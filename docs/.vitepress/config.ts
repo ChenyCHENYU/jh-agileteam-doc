@@ -13,13 +13,20 @@ export default defineConfig({
   description: "前端工程体系 - 提升研发效率，赋能团队协作",
   lang: "zh-CN",
 
+  // 站点图标
+  head: [
+    ["link", { rel: "icon", href: "/favicon.ico" }],
+    ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/logo.png" }],
+    ["meta", { name: "theme-color", content: "#667eea" }],
+  ],
+
   // 主题配置
   themeConfig: {
-    logo: "/logo.svg",
+    logo: "/logo.png",
     nav,
     sidebar,
     search,
-    
+
     // 社交链接
     socialLinks: [{ icon: "github", link: "https://github.com/ChenyCHENYU" }],
 
