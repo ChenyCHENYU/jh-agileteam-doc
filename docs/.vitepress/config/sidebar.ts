@@ -6,193 +6,111 @@ import type { DefaultTheme } from "vitepress";
  */
 export const sidebar: DefaultTheme.Sidebar = {
   // 指南
-  "/guide/": [
+  "/views/guide/": [
     {
       text: "快速开始",
       collapsed: false,
       items: [
-        { text: "介绍", link: "/guide/" },
-        { text: "快速开始", link: "/guide/getting-started" },
-        { text: "安装配置", link: "/guide/installation" },
-        { text: "项目结构", link: "/guide/project-structure" },
+        { text: "介绍", link: "/views/guide/" },
+        { text: "快速开始", link: "/views/guide/getting-started" },
+        { text: "安装配置", link: "/views/guide/installation" },
+        { text: "项目结构", link: "/views/guide/project-structure" },
       ],
     },
   ],
 
   // 工程化
-  "/engineering/": [
+  "/views/engineering/": [
     {
-      text: "脚手架",
+      text: "工程化",
       collapsed: false,
       items: [
-        { text: "概述", link: "/engineering/scaffold/" },
-        { text: "CLI 工具", link: "/engineering/scaffold/cli" },
-        { text: "项目模板", link: "/engineering/scaffold/templates" },
-      ],
-    },
-    {
-      text: "构建工具",
-      collapsed: false,
-      items: [
-        { text: "概述", link: "/engineering/build/" },
-        { text: "Vite", link: "/engineering/build/vite" },
-        { text: "Webpack", link: "/engineering/build/webpack" },
-        { text: "Rollup", link: "/engineering/build/rollup" },
-      ],
-    },
-    {
-      text: "代码质量",
-      collapsed: false,
-      items: [
-        { text: "概述", link: "/engineering/code-quality/" },
-        { text: "ESLint", link: "/engineering/code-quality/eslint" },
-        { text: "Prettier", link: "/engineering/code-quality/prettier" },
-        { text: "Stylelint", link: "/engineering/code-quality/stylelint" },
-        { text: "Husky", link: "/engineering/code-quality/husky" },
-      ],
-    },
-    {
-      text: "测试方案",
-      collapsed: false,
-      items: [
-        { text: "概述", link: "/engineering/testing/" },
-        { text: "单元测试", link: "/engineering/testing/unit-test" },
-        { text: "E2E 测试", link: "/engineering/testing/e2e-test" },
-        { text: "测试覆盖率", link: "/engineering/testing/coverage" },
-      ],
-    },
-    {
-      text: "CI/CD",
-      collapsed: false,
-      items: [
-        { text: "概述", link: "/engineering/ci-cd/" },
-        { text: "GitLab CI", link: "/engineering/ci-cd/gitlab-ci" },
-        { text: "GitHub Actions", link: "/engineering/ci-cd/github-actions" },
+        { text: "脚手架", link: "/views/engineering/scaffold" },
+        { text: "构建工具", link: "/views/engineering/build" },
+        { text: "代码质量", link: "/views/engineering/code-quality" },
+        { text: "测试方案", link: "/views/engineering/testing" },
+        { text: "CI/CD", link: "/views/engineering/ci-cd" },
       ],
     },
   ],
 
   // 最佳实践
-  "/best-practices/": [
+  "/views/best-practices/": [
     {
-      text: "架构设计",
+      text: "最佳实践",
       collapsed: false,
       items: [
-        { text: "概述", link: "/best-practices/architecture/" },
-        { text: "微前端", link: "/best-practices/architecture/micro-frontend" },
-        { text: "Monorepo", link: "/best-practices/architecture/monorepo" },
-        {
-          text: "设计模式",
-          link: "/best-practices/architecture/design-patterns",
-        },
-      ],
-    },
-    {
-      text: "性能优化",
-      collapsed: false,
-      items: [
-        { text: "概述", link: "/best-practices/performance/" },
-        {
-          text: "打包优化",
-          link: "/best-practices/performance/bundle-optimization",
-        },
-        { text: "懒加载", link: "/best-practices/performance/lazy-loading" },
-        {
-          text: "缓存策略",
-          link: "/best-practices/performance/cache-strategy",
-        },
-      ],
-    },
-    {
-      text: "安全规范",
-      collapsed: false,
-      items: [
-        { text: "概述", link: "/best-practices/security/" },
-        { text: "XSS 防护", link: "/best-practices/security/xss-prevention" },
-        { text: "依赖审计", link: "/best-practices/security/dependency-audit" },
-      ],
-    },
-    {
-      text: "编码规范",
-      collapsed: false,
-      items: [
-        { text: "概述", link: "/best-practices/coding-standards/" },
-        {
-          text: "JavaScript",
-          link: "/best-practices/coding-standards/javascript",
-        },
-        {
-          text: "TypeScript",
-          link: "/best-practices/coding-standards/typescript",
-        },
-        { text: "Vue", link: "/best-practices/coding-standards/vue" },
+        { text: "架构设计", link: "/views/best-practices/architecture" },
+        { text: "性能优化", link: "/views/best-practices/performance" },
+        { text: "安全规范", link: "/views/best-practices/security" },
+        { text: "编码规范", link: "/views/best-practices/coding-standards" },
       ],
     },
   ],
 
   // 样式方案
-  "/styling/": [
+  "/views/styling": [
     {
       text: "样式方案",
       collapsed: false,
       items: [
-        { text: "概述", link: "/styling/" },
-        { text: "UnoCSS", link: "/styling/unocss" },
+        { text: "概述", link: "/views/styling" },
+        { text: "UnoCSS", link: "/views/styling/unocss" },
       ],
     },
   ],
 
   // 组件库
-  "/components/": [
+  "/ui-components/": [
     {
       text: "开发指南",
       collapsed: false,
       items: [
-        { text: "介绍", link: "/components/" },
-        { text: "快速开始", link: "/components/guide/quickstart" },
-        { text: "安装", link: "/components/guide/installation" },
+        { text: "介绍", link: "/ui-components/" },
+        { text: "快速开始", link: "/ui-components/guide/quickstart" },
+        { text: "安装", link: "/ui-components/guide/installation" },
       ],
     },
     {
       text: "基础组件",
       collapsed: false,
       items: [
-        { text: "Button 按钮", link: "/components/basic/button" },
-        { text: "Icon 图标", link: "/components/basic/icon" },
-        { text: "Input 输入框", link: "/components/basic/input" },
-        { text: "Select 选择器", link: "/components/basic/select" },
+        { text: "Button 按钮", link: "/ui-components/basic/button" },
+        { text: "Icon 图标", link: "/ui-components/basic/icon" },
+        { text: "Input 输入框", link: "/ui-components/basic/input" },
+        { text: "Select 选择器", link: "/ui-components/basic/select" },
       ],
     },
     {
       text: "布局组件",
       collapsed: false,
       items: [
-        { text: "Container 容器", link: "/components/layout/container" },
-        { text: "Grid 栅格", link: "/components/layout/grid" },
+        { text: "Container 容器", link: "/ui-components/layout/container" },
+        { text: "Grid 栅格", link: "/ui-components/layout/grid" },
       ],
     },
     {
       text: "表单组件",
       collapsed: false,
       items: [
-        { text: "Form 表单", link: "/components/form/form" },
-        { text: "FormItem 表单项", link: "/components/form/form-item" },
+        { text: "Form 表单", link: "/ui-components/form/form" },
+        { text: "FormItem 表单项", link: "/ui-components/form/form-item" },
       ],
     },
     {
       text: "数据展示",
       collapsed: false,
       items: [
-        { text: "Table 表格", link: "/components/data/table" },
-        { text: "Pagination 分页", link: "/components/data/pagination" },
+        { text: "Table 表格", link: "/ui-components/data/table" },
+        { text: "Pagination 分页", link: "/ui-components/data/pagination" },
       ],
     },
     {
       text: "反馈组件",
       collapsed: false,
       items: [
-        { text: "Message 消息", link: "/components/feedback/message" },
-        { text: "Modal 对话框", link: "/components/feedback/modal" },
+        { text: "Message 消息", link: "/ui-components/feedback/message" },
+        { text: "Modal 对话框", link: "/ui-components/feedback/modal" },
       ],
     },
     {
@@ -201,12 +119,46 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [
         {
           text: "UserSelector 用户选择",
-          link: "/components/business/user-selector",
+          link: "/ui-components/business/user-selector",
         },
         {
           text: "DepartmentTree 部门树",
-          link: "/components/business/department-tree",
+          link: "/ui-components/business/department-tree",
         },
+      ],
+    },
+  ],
+
+  // 疑难杂症
+  "/views/troubleshooting/": [
+    {
+      text: "常见问题",
+      collapsed: false,
+      items: [
+        { text: "概述", link: "/views/troubleshooting/" },
+        { text: "环境配置问题", link: "/views/troubleshooting/environment" },
+        { text: "构建部署问题", link: "/views/troubleshooting/build-deploy" },
+      ],
+    },
+    {
+      text: "疑难问题",
+      collapsed: false,
+      items: [
+        {
+          text: "性能问题排查",
+          link: "/views/troubleshooting/performance-issues",
+        },
+        { text: "兼容性问题", link: "/views/troubleshooting/compatibility" },
+        { text: "第三方库问题", link: "/views/troubleshooting/third-party" },
+      ],
+    },
+    {
+      text: "调试技巧",
+      collapsed: false,
+      items: [
+        { text: "开发工具使用", link: "/views/troubleshooting/devtools" },
+        { text: "日志调试", link: "/views/troubleshooting/debugging-logs" },
+        { text: "错误追踪", link: "/views/troubleshooting/error-tracking" },
       ],
     },
   ],

@@ -16,31 +16,31 @@ import type { DefaultTheme } from "vitepress";
 export const nav: DefaultTheme.NavItem[] = [
   {
     text: "指南",
-    link: "/guide/",
-    activeMatch: "/guide/",
+    link: "/views/guide/",
+    activeMatch: "/views/guide/",
   },
   {
     text: "工程化",
     items: [
       {
         text: "脚手架",
-        link: "/engineering/scaffold/",
+        link: "/views/engineering/scaffold/",
       },
       {
         text: "构建工具",
-        link: "/engineering/build/",
+        link: "/views/engineering/build/",
       },
       {
         text: "代码质量",
-        link: "/engineering/code-quality/",
+        link: "/views/engineering/code-quality/",
       },
       {
         text: "测试方案",
-        link: "/engineering/testing/",
+        link: "/views/engineering/testing/",
       },
       {
         text: "CI/CD",
-        link: "/engineering/ci-cd/",
+        link: "/views/engineering/ci-cd/",
       },
     ],
   },
@@ -49,29 +49,35 @@ export const nav: DefaultTheme.NavItem[] = [
     items: [
       {
         text: "架构设计",
-        link: "/best-practices/architecture/",
+        link: "/views/best-practices/architecture/",
       },
       {
         text: "性能优化",
-        link: "/best-practices/performance/",
+        link: "/views/best-practices/performance/",
       },
       {
         text: "安全规范",
-        link: "/best-practices/security/",
+        link: "/views/best-practices/security/",
       },
       {
         text: "编码规范",
-        link: "/best-practices/coding-standards/",
+        link: "/views/best-practices/coding-standards/",
       },
     ],
   },
   {
     text: "样式方案",
-    items: [{ text: "UnoCSS", link: "/styling/unocss" }],
+    link: "/views/styling/",
+    activeMatch: "/views/styling/",
   },
   {
     text: "组件库",
-    link: "/components/",
-    activeMatch: "/components/",
+    link: "/ui-components/",
+    activeMatch: "/ui-components/",
+  },
+  {
+    text: "疑难杂症",
+    link: "/views/troubleshooting/",
+    activeMatch: "/views/troubleshooting/",
   },
 ];
