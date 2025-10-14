@@ -1,0 +1,167 @@
+# ===========================
+# VitePress 项目 .gitignore
+# ===========================
+
+# ===== 依赖目录 =====
+node_modules/
+.pnp
+.pnp.js
+
+# ===== 锁文件 =====
+# 根据你使用的包管理器保留对应的锁文件
+# 如果使用 pnpm，取消注释下面这行
+# pnpm-lock.yaml
+
+# 如果使用 npm，取消注释下面这行
+# package-lock.json
+
+# 如果使用 yarn，取消注释下面这行
+# yarn.lock
+
+# 如果使用 bun，取消注释下面这行
+# bun.lockb
+
+# ===== VitePress 构建输出 =====
+# VitePress 默认构建输出目录
+docs/.vitepress/dist
+docs/.vitepress/cache
+.temp
+.cache
+cspell.json
+
+# ===== 日志文件 =====
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ===== 操作系统文件 =====
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ===== 编辑器 / IDE =====
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# WebStorm / IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ===== 环境变量文件 =====
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# ===== 测试覆盖率 =====
+coverage/
+*.lcov
+.nyc_output
+
+# ===== 临时文件 =====
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# ===== 其他 =====
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache
+.parcel-cache
+
+# Next.js
+.next
+out
+
+# Nuxt.js
+.nuxt
+dist
+
+# Gatsby
+.cache/
+public
+
+# vuepress
+.vuepress/dist
+
+# Serverless
+.serverless/
+
+# FuseBox
+.fusebox/
+
+# DynamoDB Local
+.dynamodb/
+
+# TernJS
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
