@@ -165,3 +165,5 @@ public
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+# mgit-push 本地配置
+.mgit-push.json
