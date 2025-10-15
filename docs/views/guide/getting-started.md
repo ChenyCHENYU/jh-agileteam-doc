@@ -1,6 +1,10 @@
+---
+outline: deep
+---
+
 # 快速开始
 
-欢迎使用 AGILE TEAM 前端工程体系！本指南将帮助你快速上手。
+欢迎使用金恒科技信息化部前端团队工程体系！本指南将帮助你快速上手我们的前端工程化实践。
 
 ## 环境准备
 
@@ -9,13 +13,14 @@
 ### 必需工具
 
 - **Node.js**: >= 18.0.0 （推荐使用 LTS 版本）
-- **包管理器**: pnpm >= 8.0.0 （推荐）或 npm >= 9.0.0
+- **包管理器**: pnpm >= 8.0.0 （团队推荐）或 npm >= 9.0.0
 
 ### 推荐工具
 
-- **编辑器**: [VS Code](https://code.visualstudio.com/)
+- **编辑器**: [VS Code](https://code.visualstudio.com/) （团队标准编辑器）
 - **终端**: Windows Terminal / iTerm2 / Warp
 - **Git**: >= 2.30.0
+- **企业内部工具**: 金恒科技内部开发工具集
 
 ## 安装依赖
 
@@ -42,25 +47,27 @@ pnpm -v   # 应该显示 8.x.x 或更高版本
 
 ### 方式一：使用脚手架（推荐）
 
-使用我们提供的脚手架快速创建项目：
+使用金恒科技信息化部前端团队提供的脚手架快速创建项目：
 
 ```bash
-# 使用 pnpm
-pnpm create agile-team-app my-project
+# 使用 pnpm（团队推荐）
+pnpm create jinheng-fe-app my-project
 
 # 使用 npm
-npm create agile-team-app my-project
+npm create jinheng-fe-app my-project
 
 # 使用 yarn
-yarn create agile-team-app my-project
+yarn create jinheng-fe-app my-project
 ```
 
 根据提示选择项目模板：
 
-- **Vue 3 + TypeScript** - 标准的 Vue 3 项目模板
-- **React + TypeScript** - React 18 项目模板
-- **组件库项目** - 组件库开发模板
-- **文档站点** - VitePress 文档站点模板
+- **单体项目模板** - 适用于中小型业务系统，基于 Vue 3 + TypeScript
+- **集群项目模板** - 适用于需要高可用性的大型系统，支持多环境部署
+- **Monorepo项目模板** - 适用于多个相关应用共享代码的场景，基于 pnpm workspace
+- **微前端项目模板** - 适用于大型复杂系统，支持独立开发和部署
+- **组件库项目模板** - 适用于开发企业级组件库
+- **文档站点模板** - 基于 VitePress 的文档站点模板
 
 ### 方式二：手动创建
 
@@ -97,26 +104,54 @@ pnpm dev
 
 ## 项目结构
 
-标准的项目结构如下：
+金恒科技信息化部前端团队的标准项目结构如下：
 
 ```
 my-project/
 ├── src/
 │   ├── assets/          # 静态资源
 │   ├── components/      # 组件
+│   │   ├── common/      # 通用组件
+│   │   └── business/    # 业务组件
 │   ├── views/          # 页面
 │   ├── router/         # 路由配置
 │   ├── store/          # 状态管理
 │   ├── utils/          # 工具函数
+│   ├── api/            # API 接口
+│   ├── types/          # TypeScript 类型定义
+│   ├── hooks/          # 自定义 Hooks
 │   ├── App.vue         # 根组件
 │   └── main.ts         # 入口文件
 ├── public/             # 公共资源
+├── .env.development    # 开发环境变量
+├── .env.production     # 生产环境变量
 ├── index.html          # HTML 模板
 ├── vite.config.ts      # Vite 配置
 ├── tsconfig.json       # TypeScript 配置
 ├── package.json        # 项目配置
 └── README.md           # 项目说明
 ```
+
+### 不同项目类型的结构差异
+
+#### 单体项目
+- 简化的目录结构，适合快速开发
+- 所有功能模块集中在 `src` 目录下
+
+#### 集群项目
+- 支持多环境配置
+- 包含部署相关配置文件
+- 支持负载均衡和高可用性配置
+
+#### Monorepo项目
+- 使用 `packages` 目录管理多个子项目
+- 共享配置和依赖管理
+- 支持跨项目代码复用
+
+#### 微前端项目
+- 主应用和子应用分离的结构
+- 支持独立开发和部署
+- 包含微前端相关配置文件
 
 ## 开发规范
 
@@ -214,20 +249,21 @@ pnpm test:e2e         # 运行 E2E 测试
 如果在使用过程中遇到问题：
 
 1. 查看 [常见问题](/views/troubleshooting/) 寻找解决方案
-2. 在 [GitHub Issues](https://github.com/ChenyCHENYU/jh-agileteam-doc/issues) 提问
-3. 联系团队成员获取帮助
+2. 在 [内部工单系统](https://internal.jinheng.com/tickets/409322) 提交问题
+3. 在文档页面下方的评论区留言
+4. 联系团队成员获取帮助（企业微信/钉钉群）
 
 ## 参与贡献
 
-我们欢迎任何形式的贡献：
+金恒科技信息化部前端团队欢迎任何形式的贡献：
 
-- 🐛 报告 Bug
-- 💡 提出新功能建议
-- 📝 改进文档
-- 🔧 提交代码
+- 🐛 报告 Bug（通过内部工单系统 409322）
+- 💡 提出新功能建议（团队内部评审）
+- 📝 改进文档（直接在评论区留言或提交 PR）
+- 🔧 提交代码（遵循团队代码规范）
 
-请查看 [贡献指南](https://github.com/ChenyCHENYU/jh-agileteam-doc/blob/main/CONTRIBUTING.md) 了解详情。
+请查看 [团队贡献指南](https://internal.jinheng.com/fe/contributing) 了解详情。
 
 ::: tip 提示
-建议先阅读完整个快速开始指南，然后动手实践，这样能更快地掌握整个工程体系！
+建议先阅读完整个快速开始指南，然后动手实践，这样能更快地掌握金恒科技信息化部前端团队的工程体系！如有疑问，请随时通过内部工单系统 409322 或评论区留言。
 :::

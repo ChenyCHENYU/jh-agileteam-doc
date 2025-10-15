@@ -1,8 +1,14 @@
+---
+outline: deep
+---
+
 # 项目结构
 
-了解项目的目录结构有助于你更好地组织和管理代码。
+了解金恒科技信息化部前端团队的项目目录结构有助于你更好地组织和管理代码，适应不同的业务场景。
 
 ## 标准目录结构
+
+金恒科技信息化部前端团队根据不同的业务场景，提供了多种项目结构模板。以下是基础的标准目录结构：
 
 ```
 my-project/
@@ -36,6 +42,7 @@ my-project/
 │   ├── App.vue            # 根组件
 │   └── main.ts            # 入口文件
 ├── .env.development       # 开发环境变量
+├── .env.test             # 测试环境变量
 ├── .env.production        # 生产环境变量
 ├── .eslintrc.cjs          # ESLint 配置
 ├── .prettierrc.json       # Prettier 配置
@@ -45,6 +52,42 @@ my-project/
 ├── uno.config.ts          # UnoCSS 配置
 ├── vite.config.ts         # Vite 配置
 └── README.md              # 项目说明
+```
+
+### 不同项目类型的目录结构差异
+
+#### 单体项目
+- 简化的目录结构，适合快速开发
+- 所有功能模块集中在 `src` 目录下
+- 适合中小型业务系统
+
+#### 集群项目
+- 增加集群配置相关目录
+- 包含负载均衡和高可用性配置文件
+- 支持多环境部署配置
+
+#### Monorepo项目
+```
+my-monorepo/
+├── packages/              # 子项目目录
+│   ├── app1/             # 子应用1
+│   ├── app2/             # 子应用2
+│   ├── shared/           # 共享代码
+│   └── ui-components/    # 共享组件
+├── configs/              # 共享配置
+├── scripts/              # 构建脚本
+└── package.json          # 根配置
+```
+
+#### 微前端项目
+```
+my-microfrontend/
+├── main-app/             # 主应用
+├── micro-apps/           # 微应用
+│   ├── app1/             # 微应用1
+│   └── app2/             # 微应用2
+├── shared/               # 共享资源
+└── configs/              # 微前端配置
 ```
 
 ## 核心目录说明
@@ -366,7 +409,7 @@ UnoCSS 原子化 CSS 配置，详见 [UnoCSS 指南](/views/unocss-guide)。
 
 ### 1. 模块化组织
 
-将相关的代码放在一起，便于维护：
+金恒科技信息化部前端团队推荐将相关的代码放在一起，便于维护：
 
 ```
 features/
@@ -374,6 +417,13 @@ features/
 │   ├── api/
 │   ├── components/
 │   ├── store/
+│   ├── types/
+│   └── views/
+├── product/
+│   ├── api/
+│   ├── components/
+│   ├── store/
+│   ├── types/
 │   └── views/
 ```
 
@@ -418,6 +468,28 @@ const user: User = { id: "1", name: "John" };
 const user = { id: "1", name: "John" };
 ```
 
+### 5. 企业级项目特殊实践
+
+#### 单体项目实践
+- 保持目录结构简单清晰
+- 避免过度拆分，增加维护成本
+- 适合快速迭代和开发
+
+#### 集群项目实践
+- 增加环境配置管理
+- 实现统一的部署流程
+- 支持多环境切换
+
+#### Monorepo项目实践
+- 使用 pnpm workspace 管理依赖
+- 共享配置和工具
+- 统一的代码规范和构建流程
+
+#### 微前端项目实践
+- 明确主应用和微应用的边界
+- 实现应用间的通信机制
+- 独立的开发和部署流程
+
 ## 下一步
 
 - 🎨 学习 [UnoCSS](/views/unocss-guide) 原子化 CSS
@@ -425,5 +497,5 @@ const user = { id: "1", name: "John" };
 - 📖 查看 [编码规范](/views/best-practices/coding-standards)
 
 ::: tip 提示
-良好的项目结构是团队协作的基础，请遵循统一的目录规范和命名约定！
+良好的项目结构是金恒科技信息化部前端团队协作的基础，请遵循统一的目录规范和命名约定！如有特殊需求，请联系团队负责人或通过内部工单系统 409322 提交需求。
 :::

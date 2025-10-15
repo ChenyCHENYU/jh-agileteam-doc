@@ -1,12 +1,16 @@
+---
+outline: deep
+---
+
 # 安装配置
 
-本章节介绍如何配置和优化你的开发环境。
+本章节介绍如何配置和优化金恒科技信息化部前端团队的开发环境。
 
 ## 编辑器配置
 
-### VS Code（推荐）
+### VS Code（团队推荐编辑器）
 
-推荐安装以下扩展：
+金恒科技信息化部前端团队推荐安装以下扩展：
 
 #### 必装扩展
 
@@ -23,6 +27,7 @@
 - **Auto Rename Tag** - 自动重命名标签
 - **Path Intellisense** - 路径智能提示
 - **Import Cost** - 导入包大小提示
+- **Jinheng FE Tools** - 金恒科技前端团队内部工具集
 
 ### VS Code 设置
 
@@ -223,26 +228,51 @@ module.exports = {
 
 ```bash
 # 应用标题
-VITE_APP_TITLE=AGILE TEAM
+VITE_APP_TITLE=金恒科技前端项目
 
 # API 基础路径
 VITE_API_BASE_URL=http://localhost:3000/api
 
 # 是否开启 Mock
 VITE_USE_MOCK=true
+
+# 企业内部配置
+VITE_ENTERPRISE_MODE=true
+VITE_INTERNAL_TOOLS_ENABLED=true
+```
+
+### 测试环境 `.env.test`
+
+```bash
+# 应用标题
+VITE_APP_TITLE=金恒科技前端项目(测试)
+
+# API 基础路径
+VITE_API_BASE_URL=https://test-api.jinheng.com/api
+
+# 是否开启 Mock
+VITE_USE_MOCK=false
+
+# 企业内部配置
+VITE_ENTERPRISE_MODE=true
+VITE_INTERNAL_TOOLS_ENABLED=true
 ```
 
 ### 生产环境 `.env.production`
 
 ```bash
 # 应用标题
-VITE_APP_TITLE=AGILE TEAM
+VITE_APP_TITLE=金恒科技前端项目
 
 # API 基础路径
-VITE_API_BASE_URL=https://api.example.com
+VITE_API_BASE_URL=https://api.jinheng.com/api
 
 # 是否开启 Mock
 VITE_USE_MOCK=false
+
+# 企业内部配置
+VITE_ENTERPRISE_MODE=true
+VITE_INTERNAL_TOOLS_ENABLED=false
 ```
 
 ### 使用环境变量
@@ -301,5 +331,5 @@ export default defineConfig({
 - 🛠️ 查看 [工程化配置](/views/engineering/scaffold)
 
 ::: tip 提示
-这些配置都已经集成在脚手架中，使用脚手架创建项目可以省去大部分配置工作！
+这些配置都已经集成在金恒科技信息化部前端团队的脚手架中，使用脚手架创建项目可以省去大部分配置工作！如有特殊需求，请联系团队负责人或通过内部工单系统 409322 提交需求。
 :::
