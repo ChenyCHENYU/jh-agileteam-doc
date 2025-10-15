@@ -1,3 +1,12 @@
+<!--
+ * @Author: ChenYu ycyplus@gmail.com
+ * @Date: 2025-10-14 20:53:03
+ * @LastEditors: ChenYu ycyplus@gmail.com
+ * @LastEditTime: 2025-10-15 08:42:50
+ * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\GlassHome\index.vue
+ * @Description: 
+ * Copyright (c) 2025 by CHENY, All Rights Reserved 😎. 
+-->
 <template>
   <div class="glass-home">
     <!-- Hero 区域 -->
@@ -73,5 +82,5 @@ import { features, stats } from "./data";
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index.scss";
 </style>
