@@ -21,8 +21,8 @@
             <p class="hero-text">前端工程体系</p>
             <p class="hero-tagline">提升研发效率，赋能团队协作</p>
             <div class="hero-actions">
-              <a href="/views/guide/" class="action-button primary">
-                <span>开始使用</span>
+              <a href="/views/guide/getting-started" class="action-button primary">
+                <span>快速开始</span>
               </a>
               <a href="/ui-components/" class="action-button secondary">
                 <span>组件库</span>

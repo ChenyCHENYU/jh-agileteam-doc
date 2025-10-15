@@ -7,7 +7,6 @@
 .hero-section {
   position: relative;
   padding: 64px 24px 0px;
-    z-index: -10;
   overflow: hidden;
   background: linear-gradient(135deg, 
     var(--vp-c-bg) 0%,
@@ -37,6 +36,7 @@
               radial-gradient(circle at 80% 50%, rgba(167, 139, 250, 0.04) 0%, transparent 50%);
   animation: pulse 8s ease-in-out infinite;
   pointer-events: none;
+  z-index: 0;
 }
 
 .dark .hero-bg-decoration {
@@ -53,7 +53,7 @@
   max-width: 1152px;
   margin: 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding: 0 24px;
 }
 
@@ -224,6 +224,9 @@
   text-decoration: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid transparent;
+  cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 
 .action-button.primary {
@@ -253,6 +256,7 @@
   padding: 56px 24px 48px;
   background: var(--vp-c-bg-soft);
   position: relative;
+  z-index: 10;
 }
 
 /* 添加顶部柔和过渡 */
