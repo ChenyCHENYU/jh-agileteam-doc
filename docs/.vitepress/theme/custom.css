@@ -1,0 +1,28 @@
+/**
+ * 自定义样式
+ * @description 全局自定义样式，配合 UnoCSS 使用
+ */
+
+/* 可以在这里添加全局样式 */
+
+/* 覆盖 VitePress 默认样式 */
+:root {
+  --vp-c-brand-1: #667eea;
+  --vp-c-brand-2: #764ba2;
+  --vp-c-brand-3: #5568d3;
+}
+
+/* 优化暗色模式 */
+.dark {
+  --vp-c-bg: #1a1a1a;
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* UnoCSS 兼容性 */
+* {
+  box-sizing: border-box;
+}

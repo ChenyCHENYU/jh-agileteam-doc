@@ -2,9 +2,9 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2025-10-14 20:53:03
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2025-10-15 08:42:50
+ * @LastEditTime: 2025-10-15 08:59:29
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\GlassHome\index.vue
- * @Description: 
+ * @Description: 首页组件
  * Copyright (c) 2025 by CHENY, All Rights Reserved 😎. 
 -->
 <template>

@@ -1,4 +1,5 @@
 import type { UserConfig } from "vite";
+import UnoCSS from "unocss/vite";
 
 /**
  * Vite 配置
@@ -6,10 +7,7 @@ import type { UserConfig } from "vite";
  */
 export const vite: UserConfig = {
   // 插件配置
-  plugins: [
-    // 可以在这里添加 Vite 插件
-    // 例如：UnoCSS()
-  ],
+  plugins: [UnoCSS()],
 
   // 路径别名
   resolve: {
