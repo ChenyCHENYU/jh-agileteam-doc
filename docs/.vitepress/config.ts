@@ -66,6 +66,9 @@ export default defineConfig({
       label: "页面导航",
       level: [2, 3],
     },
+
+    // 返回顶部
+    returnToTopLabel: "返回顶部",
   },
 
   // Markdown 配置

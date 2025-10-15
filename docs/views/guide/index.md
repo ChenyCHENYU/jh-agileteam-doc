@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-<!-- AuthorTag 已全局注册，无需导入 -->
+<!-- 组件已自动导入，支持动态传入职位、工号和部门 -->
 <AuthorTag author="ChenYu" />
 
 # 指南

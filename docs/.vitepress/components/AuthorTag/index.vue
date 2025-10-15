@@ -1,16 +1,21 @@
 <template>
   <div :class="['author-tag', `author-tag--${variant}`]">
-    <!-- 默认样式 -->
+    <!-- 默认样式 - 更清晰直观 -->
     <div v-if="variant === 'default'" class="author-tag-default">
-      <div class="author-info">
+      <div class="author-header">
+        <span class="author-label">📝 作者</span>
+      </div>
+      
+      <div class="author-content">
         <img
           v-if="showAvatar && authorInfo.avatar"
           :src="authorInfo.avatar"
           :alt="authorInfo.name"
           class="author-avatar"
         />
+        
         <div class="author-details">
-          <div class="author-name-line">
+          <div class="author-main-info">
             <a
               v-if="authorLink"
               :href="authorLink"
@@ -21,34 +26,26 @@
               {{ authorInfo.name }}
             </a>
             <span v-else class="author-name">{{ authorInfo.name }}</span>
-            <span v-if="authorInfo.role" class="author-role">{{
-              authorInfo.role
-            }}</span>
+            
+            <span v-if="displayRole" class="author-role">
+              {{ displayRole }}
+            </span>
           </div>
-          <div v-if="authorInfo.bio" class="author-bio">
-            {{ authorInfo.bio }}
+          
+          <div class="author-meta">
+            <span class="employee-id">工号：{{ displayEmployeeId }}</span>
+            <span class="department">{{ displayDepartment }}</span>
           </div>
         </div>
       </div>
-
-      <div class="meta-info">
-        <span v-if="date" class="meta-item">
-          <span class="meta-icon">📅</span>
-          <span class="meta-text">{{ formattedDate }}</span>
-        </span>
-        <span v-if="updateDate" class="meta-item">
-          <span class="meta-icon">🔄</span>
-          <span class="meta-text">更新于 {{ formattedUpdateDate }}</span>
-        </span>
-        <span v-if="readingTime" class="meta-item">
-          <span class="meta-icon">⏱️</span>
-          <span class="meta-text">{{ readingTime }} 分钟阅读</span>
-        </span>
-      </div>
     </div>
 
-    <!-- 卡片样式 -->
+    <!-- 卡片样式 - 强调作者信息 -->
     <div v-else-if="variant === 'card'" class="author-tag-card">
+      <div class="card-header">
+        <span class="card-label">✍️ 文章作者</span>
+      </div>
+      
       <div class="card-content">
         <img
           v-if="showAvatar && authorInfo.avatar"
@@ -56,6 +53,7 @@
           :alt="authorInfo.name"
           class="author-avatar-large"
         />
+        
         <div class="card-info">
           <div class="author-name-line">
             <a
@@ -69,54 +67,11 @@
             </a>
             <span v-else class="author-name-large">{{ authorInfo.name }}</span>
           </div>
-          <span v-if="authorInfo.role" class="author-role-card">{{
-            authorInfo.role
-          }}</span>
-          <p v-if="authorInfo.bio" class="author-bio-card">
-            {{ authorInfo.bio }}
-          </p>
-
-          <div class="card-meta">
-            <span v-if="date" class="card-meta-item">
-              <span class="meta-icon">📅</span>
-              {{ formattedDate }}
-            </span>
-            <span v-if="updateDate" class="card-meta-item">
-              <span class="meta-icon">🔄</span>
-              {{ formattedUpdateDate }}
-            </span>
-            <span v-if="readingTime" class="card-meta-item">
-              <span class="meta-icon">⏱️</span>
-              {{ readingTime }} min
-            </span>
-          </div>
-
-          <div
-            v-if="authorInfo.email || authorInfo.github"
-            class="author-links"
-          >
-            <a
-              v-if="authorInfo.email"
-              :href="`mailto:${authorInfo.email}`"
-              class="author-link-item"
-              title="邮箱"
-            >
-              📧
-            </a>
-            <a
-              v-if="authorInfo.github"
-              :href="`https://github.com/${authorInfo.github}`"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="author-link-item"
-              title="GitHub"
-            >
-              <svg class="github-icon" viewBox="0 0 16 16" fill="currentColor">
-                <path
-                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-                ></path>
-              </svg>
-            </a>
+          
+          <div class="card-badges">
+            <span v-if="displayRole" class="role-badge">{{ displayRole }}</span>
+            <span class="id-badge">工号 {{ displayEmployeeId }}</span>
+            <span class="dept-badge">{{ displayDepartment }}</span>
           </div>
         </div>
       </div>
@@ -136,12 +91,11 @@
           {{ authorInfo.name }}
         </a>
         <strong v-else class="minimal-author">{{ authorInfo.name }}</strong>
+        <span v-if="displayRole" class="minimal-role">（{{ displayRole }}）</span>
         撰写
       </span>
-      <span v-if="date" class="minimal-date">· {{ formattedDate }}</span>
-      <span v-if="readingTime" class="minimal-reading"
-        >· {{ readingTime }} 分钟阅读</span
-      >
+      <span class="minimal-id">工号 {{ displayEmployeeId }}</span>
+      <span class="minimal-dept">{{ displayDepartment }}</span>
     </div>
   </div>
 </template>
@@ -154,17 +108,26 @@ import type { AuthorTagProps } from "./data";
 const props = withDefaults(defineProps<AuthorTagProps>(), {
   showAvatar: true,
   variant: "default",
+  employeeId: "409322", // 默认工号
+  department: "信息化部", // 默认部门
 });
 
 const authorInfo = computed(() => getAuthorInfo(props.author));
 
-const formattedDate = computed(() =>
-  props.date ? formatDate(props.date) : ""
-);
+// 显示的职位：优先使用传入的 role，否则使用预定义的，默认为"资深开发工程师"
+const displayRole = computed(() => {
+  return props.role || authorInfo.value.role || "资深开发工程师";
+});
 
-const formattedUpdateDate = computed(() =>
-  props.updateDate ? formatDate(props.updateDate) : ""
-);
+// 显示的工号：优先使用传入的 employeeId，其次使用预定义的，最后使用默认值
+const displayEmployeeId = computed(() => {
+  return props.employeeId || authorInfo.value.employeeId || "409322";
+});
+
+// 显示的部门：优先使用传入的 department，其次使用预定义的，最后使用默认值
+const displayDepartment = computed(() => {
+  return props.department || authorInfo.value.department || "信息化部";
+});
 
 const authorLink = computed(() => {
   if (authorInfo.value.link) {
@@ -175,10 +138,8 @@ const authorLink = computed(() => {
   }
   return null;
 });
-
-
 </script>
 
 <style scoped lang="scss">
-@use "./index.scss";
+@import "./index.scss";
 </style>

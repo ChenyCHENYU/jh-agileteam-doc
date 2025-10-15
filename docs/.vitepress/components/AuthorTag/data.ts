@@ -14,10 +14,12 @@ export interface Author {
   email?: string;
   /** GitHub 用户名（可选） */
   github?: string;
-  /** 作者简介（可选） */
-  bio?: string;
   /** 作者角色/职位（可选） */
   role?: string;
+  /** 工号（可选） */
+  employeeId?: string;
+  /** 所属部门（可选） */
+  department?: string;
   /** 自定义链接（可选） */
   link?: string;
 }
@@ -28,6 +30,12 @@ export interface Author {
 export interface AuthorTagProps {
   /** 作者名称或作者 ID */
   author: string | Author;
+  /** 职位/角色（可选，会覆盖预定义的 role） */
+  role?: string;
+  /** 工号（可选，默认 409322） */
+  employeeId?: string;
+  /** 所属部门（可选，默认 信息化部） */
+  department?: string;
   /** 发布日期（可选） */
   date?: string;
   /** 更新日期（可选） */
@@ -50,18 +58,23 @@ export const AUTHORS: Record<string, Author> = {
     avatar: "https://github.com/ChenyCHENYU.png",
     email: "ycyplus@gmail.com",
     github: "ChenyCHENYU",
-    role: "前端架构师",
-    bio: "专注于前端工程化和性能优化",
+    role: "资深开发工程师",
+    employeeId: "409322",
+    department: "信息化部",
   },
-  TeamLead: {
-    name: "团队负责人",
-    avatar: "/avatars/team-lead.png",
-    role: "技术总监",
-    bio: "负责团队技术方向和架构设计",
+  ZhangSan: {
+    name: "张三",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ZhangSan",
+    role: "高级前端工程师",
+    employeeId: "409323",
+    department: "信息化部",
   },
-  Developer: {
-    name: "开发者",
+  LiSi: {
+    name: "李四",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=LiSi",
     role: "前端工程师",
+    employeeId: "409324",
+    department: "信息化部",
   },
 };
 
