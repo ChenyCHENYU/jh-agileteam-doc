@@ -2,7 +2,7 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2025-10-15 10:03:04
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2025-10-15 11:21:59
+ * @LastEditTime: 2025-10-15 19:48:37
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\config.ts
  * @Description: VitePress 主配置文件
  * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
@@ -43,7 +43,7 @@ export default defineConfig({
     footer: {
       message:
         "You may not distribute, modify, or sell this software without permission.",
-      copyright: "Copyright © 2025 金恒科技 AGILE TEAM",
+      copyright: "Copyright © 2025 金恒科技 AGILE TEAM ",
     },
 
     // 最后更新时间
