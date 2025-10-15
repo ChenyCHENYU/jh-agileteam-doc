@@ -1,3 +1,10 @@
+---
+outline: deep
+---
+
+<!-- AuthorTag 已全局注册，无需导入 -->
+<AuthorTag author="ChenYu" />
+
 # 指南
 
 欢迎来到金恒科技信息化部前端团队工程体系文档！

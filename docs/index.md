@@ -2,8 +2,5 @@
 layout: page
 ---
 
-<script setup>
-import GlassHome from './.vitepress/components/GlassHome/index.vue'
-</script>
-
+<!-- 组件已自动导入，无需手动 import -->
 <GlassHome />

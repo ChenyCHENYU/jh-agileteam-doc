@@ -1,19 +1,38 @@
 import type { UserConfig } from "vite";
 import UnoCSS from "unocss/vite";
+import { resolve } from "path";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
 
 /**
  * Vite 配置
- * @description Vite 相关配置，包括插件、别名、构建选项等
+ * @description Vite 相关配置,包括插件、别名、构建选项等
  */
 export const vite: UserConfig = {
   // 插件配置
-  plugins: [UnoCSS()],
+  plugins: [
+    UnoCSS(),
+
+    // 自动导入 Vue API
+    AutoImport({
+      imports: ["vue", "vitepress"],
+      dts: resolve(__dirname, "../../types/auto-imports.d.ts"),
+    }),
+
+    // 自动导入组件
+    Components({
+      dirs: [resolve(__dirname, "../components")],
+      extensions: ["vue"],
+      include: [/\.vue$/, /\.md$/],
+      dts: resolve(__dirname, "../../types/components.d.ts"),
+    }),
+  ],
 
   // 路径别名
   resolve: {
     alias: {
-      // 可以添加路径别名
-      // '@': resolve(__dirname, '../'),
+      "@": resolve(__dirname, "../../"),
+      "@components": resolve(__dirname, "../components"),
     },
   },
 

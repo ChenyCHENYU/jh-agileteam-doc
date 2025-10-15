@@ -1,0 +1,364 @@
+/**
+ * AuthorTag 组件样式
+ */
+
+.author-tag {
+  margin: 24px 0;
+  font-family: var(--vp-font-family-base);
+}
+
+/* ========== 默认样式 ========== */
+.author-tag--default {
+  .author-tag-default {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--vp-c-bg-soft);
+    border-left: 4px solid var(--vp-c-brand-1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: var(--vp-c-bg-elev);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--vp-c-brand-1);
+  }
+
+  .author-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .author-name-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .author-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--vp-c-text-1);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--vp-c-brand-1);
+    }
+  }
+
+  .author-role {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 12px;
+    color: var(--vp-c-brand-1);
+    background: var(--vp-c-brand-soft);
+    border-radius: 4px;
+  }
+
+  .author-bio {
+    font-size: 13px;
+    color: var(--vp-c-text-2);
+    line-height: 1.5;
+  }
+
+  .meta-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--vp-c-text-2);
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .meta-icon {
+    font-size: 14px;
+  }
+
+  .meta-text {
+    line-height: 1;
+  }
+}
+
+/* ========== 卡片样式 ========== */
+.author-tag--card {
+  .author-tag-card {
+    padding: 24px;
+    background: linear-gradient(135deg, var(--vp-c-bg-soft) 0%, var(--vp-c-bg-elev) 100%);
+    border-radius: 12px;
+    border: 1px solid var(--vp-c-divider);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-color: var(--vp-c-brand-1);
+    }
+  }
+
+  .card-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .author-avatar-large {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 3px solid var(--vp-c-brand-1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .author-name-large {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--vp-c-text-1);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--vp-c-brand-1);
+    }
+  }
+
+  .author-role-card {
+    display: inline-block;
+    width: fit-content;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+    background: linear-gradient(120deg, var(--vp-c-brand-1) 0%, var(--vp-c-brand-2) 100%);
+    border-radius: 6px;
+    margin-bottom: 4px;
+  }
+
+  .author-bio-card {
+    font-size: 14px;
+    color: var(--vp-c-text-2);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--vp-c-divider-light);
+  }
+
+  .card-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    color: var(--vp-c-text-2);
+
+    .meta-icon {
+      font-size: 14px;
+    }
+  }
+
+  .author-links {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .author-link-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--vp-c-bg);
+    color: var(--vp-c-text-2);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 16px;
+
+    &:hover {
+      background: var(--vp-c-brand-1);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .github-icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+/* ========== 简洁样式 ========== */
+.author-tag--minimal {
+  .author-tag-minimal {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0;
+    font-size: 14px;
+    color: var(--vp-c-text-2);
+    border-top: 1px solid var(--vp-c-divider-light);
+    border-bottom: 1px solid var(--vp-c-divider-light);
+  }
+
+  .minimal-text {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .minimal-author {
+    color: var(--vp-c-text-1);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--vp-c-brand-1);
+    }
+  }
+
+  .minimal-date,
+  .minimal-reading {
+    color: var(--vp-c-text-3);
+  }
+}
+
+/* ========== 响应式设计 ========== */
+@media (max-width: 768px) {
+  .author-tag--default {
+    .author-tag-default {
+      padding: 12px 16px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    .author-name {
+      font-size: 15px;
+    }
+
+    .meta-info {
+      gap: 12px;
+      font-size: 12px;
+    }
+  }
+
+  .author-tag--card {
+    .author-tag-card {
+      padding: 16px;
+    }
+
+    .card-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .author-avatar-large {
+      width: 64px;
+      height: 64px;
+    }
+
+    .card-info {
+      align-items: center;
+    }
+
+    .author-role-card {
+      margin: 0 auto 4px;
+    }
+
+    .card-meta,
+    .author-links {
+      justify-content: center;
+    }
+  }
+
+  .author-tag--minimal {
+    .author-tag-minimal {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      font-size: 13px;
+    }
+  }
+}
+
+/* ========== 暗色模式优化 ========== */
+.dark {
+  .author-tag--default .author-tag-default {
+    &:hover {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .author-tag--card .author-tag-card {
+    background: linear-gradient(135deg, var(--vp-c-bg-soft) 0%, var(--vp-c-bg) 100%);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .author-tag--card .author-avatar-large {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ========== 打印样式 ========== */
+@media print {
+  .author-tag {
+    page-break-inside: avoid;
+  }
+
+  .author-tag--default .author-tag-default,
+  .author-tag--card .author-tag-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .author-links {
+    display: none;
+  }
+}

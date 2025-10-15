@@ -2,6 +2,13 @@
 outline: deep
 ---
 
+<!-- 组件已自动导入，无需手动 import -->
+<AuthorTag 
+  author="ChenYu" 
+  date="2025-10-15" 
+  :reading-time="8"
+/>
+
 # 快速开始
 
 欢迎使用金恒科技信息化部前端团队工程体系！本指南将帮助你快速上手我们的前端工程化实践。

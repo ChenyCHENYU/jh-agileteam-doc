@@ -11,12 +11,11 @@ import "./custom.css";
 /**
  * VitePress 主题配置
  * @description 扩展默认主题，集成 UnoCSS
+ * @note 组件已通过 unplugin-vue-components 自动导入，无需手动注册
  */
 export default {
   extends: DefaultTheme,
   enhanceApp({ app, router, siteData }) {
-    // 可以在这里注册全局组件
-    // app.component('MyComponent', MyComponent)
     console.log("增强应用：", { app, router, siteData });
   },
 } satisfies Theme;
