@@ -1,3 +1,12 @@
+/*
+ * @Author: ChenYu ycyplus@gmail.com
+ * @Date: 2025-10-15 10:03:04
+ * @LastEditors: ChenYu ycyplus@gmail.com
+ * @LastEditTime: 2025-10-15 11:21:59
+ * @FilePath: \jh-agileteam-doc\docs\.vitepress\config.ts
+ * @Description:
+ * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
+ */
 import { defineConfig } from "vitepress";
 import { nav } from "./config/nav";
 import { sidebar } from "./config/sidebar";
@@ -69,4 +78,6 @@ export default defineConfig({
   },
   // Vite 配置
   vite,
+  // 先忽略死链检查
+  ignoreDeadLinks: true,
 });

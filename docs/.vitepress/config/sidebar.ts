@@ -8,13 +8,21 @@ export const sidebar: DefaultTheme.Sidebar = {
   // 指南
   "/views/guide/": [
     {
-      text: "快速开始",
+      text: "快速上手",
       collapsed: false,
       items: [
         { text: "介绍", link: "/views/guide/" },
         { text: "快速开始", link: "/views/guide/getting-started" },
         { text: "安装配置", link: "/views/guide/installation" },
         { text: "项目结构", link: "/views/guide/project-structure" },
+      ],
+    },
+    {
+      text: "规范约定",
+      collapsed: false,
+      items: [
+        { text: "开发规范", link: "/views/guide/development-standards" },
+        { text: "提交规范", link: "/views/guide/commit-standards" },
       ],
     },
   ],
