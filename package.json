@@ -1,9 +1,11 @@
 {
   "type": "module",
   "devDependencies": {
+    "@types/node": "^24.7.2",
     "@unocss/reset": "^66.5.3",
     "sass-embedded": "^1.93.2",
     "unocss": "^66.5.3",
+    "vite": "^7.1.10",
     "vitepress": "^2.0.0-alpha.12"
   },
   "scripts": {

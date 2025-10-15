@@ -17,5 +17,6 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // 可以在这里注册全局组件
     // app.component('MyComponent', MyComponent)
+    console.log("增强应用：", { app, router, siteData });
   },
 } satisfies Theme;
