@@ -1,3 +1,12 @@
+<!--
+ * @Author: ChenYu ycyplus@gmail.com
+ * @Date: 2025-10-15 16:39:35
+ * @LastEditors: ChenYu ycyplus@gmail.com
+ * @LastEditTime: 2025-10-15 19:23:03
+ * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\AuthorTag\index.vue
+ * @Description: 
+ * Copyright (c) 2025 by CHENY, All Rights Reserved 😎. 
+-->
 <template>
   <div class="author-tag">
     <div class="author-tag-default">
@@ -47,8 +56,6 @@ import type { AuthorTagProps } from "./data";
 
 const props = withDefaults(defineProps<AuthorTagProps>(), {
   showAvatar: true,
-  employeeId: "409322", // 默认工号
-  department: "信息化部", // 默认部门
 });
 
 const authorInfo = computed(() => getAuthorInfo(props.author));
@@ -80,5 +87,5 @@ const authorLink = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index.scss";
 </style>

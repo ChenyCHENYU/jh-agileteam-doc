@@ -54,12 +54,12 @@ export const AUTHORS: Record<string, Author> = {
     employeeId: "409322",
     department: "信息化部",
   },
-  ZhangSan: {
-    name: "张三",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ZhangSan",
-    role: "高级前端工程师",
-    employeeId: "409323",
-    department: "信息化部",
+  ZhuXiang: {
+    name: "朱祥",
+    avatar: "https://github.com/lang321.png",
+    role: "高级开发工程师",
+    employeeId: "025877",
+    department: "研发部",
   },
 };
 
