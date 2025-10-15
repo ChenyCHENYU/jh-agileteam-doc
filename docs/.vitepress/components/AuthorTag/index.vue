@@ -102,7 +102,7 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { getAuthorInfo, formatDate } from "./data";
+import { getAuthorInfo } from "./data";
 import type { AuthorTagProps } from "./data";
 
 const props = withDefaults(defineProps<AuthorTagProps>(), {

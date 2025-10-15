@@ -2,7 +2,10 @@
 outline: deep
 ---
 
-<!-- 组件已自动导入，支持动态传入职位、工号和部门 -->
+<script setup>
+import AuthorTag from '../../.vitepress/components/AuthorTag/index.vue'
+</script>
+
 <AuthorTag author="ChenYu" />
 
 # 指南
