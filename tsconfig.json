@@ -20,10 +20,14 @@
       "@components/*": ["docs/.vitepress/components/*"]
     }
   },
+  "vueCompilerOptions": {
+    "target": 3
+  },
   "include": [
     "docs/.vitepress/**/*.ts",
     "docs/.vitepress/**/*.vue",
     "docs/**/*.md",
+    "docs/types/**/*.d.ts",
     "uno.config.ts"
   ],
   "exclude": ["node_modules", "dist", "cache"]

@@ -2,9 +2,6 @@
 outline: deep
 ---
 
-<script setup>
-import AuthorTag from '../../.vitepress/components/AuthorTag/index.vue'
-</script>
 
 <AuthorTag author="ChenYu" />
 

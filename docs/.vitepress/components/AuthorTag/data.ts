@@ -36,16 +36,8 @@ export interface AuthorTagProps {
   employeeId?: string;
   /** 所属部门（可选，默认 信息化部） */
   department?: string;
-  /** 发布日期（可选） */
-  date?: string;
-  /** 更新日期（可选） */
-  updateDate?: string;
-  /** 阅读时间（可选，分钟） */
-  readingTime?: number;
   /** 是否显示头像 */
   showAvatar?: boolean;
-  /** 显示样式：默认 | 卡片 | 简洁 */
-  variant?: "default" | "card" | "minimal";
 }
 
 /**
@@ -67,13 +59,6 @@ export const AUTHORS: Record<string, Author> = {
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=ZhangSan",
     role: "高级前端工程师",
     employeeId: "409323",
-    department: "信息化部",
-  },
-  LiSi: {
-    name: "李四",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=LiSi",
-    role: "前端工程师",
-    employeeId: "409324",
     department: "信息化部",
   },
 };

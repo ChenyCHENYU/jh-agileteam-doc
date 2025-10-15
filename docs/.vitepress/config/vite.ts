@@ -15,8 +15,46 @@ export const vite: UserConfig = {
 
     // 自动导入 Vue API
     AutoImport({
-      imports: ["vue", "vitepress"],
+      imports: [
+        "vue",
+        "vitepress",
+        {
+          vue: [
+            // Composition API
+            "computed",
+            "ref",
+            "reactive",
+            "watch",
+            "watchEffect",
+            "onMounted",
+            "onUnmounted",
+            "onBeforeMount",
+            "onBeforeUnmount",
+            "toRefs",
+            "toRef",
+            "unref",
+            "nextTick",
+            // Lifecycle
+            "onActivated",
+            "onDeactivated",
+            "onBeforeUpdate",
+            "onUpdated",
+            "onErrorCaptured",
+            "onRenderTracked",
+            "onRenderTriggered",
+            // Others
+            "provide",
+            "inject",
+            "getCurrentInstance",
+            "useSlots",
+            "useAttrs",
+          ],
+        },
+      ],
       dts: resolve(__dirname, "../../types/auto-imports.d.ts"),
+      eslintrc: {
+        enabled: false,
+      },
     }),
 
     // 自动导入组件
