@@ -1,0 +1,281 @@
+/**
+ * Waline 评论组件 - 液态玻璃质感设计
+ * 适配 VitePress 主题，支持深色模式
+ * 使用 !important 确保样式优先级
+ */
+
+// 液态玻璃效果变量
+:root {
+  --waline-glass-bg: rgba(255, 255, 255, 0.7);
+  --waline-glass-border: rgba(255, 255, 255, 0.3);
+  --waline-glass-shadow: rgba(31, 38, 135, 0.15);
+  --waline-glass-backdrop: blur(10px);
+}
+
+.dark {
+  --waline-glass-bg: rgba(26, 27, 30, 0.7);
+  --waline-glass-border: rgba(255, 255, 255, 0.1);
+  --waline-glass-shadow: rgba(0, 0, 0, 0.3);
+}
+
+// 评论区容器
+.waline-wrapper {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  position: relative;
+  
+  // 顶部液态渐变分割线
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--vp-c-brand-1),
+      transparent
+    );
+    opacity: 0.5;
+  }
+}
+
+// Waline 组件样式覆盖
+#waline {
+  // 评论面板 - 液态玻璃卡片
+  .wl-panel {
+    background: var(--waline-glass-bg) !important;
+    backdrop-filter: var(--waline-glass-backdrop);
+    -webkit-backdrop-filter: var(--waline-glass-backdrop);
+    border: 1px solid var(--waline-glass-border) !important;
+    border-radius: 16px !important;
+    padding: 24px !important;
+    box-shadow: 
+      0 8px 32px 0 var(--waline-glass-shadow),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 12px 48px 0 var(--waline-glass-shadow),
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.15) !important;
+    }
+  }
+
+  // 编辑器
+  .wl-editor {
+    background: var(--vp-c-bg-soft) !important;
+    border: 1px solid var(--vp-c-divider) !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:focus-within {
+      border-color: var(--vp-c-brand-1) !important;
+      box-shadow: 
+        0 0 0 3px rgba(var(--vp-c-brand-1), 0.1),
+        0 4px 16px rgba(var(--vp-c-brand-1), 0.15) !important;
+    }
+
+    textarea {
+      color: var(--vp-c-text-1) !important;
+      font-size: 15px !important;
+      line-height: 1.7 !important;
+      min-height: 120px !important;
+
+      &::placeholder {
+        color: var(--vp-c-text-3) !important;
+      }
+    }
+  }
+
+  // 输入框
+  .wl-input {
+    background: var(--vp-c-bg) !important;
+    border: 1px solid var(--vp-c-divider) !important;
+    border-radius: 10px !important;
+    padding: 10px 14px !important;
+    color: var(--vp-c-text-1) !important;
+    font-size: 14px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+
+    &:focus {
+      border-color: var(--vp-c-brand-1) !important;
+      box-shadow: 
+        0 0 0 3px rgba(var(--vp-c-brand-1), 0.1),
+        0 4px 12px rgba(var(--vp-c-brand-1), 0.1) !important;
+      transform: translateY(-1px);
+    }
+  }
+
+  // 按钮 - 渐变液态质感
+  .wl-btn {
+    background: linear-gradient(
+      135deg,
+      var(--vp-c-brand-1),
+      var(--vp-c-brand-2)
+    ) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 10px 24px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 
+      0 4px 12px rgba(var(--vp-c-brand-1), 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 8px 24px rgba(var(--vp-c-brand-1), 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.5 !important;
+      cursor: not-allowed !important;
+    }
+  }
+
+  // 登录信息卡片
+  .wl-login-info {
+    background: linear-gradient(
+      135deg,
+      var(--vp-c-brand-soft),
+      var(--vp-c-brand-softer)
+    ) !important;
+    border: 1px solid var(--vp-c-brand-1) !important;
+    border-radius: 12px !important;
+    padding: 10px 16px !important;
+    color: var(--vp-c-brand-1) !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-bottom: 16px !important;
+    box-shadow: 
+      0 4px 12px rgba(var(--vp-c-brand-1), 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+
+    button {
+      background: transparent !important;
+      color: var(--vp-c-brand-1) !important;
+      border: 1px solid var(--vp-c-brand-1) !important;
+      border-radius: 6px !important;
+      padding: 4px 12px !important;
+
+      &:hover {
+        background: var(--vp-c-brand-1) !important;
+        color: white !important;
+      }
+    }
+  }
+
+  // 评论卡片
+  .wl-card {
+    background: var(--waline-glass-bg) !important;
+    backdrop-filter: var(--waline-glass-backdrop);
+    -webkit-backdrop-filter: var(--waline-glass-backdrop);
+    border: 1px solid var(--waline-glass-border) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 16px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateX(4px);
+      box-shadow: 
+        -4px 0 0 0 var(--vp-c-brand-1),
+        0 4px 16px var(--waline-glass-shadow) !important;
+    }
+  }
+
+  // 评论作者
+  .wl-nick {
+    color: var(--vp-c-brand-1) !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+  }
+
+  // 评论内容
+  .wl-content {
+    color: var(--vp-c-text-1) !important;
+    line-height: 1.8 !important;
+    font-size: 15px !important;
+
+    code {
+      background: var(--vp-c-bg-mute) !important;
+      padding: 3px 8px !important;
+      border-radius: 6px !important;
+    }
+
+    pre {
+      background: var(--vp-c-bg-mute) !important;
+      padding: 16px !important;
+      border-radius: 10px !important;
+    }
+
+    a {
+      color: var(--vp-c-brand-1) !important;
+    }
+  }
+
+  // 时间戳
+  .wl-time {
+    color: var(--vp-c-text-3) !important;
+    font-size: 13px !important;
+  }
+
+  // 头像
+  .wl-avatar img {
+    border-radius: 50% !important;
+    transition: transform 0.3s ease !important;
+
+    &:hover {
+      transform: scale(1.1) !important;
+    }
+  }
+
+  // 点赞回复按钮
+  .wl-action button {
+    background: transparent !important;
+    border: 1px solid var(--vp-c-divider) !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+    color: var(--vp-c-text-2) !important;
+    transition: all 0.2s ease !important;
+
+    &:hover {
+      border-color: var(--vp-c-brand-1) !important;
+      color: var(--vp-c-brand-1) !important;
+      background: var(--vp-c-brand-soft) !important;
+    }
+  }
+}
+
+// 昵称提示
+#waline-nick-hint {
+  margin-top: 8px !important;
+  font-size: 12px !important;
+}
+
+// 响应式
+@media (max-width: 768px) {
+  .waline-wrapper {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    
+    #waline .wl-panel {
+      padding: 16px !important;
+    }
+  }
+}
