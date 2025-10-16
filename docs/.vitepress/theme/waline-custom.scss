@@ -1,24 +1,18 @@
 /**
- * Waline 评论组件 - 玻璃质感（紧凑精致版）
- * 重点：降低控件高度、统一细节、焦点更克制
+ * Waline 评论组件 - 玻璃质感精致版
  */
 
 :root {
-  /* 玻璃质感 */
   --waline-glass-bg: rgba(255, 255, 255, 0.7);
   --waline-glass-border: rgba(255, 255, 255, 0.28);
   --waline-glass-shadow: rgba(31, 38, 135, 0.12);
-
-  /* 统一控件尺寸与节奏 */
-  --ctl-h: 20px;              /* 输入/按钮高度（桌面） */
-  --ctl-h-sm: 28px;           /* 输入/按钮高度（移动） */
+  --ctl-h: 20px;
   --ctl-pad-y: 6px;
   --ctl-pad-x: 10px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
-  --ring-w: 2px;              /* focus ring 粗细 */
-  --ring-alpha: 18%;          /* focus ring 透明度（大致） */
+  --ring-w: 2px;
   --elev: 0 8px 28px var(--waline-glass-shadow);
 }
 
@@ -32,91 +26,56 @@
   margin-top: 3rem;
   padding-top: 1.25rem;
   position: relative;
-}
-.waline-wrapper::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 78%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--vp-c-brand-1), transparent);
-  opacity: .45;
+  width: 100%;
+  clear: both;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 78%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--vp-c-brand-1), transparent);
+    opacity: .45;
+  }
 }
 
-/* 彻底重置所有可能的容器边框 */
+/* 重置边框 */
 .waline-wrapper,
-.waline-wrapper *:not(.wl-panel):not(.wl-card):not(.wl-input):not(.wl-btn):not(img) {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* 重置评论容器，移除默认边框 */
-#waline {
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  outline: none !important;
-}
-
-/* 移除可能的外层容器边框 */
-#waline>div:first-child {
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-/* 强制移除所有容器的边框（彻底解决左侧蓝框） */
-#waline>div,
+.waline-wrapper *:not(.wl-panel):not(.wl-card):not(.wl-input):not(.wl-btn):not(img),
+#waline,
+#waline > div,
 #waline .wl-comment,
-#waline .wl-list,
-#waline .wl-cards,
-.waline-wrapper>div {
+#waline .wl-list {
   border: none !important;
-  box-shadow: none !important;
   outline: none !important;
+  box-shadow: none !important;
   background: transparent !important;
 }
-
-/* 移除评论区域所有默认聚焦样式 */
-#waline *:focus,
-#waline *:focus-visible {
-  outline: none !important;
-}
-
-/* 只保留输入框的聚焦效果 */
-#waline .wl-input:focus,
-#waline .wl-input:focus-visible,
-#waline .wl-editor:focus-within {
-  outline: none !important;
-}
-/* ---------- 基础面板 ---------- */
+/* 基础面板 */
 #waline .wl-panel {
   background: var(--waline-glass-bg) !important;
-  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid var(--waline-glass-border) !important;
   border-radius: var(--radius-lg) !important;
-  padding: 16px !important; /* 稍降 */
+  padding: 16px !important;
   box-shadow: var(--elev) !important;
 }
 
-/* 移除虚线与多余间距 */
 #waline .wl-header {
   border-bottom: none !important;
   margin-bottom: 8px !important;
   padding-bottom: 0 !important;
+  
+  &-item {
+    margin: 8px 0 !important;
+    &::after { display: none !important; }
+  }
 }
-#waline .wl-header-item {
-  margin-top: 8px;
-  margin-bottom: 8px !important;
 
-}
-#waline .wl-header-item::after { display: none !important; }
-
-/* ---------- 表单元素（更紧凑） ---------- */
+/* 表单元素 */
 #waline label {
   display: inline-block !important;
   margin-bottom: 4px !important;
@@ -125,7 +84,6 @@
   font-weight: 500 !important;
 }
 
-/* 输入框高度更低，焦点更克制 */
 #waline .wl-input {
   background: var(--vp-c-bg) !important;
   border: 1px solid var(--vp-c-divider) !important;
@@ -133,52 +91,50 @@
   padding: var(--ctl-pad-y) var(--ctl-pad-x) !important;
   height: var(--ctl-h) !important;
   font-size: 13px !important;
-  line-height: 1.2 !important;
   color: var(--vp-c-text-1) !important;
-  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease !important;
-}
-#waline .wl-input::placeholder {
-  color: var(--vp-c-text-3) !important;
-  font-size: 12px !important;
-}
-#waline .wl-input:focus-visible {
-  outline: none !important;
-  border-color: var(--vp-c-brand-1) !important;
-  /* 现代浏览器支持 color-mix；提供降级的半透明阴影 */
-  box-shadow:
-    0 0 0 var(--ring-w)
-    color-mix(in srgb, var(--vp-c-brand-1) var(--ring-alpha), transparent) !important;
-  transform: translateY(-1px);
+  transition: all .2s ease !important;
+  
+  &::placeholder {
+    color: var(--vp-c-text-3) !important;
+    font-size: 12px !important;
+  }
+  
+  &:focus-visible {
+    outline: none !important;
+    border-color: var(--vp-c-brand-1) !important;
+    box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent) !important;
+    transform: translateY(-1px);
+  }
 }
 
-/* 编辑器整体更低矮，内边距更紧 */
 #waline .wl-editor {
   background: var(--vp-c-bg-soft) !important;
   border: 1px solid var(--vp-c-divider) !important;
   border-radius: var(--radius-md) !important;
   padding: 10px !important;
   margin-top: 10px !important;
-  transition: border-color .2s ease, box-shadow .2s ease !important;
-}
-#waline .wl-editor:focus-within {
-  border-color: var(--vp-c-brand-1) !important;
-  box-shadow:
-    0 0 0 var(--ring-w)
-    color-mix(in srgb, var(--vp-c-brand-1) var(--ring-alpha), transparent) !important;
-}
-#waline .wl-editor textarea {
-  color: var(--vp-c-text-1) !important;
-  font-size: 13px !important;
-  line-height: 1.55 !important;
-  min-height: 72px !important; /* 降低最小高度 */
-  max-height: 260px !important;
-  resize: vertical !important;
-}
-#waline .wl-editor textarea::placeholder {
-  color: var(--vp-c-text-3) !important;
+  transition: all .2s ease !important;
+  
+  &:focus-within {
+    border-color: var(--vp-c-brand-1) !important;
+    box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent) !important;
+  }
+  
+  textarea {
+    color: var(--vp-c-text-1) !important;
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    min-height: 72px !important;
+    max-height: 260px !important;
+    resize: vertical !important;
+    
+    &::placeholder {
+      color: var(--vp-c-text-3) !important;
+    }
+  }
 }
 
-/* ---------- 动作区与按钮（苗条版） ---------- */
+/* 按钮与动作区 */
 #waline .wl-actions {
   margin-top: 10px !important;
   display: flex;
@@ -187,7 +143,6 @@
   flex-wrap: wrap;
 }
 
-/* 主按钮统一高度 28~30，视觉更精悍 */
 #waline .wl-btn {
   background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2)) !important;
   color: #fff !important;
@@ -197,38 +152,28 @@
   height: var(--ctl-h) !important;
   font-size: 12px !important;
   font-weight: 600 !important;
-  letter-spacing: .2px !important;
   box-shadow: 0 2px 8px color-mix(in srgb, var(--vp-c-brand-1) 30%, transparent) !important;
-  transition: transform .15s ease, box-shadow .2s ease, background .2s ease !important;
-}
-#waline .wl-btn:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px color-mix(in srgb, var(--vp-c-brand-1) 38%, transparent) !important;
-}
-#waline .wl-btn:active:not(:disabled) {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--vp-c-brand-1) 28%, transparent) !important;
-}
-#waline .wl-btn:disabled {
-  opacity: .55 !important;
-  cursor: not-allowed !important;
-  box-shadow: none !important;
+  transition: all .2s ease !important;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px color-mix(in srgb, var(--vp-c-brand-1) 38%, transparent) !important;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: .55 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+  }
 }
 
 #waline .wl-submit { min-width: 76px !important; }
 
-/* 登录按钮呼应高度 */
-#waline .wl-login button {
-  background: linear-gradient(135deg, #5865f2, #7289da) !important;
-  height: var(--ctl-h) !important;
-  padding: 4px 12px !important;
-  font-size: 12px !important;
-  border-radius: var(--radius-sm) !important;
-  box-shadow: 0 2px 8px rgba(88, 101, 242, .28) !important;
-  border: 1px solid color-mix(in srgb, #7289da 45%, transparent) !important;
-}
-
-/* 登录信息条 - 简洁精致 */
+/* 登录信息 */
 #waline .wl-login-info {
   background: linear-gradient(135deg, var(--vp-c-brand-soft), var(--vp-c-brand-softer)) !important;
   border: none !important;
@@ -237,73 +182,47 @@
   font-size: 12px !important;
   margin-bottom: 10px !important;
   display: flex !important;
-    flex-direction: column !important;
-    gap: 6px !important;
-    align-items: flex-start !important;
-}
-/* 登录用户名 - 原来的蓝色小字体 */
-#waline .wl-login-nick,
-#waline .wl-login-info .wl-login-nick {
-  color: var(--vp-c-brand-1) !important;
-  font-weight: 500 !important;
-  font-size: 12px !important;
-}
-
-/* 退出登录按钮 - 放在名字下方，更小 */
-#waline .wl-login-info button,
-#waline .wl-logout-btn {
-  background: transparent !important;
-  border: 1px solid var(--vp-c-brand-1) !important;
-  border-radius: var(--radius-sm) !important;
-  padding: 2px 8px !important;
+  flex-direction: column !important;
+  gap: 6px !important;
+  
+  .wl-login-nick {
+    color: var(--vp-c-brand-1) !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+  }
+  
+  button {
+    background: transparent !important;
+    border: 1px solid var(--vp-c-brand-1) !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 2px 8px !important;
     font-size: 11px !important;
     height: 22px !important;
     color: var(--vp-c-brand-1) !important;
     cursor: pointer !important;
     transition: all 0.2s ease !important;
-}
-#waline .wl-login-info button:hover,
-#waline .wl-logout-btn:hover {
-  background: var(--vp-c-brand-1) !important;
-  color: #fff !important;
-}
-
-/* 工具按钮（表情/图片）等同按钮尺寸 */
-#waline .wl-emoji button,
-#waline .wl-image-upload button,
-#waline .wl-gif button {
-  background: transparent !important;
-  border: 1px solid var(--vp-c-divider) !important;
-  border-radius: var(--radius-sm) !important;
-  width: var(--ctl-h) !important;
-  height: var(--ctl-h) !important;
-  padding: 0 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: border-color .2s ease, background .2s ease !important;
-}
-#waline .wl-emoji button:hover,
-#waline .wl-image-upload button:hover,
-#waline .wl-gif button:hover {
-  border-color: var(--vp-c-brand-1) !important;
-  background: var(--vp-c-brand-soft) !important;
+    
+    &:hover {
+      background: var(--vp-c-brand-1) !important;
+      color: #fff !important;
+    }
+  }
 }
 
-/* ---------- 评论卡片与正文 ---------- */
+/* 评论卡片 */
 #waline .wl-card {
   background: var(--waline-glass-bg) !important;
-  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid var(--waline-glass-border) !important;
   border-radius: var(--radius-md) !important;
   padding: 12px !important;
   margin-bottom: 10px !important;
-  transition: transform .15s ease, box-shadow .2s ease;
-}
-#waline .wl-card:hover {
-  transform: translateX(3px);
-  box-shadow: -3px 0 0 0 var(--vp-c-brand-1), 0 4px 14px var(--waline-glass-shadow) !important;
+  transition: all .2s ease;
+  
+  &:hover {
+    transform: translateX(3px);
+    box-shadow: -3px 0 0 0 var(--vp-c-brand-1), 0 4px 14px var(--waline-glass-shadow) !important;
+  }
 }
 
 #waline .wl-nick {
@@ -317,52 +236,34 @@
   line-height: 1.65 !important;
   font-size: 13.5px !important;
   margin-top: 6px !important;
-}
-#waline .wl-content code {
-  background: var(--vp-c-bg-mute) !important;
-  padding: 2px 6px !important;
-  border-radius: 4px !important;
-}
-#waline .wl-content pre {
-  background: var(--vp-c-bg-mute) !important;
-  padding: 10px !important;
-  border-radius: 8px !important;
+  
+  code {
+    background: var(--vp-c-bg-mute) !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+  }
+  
+  pre {
+    background: var(--vp-c-bg-mute) !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+  }
 }
 
-/* 头像容器 - 移除所有边框和轮廓 */
 #waline .wl-avatar {
   width: 32px !important;
   height: 32px !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
-}
-#waline .wl-avatar img {
-  border-radius: 50% !important;
-  border: 1px solid var(--vp-c-divider) !important;
-  transition: transform .15s ease, border-color .2s ease !important;
-  outline: none !important;
-}
-#waline .wl-avatar img:hover {
-  transform: scale(1.06) !important;
-  border-color: var(--vp-c-brand-1) !important;
-}
-
-/* 次级动作按钮（回复/点赞等）更轻 */
-#waline .wl-action button {
-  background: transparent !important;
-  border: 1px solid var(--vp-c-divider) !important;
-  border-radius: var(--radius-sm) !important;
-  padding: 3px 10px !important;
-  height: calc(var(--ctl-h) - 2px) !important;
-  font-size: 12px !important;
-  transition: border-color .2s ease, color .2s ease, background .2s ease !important;
-}
-#waline .wl-action button:hover {
-  border-color: var(--vp-c-brand-1) !important;
-  color: var(--vp-c-brand-1) !important;
-  background: var(--vp-c-brand-soft) !important;
+  
+  img {
+    border-radius: 50% !important;
+    border: 1px solid var(--vp-c-divider) !important;
+    transition: all .2s ease !important;
+    
+    &:hover {
+      transform: scale(1.06) !important;
+      border-color: var(--vp-c-brand-1) !important;
+    }
+  }
 }
 
 #waline .wl-time {
@@ -370,8 +271,8 @@
   font-size: 12px !important;
 }
 
-/* 系统信息标签（Chrome/Windows）- 跟随主题 */
-#waline .wl-comment-meta,
+/* 系统信息标签 */
+#waline .wl-comment-meta span,
 #waline .wl-meta span {
   background: var(--vp-c-bg-mute) !important;
   color: var(--vp-c-text-2) !important;
@@ -380,58 +281,16 @@
   border-radius: 4px !important;
   font-size: 11px !important;
   font-weight: 500 !important;
-  display: inline-block !important;
   margin-right: 6px !important;
 }
 
-/* Tabs 与分页尺寸对齐 */
-#waline .wl-tabs button,
-#waline .wl-operation button,
-#waline .wl-pagination button {
-  background: var(--vp-c-bg-soft) !important;
-  border: 1px solid var(--vp-c-divider) !important;
-  border-radius: var(--radius-sm) !important;
-  padding: 4px 10px !important;
-  height: var(--ctl-h) !important;
-  font-size: 12px !important;
-  transition: background .2s ease, border-color .2s ease, color .2s ease !important;
-}
-#waline .wl-tabs button.active,
-#waline .wl-operation button:hover:not(:disabled),
-#waline .wl-pagination button:hover:not(:disabled) {
-  background: var(--vp-c-brand-1) !important;
-  color: #fff !important;
-  border-color: var(--vp-c-brand-1) !important;
-}
-
-/* 表情弹窗玻璃风格 */
-#waline .wl-emoji-popup {
-  background: var(--waline-glass-bg) !important;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--waline-glass-border) !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: var(--elev) !important;
-}
-
-/* 昵称提示文案更细 */
-#waline-nick-hint {
-  margin-top: 4px !important;
-  font-size: 12px !important;
-  color: var(--vp-c-text-3) !important;
-}
-
-/* ---------- 响应式（小屏更苗条） ---------- */
+/* 响应式 */
 @media (max-width: 768px) {
-  :root { --ctl-h: var(--ctl-h-sm); }
-
+  :root { --ctl-h: 28px; }
   #waline .wl-panel { padding: 14px !important; }
-  #waline .wl-input { font-size: 12px !important; }
   #waline .wl-editor textarea { min-height: 60px !important; }
-  #waline .wl-btn { font-size: 12px !important; }
 }
 
-/* ---------- 动画尊重系统设置 ---------- */
 @media (prefers-reduced-motion: reduce) {
   #waline * {
     transition: none !important;

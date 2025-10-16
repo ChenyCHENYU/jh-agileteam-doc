@@ -22,55 +22,32 @@ export default {
   setup() {
     // 监听 VitePress 路由变化
     const router = useRouter();
-
-    // 当路由变化时，触发 Waline 更新
     watch(
       () => router.route.path,
-      () => {
-        // 派发自定义事件，通知 Waline 更新
-        window.dispatchEvent(new Event("vitepress:route-change"));
-      }
+      () => window.dispatchEvent(new Event("vitepress:route-change"))
     );
   },
   enhanceApp() {
-    // 注册 Waline 评论插件
+    // Waline 评论系统配置
     const walinePlugin = useWalineComments({
-      // Waline 服务器地址
       serverURL: "https://waline-comment-lilac.vercel.app",
+      meta: ["nick", "link"],
+      requiredMeta: ["nick", "link"],
+      login: "enable",
+      wordLimit: [0, 500],
+      pageSize: 10,
+      imageUploader: false,
+      search: false,
+      highlighter: false,
+      mountDelay: 800, // 增加延迟确保 DOM 完全渲染
 
-      // 姓名验证规则（仅针对未登录用户）
+      // 姓名验证（仅未登录用户）
       nicknameGuard: {
-        // 验证格式：中文姓名(2-4字)
         pattern: /^[\u4e00-\u9fa5]{2,4}$/,
         hint: "请输入正确的姓名（2-4个中文字符，例：张三）",
-      },
-
-      // 评论字段配置
-      // nick=姓名, link=工号（使用link字段避免邮箱验证）
-      meta: ["nick", "link"],
-      requiredMeta: ["nick", "link"], // 未登录用户必填
-      login: "enable", // 支持 GitHub 登录（登录后无需填写）
-
-      // 界面配置（dark 由 useWalineComments 自动检测）
-      wordLimit: [0, 500], // 字数限制
-      pageSize: 10, // 每页评论数
-      imageUploader: false, // 禁用图片上传
-      search: false, // 禁用表情搜索
-      highlighter: false, // 禁用代码高亮（避免警告）
-
-      // 挂载延迟（等待页面渲染完成）
-      mountDelay: 500,
-
-      // 自定义文本
-      locale: {
-        placeholder: "💬 欢迎评论（支持 Markdown 语法）",
-        nick: "姓名",
-        link: "工号",
-        nickError: "请输入正确的姓名（2-4个中文字符）",
       },
     });
 
     walinePlugin.enhanceApp();
   },
 } satisfies Theme;
-

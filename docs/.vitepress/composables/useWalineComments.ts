@@ -28,17 +28,13 @@ export function useWalineComments(options: WalineCommentsOptions) {
       let currentPath = "";
 
       const mount = () => {
-        console.log("[Waline] 开始挂载评论组件...");
-        console.log("[Waline] 当前路径:", window.location.pathname);
+        // 排除首页（首页通常是 / 或 /index.html）
+        const path = window.location.pathname;
+        if (path === '/' || path === '/index.html') return;
 
         // 检查 frontmatter 是否禁用评论
-        const pageData = (window as any).__VP_HASH_MAP__?.[
-          window.location.pathname
-        ];
-        if (pageData?.frontmatter?.comment === false) {
-          console.log("[Waline] 当前页面已通过 frontmatter 禁用评论");
-          return;
-        }
+        const pageData = (window as any).__VP_HASH_MAP__?.[path];
+        if (pageData?.frontmatter?.comment === false) return;
 
         // 查找或创建容器
         if (!target) {
@@ -46,80 +42,50 @@ export function useWalineComments(options: WalineCommentsOptions) {
           target.id = "waline";
           target.className = "waline-wrapper";
 
-          // 查找文章容器 - 尝试多种选择器
           const container =
             document.querySelector(".VPDoc .content-container") ||
             document.querySelector(".VPDoc .content") ||
-            document.querySelector(".vp-doc .content-container") ||
-            document.querySelector(".vp-doc .content") ||
             document.querySelector(".content-container") ||
-            document.querySelector(".content") ||
             document.querySelector("main") ||
-            document.querySelector("article") ||
             document.body;
 
-          console.log(
-            "[Waline] 找到容器:",
-            container?.className || container?.tagName
-          );
-
-          // 插入到文章末尾
-          const footer = container?.querySelector(
-            ".prev-next, .page-footer, footer"
-          );
-          if (footer && container) {
-            container.insertBefore(target, footer);
-            console.log("[Waline] 已插入到页脚前");
-          } else if (container) {
-            container.appendChild(target);
-            console.log("[Waline] 已插入到容器末尾");
+          if (container) {
+            // 查找页脚（必须是 container 的直接子元素）
+            const footer = Array.from(container.children).find(
+              (el) => el.classList.contains("prev-next") || 
+                      el.classList.contains("page-footer")
+            );
+            
+            if (footer) {
+              container.insertBefore(target, footer);
+            } else {
+              container.appendChild(target);
+            }
           } else {
-            console.error("[Waline] 未找到合适的容器！");
             return;
           }
         }
 
-        // 检查路径是否改变
+        // 检查路径和主题变化
         const newPath = window.location.pathname;
         const isDark = document.documentElement.classList.contains("dark");
 
-        // 如果已有实例，使用 update() 方法更新路径和主题
+        // 如果已有实例，使用 update() 更新
         if (walineInstance) {
-          if (currentPath === newPath) {
-            console.log(
-              "[Waline] 路径未变化，仅更新主题:",
-              isDark ? "暗色" : "浅色"
-            );
-            walineInstance.update({ dark: isDark });
-          } else {
-            console.log(
-              `[Waline] 🔄 路由变化检测:\n  旧路径: ${currentPath}\n  新路径: ${newPath}\n  调用 update() 刷新评论`
-            );
+          if (currentPath !== newPath) {
             currentPath = newPath;
-            // 不传 path 参数，让 Waline 自动使用 window.location.pathname
-            walineInstance.update({ dark: isDark });
-            console.log(
-              "[Waline] ✅ update() 已调用，Waline 应自动加载新路径的评论"
-            );
           }
+          walineInstance.update({ dark: isDark });
           return;
         }
 
         // 首次初始化
         currentPath = newPath;
-        console.log(
-          `[Waline] 📝 首次初始化:\n  路径: ${newPath}\n  主题: ${
-            isDark ? "暗色" : "浅色"
-          }`
-        );
-
+        
         try {
           walineInstance = init({
             el: target,
-            // 不设置 path，让 Waline 自动使用 window.location.pathname
-
-            // 默认配置（可被 options 覆盖）
-            dark: isDark, // 根据当前主题设置
+            dark: isDark,
             login: "enable",
             locale: {
               nick: "姓名",
@@ -129,59 +95,23 @@ export function useWalineComments(options: WalineCommentsOptions) {
               mailError: "请填写正确的工号（6位数字）",
               placeholder: "💬 欢迎评论（支持 Markdown 语法）",
               sofa: "来发表第一条评论吧~",
-              submit: "提交",
-              reply: "回复",
-              cancelReply: "取消回复",
-              comment: "评论",
-              more: "加载更多...",
-              preview: "预览",
-              emoji: "表情",
-              uploadImage: "上传图片",
-              seconds: "秒前",
-              minutes: "分钟前",
-              hours: "小时前",
-              days: "天前",
-              now: "刚刚",
-              uploading: "正在上传...",
-              login: "登录",
-              logout: "退出登录",
-              admin: "管理员",
-              sticky: "置顶",
-              word: "字",
-              wordHint: "评论字数应在 $0 到 $1 字之间！\n当前字数：$2",
-              anonymous: "匿名",
             },
-
-            // 必填字段（对于非 GitHub 登录用户）
             requiredMeta: ["nick", "link"],
-
-            // 其他配置
             pageSize: 10,
             wordLimit: [0, 500],
-            imageUploader: false, // 禁用图片上传（安全考虑）
-            texRenderer: false, // 关闭数学公式
-            search: false, // 禁用表情搜索
-            reaction: false, // 禁用表情反应
-            recaptchaV3Key: "", // 禁用 reCAPTCHA
-
-            // 覆盖用户自定义配置（不包含 highlighter, imageUploader, texRenderer）
+            imageUploader: false,
+            texRenderer: false,
+            search: false,
+            reaction: false,
             ...options,
           });
 
-          console.log("[Waline] 初始化成功！", walineInstance);
-
-          // 监听主题变化，动态更新 Waline 主题
+          // 监听主题变化
           const themeObserver = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
-              if (mutation.attributeName === "class") {
-                const isDark =
-                  document.documentElement.classList.contains("dark");
-                console.log("[Waline] 主题切换:", isDark ? "暗色" : "浅色");
-
-                // 更新 Waline 主题
-                if (walineInstance && walineInstance.update) {
-                  walineInstance.update({ dark: isDark });
-                }
+              if (mutation.attributeName === "class" && walineInstance?.update) {
+                const isDark = document.documentElement.classList.contains("dark");
+                walineInstance.update({ dark: isDark });
               }
             });
           });
@@ -191,108 +121,41 @@ export function useWalineComments(options: WalineCommentsOptions) {
             attributeFilter: ["class"],
           });
 
-          // 添加昵称校验
+          // 添加字段校验
           if (options.nicknameGuard && target) {
             attachNicknameGuard(target, options.nicknameGuard);
           }
-
-          // 添加工号校验（6位数字）
-          setTimeout(() => {
-            attachWorkIdGuard(target!);
-          }, 1000);
-
-          // 彻底修复 focus 错误：捕获所有异步错误
-          window.addEventListener("unhandledrejection", (event) => {
-            if (
-              event.reason?.message?.includes(
-                "Cannot read properties of undefined (reading 'focus')"
-              )
-            ) {
-              console.debug("[Waline] Focus 错误已被拦截");
-              event.preventDefault();
-            }
-          });
-
-          window.addEventListener("error", (event) => {
-            if (
-              event.message?.includes(
-                "Cannot read properties of undefined (reading 'focus')"
-              )
-            ) {
-              console.debug("[Waline] Focus 错误已被拦截");
-              event.preventDefault();
-            }
-          });
+          setTimeout(() => attachWorkIdGuard(target!), 1000);
         } catch (error) {
           console.error("[Waline] 初始化失败:", error);
         }
       };
 
-      // 延迟挂载函数
-      const delay = Math.max(0, options.mountDelay ?? 300);
+      // 延迟挂载（等待 DOM 完全渲染）
+      const delay = Math.max(500, options.mountDelay ?? 800);
       const scheduleMount = () => {
-        console.log("[Waline] 计划挂载，延迟:", delay, "ms");
         setTimeout(() => {
-          // 检查是否在文档页面
+          // 排除首页
+          const path = window.location.pathname;
+          if (path === '/' || path === '/index.html') return;
+          
+          // 检查是否是文档页面
           const isDocPage =
             document.querySelector(".VPDoc") ||
-            document.querySelector(".vp-doc") ||
-            document.querySelector("article") ||
             document.querySelector(".content");
-
-          console.log("[Waline] 检查页面类型，是否为文档页:", !!isDocPage);
-
-          if (isDocPage) {
-            mount();
-          } else {
-            console.log("[Waline] 非文档页面，跳过挂载");
-          }
+          if (isDocPage) mount();
         }, delay);
       };
 
-      // 立即执行首次挂载
       scheduleMount();
 
-      // 监听 VitePress 路由变化事件
+      // 监听路由变化
       if (typeof window !== "undefined") {
-        // 监听自定义路由变化事件（由 theme/index.ts 派发）
-        window.addEventListener("vitepress:route-change", () => {
-          console.log("[Waline] 检测到 VitePress 路由变化事件");
-          scheduleMount();
-        });
-
-        // 监听 popstate（浏览器前进/后退）
-        window.addEventListener("popstate", () => {
-          console.log("[Waline] 检测到 popstate 事件");
-          scheduleMount();
-        });
-      }
-
-      // 全局错误处理：捕获 Waline 内部的 focus 错误
-      if (typeof window !== "undefined") {
-        const originalError = console.error;
-        console.error = function (...args: any[]) {
-          // 过滤掉 Waline 的 focus 错误，避免污染控制台
-          const errorMsg = args[0]?.toString() || "";
-          if (
-            errorMsg.includes(
-              "Cannot read properties of undefined (reading 'focus')"
-            )
-          ) {
-            console.warn("[Waline] 已捕获并忽略 focus 错误（这是预期行为）");
-            return;
-          }
-          originalError.apply(console, args);
-        };
-      }
-
-      // 清理函数
-      if (typeof window !== "undefined") {
+        window.addEventListener("vitepress:route-change", scheduleMount);
+        window.addEventListener("popstate", scheduleMount);
         window.addEventListener("beforeunload", () => {
-          if (walineInstance) {
-            walineInstance.destroy();
-            walineInstance = null;
-          }
+          walineInstance?.destroy();
+          walineInstance = null;
         });
       }
     },
