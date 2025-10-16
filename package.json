@@ -17,6 +17,7 @@
     "preview": "vitepress preview docs"
   },
   "dependencies": {
+    "@waline/client": "^3.6.0",
     "vue": "^3.5.22"
   }
 }

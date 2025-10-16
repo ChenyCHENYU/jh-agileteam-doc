@@ -1,0 +1,114 @@
+/* Waline 样式优化 */
+.waline-wrapper {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+/* 适配 VitePress 主题色 */
+#waline .wl-panel {
+  border: 1px solid var(--vp-c-divider);
+  background-color: var(--vp-c-bg-soft);
+}
+
+#waline .wl-editor {
+  background-color: var(--vp-c-bg);
+}
+
+#waline .wl-card {
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+/* 登录按钮优化 */
+#waline .wl-login-info {
+  border-radius: 6px;
+  padding: 8px 12px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+#waline .wl-btn {
+  background: var(--vp-c-brand-1);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#waline .wl-btn:hover {
+  background: var(--vp-c-brand-2);
+  transform: translateY(-1px);
+}
+
+#waline .wl-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* GitHub 登录按钮样式 */
+#waline .wl-login-item.github {
+  background: #24292e;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#waline .wl-login-item.github:hover {
+  background: #2c3137;
+}
+
+/* 暗色模式适配 */
+.dark #waline .wl-panel {
+  background-color: var(--vp-c-bg-soft);
+  border-color: var(--vp-c-divider);
+}
+
+.dark #waline .wl-card {
+  border-color: var(--vp-c-divider);
+}
+
+.dark #waline .wl-editor {
+  background-color: var(--vp-c-bg-alt);
+  color: var(--vp-c-text-1);
+}
+
+/* 昵称提示样式 */
+#waline-nick-hint {
+  margin-top: 6px;
+  font-size: 12px;
+  transition: color 0.2s;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .waline-wrapper {
+    margin-top: 2rem;
+  }
+  
+  #waline .wl-panel {
+    padding: 12px;
+  }
+}
+
+/* 评论头像圆形 */
+#waline .wl-avatar {
+  border-radius: 50%;
+}
+
+/* 管理员标识 */
+#waline .wl-badge {
+  background: var(--vp-c-brand-1);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-left: 6px;
+}
