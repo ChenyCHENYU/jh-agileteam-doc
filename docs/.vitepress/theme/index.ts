@@ -1,6 +1,8 @@
 import DefaultTheme from "vitepress/theme";
 import type { Theme } from "vitepress";
 import { useWalineComments } from "../composables/useWalineComments";
+import { useRouter } from "vitepress";
+import { watch } from "vue";
 
 // UnoCSS
 import "virtual:uno.css";
@@ -17,6 +19,19 @@ import "./waline-custom.scss";
  */
 export default {
   extends: DefaultTheme,
+  setup() {
+    // 监听 VitePress 路由变化
+    const router = useRouter();
+
+    // 当路由变化时，触发 Waline 更新
+    watch(
+      () => router.route.path,
+      () => {
+        // 派发自定义事件，通知 Waline 更新
+        window.dispatchEvent(new Event("vitepress:route-change"));
+      }
+    );
+  },
   enhanceApp() {
     // 注册 Waline 评论插件
     const walinePlugin = useWalineComments({
@@ -36,12 +51,12 @@ export default {
       requiredMeta: ["nick", "link"], // 未登录用户必填
       login: "enable", // 支持 GitHub 登录（登录后无需填写）
 
-      // 界面配置
-      dark: "auto", // 自动切换深色模式
+      // 界面配置（dark 由 useWalineComments 自动检测）
       wordLimit: [0, 500], // 字数限制
       pageSize: 10, // 每页评论数
       imageUploader: false, // 禁用图片上传
       search: false, // 禁用表情搜索
+      highlighter: false, // 禁用代码高亮（避免警告）
 
       // 挂载延迟（等待页面渲染完成）
       mountDelay: 500,

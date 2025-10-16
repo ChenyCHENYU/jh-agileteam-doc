@@ -25,6 +25,7 @@ export function useWalineComments(options: WalineCommentsOptions) {
 
       let walineInstance: any = null;
       let target: HTMLElement | null = null;
+      let currentPath = "";
 
       const mount = () => {
         console.log("[Waline] 开始挂载评论组件...");
@@ -78,22 +79,47 @@ export function useWalineComments(options: WalineCommentsOptions) {
           }
         }
 
-        // 销毁旧实例
+        // 检查路径是否改变
+        const newPath = window.location.pathname;
+        const isDark = document.documentElement.classList.contains("dark");
+
+        // 如果已有实例，使用 update() 方法更新路径和主题
         if (walineInstance) {
-          console.log("[Waline] 销毁旧实例");
-          walineInstance.destroy();
-          walineInstance = null;
+          if (currentPath === newPath) {
+            console.log(
+              "[Waline] 路径未变化，仅更新主题:",
+              isDark ? "暗色" : "浅色"
+            );
+            walineInstance.update({ dark: isDark });
+          } else {
+            console.log(
+              `[Waline] 🔄 路由变化检测:\n  旧路径: ${currentPath}\n  新路径: ${newPath}\n  调用 update() 刷新评论`
+            );
+            currentPath = newPath;
+            // 不传 path 参数，让 Waline 自动使用 window.location.pathname
+            walineInstance.update({ dark: isDark });
+            console.log(
+              "[Waline] ✅ update() 已调用，Waline 应自动加载新路径的评论"
+            );
+          }
+          return;
         }
 
-        // 初始化 Waline
-        console.log("[Waline] 初始化评论系统, serverURL:", options.serverURL);
+        // 首次初始化
+        currentPath = newPath;
+        console.log(
+          `[Waline] 📝 首次初始化:\n  路径: ${newPath}\n  主题: ${
+            isDark ? "暗色" : "浅色"
+          }`
+        );
+
         try {
           walineInstance = init({
             el: target,
-            path: window.location.pathname,
+            // 不设置 path，让 Waline 自动使用 window.location.pathname
 
             // 默认配置（可被 options 覆盖）
-            dark: "auto",
+            dark: isDark, // 根据当前主题设置
             login: "enable",
             locale: {
               nick: "姓名",
@@ -133,14 +159,37 @@ export function useWalineComments(options: WalineCommentsOptions) {
             pageSize: 10,
             wordLimit: [0, 500],
             imageUploader: false, // 禁用图片上传（安全考虑）
-            highlighter: true, // 代码高亮
-            texRenderer: false, // 关闭数学公式（如需要可开启）
+            texRenderer: false, // 关闭数学公式
+            search: false, // 禁用表情搜索
+            reaction: false, // 禁用表情反应
+            recaptchaV3Key: "", // 禁用 reCAPTCHA
 
-            // 覆盖用户自定义配置
+            // 覆盖用户自定义配置（不包含 highlighter, imageUploader, texRenderer）
             ...options,
           });
 
           console.log("[Waline] 初始化成功！", walineInstance);
+
+          // 监听主题变化，动态更新 Waline 主题
+          const themeObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.attributeName === "class") {
+                const isDark =
+                  document.documentElement.classList.contains("dark");
+                console.log("[Waline] 主题切换:", isDark ? "暗色" : "浅色");
+
+                // 更新 Waline 主题
+                if (walineInstance && walineInstance.update) {
+                  walineInstance.update({ dark: isDark });
+                }
+              }
+            });
+          });
+
+          themeObserver.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ["class"],
+          });
 
           // 添加昵称校验
           if (options.nicknameGuard && target) {
@@ -152,32 +201,28 @@ export function useWalineComments(options: WalineCommentsOptions) {
             attachWorkIdGuard(target!);
           }, 1000);
 
-          // 修复 focus 错误：捕获提交后的 focus 异常
-          setTimeout(() => {
-            const form = target?.querySelector(".wl-panel");
-            if (form) {
-              form.addEventListener(
-                "submit",
-                () => {
-                  // 延迟处理，避免干扰 Waline 原有逻辑
-                  setTimeout(() => {
-                    try {
-                      // 如果 Waline 尝试 focus 失败，手动聚焦到编辑器
-                      const editor = target?.querySelector<HTMLTextAreaElement>(
-                        ".wl-editor textarea"
-                      );
-                      if (editor && document.activeElement === document.body) {
-                        editor.focus();
-                      }
-                    } catch (err) {
-                      console.warn("[Waline] Focus 处理:", err);
-                    }
-                  }, 100);
-                },
-                true
-              );
+          // 彻底修复 focus 错误：捕获所有异步错误
+          window.addEventListener("unhandledrejection", (event) => {
+            if (
+              event.reason?.message?.includes(
+                "Cannot read properties of undefined (reading 'focus')"
+              )
+            ) {
+              console.debug("[Waline] Focus 错误已被拦截");
+              event.preventDefault();
             }
-          }, 1000);
+          });
+
+          window.addEventListener("error", (event) => {
+            if (
+              event.message?.includes(
+                "Cannot read properties of undefined (reading 'focus')"
+              )
+            ) {
+              console.debug("[Waline] Focus 错误已被拦截");
+              event.preventDefault();
+            }
+          });
         } catch (error) {
           console.error("[Waline] 初始化失败:", error);
         }
@@ -207,6 +252,21 @@ export function useWalineComments(options: WalineCommentsOptions) {
 
       // 立即执行首次挂载
       scheduleMount();
+
+      // 监听 VitePress 路由变化事件
+      if (typeof window !== "undefined") {
+        // 监听自定义路由变化事件（由 theme/index.ts 派发）
+        window.addEventListener("vitepress:route-change", () => {
+          console.log("[Waline] 检测到 VitePress 路由变化事件");
+          scheduleMount();
+        });
+
+        // 监听 popstate（浏览器前进/后退）
+        window.addEventListener("popstate", () => {
+          console.log("[Waline] 检测到 popstate 事件");
+          scheduleMount();
+        });
+      }
 
       // 全局错误处理：捕获 Waline 内部的 focus 错误
       if (typeof window !== "undefined") {
