@@ -1,15 +1,12 @@
 /**
- * Waline 评论组件 - 液态玻璃质感设计
- * 适配 VitePress 主题，支持深色模式
- * 使用 !important 确保样式优先级
+ * Waline 评论组件 - 精致液态玻璃质感
+ * 修复：虚线、输入框高度、按钮大小
  */
 
-// 液态玻璃效果变量
 :root {
   --waline-glass-bg: rgba(255, 255, 255, 0.7);
   --waline-glass-border: rgba(255, 255, 255, 0.3);
   --waline-glass-shadow: rgba(31, 38, 135, 0.15);
-  --waline-glass-backdrop: blur(10px);
 }
 
 .dark {
@@ -18,13 +15,11 @@
   --waline-glass-shadow: rgba(0, 0, 0, 0.3);
 }
 
-// 评论区容器
 .waline-wrapper {
   margin-top: 4rem;
   padding-top: 2rem;
   position: relative;
   
-  // 顶部液态渐变分割线
   &::before {
     content: '';
     position: absolute;
@@ -33,59 +28,88 @@
     transform: translateX(-50%);
     width: 80%;
     height: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--vp-c-brand-1),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, var(--vp-c-brand-1), transparent);
     opacity: 0.5;
   }
 }
 
-// Waline 组件样式覆盖
 #waline {
-  // 评论面板 - 液态玻璃卡片
+  // 面板
   .wl-panel {
     background: var(--waline-glass-bg) !important;
-    backdrop-filter: var(--waline-glass-backdrop);
-    -webkit-backdrop-filter: var(--waline-glass-backdrop);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--waline-glass-border) !important;
     border-radius: 16px !important;
-    padding: 24px !important;
-    box-shadow: 
-      0 8px 32px 0 var(--waline-glass-shadow),
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.1) !important;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px !important;
+    box-shadow: 0 8px 32px var(--waline-glass-shadow) !important;
+  }
+
+  // 移除虚线！
+  .wl-header {
+    border-bottom: none !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 0 !important;
+  }
+
+  .wl-header-item {
+    margin-bottom: 10px !important;
     
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 
-        0 12px 48px 0 var(--waline-glass-shadow),
-        inset 0 1px 0 0 rgba(255, 255, 255, 0.15) !important;
+    &::after {
+      display: none !important; // 移除虚线
     }
   }
 
-  // 编辑器
+  // 标签
+  label {
+    display: inline-block !important;
+    margin-bottom: 6px !important;
+    color: var(--vp-c-text-2) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+  }
+
+  // 输入框 - 减小高度
+  .wl-input {
+    background: var(--vp-c-bg) !important;
+    border: 1px solid var(--vp-c-divider) !important;
+    border-radius: 8px !important;
+    padding: 8px 12px !important;
+    height: 36px !important; // 固定高度
+    font-size: 13px !important;
+    color: var(--vp-c-text-1) !important;
+    transition: all 0.3s ease !important;
+
+    &:focus {
+      border-color: var(--vp-c-brand-1) !important;
+      box-shadow: 0 0 0 3px rgba(var(--vp-c-brand-1), 0.1) !important;
+      transform: translateY(-1px);
+    }
+
+    &::placeholder {
+      color: var(--vp-c-text-3) !important;
+      font-size: 12px !important;
+    }
+  }
+
+  // 编辑器 - 减小高度
   .wl-editor {
     background: var(--vp-c-bg-soft) !important;
     border: 1px solid var(--vp-c-divider) !important;
     border-radius: 12px !important;
-    padding: 16px !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 12px !important;
+    margin-top: 12px !important;
 
     &:focus-within {
       border-color: var(--vp-c-brand-1) !important;
-      box-shadow: 
-        0 0 0 3px rgba(var(--vp-c-brand-1), 0.1),
-        0 4px 16px rgba(var(--vp-c-brand-1), 0.15) !important;
+      box-shadow: 0 0 0 3px rgba(var(--vp-c-brand-1), 0.1) !important;
     }
 
     textarea {
       color: var(--vp-c-text-1) !important;
-      font-size: 15px !important;
-      line-height: 1.7 !important;
-      min-height: 120px !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      min-height: 80px !important; // 减小最小高度
+      max-height: 300px !important;
 
       &::placeholder {
         color: var(--vp-c-text-3) !important;
@@ -93,53 +117,30 @@
     }
   }
 
-  // 输入框
-  .wl-input {
-    background: var(--vp-c-bg) !important;
-    border: 1px solid var(--vp-c-divider) !important;
-    border-radius: 10px !important;
-    padding: 10px 14px !important;
-    color: var(--vp-c-text-1) !important;
-    font-size: 14px !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-
-    &:focus {
-      border-color: var(--vp-c-brand-1) !important;
-      box-shadow: 
-        0 0 0 3px rgba(var(--vp-c-brand-1), 0.1),
-        0 4px 12px rgba(var(--vp-c-brand-1), 0.1) !important;
-      transform: translateY(-1px);
-    }
+  // 按钮区域
+  .wl-actions {
+    margin-top: 12px !important;
+    display: flex;
+    gap: 8px;
+    align-items: center;
   }
 
-  // 按钮 - 渐变液态质感
+  // 按钮 - 精致小巧
   .wl-btn {
-    background: linear-gradient(
-      135deg,
-      var(--vp-c-brand-1),
-      var(--vp-c-brand-2)
-    ) !important;
+    background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2)) !important;
     color: white !important;
     border: none !important;
-    border-radius: 10px !important;
-    padding: 10px 24px !important;
-    font-size: 14px !important;
+    border-radius: 8px !important;
+    padding: 6px 16px !important; // 更小
+    height: 32px !important; // 固定小巧高度
+    font-size: 13px !important;
     font-weight: 600 !important;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 
-      0 4px 12px rgba(var(--vp-c-brand-1), 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 2px 8px rgba(var(--vp-c-brand-1), 0.3) !important;
+    transition: all 0.3s ease !important;
 
     &:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 
-        0 8px 24px rgba(var(--vp-c-brand-1), 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
-    }
-
-    &:active {
-      transform: translateY(0);
+      box-shadow: 0 4px 16px rgba(var(--vp-c-brand-1), 0.4) !important;
     }
 
     &:disabled {
@@ -148,30 +149,37 @@
     }
   }
 
-  // 登录信息卡片
+  // 提交按钮
+  .wl-submit {
+    min-width: 80px !important;
+  }
+
+  // 登录按钮
+  .wl-login button {
+    background: linear-gradient(135deg, #5865f2, #7289da) !important;
+    height: 32px !important;
+    padding: 6px 16px !important;
+    font-size: 13px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(88, 101, 242, 0.3) !important;
+  }
+
+  // 登录信息
   .wl-login-info {
-    background: linear-gradient(
-      135deg,
-      var(--vp-c-brand-soft),
-      var(--vp-c-brand-softer)
-    ) !important;
+    background: linear-gradient(135deg, var(--vp-c-brand-soft), var(--vp-c-brand-softer)) !important;
     border: 1px solid var(--vp-c-brand-1) !important;
-    border-radius: 12px !important;
-    padding: 10px 16px !important;
-    color: var(--vp-c-brand-1) !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    margin-bottom: 16px !important;
-    box-shadow: 
-      0 4px 12px rgba(var(--vp-c-brand-1), 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px !important;
+    padding: 8px 12px !important;
+    font-size: 13px !important;
+    margin-bottom: 12px !important;
 
     button {
       background: transparent !important;
-      color: var(--vp-c-brand-1) !important;
       border: 1px solid var(--vp-c-brand-1) !important;
       border-radius: 6px !important;
-      padding: 4px 12px !important;
+      padding: 3px 10px !important;
+      font-size: 12px !important;
+      height: auto !important;
 
       &:hover {
         background: var(--vp-c-brand-1) !important;
@@ -180,22 +188,41 @@
     }
   }
 
+  // 工具按钮（表情等）
+  .wl-emoji,
+  .wl-image-upload,
+  .wl-gif {
+    button {
+      background: transparent !important;
+      border: 1px solid var(--vp-c-divider) !important;
+      border-radius: 6px !important;
+      width: 32px !important;
+      height: 32px !important;
+      padding: 0 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+
+      &:hover {
+        border-color: var(--vp-c-brand-1) !important;
+        background: var(--vp-c-brand-soft) !important;
+      }
+    }
+  }
+
   // 评论卡片
   .wl-card {
     background: var(--waline-glass-bg) !important;
-    backdrop-filter: var(--waline-glass-backdrop);
-    -webkit-backdrop-filter: var(--waline-glass-backdrop);
+    backdrop-filter: blur(10px);
     border: 1px solid var(--waline-glass-border) !important;
     border-radius: 12px !important;
-    padding: 20px !important;
-    margin-bottom: 16px !important;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 16px !important;
+    margin-bottom: 12px !important;
+    transition: all 0.3s ease;
     
     &:hover {
       transform: translateX(4px);
-      box-shadow: 
-        -4px 0 0 0 var(--vp-c-brand-1),
-        0 4px 16px var(--waline-glass-shadow) !important;
+      box-shadow: -4px 0 0 0 var(--vp-c-brand-1), 0 4px 16px var(--waline-glass-shadow) !important;
     }
   }
 
@@ -203,45 +230,43 @@
   .wl-nick {
     color: var(--vp-c-brand-1) !important;
     font-weight: 600 !important;
-    font-size: 15px !important;
+    font-size: 14px !important;
   }
 
   // 评论内容
   .wl-content {
     color: var(--vp-c-text-1) !important;
-    line-height: 1.8 !important;
-    font-size: 15px !important;
+    line-height: 1.7 !important;
+    font-size: 14px !important;
+    margin-top: 8px !important;
 
     code {
       background: var(--vp-c-bg-mute) !important;
-      padding: 3px 8px !important;
-      border-radius: 6px !important;
+      padding: 2px 6px !important;
+      border-radius: 4px !important;
     }
 
     pre {
       background: var(--vp-c-bg-mute) !important;
-      padding: 16px !important;
-      border-radius: 10px !important;
+      padding: 12px !important;
+      border-radius: 8px !important;
     }
-
-    a {
-      color: var(--vp-c-brand-1) !important;
-    }
-  }
-
-  // 时间戳
-  .wl-time {
-    color: var(--vp-c-text-3) !important;
-    font-size: 13px !important;
   }
 
   // 头像
-  .wl-avatar img {
-    border-radius: 50% !important;
-    transition: transform 0.3s ease !important;
+  .wl-avatar {
+    width: 36px !important;
+    height: 36px !important;
+    
+    img {
+      border-radius: 50% !important;
+      border: 2px solid var(--vp-c-divider) !important;
+      transition: all 0.3s ease !important;
 
-    &:hover {
-      transform: scale(1.1) !important;
+      &:hover {
+        transform: scale(1.1) !important;
+        border-color: var(--vp-c-brand-1) !important;
+      }
     }
   }
 
@@ -249,10 +274,10 @@
   .wl-action button {
     background: transparent !important;
     border: 1px solid var(--vp-c-divider) !important;
-    border-radius: 8px !important;
-    padding: 6px 12px !important;
-    color: var(--vp-c-text-2) !important;
-    transition: all 0.2s ease !important;
+    border-radius: 6px !important;
+    padding: 4px 10px !important;
+    height: 28px !important;
+    font-size: 12px !important;
 
     &:hover {
       border-color: var(--vp-c-brand-1) !important;
@@ -260,22 +285,80 @@
       background: var(--vp-c-brand-soft) !important;
     }
   }
+
+  // 时间戳
+  .wl-time {
+    color: var(--vp-c-text-3) !important;
+    font-size: 12px !important;
+  }
+
+  // Tab切换
+  .wl-tabs button {
+    background: transparent !important;
+    border: 1px solid var(--vp-c-divider) !important;
+    border-radius: 6px !important;
+    padding: 4px 12px !important;
+    height: 28px !important;
+    font-size: 12px !important;
+
+    &.active {
+      background: var(--vp-c-brand-1) !important;
+      color: white !important;
+    }
+  }
+
+  // 分页
+  .wl-operation button,
+  .wl-pagination button {
+    background: var(--vp-c-bg-soft) !important;
+    border: 1px solid var(--vp-c-divider) !important;
+    border-radius: 6px !important;
+    padding: 6px 12px !important;
+    height: 32px !important;
+    font-size: 13px !important;
+
+    &:hover:not(:disabled) {
+      background: var(--vp-c-brand-1) !important;
+      color: white !important;
+    }
+  }
+
+  // 表情弹窗
+  .wl-emoji-popup {
+    background: var(--waline-glass-bg) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--waline-glass-border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px var(--waline-glass-shadow) !important;
+  }
 }
 
 // 昵称提示
 #waline-nick-hint {
-  margin-top: 8px !important;
+  margin-top: 4px !important;
   font-size: 12px !important;
 }
 
 // 响应式
 @media (max-width: 768px) {
-  .waline-wrapper {
-    margin-top: 2rem;
-    padding-top: 1rem;
-    
-    #waline .wl-panel {
+  #waline {
+    .wl-panel {
       padding: 16px !important;
+    }
+
+    .wl-input {
+      height: 32px !important;
+      font-size: 12px !important;
+    }
+
+    .wl-editor textarea {
+      min-height: 60px !important;
+    }
+
+    .wl-btn {
+      height: 28px !important;
+      padding: 5px 12px !important;
+      font-size: 12px !important;
     }
   }
 }
