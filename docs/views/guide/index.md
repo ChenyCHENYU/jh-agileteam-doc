@@ -2,7 +2,7 @@
 
 Hey！伙计，欢迎来到 `金恒科技信息化部` 前端团队工程体系文档！
 
-<AuthorTag author="杨晨誉" />
+<AuthorTag author="CHENY" />
 
 ## 📖 关于本指南
 

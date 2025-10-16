@@ -23,6 +23,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [
         { text: "开发规范", link: "/views/guide/development-standards" },
         { text: "提交规范", link: "/views/guide/commit-standards" },
+        { text: "贡献指南", link: "/views/guide/contributing" },
       ],
     },
   ],

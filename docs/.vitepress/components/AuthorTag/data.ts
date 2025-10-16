@@ -45,8 +45,8 @@ export interface AuthorTagProps {
  * 可以根据团队成员进行配置
  */
 export const AUTHORS: Record<string, Author> = {
-  ChenYu: {
-    name: "Chen Yu",
+  CHENY: {
+    name: "杨晨誉",
     avatar: "https://github.com/ChenyCHENYU.png",
     email: "ycyplus@gmail.com",
     github: "ChenyCHENYU",
