@@ -173,39 +173,74 @@
 
 #waline .wl-submit { min-width: 76px !important; }
 
-/* 登录信息 */
+/* 登录信息 - 精致垂直布局 */
 #waline .wl-login-info {
   background: linear-gradient(135deg, var(--vp-c-brand-soft), var(--vp-c-brand-softer)) !important;
   border: none !important;
   border-radius: var(--radius-md) !important;
-  padding: 8px 12px !important;
-  font-size: 12px !important;
-  margin-bottom: 10px !important;
+  padding: 12px 14px !important;
+  margin-bottom: 12px !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 6px !important;
-  
-  .wl-login-nick {
-    color: var(--vp-c-brand-1) !important;
-    font-weight: 500 !important;
-    font-size: 12px !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* 用户名 - 居中显示 */
+#waline .wl-login-nick {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  text-align: center !important;
+  width: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* 退出按钮 - 底部居中 */
+#waline .wl-login-info button,
+#waline .wl-logout-btn {
+  background: transparent !important;
+  border: 1px solid var(--vp-c-brand-1) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 4px 16px !important;
+  font-size: 12px !important;
+  height: 26px !important;
+  line-height: 1 !important;
+  color: var(--vp-c-brand-1) !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+#waline .wl-login-info button:hover,
+#waline .wl-logout-btn:hover {
+  background: var(--vp-c-brand-1) !important;
+  color: #fff !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent) !important;
+}
+
+#waline .wl-login-info button:active,
+#waline .wl-logout-btn:active {
+  transform: translateY(0) !important;
+}
+
+/* 移动端优化 */
+@media (max-width: 640px) {
+  #waline .wl-login-info {
+    padding: 10px 12px !important;
   }
   
-  button {
-    background: transparent !important;
-    border: 1px solid var(--vp-c-brand-1) !important;
-    border-radius: var(--radius-sm) !important;
-    padding: 2px 8px !important;
+  #waline .wl-login-nick {
+    font-size: 13px !important;
+  }
+  
+  #waline .wl-login-info button {
+    padding: 3px 12px !important;
     font-size: 11px !important;
-    height: 22px !important;
-    color: var(--vp-c-brand-1) !important;
-    cursor: pointer !important;
-    transition: all 0.2s ease !important;
-    
-    &:hover {
-      background: var(--vp-c-brand-1) !important;
-      color: #fff !important;
-    }
+    height: 24px !important;
   }
 }
 

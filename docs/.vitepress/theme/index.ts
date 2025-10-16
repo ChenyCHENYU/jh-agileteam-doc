@@ -39,7 +39,7 @@ export default {
       imageUploader: false,
       search: false,
       highlighter: false,
-      mountDelay: 800, // 增加延迟确保 DOM 完全渲染
+      mountDelay: 800,
 
       // 姓名验证（仅未登录用户）
       nicknameGuard: {
