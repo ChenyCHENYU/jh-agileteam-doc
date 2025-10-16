@@ -244,6 +244,18 @@
   }
 }
 
+/* ========================================
+   三个字段布局（姓名 + 邮箱 + 工号）
+   ======================================== */
+#waline .wl-header.item3 {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 0.75rem !important;
+
+  .wl-header-item {
+    width: 100% !important;
+  }
+}
 /* 评论卡片 */
 #waline .wl-card {
   background: var(--waline-glass-bg) !important;

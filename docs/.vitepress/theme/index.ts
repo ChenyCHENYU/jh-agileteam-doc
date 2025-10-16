@@ -31,20 +31,17 @@ export default {
     // Waline 评论系统配置
     const walinePlugin = useWalineComments({
       serverURL: "https://waline-comment-lilac.vercel.app",
-      meta: ["nick", "link"],
-      requiredMeta: ["nick", "link"],
+      meta: ["nick", "mail", "link"], // 官方默认字段
+      requiredMeta: ["nick", "mail"], // 只要求姓名和邮箱
       login: "enable",
       wordLimit: [0, 500],
       pageSize: 10,
-      imageUploader: false,
       search: false,
-      highlighter: false,
       mountDelay: 800,
 
-      // 姓名验证（仅未登录用户）
-      nicknameGuard: {
-        pattern: /^[\u4e00-\u9fa5]{2,4}$/,
-        hint: "请输入正确的姓名（2-4个中文字符，例：张三）",
+      locale: {
+        placeholder: "💬 欢迎评论（支持 Markdown 语法）",
+        sofa: "来发表第一条评论吧~",
       },
     });
 
