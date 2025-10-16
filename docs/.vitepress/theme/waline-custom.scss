@@ -45,6 +45,12 @@
   opacity: .45;
 }
 
+/* 移除左侧头像区域的边框 */
+.waline-wrapper > div:first-child {
+  border: none !important;
+  box-shadow: none !important;
+}
+
 /* ---------- 基础面板 ---------- */
 #waline .wl-panel {
   background: var(--waline-glass-bg) !important;
@@ -295,6 +301,20 @@
 #waline .wl-time {
   color: var(--vp-c-text-3) !important;
   font-size: 12px !important;
+}
+
+/* 系统信息标签（Chrome/Windows）- 跟随主题 */
+#waline .wl-comment-meta,
+#waline .wl-meta span {
+  background: var(--vp-c-bg-mute) !important;
+  color: var(--vp-c-text-2) !important;
+  border: 1px solid var(--vp-c-divider) !important;
+  padding: 2px 8px !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  display: inline-block !important;
+  margin-right: 6px !important;
 }
 
 /* Tabs 与分页尺寸对齐 */

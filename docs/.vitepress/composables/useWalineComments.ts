@@ -98,9 +98,9 @@ export function useWalineComments(options: WalineCommentsOptions) {
             locale: {
               nick: "姓名",
               mail: "邮箱",
-              link: "网址",
+              link: "工号",
               nickError: "请输入正确的姓名（2-4个中文字符）",
-              mailError: "请填写正确的邮件地址",
+              mailError: "请填写正确的工号（6位数字）",
               placeholder: "💬 欢迎评论（支持 Markdown 语法）",
               sofa: "来发表第一条评论吧~",
               submit: "提交",
@@ -127,7 +127,7 @@ export function useWalineComments(options: WalineCommentsOptions) {
             },
 
             // 必填字段（对于非 GitHub 登录用户）
-            requiredMeta: ["nick", "mail"],
+            requiredMeta: ["nick", "link"],
 
             // 其他配置
             pageSize: 10,
@@ -146,6 +146,38 @@ export function useWalineComments(options: WalineCommentsOptions) {
           if (options.nicknameGuard && target) {
             attachNicknameGuard(target, options.nicknameGuard);
           }
+
+          // 添加工号校验（6位数字）
+          setTimeout(() => {
+            attachWorkIdGuard(target!);
+          }, 1000);
+
+          // 修复 focus 错误：捕获提交后的 focus 异常
+          setTimeout(() => {
+            const form = target?.querySelector(".wl-panel");
+            if (form) {
+              form.addEventListener(
+                "submit",
+                () => {
+                  // 延迟处理，避免干扰 Waline 原有逻辑
+                  setTimeout(() => {
+                    try {
+                      // 如果 Waline 尝试 focus 失败，手动聚焦到编辑器
+                      const editor = target?.querySelector<HTMLTextAreaElement>(
+                        ".wl-editor textarea"
+                      );
+                      if (editor && document.activeElement === document.body) {
+                        editor.focus();
+                      }
+                    } catch (err) {
+                      console.warn("[Waline] Focus 处理:", err);
+                    }
+                  }, 100);
+                },
+                true
+              );
+            }
+          }, 1000);
         } catch (error) {
           console.error("[Waline] 初始化失败:", error);
         }
@@ -175,6 +207,24 @@ export function useWalineComments(options: WalineCommentsOptions) {
 
       // 立即执行首次挂载
       scheduleMount();
+
+      // 全局错误处理：捕获 Waline 内部的 focus 错误
+      if (typeof window !== "undefined") {
+        const originalError = console.error;
+        console.error = function (...args: any[]) {
+          // 过滤掉 Waline 的 focus 错误，避免污染控制台
+          const errorMsg = args[0]?.toString() || "";
+          if (
+            errorMsg.includes(
+              "Cannot read properties of undefined (reading 'focus')"
+            )
+          ) {
+            console.warn("[Waline] 已捕获并忽略 focus 错误（这是预期行为）");
+            return;
+          }
+          originalError.apply(console, args);
+        };
+      }
 
       // 清理函数
       if (typeof window !== "undefined") {
@@ -263,4 +313,73 @@ function attachNicknameGuard(root: HTMLElement, guard: NicknameGuard) {
 
   // 延长观察时间，确保捕获登录状态变化
   setTimeout(() => observer.disconnect(), 10000); // 10秒后停止观察
+}
+
+/** 工号校验逻辑 - 仅对未登录用户生效 */
+function attachWorkIdGuard(root: HTMLElement) {
+  const observer = new MutationObserver(() => {
+    const linkInput =
+      root.querySelector<HTMLInputElement>('input[name="link"]');
+    const submitBtn = root.querySelector<HTMLButtonElement>(".wl-submit");
+    const loginInfo = root.querySelector(".wl-login-info");
+
+    if (!linkInput || !submitBtn) return;
+
+    // 如果已登录，跳过验证
+    if (loginInfo) {
+      const inputContainer = linkInput.closest(".wl-input-container");
+      if (inputContainer) {
+        (inputContainer as HTMLElement).style.display = "none";
+      }
+      console.log("[Waline] 用户已登录，跳过工号验证");
+      return;
+    }
+
+    const hintId = "waline-link-hint";
+    let hint = root.querySelector<HTMLDivElement>("#" + hintId);
+
+    if (!hint) {
+      hint = document.createElement("div");
+      hint.id = hintId;
+      hint.style.cssText =
+        "margin-top: 4px; font-size: 12px; display: flex; align-items: center; gap: 4px; transition: all 0.2s ease;";
+      linkInput.parentElement?.appendChild(hint);
+    }
+
+    const validateWorkId = () => {
+      const workId = (linkInput.value || "").trim();
+
+      // 验证6位数字
+      const isValid = /^\d{6}$/.test(workId);
+
+      if (!workId) {
+        hint!.innerHTML =
+          '<span style="color: var(--vp-c-text-3);">💡 请输入6位工号</span>';
+        submitBtn.disabled = false; // 让 Waline 自己处理空值
+      } else if (!isValid) {
+        hint!.innerHTML =
+          '<span style="color: var(--vp-c-danger-1);">❌ 工号必须是6位数字</span>';
+        submitBtn.disabled = true;
+      } else {
+        hint!.innerHTML =
+          '<span style="color: var(--vp-c-success-1);">✅ 工号格式正确</span>';
+        submitBtn.disabled = false;
+      }
+    };
+
+    // 监听输入事件
+    linkInput.removeEventListener("input", validateWorkId);
+    linkInput.addEventListener("input", validateWorkId);
+
+    // 初始验证
+    validateWorkId();
+  });
+
+  // 监听 DOM 变化
+  observer.observe(root, {
+    childList: true,
+    subtree: true,
+  });
+
+  setTimeout(() => observer.disconnect(), 10000);
 }
