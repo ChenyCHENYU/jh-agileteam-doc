@@ -32,23 +32,20 @@ export function useWalineComments(options: WalineCommentsOptions) {
           const container =
             document.querySelector(".VPDoc .content-container") ||
             document.querySelector(".VPDoc .content") ||
-            document.querySelector(".content-container") ||
-            document.querySelector("main") ||
-            document.body;
+            document.querySelector("main");
 
-          if (container) {
-            const footer = Array.from(container.children).find(
-              (el) => el.classList.contains("prev-next") || 
-                      el.classList.contains("page-footer")
-            );
-            
-            if (footer) {
-              container.insertBefore(target, footer);
-            } else {
-              container.appendChild(target);
-            }
+          if (!container) return;
+
+          const footer = Array.from(container.children).find(
+            (el) =>
+              el.classList.contains("prev-next") ||
+              el.classList.contains("page-footer")
+          );
+
+          if (footer) {
+            container.insertBefore(target, footer);
           } else {
-            return;
+            container.appendChild(target);
           }
         }
 
@@ -64,14 +61,12 @@ export function useWalineComments(options: WalineCommentsOptions) {
         }
 
         currentPath = newPath;
-        
+
         try {
           walineInstance = init({
+            ...options,
             el: target,
             dark: isDark,
-            login: "enable",
-            pageSize: 10,
-            ...options,
           });
         } catch (error) {
           console.error("[Waline] 初始化失败:", error);
@@ -82,10 +77,8 @@ export function useWalineComments(options: WalineCommentsOptions) {
         setTimeout(mount, options.mountDelay || 800);
       };
 
-      if (typeof window !== "undefined") {
-        window.addEventListener("vitepress:route-change", scheduleMount);
-        window.addEventListener("popstate", scheduleMount);
-      }
+      window.addEventListener("vitepress:route-change", scheduleMount);
+      window.addEventListener("popstate", scheduleMount);
 
       if (document.readyState === "complete") {
         scheduleMount();

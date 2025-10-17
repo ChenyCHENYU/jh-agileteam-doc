@@ -1,3 +1,12 @@
+/*
+ * @Author: ChenYu ycyplus@gmail.com
+ * @Date: 2025-10-15 08:46:20
+ * @LastEditors: ChenYu ycyplus@gmail.com
+ * @LastEditTime: 2025-10-17 08:58:16
+ * @FilePath: \jh-agileteam-doc\docs\.vitepress\theme\index.ts
+ * @Description:
+ * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
+ */
 import DefaultTheme from "vitepress/theme";
 import type { Theme } from "vitepress";
 import { useWalineComments } from "../composables/useWalineComments";
@@ -14,8 +23,6 @@ import "./waline-custom.scss";
 
 /**
  * VitePress 主题配置
- * @description 扩展默认主题，集成 UnoCSS 和 Waline 评论
- * @note 组件已通过 unplugin-vue-components 自动导入，无需手动注册
  */
 export default {
   extends: DefaultTheme,
@@ -37,13 +44,16 @@ export default {
       wordLimit: [0, 500],
       pageSize: 10,
       search: false,
+      imageUploader: false, // 禁用图片上传
       mountDelay: 800,
 
       locale: {
         placeholder: "💬 欢迎评论（支持 Markdown 语法）",
         sofa: "来发表第一条评论吧~",
-        nick: "姓名",
+        nick: "姓名或工号",
+        nickError: "请填写姓名或工号",
         mail: "邮箱",
+        mailError: "请填写正确的邮箱地址",
       },
     });
 
