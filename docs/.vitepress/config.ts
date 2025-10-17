@@ -64,7 +64,7 @@ export default defineConfig({
     // 大纲
     outline: {
       label: "页面导航",
-      level: [2, 3],
+      level: [2, 4],
     },
 
     // 返回顶部

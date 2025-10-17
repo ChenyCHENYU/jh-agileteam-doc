@@ -1,6 +1,6 @@
 # 安装配置
 
-本章节介绍如何配置和优化金恒科技信息化部前端团队的开发环境。
+工欲善其事，必先利其器。本章节介绍如何配置和优化金恒科技信息化部前端团队的开发环境。
 
 ## 编辑器配置
 
@@ -24,11 +24,21 @@
 - **Path Intellisense** - 路径智能提示
 - **Import Cost** - 导入包大小提示
 
-### 一键配置工具 <Badge type="tip" text="推荐" />
+### ♥️ 一键配置工具 <Badge type="tip" text="推荐" />
 
 为了让团队成员快速统一开发环境,我们提供了 **VSCode Configuration Installer** 工具。
 
-[![npm version](https://img.shields.io/npm/v/@agile-team/vscode-config.svg)](https://www.npmjs.com/package/@agile-team/vscode-config) [![npm downloads](https://img.shields.io/npm/dt/@agile-team/vscode-config.svg)](https://www.npmjs.com/package/@agile-team/vscode-config) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<div style="display: flex; align-items: center; gap: 8px;">
+  <a href="https://www.npmjs.com/package/@agile-team/vscode-config">
+    <img src="https://img.shields.io/npm/v/@agile-team/vscode-config.svg" alt="npm version" />
+  </a>
+  <a href="https://www.npmjs.com/package/@agile-team/vscode-config">
+    <img src="https://img.shields.io/npm/dt/@agile-team/vscode-config.svg" alt="npm downloads" />
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+  </a>
+</div>
 
 📦 **NPM 地址**:[https://www.npmjs.com/package/@agile-team/vscode-config](https://www.npmjs.com/package/@agile-team/vscode-config)
 
@@ -487,6 +497,3 @@ code --version    # 任意版本
 - 🎨 掌握 [规范约定](/views/guide/development-standards) 
 - 🛠️ 了解 [元配置](/views/guide/project-config)
 
-::: tip 提示
-这些配置都已经集成在金恒科技信息化部前端团队的脚手架中,使用脚手架创建项目可以省去大部分配置工作!如有特殊需求,请联系团队负责人或通过内部工单系统 409322 提交需求。
-:::
