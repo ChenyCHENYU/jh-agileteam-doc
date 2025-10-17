@@ -24,21 +24,84 @@
 
 .waline-wrapper {
   margin-top: 3rem;
-  padding-top: 1.25rem;
+  padding-top: 4.5rem;
   position: relative;
   width: 100%;
   clear: both;
   
+  /* 精致液态玻璃装饰 */
   &::before {
-    content: "";
+    content: "💬 评论区";
     position: absolute;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 78%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--vp-c-brand-1), transparent);
-    opacity: .45;
+    width: 100%;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--vp-c-text-1);
+    
+      /* 液态玻璃背景 */
+      background:
+        linear-gradient(135deg,
+          rgba(255, 255, 255, 0.9) 0%,
+          rgba(240, 248, 255, 0.85) 25%,
+          rgba(230, 242, 255, 0.8) 50%,
+          rgba(220, 238, 255, 0.85) 75%,
+          rgba(255, 255, 255, 0.9) 100%);
+      backdrop-filter: blur(12px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: var(--radius-lg);
+      box-shadow:
+        0 8px 32px rgba(31, 38, 135, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+    }
+    
+    /* 装饰光晕 */
+    &::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 28px;
+      background: radial-gradient(ellipse at center,
+          rgba(var(--vp-c-brand-1-rgb, 66, 133, 244), 0.15) 0%,
+          transparent 70%);
+      filter: blur(8px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    }
+    
+    .dark .waline-wrapper {
+    
+      /* 暗黑模式液态玻璃 */
+      &::before {
+        background:
+          linear-gradient(135deg,
+            rgba(26, 27, 30, 0.95) 0%,
+            rgba(30, 35, 45, 0.9) 25%,
+            rgba(35, 40, 50, 0.85) 50%,
+            rgba(30, 35, 45, 0.9) 75%,
+            rgba(26, 27, 30, 0.95) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+      }
+    
+      &::after {
+        background: radial-gradient(ellipse at center,
+            rgba(var(--vp-c-brand-1-rgb, 100, 160, 255), 0.2) 0%,
+            transparent 70%);
   }
 }
 

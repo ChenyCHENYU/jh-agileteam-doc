@@ -2,7 +2,7 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2025-10-15 08:46:20
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2025-10-17 09:23:12
+ * @LastEditTime: 2025-10-17 09:28:22
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\theme\index.ts
  * @Description: VitePress 主题入口文件
  * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
