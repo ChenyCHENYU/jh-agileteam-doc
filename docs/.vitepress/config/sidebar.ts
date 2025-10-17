@@ -18,22 +18,22 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
     {
-      text: "元配置",
-      collapsed: false,
-      items: [
-        { text: "项目配置", link: "/views/guide/meta-config/project" },
-        { text: "Git 配置", link: "/views/guide/meta-config/git" },
-        { text: "环境配置", link: "/views/guide/meta-config/environment" },
-        { text: "UnoCSS 配置", link: "/views/guide/meta-config/unocss" },
-      ],
-    },
-    {
       text: "规范约定",
       collapsed: false,
       items: [
         { text: "开发规范", link: "/views/guide/development-standards" },
         { text: "提交规范", link: "/views/guide/commit-standards" },
         { text: "贡献指南", link: "/views/guide/contributing" },
+      ],
+    },
+    {
+      text: "元配置",
+      collapsed: false,
+      items: [
+        { text: "项目配置", link: "/views/guide/project-config" },
+        { text: "Git 配置", link: "/views/guide/git-config" },
+        { text: "环境配置", link: "/views/guide/environment-config" },
+        { text: "UnoCSS 配置", link: "/views/guide/unocss-config" },
       ],
     },
   ],
