@@ -19,8 +19,8 @@
 ### 推荐工具
 
 - **编辑器**: [VS Code](https://code.visualstudio.com/) （团队标准编辑器）
-- **终端**: git bash / cmder 
-- **Git**: >= 2.30.0
+- **终端**: `git bash` / `cmder` 
+- **Git**: `>= 2.30.0`
 - **企业内部工具**: 金恒科技内部开发工具集
 
 ## 安装依赖

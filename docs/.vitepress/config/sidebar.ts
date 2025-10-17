@@ -18,6 +18,16 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
     {
+      text: "元配置",
+      collapsed: false,
+      items: [
+        { text: "项目配置", link: "/views/guide/meta-config/project" },
+        { text: "Git 配置", link: "/views/guide/meta-config/git" },
+        { text: "环境配置", link: "/views/guide/meta-config/environment" },
+        { text: "UnoCSS 配置", link: "/views/guide/meta-config/unocss" },
+      ],
+    },
+    {
       text: "规范约定",
       collapsed: false,
       items: [
