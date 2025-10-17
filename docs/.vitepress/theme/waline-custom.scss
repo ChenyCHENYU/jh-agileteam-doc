@@ -143,6 +143,35 @@
   flex-wrap: wrap;
 }
 
+/* 统一工具栏图标大小 */
+#waline .wl-action {
+  width: 32px !important;
+  height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: var(--radius-sm) !important;
+  transition: all .2s ease !important;
+  cursor: pointer !important;
+
+  svg {
+    width: 18px !important;
+    height: 18px !important;
+    fill: var(--vp-c-text-2) !important;
+    transition: all .2s ease !important;
+  }
+
+  &:hover {
+    background: var(--vp-c-bg-soft) !important;
+
+    svg {
+      fill: var(--vp-c-brand-1) !important;
+      transform: scale(1.1);
+    }
+  }
+}
+
+/* 提交按钮 - 品牌色 */
 #waline .wl-btn {
   background: linear-gradient(135deg, var(--vp-c-brand-1), var(--vp-c-brand-2)) !important;
   color: #fff !important;
@@ -198,17 +227,17 @@
   text-overflow: ellipsis !important;
 }
 
-/* 退出按钮 - 底部居中 */
+/* 登录按钮 - 使用灰色调区分 */
 #waline .wl-login-info button,
 #waline .wl-logout-btn {
-  background: transparent !important;
-  border: 1px solid var(--vp-c-brand-1) !important;
+  background: var(--vp-c-bg-soft) !important;
+    border: 1px solid var(--vp-c-divider) !important;
   border-radius: var(--radius-sm) !important;
   padding: 4px 16px !important;
   font-size: 12px !important;
   height: 26px !important;
   line-height: 1 !important;
-  color: var(--vp-c-brand-1) !important;
+  color: var(--vp-c-text-2) !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
   white-space: nowrap !important;
@@ -216,10 +245,11 @@
 
 #waline .wl-login-info button:hover,
 #waline .wl-logout-btn:hover {
-  background: var(--vp-c-brand-1) !important;
-  color: #fff !important;
+  background: var(--vp-c-brand-soft) !important;
+    border-color: var(--vp-c-brand-1) !important;
+    color: var(--vp-c-brand-1) !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent) !important;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--vp-c-brand-1) 15%, transparent) !important;
 }
 
 #waline .wl-login-info button:active,
