@@ -181,4 +181,13 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
   ],
+
+  // 晋钢优化日志
+  "/views/jingang-optimization/": [
+    {
+      text: "优化记录",
+      collapsed: false,
+      items: [{ text: "概述", link: "/views/jingang-optimization/" }],
+    },
+  ],
 };
