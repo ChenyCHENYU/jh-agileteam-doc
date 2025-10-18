@@ -2,6 +2,8 @@
 
 本文档介绍金恒科技信息化部前端团队的开发规范，确保团队代码风格一致性和项目可维护性。
 
+<AuthorTag author="ZhuXiang" />
+
 ## 代码风格
 
 ### JavaScript/TypeScript 规范

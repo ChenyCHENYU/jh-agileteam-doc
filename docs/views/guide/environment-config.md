@@ -137,7 +137,7 @@ interface ImportMeta {
 
 确保本地环境变量文件不被提交：
 
-```gitignore
+```bash
 # 本地环境变量
 .env.local
 .env.*.local

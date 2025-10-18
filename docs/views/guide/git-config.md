@@ -127,7 +127,7 @@ git commit -m "style(components): 统一组件代码格式"
 
 推荐的 `.gitignore` 配置：
 
-```gitignore
+```bash
 # Logs
 logs
 *.log
