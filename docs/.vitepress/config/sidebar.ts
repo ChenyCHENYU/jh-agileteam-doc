@@ -189,7 +189,14 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "概述", link: "/views/jingang-optimization/" },
-        { text: "入口页面【index.html】", link: "/views/jingang-optimization/entry" },
+        {
+          text: "入口页面【index.html】",
+          link: "/views/jingang-optimization/entry",
+        },
+        {
+          text: "css 引擎【unocss.config】",
+          link: "/views/jingang-optimization/unocss",
+        },
       ],
     },
   ],
