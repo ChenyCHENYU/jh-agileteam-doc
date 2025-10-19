@@ -197,6 +197,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "css 引擎【unocss.config】",
           link: "/views/jingang-optimization/unocss",
         },
+        {
+          text: "头部组件【Navbar.vue】",
+          link: "/views/jingang-optimization/navbar",
+        },
       ],
     },
   ],
