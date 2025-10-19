@@ -375,15 +375,15 @@ export interface PageResult<T> {
 
 ### `vite.config.ts`
 
-Vite 构建工具配置，详见 [工程化配置](/views/engineering/build)。
+Vite 构建工具配置，详见 [项目配置 - Vite 配置](/views/guide/project-config#vite-配置)。
 
 ### `tsconfig.json`
 
-TypeScript 编译配置，详见 [安装配置](/views/guide/installation)。
+TypeScript 编译配置，详见 [项目配置 - TypeScript 配置](/views/guide/project-config#typescript-配置)。
 
 ### `uno.config.ts`
 
-UnoCSS 原子化 CSS 配置，详见 [UnoCSS 指南](/views/unocss-guide)。
+UnoCSS 原子化 CSS 配置，详见 [UnoCSS 配置](/views/guide/unocss-config)。
 
 ## 命名规范
 
@@ -488,7 +488,7 @@ const user = { id: "1", name: "John" };
 
 ## 下一步
 
-- 🎨 学习 [UnoCSS](/views/unocss-guide) 原子化 CSS
+- 🎨 学习 [UnoCSS 配置](/views/guide/unocss-config)
 - 🛠️ 了解 [工程化配置](/views/engineering/scaffold)
 - 📖 查看 [编码规范](/views/best-practices/coding-standards)
 
