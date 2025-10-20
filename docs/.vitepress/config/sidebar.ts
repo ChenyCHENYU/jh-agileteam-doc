@@ -209,6 +209,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "自动导入【auto-import】",
           link: "/views/jingang-optimization/auto-import-config",
         },
+        {
+          text: "菜单图标【icon-map.ts】",
+          link: "/views/jingang-optimization/menu-icon",
+        },
       ],
     },
   ],
