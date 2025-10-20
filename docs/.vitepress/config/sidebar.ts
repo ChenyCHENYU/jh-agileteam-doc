@@ -205,6 +205,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "TypeScript 类型【tsconfig.ts】",
           link: "/views/jingang-optimization/typescript",
         },
+        {
+          text: "自动导入【auto-import】",
+          link: "/views/jingang-optimization/auto-import-config",
+        },
       ],
     },
   ],
