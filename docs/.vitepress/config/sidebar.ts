@@ -201,6 +201,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "头部组件【Navbar.vue】",
           link: "/views/jingang-optimization/navbar",
         },
+        {
+          text: "TypeScript 类型【tsconfig.ts】",
+          link: "/views/jingang-optimization/typescript",
+        },
       ],
     },
   ],
