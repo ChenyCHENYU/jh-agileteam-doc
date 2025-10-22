@@ -213,6 +213,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "菜单图标【icon-map.ts】",
           link: "/views/jingang-optimization/menu-icon",
         },
+        {
+          text: "菜单组件【menuNav】",
+          link: "/views/jingang-optimization/menu",
+        },
       ],
     },
   ],
