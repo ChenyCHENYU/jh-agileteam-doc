@@ -221,6 +221,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "我的收藏【index.vue】",
           link: "/views/jingang-optimization/collection",
         },
+        {
+          text: "接口调用【api】",
+          link: "/views/jingang-optimization/api",
+        },
       ],
     },
   ],
