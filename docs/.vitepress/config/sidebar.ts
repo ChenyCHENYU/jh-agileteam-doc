@@ -217,6 +217,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "菜单组件【menuNav】",
           link: "/views/jingang-optimization/menu",
         },
+        {
+          text: "我的收藏【index.vue】",
+          link: "/views/jingang-optimization/collection",
+        },
       ],
     },
   ],
