@@ -233,6 +233,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "代码构建【幽灵依赖】",
           link: "/views/jingang-optimization/build",
         },
+        {
+          text: "uat脚本命令【package.json】",
+          link: "/views/jingang-optimization/package-scripts",
+        },
       ],
     },
   ],
