@@ -230,7 +230,7 @@ export const sidebar: DefaultTheme.Sidebar = {
           link: "/views/jingang-optimization/merge",
         },
         {
-          text: "代码构建【幽灵依赖】",
+          text: "代码构建【Vue SFC】",
           link: "/views/jingang-optimization/build",
         },
         {
