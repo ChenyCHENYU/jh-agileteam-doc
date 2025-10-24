@@ -72,15 +72,20 @@
     gap: 1rem;
   }
 
+    // 头像容器（支持双层显示）
+    .author-avatar-container {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+    }
   .author-avatar {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    object-fit: cover;
     border: 3px solid var(--vp-c-bg);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--vp-c-brand-soft);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    flex-shrink: 0;
 
     &:hover {
       transform: scale(1.08) rotate(3deg);
@@ -89,6 +94,51 @@
     }
   }
 
+    // 默认头像样式（字母头像，作为背景层）
+    .author-avatar-default {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, var(--vp-c-brand-1) 0%, var(--vp-c-brand-2) 100%);
+      cursor: default;
+      user-select: none;
+      letter-spacing: 0;
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out;
+  
+      &.avatar-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+  
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
+  
+    // 真实图片头像（作为上层）
+    .author-avatar-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+  
+      &.avatar-loaded {
+        opacity: 1;
+      }
+  
+      &:hover {
+        transform: scale(1.08) rotate(3deg);
+      }
+    }
   .author-details {
     flex: 1;
     min-width: 0;
@@ -189,17 +239,24 @@
       gap: 0.875rem;
     }
 
+        .author-avatar-container {
+          width: 48px;
+          height: 48px;
+        }
     .author-avatar {
       width: 48px;
       height: 48px;
     }
 
+        .author-avatar-default {
+          font-size: 1.25rem;
+        }
     .author-main-info {
       flex-wrap: wrap;
     }
-  }
-
-  @media (max-width: 480px) {
+    }
+  
+    @media (max-width: 480px) {
     margin: 1rem 0;
 
     .author-tag-default {

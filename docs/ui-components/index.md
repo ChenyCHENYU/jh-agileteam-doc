@@ -1,5 +1,7 @@
 # 组件库
 
+<AuthorTag author="ZhuXiang" />
+
 ## 📦 介绍
 
 AGILE TEAM 组件库是一套基于 Vue 3 的高质量业务组件库，经过生产环境验证，帮助团队快速构建企业级应用。

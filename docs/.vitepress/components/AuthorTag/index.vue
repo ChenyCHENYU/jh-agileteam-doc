@@ -15,12 +15,27 @@
       </div>
       
       <div class="author-content">
-        <img
-          v-if="showAvatar && authorInfo.avatar"
-          :src="authorInfo.avatar"
-          :alt="authorInfo.name"
-          class="author-avatar"
-        />
+        <div v-if="showAvatar" class="author-avatar-container">
+          <!-- 默认字母头像（始终存在，作为背景） -->
+          <div
+            class="author-avatar author-avatar-default"
+            :class="{ 'avatar-hidden': avatarLoaded }"
+            :title="authorInfo.name"
+          >
+            {{ authorInitial }}
+          </div>
+          
+          <!-- 真实图片头像（加载成功后显示在上层） -->
+          <img
+            v-if="authorInfo.avatar"
+            :src="authorInfo.avatar"
+            :alt="authorInfo.name"
+            class="author-avatar author-avatar-image"
+            :class="{ 'avatar-loaded': avatarLoaded }"
+            @load="handleAvatarLoad"
+            @error="handleAvatarError"
+          />
+        </div>
         
         <div class="author-details">
           <div class="author-main-info">
@@ -51,6 +66,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
 import { getAuthorInfo } from "./data";
 import type { AuthorTagProps } from "./data";
 
@@ -59,6 +75,33 @@ const props = withDefaults(defineProps<AuthorTagProps>(), {
 });
 
 const authorInfo = computed(() => getAuthorInfo(props.author));
+
+// 头像加载状态
+const avatarLoaded = ref(false);
+const avatarLoadError = ref(false);
+
+// 头像加载成功
+const handleAvatarLoad = () => {
+  avatarLoaded.value = true;
+};
+
+// 头像加载失败
+const handleAvatarError = () => {
+  avatarLoadError.value = true;
+  avatarLoaded.value = false;
+};
+
+// 获取作者名字首字母作为默认头像
+const authorInitial = computed(() => {
+  const name = authorInfo.value.name;
+  if (!name) return '?';
+  // 如果是中文名，取最后一个字
+  if (/[\u4e00-\u9fa5]/.test(name)) {
+    return name.slice(-1);
+  }
+  // 如果是英文名，取第一个字母
+  return name.charAt(0).toUpperCase();
+});
 
 // 显示的职位：优先使用传入的 role，否则使用预定义的，默认为"资深开发工程师"
 const displayRole = computed(() => {
