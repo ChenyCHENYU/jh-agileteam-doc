@@ -8,7 +8,7 @@
 
 ## 一、侧边栏菜单优化
 
-### 🎨 视觉优化
+### 视觉优化
 
 #### 1. 系统切换下拉框毛玻璃化
 
@@ -115,7 +115,7 @@ dropdown.addEventListener('wheel', (e) => e.stopPropagation(), { capture: true }
 
 ## 二、菜单导航页面优化
 
-### 🎯 真实图标集成
+### 真实图标集成
 
 **文件**: `src/views/menuNav/index.vue`
 
@@ -185,7 +185,7 @@ dropdown.addEventListener('wheel', (e) => e.stopPropagation(), { capture: true }
 
 ---
 
-## 📊 性能优化
+## 性能优化
 
 ### 1. 条件渲染优化
 
@@ -207,7 +207,7 @@ dropdown.addEventListener('wheel', (e) => e.stopPropagation(), { capture: true }
 
 ---
 
-## 🎨 配色方案
+## 配色方案
 
 ### 结合晋钢logo主题紫蓝渐变色系
 
@@ -226,7 +226,7 @@ $light-purple: rgba(167, 139, 250, x); // Light Purple 浅紫
 ---
 
 
-## 📁 涉及文件
+## 涉及文件
 
 ```
 src/
@@ -248,7 +248,7 @@ src/
 
 ---
 
-## 🎯 核心亮点
+## 核心亮点
 
 1. **毛玻璃设计系统** - 统一的视觉语言
 2. **智能图标回退** - 优雅降级策略

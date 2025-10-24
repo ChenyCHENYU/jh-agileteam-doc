@@ -1,10 +1,10 @@
 # TypeScript 配置优化
 
-> 🔧 解决 Element Plus 类型声明问题
+> 解决 Element Plus 类型声明问题
 
 <AuthorTag author="CHENY" />
 
-## 🐛 遇到的问题
+## 遇到的问题
 
 ### 问题 1：Element Plus 类型找不到
 
@@ -28,7 +28,7 @@ Client network socket disconnected
 
 ---
 
-## ✅ 解决方案
+## 解决方案
 
 ### 核心改动
 
@@ -63,7 +63,7 @@ declare module "*.vue" {
 
 ---
 
-## 📝 完整配置
+## 完整配置
 
 ### tsconfig.json
 
@@ -171,7 +171,7 @@ interface ImportMeta {
 
 ---
 
-## 🎯 关键点说明
+## 关键点说明
 
 ### 1. Element Plus 类型引用
 
@@ -230,7 +230,7 @@ interface ImportMeta {
 
 ---
 
-## 📊 效果对比
+## 效果对比
 
 | 项目         | 优化前      | 优化后         | 说明              |
 | ------------ | ----------- | -------------- | ----------------- |
@@ -243,7 +243,7 @@ interface ImportMeta {
 ---
 
 
-## ✅ 问题解决清单
+## 问题解决清单
 
 - [x] 修复 Element Plus 类型声明
 - [x] 解决网络连接错误
@@ -255,7 +255,7 @@ interface ImportMeta {
 
 ---
 
-## 🔗 相关资源
+## 相关资源
 
 - [TypeScript moduleResolution](https://www.typescriptlang.org/tsconfig#moduleResolution)
 - [Element Plus TypeScript](https://element-plus.org/zh-CN/guide/typescript.html)

@@ -181,7 +181,7 @@ pnpm run build
 
 ## 根本原因总结
 
-### 🎯 核心问题
+### 核心问题
 
 **依赖版本冲突导致编译器行为不一致**
 
@@ -204,9 +204,9 @@ pnpm run build
 
 ## 解决方案优先级
 
-### ✅ 根本性解决（必须执行）
+### 根本性解决(必须执行)
 
-#### 1. 添加 pnpm overrides（优先级：最高）
+#### 1. 添加 pnpm overrides(优先级:最高)
 
 ```json
 {
@@ -243,7 +243,7 @@ grep -rn "default:\(\)\s*=>" --include="*.vue" src/
 
 ---
 
-### ❌ 无效尝试（经验教训）
+### 无效尝试(经验教训)
 
 1. **仅删除 package.json 中的 @vue/compiler-sfc**
 
@@ -510,7 +510,7 @@ pnpm install --frozen-lockfile
 
 ## 总结
 
-### 💡 核心经验
+### 核心经验
 
 1. **版本冲突是根本原因**
 
@@ -533,7 +533,7 @@ pnpm install --frozen-lockfile
 
 ---
 
-### ⚠️ 最重要的注意事项
+### 最重要的注意事项
 
 1. **永远不要混用不同大版本的 Vue 生态依赖**
 
