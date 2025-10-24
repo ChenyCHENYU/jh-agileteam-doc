@@ -55,30 +55,11 @@
         </div>
       </div>
     </section>
-
-    <!-- 数据统计 - 液态玻璃效果 -->
-    <section class="glass-stats-section">
-      <div class="glass-container">
-        <div class="glass-stats-grid">
-          <div v-for="stat in stats" :key="stat.label" class="glass-stat-card">
-            <div class="glass-card-inner">
-              <div class="stat-icon-large">{{ stat.icon }}</div>
-              <div class="stat-content">
-                <div class="stat-number-large">{{ stat.number }}</div>
-                <div class="stat-label-large">{{ stat.label }}</div>
-                <div class="stat-desc">{{ stat.desc }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="glass-bg-decoration"></div>
-    </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { features, stats } from "./data";
+import { features } from "./data";
 </script>
 
 <style scoped lang="scss">
