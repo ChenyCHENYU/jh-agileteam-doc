@@ -225,6 +225,14 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "接口调用【api】",
           link: "/views/jingang-optimization/api",
         },
+        {
+          text: "代码合并【防止漂移】",
+          link: "/views/jingang-optimization/merge",
+        },
+        {
+          text: "代码构建【幽灵依赖】",
+          link: "/views/jingang-optimization/build",
+        },
       ],
     },
   ],
