@@ -190,6 +190,10 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [
         { text: "概述", link: "/views/jingang-optimization/" },
         {
+          text: "优化执行方案",
+          link: "/views/jingang-optimization/optimization-plan",
+        },
+        {
           text: "入口页面【index.html】",
           link: "/views/jingang-optimization/entry",
         },
