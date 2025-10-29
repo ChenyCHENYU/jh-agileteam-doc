@@ -241,6 +241,10 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "uat脚本命令【package.json】",
           link: "/views/jingang-optimization/package-scripts",
         },
+        {
+          text: "vite优化【vite.config.ts】",
+          link: "/views/jingang-optimization/vite",
+        },
       ],
     },
   ],
