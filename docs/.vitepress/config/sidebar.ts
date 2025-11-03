@@ -230,7 +230,7 @@ export const sidebar: DefaultTheme.Sidebar = {
           link: "/views/jingang-optimization/api",
         },
         {
-          text: "代码合并【防止漂移】",
+          text: "合并发布【防止事故】",
           link: "/views/jingang-optimization/merge",
         },
         {
