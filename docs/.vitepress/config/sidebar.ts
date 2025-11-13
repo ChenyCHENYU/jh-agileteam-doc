@@ -245,6 +245,18 @@ export const sidebar: DefaultTheme.Sidebar = {
           text: "vite优化【vite.config.ts】",
           link: "/views/jingang-optimization/vite",
         },
+        {
+          text: "架构优化【模块联邦迁移】",
+          link: "/views/jingang-optimization/module-federation-migration",
+        },
+        {
+          text: "字体优化【fonts】",
+          link: "/views/jingang-optimization/font-optimiza",
+        },
+        {
+          text: "成本项目【独立部署】",
+          link: "/views/jingang-optimization/cost-optimiza",
+        },
       ],
     },
   ],
