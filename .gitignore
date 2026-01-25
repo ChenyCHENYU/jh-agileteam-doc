@@ -29,8 +29,8 @@ docs/.vitepress/cache
 .cache
 
 # ===== 自动生成的类型声明 =====
-types/auto-imports.d.ts
-types/components.d.ts
+docs/types/auto-imports.d.ts
+docs/types/components.d.ts
 cspell.json
 
 # ===== 日志文件 =====
