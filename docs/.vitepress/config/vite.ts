@@ -1,8 +1,18 @@
+/*
+ * @Author: ChenYu ycyplus@gmail.com
+ * @Date: 2026-01-25 17:34:41
+ * @LastEditors: ChenYu ycyplus@gmail.com
+ * @LastEditTime: 2026-01-25 17:38:47
+ * @FilePath: \jh-agileteam-doc\docs\.vitepress\config\vite.ts
+ * @Description:
+ * Copyright (c) 2026 by CHENY, All Rights Reserved 😎.
+ */
 import type { UserConfig } from "vite";
 import UnoCSS from "unocss/vite";
 import { resolve } from "path";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
+import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
 
 /**
  * Vite 配置
@@ -63,6 +73,7 @@ export const vite: UserConfig = {
       extensions: ["vue"],
       include: [/\.vue$/, /\.md$/],
       dts: resolve(__dirname, "../../types/components.d.ts"),
+      resolvers: [NaiveUiResolver()],
     }),
   ],
 
