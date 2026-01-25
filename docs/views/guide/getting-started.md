@@ -13,7 +13,7 @@
 
 ### 必需工具
 
-- **Node.js**: >= 22.13.0 （推荐使用 LTS 版本）
+- **Node.js**: >= 18+ （推荐使用 LTS 版本）
 - **包管理器**: pnpm >= 10.16.1 （团队推荐）或 npm >= 9.0.0
 
 ### 推荐工具
@@ -62,34 +62,63 @@ pnpm dev
 
 :::warning :eyes: 这里你要注意：
 
-因为项目存在本地私有包的依赖，你需要设置使用脚本或者设置npm源为本地依赖地址
+因为项目存在本地私有包的依赖，你需要根据开发环境配置 `.npmrc` 文件。
+
+### 方式一：云桌面环境
+
+如果你在云桌面环境中开发，在项目根目录创建 `.npmrc` 文件并添加以下配置：
 
 ```bash
-- npm config set registry http://172.17.8.54/
-- npm install --force or --legacy-peer-deps
+# 默认使用内网registry
+registry=http://172.18.248.130/
+
+# @jhlc scope 也使用内网registry
+@jhlc:registry=http://172.18.248.130/
+
+# pnpm配置
+shamefully-hoist=true
+strict-peer-dependencies=false
+
+# 关闭严格的SSL检查（如果内网registry是http）
+strict-ssl=false
 ```
-**或者直接使用脚本（推荐）**
+
+### 方式二：内网环境
+
+如果你在内网环境中开发，在项目根目录创建 `.npmrc` 文件并添加以下配置：
 
 ```bash
-# .npmrc
-
+# pnpm配置
 strict-peer-dependencies=false
 auto-install-peers=true
 shamefully-hoist=true
 
 # —— 私有 scope & 私服配置 ——
-@jhlc:registry=http://172.17.8.54/
+@jhlc:registry=http://<内网registry地址>/
 
 # —— 私服鉴权（写死 token） ——
 always-auth=true
-//172.17.8.54/:_authToken=MzQ4MjM3ODJkZjg5ZmNmZWUyNTU4ZGFkYzExZjc3MmM6ODQzNjkzMTNkYWU3NTZhMDgwMGY2NWU1ZTM1ODViODQ=
+//<内网registry地址>/:_authToken=<你的token>
 
 # —— 公共包依旧走官方源 ——
 registry=https://registry.npmjs.org/
-
 ```
 
-然后执行 `pnpm install` 即可，一般项目会预配置.npmrc，若没有在项目根目录请手动添加该文件
+### 个人设置方式
+
+如果不想在项目中配置 `.npmrc`，也可以在个人目录（`~/.npmrc`）全局配置，或者使用命令行临时配置：
+
+```bash
+# 设置 registry（替换为实际的内网地址）
+npm config set registry http://<内网registry地址>/
+
+# 安装依赖（使用 --force 或 --legacy-peer-deps）
+pnpm install --force
+# 或
+pnpm install --legacy-peer-deps
+```
+
+> **注意**：一般项目会预配置 `.npmrc`，若没有在项目根目录请手动添加该文件。请根据实际开发环境选择对应的配置方式，并将 `<内网registry地址>` 和 `<你的token>` 替换为实际值。
 
 :::
 
