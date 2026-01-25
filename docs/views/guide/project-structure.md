@@ -4,359 +4,441 @@
 
 ## 标准目录结构
 
-金恒科技信息化部前端团队根据不同的业务场景，提供了多种项目结构模板。以下是基础的标准目录结构：
+金恒科技信息化部前端团队推荐以下标准目录结构：
 
 ```
 my-project/
-├── .vscode/                # VS Code 配置
-│   └── settings.json       # 编辑器设置
-├── public/                 # 静态资源（不会被处理）
-│   └── favicon.ico         # 网站图标
-├── src/                    # 源代码目录
-│   ├── assets/            # 资源文件
-│   │   ├── images/        # 图片资源
-│   │   ├── styles/        # 全局样式
-│   │   └── fonts/         # 字体文件
-│   ├── components/        # 公共组件
-│   │   ├── common/        # 通用组件
-│   │   └── business/      # 业务组件
-│   ├── views/             # 页面组件
-│   │   ├── home/          # 首页
-│   │   └── about/         # 关于页
-│   ├── router/            # 路由配置
-│   │   └── index.ts       # 路由入口
-│   ├── store/             # 状态管理
-│   │   ├── modules/       # 模块
-│   │   └── index.ts       # store 入口
-│   ├── composables/       # 组合式函数
-│   ├── utils/             # 工具函数
-│   │   ├── request.ts     # 请求封装
-│   │   └── helpers.ts     # 辅助函数
-│   ├── types/             # TypeScript 类型定义
-│   ├── api/               # API 接口
-│   ├── constants/         # 常量定义
-│   ├── App.vue            # 根组件
-│   └── main.ts            # 入口文件
-├── .env.development       # 开发环境变量
-├── .env.test             # 测试环境变量
-├── .env.production        # 生产环境变量
-├── .eslintrc.cjs          # ESLint 配置
-├── .prettierrc.json       # Prettier 配置
-├── index.html             # HTML 模板
-├── package.json           # 项目配置
-├── tsconfig.json          # TypeScript 配置
-├── uno.config.ts          # UnoCSS 配置
-├── vite.config.ts         # Vite 配置
-└── README.md              # 项目说明
+├── 📁 .husky/                    # Git Hooks 配置
+├── 📁 docs/                       # 项目文档
+├── 📁 mock/                       # Mock 模拟数据
+├── 📁 public/                     # 静态资源
+├── 📁 public-sub/                 # 子应用静态资源
+├── 📁 scripts/                    # 脚本工具
+├── 📁 src/                        # 源代码目录（核心）
+│   ├── 📁 api/                    # API 接口定义
+│   │   ├── login.ts               # 登录接口
+│   │   └── hrms.ts                # 人力资源接口
+│   ├── 📁 assets/                 # 静态资源
+│   │   ├── logo/                  # Logo 图片
+│   │   └── style/                 # 全局样式
+│   ├── 📁 components/             # 公共组件
+│   │   ├── 📁 global/             # 全局组件 (C_ 前缀)
+│   │   │   └── 📁 C_Tree/        # 树形组件
+│   │   ├── 📁 local/              # 本地通用组件 (c_ 前缀)
+│   │   │   ├── 📁 c_actionModal/ # 操作模态框
+│   │   │   ├── 📁 c_formModal/   # 表单模态框
+│   │   │   └── 📁 c_spliterTitle/# 分割标题
+│   │   ├── 📁 remote/             # 远程组件引用
+│   │   │   ├── 📁 AGGrid/        # AG Grid 表格
+│   │   │   ├── 📁 BaseForm/      # 基础表单
+│   │   │   ├── 📁 BaseQuery/     # 基础查询
+│   │   │   ├── 📁 BaseTable/     # 基础表格
+│   │   │   └── 📁 BaseToolbar/   # 基础工具栏
+│   │   ├── 📁 ParentView/         # 父级视图组件
+│   │   ├── 📁 RightToolbar/       # 右侧工具栏
+│   │   ├── 📁 Splitter/           # 分割器
+│   │   └── 📁 SvgIcon/            # SVG 图标
+│   ├── 📁 composables/            # 组合式函数（Vue3）
+│   ├── 📁 enums/                  # 枚举定义
+│   │   ├── columns.ts             # 表格列枚举
+│   │   └── dict.ts                # 字典枚举
+│   ├── 📁 mixins/                 # 混入（Vue2 风格）
+│   │   ├── BaseMixins.ts          # 基础混入
+│   │   ├── ListMixins.js           # 列表混入
+│   │   └── TableMixins.js          # 表格混入
+│   ├── 📁 mock/                   # Mock 数据
+│   │   └── index.ts              # Mock 入口
+│   ├── 📁 types/                  # TypeScript 类型定义
+│   │   ├── jh4j-cloud.ts         # 云服务类型
+│   │   └── page.ts               # 页面类型
+│   ├── 📁 util/                   # 工具函数
+│   │   ├── validate.ts            # 验证工具
+│   │   ├── download.ts            # 下载工具
+│   │   └── ...                   # 其他工具
+│   ├── 📁 views/                  # 页面视图
+│   │   ├── 📁 demo-module/         # 演示模块
+│   │   ├── 📁 produce/            # 生产模块
+│   │   │   ├── 📁 production-mmwr/# 轧钢生产
+│   │   │   ├── 📁 production-omom/# 作业订单
+│   │   │   ├── 📁 production-order/# 生产订单
+│   │   │   └── 📁 production-wms/  # 仓储管理
+│   │   └── 📁 sale/               # 销售模块
+│   │       └── 📁 demo/          # 销售演示
+│   ├── App.vue                    # 根组件
+│   ├── main.ts                    # 应用入口
+│   ├── main-core.ts               # 核心模块入口
+│   ├── permission.ts              # 权限控制
+│   └── settings.ts                # 应用设置
+├── 📁 vite/                       # Vite 构建配置
+│   ├── 📁 plugins/                # Vite 插件配置
+│   │   ├── auto-import.js         # 自动导入
+│   │   ├── compression.js         # 压缩插件
+│   │   ├── svg-icon.js            # SVG 图标
+│   │   ├── windi-css/             # Windi CSS 配置
+│   │   └── 📁 shared/            # 共享模块
+│   └── environment.ts             # 环境变量处理
+├── 📄 .env                        # 通用环境变量
+├── 📄 .env.dev                    # 开发环境变量
+├── 📄 .env.uat                    # UAT 环境变量
+├── 📄 .env.prod                   # 生产环境变量
+├── 📄 .eslintrc.cjs               # ESLint 配置
+├── 📄 .prettierrc                 # Prettier 配置
+├── 📄 commitlint.config.cjs        # Git 提交规范配置
+├── 📄 index.html                  # HTML 模板
+├── 📄 package.json                # 项目配置
+├── 📄 tsconfig.json               # TypeScript 配置
+├── 📄 vite.config.ts              # Vite 配置
+├── 📄 windi.config.ts             # Windi CSS 配置
+└── 📄 README.md                   # 项目说明
 ```
 
-### 不同项目类型的目录结构差异
+### 目录说明
 
-#### 单体项目
-- 简化的目录结构，适合快速开发
-- 所有功能模块集中在 `src` 目录下
-- 适合中小型业务系统
+| 目录 | 说明 |
+|------|------|
+| `.husky/` | Git Hooks 配置，用于代码提交前检查 |
+| `docs/` | 项目文档，存放组件使用说明等 |
+| `mock/` | Mock 模拟数据，用于开发环境 |
+| `public/` | 静态资源，不会被 Webpack/Vite 处理 |
+| `public-sub/` | 子应用静态资源 |
+| `scripts/` | 脚本工具，用于构建、部署等 |
+| `src/api/` | API 接口定义，按模块组织 |
+| `src/components/global/` | 全局组件，使用 `C_` 前缀命名 |
+| `src/components/local/` | 本地通用组件，使用 `c_` 前缀命名 |
+| `src/components/remote/` | 远程组件引用，如 BaseForm、BaseTable 等 |
+| `src/composables/` | Vue3 组合式函数 |
+| `src/enums/` | 枚举定义，如表格列、字典等 |
+| `src/mixins/` | Vue2 风格混入，仅作为参考，不推荐使用 |
+| `src/types/` | TypeScript 类型定义 |
+| `src/util/` | 工具函数，如验证、下载等 |
+| `src/views/` | 页面视图，按业务模块组织 |
+| `vite/plugins/` | Vite 插件配置，统一管理 |
 
-#### 集群项目
-- 增加集群配置相关目录
-- 包含负载均衡和高可用性配置文件
-- 支持多环境部署配置
+## 📦 文件组织规范
 
-#### Monorepo项目
-```
-my-monorepo/
-├── packages/              # 子项目目录
-│   ├── app1/             # 子应用1
-│   ├── app2/             # 子应用2
-│   ├── shared/           # 共享代码
-│   └── ui-components/    # 共享组件
-├── configs/              # 共享配置
-├── scripts/              # 构建脚本
-└── package.json          # 根配置
-```
+### 页面组件组织模式
 
-#### 微前端项目
-```
-my-microfrontend/
-├── main-app/             # 主应用
-├── micro-apps/           # 微应用
-│   ├── app1/             # 微应用1
-│   └── app2/             # 微应用2
-├── shared/               # 共享资源
-└── configs/              # 微前端配置
-```
-
-## 核心目录说明
-
-### `/src/assets` - 资源文件
-
-存放项目所需的静态资源，这些资源会被 Vite 处理和优化。
-
-```
-assets/
-├── images/          # 图片资源
-│   ├── logo.png
-│   └── banner.jpg
-├── styles/          # 样式文件
-│   ├── global.css   # 全局样式
-│   ├── variables.css # CSS 变量
-│   └── reset.css    # 样式重置
-└── fonts/           # 字体文件
-    └── custom.woff2
-```
-
-**使用示例：**
-
-```vue
-<template>
-  <img :src="logo" alt="Logo" />
-</template>
-
-<script setup lang="ts">
-import logo from "@/assets/images/logo.png";
-</script>
-```
-
-### `/src/components` - 组件目录
-
-按功能分类存放可复用组件。
-
-```
-components/
-├── common/              # 通用组件
-│   ├── Button/
-│   │   ├── index.vue
-│   │   └── types.ts
-│   └── Modal/
-│       ├── index.vue
-│       └── types.ts
-└── business/            # 业务组件
-    ├── UserCard/
-    └── ProductList/
-```
-
-**组件规范：**
-
-- 使用 PascalCase 命名
-- 复杂组件使用文件夹组织
-- 包含 TypeScript 类型定义
-
-**示例：**
-
-```vue
-<!-- components/common/Button/index.vue -->
-<template>
-  <button :class="buttonClass" @click="handleClick">
-    <slot />
-  </button>
-</template>
-
-<script setup lang="ts">
-import type { ButtonProps } from "./types";
-
-const props = defineProps<ButtonProps>();
-const emit = defineEmits<{
-  click: [event: MouseEvent];
-}>();
-
-const buttonClass = computed(() => ({
-  btn: true,
-  [`btn-${props.type}`]: props.type,
-}));
-
-const handleClick = (e: MouseEvent) => {
-  emit("click", e);
-};
-</script>
-```
-
-### `/src/views` - 页面组件
-
-存放路由页面组件。
+页面组件按业务模块组织，每个模块可包含多个子模块。
 
 ```
 views/
-├── home/
-│   ├── index.vue          # 首页
-│   └── components/        # 页面私有组件
-│       └── Banner.vue
-├── user/
-│   ├── index.vue          # 用户列表
-│   ├── detail.vue         # 用户详情
-│   └── edit.vue           # 用户编辑
-└── 404.vue                # 404 页面
+├── demo-module/         # 演示模块
+├── produce/             # 生产模块
+│   ├── production-mmwr/ # 轧钢生产
+│   ├── production-omom/ # 作业订单
+│   ├── production-order/# 生产订单
+│   └── production-wms/  # 仓储管理
+└── sale/                # 销售模块
+    └── demo/           # 销售演示
 ```
 
-### `/src/router` - 路由配置
+### 组件库组织模式
+
+#### 全局组件 (C_ 前缀)
+
+全局组件使用 `C_` 前缀，表示可以在整个项目中使用。
 
 ```
-router/
-├── routes/              # 路由模块
-│   ├── home.ts
-│   ├── user.ts
-│   └── system.ts
-├── guards.ts            # 路由守卫
-└── index.ts             # 路由入口
+components/global/
+└── 📁 C_Tree/          # 树形组件
+    ├── 📄 index.vue
+    └── 📄 index.scss
 ```
 
-**路由配置示例：**
+#### 本地通用组件 (c_ 前缀)
 
-```typescript
-// router/index.ts
-import { createRouter, createWebHistory } from "vue-router";
-import type { RouteRecordRaw } from "vue-router";
-
-const routes: RouteRecordRaw[] = [
-  {
-    path: "/",
-    name: "Home",
-    component: () => import("@/views/home/index.vue"),
-  },
-  {
-    path: "/user",
-    name: "User",
-    component: () => import("@/views/user/index.vue"),
-  },
-];
-
-export const router = createRouter({
-  history: createWebHistory(),
-  routes,
-});
-```
-
-### `/src/store` - 状态管理
-
-使用 Pinia 管理全局状态。
+本地通用组件使用 `c_` 前缀，在项目内通用但非全局注册。
 
 ```
-store/
-├── modules/
-│   ├── user.ts          # 用户模块
-│   ├── app.ts           # 应用模块
-│   └── permission.ts    # 权限模块
-└── index.ts             # store 入口
+components/local/
+├── 📁 c_actionModal/   # 操作模态框
+├── 📁 c_formModal/     # 表单模态框
+└── 📁 c_spliterTitle/  # 分割标题
 ```
 
-**Store 示例：**
+#### 远程组件引用
 
-```typescript
-// store/modules/user.ts
-import { defineStore } from "pinia";
+远程组件引用来自其他项目或组件库，统一放在 `remote/` 目录。
 
-export const useUserStore = defineStore("user", {
-  state: () => ({
-    userInfo: null as UserInfo | null,
-    token: "",
-  }),
-
-  getters: {
-    isLogin: (state) => !!state.token,
-  },
-
-  actions: {
-    async login(params: LoginParams) {
-      const res = await loginApi(params);
-      this.token = res.token;
-      this.userInfo = res.userInfo;
-    },
-  },
-});
+```
+components/remote/
+├── 📁 AGGrid/          # AG Grid 表格
+├── 📁 BaseForm/        # 基础表单
+├── 📁 BaseQuery/       # 基础查询
+├── 📁 BaseTable/       # 基础表格
+└── 📁 BaseToolbar/     # 基础工具栏
 ```
 
-### `/src/api` - API 接口
+#### 特殊组件
 
-按模块组织 API 接口。
+一些特殊用途的组件直接放在 `components/` 根目录。
+
+```
+components/
+├── 📁 ParentView/      # 父级视图组件
+├── 📁 RightToolbar/    # 右侧工具栏
+├── 📁 Splitter/        # 分割器
+└── 📁 SvgIcon/         # SVG 图标
+```
+
+### 类型定义组织
+
+类型定义按模块组织，便于维护和复用。
+
+```
+types/
+├── jh4j-cloud.ts      # 云服务类型
+└── page.ts            # 页面类型
+```
+
+### 枚举定义组织
+
+枚举定义统一放在 `enums/` 目录。
+
+```
+enums/
+├── columns.ts         # 表格列枚举
+└── dict.ts            # 字典枚举
+```
+
+## 🎨 命名约定
+
+### 文件命名规范
+
+| 类型 | 命名规范 | 示例 | 说明 |
+|------|----------|------|------|
+| Vue 组件 | PascalCase | `UserManagement.vue` | 组件文件名使用大驼峰 |
+| 组件目录 | PascalCase | `C_Tree/` | 组件目录名使用大驼峰 |
+| 工具函数 | camelCase | `validate.ts` | 函数文件名使用小驼峰 |
+| 常量文件 | UPPER_SNAKE_CASE | `API_CONSTANTS.ts` | 常量文件名使用大写下划线 |
+| 样式文件 | kebab-case | `user-management.scss` | 样式文件名使用短横线 |
+| 类型文件 | camelCase + .ts | `page.ts` | 类型文件名使用小驼峰 |
+
+### 组件命名规范
+
+| 类型 | 前缀/规范 | 示例 | 说明 |
+|------|----------|------|------|
+| 全局组件 | C_ 前缀 | `C_Tree` | 可在整个项目中使用 |
+| 本地通用组件 | c_ 前缀 | `c_actionModal`, `c_formModal` | 在项目内通用但非全局注册 |
+| 远程组件 | PascalCase | `AGGrid`, `BaseForm` | 来自其他项目或组件库 |
+| 特殊组件 | PascalCase | `ParentView`, `RightToolbar` | 特殊用途的组件 |
+| 页面组件 | PascalCase | `ProductionMmwr` | 路由页面组件 |
+
+### 代码命名规范
+
+| 类型 | 命名规范 | 示例 |
+|------|----------|------|
+| 变量/函数 | camelCase | `userName`, `getUserInfo()` |
+| 常量 | UPPER_SNAKE_CASE | `API_BASE_URL`, `MAX_COUNT` |
+| 类/接口 | PascalCase | `UserService`, `UserInfo` |
+| 私有成员 | _camelCase | `_privateMethod` |
+| 事件处理 | handle + camelCase | `handleSubmit`, `handleClick` |
+
+## 核心目录说明
+
+### `/src/api` - API 接口层
+
+按模块组织 API 接口，支持内部基类方式作为特殊扩展。
 
 ```
 api/
-├── modules/
-│   ├── user.ts          # 用户相关接口
-│   ├── system.ts        # 系统相关接口
-│   └── common.ts        # 公共接口
-└── index.ts             # 统一导出
+├── login.ts           # 登录接口
+└── hrms.ts            # 人力资源接口
 ```
 
-**API 示例：**
+**基类方式说明：**
+
+项目使用内部基类封装 API 请求，提供统一的请求处理、错误处理、权限验证等功能。
 
 ```typescript
-// api/modules/user.ts
-import { request } from "@/utils/request";
-
-export interface LoginParams {
-  username: string;
-  password: string;
+// 基类示例
+class BaseApi {
+  protected request<T>(config: RequestConfig): Promise<T> {
+    // 统一请求处理
+    // 错误处理
+    // 权限验证
+  }
 }
 
-export interface UserInfo {
-  id: string;
-  name: string;
-  avatar: string;
+// 使用基类
+class UserApi extends BaseApi {
+  async getUserInfo(id: string) {
+    return this.request<UserInfo>({
+      url: `/user/${id}`,
+      method: 'GET',
+    })
+  }
 }
 
-export const loginApi = (params: LoginParams) => {
-  return request<{ token: string; userInfo: UserInfo }>({
-    url: "/auth/login",
-    method: "POST",
-    data: params,
-  });
-};
-
-export const getUserInfoApi = () => {
-  return request<UserInfo>({
-    url: "/user/info",
-    method: "GET",
-  });
-};
+export const userApi = new UserApi()
 ```
 
-### `/src/utils` - 工具函数
+> **注意**：基类方式作为特殊扩展方式使用，适用于需要统一处理复杂业务逻辑的场景。对于简单接口，可直接使用常规方式定义。
+
+### `/src/assets` - 静态资源
+
+存放项目所需的静态资源。
 
 ```
-utils/
-├── request.ts           # HTTP 请求封装
-├── storage.ts           # 本地存储封装
-├── validate.ts          # 表单验证
-├── format.ts            # 数据格式化
-└── helpers.ts           # 辅助函数
+assets/
+├── logo/              # Logo 图片
+└── style/             # 全局样式
+```
+
+### `/src/components` - 组件库
+
+按全局、本地通用、远程引用分类组织组件。
+
+```
+components/
+├── global/            # 全局组件 (C_ 前缀)
+│   └── C_Tree/
+├── local/             # 本地通用组件 (c_ 前缀)
+│   ├── c_actionModal/
+│   ├── c_formModal/
+│   └── c_spliterTitle/
+├── remote/            # 远程组件引用
+│   ├── AGGrid/
+│   ├── BaseForm/
+│   ├── BaseQuery/
+│   ├── BaseTable/
+│   └── BaseToolbar/
+├── ParentView/        # 父级视图组件
+├── RightToolbar/      # 右侧工具栏
+├── Splitter/          # 分割器
+└── SvgIcon/           # SVG 图标
+```
+
+### `/src/composables` - 组合式函数
+
+存放 Vue3 组合式函数。
+
+```
+composables/
+├── useTable.ts        # 表格逻辑
+├── useForm.ts         # 表单逻辑
+└── usePermission.ts   # 权限控制
+```
+
+### `/src/enums` - 枚举定义
+
+存放枚举定义。
+
+```
+enums/
+├── columns.ts         # 表格列枚举
+└── dict.ts            # 字典枚举
+```
+
+### `/src/mixins` - 混入（不推荐）
+
+存放 Vue2 风格混入，**仅作为参考，不推荐使用**。
+
+> **注意**：混入（Mixins）存在"黑匣子"问题，代码来源不清晰，难以追踪和维护。推荐使用 Vue3 的组合式函数（Composables）替代。
+
+```
+mixins/
+├── BaseMixins.ts      # 基础混入
+├── ListMixins.js      # 列表混入
+└── TableMixins.js     # 表格混入
+```
+
+**推荐替代方案：**
+
+```typescript
+// ❌ 不推荐：使用 Mixins
+export default {
+  mixins: [ListMixins, TableMixins],
+  mounted() {
+    this.fetchData()
+  }
+}
+
+// ✅ 推荐：使用 Composables
+import { useListData } from '@/composables/useListData'
+
+const { fetchData } = useListData()
+onMounted(() => {
+  fetchData()
+})
 ```
 
 ### `/src/types` - 类型定义
 
+存放 TypeScript 类型定义。
+
 ```
 types/
-├── global.d.ts          # 全局类型
-├── api.d.ts             # API 类型
-├── components.d.ts      # 组件类型
-└── env.d.ts             # 环境变量类型
+├── jh4j-cloud.ts     # 云服务类型
+└── page.ts           # 页面类型
 ```
 
-**类型定义示例：**
+### `/src/util` - 工具函数
 
-```typescript
-// types/global.d.ts
-export interface ResponseData<T = any> {
-  code: number;
-  message: string;
-  data: T;
-}
+存放工具函数。
 
-export interface PageParams {
-  page: number;
-  pageSize: number;
-}
+```
+util/
+├── validate.ts        # 验证工具
+├── download.ts        # 下载工具
+└── ...               # 其他工具
+```
 
-export interface PageResult<T> {
-  list: T[];
-  total: number;
-}
+### `/src/views` - 页面视图
+
+存放路由页面组件，按业务模块组织。
+
+```
+views/
+├── demo-module/       # 演示模块
+├── produce/          # 生产模块
+│   ├── production-mmwr/# 轧钢生产
+│   ├── production-omom/# 作业订单
+│   ├── production-order/# 生产订单
+│   └── production-wms/  # 仓储管理
+└── sale/             # 销售模块
+    └── demo/        # 销售演示
+```
+
+### `/vite` - Vite 构建配置
+
+存放 Vite 构建配置和插件。
+
+```
+vite/
+├── plugins/          # Vite 插件配置
+│   ├── auto-import.js    # 自动导入
+│   ├── compression.js    # 压缩插件
+│   ├── svg-icon.js       # SVG 图标
+│   ├── windi-css/        # Windi CSS 配置
+│   └── shared/           # 共享模块
+└── environment.ts     # 环境变量处理
 ```
 
 ## 配置文件说明
 
-### `package.json`
+### 环境变量配置
 
-项目依赖和脚本配置。
+| 文件 | 说明 |
+|------|------|
+| `.env` | 通用环境变量 |
+| `.env.dev` | 开发环境变量 |
+| `.env.uat` | UAT 环境变量 |
+| `.env.prod` | 生产环境变量 |
+
+### 项目配置文件
+
+| 文件 | 说明 |
+|------|------|
+| `package.json` | 项目依赖和脚本配置 |
+| `vite.config.ts` | Vite 构建工具配置 |
+| `tsconfig.json` | TypeScript 编译配置 |
+| `windi.config.ts` | Windi CSS 配置 |
+| `.eslintrc.cjs` | ESLint 代码检查配置 |
+| `.prettierrc` | Prettier 代码格式化配置 |
+| `commitlint.config.cjs` | Git 提交规范配置 |
+
+### package.json 脚本示例
 
 ```json
 {
@@ -364,87 +446,49 @@ export interface PageResult<T> {
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.ts,.jsx,.tsx",
-    "lint:fix": "eslint . --ext .vue,.js,.ts,.jsx,.tsx --fix",
-    "format": "prettier --write \"src/**/*.{js,ts,vue,json,css,scss}\""
+    "build:prod": "vite build",
+    "build:uat": "vite build --mode uat",
+    "preview": "vite preview"
   }
 }
 ```
-
-### `vite.config.ts`
-
-Vite 构建工具配置，详见 [项目配置 - Vite 配置](/views/guide/project-config#vite-配置)。
-
-### `tsconfig.json`
-
-TypeScript 编译配置，详见 [项目配置 - TypeScript 配置](/views/guide/project-config#typescript-配置)。
-
-### `uno.config.ts`
-
-UnoCSS 原子化 CSS 配置，详见 [UnoCSS 配置](/views/guide/unocss-config)。
-
-## 命名规范
-
-### 文件命名
-
-- **组件文件**: PascalCase（如 `UserCard.vue`）
-- **工具文件**: camelCase（如 `request.ts`）
-- **类型文件**: camelCase（如 `user.d.ts`）
-- **样式文件**: kebab-case（如 `global-styles.css`）
-
-### 代码命名
-
-- **变量/函数**: camelCase
-- **常量**: UPPER_SNAKE_CASE
-- **类/接口**: PascalCase
-- **组件**: PascalCase
 
 ## 最佳实践
 
 ### 1. 模块化组织
 
-金恒科技信息化部前端团队推荐将相关的代码放在一起，便于维护：
+按业务模块组织代码，便于维护和协作：
 
 ```
-features/
-├── user/
-│   ├── api/
-│   ├── components/
-│   ├── store/
-│   ├── types/
-│   └── views/
-├── product/
-│   ├── api/
-│   ├── components/
-│   ├── store/
-│   ├── types/
-│   └── views/
+views/
+├── produce/          # 生产模块
+├── sale/             # 销售模块
+└── demo-module/      # 演示模块
 ```
 
-### 2. 按需导入
+### 2. 组件分层
 
-使用 ES6 模块的按需导入，减小打包体积：
+- **全局组件（C_ 前缀）**：在多个模块中使用的通用组件
+- **本地通用组件（c_ 前缀）**：在项目内通用但非全局注册的组件
+- **远程组件**：来自其他项目或组件库的引用组件
+- **特殊组件**：特殊用途的组件，如 ParentView、RightToolbar
 
-```typescript
-// ✅ 推荐
-import { ref, computed } from "vue";
+### 3. 自动导入
 
-// ❌ 不推荐
-import * as Vue from "vue";
-```
+使用 Vite 插件实现组件和 API 的自动导入：
 
-### 3. 路径别名
+```vue
+<template>
+  <!-- 全局组件自动导入，无需 import -->
+  <C_Tree :data="treeData" />
+  <BaseTable :columns="columns" :data="data" />
+</template>
 
-使用 `@` 别名简化导入路径：
-
-```typescript
-// ✅ 推荐
-import Button from "@/components/common/Button/index.vue";
-
-// ❌ 不推荐
-import Button from "../../../components/common/Button/index.vue";
+<script setup lang="ts">
+// Vue API 自动导入，无需 import
+const loading = ref(false)
+const data = computed(() => [])
+</script>
 ```
 
 ### 4. 类型优先
@@ -454,37 +498,33 @@ import Button from "../../../components/common/Button/index.vue";
 ```typescript
 // ✅ 推荐
 interface User {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }
 
-const user: User = { id: "1", name: "John" };
+const user: User = { id: '1', name: 'John' }
 
 // ❌ 不推荐
-const user = { id: "1", name: "John" };
+const user = { id: '1', name: 'John' }
 ```
 
-### 5. 企业级项目特殊实践
+### 5. 枚举统一管理
 
-#### 单体项目实践
-- 保持目录结构简单清晰
-- 避免过度拆分，增加维护成本
-- 适合快速迭代和开发
+将表格列、字典等枚举统一放在 `enums/` 目录：
 
-#### 集群项目实践
-- 增加环境配置管理
-- 实现统一的部署流程
-- 支持多环境切换
+```typescript
+// enums/columns.ts
+export const USER_COLUMNS = [
+  { title: '姓名', dataIndex: 'name' },
+  { title: '年龄', dataIndex: 'age' },
+]
 
-#### Monorepo项目实践
-- 使用 pnpm workspace 管理依赖
-- 共享配置和工具
-- 统一的代码规范和构建流程
-
-#### 微前端项目实践
-- 明确主应用和微应用的边界
-- 实现应用间的通信机制
-- 独立的开发和部署流程
+// enums/dict.ts
+export const STATUS_DICT = {
+  ACTIVE: '启用',
+  INACTIVE: '禁用',
+}
+```
 
 ## 下一步
 
