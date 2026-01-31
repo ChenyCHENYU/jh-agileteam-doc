@@ -82,68 +82,77 @@ export const sidebar: DefaultTheme.Sidebar = {
   // 组件库
   "/ui-components/": [
     {
-      text: "开发指南",
+      text: "说明",
       collapsed: false,
-      items: [
-        { text: "介绍", link: "/ui-components/" },
-        { text: "快速开始", link: "/ui-components/guide/quickstart" },
-        { text: "安装", link: "/ui-components/guide/installation" },
-      ],
+      items: [{ text: "介绍", link: "/ui-components/" }],
     },
     {
-      text: "基础组件",
-      collapsed: false,
-      items: [
-        { text: "Button 按钮", link: "/ui-components/basic/button" },
-        { text: "Icon 图标", link: "/ui-components/basic/icon" },
-        { text: "Input 输入框", link: "/ui-components/basic/input" },
-        { text: "Select 选择器", link: "/ui-components/basic/select" },
-      ],
-    },
-    {
-      text: "布局组件",
-      collapsed: false,
-      items: [
-        { text: "Container 容器", link: "/ui-components/layout/container" },
-        { text: "Grid 栅格", link: "/ui-components/layout/grid" },
-      ],
-    },
-    {
-      text: "表单组件",
-      collapsed: false,
-      items: [
-        { text: "Form 表单", link: "/ui-components/form/form" },
-        { text: "FormItem 表单项", link: "/ui-components/form/form-item" },
-      ],
-    },
-    {
-      text: "数据展示",
-      collapsed: false,
-      items: [
-        { text: "Table 表格", link: "/ui-components/data/table" },
-        { text: "Pagination 分页", link: "/ui-components/data/pagination" },
-      ],
-    },
-    {
-      text: "反馈组件",
-      collapsed: false,
-      items: [
-        { text: "Message 消息", link: "/ui-components/feedback/message" },
-        { text: "Modal 对话框", link: "/ui-components/feedback/modal" },
-      ],
-    },
-    {
-      text: "业务组件",
+      text: "平台组件（远程）",
       collapsed: false,
       items: [
         {
-          text: "UserSelector 用户选择",
-          link: "/ui-components/business/user-selector",
+          text: "BaseTable 表格组件",
+          link: "/ui-components/remote-components/BaseTable",
         },
         {
-          text: "DepartmentTree 部门树",
-          link: "/ui-components/business/department-tree",
+          text: "BaseForm 表单组件",
+          link: "/ui-components/remote-components/BaseForm",
         },
+        {
+          text: "BaseQuery 查询组件",
+          link: "/ui-components/remote-components/BaseQuery",
+        },
+        {
+          text: "AGGrid 高性能表格",
+          link: "/ui-components/remote-components/AGGrid",
+        },
+        {
+          text: "jh-date-range 日期范围选择",
+          link: "/ui-components/remote-components/jh-date-range",
+        },
+        {
+          text: "jh-date 单日期选择",
+          link: "/ui-components/remote-components/jh-date",
+        },
+        {
+          text: "jh-dept-picker 部门选择",
+          link: "/ui-components/remote-components/jh-dept-picker",
+        },
+        {
+          text: "jh-drag-row 可拖拽分栏",
+          link: "/ui-components/remote-components/jh-drag-row",
+        },
+        {
+          text: "jh-file-upload 文件上传",
+          link: "/ui-components/remote-components/jh-file-upload",
+        },
+        {
+          text: "jh-pagination 分页组件",
+          link: "/ui-components/remote-components/jh-pagination",
+        },
+        {
+          text: "jh-picker 通用挑选组件",
+          link: "/ui-components/remote-components/jh-picker",
+        },
+        {
+          text: "jh-select 字典下拉",
+          link: "/ui-components/remote-components/jh-select",
+        },
+        {
+          text: "jh-text 文本展示",
+          link: "/ui-components/remote-components/jh-text",
+        },
+        {
+          text: "jh-user-picker 用户选择",
+          link: "/ui-components/remote-components/jh-user-picker",
+        },
+      ],
+    },
+    {
+      text: "全局组件占位",
+      collapsed: false,
+      items: [
+        { text: "全局组件（占位）", link: "/ui-components/global-components" },
       ],
     },
   ],

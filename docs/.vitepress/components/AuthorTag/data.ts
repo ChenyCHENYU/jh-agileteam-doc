@@ -28,8 +28,10 @@ export interface Author {
  * 组件属性接口
  */
 export interface AuthorTagProps {
-  /** 作者名称或作者 ID */
-  author: string | Author;
+  /** 作者名称或作者 ID（单个作者） */
+  author?: string | Author;
+  /** 多个作者（数组形式） */
+  authors?: (string | Author)[];
   /** 职位/角色（可选，会覆盖预定义的 role） */
   role?: string;
   /** 工号（可选，默认 409322） */
@@ -59,6 +61,14 @@ export const AUTHORS: Record<string, Author> = {
     avatar: "https://github.com/lang321.png",
     role: "高级开发工程师",
     employeeId: "025877",
+    department: "研发部",
+  },
+  XieFei: {
+    name: "谢飞",
+    avatar:
+      "https://api.dicebear.com/7.x/avataaars/svg?seed=XieFei&gender=male&style=circle",
+    role: "高级开发工程师",
+    employeeId: "026789",
     department: "研发部",
   },
 };

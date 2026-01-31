@@ -1,75 +1,32 @@
 # 组件库
 
-<AuthorTag author="ZhuXiang" />
+组件库文档已更新：移除旧的“开发指南”版块，现按「远程组件（平台）」分类组织组件文档。每个远程组件已拆分为独立文件，位于 `remote-components` 目录下。
 
-## 📦 介绍
+## 📦 说明
 
-AGILE TEAM 组件库是一套基于 Vue 3 的高质量业务组件库，经过生产环境验证，帮助团队快速构建企业级应用。
+本目录主要汇总项目中使用的远程平台组件（来自 `@jhlc/common-core`）及若干占位文档。
 
-## ✨ 特性
+## 🧭 目录（远程组件 - 平台）
 
-- 🎨 **精美的设计**：遵循统一的设计规范
-- 🔧 **开箱即用**：丰富的组件，覆盖常见业务场景
-- 📦 **按需加载**：支持 Tree Shaking，优化打包体积
-- 🌈 **主题定制**：灵活的主题配置系统
-- 🔒 **TypeScript**：完整的类型定义
-- ⚡ **性能优秀**：基于 Vue 3 Composition API
+- [BaseTable 表格组件](./remote-components/BaseTable.md)
+- [BaseForm 表单组件](./remote-components/BaseForm.md)
+- [BaseQuery 查询组件](./remote-components/BaseQuery.md)
+- [AGGrid 高性能表格](./remote-components/AGGrid.md)
+- [jh-date-range 日期范围选择](./remote-components/jh-date-range.md)
+- [jh-date 单日期选择](./remote-components/jh-date.md)
+- [jh-dept-picker 部门选择](./remote-components/jh-dept-picker.md)
+- [jh-drag-row 可拖拽分栏](./remote-components/jh-drag-row.md)
+- [jh-file-upload 文件上传](./remote-components/jh-file-upload.md)
+- [jh-pagination 分页组件](./remote-components/jh-pagination.md)
+- [jh-picker 通用挑选组件](./remote-components/jh-picker.md)
+- [jh-select 字典下拉](./remote-components/jh-select.md)
+- [jh-text 文本展示](./remote-components/jh-text.md)
+- [jh-user-picker 用户选择](./remote-components/jh-user-picker.md)
 
-## 📚 组件总览
+## 🧩 全局组件占位
 
-### 基础组件
-
-通用的 UI 基础组件
-
-- [Button 按钮](./basic/button)
-- [Icon 图标](./basic/icon)
-- [Input 输入框](./basic/input)
-- [Select 选择器](./basic/select)
-
-### 布局组件
-
-页面布局相关组件
-
-- [Container 容器](./layout/container)
-- [Grid 栅格](./layout/grid)
-
-### 表单组件
-
-表单相关组件
-
-- [Form 表单](./form/form)
-- [FormItem 表单项](./form/form-item)
-
-### 数据展示
-
-数据展示类组件
-
-- [Table 表格](./data/table)
-- [Pagination 分页](./data/pagination)
-
-### 反馈组件
-
-用户反馈类组件
-
-- [Message 消息](./feedback/message)
-- [Modal 对话框](./feedback/modal)
-
-### 业务组件
-
-业务场景特定组件
-
-- [UserSelector 用户选择](./business/user-selector)
-- [DepartmentTree 部门树](./business/department-tree)
-
-## 🚀 快速开始
-
-查看[快速开始](./guide/quickstart)了解如何安装和使用组件库。
-
-## 📖 开发指南
-
-- [安装](./guide/installation)
-- [快速开始](./guide/quickstart)
+- [全局组件（占位）](./global-components.md) - 预留位置，后续补充全局组件内容。
 
 ---
 
-**开始使用** 👉 从[快速开始](./guide/quickstart)开始！
+如果需要我把文档内容进一步拆细（例如把每个示例与 API 表格完整填入每个文件），我可以继续逐个文件补全。
