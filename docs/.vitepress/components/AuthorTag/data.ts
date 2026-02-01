@@ -49,7 +49,7 @@ export interface AuthorTagProps {
 export const AUTHORS: Record<string, Author> = {
   CHENY: {
     name: "杨晨誉",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YangChenYu",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=choice006",
     email: "ycyplus@gmail.com",
     github: "ChenyCHENYU",
     role: "资深开发工程师",
