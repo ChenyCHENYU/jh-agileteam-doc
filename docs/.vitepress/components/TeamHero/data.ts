@@ -2,7 +2,7 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2026-02-01 23:49:07
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-02 01:33:58
+ * @LastEditTime: 2026-02-02 01:40:49
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\TeamHero\data.ts
  * @Description:
  * Copyright (c) 2026 by CHENY, All Rights Reserved 😎.
@@ -56,7 +56,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "杨晨誉",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=choice006",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YangChenYuNew6",
     role: "资深开发工程师",
     employeeId: "409322",
     department: "信息化部",
