@@ -1,0 +1,204 @@
+/**
+ * TeamHero 组件样式 - 现代化设计
+ */
+
+.team-hero {
+  padding: 40px 24px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 1024px) {
+    .team-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .member-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 24px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2));
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 58, 237, 0.08), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -12px rgba(124, 58, 237, 0.2);
+      border-color: rgba(124, 58, 237, 0.3);
+
+      &::before {
+        opacity: 1;
+      }
+
+      &::after {
+        opacity: 1;
+      }
+
+      .member-avatar {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
+      }
+
+      .member-name {
+        color: var(--vp-c-brand-1);
+      }
+
+      .member-role {
+        color: var(--vp-c-text-1);
+      }
+    }
+
+    .member-avatar-wrapper {
+      position: relative;
+      margin: 0;
+    }
+
+    .member-avatar {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(135deg, var(--vp-c-bg-soft), var(--vp-c-bg-mute));
+    }
+
+    .member-info {
+      flex-grow: 1;
+      text-align: center;
+      width: 100%;
+    }
+
+    .member-name {
+      margin: 0 0 4px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--vp-c-text-1);
+      transition: color 0.4s;
+      letter-spacing: -0.02em;
+    }
+
+    .member-role {
+      display: inline-block;
+      margin: 0 0 16px;
+      padding: 4px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--vp-c-text-2);
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.05));
+      border-radius: 20px;
+      transition: all 0.4s;
+    }
+
+    .member-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--vp-c-text-3);
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        transition: all 0.3s;
+
+        &:hover {
+          background: rgba(124, 58, 237, 0.1);
+          color: var(--vp-c-text-2);
+        }
+
+        .meta-icon {
+          font-size: 14px;
+          opacity: 0.7;
+        }
+      }
+    }
+
+    .member-bio {
+      margin: 0 0 16px;
+      padding: 0 8px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--vp-c-text-2);
+      font-weight: 400;
+    }
+
+    .member-skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+
+      .skill-tag {
+        display: inline-block;
+        padding: 6px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.4;
+        color: var(--vp-c-brand-1);
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(139, 92, 246, 0.08));
+        border: 1px solid rgba(124, 58, 237, 0.2);
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        letter-spacing: 0.02em;
+
+        &:hover {
+          transform: translateY(-2px);
+          background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(139, 92, 246, 0.15));
+          border-color: rgba(124, 58, 237, 0.4);
+          box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+        }
+      }
+    }
+  }
+}

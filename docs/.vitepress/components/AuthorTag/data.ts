@@ -49,7 +49,7 @@ export interface AuthorTagProps {
 export const AUTHORS: Record<string, Author> = {
   CHENY: {
     name: "杨晨誉",
-    avatar: "https://github.com/ChenyCHENYU.png",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YangChenYu",
     email: "ycyplus@gmail.com",
     github: "ChenyCHENYU",
     role: "资深开发工程师",
@@ -58,15 +58,14 @@ export const AUTHORS: Record<string, Author> = {
   },
   ZhuXiang: {
     name: "朱祥",
-    avatar: "https://github.com/lang321.png",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ZhuXiang",
     role: "高级开发工程师",
     employeeId: "025877",
     department: "研发部",
   },
   XieFei: {
     name: "谢飞",
-    avatar:
-      "https://api.dicebear.com/7.x/avataaars/svg?seed=XieFei&gender=male&style=circle",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=XieFei",
     role: "高级开发工程师",
     employeeId: "026789",
     department: "研发部",

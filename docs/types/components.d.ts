@@ -10,5 +10,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     AuthorTag: typeof import('./../.vitepress/components/AuthorTag/index.vue')['default']
     GlassHome: typeof import('./../.vitepress/components/GlassHome/index.vue')['default']
+    TeamHero: typeof import('./../.vitepress/components/TeamHero/index.vue')['default']
   }
 }

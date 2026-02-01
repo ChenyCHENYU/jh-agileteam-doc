@@ -45,8 +45,8 @@ export const nav: DefaultTheme.NavItem[] = [
     activeMatch: "/views/troubleshooting/",
   },
   {
-    text: "晋钢优化日志",
-    link: "/views/jingang-optimization/",
-    activeMatch: "/views/jingang-optimization/",
+    text: "团队",
+    link: "/views/team/",
+    activeMatch: "/views/team/",
   },
 ];
