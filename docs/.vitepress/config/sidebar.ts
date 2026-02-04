@@ -63,18 +63,23 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "性能优化", link: "/views/best-practices/performance" },
         { text: "安全规范", link: "/views/best-practices/security" },
         { text: "编码规范", link: "/views/best-practices/coding-standards" },
+        { text: "HTTP 请求工具", link: "/views/best-practices/request-usage" },
       ],
     },
   ],
 
   // 样式方案
-  "/views/styling": [
+  "/views/styling/": [
     {
       text: "样式方案",
       collapsed: false,
       items: [
-        { text: "概述", link: "/views/styling" },
-        { text: "UnoCSS", link: "/views/styling/unocss" },
+        { text: "概述", link: "/views/styling/" },
+        {
+          text: "UnoCSS 最佳实践",
+          link: "/views/styling/unocss-best-practices",
+        },
+        { text: "SCSS 最佳实践", link: "/views/styling/scss-best-practices" },
       ],
     },
   ],
