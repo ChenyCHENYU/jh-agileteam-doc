@@ -2,7 +2,7 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2026-02-01 23:49:07
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-04 11:40:34
+ * @LastEditTime: 2026-02-04 14:02:47
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\TeamHero\data.ts
  * @Description:
  * Copyright (c) 2026 by CHENY, All Rights Reserved 😎.
@@ -47,7 +47,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "胥庆玉",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=XuQingYu",
+    avatar:
+      "https://api.dicebear.com/8.x/notionists/svg?seed=LongHair06&beardProbability=0",
     role: "高级开发工程师",
     employeeId: "026117",
     department: "信息化部",
@@ -120,7 +121,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "董亚婷",
     avatar:
-      "https://api.dicebear.com/8.x/notionists/svg?seed=DongYaTing&gender=female",
+      "https://api.dicebear.com/8.x/notionists/svg?seed=LongHair05&beardProbability=0",
     role: "开发工程师",
     employeeId: "409334",
     department: "信息化部",
@@ -148,7 +149,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "陈晶华",
     avatar:
-      "https://api.dicebear.com/8.x/notionists/svg?seed=ChenJingHua&gender=female",
+      "https://api.dicebear.com/8.x/notionists/svg?seed=LongHair09&beardProbability=0",
     role: "开发工程师",
     employeeId: "409347",
     department: "信息化部",
