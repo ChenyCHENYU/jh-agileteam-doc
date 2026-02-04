@@ -45,7 +45,7 @@ export const nav: DefaultTheme.NavItem[] = [
     activeMatch: "/views/troubleshooting/",
   },
   {
-    text: "团队",
+    text: "前端团队",
     link: "/views/team/",
     activeMatch: "/views/team/",
   },

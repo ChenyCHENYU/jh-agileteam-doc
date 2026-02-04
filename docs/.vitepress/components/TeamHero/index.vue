@@ -2,6 +2,8 @@
 import { TEAM_MEMBERS } from "./data";
 import "./index.scss";
 
+const teamCount = TEAM_MEMBERS.length;
+
 const handleMouseMove = (event: MouseEvent) => {
   const card = event.currentTarget as HTMLElement;
   const rect = card.getBoundingClientRect();
@@ -20,6 +22,16 @@ const handleMouseLeave = (event: MouseEvent) => {
 
 <template>
   <div class="team-hero">
+    <div class="team-header">
+      <div class="team-title-row">
+        <h2 class="team-title">前端团队</h2>
+        <span class="team-tag">{{ teamCount }}人</span>
+      </div>
+      <div class="team-note">
+        <span class="i-megaphone text-red-500"></span>
+        <span>📢 未知或者信息错漏的的请相关伙伴告知补充</span>
+      </div>
+    </div>
     <div class="team-grid">
       <div
         v-for="member in TEAM_MEMBERS"
