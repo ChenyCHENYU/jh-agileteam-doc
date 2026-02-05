@@ -26,31 +26,6 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "贡献指南", link: "/views/guide/contributing" },
       ],
     },
-    {
-      text: "元配置",
-      collapsed: false,
-      items: [
-        { text: "项目配置", link: "/views/guide/project-config" },
-        { text: "Git 配置", link: "/views/guide/git-config" },
-        { text: "环境配置", link: "/views/guide/environment-config" },
-        { text: "UnoCSS 配置", link: "/views/guide/unocss-config" },
-      ],
-    },
-  ],
-
-  // 工程化
-  "/views/engineering/": [
-    {
-      text: "工程化",
-      collapsed: false,
-      items: [
-        { text: "脚手架", link: "/views/engineering/scaffold" },
-        { text: "构建工具", link: "/views/engineering/build" },
-        { text: "代码质量", link: "/views/engineering/code-quality" },
-        { text: "测试方案", link: "/views/engineering/testing" },
-        { text: "CI/CD", link: "/views/engineering/ci-cd" },
-      ],
-    },
   ],
 
   // 最佳实践

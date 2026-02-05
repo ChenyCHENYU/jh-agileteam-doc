@@ -2,7 +2,7 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2026-01-25 17:34:41
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-01-25 17:38:47
+ * @LastEditTime: 2026-02-05 08:55:27
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\config\vite.ts
  * @Description:
  * Copyright (c) 2026 by CHENY, All Rights Reserved 😎.
@@ -106,3 +106,4 @@ export const vite: UserConfig = {
     },
   },
 };
+

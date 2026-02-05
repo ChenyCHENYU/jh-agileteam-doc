@@ -26,3 +26,10 @@ html {
 * {
   box-sizing: border-box;
 }
+
+/* 禁用疑难杂症导航项的点击 */
+.VPNavBar .VPNavBarMenu .VPNavBarMenuLink:nth-child(6) {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
