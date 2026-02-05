@@ -18,10 +18,10 @@ export interface Stat {
 
 export const features: Feature[] = [
   {
-    icon: "🚀",
-    title: "工程化配置",
-    details: "统一的脚手架、构建工具和开发规范，开箱即用的项目模板",
-    link: "/views/engineering/scaffold",
+    icon: "📋",
+    title: "模板库",
+    details: "业务驱动设计，精准提效赋能，开箱即用的页面模板",
+    link: "/templates/",
   },
   {
     icon: "🧩",
