@@ -101,8 +101,8 @@
             :alt="authorInfo.name"
             class="author-avatar author-avatar-image"
             :class="{ 'avatar-loaded': avatarLoaded }"
-            @load="handleAvatarLoad"
-            @error="handleAvatarError"
+            @load="() => handleAvatarLoad(0)"
+            @error="() => handleAvatarError(0)"
           />
         </div>
         
@@ -135,7 +135,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { getAuthorInfo } from "./data";
 import type { AuthorTagProps, Author } from "./data";
 
@@ -143,51 +143,71 @@ const props = withDefaults(defineProps<AuthorTagProps>(), {
   showAvatar: true,
 });
 
-// 判断是否为多作者模式
-const isMultipleAuthors = computed(() => {
-  return props.authors && props.authors.length > 0;
+// 规范化作者列表：统一转换为数组形式
+const normalizedAuthors = computed(() => {
+  // 如果有 authors 数组，直接使用
+  if (props.authors && props.authors.length > 0) {
+    return props.authors;
+  }
+  // 如果只有 author，转换为数组
+  if (props.author) {
+    return [props.author];
+  }
+  // 兜底：返回空数组
+  return [];
 });
 
-// 单作者模式的信息（兼容旧版）
+// 判断是否为多作者模式（大于1个作者才是多作者）
+const isMultipleAuthors = computed(() => {
+  return normalizedAuthors.value.length > 1;
+});
+
+// 单作者模式的信息
 const authorInfo = computed(() => {
-  if (props.author) {
-    return getAuthorInfo(props.author);
+  if (normalizedAuthors.value.length > 0) {
+    return getAuthorInfo(normalizedAuthors.value[0]);
   }
   return { name: '未知作者' } as Author;
 });
 
+// 头像加载状态数组（统一管理所有作者的头像状态）
+const avatarsLoadedState = ref<Array<{ loaded: boolean; error: boolean }>>([]);
+
+// 初始化或重置头像加载状态
+watch(normalizedAuthors, (newAuthors) => {
+  avatarsLoadedState.value = newAuthors.map(() => ({ loaded: false, error: false }));
+}, { immediate: true });
+
 // 多作者列表
 const authorsList = computed(() => {
-  if (!props.authors) return [];
-  
-  return props.authors.map(author => ({
+  return normalizedAuthors.value.map((author, index) => ({
     info: getAuthorInfo(author),
-    avatarLoaded: ref(false),
-    avatarLoadError: ref(false),
+    get avatarLoaded() {
+      return avatarsLoadedState.value[index]?.loaded || false;
+    },
+    get avatarLoadError() {
+      return avatarsLoadedState.value[index]?.error || false;
+    },
   }));
 });
 
-// 头像加载状态（单作者）
-const avatarLoaded = ref(false);
-const avatarLoadError = ref(false);
+// 单作者头像状态（直接使用数组的第一个元素）
+const avatarLoaded = computed(() => avatarsLoadedState.value[0]?.loaded || false);
+const avatarLoadError = computed(() => avatarsLoadedState.value[0]?.error || false);
 
-// 头像加载成功（单作者）
-const handleAvatarLoad = (index?: number) => {
-  if (index !== undefined) {
-    authorsList.value[index].avatarLoaded.value = true;
-  } else {
-    avatarLoaded.value = true;
+// 头像加载成功（统一处理）
+const handleAvatarLoad = (index: number = 0) => {
+  if (avatarsLoadedState.value[index]) {
+    avatarsLoadedState.value[index].loaded = true;
+    avatarsLoadedState.value[index].error = false;
   }
 };
 
-// 头像加载失败（单作者）
-const handleAvatarError = (index?: number) => {
-  if (index !== undefined) {
-    authorsList.value[index].avatarLoadError.value = true;
-    authorsList.value[index].avatarLoaded.value = false;
-  } else {
-    avatarLoadError.value = true;
-    avatarLoaded.value = false;
+// 头像加载失败（统一处理）
+const handleAvatarError = (index: number = 0) => {
+  if (avatarsLoadedState.value[index]) {
+    avatarsLoadedState.value[index].loaded = false;
+    avatarsLoadedState.value[index].error = true;
   }
 };
 
@@ -227,8 +247,8 @@ const displayDepartment = computed(() => getDisplayDepartment(authorInfo.value))
 
 // 获取去重后的部门列表（多作者）
 const getUniqueDepartments = () => {
-  if (!props.authors) return '';
-  const depts = [...new Set(props.authors.map(author => {
+  if (normalizedAuthors.value.length === 0) return '';
+  const depts = [...new Set(normalizedAuthors.value.map(author => {
     const info = getAuthorInfo(author);
     return getDisplayDepartment(info);
   }))];
