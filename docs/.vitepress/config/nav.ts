@@ -2,7 +2,7 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2025-10-14 15:02:42
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-05 08:54:30
+ * @LastEditTime: 2026-02-05 10:08:52
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\config\nav.ts
  * @Description: 头部导航栏配置文件
  * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
@@ -33,6 +33,11 @@ export const nav: DefaultTheme.NavItem[] = [
     text: "组件库",
     link: "/ui-components/",
     activeMatch: "/ui-components/",
+  },
+  {
+    text: "模板库",
+    link: "/templates/",
+    activeMatch: "/templates/",
   },
   {
     text: "疑难杂症",

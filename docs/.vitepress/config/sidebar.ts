@@ -31,14 +31,11 @@ export const sidebar: DefaultTheme.Sidebar = {
   // 最佳实践
   "/views/best-practices/": [
     {
-      text: "最佳实践",
+      text: "标准动作",
       collapsed: false,
       items: [
         { text: "架构设计", link: "/views/best-practices/architecture" },
-        { text: "性能优化", link: "/views/best-practices/performance" },
-        { text: "安全规范", link: "/views/best-practices/security" },
-        { text: "编码规范", link: "/views/best-practices/coding-standards" },
-        { text: "HTTP 请求工具", link: "/views/best-practices/request-usage" },
+        { text: "HTTP 请求", link: "/views/best-practices/request-usage" },
       ],
     },
   ],
@@ -133,6 +130,46 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "全局组件（占位）", link: "/ui-components/global-components" },
+      ],
+    },
+  ],
+
+  // 模板库
+  "/templates/": [
+    {
+      text: "生产领域",
+      collapsed: false,
+      items: [
+        { text: "【棒线材】精整实绩", link: "/templates/produce/production-plan" },
+        { text: "工艺管理", link: "/templates/produce/process-management" },
+        { text: "设备管理", link: "/templates/produce/equipment-management" },
+      ],
+    },
+    {
+      text: "质量领域",
+      collapsed: false,
+      items: [
+        { text: "质量检验", link: "/templates/quality/quality-inspection" },
+        { text: "质量跟踪", link: "/templates/quality/quality-tracking" },
+        { text: "质量报表", link: "/templates/quality/quality-report" },
+      ],
+    },
+    {
+      text: "销售领域",
+      collapsed: false,
+      items: [
+        { text: "订单管理", link: "/templates/sale/order-management" },
+        { text: "客户管理", link: "/templates/sale/customer-management" },
+        { text: "销售分析", link: "/templates/sale/sales-analysis" },
+      ],
+    },
+    {
+      text: "成本领域",
+      collapsed: false,
+      items: [
+        { text: "成本核算", link: "/templates/cost/cost-accounting" },
+        { text: "成本分析", link: "/templates/cost/cost-analysis" },
+        { text: "成本报表", link: "/templates/cost/cost-report" },
       ],
     },
   ],

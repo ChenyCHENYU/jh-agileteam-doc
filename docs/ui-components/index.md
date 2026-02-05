@@ -2,6 +2,8 @@
 
 组件库文档已更新：移除旧的“开发指南”版块，现按「远程组件（平台）」分类组织组件文档。每个远程组件已拆分为独立文件，位于 `remote-components` 目录下。
 
+<AuthorTag :authors="['ZhuXiang','XieFei']" />
+
 ## 📦 说明
 
 本目录主要汇总项目中使用的远程平台组件（来自 `@jhlc/common-core`）及若干占位文档。

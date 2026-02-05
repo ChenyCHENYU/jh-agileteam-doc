@@ -70,6 +70,41 @@ export const AUTHORS: Record<string, Author> = {
     employeeId: "026789",
     department: "研发部",
   },
+  MaJiaRui: {
+    name: "马佳瑞",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=SophiaLady",
+    role: "开发工程师",
+    employeeId: "409338",
+    department: "信息化部",
+  },
+  ZhongYu: {
+    name: "仲于",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ZhongYu",
+    role: "高级开发工程师",
+    employeeId: "026397",
+    department: "信息化部",
+  },
+  XuQingYu: {
+    name: "胥庆玉",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=LongHair06&beardProbability=0",
+    role: "高级开发工程师",
+    employeeId: "026117",
+    department: "信息化部",
+  },
+  ZhaoBaoShan: {
+    name: "赵保山",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=choice008",
+    role: "开发工程师",
+    employeeId: "409345",
+    department: "信息化部",
+  },
+  YinHua: {
+    name: "尹华",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YinHua",
+    role: "开发工程师",
+    employeeId: "028129",
+    department: "信息化部",
+  },
 };
 
 /**

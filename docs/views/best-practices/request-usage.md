@@ -2,6 +2,8 @@
 
 > 基于 axios 封装的统一请求工具，自动处理响应数据解包、错误拦截、token 注入等
 
+<AuthorTag author="CHENY" />
+
 ## 导入方式
 
 ```typescript
