@@ -256,7 +256,7 @@ import { straighteningConfig } from "./data";
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2026-02-04
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-04 10:57:43
+ * @LastEditTime: 2026-02-06 16:12:54
  * @FilePath: \cx-ui-produce\src\components\template\FinishingAchievementTemplate\index.vue
  * @Description: 精整实绩管理 - 通用模板组件
  * Copyright (c) 2026 by CHENY, All Rights Reserved 😎.
@@ -267,16 +267,16 @@ import { straighteningConfig } from "./data";
     <BaseQuery
       :form="queryParam"
       :items="queryItems"
-      :columns="config.query?.plan?.columns || 3"
+      :columns="config.query?.plan?.columns || 5"
       :labelWidth="config.query?.plan?.labelWidth || '100px'"
       @select="handleQuery"
       @reset="handleReset"
     />
 
     <!-- Tab 切换 -->
-    <el-tabs v-model="activeTab" class="tabs-container">
+    <jh-tabs v-model="activeTab" class="tabs-container">
       <!-- 计划排程信息 -->
-      <el-tab-pane :label="uiConfig.planTabLabel" name="plan" lazy>
+      <jh-tabs-pane :label="uiConfig.planTabLabel" name="plan" lazy>
         <BaseTable
           ref="planTableRef"
           :data="planList"
@@ -289,17 +289,17 @@ import { straighteningConfig } from "./data";
 
         <!-- 分页 -->
         <jh-pagination
-          v-show="planPage.total && planPage.total > 0"
+          v-if="planPage.total && planPage.total > 0"
           :total="planPage.total || 0"
           v-model:currentPage="planPage.current"
           v-model:pageSize="planPage.size"
-          @current-change="queryPlanList"
-          @size-change="queryPlanList"
+          @current-change="PlanPage.select"
+          @size-change="PlanPage.select"
         />
-      </el-tab-pane>
+      </jh-tabs-pane>
 
       <!-- 现场实绩信息 -->
-      <el-tab-pane :label="uiConfig.actualTabLabel" name="actual" lazy>
+      <jh-tabs-pane :label="uiConfig.actualTabLabel" name="actual" lazy>
         <jh-drag-row :top-height="400">
           <template #top>
             <!-- 上料信息清单 -->
@@ -327,12 +327,12 @@ import { straighteningConfig } from "./data";
 
             <!-- 分页 -->
             <jh-pagination
-              v-show="materialPage.total && materialPage.total > 0"
+              v-if="materialPage.total && materialPage.total > 0"
               :total="materialPage.total || 0"
               v-model:currentPage="materialPage.current"
               v-model:pageSize="materialPage.size"
-              @current-change="queryMaterialList"
-              @size-change="queryMaterialList"
+              @current-change="MaterialPage.select"
+              @size-change="MaterialPage.select"
             />
           </template>
 
@@ -340,60 +340,38 @@ import { straighteningConfig } from "./data";
             <!-- 操作按钮区域 -->
             <div class="operation-toolbar">
               <div class="operation-left">
-                <el-button
-                  type="primary"
-                  size="small"
-                  @click="handleUpMaterial"
-                >
-                  上料
-                </el-button>
-                <el-button
-                  type="warning"
-                  size="small"
-                  @click="handleCancelUpMaterial"
-                >
-                  取消上料
-                </el-button>
+                <BaseToolbar size="small" :items="leftToolbarItems" />
               </div>
 
               <div class="operation-center">
-                <span class="label">支数:</span>
-                <el-input-number
+                <jh-input-number
+                  label="支数"
+                  label-width="70px"
+                  size="small"
                   v-model="outputParams.pcs"
                   :min="1"
                   :controls="false"
-                  size="small"
                   placeholder="请输入支数"
-                  style="width: 120px; margin-right: 16px"
+                  style="width: 200px; margin-right: 16px"
                 />
 
-                <span class="label">产品状态:</span>
-                <el-select
-                  v-model="outputParams.mmwrProdStatus"
+                <jh-select
+                  label="产品状态"
+                  label-width="70px"
                   size="small"
+                  v-model="outputParams.mmwrProdStatus"
+                  logicType="dict"
+                  logicValue="mmwrProdStatus"
                   placeholder="请选择产品状态"
                   clearable
-                  style="width: 120px; margin-right: 16px"
-                >
-                  <el-option label="合格" value="1" />
-                  <el-option label="不合格" value="2" />
-                  <el-option label="脱单" value="3" />
-                  <el-option label="废品" value="4" />
-                </el-select>
+                  style="width: 200px; margin-right: 16px;"
+                />
 
-                <el-button type="success" size="small" @click="handleOutput">
-                  产出
-                </el-button>
+                <BaseToolbar size="small" :items="centerToolbarItems" style="margin-top: -5px!important;"/>
               </div>
 
               <div class="operation-right">
-                <el-button
-                  type="danger"
-                  size="small"
-                  @click="handleOutputFinish"
-                >
-                  {{ uiConfig.outputFinishBtnText }}
-                </el-button>
+                <BaseToolbar size="small" :items="rightToolbarItems" style="margin-top: -5px!important;"/>
               </div>
             </div>
 
@@ -424,26 +402,22 @@ import { straighteningConfig } from "./data";
                 </div>
 
                 <jh-pagination
-                  v-show="qualifiedPage.total && qualifiedPage.total > 0"
+                  v-if="qualifiedPage.total && qualifiedPage.total > 0"
                   :total="qualifiedPage.total || 0"
                   v-model:currentPage="qualifiedPage.current"
                   v-model:pageSize="qualifiedPage.size"
                   :page-sizes="[10, 20, 50, 100]"
                   layout="prev, pager, next, sizes"
                   size="small"
-                  @current-change="queryQualifiedList"
-                  @size-change="queryQualifiedList"
+                  @current-change="QualifiedPage.select"
+                  @size-change="QualifiedPage.select"
                 />
 
                 <div class="section-footer">
-                  <el-button
-                    type="danger"
+                  <BaseToolbar
                     size="small"
-                    :disabled="!hasQualifiedSelection"
-                    @click="handleCancelPass"
-                  >
-                    合格取消
-                  </el-button>
+                    :items="qualifiedFooterToolbarItems"
+                  />
                 </div>
               </div>
 
@@ -472,38 +446,33 @@ import { straighteningConfig } from "./data";
                 </div>
 
                 <jh-pagination
-                  v-show="unqualifiedPage.total && unqualifiedPage.total > 0"
+                  v-if="unqualifiedPage.total && unqualifiedPage.total > 0"
                   :total="unqualifiedPage.total || 0"
                   v-model:currentPage="unqualifiedPage.current"
                   v-model:pageSize="unqualifiedPage.size"
                   :page-sizes="[10, 20, 50, 100]"
                   layout="prev, pager, next, sizes"
                   size="small"
-                  @current-change="queryUnqualifiedList"
-                  @size-change="queryUnqualifiedList"
+                  @current-change="UnqualifiedPage.select"
+                  @size-change="UnqualifiedPage.select"
                 />
 
                 <div class="section-footer">
-                  <el-button
-                    type="danger"
+                  <BaseToolbar
                     size="small"
-                    :disabled="!hasUnqualifiedSelection"
-                    @click="handleCancelUnPass"
-                  >
-                    不合格取消
-                  </el-button>
+                    :items="unqualifiedFooterToolbarItems"
+                  />
                 </div>
               </div>
             </div>
           </template>
         </jh-drag-row>
-      </el-tab-pane>
-    </el-tabs>
+      </jh-tabs-pane>
+    </jh-tabs>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed } from "vue";
 import type { FinishingAchievementConfig } from "./types";
 import { DEFAULT_UI_CONFIG } from "./types";
 import {
@@ -512,106 +481,86 @@ import {
   createQualifiedPage,
   createUnqualifiedPage,
   createOutputParams,
+  createState,
+  createToolbarConfig
 } from "./data";
 
-// 接收配置
+// ==================== 配置与初始化 ====================
+
 const props = defineProps<{
   config: FinishingAchievementConfig;
 }>();
 
-// 合并UI配置
 const uiConfig = computed(() => ({
   ...DEFAULT_UI_CONFIG,
-  ...props.config.ui,
+  ...props.config.ui
 }));
 
-// 当前激活的 Tab
-const activeTab = ref("plan");
+// ==================== 状态管理 ====================
 
-// 是否已点击上料信息清单
-const hasClickedMaterial = ref(false);
+const state = createState();
+const {
+  activeTab,
+  hasClickedMaterial,
+  hasQualifiedSelection,
+  hasUnqualifiedSelection,
+  qualifiedTableRef,
+  unqualifiedTableRef
+} = state;
 
-// 合格/不合格表格选中状态
-const hasQualifiedSelection = ref(false);
-const hasUnqualifiedSelection = ref(false);
-
-// 表格 ref
-const qualifiedTableRef = ref();
-const unqualifiedTableRef = ref();
-
-// 产出参数
 const outputParams = createOutputParams();
 
-// 创建各个页面实例
+// ==================== 页面实例 ====================
+
 const PlanPage = createPlanPage(props.config);
 const MaterialPage = createMaterialPage(props.config);
 const QualifiedPage = createQualifiedPage(props.config);
 const UnqualifiedPage = createUnqualifiedPage(props.config);
 
-// 解构需要的属性
 const {
   tableRef: planTableRef,
   queryParam,
   page: planPage,
   list: planList,
-  columns: planColumns,
+  columns: planColumns
 } = PlanPage;
 
 const {
   tableRef,
   page: materialPage,
   list: materialList,
-  columns: materialColumns,
+  columns: materialColumns
 } = MaterialPage;
 
 const {
   page: qualifiedPage,
   list: qualifiedList,
-  columns: qualifiedColumns,
+  columns: qualifiedColumns
 } = QualifiedPage;
 
 const {
   page: unqualifiedPage,
   list: unqualifiedList,
-  columns: unqualifiedColumns,
+  columns: unqualifiedColumns
 } = UnqualifiedPage;
 
-// 查询项
 const queryItems = props.config.query?.plan?.items || [];
 
-// 查询事件
-const handleQuery = () => PlanPage.select();
-const handleReset = () => {
-  PlanPage.handleReset();
-  PlanPage.select();
-};
-const queryPlanList = () => PlanPage.select();
-const queryMaterialList = () => MaterialPage.select();
-const queryQualifiedList = () => QualifiedPage.select();
-const queryUnqualifiedList = () => UnqualifiedPage.select();
+// ==================== 事件处理器 ====================
 
-// 计划行点击事件
-const handlePlanRowClick = (row: any) => {
-  PlanPage.selectedPlanRow.value = row;
-  MaterialPage.selectByPlan(row);
-  // 清空合格和不合格列表
+// 重置产出结果状态
+const resetResultsState = () => {
   QualifiedPage.list.value = [];
   UnqualifiedPage.list.value = [];
-  // 重置待上料点击状态
   hasClickedMaterial.value = false;
-  // 重置选中状态
   hasQualifiedSelection.value = false;
   hasUnqualifiedSelection.value = false;
 };
 
-// 待上料信息行点击事件
-const handleMaterialRowClick = (row: any) => {
-  MaterialPage.selectedMaterialRow.value = row;
-
-  // 点击待上料信息行时，调用合格和不合格实绩接口
+// 加载产出结果
+const loadResults = () => {
   if (PlanPage.selectedPlanRow.value) {
     hasClickedMaterial.value = true;
-    // 重置选中状态
     hasQualifiedSelection.value = false;
     hasUnqualifiedSelection.value = false;
     QualifiedPage.selectByPlan(PlanPage.selectedPlanRow.value);
@@ -619,28 +568,35 @@ const handleMaterialRowClick = (row: any) => {
   }
 };
 
-// 上料信息清单勾选变化事件
+const handleQuery = () => PlanPage.select();
+
+const handleReset = () => {
+  PlanPage.handleReset();
+  PlanPage.select();
+};
+
+const handlePlanRowClick = (row: any) => {
+  PlanPage.selectedPlanRow.value = row;
+  MaterialPage.selectByPlan(row);
+  resetResultsState();
+};
+
+const handleMaterialRowClick = (row: any) => {
+  MaterialPage.selectedMaterialRow.value = row;
+  loadResults();
+};
+
 const handleMaterialSelectionChange = (selection: any[]) => {
-  // 如果勾选了数据但还没有点击过行，自动加载合格/不合格列表
-  if (
-    selection.length > 0 &&
-    !hasClickedMaterial.value &&
-    PlanPage.selectedPlanRow.value
-  ) {
-    hasClickedMaterial.value = true;
-    QualifiedPage.selectByPlan(PlanPage.selectedPlanRow.value);
-    UnqualifiedPage.selectByPlan(PlanPage.selectedPlanRow.value);
+  if (selection.length > 0 && !hasClickedMaterial.value) {
+    loadResults();
   }
 };
 
-// 合格/不合格行点击事件
-const handleQualifiedRowClick = (row: any) => {
-  // 行点击时自动设置为选中状态
+const handleQualifiedRowClick = () => {
   hasQualifiedSelection.value = true;
 };
 
-const handleUnqualifiedRowClick = (row: any) => {
-  // 行点击时自动设置为选中状态
+const handleUnqualifiedRowClick = () => {
   hasUnqualifiedSelection.value = true;
 };
 
@@ -658,10 +614,34 @@ const handleOutputFinish = () =>
     PlanPage.selectedPlanRow.value,
     QualifiedPage,
     UnqualifiedPage,
-    PlanPage,
+    PlanPage
   );
 
-// 首次加载数据
+// ==================== 工具栏配置 ====================
+
+const toolbarConfig = createToolbarConfig(
+  {
+    handleUpMaterial,
+    handleCancelUpMaterial,
+    handleOutput,
+    handleOutputFinish,
+    handleCancelPass,
+    handleCancelUnPass
+  },
+  state,
+  uiConfig
+);
+
+const {
+  leftToolbarItems,
+  centerToolbarItems,
+  rightToolbarItems,
+  qualifiedFooterToolbarItems,
+  unqualifiedFooterToolbarItems
+} = toolbarConfig;
+
+// ==================== 生命周期 ====================
+
 onMounted(() => {
   handleQuery();
 });
@@ -670,6 +650,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 @import "./index.scss";
 </style>
+
 ```
 
 </details>
@@ -682,26 +663,98 @@ onMounted(() => {
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2026-02-04
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-04
- * @FilePath: \cx-ui-produce\src\views\produce\production-mmwr\jzsj\template\data.ts
+ * @LastEditTime: 2026-02-06 16:15:18
+ * @FilePath: \cx-ui-produce\src\components\template\FinishingAchievementTemplate\data.ts
  * @Description: 精整实绩管理 - 通用业务逻辑
  * Copyright (c) 2026 by CHENY, All Rights Reserved 😎.
  */
 
-import { ref } from "vue";
 import {
   AbstractPageQueryHook,
   BaseQueryItemDesc,
   ActionButtonDesc,
-  TableColumnDesc,
+  TableColumnDesc
 } from "@/types/page";
-import { ElMessage, ElMessageBox } from "element-plus";
 import type { FinishingAchievementConfig } from "./types";
+
+// ==================== 工具函数区 ====================
+
+/**
+ * 从配置中提取默认参数
+ * 统一处理7个页面的参数提取逻辑
+ */
+function extractDefaultParams(config: FinishingAchievementConfig) {
+  const processCode = config.processCode;
+  const defaultParams = config.query?.plan?.defaultParams || {};
+  const defaultFirstProcess = defaultParams.firstProcess || "B";
+  const defaultSubBacklogCode = defaultParams.subBacklogCode || processCode;
+
+  return {
+    processCode,
+    defaultFirstProcess,
+    defaultSubBacklogCode
+  };
+}
+
+/**
+ * 解析后端响应数据
+ * 统一处理各种可能的数据结构：直接数组、records、list等
+ */
+function parseResponseData(res: any): { list: any[]; total: number } {
+  const rawData = res?.data?.data ?? res?.data ?? res;
+  
+  if (Array.isArray(rawData)) {
+    return { list: rawData, total: rawData.length };
+  } else if (rawData && typeof rawData === "object") {
+    const list = rawData.records ?? rawData.list ?? [];
+    const total = rawData.total ?? list.length;
+    return { list, total };
+  }
+  
+  return { list: [], total: 0 };
+}
+
+/**
+ * 统一的错误处理包装器
+ * 捕获用户取消操作，记录真实错误
+ */
+async function handleAsyncAction(
+  action: () => Promise<void>,
+  errorPrefix: string
+): Promise<void> {
+  try {
+    await action();
+  } catch (error: any) {
+    if (error !== "cancel") {
+      console.error(`${errorPrefix}:`, error);
+    }
+  }
+}
+
+/**
+ * 设置查询参数
+ * 统一为queryParam设置默认的工序参数
+ */
+function setQueryParams(
+  queryParam: any,
+  defaultSubBacklogCode: string,
+  defaultFirstProcess: string,
+  additionalParams?: Record<string, any>
+) {
+  queryParam.value.subBacklogCode = defaultSubBacklogCode;
+  queryParam.value.firstProcess = defaultFirstProcess;
+  
+  if (additionalParams) {
+    Object.assign(queryParam.value, additionalParams);
+  }
+}
+
+// ==================== 默认表格列配置区 ====================
 
 /**
  * 默认表格列配置
- * 适用于矫直、剥皮、抛丸、倒棱、探伤、酸洗等通用精整工序
- * 如页面字段不同（如打包作业），可在业务页面config中通过columns属性覆盖
+ * 适用于7个精整实绩页面：矫直、剥皮、抛丸、倒棱、探伤、酸洗、打包作业
+ * 如页面字段不同，可在业务页面config中通过columns属性覆盖
  */
 const DEFAULT_PLAN_COLUMNS: TableColumnDesc<any>[] = [
   { type: "index", label: "序号", width: 60, fixed: "left" },
@@ -719,7 +772,7 @@ const DEFAULT_PLAN_COLUMNS: TableColumnDesc<any>[] = [
   { name: "planWgt", label: "计划重量(kg)", width: 120 },
   { name: "wgt", label: "重量(kg)", width: 120 },
   { name: "planStatus", label: "计划状态", width: 100 },
-  { name: "remarkCraft", label: "备注", width: 150 },
+  { name: "remarkCraft", label: "备注", width: 150 }
 ];
 
 const DEFAULT_MATERIAL_COLUMNS: TableColumnDesc<any>[] = [
@@ -735,7 +788,7 @@ const DEFAULT_MATERIAL_COLUMNS: TableColumnDesc<any>[] = [
   { name: "pcs", label: "支数", width: 80 },
   { name: "wgt", label: "重量(kg)", width: 100 },
   { name: "matStatus", label: "材料状态", width: 100 },
-  { name: "processStatus", label: "进程代码", width: 100 },
+  { name: "processStatus", label: "进程代码", width: 100 }
 ];
 
 const DEFAULT_QUALIFIED_COLUMNS: TableColumnDesc<any>[] = [
@@ -750,7 +803,7 @@ const DEFAULT_QUALIFIED_COLUMNS: TableColumnDesc<any>[] = [
   { name: "pcs", label: "支数", width: 80 },
   { name: "wgt", label: "重量(kg)", width: 100 },
   { name: "orderNo", label: "订单编号", width: 140 },
-  { name: "processStatus", label: "进程代码", width: 100 },
+  { name: "processStatus", label: "进程代码", width: 100 }
 ];
 
 const DEFAULT_UNQUALIFIED_COLUMNS: TableColumnDesc<any>[] = [
@@ -765,7 +818,7 @@ const DEFAULT_UNQUALIFIED_COLUMNS: TableColumnDesc<any>[] = [
   { name: "pcs", label: "支数", width: 80 },
   { name: "wgt", label: "重量(kg)", width: 100 },
   { name: "prodStatus", label: "产品状态", width: 100 },
-  { name: "processStatus", label: "进程代码", width: 100 },
+  { name: "processStatus", label: "进程代码", width: 100 }
 ];
 
 /**
@@ -774,17 +827,93 @@ const DEFAULT_UNQUALIFIED_COLUMNS: TableColumnDesc<any>[] = [
 export const createOutputParams = () =>
   ref({
     pcs: undefined as number | undefined,
-    mmwrProdStatus: "",
+    mmwrProdStatus: ""
   });
+
+/**
+ * 创建状态管理
+ * 集中管理所有状态
+ */
+export const createState = () => ({
+  activeTab: ref("plan"),
+  hasClickedMaterial: ref(false),
+  hasQualifiedSelection: ref(false),
+  hasUnqualifiedSelection: ref(false),
+  qualifiedTableRef: ref(),
+  unqualifiedTableRef: ref()
+});
+
+/**
+ * 创建工具栏按钮配置
+ * 统一管理所有工具栏按钮
+ */
+export const createToolbarConfig = (
+  handlers: {
+    handleUpMaterial: () => void;
+    handleCancelUpMaterial: () => void;
+    handleOutput: () => void;
+    handleOutputFinish: () => void;
+    handleCancelPass: () => void;
+    handleCancelUnPass: () => void;
+  },
+  state: ReturnType<typeof createState>,
+  uiConfig: any
+) => ({
+  leftToolbarItems: computed<ActionButtonDesc[]>(() => [
+    {
+      label: "上料",
+      type: "primary",
+      onClick: handlers.handleUpMaterial
+    },
+    {
+      label: "取消上料",
+      type: "warning",
+      onClick: handlers.handleCancelUpMaterial
+    }
+  ]),
+
+  centerToolbarItems: computed<ActionButtonDesc[]>(() => [
+    {
+      label: "产出",
+      type: "success",
+      onClick: handlers.handleOutput
+    }
+  ]),
+
+  rightToolbarItems: computed<ActionButtonDesc[]>(() => [
+    {
+      label: uiConfig.value.outputFinishBtnText,
+      type: "danger",
+      onClick: handlers.handleOutputFinish
+    }
+  ]),
+
+  qualifiedFooterToolbarItems: computed<ActionButtonDesc[]>(() => [
+    {
+      label: "合格取消",
+      type: "danger",
+      disabled: () => !state.hasQualifiedSelection.value,
+      onClick: handlers.handleCancelPass
+    }
+  ]),
+
+  unqualifiedFooterToolbarItems: computed<ActionButtonDesc[]>(() => [
+    {
+      label: "不合格取消",
+      type: "danger",
+      disabled: () => !state.hasUnqualifiedSelection.value,
+      onClick: handlers.handleCancelUnPass
+    }
+  ])
+});
+
+// ==================== 页面创建函数区 ====================
 
 /**
  * 创建计划排程页面逻辑
  */
 export function createPlanPage(config: FinishingAchievementConfig) {
-  // 获取配置值，支持简化配置
-  const processCode = config.processCode;
-  const defaultFirstProcess =
-    config.query?.plan?.defaultParams?.firstProcess || "B";
+  const { defaultFirstProcess, defaultSubBacklogCode } = extractDefaultParams(config);
   const queryItems = config.query?.plan?.items || [];
   const planColumns = config.columns?.planColumns || DEFAULT_PLAN_COLUMNS;
 
@@ -794,16 +923,15 @@ export function createPlanPage(config: FinishingAchievementConfig) {
     constructor() {
       super({
         url: {
-          list: config.api.planList,
+          list: config.api.planList
         },
         page: {
           current: 1,
-          size: 10,
-        },
+          size: 10
+        }
       });
       // 初始化默认查询参数
-      this.queryParam.value.subBacklogCode = processCode;
-      this.queryParam.value.firstProcess = defaultFirstProcess;
+      setQueryParams(this.queryParam, defaultSubBacklogCode, defaultFirstProcess);
     }
 
     queryDef(): BaseQueryItemDesc<any>[] {
@@ -818,19 +946,19 @@ export function createPlanPage(config: FinishingAchievementConfig) {
       return planColumns;
     }
 
-    async beforeQuery() {
-      // 确保工序参数存在
-      this.queryParam.value.firstProcess =
-        this.queryParam.value.firstProcess || defaultFirstProcess;
-      this.queryParam.value.subBacklogCode = processCode;
-      return true;
+    async select() {
+      // 强制设置查询参数（确保每次查询都包含这些参数）
+      setQueryParams(this.queryParam, defaultSubBacklogCode, defaultFirstProcess);
+      return await super.select();
     }
 
     handleReset() {
-      this.queryParam.value.firstProcess = defaultFirstProcess;
-      this.queryParam.value.loNo = "";
-      this.queryParam.value.startDate = "";
-      this.queryParam.value.endDate = "";
+      // 重置为默认参数
+      setQueryParams(this.queryParam, defaultSubBacklogCode, defaultFirstProcess);
+      // 删除可选参数
+      delete this.queryParam.value.loNo;
+      delete this.queryParam.value.startDate;
+      delete this.queryParam.value.endDate;
     }
   })();
 }
@@ -839,11 +967,8 @@ export function createPlanPage(config: FinishingAchievementConfig) {
  * 创建待上料信息页面逻辑
  */
 export function createMaterialPage(config: FinishingAchievementConfig) {
-  const processCode = config.processCode;
-  const defaultFirstProcess =
-    config.query?.plan?.defaultParams?.firstProcess || "B";
-  const materialColumns =
-    config.columns?.materialColumns || DEFAULT_MATERIAL_COLUMNS;
+  const { processCode, defaultFirstProcess, defaultSubBacklogCode } = extractDefaultParams(config);
+  const materialColumns = config.columns?.materialColumns || DEFAULT_MATERIAL_COLUMNS;
 
   return new (class extends AbstractPageQueryHook {
     selectedMaterialRow = ref<any>(null);
@@ -851,8 +976,8 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
     constructor() {
       super({
         url: {
-          list: config.api.materialList,
-        },
+          list: config.api.materialList
+        }
       });
     }
 
@@ -868,33 +993,25 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
       return materialColumns;
     }
 
-    async beforeQuery() {
-      this.queryParam.value.subBacklogCode = processCode;
-      return true;
-    }
-
     async select() {
+      // 强制设置查询参数
+      this.queryParam.value.subBacklogCode = defaultSubBacklogCode;
       const res = await super.select();
-      let rawData = res?.data?.data ?? res?.data ?? res;
-      if (Array.isArray(rawData)) {
-        this.list.value = rawData;
-        this.page.value.total = rawData.length;
-      } else if (rawData && typeof rawData === "object") {
-        this.list.value = rawData.records ?? rawData.list ?? [];
-        this.page.value.total = rawData.total ?? this.list.value.length;
-      } else {
-        this.list.value = [];
-        this.page.value.total = 0;
-      }
+      
+      // 使用工具函数解析响应数据
+      const { list, total } = parseResponseData(res);
+      this.list.value = list;
+      this.page.value.total = total;
+      
       return res;
     }
 
     async selectByPlan(planRow: any) {
       if (planRow) {
-        this.queryParam.value.firstProcess = defaultFirstProcess;
-        this.queryParam.value.subBacklogCode = processCode;
-        this.queryParam.value.loNo = planRow.loNo;
-        this.queryParam.value.lotNo = planRow.lotNo;
+        setQueryParams(this.queryParam, defaultSubBacklogCode, defaultFirstProcess, {
+          loNo: planRow.loNo,
+          lotNo: planRow.lotNo
+        });
         await this.select();
       } else {
         this.list.value = [];
@@ -908,34 +1025,30 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
         return;
       }
 
-      try {
+      await handleAsyncAction(async () => {
         await ElMessageBox.confirm(
           "确定要对选中的捆号进行上料操作吗？",
           "提示",
           {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
-            type: "warning",
-          },
+            type: "warning"
+          }
         );
 
         const bunNoStr = selection.map((row) => row.bunNo).join(",");
         const firstRow = selection[0];
 
         await this.getAction(config.api.upMaterial, {
-          subBacklogCode: processCode,
-          bunNoStr: bunNoStr,
+          subBacklogCode: defaultSubBacklogCode,
+          bunNoStr,
           loNo: firstRow.loNo,
-          lotNo: firstRow.lotNo,
+          lotNo: firstRow.lotNo
         });
 
         ElMessage.success("上料成功");
         this.select();
-      } catch (error: any) {
-        if (error !== "cancel") {
-          console.error("上料失败:", error);
-        }
-      }
+      }, "上料失败");
     }
 
     async handleCancelUpMaterial() {
@@ -945,36 +1058,32 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
         return;
       }
 
-      try {
+      await handleAsyncAction(async () => {
         await ElMessageBox.confirm("确定要取消选中捆号的上料吗？", "提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning",
+          type: "warning"
         });
 
         const bunNoStr = selection.map((row) => row.bunNo).join(",");
         const firstRow = selection[0];
 
         await this.getAction(config.api.cancelUpMaterial, {
-          subBacklogCode: processCode,
-          bunNoStr: bunNoStr,
+          subBacklogCode: defaultSubBacklogCode,
+          bunNoStr,
           loNo: firstRow.loNo,
-          lotNo: firstRow.lotNo,
+          lotNo: firstRow.lotNo
         });
 
         ElMessage.success("取消上料成功");
         this.select();
-      } catch (error: any) {
-        if (error !== "cancel") {
-          console.error("取消上料失败:", error);
-        }
-      }
+      }, "取消上料失败");
     }
 
     async handleOutput(
       outputParams: any,
       qualifiedPage: any,
-      unqualifiedPage: any,
+      unqualifiedPage: any
     ) {
       const selection = this.getSelection();
       if (!selection || selection.length === 0) {
@@ -987,23 +1096,23 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
         return;
       }
 
-      try {
+      await handleAsyncAction(async () => {
         await ElMessageBox.confirm("确定要进行产出操作吗？", "提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning",
+          type: "warning"
         });
 
         const bunNoStr = selection.map((row) => row.bunNo).join(",");
         const firstRow = selection[0];
 
         await this.getAction(config.api.output, {
-          subBacklogCode: processCode,
+          subBacklogCode: defaultSubBacklogCode,
           loNo: firstRow.loNo,
           lotNo: firstRow.lotNo,
-          bunNoStr: bunNoStr,
+          bunNoStr,
           writePcs: outputParams.value.pcs,
-          prodStatus: outputParams.value.mmwrProdStatus,
+          prodStatus: outputParams.value.mmwrProdStatus
         });
 
         ElMessage.success("产出成功");
@@ -1015,18 +1124,14 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
         this.select();
         qualifiedPage.select();
         unqualifiedPage.select();
-      } catch (error: any) {
-        if (error !== "cancel") {
-          console.error("产出失败:", error);
-        }
-      }
+      }, "产出失败");
     }
 
     async handleOutputFinish(
       planRow: any,
       qualifiedPage: any,
       unqualifiedPage: any,
-      planPage: any,
+      planPage: any
     ) {
       const selection = this.getSelection();
       if (!selection || selection.length === 0) {
@@ -1036,19 +1141,27 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
 
       const materialRow = selection[0];
 
-      try {
+      await handleAsyncAction(async () => {
         await ElMessageBox.confirm("确定要完成产出操作吗？", "提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning",
+          type: "warning"
         });
 
-        await this.getAction(config.api.outputFinish, {
-          subBacklogCode: processCode,
+        // 构建基础参数
+        const params: any = {
+          subBacklogCode: defaultSubBacklogCode,
           bunNoStr: materialRow.bunNo,
           loNo: materialRow.loNo,
-          lotNo: materialRow.lotNo,
-        });
+          lotNo: materialRow.lotNo
+        };
+
+        // 打包作业(DB)需要额外传递pcs参数
+        if (processCode === "DB" && materialRow.pcs) {
+          params.pcs = materialRow.pcs;
+        }
+
+        await this.getAction(config.api.outputFinish, params);
 
         ElMessage.success("产出完毕");
 
@@ -1058,11 +1171,7 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
         this.select();
         qualifiedPage.select();
         unqualifiedPage.select();
-      } catch (error: any) {
-        if (error !== "cancel") {
-          console.error("产出完毕失败:", error);
-        }
-      }
+      }, "产出完毕失败");
     }
   })();
 }
@@ -1071,18 +1180,15 @@ export function createMaterialPage(config: FinishingAchievementConfig) {
  * 创建产出合格实绩页面逻辑
  */
 export function createQualifiedPage(config: FinishingAchievementConfig) {
-  const processCode = config.processCode;
-  const defaultFirstProcess =
-    config.query?.plan?.defaultParams?.firstProcess || "B";
-  const qualifiedColumns =
-    config.columns?.qualifiedColumns || DEFAULT_QUALIFIED_COLUMNS;
+  const { defaultFirstProcess, defaultSubBacklogCode } = extractDefaultParams(config);
+  const qualifiedColumns = config.columns?.qualifiedColumns || DEFAULT_QUALIFIED_COLUMNS;
 
   return new (class extends AbstractPageQueryHook {
     constructor() {
       super({
         url: {
-          list: config.api.qualifiedList,
-        },
+          list: config.api.qualifiedList
+        }
       });
     }
 
@@ -1098,33 +1204,24 @@ export function createQualifiedPage(config: FinishingAchievementConfig) {
       return qualifiedColumns;
     }
 
-    async beforeQuery() {
-      this.queryParam.value.subBacklogCode = processCode;
-      return true;
-    }
-
     async select() {
+      this.queryParam.value.subBacklogCode = defaultSubBacklogCode;
       const res = await super.select();
-      let rawData = res?.data?.data ?? res?.data ?? res;
-      if (Array.isArray(rawData)) {
-        this.list.value = rawData;
-        this.page.value.total = rawData.length;
-      } else if (rawData && typeof rawData === "object") {
-        this.list.value = rawData.records ?? rawData.list ?? [];
-        this.page.value.total = rawData.total ?? this.list.value.length;
-      } else {
-        this.list.value = [];
-        this.page.value.total = 0;
-      }
+      
+      // 使用工具函数解析响应数据
+      const { list, total } = parseResponseData(res);
+      this.list.value = list;
+      this.page.value.total = total;
+      
       return res;
     }
 
     async selectByPlan(planRow: any) {
       if (planRow) {
-        this.queryParam.value.firstProcess = defaultFirstProcess;
-        this.queryParam.value.subBacklogCode = processCode;
-        this.queryParam.value.loNo = planRow.loNo;
-        this.queryParam.value.lotNo = planRow.lotNo;
+        setQueryParams(this.queryParam, defaultSubBacklogCode, defaultFirstProcess, {
+          loNo: planRow.loNo,
+          lotNo: planRow.lotNo
+        });
         await this.select();
       } else {
         this.list.value = [];
@@ -1148,24 +1245,20 @@ export function createQualifiedPage(config: FinishingAchievementConfig) {
         return;
       }
 
-      try {
+      await handleAsyncAction(async () => {
         await ElMessageBox.confirm("确定要取消选中的合格产品吗？", "提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning",
+          type: "warning"
         });
 
         await this.getAction(config.api.cancelPass, {
-          matId: row.id,
+          matId: row.id
         });
 
         ElMessage.success("取消成功");
         this.select();
-      } catch (error: any) {
-        if (error !== "cancel") {
-          console.error("合格取消失败:", error);
-        }
-      }
+      }, "合格取消失败");
     }
   })();
 }
@@ -1174,18 +1267,15 @@ export function createQualifiedPage(config: FinishingAchievementConfig) {
  * 创建不合格实绩页面逻辑
  */
 export function createUnqualifiedPage(config: FinishingAchievementConfig) {
-  const processCode = config.processCode;
-  const defaultFirstProcess =
-    config.query?.plan?.defaultParams?.firstProcess || "B";
-  const unqualifiedColumns =
-    config.columns?.unqualifiedColumns || DEFAULT_UNQUALIFIED_COLUMNS;
+  const { defaultFirstProcess, defaultSubBacklogCode } = extractDefaultParams(config);
+  const unqualifiedColumns = config.columns?.unqualifiedColumns || DEFAULT_UNQUALIFIED_COLUMNS;
 
   return new (class extends AbstractPageQueryHook {
     constructor() {
       super({
         url: {
-          list: config.api.unqualifiedList,
-        },
+          list: config.api.unqualifiedList
+        }
       });
     }
 
@@ -1201,33 +1291,24 @@ export function createUnqualifiedPage(config: FinishingAchievementConfig) {
       return unqualifiedColumns;
     }
 
-    async beforeQuery() {
-      this.queryParam.value.subBacklogCode = processCode;
-      return true;
-    }
-
     async select() {
+      this.queryParam.value.subBacklogCode = defaultSubBacklogCode;
       const res = await super.select();
-      let rawData = res?.data?.data ?? res?.data ?? res;
-      if (Array.isArray(rawData)) {
-        this.list.value = rawData;
-        this.page.value.total = rawData.length;
-      } else if (rawData && typeof rawData === "object") {
-        this.list.value = rawData.records ?? rawData.list ?? [];
-        this.page.value.total = rawData.total ?? this.list.value.length;
-      } else {
-        this.list.value = [];
-        this.page.value.total = 0;
-      }
+      
+      // 使用工具函数解析响应数据
+      const { list, total } = parseResponseData(res);
+      this.list.value = list;
+      this.page.value.total = total;
+      
       return res;
     }
 
     async selectByPlan(planRow: any) {
       if (planRow) {
-        this.queryParam.value.firstProcess = defaultFirstProcess;
-        this.queryParam.value.subBacklogCode = processCode;
-        this.queryParam.value.loNo = planRow.loNo;
-        this.queryParam.value.lotNo = planRow.lotNo;
+        setQueryParams(this.queryParam, defaultSubBacklogCode, defaultFirstProcess, {
+          loNo: planRow.loNo,
+          lotNo: planRow.lotNo
+        });
         await this.select();
       } else {
         this.list.value = [];
@@ -1251,24 +1332,20 @@ export function createUnqualifiedPage(config: FinishingAchievementConfig) {
         return;
       }
 
-      try {
+      await handleAsyncAction(async () => {
         await ElMessageBox.confirm("确定要取消选中的不合格产品吗？", "提示", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
-          type: "warning",
+          type: "warning"
         });
 
         await this.getAction(config.api.cancelUnPass, {
-          matId: row.id,
+          matId: row.id
         });
 
         ElMessage.success("取消成功");
         this.select();
-      } catch (error: any) {
-        if (error !== "cancel") {
-          console.error("不合格取消失败:", error);
-        }
-      }
+      }, "不合格取消失败");
     }
   })();
 }
@@ -1284,7 +1361,7 @@ export function createUnqualifiedPage(config: FinishingAchievementConfig) {
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2026-02-04
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-04
+ * @LastEditTime: 2026-02-06 16:04:24
  * @FilePath: \cx-ui-produce\src\components\template\FinishingAchievementTemplate\index.scss
  * @Description: 精整实绩管理 - 通用样式
  * Copyright (c) 2026 by CHENY, All Rights Reserved 😎.
@@ -1358,6 +1435,11 @@ export function createUnqualifiedPage(config: FinishingAchievementConfig) {
     .operation-center {
       flex: 1;
       justify-content: center;
+      gap: 0;
+
+      > :deep(*) {
+        margin-top: 10px !important;
+      }
 
       .label {
         font-size: 14px;
@@ -1435,6 +1517,7 @@ export function createUnqualifiedPage(config: FinishingAchievementConfig) {
     min-height: 200px;
   }
 }
+
 ```
 
 </details>
