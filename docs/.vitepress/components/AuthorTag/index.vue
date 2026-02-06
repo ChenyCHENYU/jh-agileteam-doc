@@ -193,7 +193,6 @@ const authorsList = computed(() => {
 
 // 单作者头像状态（直接使用数组的第一个元素）
 const avatarLoaded = computed(() => avatarsLoadedState.value[0]?.loaded || false);
-const avatarLoadError = computed(() => avatarsLoadedState.value[0]?.error || false);
 
 // 头像加载成功（统一处理）
 const handleAvatarLoad = (index: number = 0) => {
