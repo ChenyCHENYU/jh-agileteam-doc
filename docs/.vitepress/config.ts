@@ -36,6 +36,13 @@ export default defineConfig({
     sidebar,
     search,
 
+    // 编辑链接
+    editLink: {
+      pattern:
+        "https://github.com/ChenyCHENYU/jh-agileteam-doc/edit/main/docs/:path",
+      text: "✏️ 在 GitHub 上编辑此页",
+    },
+
     // 社交链接
     socialLinks: [
       { icon: "github", link: "https://github.com/ChenyCHENYU" },

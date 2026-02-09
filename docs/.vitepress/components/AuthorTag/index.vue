@@ -2,7 +2,7 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2025-10-15 16:39:35
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-06 16:19:18
+ * @LastEditTime: 2026-02-09 16:05:20
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\AuthorTag\index.vue
  * @Description: 作者标签组件
  * Copyright (c) 2025 by CHENY, All Rights Reserved 😎. 
