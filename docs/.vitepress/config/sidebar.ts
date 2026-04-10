@@ -40,6 +40,68 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
+  // 前端 Skills
+  "/skills/frontend/": [
+    {
+      text: "前端 Skills",
+      collapsed: false,
+      items: [
+        { text: "概述", link: "/skills/frontend/" },
+        { text: "AI Skill 流水线", link: "/skills/frontend/skill-pipeline" },
+      ],
+    },
+    {
+      text: "5 个 AI Skill",
+      collapsed: false,
+      items: [
+        { text: "① 原型扫描", link: "/skills/frontend/prototype-scan" },
+        { text: "② 接口约定", link: "/skills/frontend/api-contract" },
+        { text: "③ 页面代码生成", link: "/skills/frontend/page-codegen" },
+        { text: "④ 菜单同步", link: "/skills/frontend/menu-sync" },
+        { text: "⑤ 规范审计", link: "/skills/frontend/convention-audit" },
+      ],
+    },
+    {
+      text: "页面模板",
+      collapsed: false,
+      items: [
+        { text: "9 种模板总览", link: "/skills/frontend/page-templates" },
+      ],
+    },
+    {
+      text: "实践",
+      collapsed: false,
+      items: [
+        { text: "使用指南", link: "/skills/frontend/usage-guide" },
+        { text: "CLI 工具", link: "/skills/frontend/cli" },
+      ],
+    },
+  ],
+
+  // 后端 Skill
+  "/skills/backend/": [
+    {
+      text: "后端 Skill",
+      collapsed: false,
+      items: [{ text: "概述", link: "/skills/backend/" }],
+    },
+  ],
+
+  // AI 工作流
+  "/views/ai-workflow/": [
+    {
+      text: "AI 工作流",
+      collapsed: false,
+      items: [
+        { text: "概述", link: "/views/ai-workflow/" },
+        { text: "原型设计", link: "/views/ai-workflow/prototype" },
+        { text: "详细设计", link: "/views/ai-workflow/detail-design" },
+        { text: "全栈开发", link: "/views/ai-workflow/fullstack-dev" },
+        { text: "测试实践", link: "/views/ai-workflow/testing" },
+      ],
+    },
+  ],
+
   // 样式方案
   "/views/styling/": [
     {
@@ -140,7 +202,10 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "生产领域",
       collapsed: false,
       items: [
-        { text: "【棒线材】精整实绩", link: "/templates/produce/production-plan" },
+        {
+          text: "【棒线材】精整实绩",
+          link: "/templates/produce/production-plan",
+        },
         { text: "工艺管理", link: "/templates/produce/process-management" },
         { text: "设备管理", link: "/templates/produce/equipment-management" },
       ],

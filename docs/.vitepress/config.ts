@@ -19,7 +19,7 @@ import { vite } from "./config/vite";
  */
 export default defineConfig({
   title: "AGILE TEAM",
-  description: "前端工程体系 - 提升研发效率，赋能团队协作",
+  description: "AI工程体系 - 提升研发效率，赋能团队协作",
   lang: "zh-CN",
 
   // 站点图标
@@ -59,7 +59,7 @@ export default defineConfig({
     footer: {
       message:
         "You may not distribute, modify, or sell this software without permission.",
-      copyright: "Copyright © 2025 金恒科技 AGILE TEAM ",
+      copyright: "Copyright © 2026 金恒科技 AGILE TEAM",
     },
 
     // 最后更新时间

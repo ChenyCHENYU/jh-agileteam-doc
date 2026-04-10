@@ -2,83 +2,94 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2025-10-14 20:53:03
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-04 09:24:00
+ * @LastEditTime: 2026-04-10 09:00:00
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\GlassHome\index.vue
- * @Description: 首页组件
- * Copyright (c) 2025 by CHENY, All Rights Reserved 😎. 
+ * @Description: 首页组件 - Linear × Apple Premium Design
+ * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
 -->
 <template>
-  <div class="glass-home">
-    <!-- Hero 区域 -->
+  <div class="premium-home">
+
+    <!-- ===== HERO ===== -->
     <section class="hero-section">
-      <div class="hero-bg-decoration"></div>
-      <div class="hero-particles"></div>
-      <div class="hero-grid-lines"></div>
-      <div class="hero-glow-orb hero-glow-orb-1"></div>
-      <div class="hero-glow-orb hero-glow-orb-2"></div>
-      <div class="hero-glow-orb hero-glow-orb-3"></div>
-      <div class="hero-container">
-        <div class="hero-content">
-          <div class="hero-text-content">
-            <div class="hero-badge">
-              <span class="badge-dot"></span>
-              <span class="badge-text">Next Generation</span>
-            </div>
-            <h1 class="hero-title">
-              <span class="title-name">AGILE TEAM</span>
-            </h1>
-            <p class="hero-text">前端工程体系</p>
-            <p class="hero-tagline">提升研发效率，赋能团队协作</p>
-            <div class="hero-actions">
-              <a href="/views/guide/getting-started" class="action-button primary">
-                <span class="button-content">
-                  <span class="button-text">快速开始</span>
-                  <svg class="button-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </span>
-              </a>
-              <a href="/ui-components/" class="action-button secondary">
-                <span class="button-content">
-                  <span class="button-text">组件库</span>
-                </span>
-              </a>
-            </div>
-          </div>
-          <div class="hero-image-content">
-            <div class="hero-logo">
-              <div class="logo-ring logo-ring-1"></div>
-              <div class="logo-ring logo-ring-2"></div>
-              <div class="logo-ring logo-ring-3"></div>
-              <img src="/logo.png" alt="AGILE TEAM" class="logo-image" />
-            </div>
+      <div class="hero-mesh" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-noise" aria-hidden="true"></div>
+
+      <div class="hero-inner">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-label">Next Generation · AI工程体系</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="title-base">AGILE</span><span class="title-gradient"> TEAM</span>
+        </h1>
+
+        <p class="hero-tagline">提升研发效率，赋能团队协作</p>
+
+        <div class="hero-cta">
+          <a href="/views/guide/getting-started" class="cta-primary">
+            <span>快速开始</span>
+            <svg class="cta-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="/ui-components/" class="cta-secondary">
+            <span>探索 Skill</span>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div v-for="stat in stats" :key="stat.label" class="stat-item">
+            <span class="stat-num">{{ stat.number }}</span>
+            <span class="stat-lbl">{{ stat.label }}</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Features 区域 -->
+    <!-- ===== FEATURES ===== -->
     <section class="features-section">
-      <div class="features-container">
-        <div class="features-grid">
+      <div class="features-inner">
+        <header class="section-header">
+          <div class="section-eyebrow">
+            <span class="eyebrow-line"></span>
+            <span>核心能力</span>
+          </div>
+          <h2 class="section-heading">六大模块，覆盖 AI 工程化全链路</h2>
+          <p class="section-sub">系统性开发工程能力沉淀，助力研发团队提质增效</p>
+        </header>
+
+        <div class="feat-grid">
           <a
-            v-for="feature in features"
+            v-for="(feature, idx) in features"
             :key="feature.title"
             :href="feature.link"
-            class="feature-card"
+            class="feat-card"
           >
-            <div class="feature-icon">{{ feature.icon }}</div>
-            <h3 class="feature-title">{{ feature.title }}</h3>
-            <p class="feature-details">{{ feature.details }}</p>
+            <div class="feat-top">
+              <span class="feat-num">{{ String(idx + 1).padStart(2, '0') }}</span>
+              <span class="feat-icon">{{ feature.icon }}</span>
+            </div>
+            <h3 class="feat-title">{{ feature.title }}</h3>
+            <p class="feat-desc">{{ feature.details }}</p>
+            <div class="feat-link">
+              <span>了解更多</span>
+              <svg class="link-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
           </a>
         </div>
       </div>
     </section>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { features } from "./data";
+import { features, stats } from "./data";
 </script>
 
 <style scoped lang="scss">

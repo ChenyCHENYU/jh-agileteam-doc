@@ -12,9 +12,12 @@
   --vp-c-brand-3: #5568d3;
 }
 
-/* 优化暗色模式 */
+/* 优化暗色模式 — Linear 风格深色底色 */
 .dark {
-  --vp-c-bg: #1a1a1a;
+  --vp-c-bg: #09090b;
+    --vp-c-bg-soft: #111113;
+    --vp-c-bg-mute: #18181b;
+    --vp-c-bg-alt: #0d0d0f;
 }
 
 /* 平滑滚动 */
@@ -22,14 +25,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* 下拉菜单中 link:"" 的项（VPLink 渲染为 span，缺少 .link 样式） */
+.VPMenuLink .VPLink:not(.link) {
+  display: block;
+  border-radius: 6px;
+  padding: 0 12px;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  cursor: not-allowed;
+}
 /* UnoCSS 兼容性 */
 * {
   box-sizing: border-box;
-}
-
-/* 禁用疑难杂症导航项的点击 */
-.VPNavBar .VPNavBarMenu .VPNavBarMenuLink:nth-child(7) {
-  pointer-events: none;
-  opacity: 0.5;
-  cursor: not-allowed;
 }
