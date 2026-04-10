@@ -37,20 +37,27 @@ html {
   color: var(--vp-c-text-2);
   cursor: not-allowed;
 }
-/* 内容区域加宽 — 减少左右留白，让表格/代码块更丰满 */
-.VPDoc .container {
-  max-width: 100% !important;
+/* 内容区域加宽 — 覆盖 VitePress scoped 样式，减少左右留白 */
+.VPDoc.has-aside .content-container {
+  max-width: 868px !important;
+}
+.VPDoc:not(.has-sidebar) .container {
+  max-width: 1104px !important;
 }
 
-.VPDoc .content {
-  max-width: 960px !important;
-  padding: 0 24px 128px !important;
+.VPDoc:not(.has-sidebar) .content {
+  max-width: 868px !important;
 }
 
 @media (min-width: 960px) {
   .VPDoc .content {
-    max-width: 1104px !important;
-    padding: 0 32px 128px !important;
+    padding: 0 24px 128px !important;
+  
+}
+
+@media (min-width: 1280px) {
+  .VPDoc .content {
+    padding: 0 16px 128px !important;
   }
 }
 
