@@ -10,6 +10,7 @@
   --vp-c-brand-1: #667eea;
   --vp-c-brand-2: #764ba2;
   --vp-c-brand-3: #5568d3;
+  --vp-layout-max-width: 1440px;
 }
 
 /* 优化暗色模式 — Linear 风格深色底色 */
@@ -35,6 +36,28 @@ html {
   font-weight: 500;
   color: var(--vp-c-text-2);
   cursor: not-allowed;
+}
+/* 内容区域加宽 — 减少左右留白，让表格/代码块更丰满 */
+.VPDoc .container {
+  max-width: 100% !important;
+}
+
+.VPDoc .content {
+  max-width: 960px !important;
+  padding: 0 24px 128px !important;
+}
+
+@media (min-width: 960px) {
+  .VPDoc .content {
+    max-width: 1104px !important;
+    padding: 0 32px 128px !important;
+  }
+}
+
+/* 亮色模式 — 不可选导航项更明显的灰色 */
+:root:not(.dark) .VPMenuLink .VPLink:not(.link) {
+  color: var(--vp-c-text-3);
+  opacity: 0.5;
 }
 /* UnoCSS 兼容性 */
 * {
