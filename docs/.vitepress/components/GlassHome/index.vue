@@ -52,7 +52,7 @@
     <!-- ===== FEATURES ===== -->
     <section class="features-section">
       <div class="features-inner">
-        <header class="section-header">
+        <header class="section-header reveal-item">
           <div class="section-eyebrow">
             <span class="eyebrow-line"></span>
             <span>核心能力</span>
@@ -66,7 +66,7 @@
             v-for="(feature, idx) in features"
             :key="feature.title"
             :href="feature.link"
-            class="feat-card"
+            class="feat-card reveal-item"
           >
             <div class="feat-top">
               <span class="feat-num">{{ String(idx + 1).padStart(2, '0') }}</span>
@@ -89,7 +89,27 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { features, stats } from "./data";
+
+onMounted(() => {
+  const items = document.querySelectorAll('.reveal-item');
+  if (!items.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  items.forEach((el) => observer.observe(el));
+});
 </script>
 
 <style scoped lang="scss">

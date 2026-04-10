@@ -194,6 +194,14 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   background-clip: text;
 }
 
+// --- Dark Mode Hero Glow ---
+.dark .hero-title {
+  text-shadow: 0 0 120px rgba(99, 102, 241, 0.35), 0 0 60px rgba(139, 92, 246, 0.15);
+}
+
+.dark .section-heading {
+  text-shadow: 0 0 50px rgba(99, 102, 241, 0.12);
+}
 // --- Tagline ---
 .hero-tagline {
   font-size: 20px;
@@ -417,8 +425,9 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   line-height: 1.6;
 }
 
-// --- Feature Grid ---
+// --- Feature Grid with Animated Gradient Glow ---
 .feat-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
@@ -427,12 +436,28 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   border: 1px solid var(--vp-c-divider);
   box-shadow: 0 1px 24px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.6s ease, border-color 0.6s ease;
+  }
+  
+  .feat-grid:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow:
+      0 0 0 1px rgba(99, 102, 241, 0.15),
+      0 0 40px -8px rgba(99, 102, 241, 0.2),
+      0 0 80px -16px rgba(139, 92, 246, 0.12);
 }
 
 .dark .feat-grid {
   box-shadow: 0 1px 32px rgba(0, 0, 0, 0.36);
 }
 
+.dark .feat-grid:hover {
+  border-color: rgba(129, 140, 248, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(129, 140, 248, 0.2),
+    0 0 50px -8px rgba(129, 140, 248, 0.28),
+    0 0 100px -16px rgba(168, 85, 247, 0.18);
+}
 // --- Feature Card ---
 .feat-card {
   position: relative;
@@ -593,6 +618,28 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   color: $accent-d;
 }
 
+// ================================================================
+// SCROLL REVEAL — 滚动触发入场动画
+// ================================================================
+
+.reveal-item {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// Stagger delays for grid items
+@for $i from 1 through 6 {
+  .feat-card.reveal-item:nth-child(#{$i}).revealed {
+    transition-delay: #{($i - 1) * 0.08}s;
+  }
+}
 // ================================================================
 // RESPONSIVE
 // ================================================================
