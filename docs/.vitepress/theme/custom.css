@@ -129,3 +129,156 @@ html {
 * {
   box-sizing: border-box;
 }
+
+/* ================================================================
+   Premium Selection — 品牌色文字选中高亮
+   ================================================================ */
+::selection {
+  background: rgba(99, 102, 241, 0.18);
+  color: inherit;
+}
+.dark ::selection {
+  background: rgba(129, 140, 248, 0.28);
+}
+
+/* ================================================================
+   Custom Scrollbar — 品牌色纤细滚动条 (Webkit)
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.18);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.35);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(129, 140, 248, 0.22);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(129, 140, 248, 0.42);
+}
+
+/* ================================================================
+   Nav Link Hover — 导航链接悬停动画下划线
+   ================================================================ */
+.VPNavBarMenuLink {
+  position: relative !important;
+}
+.VPNavBarMenuLink::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, var(--vp-c-brand-1), var(--vp-c-brand-2)) !important;
+  border-radius: 1px !important;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), left 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.VPNavBarMenuLink:hover::after,
+.VPNavBarMenuLink.active::after {
+  width: 60% !important;
+  left: 20% !important;
+}
+
+/* ================================================================
+   Sidebar Active — 侧边栏激活态渐变指示器
+   ================================================================ */
+.VPSidebarItem .is-active > .item > .indicator {
+  background: linear-gradient(180deg, var(--vp-c-brand-1), var(--vp-c-brand-2)) !important;
+  width: 3px !important;
+  border-radius: 2px !important;
+}
+.VPSidebarItem.is-active > .item {
+  background: rgba(99, 102, 241, 0.06) !important;
+  border-radius: 6px !important;
+}
+.dark .VPSidebarItem.is-active > .item {
+  background: rgba(129, 140, 248, 0.08) !important;
+}
+
+/* ================================================================
+   Code Block — 代码块渐变左边框 + 微妙阴影
+   ================================================================ */
+.vp-doc div[class*='language-'] {
+  border-left: 2px solid transparent !important;
+  border-image: linear-gradient(180deg, var(--vp-c-brand-1), var(--vp-c-brand-2)) 1 !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+  transition: box-shadow 0.25s ease !important;
+}
+.vp-doc div[class*='language-']:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10) !important;
+}
+.dark .vp-doc div[class*='language-'] {
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3) !important;
+}
+.dark .vp-doc div[class*='language-']:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ================================================================
+   Blockquote — 引用框渐变左边框
+   ================================================================ */
+.vp-doc blockquote {
+  border-left: 2px solid transparent !important;
+  border-image: linear-gradient(180deg, var(--vp-c-brand-1), var(--vp-c-brand-2)) 1 !important;
+}
+
+/* ================================================================
+   Link Hover — 文档内链接悬停发光
+   ================================================================ */
+.vp-doc a {
+  transition: color 0.2s ease, text-shadow 0.2s ease !important;
+}
+.vp-doc a:hover {
+  text-shadow: 0 0 12px rgba(99, 102, 241, 0.3) !important;
+}
+.dark .vp-doc a:hover {
+  text-shadow: 0 0 12px rgba(129, 140, 248, 0.45) !important;
+}
+
+/* ================================================================
+   Nav Shadow — 亮色模式导航栏底部微妙投影（增加层次感）
+   ================================================================ */
+.VPNavBar .divider-line {
+  background: transparent !important;
+  box-shadow: 0 1px 8px rgba(99, 102, 241, 0.08) !important;
+  height: 1px !important;
+}
+.dark .VPNavBar .divider-line {
+  box-shadow: 0 1px 12px rgba(129, 140, 248, 0.12) !important;
+}
+
+/* ================================================================
+   Table — 表格表头微妙渐变 + hover 行高亮
+   ================================================================ */
+.vp-doc table th {
+  background: linear-gradient(
+    180deg,
+    rgba(99, 102, 241, 0.04) 0%,
+    rgba(99, 102, 241, 0.01) 100%
+  ) !important;
+}
+.dark .vp-doc table th {
+  background: linear-gradient(
+    180deg,
+    rgba(129, 140, 248, 0.08) 0%,
+    rgba(129, 140, 248, 0.02) 100%
+  ) !important;
+}
+.vp-doc table tr {
+  transition: background-color 0.15s ease !important;
+}
+.vp-doc table tr:hover {
+  background-color: rgba(99, 102, 241, 0.03) !important;
+}
+.dark .vp-doc table tr:hover {
+  background-color: rgba(129, 140, 248, 0.06) !important;
+}

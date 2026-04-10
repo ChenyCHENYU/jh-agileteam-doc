@@ -239,6 +239,28 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
     0 1px 16px rgba(99, 102, 241, 0.30),
     inset 0 1px 0 rgba(255, 255, 255, 0.14);
   transition: transform $t-fast, box-shadow $t-fast;
+  position: relative;
+    overflow: hidden;
+  }
+  
+  // Shine sweep on hover
+  .cta-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(105deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.28) 45%,
+        rgba(255, 255, 255, 0.12) 50%,
+        transparent 55%);
+    transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .cta-primary:hover::after {
+    left: 125%;
 }
 
 .cta-primary .cta-arrow {
@@ -293,10 +315,12 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   background: var(--vp-c-bg-soft);
   border-color: $accent-border;
   transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.10);
 }
 
 .dark .cta-secondary:hover {
   border-color: $accent-d-border;
+  box-shadow: 0 4px 16px rgba(129, 140, 248, 0.14);
 }
 
 // --- Stats Row ---
@@ -317,6 +341,23 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 18px 38px;
   gap: 5px;
   position: relative;
+  transition: background-color $t-fast;
+  }
+  
+  .stat-item:hover {
+    background-color: rgba(99, 102, 241, 0.04);
+  }
+  
+  .dark .stat-item:hover {
+    background-color: rgba(129, 140, 248, 0.06);
+  }
+  
+  .stat-item:hover .stat-num {
+    color: $accent;
+  }
+  
+  .dark .stat-item:hover .stat-num {
+    color: $accent-d;
 }
 
 .stat-item:not(:last-child)::after {
