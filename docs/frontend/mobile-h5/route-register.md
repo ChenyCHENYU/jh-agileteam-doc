@@ -1,32 +1,77 @@
-# ⑤ 路由注册
+# ⑤ 路由注册 route-register
 
-**Skill 名称**：`route-register`
-
-**触发词**：`注册路由`、`添加菜单`
-
-**规则文件**：`.github/skills/route-register/skills.md`
-
----
-
-## 功能
+> 触发词：`注册路由` / `添加菜单` / `注册页面`
 
 自动将新页面注册到路由系统，根据页面类型写入不同路由文件。
 
 ---
 
-## 注册规则
+## 输入
 
-| 页面类型 | 写入文件 | 说明 |
-|---|---|---|
-| TabBar 页面 | `router/menu.ts` | 底部导航页面 |
-| 子页面 | `router/modules.ts` | 所有非 Tab 页面 |
+页面信息（路径、标题、是否缓存、是否菜单页）
 
 ---
 
-## 约束
+## 注册规则
 
-- 路由 `name` 必须与组件 `defineOptions({ name })` 完全一致
-- 支持 Hash / History 双模式（由 `VITE_HASH_ROUTE` 环境变量控制）
+### 子页面路由 → `src/router/modules.ts`
+
+在 `routeModuleList` 数组末尾追加：
+
+```ts
+{
+    path: '/customerArchive',
+    name: 'CustomerArchive',       // 必须与 defineOptions({ name }) 一致
+    meta: {
+        title: '客户档案',
+        keepAlive: false,
+    },
+    component: () => import('@/views/customer/archive/index.vue'),
+},
+```
+
+### TabBar 主页 → `src/router/menu.ts`
+
+```ts
+{
+    path: '/customer',
+    name: 'Customer',
+    meta: {
+        title: '客户',
+        icon: 'ph:user-list-bold',
+        keepAlive: true,
+    },
+    component: () => import('@/views/customer/index.vue'),
+},
+```
+
+### 详情 / 表单子页面
+
+只注册在 `modules.ts`，不注册菜单。
+
+---
+
+## keepAlive 规则
+
+| 页面类型 | keepAlive | 原因 |
+|---|---|---|
+| 列表页 | `true` | 保留搜索条件 + 滚动位置 |
+| 详情页 | `false` | 每次进入需刷新 |
+| 表单页 | `false` | 提交后需重置 |
+
+---
+
+## 命名约束
+
+| 项目 | 规则 | 示例 |
+|---|---|---|
+| path | camelCase | `/customerArchive` |
+| name | PascalCase | `CustomerArchive` |
+| defineOptions | 与 name 一致 | `defineOptions({ name: 'CustomerArchive' })` |
+
+::: danger 三者必须一致
+路由 `name` = `defineOptions({ name })` = `<keep-alive :include>` 的组件名，三者必须完全一致，否则缓存失效。
+:::
 
 ---
 
