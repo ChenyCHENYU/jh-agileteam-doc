@@ -100,7 +100,21 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "Skills 集合",
       collapsed: false,
       items: [
-        { text: "7 个 AI Skill", link: "/frontend/mobile-h5/skills" },
+        { text: "概述", link: "/frontend/mobile-h5/skills" },
+        { text: "AI Skill 流水线", link: "/frontend/mobile-h5/skill-pipeline" },
+      ],
+    },
+    {
+      text: "7 个 AI Skill",
+      collapsed: false,
+      items: [
+        { text: "① 原型扫描", link: "/frontend/mobile-h5/prototype-scan" },
+        { text: "② 接口规格", link: "/frontend/mobile-h5/api-spec" },
+        { text: "③ 接口约定", link: "/frontend/mobile-h5/api-contract" },
+        { text: "④ 页面代码生成", link: "/frontend/mobile-h5/page-codegen" },
+        { text: "⑤ 路由注册", link: "/frontend/mobile-h5/route-register" },
+        { text: "⑥ Mock 生成", link: "/frontend/mobile-h5/mock-gen" },
+        { text: "⑦ 规范审计", link: "/frontend/mobile-h5/convention-audit" },
       ],
     },
   ],
