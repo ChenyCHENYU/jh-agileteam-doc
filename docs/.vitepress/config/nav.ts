@@ -41,8 +41,6 @@ export const nav: DefaultTheme.NavItem[] = [
           { text: "概览 & 技术选型", link: "/frontend/pc/" },
           { text: "架构设计", link: "/frontend/pc/architecture" },
           { text: "扩展规范", link: "/frontend/pc/standards" },
-          { text: "组件库", link: "/ui-components/" },
-          { text: "模板库", link: "/templates/" },
           { text: "Skills 集合", link: "/frontend/pc/skills/" },
         ],
       },
