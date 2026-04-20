@@ -41,6 +41,7 @@ export const nav: DefaultTheme.NavItem[] = [
           { text: "概览 & 技术选型", link: "/frontend/mobile-h5/" },
           { text: "开发规范", link: "/frontend/mobile-h5/standards" },
           { text: "Skills 集合", link: "/frontend/mobile-h5/skills" },
+          { text: "@robot-h5/core", link: "/frontend/mobile-h5/h5-core/" },
         ],
       },
       {

@@ -117,6 +117,17 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "⑦ 规范审计", link: "/frontend/mobile-h5/convention-audit" },
       ],
     },
+    {
+      text: "@robot-h5/core",
+      collapsed: false,
+      items: [
+        { text: "概览 & 快速开始", link: "/frontend/mobile-h5/h5-core/" },
+        { text: "15 个 Hooks", link: "/frontend/mobile-h5/h5-core/hooks" },
+        { text: "Bridge 适配层", link: "/frontend/mobile-h5/h5-core/bridge" },
+        { text: "工具函数库", link: "/frontend/mobile-h5/h5-core/utils" },
+        { text: "配置系统", link: "/frontend/mobile-h5/h5-core/config" },
+      ],
+    },
   ],
 
   // 后端
