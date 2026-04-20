@@ -40,50 +40,79 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
-  // 前端 Skills
-  "/skills/frontend/": [
+  // 前端 PC 端
+  "/frontend/pc/": [
     {
-      text: "前端 Skills",
+      text: "PC 端前端",
       collapsed: false,
       items: [
-        { text: "概述", link: "/skills/frontend/" },
-        { text: "AI Skill 流水线", link: "/skills/frontend/skill-pipeline" },
+        { text: "概览 & 技术选型", link: "/frontend/pc/" },
+        { text: "开发规范", link: "/frontend/pc/standards" },
+      ],
+    },
+    {
+      text: "Skills 集合",
+      collapsed: false,
+      items: [
+        { text: "概述", link: "/frontend/pc/skills/" },
+        { text: "AI Skill 流水线", link: "/frontend/pc/skills/skill-pipeline" },
       ],
     },
     {
       text: "5 个 AI Skill",
       collapsed: false,
       items: [
-        { text: "① 原型扫描", link: "/skills/frontend/prototype-scan" },
-        { text: "② 接口约定", link: "/skills/frontend/api-contract" },
-        { text: "③ 页面代码生成", link: "/skills/frontend/page-codegen" },
-        { text: "④ 菜单同步", link: "/skills/frontend/menu-sync" },
-        { text: "⑤ 规范审计", link: "/skills/frontend/convention-audit" },
+        { text: "① 原型扫描", link: "/frontend/pc/skills/prototype-scan" },
+        { text: "② 接口约定", link: "/frontend/pc/skills/api-contract" },
+        { text: "③ 页面代码生成", link: "/frontend/pc/skills/page-codegen" },
+        { text: "④ 菜单同步", link: "/frontend/pc/skills/menu-sync" },
+        { text: "⑤ 规范审计", link: "/frontend/pc/skills/convention-audit" },
       ],
     },
     {
       text: "页面模板",
       collapsed: false,
       items: [
-        { text: "9 种模板总览", link: "/skills/frontend/page-templates" },
+        { text: "9 种模板总览", link: "/frontend/pc/skills/page-templates" },
       ],
     },
     {
       text: "实践",
       collapsed: false,
       items: [
-        { text: "使用指南", link: "/skills/frontend/usage-guide" },
-        { text: "CLI 工具", link: "/skills/frontend/cli" },
+        { text: "使用指南", link: "/frontend/pc/skills/usage-guide" },
+        { text: "CLI 工具", link: "/frontend/pc/skills/cli" },
       ],
     },
   ],
 
-  // 后端 Skill
-  "/skills/backend/": [
+  // 前端移动端
+  "/frontend/mobile/": [
     {
-      text: "后端 Skill",
+      text: "移动端前端",
       collapsed: false,
-      items: [{ text: "概述", link: "/skills/backend/" }],
+      items: [
+        { text: "概览（规划中）", link: "/frontend/mobile/" },
+      ],
+    },
+  ],
+
+  // 后端
+  "/backend/": [
+    {
+      text: "后端",
+      collapsed: false,
+      items: [
+        { text: "概览 & 技术选型", link: "/backend/" },
+        { text: "开发规范", link: "/backend/standards" },
+      ],
+    },
+    {
+      text: "Skills 集合",
+      collapsed: false,
+      items: [
+        { text: "概述", link: "/backend/skills/" },
+      ],
     },
   ],
 

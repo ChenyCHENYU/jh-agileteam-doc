@@ -38,6 +38,17 @@ html {
   cursor: not-allowed;
 }
 
+/* 顶级导航栏 — link:"" 渲染为 span（无 .link 类），与下拉子项同一模式 */
+.VPNavBarMenuLink:not(.link) {
+  color: var(--vp-c-text-3) !important;
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.VPNavBarMenuLink:not(.link)::after {
+  display: none !important;
+}
+
 /* 内容区域加宽 — 覆盖 VitePress scoped 样式，减少左右留白 */
 .VPDoc.has-aside .content-container {
   max-width: 868px !important;

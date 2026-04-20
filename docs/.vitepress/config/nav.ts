@@ -25,13 +25,32 @@ export const nav: DefaultTheme.NavItem[] = [
     activeMatch: "/views/best-practices/",
   },
   {
-    text: "Skills 集合",
+    text: "前端",
     items: [
-      { text: "业务 Skill", link: "", activeMatch: "---" },
-      { text: "产品 Skill", link: "", activeMatch: "---" },
-      { text: "前端 Skill", link: "/skills/frontend/" },
-      { text: "后端 Skill", link: "/skills/backend/" },
-      { text: "测试 Skill", link: "", activeMatch: "---" },
+      {
+        text: "PC 端",
+        items: [
+          { text: "概览 & 技术选型", link: "/frontend/pc/" },
+          { text: "开发规范", link: "/frontend/pc/standards" },
+          { text: "Skills 集合", link: "/frontend/pc/skills/" },
+        ],
+      },
+      {
+        text: "移动端",
+        items: [
+          { text: "概览 & 技术选型", link: "", activeMatch: "---" },
+          { text: "开发规范", link: "", activeMatch: "---" },
+          { text: "Skills 集合", link: "", activeMatch: "---" },
+        ],
+      },
+    ],
+  },
+  {
+    text: "后端",
+    items: [
+      { text: "概览 & 技术选型", link: "/backend/" },
+      { text: "开发规范", link: "/backend/standards" },
+      { text: "Skills 集合", link: "/backend/skills/" },
     ],
   },
   {
@@ -49,8 +68,8 @@ export const nav: DefaultTheme.NavItem[] = [
   },
   {
     text: "爬坑建议",
-    link: "/views/troubleshooting/",
-    activeMatch: "/views/troubleshooting/",
+    link: "",
+    activeMatch: "---",
   },
   {
     text: "团队",
