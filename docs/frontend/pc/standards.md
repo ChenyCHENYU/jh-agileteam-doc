@@ -1,7 +1,7 @@
-# PC 端开发规范
+# PC 端扩展规范
 
 ::: tip 🚀 建设中
-本版块正在持续沉淀 PC 端前端开发规范与约定。
+本版块正在持续沉淀 PC 端前端扩展规范与约定。通用开发规范请参阅 [快速上手 — 开发规范](/frontend/quick-start/development-standards)。
 :::
 
 ## 规范内容

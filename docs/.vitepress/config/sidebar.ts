@@ -8,22 +8,10 @@ export const sidebar: DefaultTheme.Sidebar = {
   // 指南
   "/views/guide/": [
     {
-      text: "快速上手",
+      text: "指南",
       collapsed: false,
       items: [
         { text: "介绍", link: "/views/guide/" },
-        { text: "快速开始", link: "/views/guide/getting-started" },
-        { text: "安装配置", link: "/views/guide/installation" },
-        { text: "项目结构", link: "/views/guide/project-structure" },
-      ],
-    },
-    {
-      text: "规范约定",
-      collapsed: false,
-      items: [
-        { text: "开发规范", link: "/views/guide/development-standards" },
-        { text: "提交规范", link: "/views/guide/commit-standards" },
-        { text: "贡献指南", link: "/views/guide/contributing" },
       ],
     },
   ],
@@ -31,11 +19,44 @@ export const sidebar: DefaultTheme.Sidebar = {
   // 最佳实践
   "/views/best-practices/": [
     {
-      text: "标准动作",
+      text: "AI 最佳实践",
       collapsed: false,
       items: [
-        { text: "架构设计", link: "/views/best-practices/architecture" },
-        { text: "HTTP 请求", link: "/views/best-practices/request-usage" },
+        { text: "概述", link: "/views/best-practices/" },
+      ],
+    },
+    {
+      text: "能力层级",
+      collapsed: false,
+      items: [
+        { text: "L1 — 提示词", link: "/views/best-practices/L1-prompt" },
+        { text: "L2 — Skill", link: "/views/best-practices/L2-skill" },
+        { text: "L3 — Skills & MCP", link: "/views/best-practices/L3-skills-mcp" },
+        { text: "L4 — CLI", link: "/views/best-practices/L4-cli" },
+      ],
+    },
+  ],
+
+  // 快速上手
+  "/frontend/quick-start/": [
+    {
+      text: "快速上手",
+      collapsed: false,
+      items: [
+        { text: "介绍", link: "/frontend/quick-start/" },
+        { text: "快速开始", link: "/frontend/quick-start/getting-started" },
+        { text: "安装配置", link: "/frontend/quick-start/installation" },
+        { text: "项目结构", link: "/frontend/quick-start/project-structure" },
+      ],
+    },
+    {
+      text: "规范约定",
+      collapsed: false,
+      items: [
+        { text: "开发规范", link: "/frontend/quick-start/development-standards" },
+        { text: "提交规范", link: "/frontend/quick-start/commit-standards" },
+        { text: "贡献指南", link: "/frontend/quick-start/contributing" },
+        { text: "Waline 评论系统", link: "/frontend/quick-start/waline-usage" },
       ],
     },
   ],
@@ -47,7 +68,8 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "概览 & 技术选型", link: "/frontend/pc/" },
-        { text: "开发规范", link: "/frontend/pc/standards" },
+        { text: "架构设计", link: "/frontend/pc/architecture" },
+        { text: "扩展规范", link: "/frontend/pc/standards" },
       ],
     },
     {
@@ -93,7 +115,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "概览 & 技术选型", link: "/frontend/mobile-h5/" },
-        { text: "开发规范", link: "/frontend/mobile-h5/standards" },
+        { text: "扩展规范", link: "/frontend/mobile-h5/standards" },
       ],
     },
     {

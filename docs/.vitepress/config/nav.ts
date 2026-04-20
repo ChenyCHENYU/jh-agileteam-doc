@@ -21,17 +21,26 @@ export const nav: DefaultTheme.NavItem[] = [
   },
   {
     text: "AI 最佳实践",
-    link: "/views/best-practices/architecture",
+    link: "/views/best-practices/",
     activeMatch: "/views/best-practices/",
   },
   {
     text: "前端",
     items: [
       {
+        text: "快速上手",
+        items: [
+          { text: "介绍", link: "/frontend/quick-start/" },
+          { text: "快速开始", link: "/frontend/quick-start/getting-started" },
+          { text: "安装配置", link: "/frontend/quick-start/installation" },
+        ],
+      },
+      {
         text: "PC 端",
         items: [
           { text: "概览 & 技术选型", link: "/frontend/pc/" },
-          { text: "开发规范", link: "/frontend/pc/standards" },
+          { text: "架构设计", link: "/frontend/pc/architecture" },
+          { text: "扩展规范", link: "/frontend/pc/standards" },
           { text: "Skills 集合", link: "/frontend/pc/skills/" },
         ],
       },
@@ -39,7 +48,7 @@ export const nav: DefaultTheme.NavItem[] = [
         text: "移动端 H5",
         items: [
           { text: "概览 & 技术选型", link: "/frontend/mobile-h5/" },
-          { text: "开发规范", link: "/frontend/mobile-h5/standards" },
+          { text: "扩展规范", link: "/frontend/mobile-h5/standards" },
           { text: "Skills 集合", link: "/frontend/mobile-h5/skills" },
           { text: "@robot-h5/core", link: "/frontend/mobile-h5/h5-core/" },
         ],
