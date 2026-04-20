@@ -26,20 +26,20 @@ export const features: Feature[] = [
   {
     icon: "📚",
     title: "AI 最佳实践",
-    details: "涵盖原型设计、详设、全栈开发、测试的 AI 最佳实践",
-    link: "/views/best-practices/architecture",
+    details: "L1 提示词 → L2 Skill → L3 Skills & MCP → L4 CLI，四级能力体系",
+    link: "/views/best-practices/",
   },
   {
     icon: "🎯",
     title: "Skill 集合",
     details: "按角色分类的精选技能包、脚手架、服务，持续沉淀工程化能力",
-    link: "/skills/frontend/",
+    link: "/frontend/pc/skills/",
   },
   {
     icon: "📖",
     title: "知识库",
     details: "组件库、模板库、样式方案等团队知识资产，统一沉淀共享",
-    link: "/ui-components/",
+    link: "/views/guide/",
   },
   {
     icon: "🔥",
