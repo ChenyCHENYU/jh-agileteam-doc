@@ -36,7 +36,15 @@ export const nav: DefaultTheme.NavItem[] = [
         ],
       },
       {
-        text: "移动端",
+        text: "移动端 H5",
+        items: [
+          { text: "概览 & 技术选型", link: "/frontend/mobile-h5/" },
+          { text: "开发规范", link: "/frontend/mobile-h5/standards" },
+          { text: "Skills 集合", link: "/frontend/mobile-h5/skills" },
+        ],
+      },
+      {
+        text: "移动端 uniApp",
         items: [
           { text: "概览 & 技术选型", link: "", activeMatch: "---" },
           { text: "开发规范", link: "", activeMatch: "---" },

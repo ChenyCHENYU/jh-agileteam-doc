@@ -86,13 +86,21 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
-  // 前端移动端
-  "/frontend/mobile/": [
+  // 前端移动端 H5
+  "/frontend/mobile-h5/": [
     {
-      text: "移动端前端",
+      text: "移动端 H5",
       collapsed: false,
       items: [
-        { text: "概览（规划中）", link: "/frontend/mobile/" },
+        { text: "概览 & 技术选型", link: "/frontend/mobile-h5/" },
+        { text: "开发规范", link: "/frontend/mobile-h5/standards" },
+      ],
+    },
+    {
+      text: "Skills 集合",
+      collapsed: false,
+      items: [
+        { text: "7 个 AI Skill", link: "/frontend/mobile-h5/skills" },
       ],
     },
   ],
