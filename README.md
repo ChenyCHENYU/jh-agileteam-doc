@@ -1,6 +1,6 @@
 # AGILE TEAM — AI 工程体系文档站
 
-> AI工程体系 · 提升研发效率 · 赋能团队协作
+> AI工程体系 · 提升交付效率 · 赋能团队协作
 
 基于 [VitePress](https://vitepress.dev/) 构建的团队知识文档站，沉淀前后端研发的 AI 辅助工作流、Skills 集合、组件库、模板库与规范文档。
 

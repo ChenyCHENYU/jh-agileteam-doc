@@ -1,8 +1,12 @@
-# Skill 5：规范审计（convention-audit）
+# Skill ⑥：规范审计（convention-audit）
 
-以 `copilot-instructions.md` 为唯一规范源头，扫描项目源码，找出不符合规范的文件和写法，输出偏差报告及整改建议。
+以 `.github/standards/` **13 条规范**为唯一基线，扫描项目源码，输出**偏差报告**和**组件提取建议**到 `reports/` 目录。
 
-> **核心理念**：规范是"标准"，代码要对齐标准。不从代码提炼规范，而是用规范审计代码。
+> **核心理念**：规范是"标准"，代码必须对齐标准。本 Skill 只负责发现偏差并给出整改建议，**不自动修复**（修复由 `code-fix` Skill 完成）。
+
+## 触发关键词
+
+`规范审计` / `规范检查` / `代码审计` / `对齐规范` / `规范偏差` / `接手新项目` / `存量代码分析` / `项目体检`
 
 ## 适用场景
 
@@ -12,102 +16,120 @@
 | 日常 Code Review 辅助 | AI 比对单文件或目录，快速发现偏差 |
 | 项目迁移/升级 | 老项目引入新架构，批量评估改造量 |
 | 团队培训 | 新成员提交代码前，用审计验证是否符合规范 |
+| page-codegen 后置自检 | 页面生成完成后自动跑一次审计，确认合规 |
 
-## 10 项审计维度
+## 13 条审计维度（全覆盖）
 
-### 1. 页面结构审计
+| 编号 | 审计维度 | 严重度判定 |
+|------|----------|-----------|
+| 01 | 工具链就绪 | 缺少 `.prettierrc.js` / `eslint.config.ts` / `.husky/` → 🔴 严重 |
+| 02 | 4 文件原则、三段式、9 段顺序 | 缺 data.ts / index.vue 含业务逻辑 → 🔴；段落顺序乱 → 🟡 |
+| 03 | 注释规范 | 文件头缺失 → 🟡；显而易见的注释 → 🟢 提示 |
+| 04 | 基础编码（13 条） | 用 var / for...in / 字符串拼接 → 🟡 |
+| 05 | console 残留 | src/ 下任何 console.log / warn / error → 🟡 |
+| 06 | 安全规范 | v-html 无注释 / import axios / eval → 🔴 |
+| 07 | 配置管理 | 硬编码 `http://` IP → 🔴；非 VITE\_ 环境变量 → 🟡 |
+| 08 | Git 规范 | （审计时不检测，由 husky 自动拦截） |
+| 09 | TypeScript | 滥用 any（>3 处/页）→ 🟡 |
+| 10 | Pinia | data.ts 内 import Store → 🔴 |
+| 11 | 表单校验 | FORM_ROUTE 缺 validate / resetFields → 🔴 |
+| 12 | BaseTable + cid | 用 el-table / 缺 render-type / cid 缺失或重复 → 🔴；cid 使用旧格式 → 🟡 |
+| 13 | 平台组件合规 | 用 el-form/el-table/el-date-picker 替代封装 → 🔴；3+ 复用 → 提取建议 |
 
-每个页面目录必须包含 4 个文件：
+## 执行流程
+
+### 步骤 1：确定审计范围
+
+| 用户输入 | 范围 |
+|---------|------|
+| "审计整个项目" | `src/views/` |
+| "审计 produce/mmwr" | 该子目录 |
+| "审计 mmwr-customer-archive 页面" | 单页面 4 文件 |
+
+### 步骤 2：加载规范基线
+
+读取 `standards/01 ~ 13` 全部规范文件（审计场景必须全量加载）。
+
+### 步骤 3：扫描源码
+
+逐个文件检查 13 个维度，同时记录跨页面相同 `el-*` 模式（统计出现次数和位置）。
+
+### 步骤 4：追加写入两份报告
+
+#### 报告 A：`reports/规范审查报告.md`（追加，最新章节在顶）
+
+```markdown
+## 🕐 {YYYY-MM-DD HH:mm} | 范围：{范围} | 触发：{user / page-codegen}
+
+### 概要
+
+| 指标 | 值 |
+|------|-----|
+| 扫描页面 | 12 |
+| 合规页面 | 8 |
+| 偏差页面 | 4 |
+| 🔴 严重 | 5 |
+| 🟡 轻微 | 7 |
+
+### 🔴 严重偏差（必须整改）
+
+#### {页面路径} — 违反规范 13（平台组件合规）
+
+- **现状**：使用 `<el-table>` 渲染数据
+- **应为**：使用 `<BaseTable render-type="agGrid" cid="...">`
+- **整改建议**：参考 templates/universal/TPL-LIST.md
+- **修复标记**：🔧 待修复
+
+### 🟡 轻微偏差（建议整改）
+### ✅ 合规页面
+```
+
+#### 报告 B：`reports/组件提取建议.md`（追加）
+
+```markdown
+## 🕐 {YYYY-MM-DD HH:mm} | 范围：{范围}
+
+### 📦 组件提取建议
+
+| 建议组件名 | 出现次数 | 页面路径 | 模式描述 |
+|-----------|---------|---------|---------|
+| c_statusBadge | 5 处 | src/views/sale/.../多页面 | 状态枚举彩色标签 |
+| c_priceFormat | 4 处 | src/views/... | 千分位金额显示 |
+```
+
+### 步骤 5：输出摘要
 
 ```
-[kebab-case目录]/
-  index.vue    纯模板+解构
-  data.ts      AbstractPageQueryHook 类 + API_CONFIG
-  index.scss   样式
-  api.md       接口约定
+📦 审计完成
+──────────────────────────────────────────────
+✅ reports/规范审查报告.md  → 已追加章节（N 个偏差）
+✅ reports/组件提取建议.md → 已追加 M 条提取建议
+──────────────────────────────────────────────
+📌 后续步骤：
+   1. 人工 review 报告，标记需要修复的条目
+   2. 严重偏差优先修复（用 page-codegen 重新生成）
+   3. 触发 code-fix 自动整改 🟢/🟡 等级偏差
+   4. 提取建议人工评审 → template-extract 或手动封装
 ```
 
-- 目录名是否 kebab-case
-- 是否缺少 data.ts（逻辑写在 index.vue 里）
-- 是否缺少 api.md
+## 偏差严重度定义
 
-### 2. data.ts 模式审计
+| 级别 | 标记 | 定义 | 示例 |
+|------|------|------|------|
+| 🔴 | 严重 | 架构性违反，影响可维护性 / 安全 | 不用 AbstractPageQueryHook、用 el-table、import axios |
+| 🟡 | 轻微 | 风格 / 命名不统一，不影响功能 | for...in、目录名 camelCase、缺 api.md |
+| 🟢 | 提示 | 优化建议，可逐步改进 | 重复表达式可抽 computed、超长函数可拆分 |
 
-- 是否有 `API_CONFIG` 常量（URL 集中管理）
-- 是否继承 `AbstractPageQueryHook`
-- 是否通过 `createPage()` 工厂函数导出
-- `queryDef()` / `toolbarDef()` / `columnsDef()` 是否齐全
-- 字典字段是否使用 `logicType: BusLogicDataType.dict`
+## 与其他 Skill 的关系
 
-### 3. index.vue 模式审计
-
-- `<script setup>` 是否只有 import + createPage 解构 + onMounted
-- 是否引用了 BaseQuery / BaseToolbar / BaseTable / jh-pagination 四件套
-- 最外层 class 是否为 `app-container app-page-container`
-
-### 4. 命名规范审计
-
-| 位置 | 标准 | 偏差判定 |
-|------|------|---------|
-| 路由/目录 | kebab-case | 含大写或下划线 |
-| 字段名 | camelCase | name 属性含下划线 |
-| 全局组件 | `C_PascalCase/` | 非此格式 |
-| 局部组件 | `c_camelCase/` | 非此格式 |
-| API URL | `/服务缩写/资源名CamelCase/操作` | 含下划线或全小写 |
-
-### 5. 组件使用审计
-
-- 查询区域用 `<BaseQuery>` 而非手写 `<el-form>`
-- 工具栏用 `<BaseToolbar>` 而非手写按钮行
-- 表格用 `<BaseTable>` 而非裸 `<el-table>`
-- 分页用 `<jh-pagination>` 而非 `<el-pagination>`
-- 下拉用 `<jh-select>` 而非 `<el-select>`
-- 日期用 `<jh-date>` 而非 `<el-date-picker>`
-
-### 6. API 写法审计
-
-- 是否使用 `getAction` / `postAction`（@jhlc/common-core）
-- 是否禁止直接用 axios
-- URL 是否集中在 `API_CONFIG` 中
-
-### 7. 样式规范审计
-
-- 使用 `:deep()` 而非 `::v-deep` / `/deep/`
-- 页面样式写在 `index.scss` 中（非行内 style）
-
-### 8. 状态管理审计
-
-- 使用 Pinia 而非 Vuex
-- Store 是否从主应用远程加载（微前端场景）
-
-### 9. 弹窗/组件提取审计
-
-- 2+ 页面复用的弹窗是否提取到 `src/components/local/c_xxxModal/`
-- 页面私有弹窗是否只在 c_modal 无法满足时才内联
-
-### 10. 路由导航审计（微前端）
-
-- 前进导航使用 `location.href`（而非 `router.push()`）
-- 返回使用 `useRouter().back()`
-
-## 执行步骤
-
-1. **确定审计范围** — 全量 / 模块 / 单页
-2. **读取规范基线** — `.github/copilot-instructions.md`
-3. **扫描源码** — 按页面目录逐个扫描文件结构、data.ts、index.vue、index.scss
-4. **输出偏差报告** — 分严重/轻微/合规三级，含具体整改建议
-5. **按需生成整改代码** — 对偏差页面逐个生成合规代码
-
-## 偏差严重度
-
-| 级别 | 定义 | 示例 |
-|------|------|------|
-| :red_circle: 严重 | 架构性违反，必须整改 | 不用 AbstractPageQueryHook、直接用 axios |
-| :yellow_circle: 轻微 | 风格不统一，建议整改 | 目录名用 camelCase、缺少 api.md |
-| :green_circle: 合规 | 完全符合规范 | 无需改动 |
+| Skill | 关系 |
+|-------|------|
+| **page-codegen** | 审计发现偏差后，可调用 page-codegen 重新生成合规代码 |
+| **template-extract** | 审计输出的"组件提取建议"，确认后可触发 template-extract |
+| **code-fix** | 审计报告作为修复输入，自动整改 🟢🟡 等级偏差 |
 
 ## 注意事项
 
-1. **规范不可协商** — 旧代码不合规就是不合规，不会因为"一直这么写"就放行
-2. **AI 生成代码必须合规** — 如出现偏差是 Skill 模板的 bug，需反馈修复
-3. **规范演进** — 调整规范时更新 `copilot-instructions.md`（唯一源头），然后重新审计
+1. **规范基线唯一** — 以 `standards/index.md` 加载的 13 条文件为准，不接受"旧代码一直这么写"的辩解
+2. **追加不覆盖** — 每次审计追加新章节，不删除历史，便于追溯整改进度
+3. **AI 生成代码必须合规** — 如出现偏差是 Skill 模板的 bug，需反馈修复

@@ -1,10 +1,153 @@
-# Skill 4：菜单同步（menu-sync）
+# Skill ④：菜单同步（menu-sync）
 
-将 pages.ts 中注册的页面同步到后端菜单表，使系统能够路由到新页面。
+将前端 `reports/SYS_MENU_INFO.md` 中定义的菜单结构，自动同步到指定环境的数据库（通过后端管理 API 创建菜单记录）。
 
-> 本项目是 Module Federation 子应用，页面在 `pages.ts` 注册后，还需要在后端菜单表中创建对应记录，系统才能路由到该页面。
+> **核心价值**：前端开发完成页面后，不需要手动登录管理后台一条条录入菜单，AI 自动完成同步，保证路由与菜单配置完全一致。
 
-## 数据来源分工
+## 触发关键词
+
+`菜单同步` / `同步菜单` / `menu-sync` / `注册菜单` / `把菜单同步上去` / `帮我创建菜单` / `补菜单`
+
+## 配置文件（统一 env.local.json）
+
+菜单同步与字典同步共用同一个配置文件：
+
+```
+.github/skills/sync/env.local.json   ← 统一配置，不区分 Skill
+```
+
+```json
+{
+  "gatewayPath": "http://10.xx.xx.xx:8080",
+  "sysAppNo": "应用编码（如 JH_AGILE）",
+  "token": "Bearer eyJhbGciOiJSUzI1Ni...",
+  "menu": {
+    "parentMenuId": "父级菜单ID（数字字符串）"
+  },
+  "dict": {
+    "moduleId": "字典模块ID"
+  }
+}
+```
+
+> ⚠️ 该文件已加入 `.gitignore`，**不可提交到仓库**（含 token、IP 等敏感信息）。
+
+### 向后兼容
+
+如果项目中仍有旧格式配置（`.github/skills/menu-sync/env/env.local.json`），仍可读取，但建议迁移到统一格式。
+
+## 数据来源
+
+| 信息 | 来源 |
+|------|------|
+| 菜单名称 / 路由路径 / 组件路径 / 权限标识 | `reports/SYS_MENU_INFO.md` |
+| 父级菜单 ID | `env.local.json` > `menu.parentMenuId` |
+| 网关地址 / Token | `env.local.json` |
+
+## 执行步骤
+
+### 步骤 1：查询子菜单（确认父级存在，防止重复）
+
+```http
+GET {gatewayPath}/uac/sysMenu/getChildrenMenuList/{parentMenuId}
+Authorization: {token}
+```
+
+响应：
+```json
+{
+  "code": 2000,
+  "message": "操作成功",
+  "data": [
+    { "menuId": "1001", "menuName": "客户管理", "routerPath": "customerManage" }
+  ]
+}
+```
+
+> 如已存在同名菜单或同路由路径，跳过不重复创建，并输出提示。
+
+### 步骤 2：批量创建菜单
+
+对每条 `reports/SYS_MENU_INFO.md` 中的菜单记录，发送创建请求：
+
+```http
+POST {gatewayPath}/uac/sysMenu/save
+Authorization: {token}
+Content-Type: application/json
+
+{
+  "sysAppNo": "{sysAppNo}",
+  "menuName": "客户管理",
+  "parentId": "{parentMenuId}",
+  "routerPath": "/aiflow/customerManage",
+  "component": "aiflow/mmwr-customer-archive/index",
+  "menuType": "1",
+  "permission": "mmwr:mmwrCustomerArchive:list",
+  "isFrame": "1",
+  "visible": "0",
+  "status": "0",
+  "orderNum": 1
+}
+```
+
+响应成功：
+```json
+{ "code": 2000, "message": "操作成功", "data": true }
+```
+
+> ⚠️ 注意：成功码是 `2000`，**不是 200**。
+
+## reports/SYS_MENU_INFO.md 格式说明
+
+AI 在 page-codegen 时生成此文件（追加写入），格式如下：
+
+```markdown
+## 客户档案管理
+
+| 字段 | 值 |
+|------|-----|
+| menuName | 客户档案管理 |
+| routerPath | /aiflow/mmwrCustomerArchive |
+| component | aiflow/mmwr-customer-archive/index |
+| permission | mmwr:mmwrCustomerArchive:list |
+| parentMenuId | （从 env.local.json 读取） |
+| visible | 0（正常显示） |
+| orderNum | 1 |
+```
+
+## 权限标识格式
+
+```
+{服务缩写}:{资源名CamelCase}:list
+```
+
+示例：
+- `mmwr:mmwrCustomerArchive:list`
+- `pm:omptMillPlanOrder:list`
+- `sale:saleOrder:list`
+
+## 隐藏菜单规则
+
+以下情况菜单 `visible` 设为 `"1"`（不在导航栏显示）：
+
+| 场景 | 说明 |
+|------|------|
+| FORM_ROUTE 子页面（新增/编辑/详情） | 通过主页面跳转，不需要导航直接访问 |
+| 变更历史页 | 通过主页面跳转 |
+| 数据导入向导 | 通过按钮触发，非独立菜单 |
+
+## 执行输出
+
+```
+✅ 菜单同步完成
+──────────────────────────────────────────────
+新增：5 条
+跳过（已存在）：1 条
+失败：0 条
+──────────────────────────────────────────────
+📌 已同步到：{gatewayPath}
+   父级菜单：{parentMenuId}
+```
 
 | 数据 | 来源 | 说明 |
 |------|------|------|

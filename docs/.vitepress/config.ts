@@ -19,7 +19,7 @@ import { vite } from "./config/vite";
  */
 export default defineConfig({
   title: "AGILE TEAM",
-  description: "AI工程体系 - 提升研发效率，赋能团队协作",
+  description: "AI工程体系 - 提升交付效率，赋能团队协作",
   lang: "zh-CN",
 
   // 站点图标

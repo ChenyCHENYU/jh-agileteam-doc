@@ -2,7 +2,7 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2025-10-14 20:53:03
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-04-10 09:00:00
+ * @LastEditTime: 2026-04-29 12:58:32
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\GlassHome\index.vue
  * @Description: 首页组件 - Linear × Apple Premium Design
  * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
@@ -26,7 +26,7 @@
           <span class="title-base">AGILE</span><span class="title-gradient"> TEAM</span>
         </h1>
 
-        <p class="hero-tagline">提升研发效率，赋能团队协作</p>
+        <p class="hero-tagline">提升交付效率，赋能团队协作</p>
 
         <div class="hero-cta">
           <a href="/frontend/quick-start/getting-started" class="cta-primary">

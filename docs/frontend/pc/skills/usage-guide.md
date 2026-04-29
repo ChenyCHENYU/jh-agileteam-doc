@@ -20,17 +20,160 @@ Step 6  AI 执行 page-codegen -> 输出：
         - index.vue + data.ts + index.scss + api.md（每页 4 文件）
         - pages.ts 注册片段
         - mock/[页面名].ts
-        - 写入 SYS_MENU_INFO.md（覆盖/追加模式）
+        - 写入 reports/SYS_MENU_INFO.md（追加模式）
 
 Step 7  AI 输出校验报告
 
-Step 8  菜单注册（二选一）
+Step 8  菜单注册（menu-sync）
         方式 A - 自动：对 AI 说「帮我创建菜单」
         方式 B - 手动：按 SYS_MENU_INFO.md 在后台手动创建
 
-Step 9  启动开发验证
+Step 9  字典同步（dict-sync）
+        "同步字典" / "拉取字典" -> AI 执行 dict-sync
+
+Step 10 启动开发验证
         pnpm run dev -> 打开页面，mock 数据自动生效
 ```
+
+## 工作流 B：详设文档 -> 代码（更高精度）
+
+```
+Step 1  发送详设文档（MD/Word/表格）
+        "按照这份详设文档帮我生成页面"
+
+Step 2  AI 执行 prototype-scan 模式 B -> 输出 page-spec JSON
+        （字段英文名、字典code 直接读取，无需推断）
+
+Step 3  其余步骤同工作流 A 的 Step 3-10
+```
+
+**精度对比**：
+- Axure -> 90-95%（英文名/字典需推断）
+- **详设文档（规范格式）-> 95-100%（字段名直接读取）**
+
+## 工作流 C：口述需求 -> 代码（最快速）
+
+> 最快捷。不需要任何文件，直接口述需求，AI 内部自动构建 page-spec 并生成代码。
+
+```
+Step 1  直接口述需求
+        "帮我生成一个客户档案管理页面，
+         有姓名、联系方式、客户类型（下拉），
+         支持新增、编辑、删除、导出"
+
+Step 2  AI 内部调用 prototype-scan 模式 0 -> 构建 page-spec JSON
+        （AI 自动推断字段名、字典、排列顺序）
+
+Step 3  AI 输出 page-spec 供确认（简要版）
+
+Step 4  继续执行 page-codegen 生成完整代码
+
+Step 5  其余步骤同工作流 A 的 Step 7-10
+```
+
+> 适合需求清晰但没有原型文件的场景。精度约 85-90%，确认 page-spec 后精度等同 A。
+
+## 前置声明
+
+只需 3 个必填项，AI 自动推导目录结构、pages.ts 注册语法和命名前缀：
+
+```markdown
+## 前置声明
+
+- 业务域/模块：生产 > 生产棒线材 > AI流程
+- 服务前缀：/mmwr/
+- 页面清单：客户档案、临时客户档案、客户申请新增、客户申请变更、客户详情
+```
+
+按需补充：
+- 参考样例路径
+- 共享组件说明
+- 特殊约定
+
+> AI 推导规则：业务域 -> 注册函数（生产=`gProd` / 销售=`gSale`），模块 -> 目录名（kebab-case）。
+
+## 精度提升技巧
+
+### 技巧 1：一次只处理一个模块
+
+- ❌ 同时发 30 个 HTML -> AI 上下文压力大，容易遗漏
+- ✅ 按业务模块分批（每批 5-8 页面）-> 精度更高
+
+### 技巧 2：提前说明约定
+
+```
+帮我扫描这些原型：
+- 服务缩写统一用 sale
+- 所有带 _1 后缀的文件是同一组件在不同上下文（不重复生成）
+- productLine 字典 code 用 product_line
+```
+
+### 技巧 3：确认 page-spec 再生成代码
+
+**不要让 AI 跳过确认直接生成代码。**
+
+page-spec JSON 是唯一可以低成本修正的节点：
+- page-spec 有误 -> 改一行 JSON -> 重新生成代码（秒级）
+- 代码生成后发现遗漏 -> 找具体文件/函数/字段 -> 修复成本 x10
+
+### 技巧 4：subTables 要明确交互意图
+
+- ❌ 含糊："页面有一个业务信息表"
+- ✅ 明确："业务信息表可以新增删除行（editable: true），但不能行内编辑"
+
+### 技巧 5：共享组件提前识别
+
+```
+基本信息/联系人/银行信息 等 8 个 Tab 在新增、变更、详情 3 个页面共用，
+请提取到 src/components/local/c_customerTabs/
+```
+
+## 8 个 Skill 触发词速查
+
+| 操作 | 触发方式 | Skill |
+|------|---------|-------|
+| 扫描 Axure 原型 | "扫描这些原型"、"解析 axure"、"页面清单" | ① prototype-scan |
+| 生成接口约定 | "生成 api.md"、"接口约定" | ② api-contract |
+| 生成页面代码 | "生成页面"、"帮我写代码"、口述需求 | ③ page-codegen |
+| 菜单同步 | "同步菜单"、"帮我创建菜单"、"注册菜单" | ④ menu-sync |
+| 字典同步 | "同步字典"、"拉取字典"、"dict-sync" | ⑤ dict-sync |
+| 规范审计 | "规范审计"、"规范检查"、"代码审计" | ⑥ convention-audit |
+| 自动修复 | "修复偏差"、"code-fix"、"自动修复" | ⑦ code-fix |
+| 提取组件 | "提取组件"、"template-extract"、"封装模板" | ⑧ template-extract |
+
+## 移植到新项目
+
+### 第 1 步：安装工具包
+
+```bash
+npx @agile-team/wl-skills-kit
+# 或 wl-skills init（v2.3+ CLI）
+```
+
+### 第 2 步：建立编码规范
+
+复制 `copilot-instructions.md` 作为基础模板，按新项目实际情况修改：
+- 路由注册方式
+- 组件库（如仍是 Element Plus + @jhlc/jh-ui 则不改）
+- 页面目录层级、服务缩写前缀
+
+### 第 3 步：改写 page-codegen 模板
+
+| 需改写的部分 | 当前写法 | 新项目要替换为 |
+|-------------|---------|--------------|
+| 基类 | `AbstractPageQueryHook` | 新项目的页面基类或 Composition API |
+| 查询组件 | `BaseQuery` | 新项目的查询封装 |
+| 表格组件 | `BaseTable` | `el-table` 或自定义封装 |
+| 分页组件 | `jh-pagination` | `el-pagination` 或自定义 |
+| API 调用 | `getAction / postAction` | 项目封装的请求方法 |
+| 字典翻译 | `BusLogicDataType.dict` | 项目的字典方案 |
+| 路由注册 | `pages.ts + gSale()` | 项目的路由配置方式 |
+
+> page-codegen 为多文件结构（SKILL.md + 9 个 TPL-*.md），移植时需同时复制所有模板文件。
+
+### 第 4 步：验证
+
+拿一个中等复杂度的 Axure 页面走一遍完整流程，确认校验无遗漏。
 
 ## 工作流 B：详设文档 -> 代码（更高精度）
 
