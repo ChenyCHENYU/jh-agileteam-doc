@@ -7,6 +7,9 @@ import type { DefaultTheme } from "vitepress";
 export const search: DefaultTheme.Config["search"] = {
   provider: "local",
   options: {
+    // 中文分词：按字切割，提升中文搜索命中率
+    _tokenize: (text: string, locale?: string) =>
+      locale === "root" ? [...text] : text.split(/\s+/),
     locales: {
       root: {
         translations: {

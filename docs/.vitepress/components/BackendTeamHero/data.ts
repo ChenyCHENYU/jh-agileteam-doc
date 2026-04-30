@@ -10,6 +10,8 @@ export interface BackendTeamMember {
   employeeId?: string;
   department?: string;
   bio?: string;
+  /** 代表贡献 */
+  spotlight?: string;
   skills?: string[];
 }
 

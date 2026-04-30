@@ -27,6 +27,15 @@ export default defineConfig({
     ["link", { rel: "icon", href: "/favicon.ico" }],
     ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/logo.png" }],
     ["meta", { name: "theme-color", content: "#667eea" }],
+    // Open Graph
+    ["meta", { property: "og:type", content: "website" }],
+    ["meta", { property: "og:title", content: "AGILE TEAM — AI 工程体系文档站" }],
+    ["meta", { property: "og:description", content: "金恒科技敏捷团队 AI 工程化知识库，涵盖 Skill 体系、规范、模板库与最佳实践" }],
+    ["meta", { property: "og:image", content: "/logo.png" }],
+    // Twitter Card
+    ["meta", { name: "twitter:card", content: "summary" }],
+    ["meta", { name: "twitter:title", content: "AGILE TEAM — AI 工程体系" }],
+    ["meta", { name: "twitter:description", content: "金恒科技敏捷团队 AI 工程化知识库" }],
   ],
 
   // 主题配置
@@ -97,6 +106,9 @@ export default defineConfig({
   },
   // Vite 配置
   vite,
-  // 先忽略死链检查
-  ignoreDeadLinks: true,
+  // 忽略指定路径的死链（规划中页面）
+  ignoreDeadLinks: [
+    /\/backend\/quick-start/,
+    /\/views\/troubleshooting\/(environment|build-deploy|performance-issues|compatibility|third-party|devtools|debugging-logs|error-tracking)/,
+  ],
 });

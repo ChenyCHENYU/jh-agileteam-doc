@@ -28,38 +28,6 @@ export const vite: UserConfig = {
       imports: [
         "vue",
         "vitepress",
-        {
-          vue: [
-            // Composition API
-            "computed",
-            "ref",
-            "reactive",
-            "watch",
-            "watchEffect",
-            "onMounted",
-            "onUnmounted",
-            "onBeforeMount",
-            "onBeforeUnmount",
-            "toRefs",
-            "toRef",
-            "unref",
-            "nextTick",
-            // Lifecycle
-            "onActivated",
-            "onDeactivated",
-            "onBeforeUpdate",
-            "onUpdated",
-            "onErrorCaptured",
-            "onRenderTracked",
-            "onRenderTriggered",
-            // Others
-            "provide",
-            "inject",
-            "getCurrentInstance",
-            "useSlots",
-            "useAttrs",
-          ],
-        },
       ],
       dts: resolve(__dirname, "../../types/auto-imports.d.ts"),
       eslintrc: {

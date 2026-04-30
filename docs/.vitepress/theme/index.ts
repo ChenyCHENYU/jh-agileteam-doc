@@ -37,7 +37,9 @@ export default {
   enhanceApp() {
     // Waline 评论系统配置
     const walinePlugin = useWalineComments({
-      serverURL: "https://waline-comment-lilac.vercel.app",
+      serverURL:
+        (typeof import.meta !== "undefined" && (import.meta as Record<string, Record<string, string>>).env?.VITE_WALINE_SERVER_URL) ||
+        "https://waline-comment-lilac.vercel.app",
       meta: ["nick", "mail"],
       requiredMeta: ["nick", "mail"],
       login: "enable",

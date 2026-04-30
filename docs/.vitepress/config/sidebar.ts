@@ -10,9 +10,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     {
       text: "指南",
       collapsed: false,
-      items: [
-        { text: "介绍", link: "/views/guide/" },
-      ],
+      items: [{ text: "介绍", link: "/views/guide/" }],
     },
   ],
 
@@ -33,11 +31,26 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "L0 — 氛围编程", link: "/views/best-practices/L0-vibe" },
         { text: "L1 — 提示词工程", link: "/views/best-practices/L1-prompt" },
         { text: "L2 — Skill", link: "/views/best-practices/L2-skill" },
-        { text: "L3 — MCP 工具调用", link: "/views/best-practices/L3-skills-mcp" },
+        {
+          text: "L3 — MCP 工具调用",
+          link: "/views/best-practices/L3-skills-mcp",
+        },
         { text: "L4 — CLI", link: "/views/best-practices/L4-cli" },
-        { text: "L5 — Agent Pipeline", link: "/views/best-practices/L5-agent-pipeline" },
-        { text: "L6 — Multi-Agent 协同", link: "/views/best-practices/L6-multi-agent" },
-        { text: "L7 — 自演化体系", link: "/views/best-practices/L7-self-evolving" },
+        {
+          text: "L5 — Agent Pipeline",
+          link: "/views/best-practices/L5-agent-pipeline",
+          badge: { text: "规划中", type: "warning" },
+        },
+        {
+          text: "L6 — Multi-Agent 协同",
+          link: "/views/best-practices/L6-multi-agent",
+          badge: { text: "远期", type: "info" },
+        },
+        {
+          text: "L7 — 自演化体系",
+          link: "/views/best-practices/L7-self-evolving",
+          badge: { text: "远期", type: "info" },
+        },
       ],
     },
   ],
@@ -58,18 +71,39 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "规范约定",
       collapsed: false,
       items: [
-        { text: "⓪ 基本规范（约定俗成）", link: "/frontend/quick-start/development-standards" },
-        { text: "① 工具链规范（ESLint · Prettier）", link: "/frontend/quick-start/01-toolchain" },
-        { text: "② 代码结构与顺序规范", link: "/frontend/quick-start/02-code-structure" },
+        {
+          text: "⓪ 基本规范（约定俗成）",
+          link: "/frontend/quick-start/development-standards",
+        },
+        {
+          text: "① 工具链规范（ESLint · Prettier）",
+          link: "/frontend/quick-start/01-toolchain",
+        },
+        {
+          text: "② 代码结构与顺序规范",
+          link: "/frontend/quick-start/02-code-structure",
+        },
         { text: "③ 注释规范", link: "/frontend/quick-start/03-comments" },
-        { text: "④ 基础编码规范", link: "/frontend/quick-start/04-coding-basics" },
+        {
+          text: "④ 基础编码规范",
+          link: "/frontend/quick-start/04-coding-basics",
+        },
         { text: "⑤ 日志输出规范", link: "/frontend/quick-start/05-logging" },
         { text: "⑥ 安全规范", link: "/frontend/quick-start/06-security" },
         { text: "⑦ 配置管理规范", link: "/frontend/quick-start/07-config" },
         { text: "⑧ Git 分支 & 提交规范", link: "/frontend/quick-start/08-git" },
-        { text: "⑨ TypeScript 类型规范", link: "/frontend/quick-start/09-typescript" },
-        { text: "⑩ Pinia 状态管理规范", link: "/frontend/quick-start/10-pinia" },
-        { text: "⑪ 表单与校验规范", link: "/frontend/quick-start/11-form-validation" },
+        {
+          text: "⑨ TypeScript 类型规范",
+          link: "/frontend/quick-start/09-typescript",
+        },
+        {
+          text: "⑩ Pinia 状态管理规范",
+          link: "/frontend/quick-start/10-pinia",
+        },
+        {
+          text: "⑪ 表单与校验规范",
+          link: "/frontend/quick-start/11-form-validation",
+        },
       ],
     },
     {
@@ -98,7 +132,10 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [
         { text: "规范概览", link: "/frontend/pc/standards" },
         { text: "BaseTable & AGGrid 规范", link: "/frontend/pc/12-base-table" },
-        { text: "平台组件合规规范", link: "/frontend/pc/13-platform-components" },
+        {
+          text: "平台组件合规规范",
+          link: "/frontend/pc/13-platform-components",
+        },
       ],
     },
     {
@@ -136,7 +173,6 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "实践",
       collapsed: false,
       items: [
-        { text: "使用指南", link: "/frontend/pc/skills/usage-guide" },
         { text: "CLI 工具", link: "/frontend/pc/skills/cli" },
       ],
     },
@@ -199,9 +235,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     {
       text: "Skills 集合",
       collapsed: false,
-      items: [
-        { text: "概述", link: "/backend/skills/" },
-      ],
+      items: [{ text: "概述", link: "/backend/skills/" }],
     },
   ],
 
@@ -212,10 +246,10 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "概述", link: "/views/ai-workflow/" },
-        { text: "原型设计", link: "/views/ai-workflow/prototype" },
-        { text: "详细设计", link: "/views/ai-workflow/detail-design" },
-        { text: "全栈开发", link: "/views/ai-workflow/fullstack-dev" },
-        { text: "测试实践", link: "/views/ai-workflow/testing" },
+        { text: "原型设计", link: "/views/ai-workflow/prototype", badge: { text: "规划中", type: "warning" } },
+        { text: "详细设计", link: "/views/ai-workflow/detail-design", badge: { text: "规划中", type: "warning" } },
+        { text: "全栈开发", link: "/views/ai-workflow/fullstack-dev", badge: { text: "规划中", type: "warning" } },
+        { text: "测试实践", link: "/views/ai-workflow/testing", badge: { text: "规划中", type: "warning" } },
       ],
     },
   ],
@@ -232,6 +266,7 @@ export const sidebar: DefaultTheme.Sidebar = {
           link: "/views/styling/unocss-best-practices",
         },
         { text: "SCSS 最佳实践", link: "/views/styling/scss-best-practices" },
+        { text: "UI 设计系统", link: "/views/styling/ui-design-system" },
       ],
     },
   ],
