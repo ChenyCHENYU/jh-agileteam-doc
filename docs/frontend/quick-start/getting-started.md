@@ -40,7 +40,7 @@ curl -fsSL https://get.pnpm.io/install.sh | sh -
 ### 验证安装
 
 ```bash
-node -v   # 应该显示 v22.x.x 或更高版本
+node -v   # 应该显示 v18.x.x 或更高版本
 pnpm -v   # 应该显示 10.x.x 或更高版本
 ```
 
