@@ -23,16 +23,21 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "概述", link: "/views/best-practices/" },
+        { text: "全景分析", link: "/views/best-practices/ai-landscape" },
       ],
     },
     {
-      text: "能力层级",
+      text: "能力层级（L0 → L7）",
       collapsed: false,
       items: [
-        { text: "L1 — 提示词", link: "/views/best-practices/L1-prompt" },
+        { text: "L0 — 氛围编程", link: "/views/best-practices/L0-vibe" },
+        { text: "L1 — 提示词工程", link: "/views/best-practices/L1-prompt" },
         { text: "L2 — Skill", link: "/views/best-practices/L2-skill" },
-        { text: "L3 — Skills & MCP", link: "/views/best-practices/L3-skills-mcp" },
+        { text: "L3 — MCP 工具调用", link: "/views/best-practices/L3-skills-mcp" },
         { text: "L4 — CLI", link: "/views/best-practices/L4-cli" },
+        { text: "L5 — Agent Pipeline", link: "/views/best-practices/L5-agent-pipeline" },
+        { text: "L6 — Multi-Agent 协同", link: "/views/best-practices/L6-multi-agent" },
+        { text: "L7 — 自演化体系", link: "/views/best-practices/L7-self-evolving" },
       ],
     },
   ],
@@ -75,7 +80,6 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "Waline 评论系统", link: "/frontend/quick-start/waline-usage" },
       ],
     },
-    },
   ],
 
   // 前端 PC 端
@@ -107,7 +111,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
     {
-      text: "8 个 AI Skill",
+      text: "9 个 AI Skill",
       collapsed: false,
       items: [
         { text: "① 原型扫描", link: "/frontend/pc/skills/prototype-scan" },
@@ -115,9 +119,10 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "③ 页面代码生成", link: "/frontend/pc/skills/page-codegen" },
         { text: "④ 菜单同步", link: "/frontend/pc/skills/menu-sync" },
         { text: "⑤ 字典同步", link: "/frontend/pc/skills/dict-sync" },
-        { text: "⑥ 规范审计", link: "/frontend/pc/skills/convention-audit" },
-        { text: "⑦ 受控自动修复", link: "/frontend/pc/skills/code-fix" },
-        { text: "⑧ 模板提取", link: "/frontend/pc/skills/template-extract" },
+        { text: "⑥ 权限同步", link: "/frontend/pc/skills/permission-sync" },
+        { text: "⑦ 规范审计", link: "/frontend/pc/skills/convention-audit" },
+        { text: "⑧ 受控自动修复", link: "/frontend/pc/skills/code-fix" },
+        { text: "⑨ 模板提取", link: "/frontend/pc/skills/template-extract" },
       ],
     },
     {

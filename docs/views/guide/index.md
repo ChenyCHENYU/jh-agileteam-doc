@@ -4,7 +4,7 @@
 
 欢迎来到 **AGILE TEAM** 工程体系文档——**金恒科技** `信息化中心 & 共享技术中心` 交付团队的 AI 工程化实践知识库。
 
-本站服务于团队各角色成员，涵盖前端、后端、测试、产品、运维等，系统化整理 **AI 辅助研发** 过程中沉淀的标准流程、规范约定、技能包与最佳实践。
+本站服务于团队各角色成员，涵盖前端、后端、测试、产品、运维等，系统化整理 **AI 辅助研发** 过程中沉淀的标准流程、规范约定、技能包与最佳实践。欢迎您的建议、批评与指正，也诚邀您的参与和贡献。
 
 ---
 
@@ -12,9 +12,11 @@
 
 ### 🚀 快速上手
 
-> 新人入职第一站，5 分钟跑通开发环境。
+> 应用上手第一站，快速跑通开发环境。
 
 [前端 → 快速上手](/frontend/quick-start/) — 环境搭建、VSCode 配置、项目结构、规范约定（⓪–⑪）、提交规范。
+
+[后端 → 快速上手](/backend/quick-start/) — **内容规划中，敬请期待**。
 
 ---
 
@@ -22,12 +24,16 @@
 
 > 按能力层级，循序渐进掌握 AI 辅助开发。
 
-| 层级 | 内容 |
-|---|---|
-| [L1 — 提示词](/views/best-practices/L1-prompt) | 提示词工程基础，与 AI 高效对话 |
-| [L2 — Skill](/views/best-practices/L2-skill) | 单个 AI Skill 的编写与使用 |
-| [L3 — Skills & MCP](/views/best-practices/L3-skills-mcp) | 多 Skill 编排 + MCP 协议集成 |
-| [L4 — CLI](/views/best-practices/L4-cli) | 命令行工具链，AI 融入自动化流水线 |
+| 层级 | 内容 | 状态 |
+|---|---|---|
+| [L0 — 氛围编程](/views/best-practices/L0-vibe) | 纯对话驱动，了解边界 | 已了解 |
+| [L1 — 提示词工程](/views/best-practices/L1-prompt) | 规范注入 + 上下文压缩 + 一致性保持 | ✅ 已实现 |
+| [L2 — Skill](/views/best-practices/L2-skill) | 9 个触发词驱动的结构化技能文件 | ✅ 已实现 |
+| [L3 — MCP 工具调用](/views/best-practices/L3-skills-mcp) | 10 个 Tool，菜单/字典/角色/权限全覆盖 | ✅ 已实现 |
+| [L4 — CLI](/views/best-practices/L4-cli) | init / update / clean / dry-run | ✅ 已实现 |
+| [L5 — Agent Pipeline](/views/best-practices/L5-agent-pipeline) | Skill 链式自动触发，减少人工干预 | ▶ 近期目标 |
+| [L6 — Multi-Agent 协同](/views/best-practices/L6-multi-agent) | 专家 Agent 分工 + 并发处理 | ⏳ 远期目标 |
+| [L7 — 自演化体系](/views/best-practices/L7-self-evolving) | 高质量产出反哺规范，正向飞轮 | 🔭 终极形态 |
 
 ---
 
@@ -84,5 +90,5 @@
 
 ## 联系我们
 
-- **团队内部沟通**：企业微信 / 微信
+- **团队内部沟通**：飞书
 - **评论区留言**：页面底部 Waline 评论区

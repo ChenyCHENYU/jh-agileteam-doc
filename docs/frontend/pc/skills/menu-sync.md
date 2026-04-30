@@ -195,3 +195,47 @@ AI 自动完成以下操作：
 5. 输出结果表（created / skipped）
 
 > 也可以按 `SYS_MENU_INFO.md` 表格在系统管理后台手动创建菜单，效果等价。
+
+---
+
+## 标准对话示例
+
+### 示例 1：新项目首次同步
+
+```
+你：项目上线前把销售域所有菜单都同步到后端。
+AI：[Pre-flight] 已读取 env.local.json
+    父级菜单：销售管理 (id: mmwr-sale)
+    待创建：9 条菜单
+    created: 9 / skipped: 0 / failed: 0
+    已更新 reports/SYS_MENU_INFO.md
+```
+
+### 示例 2：增量同步
+
+```
+你：我刚加了两个新页面，帮我把 pages.ts 新增的菜单同步上去。
+AI：[Pre-flight] 检测到 SYS_MENU_INFO.md 与线上差异：
+    新增 2 条（系统未存在）：mmwr-sales-forecast / mmwr-customer-tag
+    已跳过 7 条（已存在）
+    已写入并更新 SYS_MENU_INFO.md
+```
+
+## 常见踩坑
+
+| 现象 | 原因 | 解法 |
+|------|------|------|
+| token 过期报 401 | env.local.json 里的 token 超时 | 重新登录系统，复制最新 token 到 env.local.json |
+| 菜单创建了但路由打不开 | parentMenuId 挂到了错误节点 | 检查 env.local.json 的 parentMenuId，或在系统后台确认父节点 ID |
+| 重复跑两次创建了重复菜单 | AI 没有先 pull 基线就直接 push | 先说"刷新菜单基线"再"同步菜单" |
+
+## FAQ
+
+**Q：手动在系统后台创建菜单和用 menu-sync 有什么区别？**  
+A：功能等价，menu-sync 的优势是批量（一次处理 10+ 菜单）且自动维护 SYS_MENU_INFO.md 基线文件供后续对比。
+
+**Q：env.local.json 需要提交到 Git 吗？**  
+A：不需要，已在 `.gitignore` 里排除，包含 token 等敏感信息。
+
+**Q：actions（功能按钮权限）也能同步吗？**  
+A：menu-sync 只负责路由菜单，功能按钮权限由 `permission-sync` Skill ⑥ 处理。

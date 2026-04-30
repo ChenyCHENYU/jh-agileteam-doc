@@ -128,7 +128,7 @@ page-spec JSON 是唯一可以低成本修正的节点：
 请提取到 src/components/local/c_customerTabs/
 ```
 
-## 8 个 Skill 触发词速查
+## 9 个 Skill 触发词速查
 
 | 操作 | 触发方式 | Skill |
 |------|---------|-------|
@@ -137,9 +137,10 @@ page-spec JSON 是唯一可以低成本修正的节点：
 | 生成页面代码 | "生成页面"、"帮我写代码"、口述需求 | ③ page-codegen |
 | 菜单同步 | "同步菜单"、"帮我创建菜单"、"注册菜单" | ④ menu-sync |
 | 字典同步 | "同步字典"、"拉取字典"、"dict-sync" | ⑤ dict-sync |
-| 规范审计 | "规范审计"、"规范检查"、"代码审计" | ⑥ convention-audit |
-| 自动修复 | "修复偏差"、"code-fix"、"自动修复" | ⑦ code-fix |
-| 提取组件 | "提取组件"、"template-extract"、"封装模板" | ⑧ template-extract |
+| 权限同步 | "创建角色"、"角色授权"、"挂动作"、"权限同步" | ⑥ permission-sync |
+| 规范审计 | "规范审计"、"规范检查"、"代码审计" | ⑦ convention-audit |
+| 自动修复 | "修复偏差"、"code-fix"、"自动修复" | ⑧ code-fix |
+| 提取组件 | "提取组件"、"template-extract"、"封装模板" | ⑨ template-extract |
 
 ## 移植到新项目
 

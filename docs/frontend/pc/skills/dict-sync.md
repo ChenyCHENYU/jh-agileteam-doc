@@ -168,3 +168,47 @@ Content-Type: application/json
 ──────────────────────────────────────────────
 📌 已更新 reports/SYS_DICT_INFO.md
 ```
+
+---
+
+## 标准对话示例
+
+### 示例 1：同步 data.ts 里引用的字典
+
+```
+你：帮我把 src/views/mmwr/ 下所有 data.ts 里引用的字典码同步到后端。
+AI：[Pre-flight] 扫描 BusLogicDataType.dict 引用...
+    发现 8 个字典码，与线上对比：
+    新建：ORDER_STATUS / SALES_COMPANY / UNIT_TYPE（3 个）
+    已存在：5 个（跳过）
+    ✅ 同步完成，已更新 SYS_DICT_INFO.md
+```
+
+### 示例 2：拉取线上字典到本地
+
+```
+你：把线上所有字典全部拉到本地基线文件。
+AI：[Pre-flight] 模式：pull
+    连接 http://10.xx.xx.xx:8080 ...
+    共拉取 47 个字典码，已写入 reports/SYS_DICT_INFO.md
+    本地基线已更新。
+```
+
+## 常见踩坑
+
+| 现象 | 原因 | 解法 |
+|------|------|------|
+| 同步完但 jh-select 下拉为空 | moduleId 填错，字典挂到了其他模块 | 进低代码平台确认 moduleId，重写 env.local.json |
+| 扫描不到字典引用 | data.ts 用了非标写法（如直接传数组） | 统一使用 `logicType: BusLogicDataType.dict, logicValue: "CODE"` |
+| 字典码重复创建 | 没有先 pull 基线就 push | 先"刷新字典基线"再"同步字典" |
+
+## FAQ
+
+**Q：dict-sync 和 menu-sync 可以同时跑吗？**  
+A：可以但建议顺序执行，先菜单后字典，避免网络并发请求被限流。
+
+**Q：字典项的顺序能控制吗？**  
+A：dict-sync 会按 data.ts 里 `options` 数组顺序同步，如需指定排序请在字典项里加 sort 字段。
+
+**Q：能不能只同步某个字典码？**  
+A：可以，说"只同步 ORDER_STATUS 这个字典"，AI 会只处理这一个。

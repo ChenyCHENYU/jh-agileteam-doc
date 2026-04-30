@@ -209,3 +209,44 @@ GET /[服务缩写]/[资源名]/getById?id=xxx
 - 🟡 待后端确认 — 刚生成
 - 🟢 已确认 — 双方对齐，可编码
 - 🔴 有变更 — 需双方同步
+
+---
+
+## 标准对话示例
+
+### 示例 1：批量生成流水线
+
+```
+你：基于 reports/PROTOTYPE_SCAN_客户管理_20260426.md，帮我生成全部页面的 api.md。
+AI：[Pre-flight] 批量模式，共 7 页
+    ├─ src/views/mmwr/customer-archive/api.md  ✅
+    ├─ src/views/mmwr/customer-detail/api.md   ✅
+    └─ ... 共 7 个 api.md 已生成，状态均为 🟡 待后端确认
+```
+
+### 示例 2：单页生成 + 变更标记
+
+```
+你：客户档案页的"状态"字段后端已确认用 custStatus，不是 status，帮我更新 api.md。
+AI：已更新 src/views/mmwr/customer-archive/api.md
+    字段 status → custStatus，状态 🟡 → 🟢（已确认）
+```
+
+## 常见踩坑
+
+| 现象 | 原因 | 解法 |
+|------|------|------|
+| ai.md 与 data.ts 字段名不一致 | page-codegen 没读 api.md 直接生成 | 触发时明确"读取 api.md 生成 data.ts" |
+| 同一接口在多页面定义不一致 | 共用接口未抽取到公共层 | 抽取到 src/api/common/，各页面 import |
+| 后端改了字段 AI 不知道 | api.md 没有同步标记 | 每次联调后修改 api.md 状态标记 |
+
+## FAQ
+
+**Q：必须先有 page-spec JSON 吗？**  
+A：推荐，但也可直接口述需求让 AI 生成 api.md 草稿，后续校验。
+
+**Q：api.md 和后端 Swagger 有没有关系？**  
+A：目前独立维护，v2.4 计划支持从 Swagger/OpenAPI 自动生成 api.md。
+
+**Q：前端自己能决定字段名吗？**  
+A：查询参数前端可建议，响应体字段名需与后端对齐后再编码。

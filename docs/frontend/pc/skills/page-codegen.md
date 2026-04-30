@@ -186,3 +186,56 @@ pnpm add xlsx                           # 仅导出/导入功能需要
 ```
 
 同时检查 `vite.config.ts` 是否已注册 `viteMockServe`、`mock/` 目录是否存在。
+
+---
+
+## 标准对话示例
+
+### 示例 1：单页生成
+
+```
+你：帮我生成"炉次批次查询"页面，LIST 类型，输出到 src/views/ms/heat-batch-query/。
+AI：[Pre-flight] 完成，已读取：
+    ├─ page-spec → reports/PROTOTYPE_SCAN_ms_xxx.md 第 3 项
+    ├─ 模板 → templates/LIST.md
+    ├─ api.md → src/views/ms/heat-batch-query/api.md
+    ✅ 已生成：
+       src/views/ms/heat-batch-query/
+       ├─ index.vue     (LIST + AGGrid)
+       ├─ data.ts       (columns / queryItems / state)
+       ├─ index.scss    (空文件，备扩展)
+       └─ mock/ms-heat-batch-query.ts
+    ✅ pages.ts 已注册：["ms-heat-batch-query", "炉次批次查询"]
+```
+
+### 示例 2：批量流水线
+
+```
+你：基于原型扫描报告和 api.md，批量生成销售域所有页面。
+AI：[Pre-flight] 批量模式，共 9 页，按页面清单顺序生成...
+    ① mmwr-order-list      ✅
+    ② mmwr-order-detail    ✅
+    ...
+    耗时约 8 分钟，全部完成。
+    ⚠ 以下 2 页的 api.md 状态仍为 🟡（待确认），代码使用了字段名建议值，待后端对齐后请更新 data.ts。
+```
+
+## 常见踩坑
+
+| 现象 | 原因 | 解法 |
+|------|------|------|
+| 生成的 data.ts 里没有分页 | 模板匹配成 DETAIL 而非 LIST | 明确指定类型 "LIST 类型，带分页" |
+| columns 顺序和原型不一致 | prototype-scan 没严格按原型列顺序提取 | 重新 prototype-scan，或手动调整 page-spec |
+| 生成后 ESLint 报错 | 模板有遗留 TODO 或字段名不符合命名规范 | 运行 `pnpm lint --fix` 再让 AI "修复剩余 ESLint 问题" |
+| mock 数据全是"string"/"number" | AI 没有接收到足够的字段语义 | 在 page-spec 或 api.md 里补充字段枚举值描述 |
+
+## FAQ
+
+**Q：page-spec JSON 必须先有才能生成？**  
+A：需要原型或需求输入，但可以通过 prototype-scan 或直接口述需求来生成 page-spec。
+
+**Q：生成后能修改吗？**  
+A：生成的文件是普通代码文件，可随意修改。修改后再运行 convention-audit 自检。
+
+**Q：MASTER_DETAIL / RECORD_FORM 等复杂模板支持吗？**  
+A：支持，在触发时说明模板类型即可。复杂类型生成时间约 2-3 分钟/页。
