@@ -6,7 +6,7 @@
 `@agile-team/wl-skills-kit` · `standards/04-coding-basics.md`
 :::
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ---
 

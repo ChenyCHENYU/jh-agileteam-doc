@@ -1,6 +1,6 @@
 # PC 端扩展规范
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ::: info 说明
 本版块收录 PC 端专属扩展规范（平台规范系列 12–13 条），是通用工程规范（01–11 条）之上、针对 Robot_Admin 平台架构和 `@jhlc/jh-ui` 组件体系的专项约定。

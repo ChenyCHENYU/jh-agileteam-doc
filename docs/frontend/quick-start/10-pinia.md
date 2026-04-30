@@ -6,7 +6,7 @@
 `@agile-team/wl-skills-kit` · `standards/10-pinia.md`
 :::
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ---
 

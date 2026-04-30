@@ -4,7 +4,7 @@
 > 本文档整理了项目实际使用的架构设计模式、技术选型、开发规范和最佳实践
 
 
-<AuthorTag :authors="['ZhuXiang','CHENY']" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ## 1. 产品化架构设计
 

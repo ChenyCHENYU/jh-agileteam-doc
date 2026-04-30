@@ -1,6 +1,6 @@
 # 前端快速上手
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 前端团队工程体系的入门导航。无论你是新入职的前端、转全栈的后端，还是想了解前端 AI 工程化实践的同学，从这里开始。
 

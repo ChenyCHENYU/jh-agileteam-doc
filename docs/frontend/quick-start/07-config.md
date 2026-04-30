@@ -6,7 +6,7 @@
 `@agile-team/wl-skills-kit` · `standards/07-config.md`
 :::
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ---
 

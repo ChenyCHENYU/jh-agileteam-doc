@@ -1,8 +1,8 @@
 # 贡献指南
 
-欢迎为金恒科技信息化部前端团队的项目贡献代码！本指南将帮助你了解如何参与项目开发。
+欢迎为金恒科技信息化中心前端团队的项目贡献代码！本指南将帮助你了解如何参与项目开发。
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ## 📋 贡献流程概览
 

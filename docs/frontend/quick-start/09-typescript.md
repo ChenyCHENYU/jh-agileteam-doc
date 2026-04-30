@@ -6,7 +6,7 @@
 `@agile-team/wl-skills-kit` · `standards/09-typescript.md`
 :::
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ---
 

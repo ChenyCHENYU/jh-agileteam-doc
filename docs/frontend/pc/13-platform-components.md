@@ -6,7 +6,7 @@
 本规范属于 PC 端扩展规范系列，涉及 `@jhlc/jh-ui` 平台组件与 Robot_Admin 封装组件的强制使用约定。来源：`@agile-team/wl-skills-kit` · `standards/13-platform-components.md`
 :::
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ---
 

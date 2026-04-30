@@ -6,7 +6,7 @@
 本规范属于 PC 端扩展规范系列，涉及 AGGrid 与 Module Federation 多子应用架构下的专项约定。来源：`@agile-team/wl-skills-kit` · `standards/12-base-table.md`
 :::
 
-<AuthorTag author="CHENY" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
 
 ---
 
