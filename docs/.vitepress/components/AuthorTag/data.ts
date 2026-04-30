@@ -54,7 +54,7 @@ export const AUTHORS: Record<string, Author> = {
     github: "ChenyCHENYU",
     role: "资深开发工程师",
     employeeId: "409322",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   YangTianGuang: {
     name: "杨天广",
@@ -68,7 +68,7 @@ export const AUTHORS: Record<string, Author> = {
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ZhuXiang",
     role: "高级开发工程师",
     employeeId: "025877",
-    department: "信息化中心",
+    department: "研究院",
   },
   XieFei: {
     name: "谢飞",

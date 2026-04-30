@@ -15,61 +15,46 @@
         <span class="author-label">📝 作者</span>
       </div>
       
-      <div class="authors-compact">
-        <!-- 头像组 -->
-        <div class="avatars-group">
-          <div 
-            v-for="(authorData, index) in authorsList" 
-            :key="index"
-            class="avatar-wrapper"
-            :style="{ zIndex: authorsList.length - index }"
-            :title="authorData.info.name"
-          >
-            <!-- 默认字母头像 -->
+      <div class="author-chips">
+        <div
+          v-for="(authorData, index) in authorsList"
+          :key="index"
+          class="author-chip"
+        >
+          <!-- 头像 -->
+          <div class="chip-avatar-wrapper">
             <div
-              class="author-avatar author-avatar-default"
+              class="chip-avatar chip-avatar-default"
               :class="{ 'avatar-hidden': authorData.avatarLoaded }"
             >
               {{ getAuthorInitial(authorData.info.name) }}
             </div>
-            
-            <!-- 真实图片头像 -->
             <img
               v-if="authorData.info.avatar"
               :src="authorData.info.avatar"
               :alt="authorData.info.name"
-              class="author-avatar author-avatar-image"
+              class="chip-avatar chip-avatar-image"
               :class="{ 'avatar-loaded': authorData.avatarLoaded }"
               @load="() => handleAvatarLoad(index)"
               @error="() => handleAvatarError(index)"
             />
           </div>
-        </div>
-        
-        <!-- 作者信息 -->
-        <div class="authors-info">
-          <div class="authors-names">
-            <template v-for="(authorData, index) in authorsList" :key="index">
-              <a
-                v-if="getAuthorLink(authorData.info)"
-                :href="getAuthorLink(authorData.info)"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="author-name-link"
-              >
-                {{ authorData.info.name }}
-              </a>
-              <span v-else class="author-name-text">{{ authorData.info.name }}</span>
-              <span class="author-role-tag">{{ getDisplayDepartment(authorData.info) }}</span>
-              <span v-if="index < authorsList.length - 1" class="author-separator">、</span>
-            </template>
+          <!-- 名字 + 部门 -->
+          <div class="chip-info">
+            <a
+              v-if="getAuthorLink(authorData.info)"
+              :href="getAuthorLink(authorData.info)"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="chip-name chip-name-link"
+            >
+              {{ authorData.info.name }}
+            </a>
+            <span v-else class="chip-name">{{ authorData.info.name }}</span>
+            <span class="chip-dept">{{ getDisplayDepartment(authorData.info) }}</span>
           </div>
-          <div class="authors-meta">
-            <span class="meta-item">
-              <span class="meta-icon">👤</span>
-              工号：{{ authorsList.map(a => getDisplayEmployeeId(a.info)).join(' · ') }}
-            </span>
-          </div>
+          <!-- 工号 -->
+          <span class="chip-id"># {{ getDisplayEmployeeId(authorData.info) }}</span>
         </div>
       </div>
     </div>
