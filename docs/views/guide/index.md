@@ -1,6 +1,6 @@
 # 指南
 
-<AuthorTag :authors="['YangTianGuang','CHENY']" />
+<AuthorTag :authors="['YangTianGuang','CHENY','ZhuXiang']" />
 
 欢迎来到 **AGILE TEAM** 工程体系文档——**金恒科技** `信息化中心 & 共享技术中心` 交付团队的 AI 工程化实践知识库。
 

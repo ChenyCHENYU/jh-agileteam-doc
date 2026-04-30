@@ -36,16 +36,20 @@
             />
           </div>
           <div class="pill-body">
-            <a
-              v-if="getAuthorLink(authorData.info)"
-              :href="getAuthorLink(authorData.info)"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="pill-name pill-name-link"
-            >
-              {{ authorData.info.name }}
-            </a>
-            <span v-else class="pill-name">{{ authorData.info.name }}</span>
+            <div class="pill-top">
+              <a
+                v-if="getAuthorLink(authorData.info)"
+                :href="getAuthorLink(authorData.info)"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="pill-name pill-name-link"
+              >
+                {{ authorData.info.name }}
+              </a>
+              <span v-else class="pill-name">{{ authorData.info.name }}</span>
+              <span class="pill-divider">·</span>
+              <span class="pill-id">{{ getDisplayEmployeeId(authorData.info) }}</span>
+            </div>
             <span class="pill-dept">{{ getDisplayDepartment(authorData.info) }}</span>
           </div>
         </div>
