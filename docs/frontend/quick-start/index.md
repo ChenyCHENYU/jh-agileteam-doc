@@ -48,11 +48,10 @@ npx @agile-team/wl-skills-kit
 | [规范约定 ⑧–⑨](./08-git) | Git 工作流、TypeScript 规范 |
 | [规范约定 ⑩–⑪](./10-pinia) | Pinia 状态管理、表单校验 |
 | [提交规范](./commit-standards) | Conventional Commits + commitizen 交互提交 |
-| [ESLint & Prettier](./eslint-prettier-ts) | 团队 Flat Config 配置说明 |
 
 ---
 
 ## 联系我们
 
-- **团队内部沟通**：飞书
+- **团队内部沟通**：飞书 — 杨晨誉 | 仲于 | 马佳瑞 | 胥庆玉
 - **评论区留言**：页面底部 Waline 评论区
