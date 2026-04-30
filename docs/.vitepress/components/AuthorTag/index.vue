@@ -11,20 +11,16 @@
   <div class="author-tag">
     <!-- 多作者模式 -->
     <div v-if="isMultipleAuthors" class="author-tag-multiple">
-      <div class="author-header">
-        <span class="author-label">📝 作者</span>
-      </div>
-      
-      <div class="author-chips">
+      <span class="multi-label">📝 作者</span>
+      <div class="author-pills">
         <div
           v-for="(authorData, index) in authorsList"
           :key="index"
-          class="author-chip"
+          class="author-pill"
         >
-          <!-- 头像 -->
-          <div class="chip-avatar-wrapper">
+          <div class="pill-avatar-wrapper">
             <div
-              class="chip-avatar chip-avatar-default"
+              class="pill-avatar pill-avatar-default"
               :class="{ 'avatar-hidden': authorData.avatarLoaded }"
             >
               {{ getAuthorInitial(authorData.info.name) }}
@@ -33,28 +29,25 @@
               v-if="authorData.info.avatar"
               :src="authorData.info.avatar"
               :alt="authorData.info.name"
-              class="chip-avatar chip-avatar-image"
+              class="pill-avatar pill-avatar-image"
               :class="{ 'avatar-loaded': authorData.avatarLoaded }"
               @load="() => handleAvatarLoad(index)"
               @error="() => handleAvatarError(index)"
             />
           </div>
-          <!-- 名字 + 部门 -->
-          <div class="chip-info">
+          <div class="pill-body">
             <a
               v-if="getAuthorLink(authorData.info)"
               :href="getAuthorLink(authorData.info)"
               target="_blank"
               rel="noopener noreferrer"
-              class="chip-name chip-name-link"
+              class="pill-name pill-name-link"
             >
               {{ authorData.info.name }}
             </a>
-            <span v-else class="chip-name">{{ authorData.info.name }}</span>
-            <span class="chip-dept">{{ getDisplayDepartment(authorData.info) }}</span>
+            <span v-else class="pill-name">{{ authorData.info.name }}</span>
+            <span class="pill-dept">{{ getDisplayDepartment(authorData.info) }}</span>
           </div>
-          <!-- 工号 -->
-          <span class="chip-id"># {{ getDisplayEmployeeId(authorData.info) }}</span>
         </div>
       </div>
     </div>
