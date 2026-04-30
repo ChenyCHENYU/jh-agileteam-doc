@@ -60,7 +60,7 @@
                 {{ authorData.info.name }}
               </a>
               <span v-else class="author-name-text">{{ authorData.info.name }}</span>
-              <span class="author-role-tag">{{ getDisplayRole(authorData.info) }}</span>
+              <span class="author-role-tag">{{ getDisplayDepartment(authorData.info) }}</span>
               <span v-if="index < authorsList.length - 1" class="author-separator">、</span>
             </template>
           </div>
@@ -68,9 +68,6 @@
             <span class="meta-item">
               <span class="meta-icon">👤</span>
               工号：{{ authorsList.map(a => getDisplayEmployeeId(a.info)).join(' · ') }}
-            </span>
-            <span class="meta-item">
-              {{ getUniqueDepartments() }}
             </span>
           </div>
         </div>
@@ -119,14 +116,13 @@
             </a>
             <span v-else class="author-name">{{ authorInfo.name }}</span>
             
-            <span v-if="displayRole" class="author-role">
-              {{ displayRole }}
+            <span class="author-role">
+              {{ displayDepartment }}
             </span>
           </div>
           
           <div class="author-meta">
             <span class="employee-id">工号：{{ displayEmployeeId }}</span>
-            <span class="department">{{ displayDepartment }}</span>
           </div>
         </div>
       </div>
