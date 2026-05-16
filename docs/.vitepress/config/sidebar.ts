@@ -139,6 +139,50 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
     {
+      text: "Base 核心组件",
+      collapsed: false,
+      items: [
+        { text: "BaseTable — 基础表格", link: "/frontend/pc/components/base-table" },
+        { text: "BaseForm — 基础表单", link: "/frontend/pc/components/base-form" },
+        { text: "BaseQuery — 查询栏", link: "/frontend/pc/components/base-query" },
+        { text: "BaseToolbar — 操作栏", link: "/frontend/pc/components/base-toolbar" },
+        { text: "AGGrid — 高性能表格", link: "/frontend/pc/components/ag-grid" },
+      ],
+    },
+    {
+      text: "jh- 平台组件",
+      collapsed: false,
+      items: [
+        { text: "jh-date — 日期选择", link: "/frontend/pc/components/jh-date" },
+        { text: "jh-date-range — 日期范围", link: "/frontend/pc/components/jh-date-range" },
+        { text: "jh-select — 字典下拉", link: "/frontend/pc/components/jh-select" },
+        { text: "jh-text — 文本展示", link: "/frontend/pc/components/jh-text" },
+        { text: "jh-textarea — 多行文本", link: "/frontend/pc/components/jh-textarea" },
+        { text: "jh-picker — 通用挑选", link: "/frontend/pc/components/jh-picker" },
+        { text: "jh-dept-picker — 部门选择", link: "/frontend/pc/components/jh-dept-picker" },
+        { text: "jh-user-picker — 用户选择", link: "/frontend/pc/components/jh-user-picker" },
+        { text: "jh-file-upload — 文件上传", link: "/frontend/pc/components/jh-file-upload" },
+        { text: "jh-pagination — 分页", link: "/frontend/pc/components/jh-pagination" },
+        { text: "jh-drag-row — 可拖拽分栏", link: "/frontend/pc/components/jh-drag-row" },
+      ],
+    },
+    {
+      text: "C_ 全局组件",
+      collapsed: true,
+      items: [
+        { text: "C_Tree — 树形组件", link: "/frontend/pc/components/c-tree" },
+        { text: "C_TagStatus — 状态标签", link: "/frontend/pc/components/c-tag-status" },
+      ],
+    },
+    {
+      text: "c_ 本地组件",
+      collapsed: true,
+      items: [
+        { text: "c_formModal — 表单弹窗", link: "/frontend/pc/components/c-form-modal" },
+        { text: "c_formSections — 表单分区", link: "/frontend/pc/components/c-form-sections" },
+      ],
+    },
+    {
       text: "Skills 集合",
       collapsed: false,
       items: [
