@@ -4,7 +4,7 @@
 
 欢迎使用金恒科技信息化中心前端团队工程体系！本指南将帮助你快速上手我们的前端工程化实践。
 
-<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />
 
 
 ## 环境准备

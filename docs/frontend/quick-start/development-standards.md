@@ -2,7 +2,7 @@
 
 本文档收录金恒科技信息化中心前端团队长期沉淀的约定俗成规范，涵盖命名、目录结构、变量等基础约定。更系统化的工程规范请参阅侧栏「规范约定」系列 01–11 条。
 
-<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />
 
 ## 命名规范
 

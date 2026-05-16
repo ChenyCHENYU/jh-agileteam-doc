@@ -7,7 +7,7 @@
 工具链：[`@robot-admin/git-standards`](https://www.npmjs.com/package/@robot-admin/git-standards) v1.0.3
 :::
 
-<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />
 
 ---
 

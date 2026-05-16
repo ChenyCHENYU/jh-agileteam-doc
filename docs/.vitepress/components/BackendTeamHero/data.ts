@@ -100,4 +100,10 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
     employeeId: "409946",
     department: "信息化中心",
   },
+  {
+    name: "潘超越",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_PanChaoYue",
+    role: "开发工程师",
+    department: "信息化中心",
+  },
 ];

@@ -73,7 +73,7 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
          → 按 SKILL 流程执行 → 生成产物 + reports/ 追加
 ```
 
-## 前端示例 — 已启用的 9 个 Skill
+## 前端示例 — 已启用的 10 个 Skill
 
 | # | Skill | 路径 | 核心用途 |
 |---|-------|------|---------|
@@ -82,10 +82,11 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
 | ③ | `page-codegen` | `skills/core/page-codegen/` | 4 文件骨架生成 + 模板调度 |
 | ④ | `convention-audit` | `skills/core/convention-audit/` | 13 条规范扫描 + 双报告 |
 | ⑤ | `template-extract` | `skills/core/template-extract/` | 现有页面 → 领域模板 |
-| ⑥ | `menu-sync` | `skills/sync/menu-sync/` | 菜单基线 ↔ 后端接口 |
-| ⑦ | `dict-sync` | `skills/sync/dict-sync/` | 字典基线 ↔ 后端接口 |
-| ⑧ | `permission-sync` | `skills/sync/permission-sync/` | 角色+菜单授权+动作（权限闭环）|
-| ⑨ | `code-fix` | `skills/ops/code-fix/` | 受控自动修复偏差 |
+| ⑥ | `business-doc-extract` | `skills/core/business-doc-extract/` | 业务文档/口述 → 结构化需求文档 |
+| ⑦ | `menu-sync` | `skills/sync/menu-sync/` | 菜单基线 ↔ 后端接口 |
+| ⑧ | `dict-sync` | `skills/sync/dict-sync/` | 字典基线 ↔ 后端接口 |
+| ⑨ | `permission-sync` | `skills/sync/permission-sync/` | 角色+菜单授权+动作（权限闭环）|
+| ⑩ | `code-fix` | `skills/ops/code-fix/` | 受控自动修复偏差 |
 
 每个启用 Skill 同目录都有 **`SKILL.md`（AI 触发用）+ `USAGE.md`（团队成员阅读）**。
 
@@ -122,7 +123,7 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
 
 ## 延伸阅读
 
-- [Skills 详细文档](/frontend/pc/skills/) — 9 个 Skill 的完整使用指南
+- [Skills 详细文档](/frontend/pc/skills/) — 10 个 Skill 的完整使用指南
 - [L3 — MCP](./L3-skills-mcp) — 赋予 Skill "手和眼"（执行真实操作）
 - [全景分析](./ai-landscape)
 ## 参考资料

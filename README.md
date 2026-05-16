@@ -103,6 +103,40 @@ docs/
 
 ---
 
+## 前端 PC Skills 集合（v2.7.3）
+
+10 个 AI 辅助研发 Skill + 17 个 MCP Tool + 9 条 CLI 命令，覆盖从需求到交付的完整链路：
+
+| # | Skill | 说明 |
+|---|---|---|
+| ① | prototype-scan | 详设/原型/口述 → 页面清单 |
+| ② | api-contract | 生成前后端接口约定文档 |
+| ③ | page-codegen | 基于约定一键生成可运行页面代码（4 文件）|
+| ④ | business-doc-extract | 业务文档/口述 → 结构化需求文档 |
+| ⑤ | menu-sync | MCP 驱动同步菜单（0 次手动点击）|
+| ⑥ | dict-sync | MCP 驱动同步字典基线 |
+| ⑦ | permission-sync | 角色+菜单授权+动作权限闭环 |
+| ⑧ | convention-audit | 13 条规范扫描，偏差清单自动生成 |
+| ⑨ | template-extract | 从标杆页面提取领域专属模板 |
+| ⑩ | code-fix | 受控自动修复偏差代码 |
+
+```bash
+# 在前端项目根目录执行（新项目接入）
+npx @agile-team/wl-skills-kit
+
+# 增量更新
+npx @agile-team/wl-skills-kit update
+
+# 一键环境预检
+wl-skills check
+```
+
+## 后端 Skills 集合（v0.0.1 骨架）
+
+`@agile-team/wl-skills-bd`：9 个核心 Skill，覆盖接口设计 → 代码生成 → DDL → 单测 → 规范审计全链路，与前端 Skills 三包协作。
+
+---
+
 ## 快速开始
 
 **环境要求**：Node.js ≥ 18，pnpm ≥ 8

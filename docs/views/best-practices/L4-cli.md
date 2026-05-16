@@ -49,7 +49,7 @@ CLI 能力
 
 > **核心特征**：极简 Token（不需要 AI 推理）、零人工干预、可 CI/CD 集成。是整个 AI 体系中**可预测性最高**的一层。
 
-## 前端示例 — 当前已实现的命令
+## 已实现的 9 条命令（v2.7.3）
 
 ```bash
 # 全量安装（默认）
@@ -66,6 +66,21 @@ npx @agile-team/wl-skills-kit clean --keep-reports
 
 # 任何命令都可加 --dry-run 预览，不实际写入
 npx @agile-team/wl-skills-kit update --dry-run
+
+# 环境预检（新成员接手第一步）
+wl-skills check
+
+# 比对本地与最新 kit 版本差异
+wl-skills diff
+
+# 静态扫描页面文件完整性（CI 卡门）
+wl-skills validate
+
+# 检查 wl-skills-ui 接入完整性
+wl-skills doctor-ui
+
+# 导出菜单/字典/权限基线 xlsx
+wl-skills export
 ```
 
 > 全局安装后也可直接用 `wl-skills` 命令（如 `wl-skills update`）。
@@ -77,6 +92,12 @@ npx @agile-team/wl-skills-kit update --dry-run
 | `init`（默认） | 全量安装 + 多编辑器配置 + MCP 配置生成 | 新项目接入 |
 | `update` | MD5 比对增量更新，保护 `reports/` | kit 版本升级 |
 | `clean` | 移除 AI 文件（保留 components + types） | 构建前清理 |
+| `check` | 一键环境预检：Node / 工具链 / env.local.json / MCP 连通性 | 新成员接手项目 |
+| `diff` | 对比已安装文件与最新 kit 版本差异 | update 前决策依据 |
+| `validate` | 静态扫描页面 4 文件完整性、AGGrid、cid、mock、api.md | CI 卡门 |
+| `validate-page` | `validate` 别名，支持单页/目录路径 | 按路径校验 |
+| `doctor-ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | UI 体检 |
+| `export` | 导出菜单/字典/权限基线 xlsx | 交付/归档 |
 | `--dry-run` | 预览模式，不实际写入任何文件 | 确认变更范围 |
 | `--keep-reports` | clean 时额外保留 `reports/` | 保护菜单/字典积累数据 |
 
@@ -88,26 +109,21 @@ npx @agile-team/wl-skills-kit update --dry-run
 | `clean`（默认） | `src/components/` + `src/types/` | 业务代码必需，永不删除 |
 | `clean --keep-reports` | + `.github/reports/` | 额外保留菜单/字典/权限基线 |
 
-## v2.4 计划扩展命令
-
-| 命令 | 优先级 | 价值 |
-|------|--------|------|
-| `wl-skills check` | P0 | 一键环境预检：Node 版本 / 工具链 / `env.local.json` 填写状态 / MCP server 连通性。新成员接手项目第一步就跑这个，节省 30 分钟排查时间 |
-| `wl-skills diff` | P0 | 比对业务项目已安装文件与最新 kit 版本的差异，让 `update` 决策有据可依 |
-| `wl-skills export` | P1 | 把 `reports/SYS_MENU_INFO.md` + `SYS_DICT_INFO.md` 导出为 Excel（`xlsx` 包已在 devDependencies）|
-| `wl-skills validate` | P1 | 无 AI、纯静态扫描 `src/views/`：检查每模块 4 文件完整性，适合 CI 阶段卡门 |
-
 ## CLI 与 AI 的分工
 
 | 能力 | CLI 做 | AI 做 |
 |------|--------|-------|
 | 安装/更新规范文件 | ✅ `init` / `update` | — |
 | 清理临时文件 | ✅ `clean` | — |
+| 环境预检 | ✅ `check` | — |
+| 版本对比 | ✅ `diff` | — |
+| 页面完整性校验 | ✅ `validate` / `validate-page` | ✅ `convention-audit` Skill |
+| UI 接入体检 | ✅ `doctor-ui` | — |
+| 基线导出 | ✅ `export` | — |
 | 生成页面代码 | — | ✅ `page-codegen` Skill |
 | 菜单/字典同步 | — | ✅ `menu-sync` / `dict-sync` Skill |
-| 规范检查 | ✅（v2.4 `validate`） | ✅ `convention-audit` Skill |
 
-> CLI 是"无 AI 时的兜底执行节点"。更高阶是 L5 Agent Pipeline：让 AI 自主串联多个 Skill，CLI 和 Agent Pipeline 并不冲突，前者是后者的可靠底座。
+> CLI 是"无 AI 时的兜底执行节点"。更高阶是 L5 Agent Pipeline：让 AI 自主串联多个 Skill，CLI 和 Agent Pipeline 并不冲突，前者是后者的可靠底座。v2.7.3 后 L5 已进入试运行阶段。
 
 ## 延伸阅读
 

@@ -6,7 +6,7 @@
 `@agile-team/wl-skills-kit` · `standards/11-form-validation.md`
 :::
 
-<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />
 
 ---
 

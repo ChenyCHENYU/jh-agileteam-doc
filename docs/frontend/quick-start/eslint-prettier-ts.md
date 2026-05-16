@@ -6,7 +6,7 @@
 所有 Robot_Admin 系体项目 · 完整模式（`@robot-admin/git-standards` full preset）
 :::
 
-<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu']" />
+<AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />
 
 ---
 

@@ -50,11 +50,11 @@ CLI 层              ─── 聚合命令，固化流程，无人值守   ← 
 |---|---|---|---|
 | **L0** | 氛围编程 | 也行 | 纯对话驱动，AI 自由发挥，高随机性 |
 | **L1** | 提示词工程 | ✅ 已验证 | 结构化 Prompt + 规范注入 + 上下文压缩 |
-| **L2** | Skills | ✅ 已验证 | 9 个触发词驱动的结构化技能文件 → [速查表](/frontend/pc/skills/usage-guide) |
-| **L3** | MCP 工具调用 | ✅ 已验证 | 10 个 Tool，菜单/字典/角色/权限全覆盖 |
-| **L4** | CLI | ✅ 已验证 | init / update / clean / dry-run |
-| **L5** | Agent Pipeline | ▶ 近期目标 | Skill 链式自动触发，减少人工干预 |
-| **L6** | Multi-Agent 协同 | ⏳ 远期目标 | 专家 Agent 分工 + 并发处理 |
+| **L2** | Skills | ✅ 已验证 | 10 个触发词驱动的结构化技能文件 → [速查表](/frontend/pc/skills/usage-guide) |
+| **L3** | MCP 工具调用 | ✅ 已验证 | 17 个 Tool，菜单/字典/角色/权限/项目感知/页面校验全覆盖 |
+| **L4** | CLI | ✅ 已验证 | 9 条命令：init / update / clean / check / diff / validate / validate-page / doctor-ui / export |
+| **L5** | Agent Pipeline | 🟡 践行中 | `_pipeline.md` 协议已落地，Skill 链式自动触发进入试运行 |
+| **L6** | Multi-Agent 协同 | ▶ 近期目标 | L5 试运行期间同步规划多智能体分工 |
 | **L7** | 自演化体系 | 🔭 终极形态 | 高质量产出反哺规范，正向飞轮 |
 
 ## 快速导航
