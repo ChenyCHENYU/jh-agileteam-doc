@@ -37,7 +37,6 @@
 | 只读文本展示        | `jh-text`                                         | ❌ span/div 直接渲染         |
 | 分页                | `jh-pagination`                                   | ❌ el-pagination             |
 | 上下分栏            | `jh-drag-row`                                     | ❌ 手动 flex/grid            |
-| 左右分割            | `C_Splitter`                                      | ❌ 手动 flex/grid            |
 | 树形面板            | `C_Tree`                                          | ❌ el-tree 手写              |
 | 状态标签            | `C_TagStatus`                                     | ❌ el-tag + 颜色映射         |
 | HTTP 请求           | `getAction / postAction / putAction / deleteAction` | ❌ axios / fetch 直接调用  |
