@@ -88,7 +88,7 @@ export const nav: DefaultTheme.NavItem[] = [
   {
     text: "团队",
     items: [
-      { text: "业务团队", link: "", activeMatch: "---" },
+      { text: "业务团队", link: "/views/team/business" },
       { text: "产品团队", link: "", activeMatch: "---" },
       { text: "前端团队", link: "/views/team/" },
       { text: "后端团队", link: "/views/team/backend" },
