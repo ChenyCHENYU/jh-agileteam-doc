@@ -222,6 +222,18 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
+  // 前端移动端 uniApp
+  "/frontend/mobile-uniapp/": [
+    {
+      text: "移动端 uniApp",
+      collapsed: false,
+      items: [
+        { text: "概览 & 技术选型", link: "/frontend/mobile-uniapp/" },
+        { text: "H5 子应用集成方案", link: "/frontend/mobile-uniapp/integration" },
+      ],
+    },
+  ],
+
   // 前端移动端 H5
   "/frontend/mobile-h5/": [
     {
