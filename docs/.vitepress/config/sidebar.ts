@@ -325,6 +325,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         },
         { text: "SCSS 最佳实践", link: "/views/styling/scss-best-practices" },
         { text: "UI 设计系统", link: "/views/styling/ui-design-system" },
+        { text: "wl-skills-ui 风格框架", link: "/views/styling/wl-skills-ui" },
       ],
     },
   ],

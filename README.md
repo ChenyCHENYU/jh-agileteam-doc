@@ -37,15 +37,16 @@ npx @agile-team/wl-skills-kit
 
 | 方向 | Skill 数量 | 覆盖链路 |
 |------|-----------|---------|
-| **PC 端前端** | 9 个 | 原型扫描 → 接口约定 → 页面生成 → 菜单/字典/权限同步 → 规范审计 → 模板提取 → 自动修复 |
+| **PC 端前端** | 11 个 | 原型扫描 → 说明书解析 → 接口约定 → 页面生成 → 业务文档提取 → 菜单/字典/权限同步 → 规范审计 → 模板提取 → 自动修复 |
 | **移动端 H5** | 7 个 | 原型扫描 → 接口规格 → 接口约定 → 页面生成 → 路由注册 → Mock 生成 → 规范审计 |
 
 **套件包含内容**：
 
 | 分类 | 数量 | 说明 |
 |------|------|------|
-| AI Skills | 9 个 | 端到端代码生成全链路 |
-| 编码规范 | 13 条 | 模块化规范，AI 自动门控加载 |
+| AI Skills | 11 个 | 端到端代码生成全链路（含双线路由） |
+| MCP Tools | 17 个 | 菜单/字典/权限/代码扫描/页面校验等 |
+| 编码规范 | 14 条 | 模块化规范，AI 自动门控加载 |
 | 页面模板 | 9 种 | LIST / FORM / MASTER_DETAIL / TREE_LIST 等 |
 | 组件 API 文档 | 12 个 | 内置平台组件使用规范 |
 | 通用组件 | 15 个 | 全局 + 按需 + 远程 |
@@ -103,22 +104,23 @@ docs/
 
 ---
 
-## 前端 PC Skills 集合（v2.7.3）
+## 前端 PC Skills 集合（v2.10.0）
 
-10 个 AI 辅助研发 Skill + 17 个 MCP Tool + 9 条 CLI 命令，覆盖从需求到交付的完整链路：
+11 个 AI 辅助研发 Skill + 17 个 MCP Tool + 9 条 CLI 命令，覆盖从需求到交付的完整链路：
 
 | # | Skill | 说明 |
 |---|---|---|
-| ① | prototype-scan | 详设/原型/口述 → 页面清单 |
-| ② | api-contract | 生成前后端接口约定文档 |
-| ③ | page-codegen | 基于约定一键生成可运行页面代码（4 文件）|
-| ④ | business-doc-extract | 业务文档/口述 → 结构化需求文档 |
-| ⑤ | menu-sync | MCP 驱动同步菜单（0 次手动点击）|
-| ⑥ | dict-sync | MCP 驱动同步字典基线 |
-| ⑦ | permission-sync | 角色+菜单授权+动作权限闭环 |
-| ⑧ | convention-audit | 13 条规范扫描，偏差清单自动生成 |
-| ⑨ | template-extract | 从标杆页面提取领域专属模板 |
-| ⑩ | code-fix | 受控自动修复偏差代码 |
+| ① | prototype-scan | 原型/截图/口述 → 页面清单（原型线） |
+| ② | spec-doc-parse | 标准说明书 → 页面清单（规范线） |
+| ③ | api-contract | 生成前后端接口约定文档 |
+| ④ | page-codegen | 基于约定一键生成可运行页面代码（4 文件）|
+| ⑤ | business-doc-extract | 语义级触发 → 结构化业务文档 |
+| ⑥ | template-extract | 从标杆页面提取领域专属模板 |
+| ⑦ | convention-audit | 14 条规范扫描，偏差清单自动生成 |
+| ⑧ | menu-sync | MCP 驱动同步菜单（0 次手动点击）|
+| ⑨ | dict-sync | MCP 驱动同步字典基线 |
+| ⑩ | permission-sync | 角色+菜单授权+动作权限闭环 |
+| ⑪ | code-fix | 受控自动修复偏差代码 |
 
 ```bash
 # 在前端项目根目录执行（新项目接入）
@@ -171,7 +173,7 @@ pnpm preview
 | 语言 | TypeScript 5.x | 全量类型覆盖 |
 | 样式 | UnoCSS + SCSS | Atomic CSS + 组件级样式 |
 | 包管理 | pnpm workspace | Monorepo 就绪 |
-| 组件库 | Naive UI + Vue 3 | 自定义主题组件 |
+| 组件库 | Vue 3 | 自定义主题组件 |
 | 评论系统 | Waline | 轻量无后端评论 |
 | 部署 | Vercel | 自动 CI/CD，全球 CDN |
 
