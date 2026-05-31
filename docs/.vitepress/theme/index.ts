@@ -12,6 +12,7 @@ import type { Theme } from "vitepress";
 import { useWalineComments } from "../composables/useWalineComments";
 import { useRouter } from "vitepress";
 import { watch } from "vue";
+import Layout from "./Layout.vue";
 
 // UnoCSS
 import "virtual:uno.css";
@@ -26,6 +27,7 @@ import "./waline-custom.scss";
  */
 export default {
   extends: DefaultTheme,
+  Layout,
   setup() {
     // 监听 VitePress 路由变化
     const router = useRouter();

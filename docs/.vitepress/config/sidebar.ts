@@ -193,7 +193,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
     {
       text: "9 个 AI Skill",
-      collapsed: false,
+      collapsed: true,
       items: [
         { text: "① 原型扫描", link: "/frontend/pc/skills/prototype-scan" },
         { text: "② 接口约定", link: "/frontend/pc/skills/api-contract" },
@@ -254,7 +254,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
     {
       text: "7 个 AI Skill",
-      collapsed: false,
+      collapsed: true,
       items: [
         { text: "① 原型扫描", link: "/frontend/mobile-h5/prototype-scan" },
         { text: "② 接口规格", link: "/frontend/mobile-h5/api-spec" },
