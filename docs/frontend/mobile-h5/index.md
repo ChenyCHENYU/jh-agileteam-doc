@@ -2,10 +2,10 @@
 
 ## 项目简介
 
-`Robot H5` 是基于 **Vue 3 + Vite 7 + TypeScript** 的企业级移动端 H5 应用框架，采用 **Apple HIG Liquid Glass** 设计语言，遵循 Linear 现代工具美学。项目内置权限体系、主题系统、原生桥接能力，可同时运行于移动浏览器、钉钉/微信 WebView、原生 App 内嵌等多端场景。
+`Robot H5` 是基于 **Vue 3.5 + Vite 7 + TypeScript** 的企业级移动端 H5 应用框架，采用 **Apple HIG Liquid Glass** 设计语言，遵循 Linear 现代工具美学。项目内置权限体系、主题系统、原生桥接能力，可同时运行于移动浏览器、钉钉/微信 WebView、原生 App 内嵌等多端场景。
 
 ::: tip 项目仓库
-`Robot_H5` — 与 PC 端 `Robot_Admin` 共用后端网关，前端独立部署。
+`Robot_H5` — 与 PC 端 `Robot_Admin` 共用后端网关，前端独立部署。支持 **standalone（独立运行）** 和 **integrated（mbase 子应用）** 双模式。
 :::
 
 ---
@@ -16,16 +16,18 @@
 
 | 方向 | 技术选型 | 版本 |
 |---|---|---|
-| 框架 | Vue 3 | ^3.5.21 |
+| 框架 | Vue 3 Composition API | ^3.5.21 |
 | 构建工具 | Vite 7 | ^7.1.5 |
 | 语言 | TypeScript | ~5.9.2 |
 | 路由 | Vue Router 4 | ^4.5.1 |
 | 状态管理 | Pinia 3 + persistedstate | ^3.0.3 |
-| UI 组件库 | Vant 4 | ^4.9.14 |
-| 样式方案 | UnoCSS + SCSS | ^66.5.1 |
+| UI 组件库 | Vant 4（自动导入） | ^4.9.14 |
+| 样式方案 | UnoCSS + SCSS + CSS @layer | ^66.5.1 |
 | 图表 | ECharts 6 | ^6.0.0 |
 | 图标 | Iconify (Phosphor + Material) | 5.0.0 |
 | 工具库 | VueUse | ^13.9.0 |
+| HTTP | Axios（MAxios 封装） | — |
+| Mock | vite-plugin-mock + MockJS | — |
 
 ### 基础能力包
 
@@ -33,6 +35,7 @@
 |---|---|
 | `@miracle-web/utils` | HTTP 请求封装（MAxios）、AES 加密、自定义指令 |
 | `@robot-h5/core` | H5 通用能力包 — 拍照/定位/扫码/NFC/文件上传下载/签名/录音/蓝牙/离线存储等 15 个 Hooks |
+| `@robot-admin/git-standards` | Git 提交规范（commitizen + commitlint） |
 | `@vant/touch-emulator` | 桌面端触摸模拟，开发调试用 |
 
 ### 开发工具链
@@ -40,32 +43,107 @@
 | 工具 | 版本 | 用途 |
 |---|---|---|
 | pnpm | >=10.0.0 | 包管理器（preinstall 强制锁定） |
-| Node.js | ^20.0.0 \|\| >=22.0.0 | 运行时 |
+| Node.js | >=20.0.0 | 运行时 |
 | ESLint 10 | 10.2.0 | Flat Config 代码检查 |
 | vue-tsc | ^3.0.7 | Vue TS 类型检查（构建前强制执行） |
 | Husky 9 + lint-staged | 9.1.7 / 16.4.0 | Git Hooks + 暂存区 lint |
 | Commitizen + Commitlint | 4.3.1 / 20.5.0 | 交互式规范提交 |
+| vite-plugin-mock | ^2.9.8 | 开发阶段 Mock 数据 |
 
 ### 构建 & 部署
 
 | 方向 | 配置 |
 |---|---|
-| 部署平台 | Vercel |
-| 构建压缩 | esbuild（生产自动 drop console/debugger）+ Gzip/Brotli |
-| 旧浏览器兼容 | `@vitejs/plugin-legacy` |
-| 移动端适配 | `postcss-mobile-forever`（px → vw 自动转换） |
+| 部署平台 | Vercel / Nginx |
+| 构建压缩 | esbuild（生产自动 drop console/debugger）+ Gzip |
+| 移动端适配 | `postcss-mobile-forever`（px → vw 自动转换，基准 375px） |
 | 代码分割 | `vendor-vue` / `vendor-vant` / `vendor-echarts` 三路分包 |
+| CSS 层级 | `@layer base, components, utilities` 级联控制 |
 | Sourcemap | 生产关闭 |
+
+---
+
+## 五大模块
+
+底部 TabBar 提供 **5 大功能模块**，覆盖开发全流程：
+
+| Tab | 模块 | 说明 |
+|-----|------|------|
+| 🏠 首页 | Dashboard | 问候语 + 快捷入口 + 每日金句 + 核心能力卡片 |
+| 📦 组件 | 组件中心 | 16 个交互示例 + 开发工具（暗黑模式 / Eruda） |
+| 📋 模板 | 模板中心 | 10 大业务领域模板入口 |
+| ⚡ 能力 | 能力中心 | 15 个 @robot-h5/core 设备能力 Hook 可交互演示 |
+| 👤 我的 | 个人中心 | 账号设置 / 主题外观 / 关于 / 退出登录 |
+
+### 组件中心（16 个示例）
+
+| 示例 | 路由 | 亮点 |
+|------|------|------|
+| 主题设置 | `/themeSetting` | 暗黑/跟随系统、主题色、字体缩放、动画开关 |
+| 状态缓存 | `/keepAliveDemo` | keep-alive 计数器 + 表单 + 生命周期日志 |
+| 404 页面 | `/404` | Liquid Glass 毛玻璃动画 |
+| 自定义指令 | `/directives` | v-long-press、v-ripple 等 |
+| SVG 图标 | `/svgIcon` | 本地 SVG + Iconify 在线图标 |
+| UnoCSS 样式 | `/unoCss` | 原子 CSS 能力展示 |
+| 滚动位置缓存 | `/scrollCache` | 返回页面自动恢复滚动位置 |
+| 下拉刷新列表 | `/pullRefreshList` | CPullRefreshList 组件封装 |
+| 渲染性能优化 | `/requestAnimationFrame` | rAF 动画帧对比 |
+| 弹出层组合 | `/popupDemo` | ActionSheet / Popup 5 方位 / Dialog |
+| 手势交互 | `/gestureDemo` | SwipeCell 删除、长按菜单、多按钮滑动 |
+| 骨架屏 | `/skeletonDemo` | 基础骨架、商品卡片、联系人列表 |
+| 表单验证 | `/formDemo` | C_Form 异步校验、动态规则、多步骤表单 |
+| 表格组件 | `/tableDemo` | C_Table 虚拟滚动、排序、多选 |
+| 客户档案 | `/customerArchive` | 完整 CRUD 业务模板 |
+| ECharts 图表 | `/chart` | 折线/饼图/仪表盘可视化 |
+
+### 模板中心（10 大领域）
+
+| 领域 | 代码 | 说明 |
+|------|------|------|
+| 客户管理 | CRM | 客户档案 / 跟进记录 / 商机 |
+| 设备巡检 | INSPECT | 巡检计划 / 故障报修 / 备件 |
+| 物流配送 | LOGISTICS | 运单 / 签收 / 轨迹 |
+| 合同管理 | CONTRACT | 合同模板 / 审批流 / 归档 |
+| 安全管理 | SAFETY | 隐患排查 / 应急预案 |
+| 能源管理 | ENERGY | 能耗监控 / 碳排放 |
+| 视频监控 | VIDEO | 实时流 / 回放 / AI 告警 |
+| 质量管理 | QUALITY | 质检记录 / 不良追溯 |
+| 营销活动 | MARKETING | 活动管理 / 优惠券 / 推送 |
+| 运维管理 | OPS | 工单系统 / 值班排班 |
+
+### 能力中心（15 个 Hook 演示）
+
+| 分类 | Hooks | 说明 |
+|------|-------|------|
+| 📸 影像采集 | useCamera · useVideoRecorder · useAudioRecorder | 拍照/录像/录音 + 实时预览 |
+| 📍 定位扫描 | useLocation · useQrScanner · useNfc | GPS 定位 + 二维码 + NFC |
+| 📁 文件处理 | useFileUpload · useFileDownload · useFilePreview | 分片上传 + 下载 + 预览 |
+| ⚙️ 系统能力 | useBluetooth · useOfflineStorage · usePushNotification · usePermission | 蓝牙 / 离线 / 推送 / 权限 |
+| ✨ 创意工具 | useSignature · useWatermark | 手写签名 + 图片水印 |
 
 ---
 
 ## 环境配置
 
-| 环境 | 文件 | Mock | API 地址 | 基础路径 |
+| 环境 | 文件 | Mock | 模式 | 用途 |
 |---|---|---|---|---|
-| 开发 | `.env.development` | 开启 | Proxy → `172.28.99.172:9000` | `/robot-h5/` |
-| 测试 | `.env.test` | 关闭 | `http://172.28.99.172:9000` | `/robot-h5/` |
-| 生产 | `.env.production` | 关闭 | `http://172.28.99.172:9000` | `/` |
+| 开发 | `.env.development` | 开启 | standalone | 本地开发调试（Mock 数据） |
+| SIT 测试 | `.env.test` | 关闭 | standalone | 对接测试环境后端 |
+| UAT 预发布 | `.env.uat` | 关闭 | standalone | 预发布验证 |
+| 生产 | `.env.production` | 关闭 | standalone | 正式上线 |
+| 集成模式 | `.env.integrated` | 关闭 | integrated | 作为 mbase 子应用构建 |
+| 演示 | `.env.vercel` | 开启 | standalone | Vercel 静态演示站 |
+
+### 双模式运行机制
+
+项目支持两种运行模式，通过 `VITE_APP_MODE` 环境变量切换：
+
+| 维度 | standalone（默认） | integrated |
+|---|---|---|
+| 登录 | 独立登录页 | 从 mbase 获取 Token |
+| 部署路径 | `/robot-h5/` | `/mbase/robot-h5/` |
+| 网关 | 自有后端网关 | 共用 mbase 网关 |
+| 权限 | 完整权限体系 | 权限由 mbase 统一管控 |
 
 ---
 
@@ -79,99 +157,42 @@
 ```
 
 - **单一网关**：前端只对接一个后端地址，复用 PC 端已有微服务
-- **Token 统一**：登录获取，MAxios 拦截器自动携带
+- **Token 统一**：登录获取，MAxios 拦截器自动携带，401 自动跳转登录
 - **权限同步**：PC 端管理系统创建应用 `robot-h5` 并绑定菜单权限，H5 端动态获取
+- **HTTP 重试**：自动重试 2 次（间隔 1s），GET 请求加时间戳防缓存
 
 ---
 
-## 项目结构
+## 权限体系
+
+### 架构流程
 
 ```
-Robot_H5/
-├── build/                    # 构建配置
-│   ├── utils.ts              #   环境变量包装、时间戳、路径解析
-│   └── vite/
-│       ├── build.ts          #   Rollup 输出（manualChunks / 资源分类）
-│       ├── proxy.ts          #   开发代理生成
-│       └── plugin/           #   11 个 Vite 插件配置
-├── mock/                     # Mock 数据
-│   ├── permission.ts         #   菜单树 + 权限码
-│   └── user/user.ts          #   登录 + 用户信息
-├── public/                   # 静态资源
-├── types/                    # 全局类型定义
-│   ├── global.d.ts           #   ViteEnv / 通用工具类型
-│   ├── Permission/type.ts    #   菜单 & 权限类型
-│   ├── Form/type.ts          #   CForm 组件类型
-│   └── Table/type.ts         #   CTable 组件类型
-├── src/
-│   ├── main.ts               # 应用入口
-│   ├── App.vue               # 根组件（VanConfigProvider + 主题 + 过渡动画）
-│   ├── h5.config.ts           # @robot-h5/core 配置
-│   ├── api/                  # 接口层
-│   │   ├── user.ts           #   登录 / 用户信息 / 登出
-│   │   └── permission.ts     #   菜单树 / 权限码
-│   ├── router/               # 路由系统
-│   │   ├── index.ts          #   创建 Router（Hash/History 可切换）
-│   │   ├── base.ts           #   基础路由（Root / Login / 404）
-│   │   ├── menu.ts           #   TabBar 路由（Dashboard / Demo / Chart / Mine）
-│   │   ├── modules.ts        #   子页面路由（25+ 条）
-│   │   └── router-guards.ts  #   路由守卫（NProgress / Token / 权限校验）
-│   ├── store/modules/        # 状态管理
-│   │   ├── user.ts           #   Token + 用户信息（AES 加密持久化）
-│   │   ├── permission.ts     #   菜单树 + 按钮权限
-│   │   ├── route.ts          #   路由列表 + KeepAlive
-│   │   ├── theme.ts          #   主题系统（亮/暗 + 字体缩放）
-│   │   └── app.ts            #   全局状态（Eruda 调试开关）
-│   ├── components/           # 全局组件（C_ 前缀，自动注册）
-│   │   ├── C_Form/           #   配置式表单
-│   │   ├── C_Table/          #   移动端卡片式表格
-│   │   ├── C_NavBar/         #   导航栏
-│   │   ├── C_PullRefreshList/#   下拉刷新 + 无限滚动
-│   │   ├── C_Icon/           #   UnoCSS 图标封装
-│   │   ├── C_SvgIcon/        #   自定义 SVG 图标
-│   │   ├── C_Logo/           #   Logo
-│   │   ├── C_VirtualStatusBar/ # 桌面端虚拟状态栏
-│   │   └── C_WebSite/        #   WebView 容器
-│   ├── hooks/                # 组合式函数
-│   │   ├── useECharts/       #   ECharts 封装
-│   │   ├── useEnv/           #   环境配置读取
-│   │   ├── usePermission/    #   权限校验 + v-permission 指令
-│   │   ├── useScrollCache/   #   滚动位置缓存
-│   │   ├── useTheme/         #   主题切换（亮/暗 + Vant 变量同步）
-│   │   └── useOpeninstall/   #   OpenInstall 集成
-│   ├── plugins/              # 插件注册
-│   │   ├── miracleComponents.ts # Vant 按需注册
-│   │   ├── devtool.ts        #   disable-devtool
-│   │   ├── updater.ts        #   版本更新检测
-│   │   └── iconify.ts        #   图标集预注册
-│   ├── services/             # 原生桥接
-│   │   ├── jsCallNative.ts   #   JS → 原生
-│   │   └── nativeCallJs.ts   #   原生 → JS
-│   ├── utils/                # 工具函数
-│   │   ├── http/             #   HTTP 封装（get/post/put/del）
-│   │   ├── directives/       #   10 个自定义指令
-│   │   ├── emit.ts           #   mitt 事件总线
-│   │   ├── updater.ts        #   版本更新检测
-│   │   └── landscape.ts      #   横屏检测
-│   ├── styles/               # 全局样式
-│   │   ├── variables.scss    #   设计令牌声明
-│   │   ├── theme.scss        #   主题系统
-│   │   ├── mixin.scss        #   SCSS Mixin
-│   │   └── common.scss       #   公共样式
-│   └── views/                # 页面视图
-│       ├── dashboard/        #   首页
-│       ├── chart/            #   图表页
-│       ├── demo/             #   13 个 Demo 页面
-│       ├── mine/             #   我的（含 8 个子页面）
-│       ├── login/            #   登录
-│       └── exception/        #   404
-├── .husky/                   # Git Hooks
-├── vite.config.ts            # Vite 主配置
-├── uno.config.ts             # UnoCSS 配置
-├── eslint.config.ts          # ESLint Flat Config
-├── tsconfig.json             # TypeScript 配置
-└── vercel.json               # 部署配置
+打开 H5
+  ↓
+无 Token → 登录页 → 获取 Token
+  ↓
+GetUserInfo + loadPermissions(appId='robot-h5')
+  ↓
+解析菜单树 → allowedPaths + buttonPermissions + tabBarMenus
+  ↓
+路由守卫校验 → TabBar 动态渲染
 ```
+
+### 菜单类型
+
+| menuType | 说明 | 示例 |
+|---|---|---|
+| D | 目录（TabBar 容器） | 底部导航分组 |
+| M | 菜单（页面路由） | /dashboard、/order |
+| B | 按钮（权限点） | order:add、order:edit |
+
+### 权限校验方式
+
+- **路由级**：路由守卫 `isRouteAllowed(path)` 校验访问权限
+- **按钮级**：`v-permission="'order:add'"` 指令 或 `usePermission().hasPermission()` Hook
+- **TabBar 动态渲染**：优先使用权限接口返回的菜单，兜底使用本地路由定义
+- **降级策略**：权限数据为空时默认放行（Mock / 未对接场景不白屏）
 
 ---
 
@@ -185,136 +206,46 @@ Robot_H5/
 
 | 令牌 | 亮色 | 暗色 | 用途 |
 |---|---|---|---|
-| `--ds-bg` | #F5F5F7 | #000000 | 主背景 |
-| `--ds-bg-secondary` | #FFFFFF | #1C1C1E | 次级背景 |
-| `--ds-surface` | rgba(255,255,255,0.8) | rgba(44,44,46,0.8) | 卡片表面 |
+| `--ds-bg` | #FFFFFF | #000000 | 主背景 |
+| `--ds-bg-secondary` | #F5F5F7 | #1C1C1E | 次级背景 |
+| `--ds-surface` | #FFFFFF | #1C1C1E | 浮层背景 |
 | `--ds-text-primary` | #1D1D1F | #F5F5F7 | 主文字 |
-| `--ds-text-secondary` | #6E6E73 | #A1A1A6 | 辅助文字 |
+| `--ds-text-secondary` | #6E6E73 | #98989D | 辅助文字 |
 | `--ds-accent` | #0071E3 | #0A84FF | 品牌强调色 |
-| `--ds-success` | #34C759 | #30D158 | 成功 |
-| `--ds-warning` | #FF9500 | #FF9F0A | 警告 |
-| `--ds-danger` | #FF3B30 | #FF453A | 危险 |
+| `--ds-glass-bg` | rgba(255,255,255,0.52) | rgba(30,30,35,0.68) | 毛玻璃背景 |
+| `--ds-glass-blur` | 40px | 40px | 毛玻璃模糊值 |
 
-### 毛玻璃效果令牌
+### CSS @layer 优先级体系
 
-| 令牌 | 值 |
-|---|---|
-| `--ds-glass-bg` | rgba(255,255,255,0.72) / rgba(44,44,46,0.72) |
-| `--ds-glass-blur` | 40px |
-| `--ds-glass-saturate` | 210% |
-| `--ds-glass-border` | rgba(255,255,255,0.18) |
+```
+@layer base         ← UnoCSS preflight（reset），最低
+@layer components   ← 组件 SCSS（vite.config.ts 自动包裹），中
+@layer utilities    ← UnoCSS 工具类（flex / mb-4），最高
+```
 
-### 排版
+### 排版 & 间距
 
-- **字体栈**：`-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif`
-- **字号梯度**：11 / 13 / 15 / 16 / 17 / 20 / 22 / 28 / 34 px
-
-### 间距 & 圆角
-
-| 间距（4px 网格） | 4 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 / 64 |
-|---|---|
-| **圆角** | sm(8px) / md(12px) / lg(16px) / xl(20px) / full(9999px) |
-
-### 动画
-
-- 标准时长：200ms ~ 300ms
-- 标准缓动：`cubic-bezier(0.25, 0.1, 0.25, 1)`
-- 弹性缓动：`cubic-bezier(0.34, 1.56, 0.64, 1)`
+- **字号梯度**：11 / 12 / 13 / 14 / 15 / 16 / 17 / 20 / 22 / 28 / 34 px
+- **间距（4px 网格）**：4 / 8 / 12 / 16 / 20 / 24 / 32 / 40 / 48 / 64
+- **圆角**：sm(8px) / md(12px) / lg(16px) / xl(20px) / full(9999px)
 
 ---
 
 ## 全局组件
 
-9 个全局组件，统一 `C_` 前缀命名，通过 `unplugin-vue-components` 自动注册。
+9 个全局组件，统一 `C_` 前缀命名，通过 `unplugin-vue-components` 自动注册：
 
-| 组件 | 用途 | 说明 |
-|---|---|---|
-| `C_Form` | 配置式表单 | 支持 text/password/number/select/switch/checkbox/radio 等 |
-| `C_Table` | 卡片式表格 | 移动端专用，支持标签映射、操作按钮、状态渲染 |
-| `C_NavBar` | 导航栏 | 统一顶部导航 |
-| `C_PullRefreshList` | 下拉刷新列表 | 下拉刷新 + 触底无限滚动 |
-| `C_Icon` | 图标 | UnoCSS 图标封装 |
-| `C_SvgIcon` | SVG 图标 | 自定义 SVG 雪碧图 |
-| `C_Logo` | Logo | 品牌标识组件 |
-| `C_VirtualStatusBar` | 虚拟状态栏 | 桌面端调试时模拟手机状态栏 |
-| `C_WebSite` | WebView 容器 | 内嵌第三方网页 |
-
----
-
-## 自定义指令
-
-10 个自定义指令，位于 `src/utils/directives/`：
-
-| 指令 | 用途 |
+| 组件 | 用途 |
 |---|---|
-| `v-copy` | 复制文本到剪贴板 |
-| `v-debounce` | 防抖点击 |
-| `v-throttle` | 节流点击 |
-| `v-long-press` | 长按事件 |
-| `v-ripple` | Material Design 水波纹效果 |
-| `v-slide-in` | 滑入动画 |
-| `v-draggable` | 拖拽 |
-| `v-lazy-image` | 图片懒加载 |
-| `v-watermark` | 水印 |
-| `v-permission` | 按钮权限控制（通过 `usePermission` Hook） |
-
----
-
-## @robot-h5/core 通用能力包
-
-内置 15 个 Hooks，覆盖移动端常见原生能力：
-
-| Hook | 能力 |
-|---|---|
-| `useCamera` | 拍照 / 相册选图 |
-| `useLocation` | 定位（GCJ-02 坐标，10s 超时） |
-| `useQrScanner` | 二维码扫描 |
-| `useNfc` | NFC 读写 |
-| `useFileUpload` | 文件上传（最大 1024KB，0.8 质量压缩） |
-| `useFileDownload` | 文件下载 |
-| `useFilePreview` | 文件预览 |
-| `useSignature` | 电子签名 |
-| `useAudioRecorder` | 录音 |
-| `useVideoRecorder` | 录像 |
-| `useBluetooth` | 蓝牙连接 |
-| `useOfflineStorage` | 离线存储 |
-| `usePushNotification` | 推送通知 |
-| `useWatermark` | 水印 |
-| `usePermission` | 原生权限请求 |
-
-**Bridge 适配器**：Browser / Native / Dingtalk / Wechat — 同一 API 多端适配。
-
----
-
-## 权限体系
-
-### 架构流程
-
-```
-打开 H5
-  ↓
-无 Token → 登录页 → 获取 Token
-  ↓
-GetUserInfo + loadPermissions
-  ↓
-解析菜单树 → allowedPaths + buttonPermissions + tabBarMenus
-  ↓
-路由守卫校验 → TabBar 动态渲染
-```
-
-### 菜单类型
-
-| menuType | 说明 |
-|---|---|
-| D | 目录（分组容器） |
-| M | 菜单（页面路由） |
-| B | 按钮（权限点） |
-
-### 权限校验方式
-
-- **路由级**：路由守卫 `isRouteAllowed(path)` 校验访问权限
-- **按钮级**：`v-permission="'order:add'"` 指令 或 `usePermission().hasPermission()` Hook
-- **降级策略**：权限数据为空时默认放行（Mock / 未对接场景不白屏）
+| `<CNavBar>` | 导航栏 |
+| `<CIcon>` | UnoCSS 图标封装 |
+| `<CSvgIcon>` | 自定义 SVG 图标 |
+| `<CPullRefreshList>` | 下拉刷新 + 无限滚动 |
+| `<C_Form>` | 配置式表单（支持异步校验、动态规则） |
+| `<C_Table>` | 移动端卡片式表格（虚拟滚动、排序、多选） |
+| `<C_Logo>` | 品牌标识 |
+| `<C_VirtualStatusBar>` | 桌面端虚拟状态栏 |
+| `<C_WebSite>` | WebView 容器 |
 
 ---
 
@@ -331,28 +262,26 @@ pnpm install
 # 本地开发（Mock 模式）
 pnpm dev
 
-# 本地开发（对接生产 API）
-pnpm dev:prod
+# 集成模式调试
+pnpm dev:integrated
 
 # 类型检查
 pnpm type-check
 
-# 代码检查
-pnpm lint
-
-# 构建测试环境
-pnpm build:test
-
-# 构建生产环境
-pnpm build:prod
-
-# 预览构建产物
-pnpm preview
+# 构建各环境
+pnpm build:test       # SIT
+pnpm build:uat        # UAT
+pnpm build:prod       # 生产
+pnpm build:integrated # mbase 子应用
 ```
+
+**默认账号**：`admin` / `123456`
 
 ---
 
 ## 版块导航
 
-- [开发规范](./standards) — 编码约定、文件组织、样式规范、提交规范
+- [扩展规范](./standards) — 编码约定、文件组织、样式规范、提交规范
 - [Skills 集合](./skills) — 7 个 AI 辅助研发 Skill
+- [AI Skill 流水线](./skill-pipeline) — 从原型到代码的完整自动化流程
+- [@robot-h5/core](./h5-core/) — 通用能力包详细文档

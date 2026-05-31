@@ -12,41 +12,41 @@
 
 ### 核心框架
 
-| 方向           | 技术选型                   | 版本              |
-| -------------- | -------------------------- | ----------------- |
-| 框架           | Vue 3                      | ^3.5.30           |
-| 跨端引擎       | UniApp（@dcloudio）        | 3.0.0-407xxx      |
-| 语言           | TypeScript                 | ~5.7.3            |
-| 构建工具       | Vite + @dcloudio/vite-plugin-uni | ^5.x        |
-| 路由           | UniApp pages.json          | 内置              |
-| 状态管理       | Pinia + persistedstate     | 2.3.1 / 3.2.3     |
-| UI 组件库      | wot-design-uni             | ^1.14.0           |
-| 样式方案       | UnoCSS + SCSS              | ^66.5.1           |
-| 国际化         | vue-i18n                   | ^11.3.0           |
-| 密码加密       | jsencrypt（RSA）           | ^3.5.4            |
-| 中文转换       | opencc-js（繁简互转）      | ^1.3.1            |
+| 方向           | 技术选型                         | 版本          |
+| -------------- | -------------------------------- | ------------- |
+| 框架           | Vue 3                            | ^3.5.30       |
+| 跨端引擎       | UniApp（@dcloudio）              | 3.0.0         |
+| 语言           | TypeScript                       | ~5.7.3        |
+| 构建工具       | Vite + @dcloudio/vite-plugin-uni | ^5.x          |
+| 路由           | UniApp pages.json                | 内置          |
+| 状态管理       | Pinia + persistedstate           | 2.3.1 / 3.2.3 |
+| UI 组件库      | wot-design-uni                   | ^1.14.0       |
+| 样式方案       | UnoCSS + SCSS                    | ^66.5.1       |
+| 国际化         | vue-i18n                         | ^11.3.0       |
+| 密码加密       | jsencrypt（RSA）                 | ^3.5.4        |
+| 中文转换       | opencc-js（繁简互转）            | ^1.3.1        |
 
 ### 开发工具链
 
-| 工具                    | 版本      | 用途                                |
-| ----------------------- | --------- | ----------------------------------- |
-| pnpm                    | >=10.x    | 包管理器（强制锁定）                |
-| Node.js                 | >=18      | 运行时                              |
-| oxlint + ESLint 10      | ^1.56.0   | 代码质量（Flat Config）             |
-| Prettier                | ^3.8.1    | 格式化                              |
-| Husky 9 + lint-staged   | 9.x/16.x  | Git Hooks + 暂存区 lint             |
-| commitizen + commitlint | 4.x/20.x  | 交互式规范提交                      |
-| vite-plugin-mock-dev-server | ^2.1.0 | 开发阶段 Mock 数据               |
+| 工具                        | 版本      | 用途                            |
+| --------------------------- | --------- | ------------------------------- |
+| pnpm                        | >=10.x    | 包管理器（强制锁定）            |
+| Node.js                     | >=18      | 运行时                          |
+| oxlint + ESLint 10          | ^1.56.0   | 代码质量（Flat Config）         |
+| Prettier                    | ^3.8.1    | 格式化                          |
+| Husky 9 + lint-staged       | 9.x/16.x  | Git Hooks + 暂存区 lint         |
+| commitizen + commitlint     | 4.x/20.x  | 交互式规范提交                  |
+| vite-plugin-mock-dev-server | ^2.1.0    | 开发阶段 Mock 数据              |
 
 ### 多端编译目标
 
-| 平台         | 编译指令                | 说明                                  |
-| ------------ | ----------------------- | ------------------------------------- |
-| H5           | `uni -p h5`             | 运行于移动浏览器/钉钉WebView          |
-| 微信小程序   | `uni -p mp-weixin`      | 上线前需配置微信公众平台业务域名白名单|
-| App（全平台）| `uni -p app`            | 同时支持 Android / iOS                |
-| App-Android  | `uni -p app-android`    | 独立 Android 包                       |
-| App-iOS      | `uni -p app-ios`        | 独立 iOS 包                           |
+| 平台         | 编译指令           | 说明                                  |
+| ------------ | ------------------ | ------------------------------------- |
+| H5           | `uni -p h5`       | 运行于移动浏览器/钉钉WebView          |
+| 微信小程序   | `uni -p mp-weixin` | 上线前需配置微信公众平台业务域名白名单 |
+| App（全平台）| `uni -p app`       | 同时支持 Android / iOS                |
+| App-Android  | `uni -p app-android` | 独立 Android 包                     |
+| App-iOS      | `uni -p app-ios`   | 独立 iOS 包                           |
 
 ---
 
@@ -79,9 +79,9 @@ wl-mbase/
 ├── env/                         # 多环境变量配置
 │   ├── .env                     # 公共基础变量
 │   ├── .env.development         # 开发（内网 172.28.99.172:9000）
-│   ├── .env.test                # 测试环境
-│   ├── .env.staging             # 预发布环境
-│   └── .env.production          # 生产（HTTPS 域名）
+│   ├── .env.sit                 # SIT 测试环境
+│   ├── .env.uat                 # UAT 预发布环境
+│   └── .env.production          # PRD 生产环境
 ├── mock/                        # 开发阶段 Mock 数据（vite-plugin-mock-dev-server）
 ├── scripts/                     # 构建辅助脚本（postbuild-mp-weixin.cjs 等）
 ├── src/
@@ -93,16 +93,14 @@ wl-mbase/
 │   │       ├── C_Logo/          # 品牌 Logo 组件
 │   │       ├── C_Tabbar/        # 底部 Tab 导航
 │   │       └── C_VirtualStatusBar/ # 虚拟状态栏（用于 App/H5 安全区域）
-│   ├── composables/             # 组合式函数
-│   │   ├── index.ts             # 统一导出
-│   │   └── locale.ts            # 语言切换（中/繁/英）
+│   ├── composables/             # 组合式函数（locale.ts 国际化切换等）
 │   ├── config/
 │   │   ├── env.ts               # 运行时环境变量读取
 │   │   └── portal-apps.ts       # 子应用注册表（维护所有 H5 入口配置）
 │   ├── constants/               # 全局常量（app 标识、OAuth 参数等）
 │   ├── data/                    # 静态基础数据
 │   ├── directives/              # 自定义 Vue 指令
-│   ├── pages/                   # 主包页面（easycom 自动注册）
+│   ├── pages/                   # 主包页面
 │   │   ├── index/               # 工作台首页（子应用入口图标列表）
 │   │   ├── login/               # 登录页（OAuth2 密码模式 + RSA 加密）
 │   │   ├── message/             # 消息中心
@@ -140,12 +138,12 @@ wl-mbase/
 
 ## 多环境配置
 
-| 环境       | 文件                | Mock | API 地址                     | 说明                  |
-| ---------- | ------------------- | ---- | ---------------------------- | --------------------- |
-| 开发       | `.env.development`  | 开启 | `http://172.28.99.172:9000`  | Vite DevProxy 代理    |
-| 测试       | `.env.test`         | 关闭 | `http://172.28.99.172:9000`  | 内网测试服务器        |
-| 预发布     | `.env.staging`      | 关闭 | 待配置                       | 发布前灰度验证        |
-| 生产       | `.env.production`   | 关闭 | `https://your-domain.com`    | 必须 HTTPS（小程序要求）|
+| 环境   | 文件              | Mock | API 地址                                    | 说明                  |
+| ------ | ----------------- | ---- | ------------------------------------------- | --------------------- |
+| 开发   | `.env.development`| 开启 | `http://172.28.99.172:9000`                 | Vite DevProxy 代理    |
+| SIT    | `.env.sit`        | 关闭 | `https://ytiop-sit.walsin.com.cn/sit-api`   | SIT 测试环境          |
+| UAT    | `.env.uat`        | 关闭 | `https://ytiop-uat.walsin.com.cn/uat-api`   | UAT 预发布环境        |
+| 生产   | `.env.production` | 关闭 | `https://ytiop.walsin.com.cn/api`           | 必须 HTTPS（小程序要求）|
 
 > H5 开发环境下请求通过 Vite Proxy 转发到 `/api/*`，小程序/App 环境直接使用 `VITE_API_BASE_URL` 完整地址。
 
@@ -159,20 +157,22 @@ pnpm dev:h5           # H5 开发（端口 1999）
 pnpm dev:wx           # 微信小程序开发
 pnpm dev:app          # App 开发
 
-# ── 测试 / 预发布 ─────────────────────────────────
-pnpm test             # H5 测试环境
-pnpm test:wx          # 小程序测试环境
-pnpm staging          # H5 预发布环境
-pnpm staging:wx       # 小程序预发布环境
+# ── SIT 测试环境 ─────────────────────────────────
+pnpm build:h5:sit     # H5 SIT 构建
+pnpm build:wx:sit     # 小程序 SIT 构建
 
-# ── 生产构建 ─────────────────────────────────────
+# ── UAT 预发布环境 ────────────────────────────────
+pnpm build:h5:uat     # H5 UAT 构建
+pnpm build:wx:uat     # 小程序 UAT 构建
+
+# ── PRD 生产环境 ──────────────────────────────────
 pnpm build:h5         # H5 生产包
 pnpm build:wx         # 小程序生产包（含 WXSS 后处理）
 pnpm build:app        # App 全平台包
 pnpm build:app-android # Android 包
 pnpm build:app-ios    # iOS 包
 
-# ── 代码质量 ─────────────────────────────────────
+# ── 代码质量 ──────────────────────────────────────
 pnpm lint             # oxlint + ESLint 自动修复
 pnpm format           # Prettier 格式化
 
@@ -212,14 +212,12 @@ UniApp 门户（wl-mbase）
 
 项目通过 `src/utils/platform.ts` 在运行时自动识别平台，配合 UniApp 条件编译实现差异化处理：
 
-```
-getPlatform() 返回值
-  ├─ 'mp-weixin'  — UniApp #ifdef MP-WEIXIN 编译期确定
-  ├─ 'app'        — UniApp #ifdef APP-PLUS 编译期确定
-  ├─ 'dingtalk'   — H5 运行时，UA 包含 DingTalk
-  ├─ 'h5'         — 普通移动浏览器
-  └─ 'unknown'    — 未知环境
-```
+| 平台          | 检测方式                           | 特殊处理                                    |
+| ------------- | ---------------------------------- | ------------------------------------------- |
+| 微信小程序    | UniApp 条件编译 `#ifdef MP-WEIXIN` | 使用 `web-view` 组件嵌入 H5，无自定义导航栏 |
+| App           | UniApp 条件编译 `#ifdef APP-PLUS`  | webview 组件 + 自定义玻璃态导航栏           |
+| 钉钉 H5      | UA 含 `DingTalk`                   | 隐藏自定义导航栏（钉钉自带），注入 JSAPI    |
+| 普通浏览器 H5 | 默认 fallback                      | 完整自定义导航栏，Vite devServer 代理调试   |
 
 ### 钉钉微应用
 
@@ -232,6 +230,22 @@ getPlatform() 返回值
 | `isDingTalkEnv()`        | 检测是否在钉钉内运行              |
 
 > 钉钉微应用上线前需在钉钉开放平台配置：**微应用首页 URL** 和 **JSAPI 安全域名**。
+
+---
+
+## H5 子应用集成
+
+当前已注册的 H5 子应用入口（统一 `/mbase/` 命名空间）：
+
+| 应用     | mpPath      | 说明             |
+| -------- | ----------- | ---------------- |
+| 智慧安全 | `/mbase/aq` | 安全生产管理系统 |
+| 智慧安防 | `/mbase/af` | 安防监控管理系统 |
+| 智慧环保 | `/mbase/hb` | 环保监测管理系统 |
+
+> `mpPath` 运行时与 `VITE_DOMAIN` 动态拼接，如 SIT 环境：`https://ytiop-sit.walsin.com.cn/mbase/aq`
+
+详细集成方案请参阅 [H5 子应用集成方案](./integration)。
 
 ---
 
@@ -251,25 +265,33 @@ getPlatform() 返回值
 
 ## 全局组件（C_ 系列）
 
-所有全局组件通过 `easycom` 规则（`^C_(.*) → @/components/global/C_$1/index.vue`）**自动注册**，无需手动导入：
+所有全局组件通过 `easycom` 规则自动注册，无需手动导入：
 
-| 组件                  | 功能                                              |
-| --------------------- | ------------------------------------------------- |
-| `<C_Header />`        | 自定义导航栏，玻璃态效果，支持多端（含钉钉适配）  |
-| `<C_Layout />`        | 页面通用布局容器，处理安全区域 padding            |
-| `<C_Tabbar />`        | 底部 Tab 导航（工作台/消息/个人中心）             |
-| `<C_Logo />`          | 品牌 Logo，支持主题切换                           |
-| `<C_VirtualStatusBar />`| H5/App 虚拟状态栏，补偿原生状态栏高度           |
+| 组件                     | 功能                                              |
+| ------------------------ | ------------------------------------------------- |
+| `<C_Header />`           | 自定义导航栏，玻璃态效果，支持多端（含钉钉适配）  |
+| `<C_Layout />`           | 页面通用布局容器，处理安全区域 padding            |
+| `<C_Tabbar />`           | 底部 Tab 导航（工作台/消息/个人中心）             |
+| `<C_Logo />`             | 品牌 Logo，支持主题切换                           |
+| `<C_VirtualStatusBar />` | H5/App 虚拟状态栏，补偿原生状态栏高度             |
 
 ---
 
-## 后端服务地址（内网）
+## 多环境地址对照
 
-| 服务          | 地址                                     | 说明                             |
-| ------------- | ---------------------------------------- | -------------------------------- |
-| 移动端网关    | `http://172.28.99.172:9000`              | OAuth2 登录 / JWT Token          |
-| 智慧安全 H5   | `http://172.28.99.172:81/hxaqtest/app`   | 子应用，iframe/web-view 嵌入    |
-| 智慧安防 H5   | `http://172.28.99.172:81/hxaftest/app`   | 子应用，iframe/web-view 嵌入    |
-| 智慧环保 H5   | `http://172.28.99.172:81/hxhbtest/app`   | 子应用，占位待确认               |
+### 开发环境（内网直连）
 
-> 上线前的完整切换步骤见 `上线调整清单.md`，包含域名替换、HTTPS 配置、微信公众平台白名单设置等。
+| 服务        | 地址                        | 说明                |
+| ----------- | --------------------------- | ------------------- |
+| 移动端网关  | `http://172.28.99.172:9000` | OAuth2 / JWT Token  |
+| 智慧安全 H5 | 本地 Vite 代理 `/mbase/aq`  | 子应用，iframe 嵌入 |
+| 智慧安防 H5 | 本地 Vite 代理 `/mbase/af`  | 子应用，iframe 嵌入 |
+| 智慧环保 H5 | 本地 Vite 代理 `/mbase/hb`  | 子应用，iframe 嵌入 |
+
+### 线上环境（HTTPS 域名 + mpPath 动态拼接）
+
+| 环境 | 域名                      | API 前缀   | 基座 H5 入口                             |
+| ---- | ------------------------- | ---------- | ---------------------------------------- |
+| SIT  | `ytiop-sit.walsin.com.cn` | `/sit-api` | `https://ytiop-sit.walsin.com.cn/mbase/` |
+| UAT  | `ytiop-uat.walsin.com.cn` | `/uat-api` | `https://ytiop-uat.walsin.com.cn/mbase/` |
+| PRD  | `ytiop.walsin.com.cn`     | `/api`     | `https://ytiop.walsin.com.cn/mbase/`     |
