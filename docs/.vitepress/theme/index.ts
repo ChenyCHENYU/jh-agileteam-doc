@@ -27,7 +27,7 @@ export default {
   extends: DefaultTheme,
   Layout,
   enhanceApp() {
-    // Waline 评论系统配置
+    // Waline 评论系统（懒加载 — 滚动到评论区域时才加载资源）
     const walinePlugin = useWalineComments({
       serverURL:
         (typeof import.meta !== "undefined" && (import.meta as Record<string, Record<string, string>>).env?.VITE_WALINE_SERVER_URL) ||
@@ -38,8 +38,7 @@ export default {
       wordLimit: [0, 500],
       pageSize: 10,
       search: false,
-      noCopyright: true, // 隐藏底部版权信息 "Powered by Waline"
-      mountDelay: 800,
+      noCopyright: true,
 
       locale: {
         placeholder: "💬 欢迎评论（支持 Markdown 语法，提交后正确渲染）",

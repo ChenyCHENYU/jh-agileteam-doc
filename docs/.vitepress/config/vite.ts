@@ -12,7 +12,6 @@ import UnoCSS from "unocss/vite";
 import { resolve } from "path";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
 
 /**
  * Vite 配置
@@ -41,7 +40,6 @@ export const vite: UserConfig = {
       extensions: ["vue"],
       include: [/\.vue$/, /\.md$/],
       dts: resolve(__dirname, "../../types/components.d.ts"),
-      resolvers: [NaiveUiResolver()],
     }),
   ],
 
@@ -62,11 +60,9 @@ export const vite: UserConfig = {
   // 构建配置
   build: {
     chunkSizeWarningLimit: 1000,
-    // 代码分割优化 — 将大依赖拆分为独立 chunk，利用浏览器并行加载和缓存
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes("naive-ui")) return "vendor-naive";
           if (id.includes("@waline")) return "vendor-waline";
           if (id.includes("node_modules")) return "vendor";
         },
@@ -74,9 +70,9 @@ export const vite: UserConfig = {
     },
   },
 
-  // 预优化依赖 — 减少首次访问时 Vite 发现新依赖触发的 reload
+  // 预优化依赖
   optimizeDeps: {
-    include: ["vue", "naive-ui", "@waline/client"],
+    include: ["vue"],
   },
 
   // CSS 配置
