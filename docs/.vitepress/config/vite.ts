@@ -57,20 +57,34 @@ export const vite: UserConfig = {
   server: {
     port: 8866,
     host: true,
-    // open: true, // 自动打开浏览器
   },
 
   // 构建配置
   build: {
     chunkSizeWarningLimit: 1000,
+    // 代码分割优化 — 将大依赖拆分为独立 chunk，利用浏览器并行加载和缓存
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("naive-ui")) return "vendor-naive";
+          if (id.includes("@waline")) return "vendor-waline";
+          if (id.includes("node_modules")) return "vendor";
+        },
+      },
+    },
+  },
+
+  // 预优化依赖 — 减少首次访问时 Vite 发现新依赖触发的 reload
+  optimizeDeps: {
+    include: ["vue", "naive-ui", "@waline/client"],
   },
 
   // CSS 配置
   css: {
     preprocessorOptions: {
-      // scss: {
-      //   additionalData: `@use "@/styles/variables.scss" as *;`,
-      // },
+      scss: {
+        api: "modern-compiler",
+      },
     },
   },
 };
