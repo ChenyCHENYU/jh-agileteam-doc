@@ -304,6 +304,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "概述", link: "/views/ai-workflow/" },
+        { text: "wl-skills-design 设计技能包", link: "/views/ai-workflow/design-skills" },
         { text: "原型设计", link: "/views/ai-workflow/prototype", badge: { text: "规划中", type: "warning" } },
         { text: "详细设计", link: "/views/ai-workflow/detail-design", badge: { text: "规划中", type: "warning" } },
         { text: "全栈开发", link: "/views/ai-workflow/fullstack-dev", badge: { text: "规划中", type: "warning" } },
