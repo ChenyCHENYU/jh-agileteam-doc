@@ -9,7 +9,6 @@ const { Layout } = DefaultTheme
 const showLoading = ref(true)
 
 onMounted(() => {
-  // 等待首帧渲染完成后退出
   requestAnimationFrame(() => {
     setTimeout(() => {
       showLoading.value = false
@@ -24,6 +23,9 @@ const isNavigating = ref(false)
 watch(
   () => router.route.path,
   () => {
+    // 通知 Waline 评论系统路由变化
+    window.dispatchEvent(new Event('vitepress:route-change'))
+    // 显示进度条
     isNavigating.value = true
     nextTick(() => {
       setTimeout(() => {

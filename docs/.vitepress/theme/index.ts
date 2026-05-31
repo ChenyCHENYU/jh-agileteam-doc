@@ -10,8 +10,6 @@
 import DefaultTheme from "vitepress/theme";
 import type { Theme } from "vitepress";
 import { useWalineComments } from "../composables/useWalineComments";
-import { useRouter } from "vitepress";
-import { watch } from "vue";
 import Layout from "./Layout.vue";
 
 // UnoCSS
@@ -28,14 +26,6 @@ import "./waline-custom.scss";
 export default {
   extends: DefaultTheme,
   Layout,
-  setup() {
-    // 监听 VitePress 路由变化
-    const router = useRouter();
-    watch(
-      () => router.route.path,
-      () => window.dispatchEvent(new Event("vitepress:route-change"))
-    );
-  },
   enhanceApp() {
     // Waline 评论系统配置
     const walinePlugin = useWalineComments({
