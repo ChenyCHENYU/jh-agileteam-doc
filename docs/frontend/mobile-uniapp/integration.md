@@ -1,42 +1,10 @@
-# 移动端门户 · H5 子应用集成方案
+# 移动端 uniApp — H5 子应用集成方案
 
-> 版本：v1.1 · 更新：2026-05-29
-> 适用范围：移动端门户（wl-mbase）对接 H5 子应用的 SSO 免登集成全流程
-
----
-
-## 一、现状与过渡计划
-
-### 当前状态
-
-| 项目        | 路径规范    | SIT 完整地址                               | 说明                         |
-| ----------- | ----------- | ------------------------------------------ | ---------------------------- |
-| 移动端门户  | `/mbase/`   | `https://ytiop-sit.walsin.com.cn/mbase/`   | OAuth2 登录，JWT Token       |
-| 智慧安全 H5 | `/mbase/aq` | `https://ytiop-sit.walsin.com.cn/mbase/aq` | 统一路径规范，iframe 嵌入    |
-| 智慧安防 H5 | `/mbase/af` | `https://ytiop-sit.walsin.com.cn/mbase/af` | 同上                         |
-| 智慧环保 H5 | `/mbase/hb` | `https://ytiop-sit.walsin.com.cn/mbase/hb` | 同上                         |
-
-### 集成方式
-
-```
-移动端门户登录（OAuth2）
-  → 获取 portal_token（access_token）
-  → 用户点击工作台子应用图标
-  → 拼接 URL：https://{VITE_DOMAIN}/mbase/aq?portal_token=xxx&user_id=yyy&from=portal
-  → H5/App 端：原生 <iframe> 嵌入（position:fixed，全屏覆盖导航栏以下区域）
-  → 小程序端：<web-view> 组件加载
-```
-
-### 过渡原则
-
-- **所有环境**统一使用 `/mbase/{子应用缩写}` 路径规范，通过 `VITE_DOMAIN` 动态拼接域名
-- **外网就绪后**：只需修改 env 文件中的 `VITE_DOMAIN`，无需改代码
+> 对应项目：移动端门户（wl-mbase）。本文说明基座对接外部 H5 子应用的 SSO 免登、消息单点跳转、JSAPI 桥接、访客模式、公司上下文、openid 分发全流程。
 
 ---
 
-## 二、整体架构方案
-
-### 推荐架构（服务隔离）
+## 一、整体架构
 
 ```
 用户请求
@@ -49,38 +17,39 @@ Nginx 分流
 移动端网关
   ├─ 校验 JWT Token（移动端专属，scope=mobile）
   ├─ 菜单/权限查询（移动端权限表，独立于 PC）
-  └─ 透传业务请求 → 复用 PC 后端服务（hrms / safety / security 等）
+  └─ 透传业务请求 → 复用 PC 后端服务（hrms / safety / security）
 
-子应用 H5（智慧安全、智慧安防、智慧环保）
+子应用 H5（智慧安全、智慧安防、智慧环保 ...）
   └─ 接收 portal_token → 换取本系统 Token（或直接用）→ 调用自己业务接口
 ```
 
-### 方案可行性分析
+当前已注册子应用：
 
-| 关注点   | 结论    | 说明                                                  |
-| -------- | ------- | ----------------------------------------------------- |
-| 域名隔离 | ✅ 推荐 | `mobile.xxx.com` vs. `pc.xxx.com`，互不干扰           |
-| 网关隔离 | ✅ 推荐 | 移动网关独立部署，Token scope 不同，防越权            |
-| 服务复用 | ✅ 可行 | 业务接口（hrms、safety 等）移动/PC 共用，无需重复开发 |
-| 权限隔离 | ✅ 必须 | 移动端菜单权限独立维护（移动端功能集是 PC 的子集）    |
-| 外网扩展 | ✅ 平滑 | Nginx 加外网入口，网关逻辑不变，只改证书/域名         |
-
-> **当前阶段（内网）**：直连 IP，跳过 Nginx 分流这层，其余逻辑完全一致，方便后续平滑切换。
+| 应用     | mpPath      | 说明             | 钉钉 JSAPI          |
+| -------- | ----------- | ---------------- | ------------------- |
+| 智慧安全 | `/mbase/aq` | 安全生产管理系统 | 拍照/上传/定位      |
+| 智慧安防 | `/mbase/af` | 安防监控管理系统 | 拍照/上传/定位/扫码 |
+| 智慧环保 | `/mbase/hb` | 环保监测管理系统 | -                   |
 
 ---
 
-## 三、H5 子应用免登（SSO）原理
+## 二、免登（SSO）实现原理
 
-### 完整流程
+本项目有两层"免登"，不要混在一起看：
+
+- **基座自身登录**：用户进入 wl-mbase。钉钉 H5 场景可通过 `requestAuthCode` 换系统 token。
+- **子应用登录**：用户已进入基座后点击子应用，基座把 `portal_token` 拼到子应用 URL，子应用据此跳过自己的登录页。
+
+### 流程
 
 ```
-① 用户在移动端门户完成 OAuth2 登录
+① 用户在移动端门户登录（OAuth2）
      ↓ 获得 access_token（portal_token）
 
-② 用户点击工作台子应用图标
+② 用户点击子应用入口
      ↓
-③ 门户（portal-apps.ts + buildAppUrl）拼接跳转 URL
-     https://{VITE_DOMAIN}/mbase/aq?portal_token=<token>&user_id=<id>&from=portal
+③ 门户拼接跳转 URL
+     https://{VITE_DOMAIN}/mbase/aq?portal_token=<token>&user_id=<id>&from=portal&companyId=<id>&companyName=<name>
      ↓
 ④ 子应用入口页检测到 from=portal + portal_token
      ↓
@@ -90,35 +59,15 @@ Nginx 分流
 ⑤ 子应用正常加载，菜单/权限由子应用自己控制
 ```
 
-> **核心原则：登录只在门户发生一次。**
-> 用户已经在移动端登录，进入子应用时不应再看到任何登录界面。
-> 子应用自己的登录页对内部用户来说完全废弃，不展示、不提示。
+> **核心原则：登录只在门户发生一次。** 用户已经在移动端登录，进入子应用时不应再看到任何登录界面。
 
 ### Token 使用方式
 
-> 集成的 H5 是我们自己开发的，**优先选方式 A**；只有第三方 H5（认证体系与门户完全独立）才考虑方式 B。
+> 集成的 H5 是我们自己开发的，**优先选方式 A**；只有第三方 H5 才考虑方式 B。
 
-**方式 A：直接复用（推荐，最简单）**
-
-子应用后端与门户共用同一套认证服务，直接把 `portal_token` 当 Bearer Token 用。H5 解析出用户信息后直接进首页。
-
-```javascript
-// 子应用 login 页
-const urlParams = new URLSearchParams(window.location.search)
-const portalToken = urlParams.get('portal_token')
-const userId = urlParams.get('user_id')
-
-if (portalToken) {
-  store.setToken(portalToken)
-  store.setUserId(userId)
-  router.replace('/home')
-  return // 阻止登录组件继续渲染
-}
-```
+**方式 A：直接复用（推荐）** — 子应用后端与门户共用同一套认证服务，直接把 `portal_token` 当 Bearer Token 用。
 
 **方式 B：Token 交换（第三方 H5 适用）**
-
-子应用后端提供一个专用接口，与门户 Token 解耦：
 
 ```
 POST /auth/exchange
@@ -128,11 +77,99 @@ Response: { token: "子应用自己的token", expires_in: 3600 }
 
 ---
 
+## 三、钉钉消息单点跳转
+
+> 适用场景：钉钉消息通知点击后，不先落工作台，而是完成基座免登并直达某个子应用的具体页面。
+
+### 消息配置
+
+消息服务统一配置静态中转页（不要优先配置 `/mbase/pages/relay/index` 这种 SPA 深路径）：
+
+```text
+https://{VITE_DOMAIN}/mbase/relay.html?redirect_url=<encodeURIComponent(子应用完整URL)>
+```
+
+示例：
+
+```text
+https://ytiop-uat.walsin.com.cn/mbase/relay.html
+  ?redirect_url=https%3A%2F%2Fytiop-uat.walsin.com.cn%2Fmbase%2Faq%2Fdetail%3Fid%3D123
+```
+
+### 运行链路
+
+```text
+钉钉消息
+  ↓
+/mbase/relay.html?redirect_url=<子应用URL>
+  ↓
+校验 redirect_url：同源 + http(s) + 已注册子应用路径
+  ↓
+读取基座本地登录态
+  ↓
+已登录、token 未过期、userId/companyId 就绪
+  ├─ 是：追加 portal_token/from/user_id/companyId → 跳子应用
+  └─ 否：回 /mbase/?redirect_url=... → 基座 SSO / 公司加载 → 消费 redirect
+```
+
+### 关键源码
+
+| 文件                             | 职责                                                                                |
+| -------------------------------- | ----------------------------------------------------------------------------------- |
+| `public/relay.html`              | 静态中转页，解决深路径 Nginx 不 fallback、已登录快速直达、异常态回基座              |
+| `index.html`                     | 在 uni-app 路由初始化前捕获 `redirect_url`，新消息会覆盖旧缓存                      |
+| `src/utils/dingtalk-redirect.ts` | SPA 侧捕获/消费 `redirect_url`，做同源白名单、URL 参数拼接、companyId 兜底加载      |
+| `src/pages/login/index.vue`      | 钉钉 SSO 成功后消费 redirect，有则进子应用，否则进工作台                           |
+| `src/App.vue`                    | 已登录冷启动停在 launch 页时消费 redirect，避免被默认工作台跳转覆盖                 |
+| `src/pages/relay/index.vue`      | 旧 SPA 中转入口，保留兼容历史配置，不作为新消息首选入口                             |
+
+### 白名单与新增子应用
+
+当前允许消息直达的路径：`/mbase/aq/`、`/mbase/af/`、`/mbase/hb/`。新增子应用时必须同步维护：
+
+1. `src/config/portal-apps.ts`：注册子应用
+2. `public/relay.html`：把新 `mpPath` 加入 `APP_PATHS`，否则钉钉消息直达会被安全拦截
+3. 子应用后端：继续使用 `portal_token + companyId` 校验公司权限
+
+### 安全策略
+
+- 只允许当前域名下已注册子应用路径，不允许跨域、`javascript:`、未知路径
+- 参数拼接使用 `URLSearchParams`，会先清理旧的 `portal_token/from/user_id/companyId`，避免重复污染
+- token 过期、未登录、缺 `userId`、缺 `companyId` 时不硬跳子应用，而是回基座走既有 SSO 和公司加载流程
+- 中转页通过 `history.replaceState` 优化返回体验，从子应用返回时落工作台，不回到 relay 重复跳转
+- 控制台日志不打印完整带 token 的子应用 URL
+
+### 审批流消息分流
+
+审批流消息使用 `FLOW_` 模板编码进入基座审批流消息路由，普通业务消息仍沿用 `redirect_url` 规则：
+
+```text
+templateCode 以 FLOW_ 开头：
+  标准 FLOW_COMMENTS → 基座审批详情页（通过 / 驳回）
+  其他 FLOW_*   → 按 returnUrl 跳具体子应用
+
+  生产过渡兼容（businessType=101 安全域消息暂由安全子应用承接）：
+    FLOW_COMMENTS + 101 → /mbase/aq/message?tab=todo
+    FLOW_REFUSE   + 101 → /mbase/aq/ehs/work-license
+    该规则仅用于移动端消息中心完成前的平滑过渡
+
+templateCode 不以 FLOW_ 开头：
+  走原 redirect_url 子应用跳转
+```
+
+待审批消息固定格式：
+
+```text
+https://{VITE_DOMAIN}/mbase/relay.html?target=flow&provider=platform&templateCode=FLOW_COMMENTS&id=<instanceId>&commentId=<commentId>&messageId=<messageId>&returnUrl=<encodeURIComponent(移动端业务URL)>
+```
+
+---
+
 ## 四、门户侧配置（mbase 负责）
 
 ### 4.1 子应用注册 `portal-apps.ts`
 
-新增子应用仅需在 `src/config/portal-apps.ts` 追加一条配置：
+新增子应用仅在 `src/config/portal-apps.ts` 追加一条配置：
 
 ```typescript
 export const PORTAL_APPS: PortalApp[] = [
@@ -142,12 +179,15 @@ export const PORTAL_APPS: PortalApp[] = [
     description: '安全生产管理系统',
     icon: '🔒',
     iconBg: 'linear-gradient(135deg, #667eea, #764ba2)',
-    url: 'https://ytiop-sit.walsin.com.cn/mbase/aq',  // SIT 环境
-    mpPath: '/mbase/aq',                               // 线上环境，动态拼接 VITE_DOMAIN
-    devProxyPath: '/mbase/aq',                         // 本地 Vite 代理
-    roles: ['*'],                                      // 可见角色，'*' 全部
+    url: 'https://ytiop-sit.walsin.com.cn/mbase/aq/',  // 开发 fallback
+    mpPath: '/mbase/aq/',                                // 线上，运行时拼接 VITE_DOMAIN
+    devProxyPath: '/mbase/aq/',                          // 本地 Vite 代理
+    roles: ['*'],                                        // 可见角色，'*' 全部
     enabled: true,
     sort: 1,
+    platforms: ['h5', 'mp-weixin', 'app'],               // 可见平台，不填则全部
+    visitorAccessible: true,                             // 是否对访客开放
+    needWechatOpenid: true,                              // 微信小程序端是否注入 openid
   },
   // ... 更多子应用
 ]
@@ -155,20 +195,24 @@ export const PORTAL_APPS: PortalApp[] = [
 
 ### 4.2 各配置项说明
 
-| 字段          | 说明                                                       |
-| ------------- | ---------------------------------------------------------- |
-| `id`          | 唯一标识，用于路由参数和日志                               |
-| `url`         | H5 首页地址（SIT/生产），App/H5 端使用                     |
-| `mpPath`      | 线上路径，运行时与 `VITE_DOMAIN` 动态拼接完整 HTTPS 地址   |
-| `devProxyPath`| 开发代理路径，Vite DevServer 转发并剔除 X-Frame-Options    |
-| `roles`       | 可见角色列表，`['*']` 全部可见，支持精确角色控制           |
-| `enabled`     | 是否显示在工作台，false 则隐藏                             |
-| `sort`        | 排序权重，数字越小越靠前                                   |
+| 字段                 | 说明                                                       |
+| -------------------- | ---------------------------------------------------------- |
+| `id`                 | 唯一标识，用于路由参数和日志                               |
+| `url`                | H5 首页地址（开发环境 fallback）                           |
+| `mpPath`             | 线上路径，运行时与 `VITE_DOMAIN` 动态拼接完整 HTTPS 地址   |
+| `devProxyPath`       | 开发代理路径，Vite DevServer 转发并剔除 X-Frame-Options    |
+| `roles`              | 可见角色列表，`['*']` 全部可见，支持精确角色控制           |
+| `enabled`            | 是否显示在工作台                                           |
+| `sort`               | 排序权重，数字越小越靠前                                   |
+| `platforms`          | 可见平台列表（`h5` / `mp-weixin` / `app`），不填则全平台可见 |
+| `visitorAccessible`  | 是否允许访客（免登）访问                                   |
+| `needWechatOpenid`   | 仅微信小程序端生效，是否下发微信 openid                    |
 
-门户会通过 `buildAppUrl()` 自动追加认证参数：
+`buildAppUrl()` 会自动追加认证参数，新签名：
 
-```
-{mpPath}?portal_token={access_token}&user_id={userId}&from=portal
+```ts
+buildAppUrl(app, token, userId?, openid?, isVisitor?, context?)
+// → {mpPath}?portal_token={token}&from=portal&user_id={userId}[&openid=][&companyId=][&companyName=][&mode=visitor]
 ```
 
 ### 4.3 开发代理配置（vite.config.js）
@@ -193,73 +237,62 @@ proxy: {
 
 ### 4.4 门户已完成功能
 
-- [x] `src/config/portal-apps.ts`：配置子应用列表（url、mpPath、name、enabled）
-- [x] `buildAppUrl(app, token, userId)`：自动拼接 `portal_token`、`user_id`、`from=portal`
+- [x] `src/config/portal-apps.ts`：配置子应用列表（url、mpPath、name、enabled、roles、platforms）
+- [x] `buildAppUrl(app, token, userId, openid, isVisitor, context)`：自动拼接 `portal_token`、`user_id`、`from=portal`、`companyId`、`companyName`
 - [x] `src/pages/index/index.vue`：点击应用图标 → 传参跳转 webview 页
-- [x] `src/pages/webview/index.vue`：原生 `<iframe>` 全屏嵌入，支持 postMessage 双向通信
-
-### 4.5 后续待完成
-
-| 任务               | 优先级 | 说明                                                          |
-| ------------------ | ------ | ------------------------------------------------------------- |
-| Token 过期自动刷新 | 高     | 子应用 iframe 内收到 401 → 通知门户刷新 token → 重新加载      |
-| 子应用白名单校验   | 中     | 防止通过 url 参数嵌入任意第三方页面                           |
+- [x] `src/pages/webview/index.vue`：iframe / web-view 嵌入 + postMessage 双向通信 + 桥接协议
+- [x] `src/utils/dingtalk/`：钉钉 JSAPI 按职责拆分为 5 个子模块
+- [x] `src/utils/dingtalk-redirect.ts`：钉钉消息 redirect 捕获、白名单校验、SSO 后消费跳转
+- [x] `public/relay.html`：静态中转页，支持钉钉消息单点跳转和返回体验优化
+- [x] `src/pages/webview/photo-utils.ts`：图片归一化工具（URL/dataURI/base64）
 
 ---
 
-## 五、子应用侧改造清单（H5 负责）
+## 五、H5 子应用侧改造清单
 
 > **核心思路：登录入口只有一个，就是门户。**
-> H5 子应用的登录页对内部用户完全废弃。用户进入 H5 时已经是登录状态，
-> 子应用只需认证头部（token），不需要再论登录。
 
 ### 5.1 必须改（否则免登不生效）
 
-#### ① 移动端入口路径：子应用统一部署在 `/mbase/{缩写}` 路径下
+#### ① 移动端入口路径：统一部署在 `/mbase/{缩写}` 路径下
 
-基座统一命名规范，所有子应用的移动端入口路径为：
+```ts
+// vite.config.ts
+base: '/mbase/aq'     // 子应用 base path
 
+// vue-router
+createWebHistory('/mbase/aq')
+
+// 构建输出
+build.outDir: 'aq'    // 部署时放到 /mbase/ 目录下
 ```
-/mbase/{项目缩写}
-```
 
-| 子应用   | mpPath      | SIT 完整地址                               |
-| -------- | ----------- | ------------------------------------------ |
-| 智慧安全 | `/mbase/aq` | `https://ytiop-sit.walsin.com.cn/mbase/aq` |
-| 智慧安防 | `/mbase/af` | `https://ytiop-sit.walsin.com.cn/mbase/af` |
-| 智慧环保 | `/mbase/hb` | `https://ytiop-sit.walsin.com.cn/mbase/hb` |
+#### ② Login 入口：检测到 `portal_token` 就直接进首页
 
-**子应用 vite 构建配置要求：**
-
-- `vite.config` 的 `base` 设置为 `/mbase/{缩写}`（如 `/mbase/aq`）
-- `vue-router` 的 `createWebHistory` base 设置为 `/mbase/{缩写}`
-- `build.outDir` 设置为子应用缩写（如 `aq`），部署时放到 `/mbase/` 目录下
-
-#### ② Login 入口：检测到 `portal_token` 就直接进首页，不展示登录界面
-
-```javascript
-// 在 login 页面或入口页面的 mounted / created 生命周期中
-// 「第一件事」就是检测 portal_token，存在则立即换到首页，登录组件根本不渲染
+```ts
 const urlParams = new URLSearchParams(window.location.search)
 const portalToken = urlParams.get('portal_token')
 const userId = urlParams.get('user_id')
+const companyId = urlParams.get('companyId')
+const companyName = urlParams.get('companyName')
 
 if (portalToken) {
   // 方式A：直接用 portal_token 设置本系统认证状态
   store.setToken(portalToken)
   store.setUserId(userId)
-  router.replace('/home') // 进首页，登录页内容不显示
-  return // 防止登录页组件继续执行（不渲染登录表单）
+  store.setCompanyContext({ companyId, companyName })
+  router.replace('/home') // 进首页，登录页不渲染
+  return
 }
-// portalToken 不存在时，正常展示内部登录界面（内部调试用）
 ```
 
 #### ③ 路由守卫：深链接进入时不强制跳登录页
 
-```javascript
+```ts
 router.beforeEach((to, from, next) => {
-  const hasPortalToken = new URLSearchParams(window.location.search)
-    .has('portal_token')
+  const hasPortalToken = new URLSearchParams(window.location.search).has(
+    'portal_token'
+  )
   if (!store.token && !hasPortalToken) {
     next('/login')
   } else {
@@ -270,155 +303,348 @@ router.beforeEach((to, from, next) => {
 
 #### ④ 允许被 iframe 嵌入（nginx 配置）
 
-确保子应用 nginx 不发送 `X-Frame-Options: DENY` 或 `SAMEORIGIN`：
-
 ```nginx
-# 删除或注释掉以下行
+# 删除或注释 X-Frame-Options
 # add_header X-Frame-Options SAMEORIGIN;
 
-# 如果需要限制只允许门户域名嵌入，改为：
-add_header Content-Security-Policy "frame-ancestors 'self' http://172.28.99.172:1999 https://ytiop-sit.walsin.com.cn";
+# 改用 CSP 限制来源（推荐）
+add_header Content-Security-Policy "frame-ancestors 'self' https://ytiop-sit.walsin.com.cn";
 ```
 
 ### 5.2 建议改（体验更好）
 
-#### ⑤ Token 优先存入 `sessionStorage`
+#### ⑤ 页面标题同步给门户
 
-避免跨域 iframe 第三方 Cookie 失效（iOS Safari 等场景）：
-
-```javascript
-// 推荐：sessionStorage 优先，Cookie 兜底
-sessionStorage.setItem('token', portalToken)
-// 不建议仅依赖 Cookie（第三方 Cookie 在 iOS Safari 等场景下会被阻止）
-```
-
-#### ⑥ 页面标题同步给门户
-
-门户 webview 页面会监听 `postMessage`，子应用可以把当前页面标题传过去：
-
-```javascript
+```ts
 router.afterEach(to => {
   window.parent.postMessage({ title: to.meta.title || document.title }, '*')
 })
 ```
 
-#### ⑦ 会话过期通知门户
+#### ⑥ 会话过期通知门户
 
-```javascript
+```ts
 // 接口返回 401 时，通知门户处理
-window.parent.postMessage({ action: 'logout' }, '*')
-// 门户收到后：提示"子应用会话过期"并返回工作台，不清除门户登录态
+window.parent.postMessage({ action: 'logout' }, '*')      // 子应用会话失效，退回工作台
+window.parent.postMessage({ action: 'user-logout' }, '*') // 子应用主动退出，基座清登录态
 ```
 
 ### 5.3 不需要改
 
-- 子应用自己的业务接口 — 无需改造，继续走自己的接口
-- 子应用自己的 UI/样式 — 门户只是 iframe 嵌入，完全样式隔离
-- 子应用内部路由 — 照常工作，门户不感知子应用内页面切换
+- 子应用普通业务接口 — 照常；涉及公司数据/权限的接口需接收并校验 `companyId`
+- 子应用 UI/样式 — iframe 完全隔离
+- 子应用内部路由 — 照常工作，门户不感知
 
 ---
 
-## 六、门户 webview 容器行为说明
+## 六、桥接通信协议
 
-`src/pages/webview/index.vue` 是子应用的统一容器，不同平台渲染方式不同：
+子应用运行在 iframe 内，受安全策略限制无法直调钉钉 JSAPI。由基座统一调用 JSAPI，通过 `mbase-bridge` postMessage 桥接回传结果。
 
-| 平台       | 嵌入方式            | 特殊处理                                          |
-| ---------- | ------------------- | ------------------------------------------------- |
-| 微信小程序 | `<web-view>` 独占页 | 无自定义导航栏，系统自带返回按钮                  |
-| App        | `<web-view>` 组件   | 自定义玻璃态导航栏 + 进度条                       |
-| H5/钉钉   | 原生 `<iframe>`     | 自定义导航栏；钉钉环境隐藏导航栏（原生提供）      |
+```
+子应用 iframe                     基座 mbase
+  │  postMessage(invoke)            │
+  │ ───────────────────────────────>│  dd.biz.util.uploadImageFromCamera()
+  │                                 │  dd.device.geolocation.get()
+  │                                 │  dd.biz.util.scan()
+  │  postMessage(result)            │
+  │ <───────────────────────────────│
+```
 
-**webview 容器监听以下 postMessage 消息：**
+### 支持的能力列表
 
-| 消息类型                  | 门户行为                                            |
-| ------------------------- | --------------------------------------------------- |
-| `{ title: '...' }`       | 更新导航栏标题                                      |
-| `{ action: 'logout' }`   | 提示"子应用会话过期"并返回工作台，不清除门户登录态  |
+| api                  | 说明                    | payload                                | 返回 data                                               |
+| -------------------- | ----------------------- | -------------------------------------- | ------------------------------------------------------- |
+| `takePhoto`          | 拍照（含 iOS 降级策略） | `{ max, uploadConfig? }`               | `{ images: string[] }` 或 `{ uploaded: true, results }` |
+| `takePhotoAndUpload` | 拍照直传后端            | `{ max, url, formData?, header? }`     | `{ results: any[] }`                                    |
+| `getLocation`        | 获取定位                | 无                                     | `{ latitude, longitude, accuracy, address }`            |
+| `scan`               | 扫一扫                  | `{ type: 'qrCode'\|'barCode'\|'all' }` | `{ text: string }`                                      |
+| `debugInfo`          | 获取诊断信息            | 无                                     | 签名 URL / 平台 / 入口 URL 等                           |
+
+### 接入示例（子应用侧）
+
+```ts
+/** 调用基座钉钉能力 */
+function callBridge<T = any>(api: string, payload?: any, timeout = 30000): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const id = `${Date.now()}-${Math.random().toString(36).slice(2)}`
+    const timer = setTimeout(() => {
+      window.removeEventListener('message', handler)
+      reject(new Error(`桥接超时: ${api}`))
+    }, timeout)
+
+    function handler(e: MessageEvent) {
+      const msg = e.data
+      if (msg?.source !== 'mbase-bridge' || msg?.type !== 'capability:result' || msg?.id !== id) return
+      clearTimeout(timer)
+      window.removeEventListener('message', handler)
+      msg.ok ? resolve(msg.data) : reject(new Error(msg.reason || msg.error || '桥接调用失败'))
+    }
+    window.addEventListener('message', handler)
+    window.parent.postMessage(
+      { source: 'mbase-bridge', type: 'capability:invoke', id, api, payload },
+      '*'
+    )
+  })
+}
+
+// 使用
+const { images } = await callBridge<{ images: string[] }>('takePhoto', { max: 1 })
+const loc = await callBridge<{ latitude: number; longitude: number }>('getLocation')
+const { text } = await callBridge<{ text: string }>('scan', { type: 'qrCode' })
+```
 
 ---
 
-## 七、特殊情况：早期 H5 只用平台角色、自管权限
+## 七、钉钉 JSAPI 鉴权
 
-> 针对"角色用咱平台的，但权限是它们自己内部管控"的早期 H5 应用。
+> 适用场景：用户在钉钉客户端内使用拍照、定位等敏感 JSAPI，前端必须先 `dd.config` 签名鉴权，否则报 `No permission info for action: ...`。
 
-### 特征
+### 流程
 
-- 登录身份（用户是谁）来自门户
-- 但菜单、按钮、数据权限由子应用自己决定，不接入门户的权限体系
+```
+前端(mbase)                         后端                         钉钉服务端
+   │   GET /dingtalk/jsapi-signature   │                              │
+   │       ?url=当前页面URL             │                              │
+   │──────────────────────────────────►│                              │
+   │                          (缓存) │── gettoken(AppKey/Secret) ──►│
+   │                                 │◄────── access_token ────────│
+   │                                 │  SHA1 计算 signature          │
+   │◄── {agentId,corpId,timeStamp,nonceStr,signature} ─────────────│
+   │  dd.config(...) → dd.ready → 调拍照/定位                       │
+```
 
-### 改造范围
+### 前端鉴权模块
 
-| 改造项                        | 是否需要   | 说明                                |
-| ----------------------------- | ---------- | ----------------------------------- |
-| 移动端入口路径 `/mbase/{缩写}` | **需要**   | 基座统一规范，必须配                |
-| Login 入口检测 `portal_token` | **需要**   | 免登的最低要求，必须做              |
-| Token 换取 / 直接复用         | 视情况     | 至少能知道"当前用户是谁"（user_id） |
-| 向门户同步页面标题            | 可选       | 建议做，体验更好                    |
-| 接入门户菜单权限接口          | **不需要** | 子应用自己管控，门户不干涉          |
-| 修改业务接口                  | **不需要** | 照常                                |
+`src/utils/dingtalk/` 按职责拆分为 5 个子模块：
 
-### 最小改造示例（仅免登，权限完全自管）
+| 子模块     | 文件        | 职责                                                      |
+| ---------- | ----------- | --------------------------------------------------------- |
+| 共享工具   | `shared.ts` | 环境检测、JSAPI 动态加载、通用调用封装、类型定义          |
+| 鉴权初始化 | `config.ts` | dd.config 签名鉴权、dd.ready 初始化、导航栏控制、诊断信息 |
+| 拍照选图   | `photo.ts`  | 拍照/选图（compression 渐进增强策略）                     |
+| 文件上传   | `upload.ts` | 文件上传/拍照直传（安卓双路 + iOS 单路）                  |
+| 设备能力   | `device.ts` | 定位（需鉴权）/ 扫码（免鉴权）                            |
 
-```javascript
-// 入口页 mounted
-mounted() {
-  const p = new URLSearchParams(location.search)
-  if (p.get('from') === 'portal' && p.get('portal_token')) {
-    // 只需知道是哪个用户，权限由本系统根据 user_id 自行决定
-    this.$store.commit('SET_USER_ID', p.get('user_id'))
-    this.$store.commit('SET_TOKEN', p.get('portal_token'))
-    this.$router.replace('/home')
-  }
+### 调用时机
+
+- **不是进门户就鉴权**，用户首次点击拍照/定位时惰性触发 `dingtalkConfig()`
+- webview 容器页 `onMounted` 时预鉴权一次，缓存复用（按签名 URL 缓存）
+- 52013 签名错误自动用钉钉返回的 URL 重试；非敏感 API（扫码）无需鉴权
+
+---
+
+## 八、访客模式接入（免账号密码）
+
+> 适用场景：访客预约、进出厂物资登记等业务，需要**外部人员（无系统账号）**在微信端直接使用。
+
+### 流程
+
+```
+① 用户在 mbase 登录页点击「访客入口」（仅微信小程序端展示）
+     ↓
+② mbase 用预置的访客客户端凭证 RSA 加密后请求平台
+     POST /auth/oauth/token?grant_type=client_credentials&client_code=<密文>
+     ↓ 返回受限 access_token（scope 仅含访客相关接口）
+     ↓
+③ mbase 拼接跳转 URL：
+     https://{VITE_DOMAIN}/mbase/af/#/visitor-reservation/person
+       ?portal_token=<受限token>&from=portal&mode=visitor
+     ↓
+④ 子应用入口：
+     · from=portal  → 复用免登逻辑，直接登录
+     · mode=visitor → 标记访客身份，控制功能图标显隐
+```
+
+### 两层控制
+
+| 层级           | 手段                         | 作用                                       |
+| -------------- | ---------------------------- | ------------------------------------------ |
+| 安全（硬控制） | 后端访客客户端的 `scope`     | 决定**能不能调接口**，越权直接拒绝         |
+| 体验（软控制） | 前端 `mode=visitor` + `v-if` | 决定**显不显示图标**，避免访客看到无关功能 |
+
+### 门户侧已预置（子应用无需关心）
+
+| 文件                        | 内容                                              |
+| --------------------------- | ------------------------------------------------- |
+| `src/pages/login/index.vue` | 微信端「访客入口」按钮（`#ifdef MP-WEIXIN`）      |
+| `src/utils/visitor-auth.ts` | `client_credentials` 换 token、RSA 加密、独立存储 |
+
+### 子应用改造（4 处小改动）
+
+1. 新增常量 `VISITOR_MODE_KEY = 'h5_visitor_mode'`
+2. URL 参数解析增加 `mode` 字段
+3. 初始化时记录访客模式到 `sessionStorage`
+4. 导出 `isVisitorMode()` 供业务控制显隐
+
+```vue
+<van-cell v-if="!visitor" title="隐患排查" /> <!-- 访客隐藏 -->
+<van-cell title="访客预约" />                  <!-- 访客可见 -->
+```
+
+### 后端配合
+
+1. 平台后台「客户端管理」新增访客专用客户端
+2. scope 仅授予访客接口（如 `store_attach_view`、`store_attach_add`）
+3. 将 `clientId/clientSecret` 提供给前端替换占位值
+
+---
+
+## 九、微信小程序 openid 分发（访客身份识别）
+
+> 适用场景：微信小程序访客入口进入子应用（当前为智慧安防）时，子应用需要拿到微信 `openid`，用于识别同一访客并留存入场/登记记录。**仅微信小程序端生效**。
+
+小程序前端只能通过 `uni.login` 拿到一次性 `code`，`code → openid` 必须由后端携带小程序 `appid` + `appsecret` 调微信 `jscode2session` 完成（`appsecret` 严禁放到前端或子应用 URL）。
+
+### 流程
+
+```
+微信小程序 mbase
+  │  用户点击「访客入口」进入工作台
+  │  用户点击需要 openid 的子应用（当前：security/智慧安防）
+  ▼
+mbase 调 uni.login() 获取 code
+  │
+  │  GET /integrated/external/wx/getOpenId?code=<code>  ← 已上线，无需鉴权
+  ▼
+后端调微信 jscode2session(appid + appsecret + code)
+  │  返回 { openid, unionid? }
+  ▼
+mbase 缓存 openid（独立 storage，不进入 user store）
+  │  打开子应用 URL 时按需追加：&openid=<openid>
+  ▼
+安防子应用从 URL 读取 openid，用于访客登记/入场留存
+```
+
+### 应用级 opt-in（防止污染其它子应用）
+
+openid 注入是**应用级 opt-in**，只有在 `src/config/portal-apps.ts` 中显式声明 `needWechatOpenid: true` 的应用才会收到：
+
+```ts
+{
+  id: 'security',
+  name: '智慧安防',
+  visitorAccessible: true,
+  needWechatOpenid: true, // 仅此应用会在微信小程序端收到 &openid=
 }
 ```
 
+未声明的应用永远不会被追加 `openid` 参数，避免身份信息误传、互相污染。
+
+### 后端接口（已上线）
+
+| 项   | 实际值                                                           |
+| -------- | ---------------------------------------------------------------- |
+| 方法     | `GET`                                                            |
+| 路径     | `/integrated/external/wx/getOpenId`                              |
+| 入参     | Query：`code`，必填。值来自 `uni.login()` 返回的 `code`          |
+| 鉴权     | 无需鉴权（已验证）                                               |
+| 返回     | 统一包裹格式 `{ "code": 200, "data": { "openid": "..." } }`      |
+
+### 降级策略
+
+后端接口未上线/失败/超时/未返回 openid：**不阻断进入子应用**，URL 只是不携带 `openid`，仍保留 `portal_token`、`from=portal` 等免登参数；错误仅在 mbase 控制台输出 warning。
+
 ---
 
-## 八、内网 → 外网切换配置指引
+## 十、公司上下文透传
 
-### 8.1 门户配置变更
+> 适用场景：正式登录用户进入工作台后，基座获取该用户可访问的公司列表，用户选择当前公司，打开子应用时把公司上下文随 URL 一起传入。
 
-修改 `env/.env.production`：
+### 门户侧公司来源
 
-```ini
-# 内网
-VITE_API_BASE_URL=http://172.28.99.172:9000
-
-# 外网（当前 SIT 环境）
-VITE_API_BASE_URL=https://ytiop-sit.walsin.com.cn/sit-api
+```http
+GET /hrms/user/getCurUser
+GET /hrms/user/getById?id=<getCurUser.data.user.id>
 ```
 
-修改 `src/config/portal-apps.ts`：
+门户先通过 `getCurUser` 拿到当前用户 ID，再通过 `getById` 读取 `userOrganizeInfo`，转成 `{ id: companyId, name: companyName, deptId, deptName, main }[]`。
 
-```typescript
-// 所有环境统一使用 mpPath，通过 VITE_DOMAIN 动态拼接
-{ id: 'safety', url: 'https://ytiop-sit.walsin.com.cn/mbase/aq', mpPath: '/mbase/aq', devProxyPath: '/mbase/aq', ... }
+**兜底策略**：
+
+- 正常：`getById` 返回 `userOrganizeInfo`，门户使用该列表
+- 兜底：`getById` 因权限/网关失败，但 `getCurUser` 已在 `userStore.userInfo` 缓存了 `userOrganizeInfo`，门户用缓存恢复公司上下文
+- 失败：两处都没有可用组织信息，门户展示明确错误（如 `/hrms/user/getById 获取失败：无权限访问`）
+
+**默认选择规则**：优先用户上次选择且仍在列表内的公司 → 否则 `main === true` 主公司 → 否则列表第一项。当前选择按用户 ID 维度保存在本地，避免用户互相污染。
+
+> 公司 ID 可能超过 JS 安全整数范围，前端和子应用都必须按字符串处理，不要转成 `number`。
+
+### 子应用 URL 参数
+
+```text
+portal_token=<token>
+from=portal
+user_id=<userId>
+companyId=<当前公司ID>
+companyName=<当前公司名称>
 ```
 
-> **说明**：`mpPath` 用于所有线上环境（SIT/UAT/PRD），运行时通过 `VITE_DOMAIN` 动态拼接完整 HTTPS 地址。`url` 字段仅用于开发环境 fallback。
+完整示例：
 
-修改 `src/manifest.json`（小程序发布时）：
-
-```json
-"mp-weixin": {
-  "setting": { "urlCheck": true }  // 发布时必须开启
-}
+```text
+https://ytiop-sit.walsin.com.cn/mbase/aq/
+  ?portal_token=xxx
+  &from=portal
+  &user_id=U001
+  &companyId=2061278439935053827
+  &companyName=%E7%83%9F%E5%8F%B0%E5%8D%8E%E9%91%AB
 ```
 
-### 8.2 微信公众平台配置
+### 子应用读取方式
 
-| 配置项               | 需要添加的域名                                          |
-| -------------------- | ------------------------------------------------------- |
-| request 合法域名     | `https://ytiop-sit.walsin.com.cn`（API 域名）           |
-| webview 业务域名     | 各子应用域名（安全、安防、环保等）                      |
-| downloadFile 合法域名| `https://at.alicdn.com`（wot-design-uni 图标字体）      |
+```ts
+const params = new URLSearchParams(window.location.search)
 
-### 8.3 钉钉开放平台配置
+const portalToken = params.get('portal_token') || ''
+const companyId = params.get('companyId') || ''
+const companyName = params.get('companyName') || ''
 
-- **微应用首页 URL**：`https://ytiop-sit.walsin.com.cn/mbase/`（H5 部署地址）
-- **JSAPI 安全域名**：与微应用首页同域名
+if (portalToken) localStorage.setItem('portal_token', portalToken)
+if (companyId) sessionStorage.setItem('portal_company_id', companyId)
+if (companyName) sessionStorage.setItem('portal_company_name', companyName)
 
-### 8.4 Nginx 外网入口示例
+// 业务接口显式携带公司 ID
+await request('/api/current-user/permissions', {
+  headers: { Authorization: `Bearer ${portalToken}` },
+  params: { companyId },
+})
+```
+
+### 权限边界
+
+`companyId` 是用户在门户选择的业务上下文，**不是权限证明**。子应用后端必须用 `portal_token + companyId` 再次校验该用户是否有该公司权限，据此返回菜单、按钮和数据范围。`companyName` 仅用于展示，不能做权限判断。如果子应用没收到 `companyId`，建议阻断进入业务首页并提示"缺少公司上下文，请从移动门户重新进入"。
+
+---
+
+## 十一、多环境配置
+
+### 线上环境
+
+| 环境 | 域名                      | API 前缀   |
+| ---- | ------------------------- | ---------- |
+| SIT  | `ytiop-sit.walsin.com.cn` | `/sit-api` |
+| UAT  | `ytiop-uat.walsin.com.cn` | `/uat-api` |
+| PRE  | `ytiop-pre.walsin.com.cn` | `/pre-api` |
+| PRD  | `ytiop-prd.walsin.com.cn` | `/prd-api` |
+
+> ⚠️ PRE 域名 / API 前缀为按规律推断的占位值，上线前需确认替换。
+
+切换环境只需修改 `env/.env.*` 文件：
+
+- `VITE_API_BASE_URL`：API 网关地址
+- `VITE_DOMAIN`：子应用域名前缀（与 `mpPath` 拼接生成子应用完整 URL）
+
+> `mpPath` 用于所有线上环境，运行时通过 `VITE_DOMAIN` 动态拼接完整 HTTPS 地址；`url` 字段仅用于开发环境 fallback。
+
+### 开发环境（内网直连）
+
+| 服务       | 地址                          | 说明               |
+| ---------- | ----------------------------- | ------------------ |
+| 移动端网关 | `http://172.28.99.172:9000`   | OAuth2 / JWT Token |
+| 子应用 H5  | 本地 Vite 代理 `/mbase/aq` 等 | iframe 嵌入        |
+
+### Nginx 配置示例
 
 ```nginx
 server {
@@ -432,160 +658,68 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
     }
 
-    # 门户 H5 静态资源
+    # 门户 H5
     location /mbase/ {
         alias /path/to/dist/build/h5/;
         index index.html;
         try_files $uri $uri/ /mbase/index.html;
     }
 
-    # 子应用（智慧安全）
-    location /mbase/aq/ {
-        alias /path/to/aq/;
-        index index.html;
-        try_files $uri $uri/ /mbase/aq/index.html;
+    # 钉钉消息单点跳转静态中转页（真实文件，必须能被直接命中）
+    location = /mbase/relay.html {
+        alias /path/to/dist/build/h5/relay.html;
     }
 
-    # 子应用（智慧安防）
-    location /mbase/af/ {
-        alias /path/to/af/;
-        index index.html;
-        try_files $uri $uri/ /mbase/af/index.html;
-    }
-
-    # 子应用（智慧环保）
-    location /mbase/hb/ {
-        alias /path/to/hb/;
-        index index.html;
-        try_files $uri $uri/ /mbase/hb/index.html;
-    }
+    # 子应用（按需添加）
+    location /mbase/aq/ { alias /path/to/aq/; try_files $uri $uri/ /mbase/aq/index.html; }
+    location /mbase/af/ { alias /path/to/af/; try_files $uri $uri/ /mbase/af/index.html; }
+    location /mbase/hb/ { alias /path/to/hb/; try_files $uri $uri/ /mbase/hb/index.html; }
 }
 ```
 
-### 8.5 CORS 配置
+---
 
-外网环境下，子应用后端需允许门户域名跨域：
+## 十二、安全注意事项
 
-```
-Access-Control-Allow-Origin: https://ytiop-sit.walsin.com.cn
-Access-Control-Allow-Credentials: true
-```
+| 风险点                    | 当前策略 / 建议                                                                        |
+| ------------------------- | -------------------------------------------------------------------------------------- |
+| `portal_token` 明文在 URL | 内网 HTTPS 可接受；外网或更高安全级别建议改为短期一次性 code 换取                      |
+| 消息 `redirect_url` 外跳  | `relay.html` 与 `dingtalk-redirect.ts` 只允许同源 + 已注册 `mpPath`，拦截跨域/未知路径 |
+| iframe 嵌入任意 URL       | 工作台入口通过 `portal-apps.ts` 注册表打开；消息直达也走白名单                         |
+| postMessage 来源校验      | 基座按当前 iframe origin + contentWindow 校验来源；子应用接收消息也应校验来源          |
+| Token 有效期              | relay 检测本地 `tokenExpiresAt`，过期时回基座 SSO；长期建议接入子应用刷新协议          |
+| 子应用登出不同步          | 通过 postMessage `action: logout` / `user-logout` 触发基座同步清理                     |
+| `companyId` 被篡改        | 子应用后端必须用 `portal_token + companyId` 校验公司权限                               |
+| `companyName` 被篡改      | 仅用于展示，不参与权限判断和数据范围过滤                                               |
+
+### 维护约定
+
+- 新增子应用时，先维护 `src/config/portal-apps.ts`，再同步 `public/relay.html` 的 `APP_PATHS`
+- 不要在日志中打印完整带 `portal_token` 的子应用 URL；需要排查时只打印脱敏 URL 或 appId/companyId
+- `src/pages/relay/index.vue` 是历史兼容入口；新消息配置统一使用 `/mbase/relay.html`
 
 ---
 
-## 九、安全注意事项
+## 附录：钉钉 SSO 免登调用流程
 
-| 风险点                    | 建议                                                                                         |
-| ------------------------- | -------------------------------------------------------------------------------------------- |
-| `portal_token` 明文在 URL | 内网可接受；外网建议改为 HTTPS + 短期一次性 code 换取（参考 OAuth2 Authorization Code Flow） |
-| iframe 嵌入任意 URL       | 门户 `webview/index.vue` 应在白名单内校验 `url` 参数，防止 XSS                               |
-| postMessage 来源校验      | 子应用接收门户消息时加 `event.origin` 白名单校验                                             |
-| Token 有效期              | 建议移动端 Token 有效期短（2h），配合静默刷新；子应用 token 同步刷新                         |
-| 子应用登出不同步          | 建议通过 postMessage `action: logout` 触发门户一起清理状态                                   |
-| HTTPS 强制                | 外网全链路强制 HTTPS；小程序审核要求所有网络请求使用 HTTPS                                   |
-| Client Secret 安全性      | UniApp 编译产物中 client_secret 可见，属于"公开客户端"固有限制，建议后续改为 public client   |
-
----
-
-## 附录：钉钉 SSO 免登完整调用流程
-
-> 适用场景：用户在钉钉客户端内打开 H5 应用，后端通过钉钉身份识别完成免登录。
-> 前端只负责获取 `authCode` 并传给后端，AppKey / AppSecret 只存在后端，不经过前端。
-
-### 整体流程图
+> 适用场景：用户在钉钉客户端内打开 H5 应用，后端通过钉钉身份识别完成免登录。前端只负责获取 `authCode` 并传给后端，AppKey / AppSecret 只存在后端。
 
 ```
 前端（钉钉客户端内）              后端                        钉钉服务器
        │                           │                              │
        │  JSAPI 获取 authCode       │                              │
        │──────── authCode ─────────►│                              │
-       │                           │                              │
        │                    Step 1 │── POST /oauth2/accessToken ──►│
        │                           │◄── { accessToken } ──────────│
-       │                           │                              │
        │                    Step 2 │── POST /user/getuserinfo ────►│
        │                           │◄── { userid, name, ... } ────│
-       │                           │                              │
        │                    Step 3 │  查本系统账号，签发系统 JWT    │
        │◄──── 系统 token ──────────│                              │
 ```
 
-### Step 1：获取应用 accessToken
-
-后端调用，与前端无关。建议缓存结果，有效期内不重复调用。
-
-```
-POST https://api.dingtalk.com/v1.0/oauth2/accessToken
-Content-Type: application/json
-```
-
-请求体：
-
-```json
-{
-  "appKey": "<应用的 AppKey>",
-  "appSecret": "<应用的 AppSecret>"
-}
-```
-
-成功响应：
-
-```json
-{
-  "accessToken": "<应用级访问凭证>",
-  "expireIn": 7200
-}
-```
-
-> - `accessToken` 有效期 **7200 秒（2 小时）**，有效期内重复调用返回同一个值并自动续期
-> - 建议后端缓存，设置 **7000 秒**过期触发刷新，避免频繁请求被限流
-> - 此接口**无需额外权限**，应用创建后默认可调用
-
-### Step 2：用 authCode 换取用户身份
-
-前端每次登录时传来一个新的 `authCode`，后端收到后立即调用。
-
-```
-POST https://oapi.dingtalk.com/topapi/v2/user/getuserinfo?access_token=<Step1的accessToken>
-Content-Type: application/json
-```
-
-请求体：
-
-```json
-{
-  "code": "<前端传来的 authCode>"
-}
-```
-
-成功响应：
-
-```json
-{
-  "errcode": 0,
-  "errmsg": "ok",
-  "result": {
-    "userid": "<用户在企业内的唯一 ID>",
-    "sys_level": 0,
-    "associated_unionid": "<unionId>",
-    "name": "张三",
-    "sys": false
-  }
-}
-```
-
-> - `authCode` **一次性有效**，前端每次登录都会生成新的，后端收到后必须立即使用，不可缓存
-> - 此接口需要应用已开通 **`open_app_api_base`** 权限（默认已开通）
-> - 若后续还需查询手机号、头像等详细信息，需额外开通 **`Contact.User.Read`** 权限
-
-### Step 3：查本系统账号，签发系统 JWT
-
-后端拿到 `userid`（或 `name`）后：
-
-1. 用 `userid` 或手机号在本系统数据库中匹配对应账号
-2. 匹配成功则签发本系统的登录凭证（JWT 或 Session）
-3. 将凭证返回给前端
-4. 前端存储该凭证，后续所有业务请求携带此凭证，与普通账号密码登录完全一致
+- **Step 1** `POST https://api.dingtalk.com/v1.0/oauth2/accessToken`：`{appKey, appSecret}` → `{accessToken, expireIn: 7200}`。建议后端缓存，设 7000 秒触发刷新。
+- **Step 2** `POST https://oapi.dingtalk.com/topapi/v2/user/getuserinfo?access_token=<Step1>`：`{code: authCode}` → `{userid, name, ...}`。`authCode` 一次性有效，后端收到立即使用。
+- **Step 3** 后端用 `userid`/手机号匹配本系统账号，签发 JWT 返回前端。
 
 ### 权限清单
 
@@ -594,28 +728,4 @@ Content-Type: application/json
 | `open_app_api_base` | 获取钉钉开放接口用户访问凭证的基础权限 | 无需审批     | Step 1 换 token、Step 2 换用户信息（必须开通）   |
 | `Contact.User.Read` | 通讯录个人信息读权限                   | 无需审批     | 查询用户手机号、头像、邮箱等详细信息（按需开通） |
 
-### 开通权限步骤
-
-1. 登录 [open-dev.dingtalk.com](https://open-dev.dingtalk.com)
-2. 进入对应应用 → **权限管理**
-3. 搜索框输入权限点 Code（如 `Contact.User.Read`）
-4. 点击**申请权限**，无需审批，即时生效
-5. 权限变更后需后端**重新获取** accessToken，旧 token 不会感知新权限
-
----
-
-## 多环境地址对照
-
-| 环境 | 域名                      | API 前缀   | 基座 H5 入口                             |
-| ---- | ------------------------- | ---------- | ---------------------------------------- |
-| SIT  | `ytiop-sit.walsin.com.cn` | `/sit-api` | `https://ytiop-sit.walsin.com.cn/mbase/` |
-| UAT  | `ytiop-uat.walsin.com.cn` | `/uat-api` | `https://ytiop-uat.walsin.com.cn/mbase/` |
-| PRD  | `ytiop.walsin.com.cn`     | `/api`     | `https://ytiop.walsin.com.cn/mbase/`     |
-
-子应用地址由 `VITE_DOMAIN` + `mpPath` 动态拼接，切换环境只改 env 文件：
-
-```text
-SIT: https://ytiop-sit.walsin.com.cn/mbase/aq  (安全)
-     https://ytiop-sit.walsin.com.cn/mbase/af  (安防)
-     https://ytiop-sit.walsin.com.cn/mbase/hb  (环保)
-```
+开通：登录 [open-dev.dingtalk.com](https://open-dev.dingtalk.com) → 对应应用 → 权限管理 → 搜索权限点 Code → 申请权限（即时生效）。
