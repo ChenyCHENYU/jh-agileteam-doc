@@ -1,5 +1,9 @@
 # 前端 Skills 概述
 
+::: warning ⚠️ 本页已迁移
+本页内容已过期并迁移至 **[前端 PC 端 Skills 概述](/frontend/pc/skills/)**（对应 `@agile-team/wl-skills-kit` v2.11.5：14 条规范 + 11 个 AI Skill + 17 个 MCP Tool）。请前往新位置查看最新内容。
+:::
+
 前端 Skills 基于 `@agile-team/wl-skills-kit` — 一条命令，将 AI 编码指令、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf 等）**直接理解项目规范和组件体系**，从 Axure 原型 / 详细设计文档 → 生成可运行的完整页面代码。
 
 ## 快速开始

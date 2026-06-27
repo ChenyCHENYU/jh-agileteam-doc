@@ -80,7 +80,7 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
 | ① | `prototype-scan` | `skills/core/prototype-scan/` | 原型/详设/口述 → 页面清单 |
 | ② | `api-contract` | `skills/core/api-contract/` | 生成 api.md 前后端契约 |
 | ③ | `page-codegen` | `skills/core/page-codegen/` | 4 文件骨架生成 + 模板调度 |
-| ④ | `convention-audit` | `skills/core/convention-audit/` | 13 条规范扫描 + 双报告 |
+| ④ | `convention-audit` | `skills/core/convention-audit/` | 14 条规范扫描 + 双报告 |
 | ⑤ | `template-extract` | `skills/core/template-extract/` | 现有页面 → 领域模板 |
 | ⑥ | `business-doc-extract` | `skills/core/business-doc-extract/` | 业务文档/口述 → 结构化需求文档 |
 | ⑦ | `menu-sync` | `skills/sync/menu-sync/` | 菜单基线 ↔ 后端接口 |

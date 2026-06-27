@@ -1,5 +1,9 @@
 # AI Skill 流水线
 
+::: warning ⚠️ 本页已迁移
+本页内容已过期并迁移至 **[前端 PC 端 — AI Skill 流水线](/frontend/pc/skills/skill-pipeline)**（对应 `@agile-team/wl-skills-kit` v2.11.5：11 个 AI Skill 串联）。请前往新位置查看最新内容。
+:::
+
 5 个 AI Skill 串联形成完整的 **原型 → 代码** 流水线：
 
 ```

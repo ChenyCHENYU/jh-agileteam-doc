@@ -66,7 +66,7 @@ L0 氛围编程（你现在在这）
     │
     └── 快车道：直接用 @agile-team/wl-skills-kit
         npx @agile-team/wl-skills-kit
-        一键导入 13 条规范 + 9 个 Skill + MCP 配置
+        一键导入 14 条规范 + 11 个 Skill + 17 个 MCP Tool
         直接跳到 L2/L3 起手
 ```
 
@@ -101,4 +101,4 @@ L0 氛围编程（你现在在这）
 
 当你发现 AI 生成的代码频繁需要大幅修改时，是时候升级到 **[L1 — 提示词工程](./L1-prompt)**：通过结构化 Prompt 注入项目规范，让 AI 的输出更可预测。
 
-或者直接使用 **[L2 — Skill](./L2-skill)**：通过 `@agile-team/wl-skills-kit` 一键导入 13 条编码规范 + 9 个触发词驱动的 Skill，将 L0 的随机性降到最低。
+或者直接使用 **[L2 — Skill](./L2-skill)**：通过 `@agile-team/wl-skills-kit` 一键导入 14 条编码规范 + 11 个 Skill，将 L0 的随机性降到最低。

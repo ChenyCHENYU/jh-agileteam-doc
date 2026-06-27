@@ -49,7 +49,7 @@ CLI 能力
 
 > **核心特征**：极简 Token（不需要 AI 推理）、零人工干预、可 CI/CD 集成。是整个 AI 体系中**可预测性最高**的一层。
 
-## 已实现的 9 条命令（v2.7.3）
+## 已实现的 11 条命令（v2.11.5）
 
 ```bash
 # 全量安装（默认）
@@ -73,14 +73,23 @@ wl-skills check
 # 比对本地与最新 kit 版本差异
 wl-skills diff
 
-# 静态扫描页面文件完整性（CI 卡门）
+# 静态扫描页面文件完整性 + AST 语义级 R1~R14（CI 卡门）
 wl-skills validate
+wl-skills validate --typecheck --strict   # 含类型检查 R14（发版前用）
+
+# 确定性机械修复（幂等安全：缺 render-type、::v-deep→:deep、行尾空白等）
+wl-skills fix
+wl-skills fix --dry-run
 
 # 检查 wl-skills-ui 接入完整性
 wl-skills doctor-ui
 
 # 导出菜单/字典/权限基线 xlsx
 wl-skills export
+
+# 清理 mock 文件（保留 _utils.ts）
+wl-skills mock-clean --domain mdata
+wl-skills mock-clean --all
 ```
 
 > 全局安装后也可直接用 `wl-skills` 命令（如 `wl-skills update`）。
@@ -94,10 +103,12 @@ wl-skills export
 | `clean` | 移除 AI 文件（保留 components + types） | 构建前清理 |
 | `check` | 一键环境预检：Node / 工具链 / env.local.json / MCP 连通性 | 新成员接手项目 |
 | `diff` | 对比已安装文件与最新 kit 版本差异 | update 前决策依据 |
-| `validate` | 静态扫描页面 4 文件完整性、AGGrid、cid、mock、api.md | CI 卡门 |
-| `validate-page` | `validate` 别名，支持单页/目录路径 | 按路径校验 |
+| `validate` | 静态扫描页面 4 文件完整性、AGGrid、cid、mock、api.md + AST 语义级 R1~R14 | CI 卡门 |
+| `validate-page` | 单页 / 指定目录校验 | 按路径校验 |
+| `fix` | 确定性机械修复：缺 `render-type`、`::v-deep`→`:deep()`、行尾空白等幂等问题 | 批量收口风格偏差 |
 | `doctor-ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | UI 体检 |
 | `export` | 导出菜单/字典/权限基线 xlsx | 交付/归档 |
+| `mock-clean` | 按域或全量清理 mock 文件（保留 `_utils.ts`） | 切换/清理 Mock 数据 |
 | `--dry-run` | 预览模式，不实际写入任何文件 | 确认变更范围 |
 | `--keep-reports` | clean 时额外保留 `reports/` | 保护菜单/字典积累数据 |
 
@@ -123,7 +134,7 @@ wl-skills export
 | 生成页面代码 | — | ✅ `page-codegen` Skill |
 | 菜单/字典同步 | — | ✅ `menu-sync` / `dict-sync` Skill |
 
-> CLI 是"无 AI 时的兜底执行节点"。更高阶是 L5 Agent Pipeline：让 AI 自主串联多个 Skill，CLI 和 Agent Pipeline 并不冲突，前者是后者的可靠底座。v2.7.3 后 L5 已进入试运行阶段。
+> CLI 是"无 AI 时的兜底执行节点"。更高阶是 L5 Agent Pipeline：让 AI 自主串联多个 Skill，CLI 和 Agent Pipeline 并不冲突，前者是后者的可靠底座。当前 L5 已进入试运行阶段（`_pipeline.md` Skill 间 I/O 契约已落地）。
 
 ## 延伸阅读
 

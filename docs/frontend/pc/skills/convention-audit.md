@@ -1,6 +1,6 @@
 # Skill ⑥：规范审计（convention-audit）
 
-以 `.github/standards/` **13 条规范**为唯一基线，扫描项目源码，输出**偏差报告**和**组件提取建议**到 `reports/` 目录。
+以 `.github/standards/` **14 条规范**为唯一基线，扫描项目源码，输出**偏差报告**和**组件提取建议**到 `reports/` 目录。
 
 > **核心理念**：规范是"标准"，代码必须对齐标准。本 Skill 只负责发现偏差并给出整改建议，**不自动修复**（修复由 `code-fix` Skill 完成）。
 
@@ -142,7 +142,7 @@
 
 ```
 你：帮我做一次全量规范审计，目录 src/views/mmwr/。
-AI：[Pre-flight] 已读取 standards/ 13 条规范
+AI：[Pre-flight] 已读取 standards/ 14 条规范
     扫描 src/views/mmwr/ 共 23 个 Vue 文件...
     
     ⚠ 偏差汇总（本次）

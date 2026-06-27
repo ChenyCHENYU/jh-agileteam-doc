@@ -138,7 +138,7 @@ AbstractPageQueryHook + BaseQuery + BaseToolbar + BaseTable(render-type="agGrid"
 |---|---|---|
 | `element-plus` | `2.2.6-prod.3` | 集团 jh- 定制版 |
 | `@jhlc/jh-ui` | `3.1.0` | SCSS 皮肤包 |
-| `@agile-team/wl-skills-ui` | `^1.8.0` | 已对齐上述组合 |
+| `@agile-team/wl-skills-ui` | `^1.8.13` | 已对齐上述组合 |
 
 ---
 

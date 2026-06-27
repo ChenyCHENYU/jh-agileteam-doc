@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip � 骨架阶段
-后端 Skills 包（`@agile-team/wl-skills-bd`）正在进行 PoC 验证，当前结构已定、内容持续完善中。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 v0.0.2）正在进行 PoC 验证，当前结构已定、内容持续完善中。
 :::
 
 ## 概述
@@ -97,7 +97,7 @@ L4  质量层 (test + audit + fix)  单测 / 集成测试 / 审计 / 修复
 
 | 阶段 | 目标 | 状态 |
 |------|------|------|
-| v0.0.1 | 骨架：14 条 standards + 9 个 SKILL frontmatter + pipeline | ✅ 完成 |
+| v0.0.2 | 骨架完善：14 条 standards + 9 个 SKILL 骨架 + pipeline | ✅ 完成 |
 | v0.1.x | PoC：跑通 mdm-service 一个真实模块 ②→⑨ 全链路 | 🎯 进行中 |
 | v0.2.x | CLI `init/update/check/diff/doctor` 实现 + npm 发布 | 🔜 规划中 |
 | v0.3.x | MCP 集成（DB schema / Git diff / 飞书任务）| 🔜 规划中 |
