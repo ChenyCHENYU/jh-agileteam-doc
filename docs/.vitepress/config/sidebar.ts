@@ -153,17 +153,31 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "jh- 平台组件",
       collapsed: false,
       items: [
-        { text: "jh-date — 日期选择", link: "/frontend/pc/components/jh-date" },
-        { text: "jh-date-range — 日期范围", link: "/frontend/pc/components/jh-date-range" },
-        { text: "jh-select — 字典下拉", link: "/frontend/pc/components/jh-select" },
+        { text: "jh-input — 输入框", link: "/frontend/pc/components/jh-input" },
+        { text: "jh-input-number — 数字输入", link: "/frontend/pc/components/jh-input-number" },
         { text: "jh-text — 文本展示", link: "/frontend/pc/components/jh-text" },
         { text: "jh-textarea — 多行文本", link: "/frontend/pc/components/jh-textarea" },
+        { text: "jh-select — 字典下拉", link: "/frontend/pc/components/jh-select" },
+        { text: "jh-radio-group — 单选组", link: "/frontend/pc/components/jh-radio-group" },
+        { text: "jh-checkbox-group — 多选组", link: "/frontend/pc/components/jh-checkbox-group" },
+        { text: "jh-switch — 开关", link: "/frontend/pc/components/jh-switch" },
+        { text: "jh-cascader — 级联选择", link: "/frontend/pc/components/jh-cascader" },
+        { text: "jh-date — 日期选择", link: "/frontend/pc/components/jh-date" },
+        { text: "jh-date-range — 日期范围", link: "/frontend/pc/components/jh-date-range" },
+        { text: "jh-tree-picker — 树选择", link: "/frontend/pc/components/jh-tree-picker" },
         { text: "jh-picker — 通用挑选", link: "/frontend/pc/components/jh-picker" },
         { text: "jh-dept-picker — 部门选择", link: "/frontend/pc/components/jh-dept-picker" },
         { text: "jh-user-picker — 用户选择", link: "/frontend/pc/components/jh-user-picker" },
         { text: "jh-file-upload — 文件上传", link: "/frontend/pc/components/jh-file-upload" },
         { text: "jh-pagination — 分页", link: "/frontend/pc/components/jh-pagination" },
-        { text: "jh-drag-row — 可拖拽分栏", link: "/frontend/pc/components/jh-drag-row" },
+        { text: "jh-tabs — 标签页", link: "/frontend/pc/components/jh-tabs" },
+        { text: "jh-drag-row — 上下分栏", link: "/frontend/pc/components/jh-drag-row" },
+        { text: "jh-drag-col — 左右分栏", link: "/frontend/pc/components/jh-drag-col" },
+        { text: "jh-progress — 进度条", link: "/frontend/pc/components/jh-progress" },
+        { text: "jh-button — 按钮", link: "/frontend/pc/components/jh-button" },
+        { text: "jh-icon — 图标", link: "/frontend/pc/components/jh-icon" },
+        { text: "jh-dialog — 对话框", link: "/frontend/pc/components/jh-dialog" },
+        { text: "jh-drawer — 抽屉", link: "/frontend/pc/components/jh-drawer" },
       ],
     },
     {
@@ -331,7 +345,7 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
-  // 组件库
+  // 组件库（统一在 /frontend/pc/components 维护，此处仅保留入口说明）
   "/ui-components/": [
     {
       text: "说明",
@@ -339,72 +353,13 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [{ text: "介绍", link: "/ui-components/" }],
     },
     {
-      text: "平台组件（远程）",
+      text: "平台组件文档",
       collapsed: false,
       items: [
         {
-          text: "BaseTable 表格组件",
-          link: "/ui-components/remote-components/BaseTable",
+          text: "👉 前往 PC 组件文档（Base / jh- / C_ 全集）",
+          link: "/frontend/pc/components/base-table",
         },
-        {
-          text: "BaseForm 表单组件",
-          link: "/ui-components/remote-components/BaseForm",
-        },
-        {
-          text: "BaseQuery 查询组件",
-          link: "/ui-components/remote-components/BaseQuery",
-        },
-        {
-          text: "AGGrid 高性能表格",
-          link: "/ui-components/remote-components/AGGrid",
-        },
-        {
-          text: "jh-date-range 日期范围选择",
-          link: "/ui-components/remote-components/jh-date-range",
-        },
-        {
-          text: "jh-date 单日期选择",
-          link: "/ui-components/remote-components/jh-date",
-        },
-        {
-          text: "jh-dept-picker 部门选择",
-          link: "/ui-components/remote-components/jh-dept-picker",
-        },
-        {
-          text: "jh-drag-row 可拖拽分栏",
-          link: "/ui-components/remote-components/jh-drag-row",
-        },
-        {
-          text: "jh-file-upload 文件上传",
-          link: "/ui-components/remote-components/jh-file-upload",
-        },
-        {
-          text: "jh-pagination 分页组件",
-          link: "/ui-components/remote-components/jh-pagination",
-        },
-        {
-          text: "jh-picker 通用挑选组件",
-          link: "/ui-components/remote-components/jh-picker",
-        },
-        {
-          text: "jh-select 字典下拉",
-          link: "/ui-components/remote-components/jh-select",
-        },
-        {
-          text: "jh-text 文本展示",
-          link: "/ui-components/remote-components/jh-text",
-        },
-        {
-          text: "jh-user-picker 用户选择",
-          link: "/ui-components/remote-components/jh-user-picker",
-        },
-      ],
-    },
-    {
-      text: "全局组件占位",
-      collapsed: false,
-      items: [
-        { text: "全局组件（占位）", link: "/ui-components/global-components" },
       ],
     },
   ],

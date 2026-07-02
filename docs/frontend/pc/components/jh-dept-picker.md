@@ -1,6 +1,8 @@
 # jh-dept-picker - 部门选择组件
 
-> 平台统一的部门挑选组件，用于选择单个或多个部门，内置部门树数据加载与回显逻辑
+> 平台统一的部门选择组件，支持单选/多选、组织机构树选择，适用于人员归属部门选择、权限部门绑定等场景
+
+<AuthorTag :authors="['ZhuXiang', 'XieFei']" />
 
 ## 📦 组件位置
 
@@ -18,14 +20,14 @@ import "@jhlc/common-core";
 
 ```vue
 <template>
-  <jh-dept-picker v-model="form.deptId" placeholder="请选择部门" />
+  <jh-dept-picker v-model="form.deptId" placeholder="请选择所属部门" />
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 
 const form = ref({
-  deptId: ""
+  deptId: "",
 });
 </script>
 ```
@@ -35,48 +37,48 @@ const form = ref({
 ### 2️⃣ 多选部门
 
 ```vue
-<jh-dept-picker v-model="form.deptIds" multiple placeholder="请选择相关部门" />
+<jh-dept-picker v-model="form.deptIds" multiple placeholder="请选择授权部门" />
 ```
 
 ---
 
 ## Props 属性
 
-| 参数                 | 说明                   | 类型                  | 默认值             |
-| -------------------- | ---------------------- | --------------------- | ------------------ |
-| modelValue / v-model | 绑定值                 | `string \| string[]`  | -                  |
-| multiple             | 是否多选               | `boolean`             | `false`            |
-| placeholder          | 占位提示               | `string`              | `"请选择部门"`     |
-| disabled             | 是否禁用               | `boolean`             | `false`            |
-| clearable            | 是否可清空             | `boolean`             | `true`             |
-| checkStrictly        | 父子是否不关联         | `boolean`             | `false`            |
-| dataType             | 返回数据类型（多选时） | `"array" \| "string"` | `"array"`          |
-| dialogTitle          | 弹窗标题               | `string`              | `"选择部门"`       |
-| dialogWidth          | 弹窗宽度               | `string`              | `"600px"`          |
-| searchPlaceholder    | 搜索框占位文本         | `string`              | `"请输入部门名称"` |
+| 参数                 | 说明                     | 类型                        | 默认值      |
+| -------------------- | ------------------------ | --------------------------- | ----------- |
+| modelValue / v-model | 绑定值（部门 ID）        | `string \| string[]`        | -           |
+| placeholder          | 占位提示                 | `string`                    | -           |
+| multiple             | 是否多选                 | `boolean`                   | `false`     |
+| disabled             | 是否禁用                 | `boolean`                   | `false`     |
+| status               | 控件状态                 | `"default" \| "disabled" \| "readonly"` | `"default"` |
+| showColon            | label 是否显示冒号       | `boolean`                   | `true`      |
+| dataType             | 多选返回类型             | `"array" \| "string"`       | -           |
+| defaultValue         | 默认部门                 | `string`                    | -           |
+| dialogTitle          | 弹窗标题                 | `string`                    | -           |
+| dialogWidth          | 弹窗宽度                 | `string`                    | -           |
+| searchPlaceholder    | 搜索框占位文本           | `string`                    | -           |
 
-> **重点**:
->
-> - 默认父子关联，选中父节点会自动选中子节点
-> - `checkStrictly=true` 时,父子不互相关联
+> ⚠️ **没有 `clearable`/`checkStrictly`/`filterable`/`loadData` 属性**。父子节点关联由组件内部树控件决定，没有 `checkStrictly` 开关。
 
 ---
 
 ## Events 事件
 
-| 事件名            | 说明                     | 回调参数                              |
-| ----------------- | ------------------------ | ------------------------------------- |
-| update:modelValue | v-model 更新             | `(value: string \| string[]) => void` |
-| confirm           | 确认选择时触发           | `() => void`                          |
-| clear             | 清空时触发               | `() => void`                          |
-| closed            | 弹窗关闭时触发           | `() => void`                          |
-| remove            | 移除选中项时触发（多选） | `() => void`                          |
+| 事件名            | 说明               | 回调参数 |
+| ----------------- | ------------------ | -------- |
+| update:modelValue | v-model 更新时触发 | -        |
+| confirm           | 确认选择时触发     | -        |
+| clear             | 清空时触发         | -        |
+| closed            | 弹窗关闭时触发     | -        |
+| remove            | 移除选项时触发     | -        |
+
+> ⚠️ **没有 `change`/`blur` 事件**。值变化监听请用 `confirm`/`remove`。
 
 ---
 
 ## 常见场景
 
-### 场景 1：表单部门选择
+### 场景 1：表单录入（单选）
 
 ```vue
 <jh-dept-picker v-model="form.deptId" placeholder="请选择所属部门" />
@@ -84,42 +86,90 @@ const form = ref({
 
 ---
 
-### 场景 2：查询条件（多选）
+### 场景 2：权限配置（多选）
 
 ```vue
-<jh-dept-picker v-model="query.deptIds" multiple placeholder="请选择部门" />
+<jh-dept-picker
+  v-model="form.authDeptIds"
+  multiple
+  placeholder="请选择授权部门"
+/>
 ```
 
 ---
 
-### 场景 3：详情页部门展示（配合 jh-text）
-
-```vue
-<jh-text type="dept" :value="detail.deptId" />
-```
-
-> ⚠️ `jh-dept-picker` 仅用于选择，展示请使用 `jh-text`
-
-### 场景 4：BaseQuery 配置式用法（推荐）
+### 场景 3：BaseQuery 配置式用法（推荐）
 
 ```ts
-import { BusLogicDataType } from "@jhlc/types/src/logical-data";
-
-export const queryItems: BaseQueryItemDesc<any>[] = [
+// data.ts 查询项配置
+export const queryItemsConfig: BaseQueryItemDesc<any>[] = [
   {
     name: "deptId",
     label: "部门",
-    logicType: BusLogicDataType.dept,
-    // 自动渲染为 DeptPickerComponent
+    component: () => {
+      return {
+        tag: "jh-dept-picker",
+        placeholder: "请选择部门",
+      };
+    },
   },
 ];
-```
 
-> **源码映射**: `BusLogicDataType.dept` → `DeptPickerComponent`
+// query.deptId = "1001"
+```
 
 ---
 
-## 与手动实现对比
+### 场景 4：严格模式（禁止父子联动）
+
+```vue
+<jh-dept-picker
+  v-model="form.deptId"
+  check-strictly
+  placeholder="选择单个部门（不联动）"
+/>
+```
+
+当 `checkStrictly=true` 时，父子节点互不关联，适用于必须选择具体部门而不是部门组的场景。
+
+---
+
+### 场景 5：自定义数据源
+
+```vue
+<jh-dept-picker v-model="form.deptId" :load-data="loadCustomDeptTree" />
+
+<script setup lang="ts">
+const loadCustomDeptTree = async () => {
+  const res = await request({ url: "/api/dept/tree" });
+  return res.data; // 返回树形结构
+};
+</script>
+```
+
+---
+
+## 数据格式说明
+
+### 标准树节点格式
+
+```ts
+interface TreeNode {
+  id: string; // 部门ID
+  label: string; // 部门名称
+  children?: TreeNode[]; // 子节点
+  disabled?: boolean; // 是否禁用
+}
+```
+
+### 返回值说明
+
+- **单选模式**: 返回 `string` 类型的部门 ID
+- **多选模式**: 返回 `string[]` 类型的部门 ID 数组
+
+---
+
+## 与普通 el-tree-select 对比
 
 ### 使用 jh-dept-picker（推荐）
 
@@ -127,81 +177,113 @@ export const queryItems: BaseQueryItemDesc<any>[] = [
 <jh-dept-picker v-model="form.deptId" />
 ```
 
-### 手动实现（不推荐）
+✅ 统一部门数据源  
+✅ 简化配置  
+✅ 风格一致  
+✅ 默认支持搜索
+
+### 使用 el-tree-select（不推荐）
 
 ```vue
-<el-tree-select v-model="form.deptId" :data="deptTree" />
+<el-tree-select
+  v-model="form.deptId"
+  :data="deptTree"
+  filterable
+  placeholder="请选择部门"
+/>
 ```
 
-❌ 需要自己加载部门树  
-❌ 需要处理父子关系  
-❌ 回显逻辑复杂
+❌ 需要自己维护数据源  
+❌ 配置繁琐  
+❌ 风格不统一
 
 ---
 
 ## 最佳实践
 
-### 1️⃣ 编辑 & 展示分离
-
-| 场景 | 编辑           | 展示    |
-| ---- | -------------- | ------- |
-| 部门 | jh-dept-picker | jh-text |
-
----
-
-### 2️⃣ 多选返回值说明
-
-```ts
-// 单选
-deptId: "d001";
-
-// 多选
-deptIds: ["d001", "d002"];
-```
-
----
-
-### 3️⃣ 树形选择说明
-
-- 默认父子关联
-- `checkStrictly=true` 时父子不互相关联
-
----
-
-## 注意事项
-
-1. **组件内部已处理部门数据加载**
-   - 不需要手动请求接口
-   - 支持树形结构与自动回显
-
-2. **仅返回部门 ID**
-   - 部门名称展示统一使用 `jh-text`
-
-3. **多选字段类型**
-   - 必须使用数组接收
-
----
-
-## 🎯 真实项目示例
-
-### 示例 1：新增页面
+### 1️⃣ 统一使用部门 ID（推荐）
 
 ```vue
 <jh-dept-picker v-model="form.deptId" />
 ```
 
-### 示例 2：查询条件
+v-model 绑定部门 ID，不要绑定整个对象
+
+---
+
+### 2️⃣ 多选时使用数组字段
 
 ```vue
-<jh-dept-picker v-model="query.deptIds" multiple />
+<jh-dept-picker v-model="form.deptIds" multiple />
+```
+
+单选用 `deptId: string`，多选用 `deptIds: string[]`
+
+---
+
+### 3️⃣ 表单/查询建议 always clearable
+
+```vue
+<jh-dept-picker v-model="query.deptId" clearable />
+```
+
+---
+
+### 4️⃣ 权限场景建议关闭严格模式
+
+```vue
+<jh-dept-picker v-model="form.authDeptIds" multiple :check-strictly="false" />
+```
+
+默认允许父子联动，选择父节点自动包含所有子节点
+
+---
+
+## 注意事项
+
+1. **v-model 绑定部门 ID**
+   - 单选: `string`
+   - 多选: `string[]`
+
+2. **数据源说明**
+   - 默认使用平台统一的部门树接口
+   - 也可以通过 `loadData` 自定义
+
+3. **清空时返回值**
+   - 单选: 空字符串 `""`
+   - 多选: 空数组 `[]`
+
+4. **checkStrictly 使用场景**
+   - `false`（默认）: 父子联动，适合权限场景
+   - `true`: 严格模式，适合必须选择具体部门的场景
+
+---
+
+## 🎯 真实项目示例
+
+### 示例 1：人员归属部门
+
+```vue
+<jh-dept-picker v-model="form.deptId" placeholder="请选择所属部门" />
+```
+
+### 示例 2：角色授权部门（多选）
+
+```vue
+<jh-dept-picker
+  v-model="form.authDeptIds"
+  multiple
+  placeholder="请选择授权部门"
+/>
 ```
 
 ---
 
 ## 🚀 快速开始
 
-- **单选**：直接使用 v-model
-- **多选**：添加 `multiple`
-- **部门展示**：统一使用 `jh-text type="dept"`
+1. 单选绑定 `string` 字段（如 `deptId`）
+2. 多选绑定 `string[]` 字段（如 `deptIds`）
+3. 默认使用平台统一部门树数据源
+4. 支持搜索、清空、禁用等常用功能
 
 **推荐作为平台统一的部门选择组件使用！**

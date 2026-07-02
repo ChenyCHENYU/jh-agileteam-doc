@@ -1,8 +1,12 @@
-# jh-picker - 通用关联挑选组件
+# jh-picker - 关联数据挑选组件
 
-> 平台统一的通用数据挑选组件，适用于需要从某一业务数据源中选择一条或多条数据的场景，常用于关联单据、基础资料等
+> 平台统一的关联数据挑选组件，通过弹窗 + 表格形式从业务数据源中选择一条或多条数据，适用于关联客户、商品、订单等基础资料/单据选择场景
+
+<AuthorTag :authors="['ZhuXiang', 'XieFei']" />
 
 ## 📦 组件位置
+
+> 来源：`@jhlc/common-core`
 
 ```ts
 import "@jhlc/common-core";
@@ -20,17 +24,29 @@ import "@jhlc/common-core";
 <template>
   <jh-picker
     v-model="form.customerId"
-    picker-type="customer"
-    placeholder="请选择客户"
+    :list-url="customerApi.list"
+    :list-by-ids-url="customerApi.getByIds"
+    :value-attr="['id']"
+    :label-attr="['name']"
+    :data-attr="['data', 'records']"
+    :columns="customerColumns"
+    :query="customerQueryItems"
+    title="选择客户"
+    start-placeholder="请选择客户"
   />
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+const form = ref({ customerId: "" });
 
-const form = ref({
-  customerId: ""
-});
+const customerColumns = [
+  { name: "code", label: "客户编码" },
+  { name: "name", label: "客户名称" },
+];
+
+const customerQueryItems = [
+  { name: "keyword", label: "关键字", placeholder: "编码/名称" },
+];
 </script>
 ```
 
@@ -41,41 +57,58 @@ const form = ref({
 ```vue
 <jh-picker
   v-model="form.productIds"
-  picker-type="product"
-  multiple
-  placeholder="请选择商品"
+  :single="false"
+  :list-url="productApi.list"
+  :value-attr="['id']"
+  :label-attr="['name']"
+  :columns="productColumns"
+  :query="productQueryItems"
+  title="选择商品"
+  start-placeholder="请选择商品"
 />
 ```
+
+> ⚠️ 多选用 `:single="false"`，**没有 `multiple` 属性**。
 
 ---
 
 ## Props 属性
 
-| 参数                 | 说明                             | 类型                                                                     | 默认值                |
-| -------------------- | -------------------------------- | ------------------------------------------------------------------------ | --------------------- |
-| modelValue / v-model | 绑定值                           | `string \| string[]`                                                     | -                     |
-| pickerType           | 选择器类型（业务标识）           | `string`                                                                 | -                     |
-| single               | 是否单选（与 multiple 相反）     | `boolean`                                                                | `true`                |
-| multiple             | 是否多选                         | `boolean`                                                                | `false`               |
-| placeholder          | 占位提示                         | `string`                                                                 | `"请选择"`            |
-| disabled             | 是否禁用                         | `boolean`                                                                | `false`               |
-| clearable            | 是否可清空                       | `boolean`                                                                | `true`                |
-| dataType             | 返回数据类型（多选时）           | `"array" \| "string"`                                                    | `"array"`             |
-| showType             | 显示类型                         | `"" \| "button"`                                                         | `""`                  |
-| showLabel            | 按钮文本（showType="button" 时） | `string`                                                                 | -                     |
-| buttonType           | 按钮类型                         | `"default" \| "primary" \| "success" \| "info" \| "warning" \| "danger"` | `"default"`           |
-| buttonIcon           | 按钮图标                         | `"Search" \| "Edit" \| "Delete" \| "Plus" \| "Refresh"`                  | -                     |
-| title                | 弹窗标题                         | `string`                                                                 | -                     |
-| width                | 弹窗宽度                         | `string`                                                                 | `"800px"`             |
-| listUrl              | 列表查询接口                     | `string`                                                                 | -                     |
-| listByIdsUrl         | 根据ID查询接口（回显）           | `string`                                                                 | -                     |
-| query                | 查询条件配置                     | `Array`                                                                  | -                     |
-| columns              | 表格列配置                       | `Array`                                                                  | -                     |
-| valueAttr            | 值字段路径                       | `string[] \| string`                                                     | `["id"]`              |
-| labelAttr            | 标签字段路径                     | `string[] \| string`                                                     | `["name"]`            |
-| dataAttr             | 数据字段路径                     | `string[] \| string`                                                     | `["data", "records"]` |
+| 参数                 | 说明                             | 类型                                                                     | 默认值     |
+| -------------------- | -------------------------------- | ------------------------------------------------------------------------ | ---------- |
+| modelValue / v-model | 绑定值                           | `string \| string[]`                                                     | -          |
+| single               | 是否单选（**多选用 `:single="false"`**） | `boolean`                                                        | `true`     |
+| placeholder          | 占位提示                         | `string`                                                                 | -          |
+| status               | 控件状态                         | `"default" \| "disabled" \| "readonly"`                                  | `"default"`|
+| dataType             | 多选时返回数据类型               | `"array" \| "string"`                                                    | -          |
+| list                 | 本地静态数据                     | `Array`                                                                  | -          |
+| listUrl              | 列表查询接口（**核心数据源配置**） | `string`                                                               | -          |
+| listMethod           | 列表查询方式                     | `string`                                                                 | -          |
+| listByIdsUrl         | 根据 ID 查询接口（回显）         | `string`                                                                 | -          |
+| listByIdsMethod      | 回显请求方式                     | `"param" \| "body"`                                                      | -          |
+| listByIdsDsId        | 回显数据源 ID                    | `string`                                                                 | -          |
+| listDsId             | 列表数据源 ID                    | `string`                                                                 | -          |
+| echoRequestType      | 回显请求类型                     | `"post" \| "get"`                                                        | -          |
+| query                | 弹窗内查询条件配置               | `Array`                                                                  | -          |
+| columns              | 弹窗内表格列配置                 | `Array`                                                                  | -          |
+| title                | 弹窗标题                         | `string`                                                                 | -          |
+| width                | 弹窗宽度                         | `string`                                                                 | -          |
+| valueAttr            | 值字段路径                       | `string[] \| string`                                                     | -          |
+| labelAttr            | 标签字段路径（回显显示）         | `string[] \| string`                                                     | -          |
+| dataAttr             | 列表数据字段路径                 | `string[] \| string`                                                     | -          |
+| valueExpr            | 值表达式                         | `string`                                                                 | -          |
+| labelExpr            | 标签表达式                       | `string`                                                                 | -          |
+| fixQueryParam        | 固定查询参数                     | `object`                                                                 | `{}`       |
+| showType             | 显示类型                         | `"" \| "button"`                                                         | `""`       |
+| showLabel            | 按钮文本（showType="button" 时） | `string`                                                                 | -          |
+| buttonType           | 按钮类型                         | `"default" \| "primary" \| "success" \| "info" \| "warning" \| "danger"` | `"default"`|
+| buttonIcon           | 按钮图标                         | `"Search" \| "Edit" \| "Delete" \| "Plus" \| "Refresh"`                  | -          |
+| showSearchBtn        | 是否显示搜索按钮                 | `boolean`                                                                | `true`     |
+| defaultValue         | 默认值                           | `string`                                                                 | -          |
+| queryParamType       | 查询参数类型                     | `string`                                                                 | -          |
+| echoParamAppends     | 回显参数追加方式                 | `"appends" \| "notAppends"`                                              | -          |
 
-> **重点**: `pickerType` 必须是平台配置过的类型,否则需要手动配置 `listUrl`、`query`、`columns` 等参数。
+> ⚠️ **没有 `options`/`multiple`/`disabled`/`clearable`/`filterable`/`remote`/`remoteMethod`/`valueKey`/`labelKey` 属性**。数据源用 `listUrl`（接口）或 `list`（本地），字段映射用 `valueAttr`/`labelAttr`/`dataAttr`（非 valueKey/labelKey）。
 
 ---
 
@@ -88,131 +121,82 @@ const form = ref({
 | ok                | 确认选择时触发 | `() => void`                          |
 | clear             | 清空时触发     | `() => void`                          |
 
+> ⚠️ **没有 `blur` 事件**。
+
 ---
 
 ## 常见场景
 
-### 场景 1：选择关联客户
+### 场景 1：选择关联客户（接口数据源）
 
 ```vue
-<jh-picker v-model="form.customerId" picker-type="customer" />
+<jh-picker
+  v-model="form.customerId"
+  :list-url="customerApi.list"
+  :list-by-ids-url="customerApi.getByIds"
+  :value-attr="['id']"
+  :label-attr="['name']"
+  :data-attr="['data', 'records']"
+  :columns="customerColumns"
+  :query="customerQueryItems"
+  title="选择客户"
+/>
+```
+
+### 场景 2：本地静态数据
+
+```vue
+<jh-picker
+  v-model="form.materialId"
+  :list="materialList"
+  :value-attr="['id']"
+  :label-attr="['name']"
+  :columns="materialColumns"
+  title="选择物料"
+/>
+```
+
+### 场景 3：按钮模式
+
+```vue
+<jh-picker
+  v-model="form.userId"
+  show-type="button"
+  button-type="primary"
+  button-icon="Search"
+  show-label="选择用户"
+  :list-url="userApi.list"
+  :value-attr="['id']"
+  :label-attr="['name']"
+  :columns="userColumns"
+  title="选择用户"
+/>
 ```
 
 ---
 
-### 场景 2：选择关联单据
+## 关联组件
 
-```vue
-<jh-picker v-model="form.orderId" picker-type="order" />
-```
-
----
-
-### 场景 3：多选关联基础资料
-
-```vue
-<jh-picker v-model="form.materialIds" picker-type="material" multiple />
-```
-
----
-
-### 场景 4：详情页展示（配合 jh-text）
-
-```vue
-<jh-text :value="detail.customerName" />
-```
-
-> ⚠️ `jh-picker` 仅负责选择，展示请使用文本组件
-
----
-
-## 与手动实现对比
-
-### 使用 jh-picker（推荐）
-
-```vue
-<jh-picker v-model="form.customerId" picker-type="customer" />
-```
-
-### 手动实现（不推荐）
-
-```vue
-<el-input v-model="form.customerName" @click="openDialog" readonly />
-```
-
-❌ 需要自己实现弹窗  
-❌ 需要处理列表查询  
-❌ 需要维护回填逻辑
-
----
-
-## 最佳实践
-
-### 1️⃣ pickerType 必须语义清晰
-
-```vue
-<jh-picker picker-type="customer" />
-<jh-picker picker-type="product" />
-```
-
-确保不同业务类型对应不同选择器配置
-
----
-
-### 2️⃣ 编辑 & 展示分离
-
-| 场景     | 编辑      | 展示               |
-| -------- | --------- | ------------------ |
-| 关联数据 | jh-picker | jh-text / 普通文本 |
-
----
-
-### 3️⃣ 多选返回值说明
-
-```ts
-// 单选
-customerId: "c001";
-
-// 多选
-productIds: ["p001", "p002"];
-```
+| 组件          | 说明                           |
+| ------------- | ------------------------------ |
+| jh-picker     | 平铺列表数据选择（本组件）     |
+| jh-tree-picker| 树形数据选择（组织树、分类树）|
 
 ---
 
 ## 注意事项
 
-1. **pickerType 由平台统一配置**
-   - 不可随意填写
-   - 必须是平台已支持的类型
+1. **数据源必须配置**
+   - 接口模式：`listUrl`（列表查询）+ `listByIdsUrl`（ID 回显）+ `valueAttr`/`labelAttr`/`dataAttr`（字段映射）+ `columns`（弹窗表格列）+ `query`（查询条件）
+   - 本地模式：`list`（静态数组）+ `valueAttr`/`labelAttr` + `columns`
 
-2. **组件仅返回关联 ID**
+2. **多选用 `:single="false"`**
+   - 不是 `multiple`；多选返回值类型由 `dataType` 控制（`array`/`string`）
+
+3. **字段映射用 attr 系列**
+   - `valueAttr`（值）、`labelAttr`（显示标签）、`dataAttr`（列表数据路径）均为数组路径，如 `["data", "records"]`
+
+4. **组件仅返回关联 ID**
    - 其他字段需自行处理或由后端返回
 
-3. **多选注意字段类型**
-   - 必须使用数组接收
-
----
-
-## 🎯 真实项目示例
-
-### 示例 1：销售订单选择客户
-
-```vue
-<jh-picker v-model="form.customerId" picker-type="customer" />
-```
-
-### 示例 2：采购单选择商品
-
-```vue
-<jh-picker v-model="form.productIds" picker-type="product" multiple />
-```
-
----
-
-## 🚀 快速开始
-
-1. 确定业务类型（pickerType）
-2. 使用 v-model 绑定 ID
-3. 展示统一使用文本组件
-
-**推荐作为平台统一的通用关联选择组件使用！**
+**推荐作为平台统一的关联数据选择组件使用！**

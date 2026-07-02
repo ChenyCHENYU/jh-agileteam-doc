@@ -44,14 +44,16 @@ const form = ref({
 
 | 参数                 | 说明                    | 类型               | 默认值         |
 | -------------------- | ----------------------- | ------------------ | -------------- |
-| modelValue / v-model | 绑定值                  | `string`           | -              |
-| placeholder          | 占位提示                | `string`           | `"请输入"`     |
-| rows                 | 显示行数                | `number`           | `3`            |
+| modelValue / v-model | 绑定值                  | `string \| number` | -              |
+| placeholder          | 占位提示                | `string`           | -              |
+| rows                 | 显示行数                | `number`           | -              |
 | maxlength            | 最大输入长度            | `number`           | -              |
-| showWordLimit        | 是否显示字数统计        | `boolean`          | `false`        |
-| disabled             | 是否禁用                | `boolean`          | `false`        |
-| clearable            | 是否可清空              | `boolean`          | `true`         |
+| showWordLimit        | 是否显示字数统计        | `boolean`          | -              |
+| status               | 控件状态（禁用/只读用此属性） | `"default" \| "disabled" \| "readonly"` | `"default"` |
+| showColon            | label 是否显示冒号      | `boolean`          | `true`         |
 | autosize             | 自适应内容高度          | `boolean \| object`| `false`        |
+
+> ⚠️ **没有 `disabled`/`clearable` 属性**。禁用用 `status="disabled"`。
 
 ---
 
@@ -59,9 +61,12 @@ const form = ref({
 
 | 事件名            | 说明         | 回调参数          |
 | ----------------- | ------------ | ----------------- |
-| change            | 值变化时触发 | `(value) => void` |
 | update:modelValue | v-model 更新 | `(value) => void` |
+| input             | 输入时触发   | `(value) => void` |
+| focus             | 获得焦点     | `() => void`      |
 | blur              | 失去焦点     | `() => void`      |
+
+> ⚠️ **没有 `change` 事件**。监听输入用 `@input` / `@update:modelValue`。
 
 ---
 

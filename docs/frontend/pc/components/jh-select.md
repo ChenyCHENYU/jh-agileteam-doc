@@ -1,6 +1,8 @@
-# jh-select - 字典下拉选择组件
+# jh-select - 字典选择组件
 
-> 集成平台数据字典的下拉选择组件，只需传入字典名称即可自动加载选项，统一字典使用方式
+> 平台统一的字典选择组件，基于字典数据源的下拉选择，适用于状态、类型等需要从字典表选择的场景
+
+<AuthorTag :authors="['ZhuXiang', 'XieFei']" />
 
 ## 📦 组件位置
 
@@ -10,80 +12,11 @@ import "@jhlc/common-core";
 
 组件已全局注册，可直接在模板中使用 `<jh-select />`。
 
+---
+
 ## 基本用法
 
-### 根据字典名称加载
-
-```vue
-<template>
-  <jh-select
-    v-model="form.status"
-    dict="order_status"
-    placeholder="请选择订单状态"
-    clearable
-  />
-</template>
-
-<script setup lang="ts">
-import { ref } from "vue";
-
-const form = ref({
-  status: ""
-});
-</script>
-```
-
-## Props 属性
-
-| 参数                 | 说明                      | 类型                                                     | 默认值     |
-| -------------------- | ------------------------- | -------------------------------------------------------- | ---------- |
-| modelValue / v-model | 绑定值                    | `string \| number \| Array<string \| number> \| boolean` | -          |
-| dict                 | 字典名称（平台字典 code） | `string`                                                 | -          |
-| items                | 静态数据选项              | `Array<{label: string, value: any}>`                     | `[]`       |
-| placeholder          | 占位提示                  | `string`                                                 | `"请选择"` |
-| clearable            | 是否可清空                | `boolean`                                                | `true`     |
-| disabled             | 是否禁用                  | `boolean`                                                | `false`    |
-| multiple             | 是否多选                  | `boolean`                                                | `false`    |
-| filterable           | 是否可搜索                | `boolean`                                                | `false`    |
-| datasourceType       | 数据源类型                | `"static" \| "interface"`                                | `"static"` |
-| multiDataFormat      | 多选时的数据格式          | `"string" \| "array"`                                    | `"array"`  |
-| collapseTag          | 多选时是否折叠 Tag        | `boolean`                                                | `false`    |
-| teleported           | 是否将下拉面板插入 body   | `boolean`                                                | `true`     |
-
-> **重点**:
-> - 当 `dict` 属性存在时，组件会自动加载对应字典数据，无需手动设置 `items`
-> - 源码中 `BusLogicDataType.dict` 和 `BusLogicDataType.company` 都映射为 `SelectComponent`，即公司选择也使用同一组件
-
-## Events 事件
-
-| 事件名            | 说明         | 回调参数          |
-| ----------------- | ------------ | ----------------- |
-| change            | 选中值变化   | `(value) => void` |
-| update:modelValue | v-model 更新 | `(value) => void` |
-
-## 常见场景
-
-### 场景 1：列表查询条件
-
-```vue
-<jh-select v-model="query.status" dict="order_status" placeholder="订单状态" />
-```
-
-### 场景 2：表单编辑
-
-```vue
-<jh-select v-model="form.type" dict="order_type" :disabled="isView" />
-```
-
-### 场景 3：多选字典
-
-```vue
-<jh-select v-model="form.tags" dict="order_tag" multiple />
-```
-
-### 场景 4：BaseQuery 配置式用法（推荐）
-
-#### 方式一：使用 logicType 自动映射（推荐）
+### 1️⃣ 字典选择（最常用，logicType 配置式）
 
 ```ts
 import { BusLogicDataType } from "@jhlc/types/src/logical-data";
@@ -93,15 +26,7 @@ export const queryItems: BaseQueryItemDesc<any>[] = [
     name: "status",
     label: "状态",
     logicType: BusLogicDataType.dict,
-    logicValue: "order_status",
-    // 自动渲染为 jh-select，自动加载字典 order_status 的选项
-  },
-  {
-    name: "companyId",
-    label: "公司",
-    logicType: BusLogicDataType.company,
-    logicValue: "companyId",
-    // BusLogicDataType.company 同样映射为 SelectComponent
+    logicValue: "sys_status",
   },
 ];
 ```
@@ -109,77 +34,156 @@ export const queryItems: BaseQueryItemDesc<any>[] = [
 > **源码映射规则**（`getFormItemByLogicType`）：
 > - `BusLogicDataType.dict` → `SelectComponent`
 > - `BusLogicDataType.company` → `SelectComponent`
-> - `BusLogicDataType.enums` → `SelectComponent`
+> - ⚠️ `BusLogicDataType.enums` → **`InputComponent`（普通输入框）**，并非 SelectComponent
 
-#### 方式二：使用 component 自定义
+---
 
-```ts
-export const queryItems: BaseQueryItemDesc<any>[] = [
-  {
-    name: "orderStatus",
-    label: "操作类型",
-    placeholder: "请选择操作类型",
-    component: () => {
-      return {
-        tag: "jh-select",
-        items: [
-          { label: "是", value: 1 },
-          { label: "否", value: 0 }
-        ]
-      };
-    }
-  },
-];
-```
-
-#### historyTop 个人偏好（仅对 jh-select 生效）
-
-```ts
-{
-  name: "customerId",
-  label: "客户",
-  logicType: BusLogicDataType.dict,
-  logicValue: "customer_type",
-  historyTop: true,
-  // 启用后，用户近期选择过的选项会置顶显示
-}
-```
-
-### 场景 5：静态 items 方式
+### 2️⃣ 静态选项
 
 ```vue
 <jh-select
-  v-model="form.gender"
+  v-model="form.type"
+  datasource-type="static"
   :items="[
-    { label: '男', value: 1 },
-    { label: '女', value: 2 }
+    { label: '是', value: 1 },
+    { label: '否', value: 0 }
   ]"
-  placeholder="请选择性别"
 />
 ```
 
 ---
 
-## 最佳实践
+### 3️⃣ 多选模式
 
-1. **优先使用 logicType + logicValue**
-   - 配置式优于模板式，保证字典来源统一
-   - `logicType: BusLogicDataType.dict` 自动渲染 jh-select
-   - 只有静态选项时才使用 `component` + `items`
-
-2. **配合 jh-text 使用**
-   - 列表展示用 `jh-text`
-   - 表单编辑用 `jh-select`
-
-3. **字典值以字符串为主**
-   - 避免 number/string 混用
-
-## 注意事项
-
-- 字典数据来自平台缓存
-- 字典名称必须是平台已配置的 code
-- 多选时返回数组
+```vue
+<jh-select v-model="form.types" logicType="BusLogicDataType.dict" logicValue="sys_type" multiple />
+```
 
 ---
 
-✅ **推荐作为平台统一的字典下拉组件使用**
+## Props 属性
+
+| 参数                 | 说明                        | 类型                                       | 默认值      |
+| -------------------- | --------------------------- | ------------------------------------------ | ----------- |
+| modelValue / v-model | 绑定值                      | `string \| number \| string[] \| boolean`  | -           |
+| datasourceType       | 数据源类型                  | `"static" \| "interface"`                  | -           |
+| items                | 静态选项（datasourceType=static 时） | `Array<{label, value}>`           | -           |
+| showColon            | label 是否显示冒号          | `boolean`                                  | `true`      |
+| label                | label 文本                  | `string`                                   | -           |
+| placeholder          | 占位提示                    | `string`                                   | -           |
+| multiple             | 是否多选                    | `boolean`                                  | `false`     |
+| status               | 控件状态（禁用/只读用此属性） | `"default" \| "disabled" \| "readonly"`   | `"default"` |
+| filterable           | 是否可搜索                  | `boolean`                                  | -           |
+| dataType             | 多选返回类型                | `"array" \| "string"`                      | -           |
+| collapseTag          | 多选时是否折叠 Tag          | `boolean`                                  | -           |
+| teleported           | 下拉面板是否插入 body       | `boolean`                                  | -           |
+| allowCreate          | 是否允许创建新项            | `boolean`                                  | -           |
+| size                 | 控件尺寸                    | `"small" \| "default" \| "large"`          | -           |
+
+> ⚠️ **没有 `dictType`/`disabled` 属性**。字典数据通过 BaseQuery/BaseForm 的 `logicType: BusLogicDataType.dict` + `logicValue` 自动加载；禁用用 `status="disabled"`（非 disabled）。
+
+---
+
+## Events 事件
+
+| 事件名            | 说明               | 回调参数          |
+| ----------------- | ------------------ | ----------------- |
+| update:modelValue | v-model 更新时触发 | `(value) => void` |
+| change            | 选中值改变时触发   | `(value) => void` |
+| blur              | 失去焦点时触发     | `() => void`      |
+| select            | 选中选项时触发     | `() => void`      |
+| visibleChange     | 下拉显示/隐藏切换  | `() => void`      |
+
+---
+
+## 常见场景
+
+### 场景 1：状态选择（BaseQuery/BaseForm 配置式，推荐）
+
+```ts
+{
+  name: "status",
+  label: "状态",
+  logicType: BusLogicDataType.dict,
+  logicValue: "sys_status",
+}
+```
+
+通过 `logicType=dict` + `logicValue`（字典编码）自动加载选项。
+
+---
+
+### 场景 2：静态选项
+
+```vue
+<jh-select
+  v-model="form.gender"
+  datasource-type="static"
+  :items="[
+    { label: '男', value: 1 },
+    { label: '女', value: 2 }
+  ]"
+/>
+```
+
+---
+
+### 场景 3：禁用/只读
+
+```vue
+<jh-select v-model="form.status" :status="isView ? 'readonly' : 'default'" />
+```
+
+> 用 `status` 控制状态，不是 `disabled`。
+
+---
+
+## 注意事项
+
+1. **字典选择走 logicType 配置式**
+   - 在 BaseQuery/BaseForm 中用 `logicType: BusLogicDataType.dict` + `logicValue`
+   - 不要用不存在的 `dict-type` / `dictType` 属性
+
+2. **v-model 类型**
+   - 单选: `string | number | boolean`
+   - 多选: `string[] | number[]`
+
+3. **多选返回类型**
+   - 由 `dataType`（`"array"`/`"string"`）控制
+
+4. **label 冒号**
+   - `showColon` 默认 `true`，表单内 label 会带冒号；如需关闭传 `:show-colon="false"`
+
+---
+
+## 🎯 真实项目示例
+
+### 示例 1：查询条件状态筛选
+
+```ts
+export const queryItems: BaseQueryItemDesc<any>[] = [
+  {
+    name: "status",
+    label: "状态",
+    logicType: BusLogicDataType.dict,
+    logicValue: "sys_status",
+  },
+];
+```
+
+### 示例 2：静态是/否选择
+
+```vue
+<jh-select
+  v-model="form.enabled"
+  datasource-type="static"
+  :items="[
+    { label: '是', value: 1 },
+    { label: '否', value: 0 }
+  ]"
+/>
+```
+
+**推荐作为平台统一的选择组件使用！**
+
+> 字典选择通过 BaseQuery/BaseForm 的 `logicType=dict` + `logicValue` 配置式自动加载；静态选项用 `datasourceType="static"` + `items`。已全局注册，可直接使用 `<jh-select />`。

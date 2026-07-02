@@ -2,6 +2,8 @@
 
 > 平台统一的日期范围选择组件，封装常用日期范围选择交互与默认格式，适用于查询条件、统计分析等需要选择开始/结束日期的场景
 
+<AuthorTag :authors="['ZhuXiang', 'XieFei']" />
+
 ## 📦 组件位置
 
 ```ts
@@ -18,14 +20,18 @@ import "@jhlc/common-core";
 
 ```vue
 <template>
-  <jh-date-range v-model="query.dateRange" placeholder="请选择日期范围" />
+  <jh-date-range
+    v-model="query.dateRange"
+    start-placeholder="开始日期"
+    end-placeholder="结束日期"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 
 const query = ref({
-  dateRange: []
+  dateRange: [],
 });
 </script>
 ```
@@ -46,22 +52,26 @@ const query = ref({
 
 ## Props 属性
 
-| 参数                            | 说明                         | 类型                                             | 默认值             |
-| ------------------------------- | ---------------------------- | ------------------------------------------------ | ------------------ |
-| modelValue / v-model            | 绑定值（开始/结束数组）      | `Array<string \| Date>`                          | `[]`               |
-| beginValue / v-model:beginValue | 开始日期（可拆分绑定）       | `string \| Date`                                 | -                  |
-| endValue / v-model:endValue     | 结束日期（可拆分绑定）       | `string \| Date`                                 | -                  |
-| placeholder                     | 占位提示                     | `string`                                         | `"请选择日期范围"` |
-| startPlaceholder                | 开始日期占位                 | `string`                                         | `"开始日期"`       |
-| endPlaceholder                  | 结束日期占位                 | `string`                                         | `"结束日期"`       |
-| type                            | 范围选择器类型               | `"daterange" \| "monthrange" \| "datetimerange"` | `"daterange"`      |
-| format                          | 绑定值格式（返回给 v-model） | `string`                                         | `"YYYY-MM-DD"`     |
-| showFormat                      | 显示格式                     | `string`                                         | `"YYYY-MM-DD"`     |
-| rangeSeparator                  | 分隔符                       | `string`                                         | `"至"`             |
-| disabled                        | 是否禁用                     | `boolean`                                        | `false`            |
-| clearable                       | 是否可清空                   | `boolean`                                        | `true`             |
+| 参数                            | 说明                         | 类型                                             | 默认值      |
+| ------------------------------- | ---------------------------- | ------------------------------------------------ | ----------- |
+| modelValue / v-model            | 绑定值（开始/结束数组）      | `Array<string \| Date>`                          | -           |
+| beginValue / v-model:beginValue | 开始日期（可拆分绑定）       | `string \| Date`                                 | -           |
+| endValue / v-model:endValue     | 结束日期（可拆分绑定）       | `string \| Date`                                 | -           |
+| startPlaceholder                | 开始日期占位                 | `string`                                         | -           |
+| endPlaceholder                  | 结束日期占位                 | `string`                                         | -           |
+| type                            | 范围选择器类型               | `"daterange" \| "monthrange" \| "datetimerange"` | -           |
+| format                          | 绑定值格式（返回给 v-model） | `string`                                         | -           |
+| showFormat                      | 显示格式                     | `string`                                         | -           |
+| rangeSeparator                  | 分隔符                       | `string`                                         | -           |
+| status                          | 控件状态（禁用/只读用此属性） | `"default" \| "disabled" \| "readonly"`          | `"default"` |
+| showColon                       | label 是否显示冒号           | `boolean`                                        | `true`      |
 
-> **新增提示**: 除了使用 `v-model` 绑定数组外,还可以使用 `v-model:beginValue` 和 `v-model:endValue` 分别绑定开始和结束日期,这在某些场景下更加灵活。
+> ⚠️ **没有 `placeholder`/`disabled` 属性**。
+> - 日期范围**没有单值 `placeholder`**，只有 `startPlaceholder`（开始日期占位）和 `endPlaceholder`（结束日期占位）
+> - 禁用用 `status="disabled"`（非 disabled）
+> - `type="datetimerange"` 时也可用独立的 `DateTimeRangeComponent`（`jh-date-time-range`）
+
+> **拆分绑定提示**: 除了使用 `v-model` 绑定数组外，还可以使用 `v-model:beginValue` 和 `v-model:endValue` 分别绑定开始和结束日期，这在某些场景下更加灵活。
 
 ---
 
@@ -81,7 +91,7 @@ const query = ref({
 ### 场景 1：列表查询时间范围（推荐）
 
 ```vue
-<jh-date-range v-model="query.bizDateRange" placeholder="业务日期" />
+<jh-date-range v-model="query.bizDateRange" start-placeholder="业务开始" end-placeholder="业务结束" />
 ```
 
 ---
@@ -89,7 +99,7 @@ const query = ref({
 ### 场景 2：统计报表筛选
 
 ```vue
-<jh-date-range v-model="query.statRange" placeholder="统计区间" />
+<jh-date-range v-model="query.statRange" start-placeholder="统计开始" end-placeholder="统计结束" />
 ```
 
 ---
@@ -98,11 +108,11 @@ const query = ref({
 
 ```ts
 // data.ts 查询项配置
-export const queryItems: BaseQueryItemDesc<any>[] = [
+export const queryItemsConfig: BaseQueryItemDesc<any>[] = [
   {
     name: "createDateTime",
-    startName: "createDateTimeStart", // 开始字段（自动拆分）
-    endName: "createDateTimeEnd",     // 结束字段（自动拆分）
+    startName: "createDateTimeStart", // 开始字段
+    endName: "createDateTimeEnd", // 结束字段
     label: "创建日期",
     component: () => {
       return {
@@ -110,50 +120,18 @@ export const queryItems: BaseQueryItemDesc<any>[] = [
         type: "daterange",
         rangeSeparator: "至",
         showFormat: "YYYY-MM-DD",
-        format: "YYYY-MM-DD"
+        valueFormat: "YYYY-MM-DD",
       };
-    }
-  }
+    },
+  },
 ];
 
-// 运行时框架会自动拆分为 startName 和 endName 两个字段：
+// 使用时会自动拆分为 startName 和 endName 两个字段
 // query.createDateTimeStart = "2026-01-01"
 // query.createDateTimeEnd = "2026-01-31"
 ```
 
-### 场景 4：使用 defaultValue 预设值（源码内置）
-
-框架在 `BaseQueryItemDesc` 中内置了丰富的日期范围预设值，配合 `startName` / `endName` 使用：
-
-```ts
-export const queryItems: BaseQueryItemDesc<any>[] = [
-  {
-    name: "dateRange",
-    startName: "startDate",
-    endName: "endDate",
-    label: "业务日期",
-    defaultValue: "recentDay7",  // 默认选中近 7 天
-    component: () => ({ tag: "jh-date", type: "daterange" })
-  },
-];
-```
-
-**全部可用预设值**（源码 `setFormDefaultValue`）：
-
-| 预设值                                | 说明                                     |
-| ------------------------------------- | ---------------------------------------- |
-| `"recentDay3"`                        | 近 3 天（startDate ~ 明天）                |
-| `"recentDay7"`                        | 近 7 天（startDate ~ 明天）                |
-| `"recentDay30"`                       | 近 30 天（startDate ~ 明天）               |
-| `"recentDay3Datetime"`                | 近 3 天（含时分秒 00:00:00 ~ 23:59:59）  |
-| `"rangeDatetimeToday"`                | 今天（00:00:00 ~ 23:59:59）               |
-| `"rangeDayCurrentMonth1ToToday"`      | 本月 1 号 ~ 今天                           |
-| `"rangeDayCurrentMonth1ToLastDay"`    | 本月 1 号 ~ 本月最后一天                   |
-| `"rangeDatetimeCurrentMonth1ToLastDay"` | 本月 1 号 ~ 本月最后一天（含时分秒）       |
-
-> **单字段预设值**（非范围）：`"currentDay"` | `"currentMonth"` | `"currentYear"` | `"currentDept"`
-
-### 场景 5：与后端接口参数映射
+### 场景 4：与后端接口参数映射
 
 ```ts
 // v-model 方式
@@ -215,7 +193,7 @@ params: {
 ### 1️⃣ 统一返回字符串格式（强烈推荐）
 
 ```vue
-<jh-date-range v-model="query.dateRange" format="YYYY-MM-DD" />
+<jh-date-range v-model="query.dateRange" value-format="YYYY-MM-DD" />
 ```
 
 避免 Date / string 混用，接口参数更稳定
@@ -236,7 +214,7 @@ params: {
 const [startDate, endDate] = query.value.dateRange || [];
 request({
   url: "/api/list",
-  params: { startDate, endDate }
+  params: { startDate, endDate },
 });
 ```
 
@@ -255,7 +233,7 @@ request({
    - 必须使用数组字段接收
    - 推荐默认 `[]`
 
-2. **format 决定返回类型**
+2. **valueFormat 决定返回类型**
    - 默认 `"YYYY-MM-DD"` 字符串数组
    - 不建议返回 Date（容易引入时区/格式问题）
 
