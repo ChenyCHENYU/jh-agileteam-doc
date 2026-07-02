@@ -70,32 +70,40 @@ const form = ref({ enabled: 1 });
 
 ## Props 属性
 
-| 参数           | 说明                          | 类型                                            | 默认值 |
-| -------------- | ----------------------------- | ----------------------------------------------- | ------ |
-| modelValue / v-model | 绑定值                  | `string \| number \| boolean`                   | -      |
-| label          | label 文本                    | `string`                                        | `""`   |
-| showColon      | label 是否显示冒号            | `boolean`                                       | `true` |
-| prop           | 表单字段（校验用）            | `array`                                         | -      |
-| tip            | 提示信息                      | `string`                                        | -      |
-| defaultValue   | 默认值                        | `string`                                        | -      |
-| status         | 控件状态                      | `"default" \| "disabled" \| "readonly"`         | `""`   |
-| size           | 控件尺寸                      | `"small" \| "default" \| "large"`               | `""`   |
-| labelWidth     | label 宽度                    | `string`                                        | -      |
-| maxWidth       | 最大宽度                      | `string`                                        | `""`   |
-| labelClass     | label 自定义类名              | `array`                                         | `[]`   |
-| appendText     | 后置文本                      | `string`                                        | -      |
-| width          | 开关宽度                      | `string`                                        | -      |
-| ctrlHidden     | 控件隐藏表达式                | `string`                                        | -      |
-| openDesc       | 是否显示开关描述              | `boolean`                                       | `true` |
-| textType       | 描述类型                      | `"text" \| "icon"`                              | `""`   |
-| activeText     | 打开时文字                    | `string`                                        | `""`   |
-| inactiveText   | 关闭时文字                    | `string`                                        | `""`   |
-| activeIcon     | 打开时图标                    | `string`                                        | `""`   |
-| inactiveIcon   | 关闭时图标                    | `string`                                        | `""`   |
-| loading        | 是否加载中                    | `boolean`                                       | `false` |
-| dataType       | 绑定值类型                    | `"string" \| "number" \| "boolean"`             | `""`   |
-| activeValue    | 打开时的值                    | `string \| number \| boolean`                   | `1`    |
-| inactiveValue  | 关闭时的值                    | `string \| number \| boolean`                   | `0`    |
+### 基础属性
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| modelValue / v-model | 数据绑定 | `string \| number \| boolean` | - |
+| label | 标题名称 | `string` | `开关` |
+| showColon | 标题与输入框之间加英文冒号 | `boolean` | `true` |
+| prop | 字段属性，用于表单校验确定字段，选择字段后自动设置数据绑定 | `array` | - |
+| tip | 描述性文案 | `string` | - |
+| defaultValue | 默认值 | `string` | - |
+| status | 状态 | `string` | `default` |
+| size | 尺寸 | `string` | `default` |
+| labelWidth | 标签宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | `450px` |
+| viewer | 阅读模式，将输入框渲染为 span | `boolean` | `false` |
+| labelClass | 标签样式 | `array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| width | 开关宽度 | `string` | - |
+| ctrlHidden | 控件隐藏表达式 | `string` | - |
+| openDesc | 开关内描述 | `boolean` | `true` |
+| textType | 展示样式（text / icon） | `string` | `text` |
+| activeText | 开启文字 | `string` | `""` |
+| inactiveText | 关闭文字 | `string` | `""` |
+| activeIcon | 开启图标 | `string` | `""` |
+| inactiveIcon | 关闭图标 | `string` | `""` |
+| loading | 加载中 | `boolean` | `false` |
+
+### 数据配置
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| dataType | 数据类型 | `string` | `number` |
+| activeValue | 开启值 | `string \| number \| boolean` | `1` |
+| inactiveValue | 关闭值 | `string \| number \| boolean` | `0` |
 
 > ⚠️ **禁用/只读用 `status`**（`"disabled"` / `"readonly"`），不是 `disabled`。
 > ⚠️ **没有 `disabled` 属性**（声明层未声明），统一用 `status`。

@@ -52,16 +52,25 @@ import "@jhlc/common-core";
 
 ## Props 属性
 
-| 参数         | 说明                  | 类型     | 默认值 |
-| ------------ | --------------------- | -------- | ------ |
-| width        | 容器宽度              | `string` | -      |
-| leftPercent  | 左区占比（0-1）       | `number` | -      |
-| leftWidth    | 左区固定宽度（px）    | `number` | -      |
-| rightPercent | 右区占比（0-1）       | `number` | -      |
-| rightWidth   | 右区固定宽度（px）    | `number` | -      |
+> 基础属性来自 `schema-component/base-container-group/drag-col/props.ts`（基本属性 · 基础）；
+> `slider*` 样式属性为骨架组件 `common-core/src/components/drag-col/drag-col.vue` 补充。
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| width | 宽度 | `string` | `"400px"` |
+| height | 高度 | `string` | `"400px"` |
+| leftPercent | 左区占比 | `number` | - |
+| leftWidth | 左区宽度 | `number` | - |
+| rightPercent | 右区占比 | `number` | - |
+| rightWidth | 右区宽度 | `number` | - |
+| sliderWidth | 拖拽条宽度 | `number` | `10` |
+| sliderColor | 拖拽条颜色 | `string` | `"#6f808d"` |
+| sliderBgColor | 拖拽条背景色 | `string` | `"#a7caec"` |
+| sliderHoverColor | 拖拽条 hover 颜色 | `string` | `"#6f808d"` |
+| sliderBgHoverColor | 拖拽条 hover 背景色 | `string` | `"#c8dcea"` |
 
 > ⚠️ **比例（`leftPercent`/`rightPercent`）与固定宽度（`leftWidth`/`rightWidth`）二选一**，不要同时设置。
-> ⚠️ **没有 `sliderWidth`/`sliderColor` 等样式属性**（声明层未声明），如需自定义请用覆盖样式。
+> ℹ️ `sliderWidth`/`sliderColor` 等 `slider*` 样式属性来自骨架组件 `drag-col.vue`，schema 声明层（props.ts）未声明。
 
 ---
 

@@ -52,26 +52,38 @@ const visible = ref(false);
 
 ## Props 属性
 
-| 参数               | 说明                          | 类型                                       | 默认值 |
-| ------------------ | ----------------------------- | ------------------------------------------ | ------ |
-| modelValue / v-model | 是否显示（支持 v-model）    | `boolean`                                  | -      |
-| title              | 标题                          | `string`                                   | `""`   |
-| size               | 抽屉尺寸（宽/高）             | `string`（可选值 `"356px" \| "594px" \| "720px"` 或自定义） | `""` |
-| direction          | 滑出方向                      | `"rtl" \| "ltr" \| "ttb" \| "btt"`         | `""`   |
-| drawerTop          | 距离顶部偏移                  | `string`                                   | `""`   |
-| drawerRight        | 距离右侧偏移                  | `string`                                   | `""`   |
-| drawerLeft         | 距离左侧偏移                  | `string`                                   | `""`   |
-| drawerBottom       | 距离底部偏移                  | `string`                                   | `""`   |
-| withHeader         | 是否显示头部                  | `boolean`                                  | `true` |
-| withFooter         | 是否显示底部                  | `boolean`                                  | `true` |
-| modal              | 是否显示遮罩层                | `boolean`                                  | `true` |
-| titleDraggable     | 标题是否可拖拽                | `boolean`                                  | -      |
-| appendToBody       | 是否插入 body                 | `boolean`                                  | -      |
-| destroyOnclose     | 关闭时是否销毁内容            | `boolean`                                  | `true` |
-| lockScroll         | 是否锁定滚动                  | `boolean`                                  | -      |
-| isShowSwitchFull   | 是否显示全屏切换按钮          | `boolean`                                  | `false` |
-| closeOnClickModal  | 点击遮罩层是否关闭            | `boolean`                                  | -      |
-| closeOnPressEscape | 按 ESC 是否关闭               | `boolean`                                  | `true` |
+**基础**
+
+| 参数      | 说明     | 类型     | 默认值         |
+| --------- | -------- | -------- | -------------- |
+| title     | 标题名称 | `string` | `"Drawer标题"` |
+| size      | 宽度     | `string` | `"40%"`        |
+| direction | 弹出方向 | `string` | `"rtl"`        |
+
+**主要属性**
+
+| 参数                  | 说明                                                             | 类型      | 默认值 |
+| --------------------- | ---------------------------------------------------------------- | --------- | ------ |
+| modelValue / v-model  | 是否显示                                                         | `boolean` | -      |
+| withHeader            | 显示顶部栏                                                       | `boolean` | `true` |
+| withFooter            | 显示底部栏                                                       | `boolean` | `true` |
+| titleDraggable        | 定制标题                                                         | `boolean` | -      |
+| modal                 | 显示遮罩                                                         | `boolean` | `true` |
+| appendToBody          | body内（自身是否插入至 body 元素，嵌套必须为 `true`）            | `boolean` | -      |
+| destroyOnclose        | 关闭销毁（关闭后是否将子元素全部销毁）                           | `boolean` | `true` |
+| lockScroll            | 锁定滚动（出现时是否将 body 滚动锁定）                           | `boolean` | -      |
+
+**交互配置**
+
+| 参数               | 说明                                       | 类型      | 默认值  |
+| ------------------ | ------------------------------------------ | --------- | ------- |
+| isShowSwitchFull   | 切换全屏（是否展示头部切换全屏功能）       | `boolean` | `false` |
+| closeOnClickModal  | 外部关闭（是否可点击抽屉外部区域关闭）     | `boolean` | -       |
+| closeOnPressEscape | esc关闭（是否可按下 ESC 关闭）             | `boolean` | `true`  |
+| drawerTop          | 头部位置                                   | `string`  | `"0px"` |
+| drawerRight        | 右侧位置                                   | `string`  | `"0px"` |
+| drawerLeft         | 左侧位置                                   | `string`  | `"0px"` |
+| drawerBottom       | 底部位置                                   | `string`  | `"0px"` |
 
 > ⚠️ **没有 `visible`/`width` 属性**。开关用 `v-model`（对应 `modelValue`）；尺寸用 `size`（不是 `width`）。
 

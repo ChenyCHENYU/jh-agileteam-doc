@@ -52,20 +52,22 @@ import "@jhlc/common-core";
 
 ## Props 属性
 
-| 参数     | 说明                       | 类型                                                                                       | 默认值 |
-| -------- | -------------------------- | ------------------------------------------------------------------------------------------ | ------ |
-| text     | 按钮文本（也可用默认插槽） | `string`                                                                                   | -      |
-| type     | 按钮类型                   | `"primary" \| "default" \| "success" \| "info" \| "warning" \| "danger"`                   | `""`   |
-| size     | 按钮尺寸                   | `"small" \| "default" \| "large"`                                                          | `""`   |
-| icon     | 内置图标                   | `"Search" \| "Edit" \| "Delete" \| "Plus" \| "Refresh"`                                    | -      |
-| shape    | 形状                       | `"none" \| "round" \| "circle"`                                                            | `""`   |
-| round    | 是否圆角                   | `boolean`                                                                                  | -      |
-| circle   | 是否圆形                   | `boolean`                                                                                  | -      |
-| link     | 是否为链接模式             | `boolean`                                                                                  | -      |
-| isText   | 是否为文字按钮             | `boolean`                                                                                  | -      |
-| href     | 跳转地址（链接模式生效）   | `string`                                                                                   | -      |
-| target   | 跳转方式                   | `"_blank" \| "_self"`                                                                      | `""`   |
-| disabled | 是否禁用                   | `boolean`                                                                                  | -      |
+**基础**
+
+| 参数     | 说明     | 类型      | 默认值      |
+| -------- | -------- | --------- | ----------- |
+| text     | 内容     | `string`  | -           |
+| type     | 按钮类型 | `string`  | `"default"` |
+| round    | 圆角     | `boolean` | -           |
+| circle   | 圆形     | `boolean` | -           |
+| shape    | 形状     | `string`  | `"none"`    |
+| link     | 链接按钮 | `boolean` | -           |
+| href     | 链接地址 | `string`  | -           |
+| target   | 打开方式 | `string`  | `"_blank"`  |
+| isText   | 文字按钮 | `boolean` | -           |
+| size     | 尺寸     | `string`  | `"default"` |
+| icon     | 图标     | `string`  | -           |
+| disabled | 禁用     | `boolean` | -           |
 
 > ⚠️ **没有 `loading`/`plain`/`nativeType` 属性**（声明层未声明）。
 > - 禁用用 `disabled`

@@ -71,37 +71,43 @@ const form = ref({ roles: ['admin'] });
 
 ## Props 属性
 
-| 参数             | 说明                          | 类型                                            | 默认值 |
-| ---------------- | ----------------------------- | ----------------------------------------------- | ------ |
-| modelValue / v-model | 绑定值                    | `array \| string \| number`                     | -      |
-| label            | label 文本                    | `string`                                        | `""`   |
-| showColon        | label 是否显示冒号            | `boolean`                                       | `true` |
-| prop             | 表单字段（校验用）            | `array`                                         | -      |
-| type             | 风格类型                      | `"" \| "button" \| "border"`                    | -      |
-| size             | 控件尺寸                      | `"small" \| "default" \| "large"`               | `""`   |
-| tip              | 提示信息                      | `string`                                        | -      |
-| status           | 控件状态                      | `"default" \| "disabled" \| "readonly"`         | `""`   |
-| labelWidth       | label 宽度                    | `string`                                        | -      |
-| maxWidth         | 最大宽度                      | `string`                                        | `""`   |
-| labelClass       | label 自定义类名              | `array`                                         | `[]`   |
-| appendText       | 后置文本                      | `string`                                        | -      |
-| ctrlHidden       | 控件隐藏表达式                | `string`                                        | -      |
-| hasSelectAll     | 是否显示全选项                | `boolean`                                       | -      |
-| dataFormat       | 绑定值格式                    | `"string" \| "array"`                           | `""`   |
-| dataType         | 绑定值类型                    | `"string" \| "number" \| "boolean"`             | `""`   |
-| viewer           | 是否为只读查看态              | `boolean`                                       | -      |
-| datasourceType   | 数据源类型                    | `"static" \| "interface"`                       | `""`   |
-| items            | 静态选项（datasourceType=static） | `array`                                     | -      |
-| _optionsDsId     | 接口数据源 ID（interface）    | `string`                                        | -      |
-| _optionsDataAttr | 接口数据取值路径              | `array \| string`                               | `[""]` |
-| _optionsValueAttr| 选项值字段路径                | `array \| string`                               | `[""]` |
-| _optionsLabelAttr| 选项标签字段路径              | `array \| string`                               | `[""]` |
-| _optionsValueExpr| 选项值表达式                  | -                                               | -      |
-| _optionsLabelExpr| 选项标签表达式                | -                                               | -      |
-| _optionsQuery    | 接口查询参数                  | `array`                                         | `[]`   |
-| _optionsQueryAttr| 查询参数字段                  | `array`                                         | -      |
-| _fixQueryParam   | 固定查询参数                  | `object`                                        | `{}`   |
-| fetchDataCb      | 数据获取回调                  | -                                               | -      |
+### 基础属性
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| label | 标题名称 | `string` | `复选框组` |
+| showColon | 冒号，标题与输入框之间加英文冒号 | `boolean` | `true` |
+| prop | 字段属性，用于表单校验，确定是哪个字段，选择字段后自动会设置数据绑定 | `Array` | - |
+| modelValue / v-model | 数据绑定 | `Array \| string \| number` | - |
+| type | 显示样式 | `string` | - |
+| tip | 描述性文案 | `string` | - |
+| status | 状态 | `string` | `default` |
+| size | 尺寸 | `string` | `default` |
+| labelWidth | 标签宽度，styleY样式，比如500px,100%,默认450px | `string` | - |
+| maxWidth | 最大宽度，styleY样式，比如500px,100%,默认450px | `string` | `450px` |
+| viewer | 阅读模式，阅读模式将输入框渲染为span | `boolean` | `false` |
+| labelClass | 标签样式 | `Array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| hasSelectAll | 可全选，提供全选选项工具 | `boolean` | - |
+
+### 数据配置
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| dataFormat | 数据格式 | `string` | `array` |
+| dataType | 数据类型 | `string` | `string` |
+| datasourceType | 数据来源 | `string` | `static` |
+| items | 选项 | `Array` | - |
+| _optionsDsId | 查询接口 | `string` | - |
+| _optionsDataAttr | 数据属性 | `Array \| string` | `[""]` |
+| _optionsValueAttr | 值属性 | `Array \| string` | `[""]` |
+| _optionsValueExpr | 值表达式 | `Function` | - |
+| _optionsLabelAttr | 标签属性 | `Array \| string` | `[""]` |
+| _optionsLabelExpr | 标签表达式 | `Function` | - |
+| _fixQueryParam | 固定查询参数 | `object` | `{}` |
+| fetchDataCb | 数据获取回调 | `Function` | - |
+| _optionsQuery | 接口查询参数 | `Array` | `[]` |
+| _optionsQueryAttr | 查询参数字段 | `Array` | - |
 
 > ⚠️ **禁用/只读用 `status`**（`"disabled"` / `"readonly"`），不是 `disabled`。
 > ⚠️ **没有 `defaultValue` 属性**（声明层未声明，与单选组不同）。

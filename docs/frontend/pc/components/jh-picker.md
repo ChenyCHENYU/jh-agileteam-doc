@@ -74,39 +74,87 @@ const customerQueryItems = [
 
 ## Props 属性
 
-| 参数                 | 说明                             | 类型                                                                     | 默认值     |
-| -------------------- | -------------------------------- | ------------------------------------------------------------------------ | ---------- |
-| modelValue / v-model | 绑定值                           | `string \| string[]`                                                     | -          |
-| single               | 是否单选（**多选用 `:single="false"`**） | `boolean`                                                        | `true`     |
-| placeholder          | 占位提示                         | `string`                                                                 | -          |
-| status               | 控件状态                         | `"default" \| "disabled" \| "readonly"`                                  | `"default"`|
-| dataType             | 多选时返回数据类型               | `"array" \| "string"`                                                    | -          |
-| list                 | 本地静态数据                     | `Array`                                                                  | -          |
-| listUrl              | 列表查询接口（**核心数据源配置**） | `string`                                                               | -          |
-| listMethod           | 列表查询方式                     | `string`                                                                 | -          |
-| listByIdsUrl         | 根据 ID 查询接口（回显）         | `string`                                                                 | -          |
-| listByIdsMethod      | 回显请求方式                     | `"param" \| "body"`                                                      | -          |
-| listByIdsDsId        | 回显数据源 ID                    | `string`                                                                 | -          |
-| listDsId             | 列表数据源 ID                    | `string`                                                                 | -          |
-| echoRequestType      | 回显请求类型                     | `"post" \| "get"`                                                        | -          |
-| query                | 弹窗内查询条件配置               | `Array`                                                                  | -          |
-| columns              | 弹窗内表格列配置                 | `Array`                                                                  | -          |
-| title                | 弹窗标题                         | `string`                                                                 | -          |
-| width                | 弹窗宽度                         | `string`                                                                 | -          |
-| valueAttr            | 值字段路径                       | `string[] \| string`                                                     | -          |
-| labelAttr            | 标签字段路径（回显显示）         | `string[] \| string`                                                     | -          |
-| dataAttr             | 列表数据字段路径                 | `string[] \| string`                                                     | -          |
-| valueExpr            | 值表达式                         | `string`                                                                 | -          |
-| labelExpr            | 标签表达式                       | `string`                                                                 | -          |
-| fixQueryParam        | 固定查询参数                     | `object`                                                                 | `{}`       |
-| showType             | 显示类型                         | `"" \| "button"`                                                         | `""`       |
-| showLabel            | 按钮文本（showType="button" 时） | `string`                                                                 | -          |
-| buttonType           | 按钮类型                         | `"default" \| "primary" \| "success" \| "info" \| "warning" \| "danger"` | `"default"`|
-| buttonIcon           | 按钮图标                         | `"Search" \| "Edit" \| "Delete" \| "Plus" \| "Refresh"`                  | -          |
-| showSearchBtn        | 是否显示搜索按钮                 | `boolean`                                                                | `true`     |
-| defaultValue         | 默认值                           | `string`                                                                 | -          |
-| queryParamType       | 查询参数类型                     | `string`                                                                 | -          |
-| echoParamAppends     | 回显参数追加方式                 | `"appends" \| "notAppends"`                                              | -          |
+> 以下属性以 `props.ts` 为唯一权威源。
+
+#### 基本属性 · 基础
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| forPick | 提供选择 | `boolean` | - |
+| showMultiEcho | 多选回显 | `boolean` | `true` |
+| customLabel | 自定义标签 | `Function \| string` | - |
+| label | 标题名称 | `string` | `""` |
+| showColon | 冒号（标题与输入框之间加英文冒号） | `boolean` | `true` |
+| prop | 字段属性（用于表单校验，确定是哪个字段，选择字段后自动会设置数据绑定） | `Array` | - |
+| modelValue / v-model | 数据绑定 | `string \| Array` | - |
+| placeholder | 占位提示 | `string` | `"请选择"` |
+| tip | 描述性文案 | `string` | - |
+| list | 列表绑定 | `Array` | - |
+| defaultValue | 默认值 | `string` | - |
+| status | 状态 | `string` | `"default"` |
+| size | 尺寸 | `string` | `"default"` |
+| labelWidth | 标签宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | `"450px"` |
+| viewer | 阅读模式（阅读模式将输入框渲染为 span） | `boolean` | `false` |
+| labelClass | 标签样式 | `Array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| single | 是否单选 | `boolean` | `true` |
+| dataType | 数据类型（多选时，字段数据类型，如果是字符串，则是逗号隔开） | `string` | `"array"` |
+| validFun | 数据校验（用于校验数据项是否可选，不合法调用 cb(false)，否则调用 cb(true)） | `Function` | - |
+| equals | 相等比较 | `Function` | - |
+| showType | 显示类型 | `string` | `""` |
+| inputable | 显示类型 | `boolean` | `false` |
+| showLabel | 按钮名称 | `string` | `"按钮"` |
+| buttonType | 按钮类型 | `string` | `"primary"` |
+| buttonIcon | 按钮图标 | `string` | - |
+| listUrl | 列表接口 | `string` | - |
+| listMethod | 列表接口 | `string` | `"get"` |
+| listByIdsUrl | 回显接口 | `string \| Function` | - |
+
+#### 基本属性 · 弹窗
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| title | 标题名称 | `string` | - |
+| width | 弹框宽度 | `string` | - |
+| customClass | 弹框自定义类名 | `string` | - |
+| showSearchBtn | 是否展示搜索按钮 | `boolean` | `true` |
+
+#### 数据配置 · 数据接口
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| tableRenderType | 表格渲染类型 | `string` | - |
+| \_ct | 配置方式 | `number` | `1` |
+| \_modelSelector | 模型配置（配置模型的默认接口，查询接口为 list，回显接口为 listByKeys） | `string` | - |
+| fixQueryParam | 固定查询参数 | `object` | `{}` |
+| tableProps | 表格属性 | `object` | - |
+| listUrl | 查询接口 | `string` | - |
+| listDsId | 查询接口 | `string` | - |
+| dataAttr | 数据属性 | `Array \| string` | `[""]` |
+| valueAttr | 值属性（将该字段的值绑定到组件上） | `Array \| string` | `[""]` |
+| valueExpr | 值表达式（优先级高于属性） | `Function \| string` | - |
+| labelAttr | 标签属性（将显示该字段到挑选框输入框中） | `Array \| string` | `[""]` |
+| labelExpr | 标签表达式（优先级高于值属性） | `Function \| string` | - |
+| listByIdsUrl | 回显接口 | `string \| Function` | - |
+| listByIdsDsId | 回显接口（用于在表单编辑页中，显示值属性对应的标签属性值） | `string` | - |
+| echoRequestType | 请求方式（回显接口请求方式） | `string` | `"post"` |
+| listByIdsMethod | 回显请求（请求体：`["id","id"]`；请求参数：`id="id,id"` 或 `ids="id,id"`） | `string` | `"body"` |
+| echoParamAppends | 参数名（回显参数名后是否追加 s：追加 s 为 `ids=xxx`，不追加 s 为 `id=xxx`） | `string` | `"appends"` |
+
+#### 数据配置 · 查询条件
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| queryParamType | 参数属性（单个变量如 `username=xxx`，多层变量如 `user.username=xxx`） | `string` | `"singleWord"` |
+| query | 查询条件 | `Array` | - |
+| queryColumns | 查询列数 | `number` | - |
+
+#### 数据配置 · 显示列
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| columns | 显示列 | `Array` | - |
 
 > ⚠️ **没有 `options`/`multiple`/`disabled`/`clearable`/`filterable`/`remote`/`remoteMethod`/`valueKey`/`labelKey` 属性**。数据源用 `listUrl`（接口）或 `list`（本地），字段映射用 `valueAttr`/`labelAttr`/`dataAttr`（非 valueKey/labelKey）。
 

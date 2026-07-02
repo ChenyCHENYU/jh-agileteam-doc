@@ -49,36 +49,60 @@ const form = ref({
 
 ## Props 属性
 
-| 参数                 | 说明                 | 类型                                    | 默认值       |
-| -------------------- | -------------------- | --------------------------------------- | ------------ |
-| modelValue / v-model | 绑定值（文件信息）   | `string \| array \| object`             | `[]`         |
-| readyList            | 已就绪文件列表       | `Array`                                 | -            |
-| relativeType         | 业务类型标识         | `string`                                | -            |
-| relativeId           | 业务主键 ID          | `string`                                | -            |
-| refreshId            | 刷新 ID              | `string`                                | -            |
-| accept               | 接受的文件类型       | `string`                                | -            |
-| multiple             | 是否多选             | `boolean`                               | -            |
-| limit                | 最大上传数量         | `number`                                | -            |
-| fileSizeLimit        | 单文件大小限制       | `string`                                | -            |
-| showFileSize         | 是否显示文件大小     | `boolean`                               | `true`       |
-| addable              | 是否允许添加         | `boolean`                               | `true`       |
-| deletable            | 是否允许删除         | `boolean`                               | `true`       |
-| downloadable         | 是否允许下载         | `boolean`                               | `true`       |
-| disabled             | 是否禁用             | `boolean`                               | -            |
-| drag                 | 是否支持拖拽上传     | `boolean`                               | `true`       |
-| autoUpload           | 是否自动上传         | `boolean`                               | `false`      |
-| listType             | 文件列表类型         | `"picture" \| "picture-card" \| "no-list"` | -         |
-| uploadUrl            | 上传地址             | `string`                                | 平台默认接口 |
-| listUrl              | 文件列表查询地址     | `string`                                | -            |
-| listParam            | 列表查询参数         | `object`                                | -            |
-| uploadParam          | 上传额外参数         | `object`                                | -            |
-| pathPrefix           | 路径前缀             | `string`                                | -            |
-| cardWidth            | 卡片宽度             | `number`                                | -            |
-| cardHeight           | 卡片高度             | `number`                                | -            |
-| saveBase64           | 是否保存 base64      | `boolean`                               | -            |
-| customDownload       | 自定义下载           | `boolean`                               | -            |
-| buttonSize           | 按钮尺寸             | `string`                                | -            |
-| rules                | 校验规则             | `Array`                                 | -            |
+> 以下属性以 `props.ts` 为唯一权威源。
+
+#### 基本属性 · 基础
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| label | 标题名称 | `string` | - |
+| listType | 显示样式（列表显示样式） | `string` | `"picture"` |
+| maxWidth | 最大宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | `"450px"` |
+| cardWidth | 图片宽度 | `string` | `"104px"` |
+| cardHeight | 图片高度 | `string` | `"104px"` |
+| showNum | 显示数量（限制展示数量，默认展示所有） | `number` | - |
+| limit | 数量限制 | `number` | - |
+| fileSizeLimit | 大小限制（单个文件大小限制，如：10MB、10KB） | `string` | - |
+| accept | 类型限制（如：.png,.pdf） | `string` | - |
+| drag | 可拖拽 | `boolean` | `true` |
+| multiple | 多文件上传 | `boolean` | - |
+| addable | 可上传 | `boolean` | `true` |
+| autoUpload | 自动上传 | `boolean` | `false` |
+| deletable | 可删除 | `boolean` | `true` |
+| downloadable | 可下载 | `boolean` | `true` |
+| showColon | 冒号（标题与输入框之间加英文冒号） | `boolean` | `true` |
+| disabled | 禁用 | `boolean` | - |
+| showFileSize | 显示文件大小 | `boolean` | `true` |
+| saveBase64 | 保存 base64（文件以 base64 形式保存） | `boolean` | `false` |
+| customDownload | 自定义下载 | `Function` | - |
+| buttonSize | 按钮尺寸 | `string` | - |
+| rules | 校验规则 | `Array` | - |
+
+#### 数据配置 · 业务配置
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| relativeType | 业务类型（小写字母+下划线组合，如：hr_user） | `string` | - |
+| relativeId | 业务 ID | `string` | - |
+| refreshId | 刷新序列（当刷新序列变化时，会主动刷新文件列表） | `string` | - |
+| pathPrefix | 服务器路径前缀 | `string` | - |
+
+#### 数据配置 · 接口配置
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| uploadUrl | 上传路径（POST 请求） | `string` | `"POST;/store/attach/upload"` |
+| uploadParam | 上传参数 | `object` | `{}` |
+| listUrl | 查询路径（GET 请求） | `string` | `"/store/attach/getRelatives"` |
+| listParam | 查询参数 | `object` | `{}` |
+| removeUrl | 删除 URL（POST 请求） | `string` | `"/store/attach/deleteFileById"` |
+
+#### 数据配置 · 数据配置
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| modelValue / v-model | 文件列表 | `Array \| string \| object` | - |
+| readyList | 待保存列表 | `Array \| string \| object` | - |
 
 > ⚠️ **没有 `maxSize`/`action`/`showFileList`/`beforeUpload`/`onSuccess`/`onError`/`readonly` 属性**。
 > - 文件大小限制用 `fileSizeLimit`（非 maxSize）

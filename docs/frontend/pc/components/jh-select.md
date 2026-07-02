@@ -63,22 +63,60 @@ export const queryItems: BaseQueryItemDesc<any>[] = [
 
 ## Props 属性
 
-| 参数                 | 说明                        | 类型                                       | 默认值      |
-| -------------------- | --------------------------- | ------------------------------------------ | ----------- |
-| modelValue / v-model | 绑定值                      | `string \| number \| string[] \| boolean`  | -           |
-| datasourceType       | 数据源类型                  | `"static" \| "interface"`                  | -           |
-| items                | 静态选项（datasourceType=static 时） | `Array<{label, value}>`           | -           |
-| showColon            | label 是否显示冒号          | `boolean`                                  | `true`      |
-| label                | label 文本                  | `string`                                   | -           |
-| placeholder          | 占位提示                    | `string`                                   | -           |
-| multiple             | 是否多选                    | `boolean`                                  | `false`     |
-| status               | 控件状态（禁用/只读用此属性） | `"default" \| "disabled" \| "readonly"`   | `"default"` |
-| filterable           | 是否可搜索                  | `boolean`                                  | -           |
-| dataType             | 多选返回类型                | `"array" \| "string"`                      | -           |
-| collapseTag          | 多选时是否折叠 Tag          | `boolean`                                  | -           |
-| teleported           | 下拉面板是否插入 body       | `boolean`                                  | -           |
-| allowCreate          | 是否允许创建新项            | `boolean`                                  | -           |
-| size                 | 控件尺寸                    | `"small" \| "default" \| "large"`          | -           |
+### 基础属性
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| modelValue / v-model | 数据绑定 | `string \| number \| array \| boolean` | - |
+| static | 静态仅用来展示和点击 | `boolean` | - |
+| enableRefreshDict | 是否启用字典刷新 | `boolean` | `true` |
+| label | 标题名称 | `string` | `下拉选择框` |
+| showColon | 标题与输入框之间加英文冒号 | `boolean` | `true` |
+| prop | 字段属性，用于表单校验确定字段，选择字段后自动设置数据绑定 | `array` | - |
+| placeholder | 占位提示 | `string` | `请选择或输入` |
+| tip | 描述性文案 | `string` | - |
+| status | 状态 | `string` | `default` |
+| size | 尺寸 | `string` | `default` |
+| labelWidth | 标签宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | `450px` |
+| viewer | 阅读模式，将输入框渲染为 span | `boolean` | `false` |
+| labelClass | 标签样式 | `array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| ctrlHidden | 控件隐藏表达式 | `string` | - |
+| multiDataFormat | 数据格式（多选时数据存储格式） | `string` | `array` |
+| collapseTag | 多选折叠，多选值是否折叠展示 | `boolean` | - |
+| teleported | 是否插入 body | `boolean` | `true` |
+
+### 交互配置
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| filterable | 可模糊搜索 | `boolean` | - |
+| multiple | 可多选 | `boolean` | `false` |
+| clearable | 可清除 | `boolean` | - |
+| offset | 下拉选项偏移量 | `number` | - |
+| allowCreate | 创建新条目 | `boolean` | - |
+
+### 数据配置
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| dataType | 数据类型 | `string` | `string` |
+| datasourceType | 数据来源 | `string` | `static` |
+| items | 选项 | `array` | - |
+| _optionsDsId | 查询接口 | `string` | - |
+| remote | 后端搜索 | `boolean` | - |
+| remoteSearchKey | 搜索关键字 | `array` | - |
+| _optionsDataAttr | 数据属性 | `array \| string` | `[""]` |
+| _optionsValueAttr | 值属性 | `array \| string` | `[""]` |
+| _optionsValueExpr | 值表达式 | `Function` | - |
+| _optionsLabelAttr | 标签属性 | `array \| string` | `[""]` |
+| _optionsLabelExpr | 标签表达式 | `Function` | - |
+| _fixQueryParam | 固定查询参数 | `object` | `{}` |
+| fetchDataCb | 数据获取回调 | `Function` | - |
+| _optionsQuery | 查询参数 | `array` | `[]` |
+| _optionsQueryAttr | 查询属性 | `array` | - |
+| cid | 组件实例标识 | `string` | - |
 
 > ⚠️ **没有 `dictType`/`disabled` 属性**。字典数据通过 BaseQuery/BaseForm 的 `logicType: BusLogicDataType.dict` + `logicValue` 自动加载；禁用用 `status="disabled"`（非 disabled）。
 

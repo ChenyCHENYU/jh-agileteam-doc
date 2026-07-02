@@ -42,16 +42,29 @@ const form = ref({
 
 ## Props 属性
 
-| 参数                 | 说明                    | 类型               | 默认值         |
-| -------------------- | ----------------------- | ------------------ | -------------- |
-| modelValue / v-model | 绑定值                  | `string \| number` | -              |
-| placeholder          | 占位提示                | `string`           | -              |
-| rows                 | 显示行数                | `number`           | -              |
-| maxlength            | 最大输入长度            | `number`           | -              |
-| showWordLimit        | 是否显示字数统计        | `boolean`          | -              |
-| status               | 控件状态（禁用/只读用此属性） | `"default" \| "disabled" \| "readonly"` | `"default"` |
-| showColon            | label 是否显示冒号      | `boolean`          | `true`         |
-| autosize             | 自适应内容高度          | `boolean \| object`| `false`        |
+### 基础属性
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| modelValue / v-model | 数据绑定 | `string \| number` | - |
+| label | 标题名称 | `string` | `多行输入框` |
+| showColon | 标题与输入框之间加英文冒号 | `boolean` | `true` |
+| prop | 字段属性，用于表单校验确定字段，选择字段后自动设置数据绑定 | `array` | - |
+| placeholder | 占位提示 | `string` | `请输入` |
+| tip | 描述性文案 | `string` | - |
+| defaultValue | 默认值 | `string` | - |
+| status | 状态 | `string` | `default` |
+| size | 尺寸 | `string` | `default` |
+| labelWidth | 标签宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | `450px` |
+| viewer | 阅读模式，将输入框渲染为 span | `boolean` | `false` |
+| labelClass | 标签样式 | `array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| rows | 默认行数 | `number` | - |
+| autosize | 高度自适应 | `boolean \| object` | `false` |
+| maxlength | 最大输入长度 | `number` | - |
+| showWordLimit | 显示字数统计 | `boolean` | - |
+| userRemember | 用户输入记忆 | `boolean` | - |
 
 > ⚠️ **没有 `disabled`/`clearable` 属性**。禁用用 `status="disabled"`。
 

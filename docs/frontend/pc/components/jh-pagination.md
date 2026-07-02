@@ -63,20 +63,24 @@ const handleSizeChange = () => {
 
 ## Props 属性
 
-| 参数                          | 说明                 | 类型       | 默认值  |
-| ----------------------------- | -------------------- | ---------- | ------- |
-| currentPage / v-model:currentPage | 当前页码         | `number`   | `1`     |
-| pageSize / v-model:pageSize       | 每页条数         | `number`   | `10`    |
-| total                         | 总条数               | `number`   | -       |
-| pageSizes                     | 每页条数选项         | `number[]` | -       |
-| layout                        | 布局                 | `string`   | -       |
-| small                         | 是否使用小型分页样式 | `boolean`  | `true`  |
-| simple                        | 简洁模式             | `boolean`  | -       |
-| showTotal                     | 是否显示总条数       | `boolean`  | `true`  |
-| showPageSize                  | 是否显示每页条数选择 | `boolean`  | `true`  |
-| showJumper                    | 是否显示跳页输入框   | `boolean`  | `true`  |
-| hideOnSinglePage              | 只有一页时是否隐藏   | `boolean`  | -       |
-| disabled                      | 是否禁用             | `boolean`  | `false` |
+**基础**
+
+| 参数                              | 说明                                           | 类型       | 默认值                     |
+| --------------------------------- | ---------------------------------------------- | ---------- | -------------------------- |
+| small                             | 小型分页器                                     | `boolean`  | `true`                     |
+| pageSizes                         | 分页选项                                       | `number[]` | `[10,20,30,50,99,199,999]` |
+| `""`（接口快速配置，name 为空）   | 接口快速配置                                   | `string`   | -                          |
+| simple                            | 简洁版                                         | `boolean`  | `false`                    |
+| showTotal                         | 显示总条数                                     | `boolean`  | `true`                     |
+| total                             | 数据总数                                       | `number`   | -                          |
+| showPageSize                      | 显示每页条数                                   | `boolean`  | `true`                     |
+| pageSize / v-model:pageSize       | 每页条数                                       | `number`   | `10`                       |
+| showJumper                        | 显示跳转输入                                   | `boolean`  | `true`                     |
+| showPager                         | 显示跳转输入                                   | `boolean`  | `true`                     |
+| currentPage / v-model:currentPage | 默认页码（配置表格的初始页码）                 | `number`   | `1`                        |
+| hideOnSinglePage                  | 一页隐藏（当只有一页数据时不显示分页器）       | `boolean`  | `false`                    |
+| disabled                          | 禁用                                           | `boolean`  | `false`                    |
+| pagerCount                        | 页码按钮数                                     | `number`   | `5`                        |
 
 > ⚠️ **没有 `page`/`size`/`background` 属性**。页码用 `currentPage`，每页条数用 `pageSize`（均为驼峰），与 el-pagination 原生命名一致。
 

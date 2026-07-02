@@ -52,19 +52,32 @@ const query = ref({
 
 ## Props 属性
 
-| 参数                            | 说明                         | 类型                                             | 默认值      |
-| ------------------------------- | ---------------------------- | ------------------------------------------------ | ----------- |
-| modelValue / v-model            | 绑定值（开始/结束数组）      | `Array<string \| Date>`                          | -           |
-| beginValue / v-model:beginValue | 开始日期（可拆分绑定）       | `string \| Date`                                 | -           |
-| endValue / v-model:endValue     | 结束日期（可拆分绑定）       | `string \| Date`                                 | -           |
-| startPlaceholder                | 开始日期占位                 | `string`                                         | -           |
-| endPlaceholder                  | 结束日期占位                 | `string`                                         | -           |
-| type                            | 范围选择器类型               | `"daterange" \| "monthrange" \| "datetimerange"` | -           |
-| format                          | 绑定值格式（返回给 v-model） | `string`                                         | -           |
-| showFormat                      | 显示格式                     | `string`                                         | -           |
-| rangeSeparator                  | 分隔符                       | `string`                                         | -           |
-| status                          | 控件状态（禁用/只读用此属性） | `"default" \| "disabled" \| "readonly"`          | `"default"` |
-| showColon                       | label 是否显示冒号           | `boolean`                                        | `true`      |
+### 基础属性
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| label | 标题名称 | `string` | `日期范围` |
+| showColon | 冒号，标题与输入框之间加英文冒号 | `boolean` | `true` |
+| prop | 字段属性，用于表单校验，确定是哪个字段，选择字段后自动会设置数据绑定 | `Array` | - |
+| modelValue / v-model | 数据绑定 | `Array \| Date` | - |
+| tip | 描述性文案 | `string` | - |
+| beginValue / v-model:beginValue | 开始日期 | `string \| Date` | - |
+| endValue / v-model:endValue | 结束日期 | `string \| Date` | - |
+| status | 状态 | `string` | `default` |
+| size | 尺寸 | `string` | `default` |
+| labelWidth | 标签宽度，styleY样式，比如500px,100%,默认450px | `string` | - |
+| maxWidth | 最大宽度，styleY样式，比如500px,100%,默认450px | `string` | `450px` |
+| viewer | 阅读模式，阅读模式将输入框渲染为span | `boolean` | `false` |
+| labelClass | 标签样式 | `Array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| type | 范围类型 | `string` | `daterange` |
+| rangeSeparator | 分隔符 | `string` | `-` |
+| startPlaceholder | 开始占位提示 | `string` | `开始日期` |
+| endPlaceholder | 结束占位提示 | `string` | `结束日期` |
+| disabledDate | 禁用日期 | `Function` | - |
+| format | 日期格式 | `string` | `YYYY-MM-DD` |
+| showFormat | 显示格式 | `string` | `YYYY-MM-DD` |
+| clearable | 可清除 | `boolean` | - |
 
 > ⚠️ **没有 `placeholder`/`disabled` 属性**。
 > - 日期范围**没有单值 `placeholder`**，只有 `startPlaceholder`（开始日期占位）和 `endPlaceholder`（结束日期占位）

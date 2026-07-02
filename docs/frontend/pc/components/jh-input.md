@@ -63,39 +63,38 @@ const form = ref({ name: "" });
 
 ## Props 属性
 
-| 参数             | 说明                          | 类型                                            | 默认值 |
-| ---------------- | ----------------------------- | ----------------------------------------------- | ------ |
-| modelValue / v-model | 绑定值                    | `string \| number \| array`                     | -      |
-| label            | label 文本                    | `string`                                        | `""`   |
-| showColon        | label 是否显示冒号            | `boolean`                                       | `true` |
-| prop             | 表单字段（校验用）            | `array`                                         | -      |
-| placeholder      | 占位提示                      | `string`                                        | `""`   |
-| tip              | 提示信息                      | `string`                                        | -      |
-| defaultValue     | 默认值                        | `string`                                        | -      |
-| status           | 控件状态                      | `"default" \| "disabled" \| "readonly"`         | `""`   |
-| disabled         | 是否禁用（建议用 status）     | `boolean`                                       | -      |
-| size             | 控件尺寸                      | `"small" \| "default" \| "large"`               | `""`   |
-| labelWidth       | label 宽度                    | `string`                                        | -      |
-| maxWidth         | 最大宽度                      | `string`                                        | `""`   |
-| labelClass       | label 自定义类名              | `array`                                         | `[]`   |
-| appendText       | 后置文本                      | `string`                                        | -      |
-| maxlength        | 最大输入长度                  | `number`                                        | -      |
-| clearable        | 是否可清空                    | `boolean`                                       | -      |
-| showPassword     | 是否显示密码切换              | `boolean`                                       | -      |
-| showWordLimit    | 是否显示字数统计              | `boolean`                                       | -      |
-| prefixIcon       | 前置图标                      | `"Search" \| "Edit" \| "Delete" \| "Plus" \| "Refresh"` | - |
-| suffixIcon       | 后置图标                      | `"Search" \| "Edit" \| "Delete" \| "Plus" \| "Refresh"` | - |
-| viewer           | 是否为只读查看态              | `boolean`                                       | `false` |
-| ctrlHidden       | 控件隐藏表达式                | `string`                                        | -      |
-| tagSearch        | 是否开启标签搜索模式          | `boolean`                                       | -      |
-| maxCollapseTags  | 折叠标签最大数                | `number`                                        | -      |
-| dataType         | 标签模式返回类型              | `"array" \| "string"`                           | `""`   |
-| splitChar        | 标签字符串分隔符              | `string`                                        | `""`   |
-| preventTagEnter  | 标签模式下阻止回车生成        | `boolean`                                       | -      |
-| preventTagDelete | 标签模式下阻止退格删除        | `boolean`                                       | -      |
+### 基础属性
 
-> ⚠️ **禁用/只读统一用 `status`**（`"disabled"` / `"readonly"`）。组件同时声明了 `disabled`，但推荐用 `status` 统一管控。
-> ⚠️ **图标仅限内置枚举**：`"Search" | "Edit" | "Delete" | "Plus" | "Refresh"`。
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| modelValue / v-model | 数据绑定 | `string \| number \| array` | - |
+| label | 标题名称 | `string` | `单行输入框` |
+| showColon | 标题与输入框之间加英文冒号 | `boolean` | `true` |
+| prop | 字段属性，用于表单校验确定字段，选择字段后自动设置数据绑定 | `array` | - |
+| placeholder | 占位提示 | `string` | `请输入内容...` |
+| tip | 描述性文案 | `string` | - |
+| defaultValue | 默认值 | `string` | - |
+| status | 状态 | `string` | `default` |
+| size | 尺寸 | `string` | `default` |
+| labelWidth | 标签宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | `450px` |
+| viewer | 阅读模式，将输入框渲染为 span | `boolean` | `false` |
+| labelClass | 标签样式 | `array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| maxlength | 最大输入长度 | `number` | - |
+| ctrlHidden | 控件隐藏表达式 | `string` | - |
+| tagSearch | 标签搜索 | `boolean` | - |
+| maxCollapseTags | 最多显示标签数 | `number` | - |
+| dataType | 数据格式 | `string` | `string` |
+| splitChar | 数据分隔符 | `string` | `,` |
+| clearable | 可清除 | `boolean` | - |
+| showPassword | 密码模式 | `boolean` | - |
+| showWordLimit | 显示字数统计 | `boolean` | - |
+| prefixIcon | 前置图标 | `string` | - |
+| suffixIcon | 后置图标 | `string` | - |
+| disabled | 是否禁用 | `boolean` | - |
+| preventTagEnter | 标签模式阻止回车生成标签 | `boolean` | - |
+| preventTagDelete | 标签模式阻止退格删除标签 | `boolean` | - |
 
 ---
 

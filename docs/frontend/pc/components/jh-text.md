@@ -47,13 +47,15 @@ import "@jhlc/common-core";
 
 ## Props 属性
 
-| 参数    | 说明                                       | 类型                                                          | 默认值     |
-| ------- | ------------------------------------------ | ------------------------------------------------------------- | ---------- |
-| content | 显示内容                                   | `string \| number \| date \| array`                           | -          |
-| format  | 渲染格式                                   | `"default" \| "ellipsis" \| "html"`                           | `"default"`|
-| rows    | 多行省略行数（format="ellipsis" 时生效）   | `number`                                                      | `1`        |
-| fontSize | 字号                                      | `"extra-small" \| "small" \| "base" \| "medium" \| "large" \| "extra-large"` | -  |
-| fontWeight | 字重                                     | `"light" \| "regular" \| "medium" \| "semi"`                  | -          |
+**基础**
+
+| 参数       | 说明         | 类型                                 | 默认值      |
+| ---------- | ------------ | ------------------------------------ | ----------- |
+| format     | 文本格式     | `string`                             | `"default"` |
+| rows       | 最大文本行数 | `number`                             | `1`         |
+| content    | 内容         | `string \| number \| Date \| any[]`  | `""`        |
+| fontSize   | 字号         | `string`                             | `"base"`    |
+| fontWeight | 字重         | `string`                             | `"regular"` |
 
 > ⚠️ **没有 `maxLength`/`ellipsis`(boolean)/`tooltip`/`copyable`/`type`/`tag` 属性**。
 > - 文本省略用 `format="ellipsis"` + `rows`（多行），不是 `maxLength` + `ellipsis`（boolean）

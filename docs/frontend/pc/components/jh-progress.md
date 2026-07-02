@@ -72,20 +72,22 @@ const progress = ref(60);
 
 ## Props 属性
 
-| 参数           | 说明                            | 类型                                              | 默认值 |
-| -------------- | ------------------------------- | ------------------------------------------------- | ------ |
-| percentage     | 百分比（0-100）                 | `number`                                          | `30`   |
-| type           | 类型                            | `"line" \| "circle"`                              | `""`   |
-| status         | 状态                            | `"" \| "success" \| "warning" \| "exception"`     | `""`   |
-| strokeWidth    | 进度条宽度                      | `number`                                          | `6`    |
-| textInside     | 文字是否内显                    | `boolean`                                         | `false` |
-| indeterminate  | 是否动态（不定进度）            | `boolean`                                         | `false` |
-| duration       | 动态动画周期（秒）              | `number`                                          | `5`    |
-| isCustomcolor  | 是否启用自定义颜色              | `boolean`                                         | `false` |
-| color          | 单一自定义颜色                  | `string`                                          | -      |
-| colorArr       | 自定义颜色数组（按百分比渐变）  | `array`                                           | `[内置梯度]` |
-| isFormat       | 是否自定义格式化                | `boolean`                                         | `false` |
-| format         | 格式化模板                      | `string`                                          | `""`   |
+> 来源：`schema-component/base-guide-group/progress/props.ts`（基本属性 · 基础）
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| type | 形状 | `string` | `"line"` |
+| textInside | 内容位置 | `boolean` | `false` |
+| percentage | 当前进度(%) | `number` | `30` |
+| status | 状态 | `string` | `""` |
+| strokeWidth | 进度高度 / 环高度 | `number` | `6` |
+| indeterminate | 动画效果 | `boolean` | `false` |
+| duration | 动画速度 | `number` | `5` |
+| isCustomcolor | 进度颜色 | `boolean` | `false` |
+| color | 纯色 | `string` | - |
+| colorArr | 颜色数据（根据示例代码自定义设置颜色和百分比） | `array` | - |
+| isFormat | 自定义文字 | `boolean` | `false` |
+| format | 格式函数 | `string` | `function formatter(percentage) { return '自定义:' + percentage + '%'; }` |
 
 > ⚠️ **默认百分比 `30`、宽度 `6`、动画周期 `5` 秒**，使用时按需覆盖。
 > ⚠️ **没有 `show-text`/`width`(环形直径) 属性**（声明层未声明）。文字内显用 `text-inside`。

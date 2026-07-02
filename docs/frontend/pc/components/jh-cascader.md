@@ -85,38 +85,39 @@ const regionOptions = ref([
 
 ## Props 属性
 
-| 参数            | 说明                          | 类型                                            | 默认值 |
-| --------------- | ----------------------------- | ----------------------------------------------- | ------ |
-| modelValue / v-model | 绑定值                    | `string \| number \| array`                     | -      |
-| label           | label 文本                    | `string`                                        | `""`   |
-| showColon       | label 是否显示冒号            | `boolean`                                       | `true` |
-| prop            | 表单字段（校验用）            | `array`                                         | -      |
-| placeholder     | 占位提示                      | `string`                                        | `""`   |
-| tip             | 提示信息                      | `string`                                        | -      |
-| status          | 控件状态                      | `"default" \| "disabled" \| "readonly"`         | `""`   |
-| size            | 控件尺寸                      | `"small" \| "default" \| "large"`               | `""`   |
-| labelWidth      | label 宽度                    | `string`                                        | -      |
-| maxWidth        | 最大宽度                      | `string`                                        | `""`   |
-| labelClass      | label 自定义类名              | `array`                                         | `[]`   |
-| appendText      | 后置文本                      | `string`                                        | -      |
-| separator       | 选项分隔符                    | `string`                                        | `""`   |
-| options         | 选项数据（树状结构）          | `array`                                         | `[内置示例]` |
-| propValue       | 节点值字段名                  | `string`                                        | `""`   |
-| propLabel       | 节点标签字段名                | `string`                                        | `""`   |
-| propChildren    | 子节点字段名                  | `string`                                        | `""`   |
-| multiple        | 是否多选                      | `boolean`                                       | -      |
-| collapseTags    | 多选时是否折叠标签            | `boolean`                                       | -      |
-| tagType         | 标签类型                      | `"defalut" \| "primary" \| "success" \| "info" \| "warning" \| "danger"` | `""` |
-| checkStrictly   | 是否可选择任意层级（含父节点）| `boolean`                                       | -      |
-| filterable      | 是否可搜索                    | `boolean`                                       | -      |
-| clearable       | 是否可清空                    | `boolean`                                       | -      |
-| showAllLevels   | 是否显示完整路径              | `boolean`                                       | -      |
-| emitPath        | 是否返回完整路径数组          | `boolean`                                       | -      |
-| lazy            | 是否懒加载                    | `boolean`                                       | -      |
-| leaf            | 叶子节点标识字段              | `string`                                        | -      |
-| expandTrigger   | 展开触发方式                  | `"click" \| "hover"`                            | `""`   |
-| debounce        | 搜索防抖（ms）                | `number`                                        | -      |
-| viewer          | 是否为只读查看态              | `boolean`                                       | `false` |
+### 基础属性
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| label | 标题名称 | `string` | `级联选择` |
+| showColon | 冒号，标题与输入框之间加英文冒号 | `boolean` | `true` |
+| prop | 字段属性，用于表单校验，确定是哪个字段，选择字段后自动会设置数据绑定 | `Array` | - |
+| modelValue / v-model | 数据绑定 | `string \| number \| Array` | - |
+| placeholder | 占位提示 | `string` | `请选择` |
+| tip | 描述性文案 | `string` | - |
+| status | 状态 | `string` | `default` |
+| size | 尺寸 | `string` | `default` |
+| labelWidth | 标签宽度，styleY样式，比如500px,100%,默认450px | `string` | - |
+| maxWidth | 最大宽度，styleY样式，比如500px,100%,默认450px | `string` | `450px` |
+| viewer | 阅读模式，阅读模式将输入框渲染为span | `boolean` | `false` |
+| labelClass | 标签样式 | `Array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| multiple | 多选 | `boolean` | - |
+| checkStrictly | 任意层级 | `boolean` | - |
+| filterable | 可搜索 | `boolean` | - |
+| clearable | 可清除 | `boolean` | - |
+| separator | 分隔符 | `string` | - |
+| showAllLevels | 完整路径，输入框内是否显示选中值的完整路径 | `boolean` | - |
+| collapseTags | 折叠tag，多选模式下是否折叠Tag | `boolean` | - |
+| expandTrigger | 展开方式，次级菜单的展开方式 | `string` | `click` |
+| options | 数据源 | `Array` | `[内置示例]` |
+| lazy | 懒加载，懒加载必须设置叶子节点，否则无法选中 | `boolean` | - |
+| propValue | 值属性，存储值的属性名，默认value | `string` | - |
+| propLabel | 显示属性，默认label | `string` | - |
+| propChildren | 子属性，子元素属性名，默认children | `string` | - |
+| leaf | 叶子标志，叶子节点标志位属性名，默认leaf | `string` | - |
+| debounce | 防抖延迟，毫秒 | `number` | - |
+| tagType | 标签类型 | `string` | - |
 
 > ⚠️ **禁用/只读用 `status`**（`"disabled"` / `"readonly"`），不是 `disabled`。
 > ⚠️ **`tagType` 的 `"defalut"` 是组件声明中的拼写**（保留原样），使用时注意。

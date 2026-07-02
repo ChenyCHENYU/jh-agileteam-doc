@@ -67,33 +67,35 @@ const form = ref({ age: 0 });
 
 ## Props 属性
 
-| 参数             | 说明                       | 类型                                    | 默认值 |
-| ---------------- | -------------------------- | --------------------------------------- | ------ |
-| modelValue / v-model | 绑定值（数值）         | `number \| string`                      | -      |
-| label            | label 文本                 | `string`                                | `""`   |
-| showColon        | label 是否显示冒号         | `boolean`                               | `true` |
-| prop             | 表单字段（校验用）         | `array`                                 | -      |
-| placeholder      | 占位提示                   | `string`                                | `""`   |
-| tip              | 提示信息                   | `string`                                | -      |
-| defaultValue     | 默认值                     | `string`                                | -      |
-| status           | 控件状态                   | `"default" \| "disabled" \| "readonly"` | `""`   |
-| size             | 控件尺寸                   | `"small" \| "default" \| "large"`       | `""`   |
-| labelWidth       | label 宽度                 | `string`                                | -      |
-| maxWidth         | 最大宽度                   | `string`                                | `""`   |
-| labelClass       | label 自定义类名           | `array`                                 | `[]`   |
-| appendText       | 后置文本                   | `string`                                | -      |
-| step             | 步进值                     | `number`                                | -      |
-| min              | 最小值                     | `number`                                | -      |
-| max              | 最大值                     | `number`                                | -      |
-| precision        | 数值精度（小数位数）       | `number`                                | -      |
-| controlsPosition | 步进按钮位置               | `"left" \| "right"`                     | `""`   |
-| textAlign        | 文本对齐                   | `"left" \| "center" \| "right"`         | `""`   |
-| inputType        | 输入类型（开启单位模式）   | `"" \| "unit"`                          | `""`   |
-| unitValue        | 单位绑定值（配合 unit 模式） | `string`                              | -      |
-| unitOptions      | 单位选项                   | `array`                                 | -      |
-| unitValueType    | 单位值类型                 | `"separate" \| "combine"`               | `""`   |
-| viewer           | 是否为只读查看态           | `boolean`                               | `false` |
-| ctrlHidden       | 控件隐藏表达式             | `string`                                | -      |
+### 基础属性
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| modelValue / v-model | 数据绑定 | `number \| string` | - |
+| label | 标题名称 | `string` | `数字输入框` |
+| showColon | 标题与输入框之间加英文冒号 | `boolean` | `true` |
+| prop | 字段属性，用于表单校验确定字段，选择字段后自动设置数据绑定 | `array` | - |
+| placeholder | 占位提示 | `string` | `请输入` |
+| tip | 描述性文案 | `string` | - |
+| defaultValue | 默认值 | `string` | - |
+| status | 状态 | `string` | `default` |
+| size | 尺寸 | `string` | `default` |
+| labelWidth | 标签宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，如 500px、100%，默认 450px） | `string` | `450px` |
+| controlsPosition | 数字选择样式 | `string` | `right` |
+| textAlign | 数字对齐方式 | `string` | `left` |
+| viewer | 阅读模式，将输入框渲染为 span | `boolean` | `false` |
+| labelClass | 标签样式 | `array` | `[]` |
+| appendText | 后缀 | `string` | - |
+| ctrlHidden | 控件隐藏表达式 | `string` | - |
+| step | 间隔（步进值） | `number` | - |
+| min | 最小值 | `number` | - |
+| max | 最大值 | `number` | - |
+| precision | 精度，控制小数点后保留位数 | `number` | - |
+| inputType | 后置标签，输入框显示的单位 | `string` | `""` |
+| unitOptions | 单位列表 | `array` | - |
+| unitValueType | 单位数据绑定方式（separate 分离 / combine 组合绑定数字与单位） | `string` | `separate` |
+| unitValue | 单位数据绑定 | `string` | - |
 
 > ⚠️ **禁用/只读用 `status`**（`"disabled"` / `"readonly"`），不是 `disabled`。
 > ⚠️ **没有 `disabled` 属性**（声明层未声明），统一用 `status`。

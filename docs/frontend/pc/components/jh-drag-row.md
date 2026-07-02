@@ -41,20 +41,23 @@ import "@jhlc/common-core";
 
 ## Props 属性
 
-| 参数              | 说明                       | 类型     | 默认值     |
-| ----------------- | -------------------------- | -------- | ---------- |
-| topPercent        | 上区占比（0-1）            | `number` | -          |
-| topHeight         | 上区固定高度               | `number` | -          |
-| bottomHeight      | 下区固定高度               | `number` | -          |
-| bottomPercent     | 下区占比（0-1）            | `number` | -          |
-| sliderWidth       | 拖拽条宽度（px）           | `number` | `10`       |
-| width             | 容器宽度                   | `string` | `"400px"`  |
-| height            | 容器高度                   | `string` | `"400px"`  |
-| isNest            | 是否嵌套使用               | `boolean`| -          |
-| sliderColor       | 拖拽条颜色                 | `string` | `"#6f808d"`|
-| sliderBgColor     | 拖拽条背景色               | `string` | `"#a7caec"`|
-| sliderHoverColor  | 拖拽条 hover 颜色          | `string` | `"#6f808d"`|
-| sliderBgHoverColor| 拖拽条 hover 背景色        | `string` | `"#c8dcea"`|
+> 基础属性来自 `schema-component/base-container-group/drag-row/props.ts`（基本属性 · 基础）；
+> 其余属性为骨架组件 `common-core/src/components/drag-row/drag-row.vue` 补充。
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| topPercent | 上区占比 | `number` | - |
+| topHeight | 上区高度 | `number` | - |
+| bottomPercent | 下区占比 | `number` | - |
+| bottomHeight | 下区高度 | `number` | - |
+| isNest | 是否嵌套使用 | `boolean` | - |
+| sliderWidth | 拖拽条宽度 | `number` | `10` |
+| width | 容器宽度 | `string` | `"400px"` |
+| height | 容器高度 | `string` | `"400px"` |
+| sliderColor | 拖拽条颜色 | `string` | `"#6f808d"` |
+| sliderBgColor | 拖拽条背景色 | `string` | `"#a7caec"` |
+| sliderHoverColor | 拖拽条 hover 颜色 | `string` | `"#6f808d"` |
+| sliderBgHoverColor | 拖拽条 hover 背景色 | `string` | `"#c8dcea"` |
 
 ---
 

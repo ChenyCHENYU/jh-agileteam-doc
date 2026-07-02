@@ -58,16 +58,38 @@ export const queryItems: BaseQueryItemDesc<any>[] = [
 
 ## Props 属性
 
-> ⚠️ **声明层说明**：`UserPickerComponent.d.ts` 的 props 块为空（`ExtractPropTypes<{}>`），仅通过 `& Record<string, any>` 透传运行时属性。以下为运行时通用透传属性，具体可用性以实际组件为准：
+> 以下属性以 `props.ts` 为唯一权威源，共 26 项。
 
-| 参数                 | 说明              | 类型                    | 默认值 |
-| -------------------- | ----------------- | ----------------------- | ------ |
-| modelValue / v-model | 绑定值（用户 ID） | `string \| string[]`    | -      |
-| placeholder          | 占位提示          | `string`                | -      |
-| multiple             | 是否多选          | `boolean`               | -      |
-| disabled             | 是否禁用          | `boolean`               | -      |
+#### 基础
 
-> 说明：`filterable`/`deptId`/`showAvatar`/`loadData` 等属性**未在类型声明中**，但运行时可能由组件内部实现支持。如需使用，请先在项目中验证有效性。
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| forPick | 隐藏，提供选择 | `boolean` | - |
+| suppressBatchSelect | 禁止批量选择 | `boolean` | - |
+| isTreeSelector | 树形选择器 | `boolean` | - |
+| teleported | 弹出层传送 | `boolean` | - |
+| label | 标题名称 | `string` | `""` |
+| showColon | 冒号 | `boolean` | `true` |
+| placeholder | 占位提示 | `string` | `"请选择或输入"` |
+| prop | 字段属性（用于表单校验，确定是哪个字段，选择字段后自动会设置数据绑定） | `Array` | - |
+| modelValue / v-model | 数据绑定 | `string \| Array` | - |
+| defaultValue | 默认值 | `string` | - |
+| status | 状态 | `string` | `"default"` |
+| size | 尺寸 | `string` | `"default"` |
+| labelWidth | 标签宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | `"450px"` |
+| labelClass | 标签样式 | `Array` | `[]` |
+| dialogTitle | 弹框标题名称 | `string` | - |
+| dialogWidth | 弹框宽度 | `string` | `"835px"` |
+| searchPlaceholder | 弹框搜索提示 | `string` | `"搜索用户名或工号"` |
+| multiple | 可多选 | `boolean` | `false` |
+| maxCollapseTags | 最多显示标签数 | `number` | `5` |
+| disabled | 禁用 | `boolean` | `null` |
+| viewer | 阅读模式 | `boolean` | - |
+| dataType | 数据类型（多选时，字段数据类型，如果是字符串，则是逗号隔开） | `string` | `"array"` |
+| clearable | 可清除 | `boolean` | - |
+| optionList | 可选值列表 | `Array` | - |
+| queryMethod | 自定义搜索 | `Function` | - |
 
 ---
 

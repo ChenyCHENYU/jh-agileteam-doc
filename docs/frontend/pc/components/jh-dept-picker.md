@@ -44,19 +44,36 @@ const form = ref({
 
 ## Props 属性
 
-| 参数                 | 说明                     | 类型                        | 默认值      |
-| -------------------- | ------------------------ | --------------------------- | ----------- |
-| modelValue / v-model | 绑定值（部门 ID）        | `string \| string[]`        | -           |
-| placeholder          | 占位提示                 | `string`                    | -           |
-| multiple             | 是否多选                 | `boolean`                   | `false`     |
-| disabled             | 是否禁用                 | `boolean`                   | `false`     |
-| status               | 控件状态                 | `"default" \| "disabled" \| "readonly"` | `"default"` |
-| showColon            | label 是否显示冒号       | `boolean`                   | `true`      |
-| dataType             | 多选返回类型             | `"array" \| "string"`       | -           |
-| defaultValue         | 默认部门                 | `string`                    | -           |
-| dialogTitle          | 弹窗标题                 | `string`                    | -           |
-| dialogWidth          | 弹窗宽度                 | `string`                    | -           |
-| searchPlaceholder    | 搜索框占位文本           | `string`                    | -           |
+> 以下属性以 `props.ts` 为唯一权威源。
+
+#### 基本属性 · 基础
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| forPick | 隐藏，提供选择 | `boolean` | - |
+| label | 标题名称 | `string` | `""` |
+| showColon | 冒号 | `boolean` | `true` |
+| placeholder | 占位提示 | `string` | `"请选择"` |
+| prop | 字段属性（用于表单校验，确定是哪个字段，选择字段后自动会设置数据绑定） | `Array` | - |
+| modelValue / v-model | 数据绑定 | `string \| Array` | - |
+| defaultValue | 默认值 | `string` | - |
+| status | 状态 | `string` | `"default"` |
+| size | 尺寸 | `string` | `"default"` |
+| labelWidth | 标签宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | `"450px"` |
+| labelClass | 标签样式 | `Array` | `[]` |
+| multiple | 可多选 | `boolean` | `false` |
+| dataType | 数据类型（多选时，字段数据类型，如果是字符串，则是逗号隔开） | `string` | `"array"` |
+| disabled | 禁用 | `boolean` | `false` |
+| filterDept | 过滤初始部门 | `Function` | - |
+
+#### 基本属性 · 弹窗
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| dialogTitle | 标题名称 | `string` | - |
+| dialogWidth | 弹框宽度 | `string` | `"1050px"` |
+| searchPlaceholder | 搜索提示 | `string` | `"搜索部门"` |
 
 > ⚠️ **没有 `clearable`/`checkStrictly`/`filterable`/`loadData` 属性**。父子节点关联由组件内部树控件决定，没有 `checkStrictly` 开关。
 

@@ -57,25 +57,37 @@ const visible = ref(false);
 
 ## Props 属性
 
-| 参数                | 说明                          | 类型                                            | 默认值  |
-| ------------------- | ----------------------------- | ----------------------------------------------- | ------- |
-| modelValue / v-model| 是否显示（支持 v-model）      | `boolean \| number`                             | -       |
-| title               | 标题                          | `string`                                        | -       |
-| width               | 宽度                          | `string`（可选值 `"450px" \| "856px" \| "1000px"` 或自定义） | `""` |
-| top                 | 距离顶部位置                  | `string`                                        | `""`    |
-| modalClass          | 遮罩层自定义类名              | `string \| string[]`                            | -       |
-| modal               | 是否显示遮罩层                | `boolean`                                       | `true`  |
-| alignCenter         | 是否水平垂直居中              | `boolean`                                       | `true`  |
-| renderHeader        | 是否渲染默认标题栏            | `boolean`                                       | `true`  |
-| renderFooter        | 是否渲染默认底部              | `boolean`                                       | `true`  |
-| draggable           | 是否可拖拽（整体）            | `boolean`                                       | `true`  |
-| titleDraggable      | 标题栏是否可拖拽              | `boolean`                                       | -       |
-| fullscreen          | 是否默认全屏                  | `boolean`                                       | -       |
-| isShowSwitchFull    | 是否显示全屏切换按钮          | `boolean`                                       | `false` |
-| appendToBody        | 是否插入 body                 | `boolean`                                       | -       |
-| lockScroll          | 是否锁定滚动                  | `boolean`                                       | -       |
-| closeOnClickModal   | 点击遮罩层是否关闭            | `boolean`                                       | -       |
-| closeOnPressEscape  | 按 ESC 是否关闭               | `boolean`                                       | `true`  |
+**基础**
+
+| 参数        | 说明                          | 类型              | 默认值  |
+| ----------- | ----------------------------- | ----------------- | ------- |
+| modalClass  | 遮罩层类名                    | `string \| any[]` | -       |
+| title       | 标题名称                      | `string`          | -       |
+| width       | 宽度                          | `string`          | -       |
+| alignCenter | 水平垂直居中                  | `boolean`         | `true`  |
+| top         | top值（距离浏览器顶部距离）   | `string`          | `"6vh"` |
+
+**主要属性**
+
+| 参数                  | 说明                                                                 | 类型                | 默认值 |
+| --------------------- | -------------------------------------------------------------------- | ------------------- | ------ |
+| modelValue / v-model  | 是否显示                                                             | `boolean \| number` | -      |
+| renderHeader          | 显示顶部栏                                                           | `boolean`           | `true` |
+| renderFooter          | 显示底部栏                                                           | `boolean`           | `true` |
+| modal                 | 显示遮罩                                                             | `boolean`           | `true` |
+| titleDraggable        | 定制标题                                                             | `boolean`           | -      |
+| appendToBody          | 追加到body内（自身是否插入至 body 元素，嵌套 Dialog 必须为 `true`）  | `boolean`           | -      |
+| lockScroll            | 锁定滚动（出现时是否将 body 滚动锁定）                               | `boolean`           | -      |
+
+**交互配置**
+
+| 参数               | 说明                                       | 类型      | 默认值  |
+| ------------------ | ------------------------------------------ | --------- | ------- |
+| draggable          | 窗口位置可拖动                             | `boolean` | `true`  |
+| isShowSwitchFull   | 切换全屏（是否展示头部切换全屏功能）       | `boolean` | `false` |
+| fullscreen         | 默认全屏（弹窗打开后默认全屏）             | `boolean` | -       |
+| closeOnClickModal  | 外部关闭（是否可点击弹框外部区域关闭）     | `boolean` | -       |
+| closeOnPressEscape | esc关闭（是否可按下 ESC 关闭）             | `boolean` | `true`  |
 
 > ⚠️ **没有 `visible` 属性**。开关用 `v-model`（对应 `modelValue`）；禁用关闭交互用 `closeOnClickModal`/`closeOnPressEscape`。
 

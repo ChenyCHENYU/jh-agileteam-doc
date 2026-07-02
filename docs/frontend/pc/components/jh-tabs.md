@@ -55,15 +55,18 @@ const activeName = ref("base");
 
 ## Props 属性
 
-| 参数             | 说明                  | 类型                                                       | 默认值 |
-| ---------------- | --------------------- | ---------------------------------------------------------- | ------ |
-| modelValue / v-model | 当前激活项（name）| `string \| number`                                         | -      |
-| type             | 风格类型              | `"" \| "card" \| "border-card" \| "bookmark-card"`         | `""`   |
-| tabPosition      | 标签位置              | `"top" \| "bottom" \| "left" \| "right"`                   | `""`   |
-| closable         | 是否可关闭            | `boolean`                                                  | -      |
-| addable          | 是否可新增            | `boolean`                                                  | -      |
-| stretch          | 标签是否撑满          | `boolean`                                                  | -      |
-| children         | 子项配置（配置式）    | `array`                                                    | -      |
+> 来源：`schema-component/base-container-group/tabs/props.ts`（基本属性 · 基础）
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| modelValue / v-model | 数据绑定 | `string \| number` | - |
+| _show | 是否展示 | `boolean` | `true` |
+| type | 选项卡样式 | `string` | `""` |
+| tabPosition | 位置 | `string` | `"top"` |
+| closable | 可关闭 | `boolean` | - |
+| addable | 可增加 | `boolean` | - |
+| stretch | 自适应 | `boolean` | - |
+| children | 标签项 | `array` | - |
 
 > ⚠️ **没有 `editable`/`tab-type` 属性**。可关闭/可新增用 `closable`/`addable`；风格用 `type`。
 

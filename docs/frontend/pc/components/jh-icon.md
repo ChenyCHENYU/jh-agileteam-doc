@@ -52,18 +52,20 @@ import "@jhlc/common-core";
 
 ## Props 属性
 
-| 参数         | 说明                            | 类型                                              | 默认值 |
-| ------------ | ------------------------------- | ------------------------------------------------- | ------ |
-| iconName     | 图标名称                        | `string`                                          | -      |
-| iconColor    | 图标颜色                        | `string`                                          | -      |
-| iconSize     | 图标尺寸                        | `string`                                          | `""`   |
-| radius       | 圆角半径（`"50%"` 为圆形）      | `string`                                          | `""`   |
-| bgColor      | 背景色                          | `string`                                          | -      |
-| borderColor  | 边框颜色                        | `string`                                          | -      |
-| behave       | 交互行为                        | `"" \| "hoverFill" \| "alwaysFill" \| "borderColor"` | `""` |
-| hoverBgColor | hover 背景色主题                | `"none" \| "info" \| "danger"`                    | `""`   |
-| desc         | 描述/提示文本                   | `string`                                          | -      |
-| disabled     | 是否禁用                        | `boolean`                                         | -      |
+**基础**
+
+| 参数         | 说明           | 类型      | 默认值        |
+| ------------ | -------------- | --------- | ------------- |
+| iconName     | 图标           | `string`  | -             |
+| iconColor    | 颜色           | `string`  | -             |
+| iconSize     | 大小           | `string`  | `"16px"`      |
+| radius       | 圆角           | `string`  | `"2"`         |
+| behave       | 填充色         | `string`  | `"hoverFill"` |
+| hoverBgColor | 悬停态背景颜色 | `string`  | `"info"`      |
+| bgColor      | 背景色         | `string`  | -             |
+| borderColor  | 边框色         | `string`  | -             |
+| desc         | 提示信息       | `string`  | -             |
+| disabled     | 禁用           | `boolean` | -             |
 
 > ⚠️ **没有 `name`/`size`/`color` 属性**。属性名为 `iconName`/`iconSize`/`iconColor`（带 `icon` 前缀）。
 

@@ -78,31 +78,50 @@ const form = ref({ deptId: "" });
 
 ## Props 属性
 
-| 参数          | 说明                       | 类型                                            | 默认值 |
-| ------------- | -------------------------- | ----------------------------------------------- | ------ |
-| modelValue / v-model | 绑定值               | `string \| array`                               | -      |
-| label         | label 文本                 | `string`                                        | `""`   |
-| showColon     | label 是否显示冒号         | `boolean`                                       | `true` |
-| placeholder   | 占位提示                   | `string`                                        | -      |
-| prop          | 表单字段（校验用）         | `array`                                         | -      |
-| defaultValue  | 默认值                     | `string`                                        | -      |
-| status        | 控件状态                   | `"default" \| "disabled" \| "readonly"`         | `""`   |
-| size          | 控件尺寸                   | `"small" \| "default" \| "large"`               | `""`   |
-| labelWidth    | label 宽度                 | `string`                                        | -      |
-| maxWidth      | 最大宽度                   | `string`                                        | `""`   |
-| labelClass    | label 自定义类名           | `array`                                         | `[]`   |
-| single        | 是否单选                   | `boolean`                                       | `true` |
-| dialogTitle   | 弹窗标题                   | `string`                                        | `""`   |
-| dialogWidth   | 弹窗宽度                   | `string`                                        | `""`   |
-| url           | 数据接口地址               | `string`                                        | -      |
-| method        | 请求方法                   | `string`                                        | -      |
-| dsId          | 数据源 ID                  | `string`                                        | -      |
-| dataAttr      | 接口数据取值路径           | `array`                                         | `[""]` |
-| valueAttr     | 节点值字段路径             | `array`                                         | -      |
-| labelAttr     | 节点标签字段路径           | `array`                                         | -      |
-| fixQueryParam | 固定查询参数               | `object`                                        | `{}`   |
-| query         | 查询参数                   | `array`                                         | -      |
-| validFun      | 校验函数                   | -                                               | -      |
+> 以下属性以 `props.ts` 为唯一权威源。
+
+#### 基本属性 · 基础
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| label | 标题名称 | `string` | `""` |
+| showColon | 冒号 | `boolean` | `true` |
+| placeholder | 占位提示 | `string` | - |
+| prop | 字段属性（用于表单校验，确定是哪个字段，选择字段后自动会设置数据绑定） | `Array` | - |
+| modelValue / v-model | 数据绑定 | `string \| Array` | - |
+| defaultValue | 默认值 | `string` | - |
+| status | 状态 | `string` | `"default"` |
+| size | 尺寸 | `string` | `"default"` |
+| labelWidth | 标签宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | - |
+| maxWidth | 最大宽度（styleY 样式，比如 500px、100%，默认 450px） | `string` | `"450px"` |
+| labelClass | 标签样式 | `Array` | `[]` |
+| single | 可多选 | `boolean` | `true` |
+
+#### 基本属性 · 弹窗
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| dialogTitle | 标题名称 | `string` | `"请选择"` |
+| dialogWidth | 弹框宽度 | `string` | `"856px"` |
+| validFun | 数据校验 | `Function` | - |
+
+#### 数据配置 · 数据接口
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| url | url | `string` | - |
+| method | method | `string` | - |
+| dsId | 查询接口 | `string` | - |
+| dataAttr | 数据属性 | `Array` | `[""]` |
+| valueAttr | 值属性 | `Array` | - |
+| labelAttr | 标签属性 | `Array` | - |
+
+#### 数据配置 · 查询条件
+
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ------ |
+| fixQueryParam | 固定查询参数 | `object` | `{}` |
+| query | 查询条件 | `Array` | - |
 
 > ⚠️ **禁用/只读用 `status`**（`"disabled"` / `"readonly"`），不是 `disabled`。
 > ⚠️ **默认单选**（`single` 默认 `true`）；多选需显式 `:single="false"`。

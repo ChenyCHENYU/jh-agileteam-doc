@@ -55,13 +55,15 @@ const active = ref("base");
 
 ## Props 属性
 
-| 参数     | 说明                          | 类型      | 默认值 |
-| -------- | ----------------------------- | --------- | ------ |
-| name     | 唯一标识（与父级 v-model 对应） | `string`  | -      |
-| label    | 标签标题                      | `string`  | `""`   |
-| disabled | 是否禁用                      | `boolean` | -      |
-| closable | 是否可关闭                    | `boolean` | -      |
-| lazy     | 是否懒加载（首次激活才渲染）  | `boolean` | -      |
+> 来源：`schema-component/base-container-group/tabs-pane/props.ts`（基本属性）
+
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| name | 唯一标识 | `string` | - |
+| label | 标题 | `string` | `"tab1"` |
+| disabled | 是否禁用 | `boolean` | - |
+| closable | 可关闭 | `boolean` | - |
+| lazy | 延迟渲染 | `boolean` | - |
 
 > ⚠️ **`name` 必传**，作为父级 `<jh-tabs>` 的 `v-model` 激活值标识。
 > **没有 `title`/`value` 属性**，标题用 `label`，标识用 `name`。
