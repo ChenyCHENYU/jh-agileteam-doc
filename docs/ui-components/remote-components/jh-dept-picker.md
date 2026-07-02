@@ -44,26 +44,35 @@ const form = ref({
 
 ## Props 属性
 
-| 参数                 | 说明                     | 类型                        | 默认值         |
-| -------------------- | ------------------------ | --------------------------- | -------------- |
-| modelValue / v-model | 绑定值（部门 ID）        | `string \| string[]`        | -              |
-| placeholder          | 占位提示                 | `string`                    | `"请选择部门"` |
-| multiple             | 是否多选                 | `boolean`                   | `false`        |
-| disabled             | 是否禁用                 | `boolean`                   | `false`        |
-| clearable            | 是否可清空               | `boolean`                   | `true`         |
-| checkStrictly        | 是否严格模式（父子联动） | `boolean`                   | `false`        |
-| filterable           | 是否可搜索               | `boolean`                   | `true`         |
-| loadData             | 自定义数据源             | `() => Promise<TreeNode[]>` | -              |
+| 参数                 | 说明                     | 类型                        | 默认值      |
+| -------------------- | ------------------------ | --------------------------- | ----------- |
+| modelValue / v-model | 绑定值（部门 ID）        | `string \| string[]`        | -           |
+| placeholder          | 占位提示                 | `string`                    | -           |
+| multiple             | 是否多选                 | `boolean`                   | `false`     |
+| disabled             | 是否禁用                 | `boolean`                   | `false`     |
+| status               | 控件状态                 | `"default" \| "disabled" \| "readonly"` | `"default"` |
+| showColon            | label 是否显示冒号       | `boolean`                   | `true`      |
+| dataType             | 多选返回类型             | `"array" \| "string"`       | -           |
+| defaultValue         | 默认部门                 | `string`                    | -           |
+| dialogTitle          | 弹窗标题                 | `string`                    | -           |
+| dialogWidth          | 弹窗宽度                 | `string`                    | -           |
+| searchPlaceholder    | 搜索框占位文本           | `string`                    | -           |
+
+> ⚠️ **没有 `clearable`/`checkStrictly`/`filterable`/`loadData` 属性**。父子节点关联由组件内部树控件决定，没有 `checkStrictly` 开关。
 
 ---
 
 ## Events 事件
 
-| 事件名            | 说明               | 回调参数                              |
-| ----------------- | ------------------ | ------------------------------------- |
-| update:modelValue | v-model 更新时触发 | `(value: string \| string[]) => void` |
-| change            | 选中值改变时触发   | `(value, node) => void`               |
-| blur              | 失去焦点时触发     | `() => void`                          |
+| 事件名            | 说明               | 回调参数 |
+| ----------------- | ------------------ | -------- |
+| update:modelValue | v-model 更新时触发 | -        |
+| confirm           | 确认选择时触发     | -        |
+| clear             | 清空时触发         | -        |
+| closed            | 弹窗关闭时触发     | -        |
+| remove            | 移除选项时触发     | -        |
+
+> ⚠️ **没有 `change`/`blur` 事件**。值变化监听请用 `confirm`/`remove`。
 
 ---
 

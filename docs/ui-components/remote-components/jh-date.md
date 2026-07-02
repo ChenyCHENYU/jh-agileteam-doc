@@ -44,17 +44,23 @@ const query = ref({
 
 ## Props 属性
 
-| 参数                 | 说明                         | 类型                                 | 默认值         |
-| -------------------- | ---------------------------- | ------------------------------------ | -------------- |
-| modelValue / v-model | 绑定值                       | `string \| Date`                     | -              |
-| placeholder          | 占位提示                     | `string`                             | `"请选择日期"` |
-| type                 | 选择器类型                   | `"date" \| "month" \| "datetime"`    | `"date"`       |
-| format               | 绑定值格式（返回给 v-model） | `string`                             | `"YYYY-MM-DD"` |
-| showFormat           | 显示格式                     | `string`                             | `"YYYY-MM-DD"` |
-| disabled             | 是否禁用                     | `boolean`                            | `false`        |
-| clearable            | 是否可清空                   | `boolean`                            | `true`         |
-| disabledDate         | 禁用日期函数                 | `(time: Date) => boolean`            | -              |
-| shortcuts            | 快捷选项                     | `Array<{ text: string, value: any}>` | -              |
+| 参数                 | 说明                         | 类型                                              | 默认值      |
+| -------------------- | ---------------------------- | ------------------------------------------------- | ----------- |
+| modelValue / v-model | 绑定值                       | `string \| Date`                                  | -           |
+| placeholder          | 占位提示                     | `string`                                          | -           |
+| type                 | 选择器类型                   | `"date" \| "week" \| "month" \| "year"`           | -           |
+| format               | 绑定值格式（返回给 v-model） | `string`                                          | -           |
+| showFormat           | 显示格式                     | `string`                                          | -           |
+| status               | 控件状态（禁用/只读用此属性） | `"default" \| "disabled" \| "readonly"`          | `"default"` |
+| showColon            | label 是否显示冒号           | `boolean`                                         | `true`      |
+| defaultValue         | 默认日期                     | `string`                                          | -           |
+| size                 | 控件尺寸                     | `"small" \| "default" \| "large"`                 | -           |
+| labelWidth           | label 宽度                  | `string`                                          | -           |
+
+> ⚠️ **没有 `disabled`/`disabledDate`/`shortcuts` 属性**。
+> - 禁用用 `status="disabled"`（非 disabled）
+> - `type` 枚举为 `date`/`week`/`month`/`year`（**无 datetime**，datetime 是独立的 DateTimeComponent 组件）
+> - 没有 `disabledDate`（禁用日期）和 `shortcuts`（快捷选项）属性
 
 ---
 

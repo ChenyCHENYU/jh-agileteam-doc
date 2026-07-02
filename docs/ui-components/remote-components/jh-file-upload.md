@@ -51,32 +51,57 @@ const form = ref({
 
 | 参数                 | 说明                 | 类型                                    | 默认值       |
 | -------------------- | -------------------- | --------------------------------------- | ------------ |
-| modelValue / v-model | 绑定值（文件 URL）   | `string \| string[]`                    | -            |
-| accept               | 接受的文件类型       | `string`                                | `"*"`        |
-| multiple             | 是否多选             | `boolean`                               | `false`      |
-| limit                | 最大上传数量         | `number`                                | `1`          |
-| maxSize              | 单文件最大大小（MB） | `number`                                | `10`         |
-| disabled             | 是否禁用             | `boolean`                               | `false`      |
-| showFileList         | 是否显示文件列表     | `boolean`                               | `true`       |
-| drag                 | 是否支持拖拽上传     | `boolean`                               | `false`      |
-| autoUpload           | 是否自动上传         | `boolean`                               | `true`       |
-| listType             | 文件列表类型         | `"text" \| "picture" \| "picture-card"` | `"text"`     |
-| action               | 上传地址             | `string`                                | 平台默认接口 |
-| beforeUpload         | 上传前钩子           | `(file) => boolean \| Promise`          | -            |
-| onSuccess            | 上传成功钩子         | `(response, file) => void`              | -            |
-| onError              | 上传失败钩子         | `(error, file) => void`                 | -            |
+| modelValue / v-model | 绑定值（文件信息）   | `string \| array \| object`             | `[]`         |
+| readyList            | 已就绪文件列表       | `Array`                                 | -            |
+| relativeType         | 业务类型标识         | `string`                                | -            |
+| relativeId           | 业务主键 ID          | `string`                                | -            |
+| refreshId            | 刷新 ID              | `string`                                | -            |
+| accept               | 接受的文件类型       | `string`                                | -            |
+| multiple             | 是否多选             | `boolean`                               | -            |
+| limit                | 最大上传数量         | `number`                                | -            |
+| fileSizeLimit        | 单文件大小限制       | `string`                                | -            |
+| showFileSize         | 是否显示文件大小     | `boolean`                               | `true`       |
+| addable              | 是否允许添加         | `boolean`                               | `true`       |
+| deletable            | 是否允许删除         | `boolean`                               | `true`       |
+| downloadable         | 是否允许下载         | `boolean`                               | `true`       |
+| disabled             | 是否禁用             | `boolean`                               | -            |
+| drag                 | 是否支持拖拽上传     | `boolean`                               | `true`       |
+| autoUpload           | 是否自动上传         | `boolean`                               | `false`      |
+| listType             | 文件列表类型         | `"picture" \| "picture-card" \| "no-list"` | -         |
+| uploadUrl            | 上传地址             | `string`                                | 平台默认接口 |
+| listUrl              | 文件列表查询地址     | `string`                                | -            |
+| listParam            | 列表查询参数         | `object`                                | -            |
+| uploadParam          | 上传额外参数         | `object`                                | -            |
+| pathPrefix           | 路径前缀             | `string`                                | -            |
+| cardWidth            | 卡片宽度             | `number`                                | -            |
+| cardHeight           | 卡片高度             | `number`                                | -            |
+| saveBase64           | 是否保存 base64      | `boolean`                               | -            |
+| customDownload       | 自定义下载           | `boolean`                               | -            |
+| buttonSize           | 按钮尺寸             | `string`                                | -            |
+| rules                | 校验规则             | `Array`                                 | -            |
+
+> ⚠️ **没有 `maxSize`/`action`/`showFileList`/`beforeUpload`/`onSuccess`/`onError`/`readonly` 属性**。
+> - 文件大小限制用 `fileSizeLimit`（非 maxSize）
+> - 上传地址用 `uploadUrl`（非 action）
+> - 列表显示由 `listType` 控制（非 showFileList）
+> - **`drag` 默认 `true`**（默认已支持拖拽，不是 false）
+> - **`autoUpload` 默认 `false`**（默认不自动上传，不是 true）
+> - `listType` 无 `"text"`，枚举为 `picture`/`picture-card`/`no-list`
 
 ---
 
 ## Events 事件
 
-| 事件名            | 说明               | 回调参数                              |
-| ----------------- | ------------------ | ------------------------------------- |
-| update:modelValue | v-model 更新时触发 | `(value: string \| string[]) => void` |
-| change            | 文件状态改变时触发 | `(file, fileList) => void`            |
-| success           | 文件上传成功时触发 | `(response, file, fileList) => void`  |
-| error             | 文件上传失败时触发 | `(error, file, fileList) => void`     |
-| exceed            | 文件超出限制时触发 | `(files, fileList) => void`           |
+| 事件名              | 说明               | 回调参数 |
+| ------------------- | ------------------ | -------- |
+| update:modelValue   | v-model 更新时触发 | -        |
+| update:readyList    | readyList 更新     | -        |
+| success             | 文件上传成功时触发 | -        |
+| failed              | 文件上传失败时触发 | -        |
+| exceed              | 文件超出限制时触发 | -        |
+| remove              | 删除文件时触发     | -        |
+
+> ⚠️ **没有 `change`/`error` 事件**。上传失败监听 `@failed`（不是 `@error`）。
 
 ---
 
@@ -89,7 +114,7 @@ const form = ref({
   v-model="form.avatar"
   accept="image/*"
   list-type="picture-card"
-  :max-size="2"
+  :file-size-limit="2"
   placeholder="上传头像"
 />
 ```
@@ -117,7 +142,7 @@ const form = ref({
 <jh-file-upload
   v-model="form.docUrl"
   accept=".pdf,.doc,.docx,.xls,.xlsx"
-  :max-size="20"
+  :file-size-limit="20"
   placeholder="上传文档（最大20MB）"
 />
 ```
@@ -173,7 +198,7 @@ export const formItemsConfig: BaseFormItemDesc<any>[] = [
         tag: "jh-file-upload",
         accept: "image/*",
         listType: "picture-card",
-        maxSize: 2,
+        fileSizeLimit: "2MB",
       };
     },
   },
@@ -220,7 +245,7 @@ form.fileUrls = [
 
 ```vue
 <el-upload
-  :action="uploadUrl"
+  :upload-url="uploadUrl"
   :on-success="handleSuccess"
   :before-upload="beforeUpload"
   accept="image/*"
@@ -260,7 +285,7 @@ const handleSuccess = (response) => {
 ### 2️⃣ 限制文件大小（强烈推荐）
 
 ```vue
-<jh-file-upload v-model="form.fileUrl" :max-size="10" />
+<jh-file-upload v-model="form.fileUrl" :file-size-limit="10" />
 ```
 
 单文件最大 10MB
@@ -274,7 +299,7 @@ const handleSuccess = (response) => {
   v-model="form.image"
   accept="image/*"
   list-type="picture-card"
-  :max-size="2"
+  :file-size-limit="2"
 />
 ```
 
@@ -332,14 +357,14 @@ const handleExceed = () => {
   v-model="form.avatar"
   accept="image/*"
   list-type="picture-card"
-  :max-size="2"
+  :file-size-limit="2"
 />
 ```
 
 ### 示例 2：附件上传
 
 ```vue
-<jh-file-upload v-model="form.attachments" multiple :limit="5" :max-size="20" />
+<jh-file-upload v-model="form.attachments" multiple :limit="5" :file-size-limit="20" />
 ```
 
 ### 示例 3：拖拽上传
