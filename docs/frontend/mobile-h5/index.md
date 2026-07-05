@@ -2,10 +2,19 @@
 
 ## 项目简介
 
-`Robot H5` 是基于 **Vue 3.5 + Vite 7 + TypeScript** 的企业级移动端 H5 应用框架，采用 **Apple HIG Liquid Glass** 设计语言，遵循 Linear 现代工具美学。项目内置权限体系、主题系统、原生桥接能力，可同时运行于移动浏览器、钉钉/微信 WebView、原生 App 内嵌等多端场景。
+移动端有两个项目：
+
+| 项目 | 定位 | 框架 | UI 库 |
+|------|------|------|-------|
+| **Robot_H5** | 企业级 H5 应用框架（主力） | Vue 3.5 + Vite 7 | Vant 4 |
+| **wl-mbase** | Uniapp 跨端应用（H5 + 小程序） | Vue 3.5 + Vite 5（Uniapp） | uv-ui / Uniapp 内置 |
+
+`Robot_H5` 采用 **Apple HIG Liquid Glass** 设计语言，遵循 Linear 现代工具美学。项目内置权限体系、主题系统、原生桥接能力，可同时运行于移动浏览器、钉钉/微信 WebView、原生 App 内嵌等多端场景。
 
 ::: tip 项目仓库
-`Robot_H5` — 与 PC 端 `Robot_Admin` 共用后端网关，前端独立部署。支持 **standalone（独立运行）** 和 **integrated（mbase 子应用）** 双模式。
+`Robot_H5` — 与 PC 端共用后端网关，前端独立部署。支持 **standalone（独立运行）** 和 **integrated（mbase 子应用）** 双模式。
+
+`wl-mbase` — 基于 Uniapp 的跨端项目，编译产物可同时部署到 H5 / 微信小程序 / 钉钉小程序等多端。通过 `src/manifest.json` + `src/pages.json` 配置式管理。
 :::
 
 ---
@@ -28,6 +37,19 @@
 | 工具库 | VueUse | ^13.9.0 |
 | HTTP | Axios（MAxios 封装） | — |
 | Mock | vite-plugin-mock + MockJS | — |
+
+### wl-mbase（Uniapp 跨端）技术栈
+
+| 方向 | 技术选型 | 说明 |
+|------|---------|------|
+| 框架 | Uniapp（@dcloudio） | 一套代码，多端编译 |
+| 构建 | Vite 5 | Uniapp Vite 模式 |
+| UI 库 | uv-ui + Uniapp 内置组件 | `<view>`/`<text>` 跨端标签 |
+| 页面注册 | `src/pages.json` | Uniapp 配置式路由（非 vue-router） |
+| 路由跳转 | `uni.navigateTo()` / `uni.switchTab()` | Uniapp API |
+| 网络请求 | `uni.request` 封装 | 非 axios |
+| 条件编译 | `#ifdef H5` / `#ifdef MP-WEIXIN` | 平台差异化代码 |
+| 状态管理 | Pinia | 与 Robot_H5 一致 |
 
 ### 基础能力包
 
@@ -282,6 +304,6 @@ pnpm build:integrated # mbase 子应用
 ## 版块导航
 
 - [扩展规范](./standards) — 编码约定、文件组织、样式规范、提交规范
-- [Skills 集合](./skills) — 7 个 AI 辅助研发 Skill
-- [AI Skill 流水线](./skill-pipeline) — 从原型到代码的完整自动化流程
+- [Skills 集合](./skills) — 7 个 AI 辅助研发 Skill（prototype-scan / api-spec / api-contract / page-codegen / route-register / mock-gen / convention-audit）
+- [AI Skill 流水线](./skill-pipeline) — 从原型到代码的完整自动化流程（含 Robot_H5 与 wl-mbase 双端对比）
 - [@robot-h5/core](./h5-core/) — 通用能力包详细文档
