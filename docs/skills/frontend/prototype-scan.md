@@ -31,7 +31,7 @@
 |------|------|---------|
 | `LIST` | 查询区 + 表格 + 分页 | BaseQuery + BaseTable + jh-pagination |
 | `MASTER_DETAIL` | 上方主表 + 下方明细表 | jh-drag-row |
-| `TREE_LIST` | 左侧树 + 右侧表格 | C_Splitter + C_Tree |
+| `TREE_LIST` | 左侧树 + 右侧表格 | jh-drag-col + C_Tree |
 | `FORM_MODAL` | 弹窗中的表单 | el-dialog + el-form |
 | `COMPOSITE` | 多种组合 | 组合使用 |
 
@@ -62,7 +62,7 @@
 | 表格 | BaseTable | 通过 `columnsDef()` 声明式配置 |
 | 分页 | jh-pagination | 固定用法 |
 | 上下分栏 | jh-drag-row | 主从表必备，需设 `:top-height` |
-| 左右分割 | C_Splitter | 树形+列表必备 |
+| 左右分割 | jh-drag-col | 树形+列表必备 |
 | 树形面板 | C_Tree | 含搜索+Tab 切换 |
 | 下拉选择 | jh-select | dict 属性自动加载字典数据 |
 | 日期选择 | jh-date / jh-date-range | 单日期 / 日期范围 |

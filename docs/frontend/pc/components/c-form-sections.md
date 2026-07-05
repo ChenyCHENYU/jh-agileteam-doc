@@ -472,7 +472,7 @@ const defaultForm = generateDefaultFormData(sectionsConfig);
 - ✅ 真实的保存/草稿/取消逻辑（使用 request + Mock）
 - ✅ 项次信息管理（带分页，使用 jh-pagination）
 - ✅ 全屏模式支持
-- ✅ C_Splitter 拖动调整布局
+- ✅ jh-drag-col 拖动调整布局
 
 **使用方式**:
 

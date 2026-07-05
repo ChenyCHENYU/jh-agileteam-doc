@@ -9,7 +9,7 @@ page-codegen Skill 支持 9 种页面模板，每种模板对应一个独立的 
 | TPL-LIST | `LIST` | 查询 + 工具栏 + 表格 + 分页 | `AbstractPageQueryHook` |
 | TPL-FORM-ROUTE | `FORM_ROUTE` | 复杂表单（多 Tab、多子表）独立路由 | `useXxx` Composable |
 | TPL-MASTER-DETAIL | `MASTER_DETAIL` | jh-drag-row 上下分栏主从表 | `AbstractPageQueryHook` + createBottomPage |
-| TPL-TREE-LIST | `TREE_LIST` | C_Splitter 左树 + 右列表 | `AbstractPageQueryHook` |
+| TPL-TREE-LIST | `TREE_LIST` | jh-drag-col 左树 + 右列表 | `AbstractPageQueryHook` |
 | TPL-DETAIL-TABS | `DETAIL_TABS` | 上方 Tab 表单 + 下方子表 | 直接导出 reactive + ref |
 | TPL-CHANGE-HISTORY | `CHANGE_HISTORY` | 左变更时间线 + 右字段比对 | composable + mock |
 | TPL-RECORD-FORM | `RECORD_FORM` | 查询 + 表单录入（无分页） | 直接 ref + 函数 |
@@ -66,9 +66,9 @@ class XxxPage extends AbstractPageQueryHook {
 
 ## TREE_LIST：左树右列表
 
-左侧树形面板 + 右侧列表，使用 `C_Splitter` 左右分割组件。
+左侧树形面板 + 右侧列表，使用 `jh-drag-col` 左右分割组件。
 
-**布局**：C_Splitter 包裹左右两个区域
+**布局**：jh-drag-col 包裹左右两个区域
 - 左区：`C_Tree`（含搜索 + Tab 切换）
 - 右区：标准列表（查询 + 工具栏 + 表格 + 分页）
 
@@ -78,7 +78,7 @@ class XxxPage extends AbstractPageQueryHook {
 
 上半区为多 Tab 表单（基本信息/客户信息/其他信息），下半区为子项表格。
 
-**布局**：`C_Splitter direction="vertical"` 垂直分割
+**布局**：`jh-drag-row` 垂直分割
 - 上区：el-card 包裹页头工具栏 + el-tabs 表单区
 - 下区：子表表格
 

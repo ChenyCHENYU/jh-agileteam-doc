@@ -28,9 +28,9 @@
 |---|---|---|
 | [L0 — 氛围编程](/views/best-practices/L0-vibe) | 纯对话驱动，了解边界 | 已了解 |
 | [L1 — 提示词工程](/views/best-practices/L1-prompt) | 规范注入 + 上下文压缩 + 一致性保持 | ✅ 已实现 |
-| [L2 — Skill](/views/best-practices/L2-skill) | 10 个触发词驱动的结构化技能文件 | ✅ 已实现 |
+| [L2 — Skill](/views/best-practices/L2-skill) | 12 个触发词驱动的结构化技能文件 | ✅ 已实现 |
 | [L3 — MCP 工具调用](/views/best-practices/L3-skills-mcp) | 17 个 Tool，菜单/字典/权限/项目感知全覆盖 | ✅ 已实现 |
-| [L4 — CLI](/views/best-practices/L4-cli) | 9 条命令：init / update / check / diff / validate / doctor-ui / export | ✅ 已实现 |
+| [L4 — CLI](/views/best-practices/L4-cli) | 11 条命令：init / update / clean / check / diff / validate / validate-page / doctor-ui / export / fix / mock-clean | ✅ 已实现 |
 | [L5 — Agent Pipeline](/views/best-practices/L5-agent-pipeline) | Skill 链式自动触发，_pipeline.md 协议已落地 | 🟡 践行中 |
 | [L6 — Multi-Agent 协同](/views/best-practices/L6-multi-agent) | 专家 Agent 分工 + 并发处理 | ▶ 近期目标 |
 | [L7 — 自演化体系](/views/best-practices/L7-self-evolving) | 高质量产出反哺规范，正向飞轮 | 🔭 终极形态 |

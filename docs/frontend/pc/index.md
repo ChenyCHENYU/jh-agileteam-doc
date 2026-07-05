@@ -19,4 +19,4 @@
 ## 版块内容
 
 - [开发规范](./standards) — 命名约定、目录结构、代码风格
-- [Skills 集合](./skills/) — AI 辅助研发工作流，5 个核心 Skill
+- [Skills 集合](./skills/) — AI 辅助研发工作流，12 个 AI Skill

@@ -115,7 +115,7 @@ page-spec JSON 是唯一可以低成本修正的节点：
       prototype-scan/SKILL.md   直接复制，不改
       api-contract/SKILL.md     直接复制，微调命名规范
       page-codegen/SKILL.md     需要重写代码模板
-      convention-extract/SKILL.md  直接复制
+      convention-audit/SKILL.md  直接复制
 ```
 
 ### 第 2 步：建立编码规范

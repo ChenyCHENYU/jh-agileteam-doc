@@ -162,7 +162,7 @@ export const modalConfig = {
 | TPL-LIST.md | LIST | 查询 + 工具栏 + 表格 + 分页 |
 | TPL-FORM-ROUTE.md | FORM_ROUTE | 复杂表单独立路由 |
 | TPL-MASTER-DETAIL.md | MASTER_DETAIL | jh-drag-row 上下分栏主从表 |
-| TPL-TREE-LIST.md | TREE_LIST | C_Splitter 左树 + 右列表 |
+| TPL-TREE-LIST.md | TREE_LIST | jh-drag-col 左树 + 右列表 |
 | TPL-DETAIL-TABS.md | DETAIL_TABS | 上方表单 + 下方 Tab 子表 |
 | TPL-CHANGE-HISTORY.md | CHANGE_HISTORY | 左变更时间线 + 右字段比对 |
 | TPL-RECORD-FORM.md | RECORD_FORM | 查询 + 表单录入（无分页） |

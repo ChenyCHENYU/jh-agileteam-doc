@@ -3,7 +3,7 @@
 <AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />
 
 ::: info 说明
-本版块收录 PC 端专属扩展规范（平台规范系列 12–13 条），是通用工程规范（01–11 条）之上、针对 Robot_Admin 平台架构和 `@jhlc/jh-ui` 组件体系的专项约定。
+本版块收录 PC 端专属扩展规范（平台规范系列 12–13 条），是通用工程规范（01–11 条）之上、针对 Robot_Admin 平台架构和 `@jhlc/common-core` 组件体系的专项约定。
 
 通用工程规范（01–11）请参阅 [快速上手 — 规范约定](/frontend/quick-start/)。
 :::

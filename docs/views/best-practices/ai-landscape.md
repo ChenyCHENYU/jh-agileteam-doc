@@ -1,6 +1,6 @@
 # AI 辅助开发全景分析
 
-> 基于 `@agile-team/wl-skills-kit` v2.11.5 架构梳理，更新日期：2026-06-27
+> 基于 `@agile-team/wl-skills-kit` v2.11.8 架构梳理，更新日期：2026-06-27
 
 <AuthorTag :authors="['CHENY']" />
 
@@ -62,15 +62,15 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | L6 | 高（多 Agent） | 高 | ⚠️ 编排复杂 | 高 | 并发 + 专业化 |
 | L7 | — | — | — | 极高 | 体系自优化 |
 
-## 当前项目位置（v2.11.5）
+## 当前项目位置（v2.11.8）
 
 | 层级 | 状态 | 说明 |
 |------|------|------|
 | L0 氛围编程 | 了解 | 每个人都用过，边界已清晰 |
 | L1 提示词工程 | ✅ 已实现 | `copilot-instructions.md` + `standards` 懒加载 + 多编辑器适配 |
-| L2 Skills | ✅ 已实现 | 10 个 Skill（含 business-doc-extract），pre-flight + registry + 模板分层 |
+| L2 Skills | ✅ 已实现 | 12 个 Skill（含 business-doc-extract），pre-flight + registry + 模板分层 |
 | L3 MCP | ✅ 已实现 | 17 个 Tool（菜单+字典+权限+项目感知+页面校验+UI体检+通知） |
-| L4 CLI | ✅ 已实现 | 9 条命令：init / update / clean / check / diff / validate / validate-page / doctor-ui / export |
+| L4 CLI | ✅ 已实现 | 11 条命令：init / update / clean / check / diff / validate / validate-page / doctor-ui / export / fix / mock-clean |
 | L5 Agent Pipeline | 🟡 试运行中 | `_pipeline.md` 协议已落地，进入试运行阶段 |
 | L6 Multi-Agent | ⏳ 远期 | L5 稳定后再规划 |
 | L7 自演化体系 | 🔭 终极形态 | 需 L5 稳定 + 审计报告 ≥ 50 份 + 模板提取 ≥ 3 次 |
@@ -100,7 +100,7 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 
 > **整体效果**：菜单/权限同步 token 节省约 **87%**；操作时间压缩 **15-20 倍**；人工点击次数 → **0**。
 
-## 已实现的 9 条 CLI 命令
+## 已实现的 11 条 CLI 命令
 
 | 命令 | 用途 |
 |------|------|
@@ -113,11 +113,13 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | `validate-page` | `validate` 别名，支持单页/目录路径 |
 | `doctor-ui` | 检查 wl-skills-ui 接入完整性 |
 | `export` | 导出菜单/字典/权限基线 xlsx |
+| `fix` | 确定性机械修复（缺 `render-type`、`::v-deep`→`:deep()` 等） |
+| `mock-clean` | 清理 mock 文件（按域或全量，保留 `_utils.ts`） |
 
 ## 延伸阅读
 
 - [L0 — 氛围编程](./L0-vibe)
-- [L2 — Skill](./L2-skill) — 10 个 Skill 详情
+- [L2 — Skill](./L2-skill) — 12 个 Skill 详情
 - [L3 — MCP](./L3-skills-mcp) — 17 个 MCP Tool 详情
 - [L5 — Agent Pipeline](./L5-agent-pipeline) — Pipeline 协议与运行手册
 - [L6 — Multi-Agent 协同](./L6-multi-agent) — 多智能体分工设计
@@ -133,51 +135,3 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | [GitHub Copilot 官方文档](https://docs.github.com/en/copilot) | Copilot 指令文件、Agent 模式、MCP 接入 |
 | [Cursor 官方文档](https://docs.cursor.com/) | Cursor Rules、Agent 模式与 MCP 配置 |
 | [Vibe Coding — Andrej Karpathy](https://x.com/karpathy/status/1886192184808149190) | "Vibe Coding" 概念出处（Karpathy，2025年2月）|
-
-```
-AI 辅助开发能力谱系（从低到高）
-
-L0  氛围编程（Vibe Coding）
-    │  纯对话 → AI 自由发挥 → 高随机性 → 低还原度
-    │
-L1  提示词工程（Prompt Engineering）
-    │  结构化 Prompt → 少样本示例 → CoT → 上下文注入
-    │
-L2  Skills（结构化技能文件）              ← 当前项目核心
-    │  触发词驱动 → SKILL.md → 规范门控 → Pre-flight 声明
-    │
-L3  MCP（模型上下文协议）                 ← 当前项目已接入
-    │  工具调用 → 实时 I/O → 副作用执行 → 跨系统联动
-    │
-L4  CLI（命令行工具）                     ← 当前项目已实现
-    │  独立可执行 → 无 AI 依赖 → 自动化脚本 → CI/CD 集成
-    │
-L5  Agent Pipeline（智能体流水线）        ← 🟡 试运行中
-    │  Skill 链式自动触发 → 减少人工干预 → 批量处理
-    │
-L6  Multi-Agent 协同                      ← 远期目标（L5 稳定后再看）
-    │  专家 Agent 分工 → 并发处理 → 质量仲裁
-    │
-L7  自演化体系（Self-Evolving）            ← 终极形态（条件成熟后规划）
-       高质量产出反哺规范/模板 → 精度持续提升 → 正向飞轮
-```
-
-## 当前位置（v2.11.5）
-
-| 层级 | 状态 | 说明 |
-|------|------|------|
-| L1 提示词工程 | ✅ 已实现 | `copilot-instructions.md` + `standards` 懒加载 + 多编辑器适配 |
-| L2 Skills | ✅ 已实现 | 10 个 Skill（含 business-doc-extract），pre-flight + registry + 模板分层 |
-| L3 MCP | ✅ 已实现 | 17 个 Tool（菜单+字典+权限+项目感知+页面校验+UI体检+通知） |
-| L4 CLI | ✅ 已实现 | 9 条命令：init / update / clean / check / diff / validate / validate-page / doctor-ui / export |
-| L5 Agent Pipeline | 🟡 试运行中 | `_pipeline.md` 协议已落地，进入试运行阶段 |
-| L6 Multi-Agent | ⏳ 远期 | L5 稳定后再规划 |
-| L7 自演化体系 | 🔭 终极形态 | 需 L5 稳定 + 审计报告 ≥ 50 份 + 模板提取 ≥ 3 次 |
-
-## 延伸阅读
-
-- [L0 — 氛围编程](./L0-vibe)
-- [L2 — Skill](./L2-skill) — 10 个 Skill 详情
-- [L3 — MCP](./L3-skills-mcp) — 17 个 MCP Tool 详情
-- [L5 — Agent Pipeline](./L5-agent-pipeline) — Pipeline 协议与运行手册
-- [L6 — Multi-Agent 协同](./L6-multi-agent) — 多智能体分工设计

@@ -55,7 +55,7 @@
 | ③ | [business-doc-extract](./page-codegen) | core | 原型目录 / 详设 / 字段字典资料 | `docs/business/0X-xx/*.md`（业务沉淀） | 模块级业务梳理 |
 | ④ | [api-contract](./api-contract) | core | page-spec / 业务文档 / 口述 | `src/views/**/api.md` | 前后端接口对齐 |
 | ⑤ | [page-codegen](./page-codegen) | core | api.md / page-spec / 口述 | 4 文件/页 + mock + SYS_MENU_INFO | 批量出代码 |
-| ⑥ | [convention-audit](./convention-audit) | core | 源码 + standards/01-13 | `AUDIT_*.md` 偏差报告 | 存量代码体检 |
+| ⑥ | [convention-audit](./convention-audit) | core | 源码 + standards/01-14 | `AUDIT_*.md` 偏差报告 | 存量代码体检 |
 | ⑦ | [code-fix](./code-fix) | ops | 审计报告 | 源码 diff / 修复摘要 | 批量修规范问题 |
 | ⑧ | [menu-sync](./menu-sync) | sync | SYS_MENU_INFO.md + env.local.json | 后端菜单表记录 | 联调环境准备 |
 | ⑨ | [dict-sync](./dict-sync) | sync | env.local.json | 字典同步摘要 | 字典拉取/推送 |

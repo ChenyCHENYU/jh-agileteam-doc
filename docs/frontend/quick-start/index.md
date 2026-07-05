@@ -26,7 +26,7 @@ vscode-config install
 
 **Step 3 — AI Skill 体系**
 
-在业务项目根目录执行，导入 14 条规范 + 11 个 AI Skill：
+在业务项目根目录执行，导入 14 条规范 + 12 个 AI Skill：
 
 ```bash
 npx @agile-team/wl-skills-kit
