@@ -3,7 +3,7 @@
 > 本页说明团队在 ESLint、Prettier 上约定了哪些规则、为什么这样约定，以及各工具的职责边界。工具链安装与配置见 [① 工具链检测规范](./01-toolchain)。
 
 ::: info 适用范围
-所有 Robot_Admin 系体项目 · 完整模式（`@robot-admin/git-standards` full preset）
+所有平台前端项目 · 完整模式（`@robot-admin/git-standards` full preset）
 :::
 
 <AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />

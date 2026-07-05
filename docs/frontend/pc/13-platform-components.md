@@ -3,7 +3,7 @@
 > **平台规范第 13 条** · 强制度：🔴 必遵 + 阻断式。这是防止 AI 绕过平台封装、自由发挥使用 `el-*` 原生组件的核心规则。
 
 ::: info 位置说明
-本规范属于 PC 端扩展规范系列，涉及 `@jhlc/common-core` 平台封装组件与 Robot_Admin 封装组件的强制使用约定。来源：`@agile-team/wl-skills-kit` · `standards/13-platform-components.md`
+本规范属于 PC 端扩展规范系列，涉及 `@jhlc/common-core` 平台封装组件的强制使用约定。来源：`@agile-team/wl-skills-kit` · `standards/13-platform-components.md`
 :::
 
 <AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />

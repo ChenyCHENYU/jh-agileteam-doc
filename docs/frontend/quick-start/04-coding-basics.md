@@ -1,6 +1,6 @@
 # 基础编码规范（04）
 
-> **平台规范第 04 条** · 强制度：🔴 必遵。参考 jhat.tech 开发规范 + Robot_Admin 实践。
+> **平台规范第 04 条** · 强制度：🔴 必遵。参考 jhat.tech 开发规范 + 平台前端实践。
 
 ::: info 来源
 `@agile-team/wl-skills-kit` · `standards/04-coding-basics.md`
