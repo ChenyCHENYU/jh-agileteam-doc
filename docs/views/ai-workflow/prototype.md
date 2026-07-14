@@ -83,4 +83,4 @@ page-codegen（生成 Vue 代码）
 
 - [L2 — Skill 总览](/views/best-practices/L2-skill)
 - [AI 工作流概述](/views/ai-workflow/)
-- [前端 Skills — prototype-scan](/skills/frontend/prototype-scan)
+- [前端 Skills — prototype-scan](/frontend/pc/skills/prototype-scan)

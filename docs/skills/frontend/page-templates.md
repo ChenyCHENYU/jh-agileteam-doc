@@ -1,5 +1,9 @@
 # 9 种页面模板
 
+::: warning ⚠️ 本页已迁移
+本页内容已迁移至 **[前端 PC 端 Skills — 9 种页面模板](/frontend/pc/skills/page-templates)**。请前往新位置查看，保证与最新版本一致。
+:::
+
 page-codegen Skill 支持 9 种页面模板，每种模板对应一个独立的 `TPL-*.md` 文件，AI 会根据 page-spec 中的 `pattern` 自动选择对应模板生成代码。
 
 ## 模板总览

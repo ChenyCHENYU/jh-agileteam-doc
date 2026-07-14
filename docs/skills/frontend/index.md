@@ -22,18 +22,18 @@ npx @agile-team/wl-skills-kit@latest update
 npx @agile-team/wl-skills-kit clean
 ```
 
-执行后自动写入 **117 个文件**，无其他副作用。
+执行后自动写入完整的 AI 工程化体系文件，无其他副作用。
 
 ## 包含什么
 
 | 类别              | 数量  | 说明                                                              |
 | ----------------- | ----- | ----------------------------------------------------------------- |
-| **AI Skills**     | 5 个  | 原型扫描 → 接口约定 → 页面生成 → 菜单同步 → 规范审计              |
+| **AI Skills**     | 12 个 | prototype-scan / spec-doc-parse / api-contract / page-codegen 等（详见新版） |
 | **页面模板**      | 9 种  | LIST / FORM_ROUTE / MASTER_DETAIL / TREE_LIST 等                  |
-| **组件 API 文档** | 12 个 | jh-select / jh-date / jh-drag-row / jh-pagination 等              |
-| **通用组件**      | 15 个 | 全局 6 + 按需 4 + 远程 5                                          |
+| **编码规范**      | 14 条 | 模块化规范（01-工具链 ~ 14-布局容器）                              |
+| **MCP Tools**     | 17 个 | 菜单/字典/权限/代码扫描/路由检查/页面校验/UI诊断等                  |
 | **领域样例**      | 13 个 | 生产域 8 页 + 销售域 5 页                                         |
-| **编辑器配置**    | 8 个  | Copilot / Cursor / Windsurf / Kiro / Trae / Claude / Roo / AGENTS |
+| **编辑器配置**    | 10 个 | Copilot / Cursor / Windsurf / Kiro / Trae / Claude / Roo / Cline / AGENTS / Qoder |
 
 ## 导入后的项目结构
 

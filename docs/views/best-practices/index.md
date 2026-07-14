@@ -1,4 +1,4 @@
-# AI 最佳实践
+﻿# AI 最佳实践
 
 <AuthorTag :authors="['ZhuXiang','CHENY']" />
 
@@ -59,7 +59,7 @@ CLI 层              ─── 聚合命令，固化流程，无人值守   ← 
 
 ## 快速导航
 
-- [全景分析](./ai-landscape) — L0-L7 完整能力谱系 + 架构升级路线图
+- [全景分析](./ai-landscape) — L0-L7 完整能力谱系 
 - [L0 — 氛围编程](./L0-vibe) — 了解 AI 自由对话的边界
 - [L1 — 提示词工程](./L1-prompt) — 结构化 Prompt 与规范注入
 - [L2 — Skill](./L2-skill) — 触发词驱动的结构化技能文件

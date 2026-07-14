@@ -1,4 +1,4 @@
-# BaseForm 表单组件
+﻿# BaseForm 表单组件
 
 > 来源：`@jhlc/common-core` 远程组件
 
@@ -504,5 +504,5 @@ const dynamicItems = computed(() => {
 
 ## 📚 相关文档
 
-- [BaseQuery 查询组件](../BaseQuery/README.md)
-- [BaseTable 表格组件](../BaseTable/README.md)
+- [BaseQuery 查询组件](./base-query)
+- [BaseTable 表格组件](./base-table)

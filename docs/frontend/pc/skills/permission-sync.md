@@ -1,6 +1,6 @@
 # ⑥ 权限同步（permission-sync）
 
-> `@agile-team/wl-skills-kit` v2.3.6 正式激活，路径：`skills/sync/permission-sync/`
+> `@agile-team/wl-skills-kit` 自 v2.3.6 起激活，路径：`skills/sync/permission-sync/`
 
 ## 一句话理解
 

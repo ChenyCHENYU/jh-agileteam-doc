@@ -1,5 +1,9 @@
 # 后端 Skill
 
+::: warning ⚠️ 本页已迁移
+本页内容已迁移至 **[后端 Skills 集合](/backend/skills/)**（`wl-skills-bd` — 后端 AI Skills 模板包）。请前往新位置查看最新内容。
+:::
+
 ::: tip 🚀 建设中
 本版块正在持续沉淀后端方向的 Skill 集合。
 :::

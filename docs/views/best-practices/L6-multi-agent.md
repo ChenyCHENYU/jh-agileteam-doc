@@ -43,7 +43,9 @@ Orchestrator（协调 Agent）
 
 > **核心成本**：Token 消耗是单 Agent 的 3-5 倍，框架复杂度显著上升。只有在单 Agent 确实无法胜任时才值得投入。
 
-## 前端示例 — 本项目的 L6 适用场景
+---
+
+## 本项目的 L6 适用场景
 
 ### 适用场景
 
@@ -61,22 +63,7 @@ Orchestrator（协调 Agent）
 | 规范审计 Agent | 并发扫描所有新生成文件 | convention-audit Skill |
 | 协调 Agent | 拆解目标、分派任务、整合结果 | 所有 MCP Tools |
 
-### 前置条件
-
-在 **[L5 Agent Pipeline](./L5-agent-pipeline)** 跑通并稳定运转之后再规划 L6。单 Agent 能搞定的事，不需要引入 Multi-Agent 的复杂度。
-
-## 延伸阅读
-
-- [L5 — Agent Pipeline](./L5-agent-pipeline) — 前置阶段
-- [L7 — 自演化体系](./L7-self-evolving) — 更高阶形态
-
-## 适用场景
-
-- 20 个页面以上的批量生成，单 AI 上下文装不下时
-- 需要并发处理多个独立模块，缩短整体耗时
-- 某个专项任务需要更强的专业 Agent（如专属的安全审计 Agent）
-
-## 实现难度
+### 实现难度
 
 **高**。需要：
 - Agent 编排框架（AutoGen / LangGraph 或编辑器 Agent 模式串联）
@@ -84,14 +71,11 @@ Orchestrator（协调 Agent）
 - Agent 间通信协议
 - Token 消耗是单 Agent 的 3-5 倍
 
-## 前置条件
+### 前置条件
 
-在 **[L5 Agent Pipeline](./L5-agent-pipeline)** 跑通并稳定运转之后再规划 L6。
+在 **[L5 Agent Pipeline](./L5-agent-pipeline)** 跑通并稳定运转之后再规划 L6。单 Agent 能搞定的事，不需要引入 Multi-Agent 的复杂度。
 
-## 延伸阅读
-
-- [L5 — Agent Pipeline](./L5-agent-pipeline) — 前置阶段
-- [L7 — 自演化体系](./L7-self-evolving) — 更高阶形态
+---
 
 ## 业界实践参考
 
@@ -112,3 +96,8 @@ Orchestrator（协调 Agent）
 | [LangGraph Multi-Agent](https://langchain-ai.github.io/langgraph/concepts/multi_agent/) | 图状态机多 Agent 协同，支持复杂分支 |
 | [OpenAI Swarm（实验性）](https://github.com/openai/swarm) | OpenAI 官方 Multi-Agent 轻量框架 |
 | [AWS Bedrock Agents](https://aws.amazon.com/bedrock/agents/) | 企业级 Multi-Agent 托管方案 |
+
+## 延伸阅读
+
+- [L5 — Agent Pipeline](./L5-agent-pipeline) — 前置阶段
+- [L7 — 自演化体系](./L7-self-evolving) — 更高阶形态

@@ -1,4 +1,4 @@
-# BaseTable 表格组件
+﻿# BaseTable 表格组件
 
 > 来源：`@jhlc/common-core` 远程组件
 
@@ -936,6 +936,6 @@ const handleSave = () => {
 
 ## 📚 相关文档
 
-- [AGGrid 高级表格](../AGGrid/README.md)
+- [AGGrid 高级表格](./ag-grid)
 - [BaseToolbar 工具栏](../BaseToolbar/README.md)
-- [BaseQuery 查询组件](../BaseQuery/README.md)
+- [BaseQuery 查询组件](./base-query)

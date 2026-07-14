@@ -60,6 +60,22 @@ export const nav: DefaultTheme.NavItem[] = [
           { text: "H5 子应用集成方案", link: "/frontend/mobile-uniapp/integration" },
         ],
       },
+      {
+        text: "样式方案",
+        items: [
+          { text: "概述", link: "/views/styling/" },
+          { text: "UnoCSS 最佳实践", link: "/views/styling/unocss-best-practices" },
+          { text: "SCSS 最佳实践", link: "/views/styling/scss-best-practices" },
+        ],
+      },
+      {
+        text: "模板库",
+        items: [
+          { text: "模板总览", link: "/templates/" },
+          { text: "生产领域", link: "/templates/produce/" },
+          { text: "销售领域", link: "/templates/sale/" },
+        ],
+      },
     ],
   },
   {
@@ -69,6 +85,11 @@ export const nav: DefaultTheme.NavItem[] = [
       { text: "开发规范", link: "/backend/standards" },
       { text: "Skills 集合", link: "/backend/skills/" },
     ],
+  },
+  {
+    text: "工程脚手架",
+    link: "/scaffold/",
+    activeMatch: "/scaffold/",
   },
   {
     text: "AI 工作流",

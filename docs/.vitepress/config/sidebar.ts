@@ -39,7 +39,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         {
           text: "L5 — Agent Pipeline",
           link: "/views/best-practices/L5-agent-pipeline",
-          badge: { text: "规划中", type: "warning" },
+          badge: { text: "试运行", type: "tip" },
         },
         {
           text: "L6 — Multi-Agent 协同",
@@ -111,6 +111,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: true,
       items: [
         { text: "贡献指南", link: "/frontend/quick-start/contributing" },
+        { text: "ESLint & Prettier 规范约定", link: "/frontend/quick-start/eslint-prettier-ts" },
         { text: "Waline 评论系统", link: "/frontend/quick-start/waline-usage" },
       ],
     },
@@ -171,6 +172,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "jh-file-upload — 文件上传", link: "/frontend/pc/components/jh-file-upload" },
         { text: "jh-pagination — 分页", link: "/frontend/pc/components/jh-pagination" },
         { text: "jh-tabs — 标签页", link: "/frontend/pc/components/jh-tabs" },
+        { text: "jh-tabs-pane — 标签面板", link: "/frontend/pc/components/jh-tabs-pane" },
         { text: "jh-drag-row — 上下分栏", link: "/frontend/pc/components/jh-drag-row" },
         { text: "jh-drag-col — 左右分栏", link: "/frontend/pc/components/jh-drag-col" },
         { text: "jh-progress — 进度条", link: "/frontend/pc/components/jh-progress" },
@@ -234,7 +236,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "实践",
       collapsed: false,
       items: [
-        { text: "CLI 工具", link: "/frontend/pc/skills/cli" },
+        { text: "wl-skills-kit 工具", link: "/frontend/pc/skills/cli" },
       ],
     },
   ],
@@ -292,6 +294,36 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "工具函数库", link: "/frontend/mobile-h5/h5-core/utils" },
         { text: "配置系统", link: "/frontend/mobile-h5/h5-core/config" },
       ],
+    },
+  ],
+
+  // 工程脚手架
+  "/scaffold/": [
+    {
+      text: "工程脚手架",
+      collapsed: false,
+      items: [
+        { text: "概览 & 快速开始", link: "/scaffold/" },
+        { text: "创建项目", link: "/scaffold/create" },
+      ],
+    },
+    {
+      text: "命令 & 配置",
+      collapsed: false,
+      items: [{ text: "命令参考", link: "/scaffold/commands" }],
+    },
+    {
+      text: "模板体系",
+      collapsed: false,
+      items: [
+        { text: "模板来源 & Catalog", link: "/scaffold/templates" },
+        { text: "模板接入规范", link: "/scaffold/template-spec" },
+      ],
+    },
+    {
+      text: "参考",
+      collapsed: true,
+      items: [{ text: "常见问题", link: "/scaffold/faq" }],
     },
   ],
 
@@ -408,36 +440,66 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
+  // 团队
+  "/views/team/": [
+    {
+      text: "团队",
+      collapsed: false,
+      items: [
+        { text: "前端团队", link: "/views/team/" },
+        { text: "业务团队", link: "/views/team/business" },
+        { text: "后端团队", link: "/views/team/backend" },
+      ],
+    },
+  ],
+
   // 疑难杂症
   "/views/troubleshooting/": [
     {
-      text: "常见问题",
+      text: "疑难杂症",
       collapsed: false,
       items: [
         { text: "概述", link: "/views/troubleshooting/" },
-        { text: "环境配置问题", link: "/views/troubleshooting/environment" },
-        { text: "构建部署问题", link: "/views/troubleshooting/build-deploy" },
-      ],
-    },
-    {
-      text: "疑难问题",
-      collapsed: false,
-      items: [
+        {
+          text: "环境配置问题",
+          link: "/views/troubleshooting/",
+          badge: { text: "待补充", type: "info" },
+        },
+        {
+          text: "构建部署问题",
+          link: "/views/troubleshooting/",
+          badge: { text: "待补充", type: "info" },
+        },
         {
           text: "性能问题排查",
-          link: "/views/troubleshooting/performance-issues",
+          link: "/views/troubleshooting/",
+          badge: { text: "待补充", type: "info" },
         },
-        { text: "兼容性问题", link: "/views/troubleshooting/compatibility" },
-        { text: "第三方库问题", link: "/views/troubleshooting/third-party" },
-      ],
-    },
-    {
-      text: "调试技巧",
-      collapsed: false,
-      items: [
-        { text: "开发工具使用", link: "/views/troubleshooting/devtools" },
-        { text: "日志调试", link: "/views/troubleshooting/debugging-logs" },
-        { text: "错误追踪", link: "/views/troubleshooting/error-tracking" },
+        {
+          text: "兼容性问题",
+          link: "/views/troubleshooting/",
+          badge: { text: "待补充", type: "info" },
+        },
+        {
+          text: "第三方库问题",
+          link: "/views/troubleshooting/",
+          badge: { text: "待补充", type: "info" },
+        },
+        {
+          text: "开发工具使用",
+          link: "/views/troubleshooting/",
+          badge: { text: "待补充", type: "info" },
+        },
+        {
+          text: "日志调试",
+          link: "/views/troubleshooting/",
+          badge: { text: "待补充", type: "info" },
+        },
+        {
+          text: "错误追踪",
+          link: "/views/troubleshooting/",
+          badge: { text: "待补充", type: "info" },
+        },
       ],
     },
   ],

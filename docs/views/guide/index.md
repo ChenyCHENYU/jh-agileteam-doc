@@ -43,7 +43,7 @@
 
 - **PC 端** — [概览 & 技术选型](/frontend/pc/) · [架构设计](/frontend/pc/architecture) · [扩展规范](/frontend/pc/standards) · [Skills 集合](/frontend/pc/skills/)
 - **移动端 H5** — [概览 & 技术选型](/frontend/mobile-h5/) · [扩展规范](/frontend/mobile-h5/standards) · [Skills 集合](/frontend/mobile-h5/skills) · [@robot-h5/core](/frontend/mobile-h5/h5-core/)
-- **移动端 uniApp** — 规划中
+- **移动端 uniApp** — [概览 & 技术选型](/frontend/mobile-uniapp/) · [H5 子应用集成方案](/frontend/mobile-uniapp/integration)
 
 ---
 

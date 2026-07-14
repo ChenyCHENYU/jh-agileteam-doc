@@ -37,14 +37,14 @@ npx @agile-team/wl-skills-kit
 
 | 方向 | Skill 数量 | 覆盖链路 |
 |------|-----------|---------|
-| **PC 端前端** | 11 个 | 原型扫描 → 说明书解析 → 接口约定 → 页面生成 → 业务文档提取 → 菜单/字典/权限同步 → 规范审计 → 模板提取 → 自动修复 |
+| **PC 端前端** | 12 个 | 原型扫描 → 说明书解析 → 业务文档提取 → 接口约定 → 页面生成 → 规范审计 → 模板提取 → 菜单/字典/权限同步 → 自动修复 → 环境配置 |
 | **移动端 H5** | 7 个 | 原型扫描 → 接口规格 → 接口约定 → 页面生成 → 路由注册 → Mock 生成 → 规范审计 |
 
 **套件包含内容**：
 
 | 分类 | 数量 | 说明 |
 |------|------|------|
-| AI Skills | 11 个 | 端到端代码生成全链路（含双线路由） |
+| AI Skills | 12 个 | 端到端代码生成全链路（含双线路由） |
 | MCP Tools | 17 个 | 菜单/字典/权限/代码扫描/页面校验等 |
 | 编码规范 | 14 条 | 模块化规范，AI 自动门控加载 |
 | 页面模板 | 9 种 | LIST / FORM / MASTER_DETAIL / TREE_LIST 等 |
@@ -82,45 +82,48 @@ L7  自演化体系      — 产出反哺规范，精度持续提升的正向飞
 ```
 docs/
 ├── views/
-│   ├── guide/              # 上手指南
+│   ├── guide/              # 上手指南与站点地图
 │   ├── best-practices/     # AI 最佳实践（L0-L7 能力层级）
-│   ├── ai-workflow/        # AI 工作流（原型 / 设计 / 全栈 / 测试）
-│   ├── team/               # 团队成员（前端 / 后端）
-│   └── styling/            # 样式方案（UnoCSS / SCSS / UI 设计系统）
+│   ├── ai-workflow/        # AI 工作流（设计技能 / 原型 / 详设 / 全栈 / 测试）
+│   ├── team/               # 团队介绍（前端 / 后端 / 业务）
+│   ├── styling/            # 样式方案（UnoCSS / SCSS / UI 设计系统）
+│   └── troubleshooting/    # 疑难杂症
 │
 ├── frontend/
-│   ├── quick-start/        # 快速上手 + 13 条编码规范
-│   ├── pc/                 # PC 端：概览、架构、规范、9 个 Skill
-│   └── mobile-h5/          # 移动端 H5：概览、规范、7 个 Skill、@robot-h5/core
+│   ├── quick-start/        # 快速上手 + 14 条编码规范
+│   ├── pc/                 # PC 端：概览、架构、规范、34 个组件、12 个 Skill
+│   ├── mobile-h5/          # 移动端 H5：概览、规范、7 个 Skill、@robot-h5/core
+│   └── mobile-uniapp/      # 移动端 uniApp：基座概览、H5 子应用集成
+│
+├── scaffold/               # 工程脚手架（jh4j-cloud-cli 命令文档）
 │
 ├── backend/                # 后端：概览、规范、Skills 集合
 │
-├── ui-components/          # 平台组件库文档（BaseTable / BaseForm / AGGrid 等）
+├── ui-components/          # 平台组件库入口（指向 PC 端组件文档）
 │
-├── templates/              # 页面模板库（生产 / 销售 / 质量 / 成本）
-│
-└── skills/                 # Skill 使用指南与 CLI 工具
+└── templates/              # 业务页面模板库（生产 / 质量 / 销售 / 成本）
 ```
 
 ---
 
-## 前端 PC Skills 集合（v2.10.0）
+## 前端 PC Skills 集合（v2.11.8）
 
-11 个 AI 辅助研发 Skill + 17 个 MCP Tool + 9 条 CLI 命令，覆盖从需求到交付的完整链路：
+12 个 AI 辅助研发 Skill + 17 个 MCP Tool + 11 条 CLI 命令，覆盖从需求到交付的完整链路：
 
 | # | Skill | 说明 |
 |---|---|---|
 | ① | prototype-scan | 原型/截图/口述 → 页面清单（原型线） |
 | ② | spec-doc-parse | 标准说明书 → 页面清单（规范线） |
-| ③ | api-contract | 生成前后端接口约定文档 |
-| ④ | page-codegen | 基于约定一键生成可运行页面代码（4 文件）|
-| ⑤ | business-doc-extract | 语义级触发 → 结构化业务文档 |
-| ⑥ | template-extract | 从标杆页面提取领域专属模板 |
-| ⑦ | convention-audit | 14 条规范扫描，偏差清单自动生成 |
+| ③ | business-doc-extract | 语义级触发 → 结构化业务文档 |
+| ④ | api-contract | 生成前后端接口约定文档 |
+| ⑤ | page-codegen | 基于约定一键生成可运行页面代码（4 文件）|
+| ⑥ | convention-audit | 14 条规范扫描，偏差清单自动生成 |
+| ⑦ | template-extract | 从标杆页面提取领域专属模板 |
 | ⑧ | menu-sync | MCP 驱动同步菜单（0 次手动点击）|
 | ⑨ | dict-sync | MCP 驱动同步字典基线 |
 | ⑩ | permission-sync | 角色+菜单授权+动作权限闭环 |
 | ⑪ | code-fix | 受控自动修复偏差代码 |
+| ⑫ | env-config | 环境标准化 / 客户迁移（dry-run → apply）|
 
 ```bash
 # 在前端项目根目录执行（新项目接入）
@@ -130,8 +133,22 @@ npx @agile-team/wl-skills-kit
 npx @agile-team/wl-skills-kit update
 
 # 一键环境预检
-wl-skills check
+npx @agile-team/wl-skills-kit check
 ```
+
+## 工程脚手架（jh4j-cloud-cli）
+
+`@agile-team/jh4j-cloud-cli`（v0.6.1）—— 从受控模板一键创建结构一致、配置完整的 PC 业务子系统或移动端 H5 应用：
+
+```bash
+# 无需全局安装
+npx @agile-team/jh4j-cloud-cli create my-project
+
+# 环境体检
+npx @agile-team/jh4j-cloud-cli doctor
+```
+
+支持模板直选（PC/移动端）、快速/自定义双模式创建、GitHub→Gitee 主备源容灾、模板缓存、事务化生成与失败恢复。详见 [工程脚手架文档](/scaffold/)。
 
 ## 后端 Skills 集合（v0.0.1 骨架）
 
@@ -141,7 +158,7 @@ wl-skills check
 
 ## 快速开始
 
-**环境要求**：Node.js ≥ 18，pnpm ≥ 8
+**环境要求**：Node.js ≥ 20，pnpm ≥ 10（文档站构建）；PC/移动端模板开发需 Node 22+/pnpm 11.8+
 
 ```bash
 # 克隆仓库
@@ -192,7 +209,7 @@ pnpm preview
 | 自定义样式 | `docs/.vitepress/theme/custom.css` |
 | 全局组件 | `docs/.vitepress/components/` |
 
-提交规范遵循 [Conventional Commits](https://www.conventionalcommits.org/)，详见 [贡献指南](/docs/frontend/quick-start/contributing.md)。
+提交规范遵循 [Conventional Commits](https://www.conventionalcommits.org/)，详见 [贡献指南](/frontend/quick-start/contributing)。
 
 ---
 

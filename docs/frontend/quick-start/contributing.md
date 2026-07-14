@@ -25,7 +25,7 @@ graph LR
 
 ### 1. 环境准备
 
-确保你已经完成了[快速开始](/views/guide/getting-started)中的环境配置。
+确保你已经完成了[快速开始](/frontend/quick-start/getting-started)中的环境配置。
 
 ```bash
 # 检查工具版本
@@ -120,8 +120,8 @@ git checkout -b feature/TASK-123-add-user-module
 
 #### 代码规范
 
-- 遵循[开发规范](/views/guide/development-standards)
-- 遵循[提交规范](/views/guide/commit-standards)
+- 遵循[开发规范](/frontend/quick-start/development-standards)
+- 遵循[提交规范](/frontend/quick-start/commit-standards)
 - 使用团队统一的代码检查工具：
   - **ESLint**：JavaScript/TypeScript 代码检查
   - **Prettier**：代码格式化
@@ -203,7 +203,7 @@ fix bug
 修改了一些东西
 ````
 
-详细的提交规范请查看[提交规范文档](/views/guide/commit-standards)。
+详细的提交规范请查看[提交规范文档](/frontend/quick-start/commit-standards)。
 
 ### 5. 推送代码
 
@@ -526,9 +526,9 @@ git checkout -- file.ts
 
 1. **查阅文档**：
 
-   - [快速开始](/views/guide/getting-started)
-   - [开发规范](/views/guide/development-standards)
-   - [提交规范](/views/guide/commit-standards)
+   - [快速开始](/frontend/quick-start/getting-started)
+   - [开发规范](/frontend/quick-start/development-standards)
+   - [提交规范](/frontend/quick-start/commit-standards)
 
 2. **团队沟通**：
 
@@ -559,10 +559,10 @@ git checkout -- file.ts
 
 ## 🔗 相关文档
 
-- [快速开始](/views/guide/getting-started)
-- [开发规范](/views/guide/development-standards)
-- [提交规范](/views/guide/commit-standards)
-- [项目结构](/views/guide/project-structure)
+- [快速开始](/frontend/quick-start/getting-started)
+- [开发规范](/frontend/quick-start/development-standards)
+- [提交规范](/frontend/quick-start/commit-standards)
+- [项目结构](/frontend/quick-start/project-structure)
 
 ::: tip 💡 提示
 遵循规范不仅能提高代码质量，还能让团队协作更加顺畅。如有疑问，请随时联系 Tech Leader（工号 409322）。

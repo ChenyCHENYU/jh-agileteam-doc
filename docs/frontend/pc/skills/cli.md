@@ -1,4 +1,9 @@
-# CLI 工具
+# wl-skills-kit 工具
+
+::: tip 这是哪个 CLI？
+本页讲的是 **Skills 体系安装器** `@agile-team/wl-skills-kit`（`init / update / validate / fix / clean` 等 11 个子命令），用于把规范、Skill、组件文档导入**已有项目**。
+从零**创建新项目**用的是另一个工具 —— 项目脚手架 [`@agile-team/jh4j-cloud-cli`](/scaffold/)（命令 `jh4j create`）。
+:::
 
 `@agile-team/wl-skills-kit`（v2.11.8）提供 11 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
 

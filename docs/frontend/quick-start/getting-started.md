@@ -137,11 +137,11 @@ pnpm preview          # 预览生产构建
 
 现在你已经成功创建并启动了项目，接下来可以：
 
-- 📚 阅读 [项目结构](/views/guide/project-structure) 了解详细的目录说明
+- 📚 阅读 [项目结构](/frontend/quick-start/project-structure) 了解详细的目录说明
 - 🎨 查看 [组件库](/ui-components/) 学习如何使用组件
-- 🛠️ 探索 [工程化配置](/views/engineering/scaffold) 深入了解项目配置
-- ⚡ 学习 [UnoCSS](/views/unocss-guide) 使用原子化 CSS
-- 📖 参考 [最佳实践](/views/best-practices/architecture) 编写高质量代码
+- 🛠️ 探索 [工程脚手架](/scaffold/) 了解项目创建与配置
+- 🎨 查看 [样式方案 — UnoCSS 最佳实践](/views/styling/unocss-best-practices) 使用原子化 CSS
+- 📖 参考 [PC 架构设计](/frontend/pc/architecture) 编写高质量代码
 
 ## 遇到问题？
 
@@ -160,7 +160,7 @@ pnpm preview          # 预览生产构建
 - 📝 改进文档（直接在评论区留言或提交 PR）
 - 🔧 提交代码（遵循团队代码规范）
 
-请查看 [贡献指南](/views/guide/contributing) 了解详细的贡献流程和规范。
+请查看 [贡献指南](/frontend/quick-start/contributing) 了解详细的贡献流程和规范。
 
 ::: tip 提示
 建议先阅读完整个指南版块，然后动手实践，这样能更快地掌握金恒科技信息化中心前端团队的工程体系！如有疑问，请随时通过内部工号 409322取得联系或直接评论区留言。

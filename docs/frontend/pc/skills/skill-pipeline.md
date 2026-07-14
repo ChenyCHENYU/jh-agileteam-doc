@@ -51,8 +51,8 @@
 | # | Skill | 分类 | 输入 | 输出 | 典型场景 |
 |---|-------|------|------|------|---------|
 | ① | [prototype-scan](./prototype-scan) | core | Axure HTML / 截图 / 口述 | `PROTOTYPE_SCAN_*.md`（含 page-spec JSON） | 新模块开发启动（原型线） |
-| ② | [spec-doc-parse](./page-codegen) | core | wl-skills-design 标准说明书 | `SPEC_PARSE_*.md`（含 page-spec JSON + 解析报告） | 规范线入口 |
-| ③ | [business-doc-extract](./page-codegen) | core | 原型目录 / 详设 / 字段字典资料 | `docs/business/0X-xx/*.md`（业务沉淀） | 模块级业务梳理 |
+| ② | [spec-doc-parse](./spec-doc-parse) | core | wl-skills-design 标准说明书 | `SPEC_PARSE_*.md`（含 page-spec JSON + 解析报告） | 规范线入口 |
+| ③ | [business-doc-extract](./business-doc-extract) | core | 原型目录 / 详设 / 字段字典资料 | `docs/business/0X-xx/*.md`（业务沉淀） | 模块级业务梳理 |
 | ④ | [api-contract](./api-contract) | core | page-spec / 业务文档 / 口述 | `src/views/**/api.md` | 前后端接口对齐 |
 | ⑤ | [page-codegen](./page-codegen) | core | api.md / page-spec / 口述 | 4 文件/页 + mock + SYS_MENU_INFO | 批量出代码 |
 | ⑥ | [convention-audit](./convention-audit) | core | 源码 + standards/01-14 | `AUDIT_*.md` 偏差报告 | 存量代码体检 |

@@ -18,7 +18,7 @@
 | **规则强化** | `convention-audit` 偏差报告积累 | Skill Pre-flight 警告权重 | 高频偏差被更早拦截 |
 | **工作流优化** | 人工修正记录、步骤重跑频率 | `_pipeline.md` 步骤描述 | 流水线减少人工干预次数 |
 
-## 核心能力（通用）
+## 核心能力
 
 | 能力 | 说明 |
 |------|------|
@@ -30,7 +30,9 @@
 
 > **进入门槛**：需要 L5 流水线稳定运转提供足够的样本量，以及结构化存储审计数据的基础设施。
 
-## 前端示例 — 本项目的 L7 规划
+---
+
+## 本项目的 L7 规划
 
 ### 飞轮模型
 
@@ -82,67 +84,7 @@ convention-audit 报告积累                │
 - 模板自动生成：AI 直接从代码库提炼新模板，人工只做 review
 - 规范冲突检测：新规范与现有规范的逻辑冲突由 AI 自动发现
 
-## 延伸阅读
-
-- [全景分析](./ai-landscape) — 完整架构蓝图
-- [L5 — Agent Pipeline](./L5-agent-pipeline) — 前置阶段
-- [L6 — Multi-Agent 协同](./L6-multi-agent)
-
-## 飞轮模型
-
-```
-高质量生成代码（page-codegen）
-        │
-        ▼ [template-extract] 提炼为新领域模板
-        │
-        ▼ 人工 review → 合并到 files/
-        │
-        ▼ kit 升级发布（npx 即可获取）
-        │
-        ▼ 下次生成精度更高 ──────────────┐
-                                         │（循环）
-convention-audit 报告积累                │
-        │                                │
-        ▼ 偏差统计（哪条规范最常被违反） │
-        │                                │
-        ▼ 规范权重调整 → Skill 描述强化  │
-        │                                │
-        └────────────────────────────────┘
-```
-
-## 落地所需条件
-
-| 条件 | 说明 | 当前状态 |
-|------|------|----------|
-| L5 Pipeline 稳定运转 | Skill 链式触发已常态化，产出量足够大 | ⏳ 未达到 |
-| 审计报告数量 ≥ 50 份 | 有足够的偏差样本做统计 | ⏳ 积累中 |
-| 模板提取 ≥ 3 次成功 | template-extract 流程验证可靠 | ⏳ 未达到 |
-| 跨项目质量数据汇总 | 单项目偏差不足以发现系统性问题 | ⏳ 需 v4.0 基础设施 |
-
-## 与当前项目的关系
-
-`template-extract` Skill + `convention-audit` 报告积累机制已经是这个飞轮的雏形——**L7 不是全新建设，是现有机制的系统性放大**。
-
-### 短期飞轮（L5 稳定后即可启动）
-
-- 同类页面出现 ≥ 5 次 → 自动推荐 template-extract
-- 某偏差出现 ≥ 3 次 → 对应 SKILL.md Pre-flight 加重警告
-
-### 中期飞轮（v4.0 基础设施就绪后）
-
-- convention-audit 报告结构化入库，跨项目聚合
-- AI 分析高频偏差 → 生成规范修订草稿 → 人工 review 合并
-
-### 长期飞轮（AI 能力充分成熟后）
-
-- 模板自动生成：AI 直接从代码库提炼新模板，人工只做 review
-- 规范冲突检测：新规范与现有规范的逻辑冲突由 AI 自动发现
-
-## 延伸阅读
-
-- [全景分析](./ai-landscape) — 完整架构蓝图
-- [L5 — Agent Pipeline](./L5-agent-pipeline) — 前置阶段
-- [L6 — Multi-Agent 协同](./L6-multi-agent)
+---
 
 ## 业界实践参考
 
@@ -164,3 +106,9 @@ convention-audit 报告积累                │
 | [SWE-bench](https://www.swebench.com/) | 衡量 AI 修复真实代码 Bug 能力的标准 Benchmark，L7 效果量化参考 |
 | [Cursor Blog](https://www.cursor.com/blog) | Cursor 产品迭代背后的 AI 工程化思考 |
 | [GitHub Blog — AI & ML](https://github.blog/ai-and-ml/) | GitHub Copilot 持续改进机制的官方说明 |
+
+## 延伸阅读
+
+- [全景分析](./ai-landscape) — 完整架构蓝图
+- [L5 — Agent Pipeline](./L5-agent-pipeline) — 前置阶段
+- [L6 — Multi-Agent 协同](./L6-multi-agent)

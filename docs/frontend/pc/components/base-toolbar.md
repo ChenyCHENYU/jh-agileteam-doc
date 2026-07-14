@@ -1,4 +1,4 @@
-# BaseToolbar 工具栏组件
+﻿# BaseToolbar 工具栏组件
 
 > 来源：`@jhlc/common-core` 远程组件
 
@@ -491,6 +491,6 @@ const rightItems = computed(() => [
 
 ## 📚 相关文档
 
-- [BaseTable 表格组件](../BaseTable/README.md) - 表格操作列按钮
-- [BaseQuery 查询组件](../BaseQuery/README.md) - 查询区按钮
-- [BaseForm 表单组件](../BaseForm/README.md) - 表单提交按钮
+- [BaseTable 表格组件](./base-table) - 表格操作列按钮
+- [BaseQuery 查询组件](./base-query) - 查询区按钮
+- [BaseForm 表单组件](./base-form) - 表单提交按钮

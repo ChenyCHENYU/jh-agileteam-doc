@@ -53,8 +53,6 @@
 
 ## 模式 A：Axure HTML 扫描
 
-## 模式 A：Axure HTML 扫描
-
 ### 步骤 1 — 全量扫描 HTML
 
 遍历所有 `.html` 文件，提取：

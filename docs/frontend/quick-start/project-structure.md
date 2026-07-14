@@ -528,9 +528,9 @@ export const STATUS_DICT = {
 
 ## 下一步
 
-- 🎨 学习 [UnoCSS 配置](/views/guide/unocss-config)
-- 🛠️ 了解 [工程化配置](/views/engineering/scaffold)
-- 📖 查看 [编码规范](/views/best-practices/coding-standards)
+- 🎨 查看 [样式方案 — UnoCSS 最佳实践](/views/styling/unocss-best-practices)
+- 🛠️ 了解 [工程脚手架](/scaffold/)
+- 📖 查看 [基础编码规范](/frontend/quick-start/04-coding-basics)
 
 ::: tip 提示
 良好的项目结构是金恒科技信息化中心前端团队协作的基础，请遵循统一的目录规范和命名约定！如有特殊需求，请联系团队负责人或通过内部工单系统 409322 提交需求。

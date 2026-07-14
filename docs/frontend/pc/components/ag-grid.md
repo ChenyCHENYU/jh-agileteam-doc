@@ -1,4 +1,4 @@
-# AGGrid 高性能表格
+﻿# AGGrid 高性能表格
 
 > 来源：`@jhlc/common-core` 远程组件
 
@@ -525,6 +525,6 @@ const toolbarItems = computed(() => [
 
 ## 📚 相关文档
 
-- [BaseTable 表格组件](../BaseTable/README.md) - 完整的表格 Props 和列配置
+- [BaseTable 表格组件](./base-table) - 完整的表格 Props 和列配置
 - [BaseToolbar 工具栏组件](../BaseToolbar/README.md) - 搭配工具栏使用
 - [AG Grid 官方文档](https://www.ag-grid.com/documentation/) - AG Grid 更多高级特性
