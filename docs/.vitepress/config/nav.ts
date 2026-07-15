@@ -58,6 +58,7 @@ export const nav: DefaultTheme.NavItem[] = [
         items: [
           { text: "概览 & 技术选型", link: "/frontend/mobile-uniapp/" },
           { text: "H5 子应用集成方案", link: "/frontend/mobile-uniapp/integration" },
+          { text: "App 集成与发布", link: "/frontend/mobile-uniapp/app-integration" },
         ],
       },
       {
