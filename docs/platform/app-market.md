@@ -1,73 +1,139 @@
 # 低代码应用市场
 
-> 系统管理 → 低代码 → 应用市场
-
-应用市场提供预置的低代码应用，可一键安装到当前平台实例。
+> 应用市场提供预置的低代码应用，可一键安装到当前平台实例。
 
 ---
 
-## 功能说明
+### 概述
 
-应用市场中的应用是完整的业务模块包，包含：
-- 菜单配置
-- 页面设计
-- 模型定义
-- 接口定义
-- 数据字典
-- 流程模板
+在使用低代码开发页面时，可以通过拖拽页面，快速的创建出项目页面。在其他项目中复用这些页面，将更能提高生成效率。低代码应用市场，是一组页面、菜单、接口、模型等一套可以仅依赖平台项目就可以运行的微型应用。多个微型应用组成了低代码应用市场。可以从应用市场中导出下载该微型应用，导入到其他系统中，即可使其拥有该微应用的功能。将大应用市场导入数据之后需要点击同步按钮，需要组装一个手动输入的参数的老数据源。
 
----
+注意事项
 
-## 操作说明
+低代码应用市场中的应用是依赖系统平台的应用，尤其是平台的菜单，所以在建立菜单时，不要随意删除平台菜单，或者跟平台创建同样的菜单。
 
-### 安装应用
+正式机测试机同步开发时，不要在两台服务器上同时建立相同菜单，否则在导出导入时会有两个同样的菜单。可以在测试机上创建菜单，同步到正式机上。
 
-1. 浏览应用市场中的可用应用
-2. 查看应用详情（功能介绍、包含模块、依赖）
-3. 点击安装，系统自动导入应用的所有配置
-4. 安装完成后在菜单中可见
+不要在正式机、测试机开发同一个应用的项目，否则在导出导入时，将会覆盖该应用的数据。
 
-### 管理已安装应用
+应用创建后，创建了应用数据，不要删除该应用，否则无法查询至应用市场导入数据之后需要点击同步按钮，需要组装一个。
 
-| 操作 | 说明 |
-|------|------|
-| 查看已安装 | 查看当前已安装的应用列表 |
-| 升级 | 更新到应用的新版本 |
-| 卸载 | 卸载应用（可选择是否保留数据） |
+不要增加、修改、删除导出表，否则影响功能。
 
-### 导出应用
+不要在开发时进行导入导出，否则会影响数据的一致性或者丢失数据。
 
-将当前平台中的业务模块打包导出为应用包，供其他平台实例安装。
+建议
 
+开发时，可以先将正式机的数据同步到测试机，然后在测试机上进行开发，完成一个阶段，再将测试机上的数据导出，然后导入到正式机上。
 
-![一个应用是指可以导出给其他项目运行的程序，他可以是一个项目，...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/02.png)
-![一个应用是指可以导出给其他项目运行的程序，他可以是一个项目，...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/01.png)
+对于新开发的功能，可以创建一个新的应用，将新应用依赖关联到原来应用，在导出导入时将会极大地提高效率。
 
-![登录系统后，若已切换到对应的应用，添加菜单时，默认使用当前选...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/03.png)
+不要在正式机上进行开发。
+
+减少应用创建，减少应用之间的依赖，否则导出只能依赖导出，导出当前应用时存在很大概率产生异常。
+
+在应用无开发时可以进行导出。
+
+建字典时，带一个前缀，避免重复，平台使用sys开头，避免使用此开头，与平台重复，导入后字典异常。
+
+将多个微应用组合使用
+
+支持应用的导出、查看
+
+新建应用
+
+登录系统后，管理员角色可以创建应用。在系统管理－〉资源管理－〉低代码应用市场应用列表中的【添加】按钮，添加应用，如下图：
+
+![一个应用是指可以导出给其他项目运行的程序，他可以是一个项目，或者是一些公用性的中](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/01.png)
+
+![一个应用是指可以导出给其他项目运行的程序，他可以是一个项目，或者是一些公用性的中](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/02.png)
+
+一个应用是指可以导出给其他项目运行的程序，他可以是一个项目，或者是一些公用性的中间应用，更多的还是体现在页面上。所以在创建应用时，要考虑应用的扩展性，是否需要区分基础应用等。微应用，是指一个大的应用，比如DHR应用，它包括低代码拖拽页面，也包括程序员编码的页面，此时可以单独部署前端代码，DHR应用就是相对本系统来说，就是一个微应用，在DHR应用中配置地址源，同时在nginx配置相应配置，然后在本应用中创建菜单，关联DHR应用的菜单，具体细节配置请查看微应用。
+
+新建菜单
+
+应用创建好后，此时该应用下还无数据，切换到该应用时，将无法查询数据。在应用选择《全部应用》下，到系统管理－〉菜应用市场导入数据之后需要点击同步按钮，需要组装一个手动输入的参数的老数据源。新数据源是选择当前导入库的数据源单管理页面，创建菜单/目录；填写相应的值，选择对应的应用，如下图：
+
+![登录系统后，若已切换到对应的应用，添加菜单时，默认使用当前选择的应用，不可修改，](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/03.png)
 
 ![创建应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/04.png)
 
+### 创建应用数据
 
+菜单创建完成后，开始使用低代码开发功能。（注意：此时要切换到对应的对应下进行开发）比如快速构建页面：
 
-![在此过程中，创建了页面、模型、接口、权限等操作。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/07.png)
-![在此过程中，创建了页面、模型、接口、权限等操作。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/06.png)
 ![在此过程中，创建了页面、模型、接口、权限等操作。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/05.png)
 
+![在此过程中，创建了页面、模型、接口、权限等操作。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/06.png)
 
+![在此过程中，创建了页面、模型、接口、权限等操作。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/07.png)
 
-![导出应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/10.png)
-![导出应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/09.png)
+在此过程中，创建了页面、模型、接口、权限等操作。
+
+切换应用查看数据
+
+应用选择，切换功能。
+
+在系统管理－〉权限管理－〉接口管理中；可以查看刚刚创建的接口；在系统管理－〉低代码－〉模型管理中；可以查看刚刚创建的模型；在系统管理－〉菜单程序－〉菜单管理中；可以查看刚刚创建的菜单及菜单动作；此时，若切换到另一个应用，并且与该应用没有关联关系，将无法查询刚刚创建的数据。
+
+仅选择当前应用功能：
+
+若低代码开发完A应用后，想在A应用基础之上开发扩展功能，应用B，在应用列中，将应用B关联应用A，如下图：
+
 ![导出应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/08.png)
 
+![导出应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/09.png)
 
-![小技巧：](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/12.png)
+![导出应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/10.png)
+
+### 导出应用数据
+
+开发完低代码相关应用程序，需要进行打包，给其他项目使用，此时在应用列表中选择需要打包的应用，点击导出，勾选导出组全部组，填写相关导出名称、详情，导出完成后，在导出记录中将查看到刚刚导出的结果，如下图：
+
 ![小技巧：](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/11.png)
 
-![导入事件发出后，可以查看日志信息，查看导入情况；导入完成后，...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/13.png)
-![若导入数据有误，可以点击恢复，恢复到导入之前的数据，状态将置...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/14.png)
+![小技巧：](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/12.png)
+
+小技巧：
+
+若测试机开发，向正式机同步时，在改动很小，很明确的情况下，比如只改了页面的样式，可以只选择菜单组，进行导出；
+
+若只改了B应用的低代码程序，未改动A应用的程序，可以勾选仅导出当前应用，减少导出量，提高同步效率。
+
+导入应用
+
+应用导出成功之后，在导出记录中查询刚刚导出的结果，下载导出的zip包；在正式机进行导入；在系统管理－〉资源管理－〉低代码应用市场；应用列表，点击导入，如下图：
+
+![导入事件发出后，可以查看日志信息，查看导入情况；导入完成后，可以在导入记录中查看](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/13.png)
+
+导入事件发出后，可以查看日志信息，查看导入情况；导入完成后，可以在导入记录中查看刚刚导入的结果，如下图：
+
+![若导入数据有误，可以点击恢复，恢复到导入之前的数据，状态将置成已恢复；（注意：不](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/14.png)
+
+若导入数据有误，可以点击恢复，恢复到导入之前的数据，状态将置成已恢复；（注意：不要点击过早的记录进行恢复，防止之后开发的数据丢失。）
+
+同步数据源
+
+导入成功之后，需要同步数据源，之前测试机或者其他机器的
+
+应用市场导入数据之后需要点击同步按钮，需要组装一个手动输入的参数
+
+老数据源获取方式 去源头系统找到
+
+低代码 &gt; 数据源详情找到数据源组装数据
 
 ![老数据源分为三个部分 数据连接 类型和用户名称](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/15.png)
 
+老数据源分为三个部分 数据连接 类型和用户名称
+
+连接地址（jdbc）；类型（oracle 等）；用户名（例： 1.3.2_dev）
+
+老数据源例子： jdbc:oracle:thin:@172.18.247.88:1521:jh4j;oracle;1.3.2_dev
+
+分号隔开的是上面三个部分
+
+![老数据源选择方式参见数据源详情上面描述](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/16.png)
 
 ![老数据源选择方式参见数据源详情上面描述](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/17.png)
-![老数据源选择方式参见数据源详情上面描述](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/16.png)
+
+老数据源选择方式参见数据源详情上面描述
