@@ -95,6 +95,11 @@ export const nav: DefaultTheme.NavItem[] = [
     activeMatch: "/scaffold/",
   },
   {
+    text: "平台手册",
+    link: "/platform/",
+    activeMatch: "/platform/",
+  },
+  {
     text: "AI 工作流",
     link: "/views/ai-workflow/",
     activeMatch: "/views/ai-workflow/",

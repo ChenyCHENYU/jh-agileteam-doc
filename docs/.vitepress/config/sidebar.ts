@@ -5,6 +5,74 @@ import type { DefaultTheme } from "vitepress";
  * @description 根据不同的路由路径，展示对应的侧边栏
  */
 export const sidebar: DefaultTheme.Sidebar = {
+  // 平台手册
+  "/platform/": [
+    {
+      text: "平台手册",
+      collapsed: false,
+      items: [
+        { text: "总览", link: "/platform/" },
+        { text: "快速搭建", link: "/platform/quick-start" },
+      ],
+    },
+    {
+      text: "基础配置",
+      collapsed: false,
+      items: [
+        { text: "基础服务", link: "/platform/base-services" },
+        { text: "公共配置", link: "/platform/common-config" },
+      ],
+    },
+    {
+      text: "权限与菜单",
+      collapsed: false,
+      items: [
+        { text: "权限管理", link: "/platform/permission" },
+        { text: "菜单配置", link: "/platform/menu-config" },
+        { text: "通知中心", link: "/platform/notification" },
+      ],
+    },
+    {
+      text: "流程与人事",
+      collapsed: false,
+      items: [
+        { text: "流程管理", link: "/platform/workflow" },
+        { text: "人事管理", link: "/platform/hr" },
+      ],
+    },
+    {
+      text: "低代码开发",
+      collapsed: false,
+      items: [
+        { text: "模型设计", link: "/platform/model-design" },
+        { text: "页面设计", link: "/platform/page-design" },
+        { text: "门户页设计", link: "/platform/portal-design" },
+        { text: "可视化大屏", link: "/platform/dashboard" },
+        { text: "接口管理", link: "/platform/api-management" },
+        { text: "低代码应用市场", link: "/platform/app-market" },
+      ],
+    },
+    {
+      text: "运维监控",
+      collapsed: false,
+      items: [
+        { text: "日志监控", link: "/platform/log-monitor" },
+        { text: "文件服务", link: "/platform/file-service" },
+        { text: "资源管理", link: "/platform/resource" },
+        { text: "AI 助手", link: "/platform/ai-assistant" },
+        { text: "新特性", link: "/platform/whats-new" },
+      ],
+    },
+    {
+      text: "参考",
+      collapsed: true,
+      items: [
+        { text: "常见问题", link: "/platform/faq" },
+        { text: "术语表", link: "/platform/glossary" },
+      ],
+    },
+  ],
+
   // 指南
   "/views/guide/": [
     {
