@@ -93,7 +93,9 @@ docs/
 │   ├── quick-start/        # 快速上手 + 14 条编码规范
 │   ├── pc/                 # PC 端：概览、架构、规范、34 个组件、12 个 Skill
 │   ├── mobile-h5/          # 移动端 H5：概览、规范、7 个 Skill、@robot-h5/core
-│   └── mobile-uniapp/      # 移动端 uniApp：基座概览、H5 子应用集成
+│   └── mobile-uniapp/      # 移动端 uniApp：基座、H5/App 集成、消息中心、钉钉
+│
+├── platform/               # 低代码平台用户手册（18 模块 / 426 张截图）
 │
 ├── scaffold/               # 工程脚手架（jh4j-cloud-cli 命令文档）
 │
@@ -149,6 +151,10 @@ npx @agile-team/jh4j-cloud-cli doctor
 ```
 
 支持模板直选（PC/移动端）、快速/自定义双模式创建、GitHub→Gitee 主备源容灾、模板缓存、事务化生成与失败恢复。详见 [工程脚手架文档](/scaffold/)。
+
+## 低代码平台用户手册
+
+FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基础配置 / 权限菜单 / 流程人事 / 低代码开发 / 运维监控），含 426 张操作截图（托管于阿里云 OSS）。详见 [平台手册](/platform/)。
 
 ## 后端 Skills 集合（v0.0.1 骨架）
 
