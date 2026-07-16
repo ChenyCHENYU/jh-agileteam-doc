@@ -1,5 +1,7 @@
 # 基础服务
 
+
+![云原生](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/10.png)
 > 平台的应用基础设施，包括微服务、云原生和 CICD。
 
 ---
@@ -12,34 +14,52 @@
 
 服务治理是所有服务的统一管理中心，通过容器化集群部署实现服务中心高可用。服务中心维护所有服务的状态信息，调用服务与服务中心交互获得可用服务实例。
 
+
+![远程配置](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/01.png)
 ### 远程配置
 
 远程配置中心保证多个环境之间的配置一致性，支持配置的动态变化，可以实时推送最新配置到集群实例，实例无需重启服务就实现配置异动。
 
+
+![链路追踪](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/02.png)
 ### 链路追踪
 
 通过网络拓扑图展示所有服务之间的调用关系，分析核心服务与边缘服务。当单个请求链路过长、响应慢时，通过链路分析定位问题节点。
 
+
+![流量控制](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/03.jpeg)
 ### 流量控制
 
 从流量控制、熔断降级、系统负载保护等多个维度保护服务稳定性，防止因某个服务不可用引发服务雪崩。
 
+
+![服务监控](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/04.png)
 ### 服务监控
 
 实时查看各个服务的状态，通过采集 actuator 健康信息实现 JVM、内存、线程等监控信息可视化。可用于线上排查配置不一致、内存溢出、线程池过大等问题。
 
+
+![消息队列](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/05.png)
 ### 消息队列
 
 平台使用 RocketMQ 作为消息队列，通过发布-订阅消息模型实现异步、削峰、解耦，提高系统并发处理能力和稳定性。
 
+
+![分布式日志](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/06.png)
 ### 分布式日志
 
 使用 log4j2 高性能日志组件实现日志记录，通过 lombok 插件简化开发。服务端部署 fluentd 收集日志并推送至 elasticsearch 搜索引擎。
 
+
+
+![分布式调度](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/08.png)
+![分布式调度](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/07.png)
 ### 分布式调度
 
 支持分布式场景下的任务调度，可视化配置，支持多种路由策略、任务处理策略、故障策略等。
 
+
+![分布式事务](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/09.png)
 ### 分布式事务
 
 支持 AT、TCC、SAGA 和 XA 多种事务模式。对性能要求不高但开发效率要求高时使用 AT 模式，一个注解即可实现分布式事务控制。
@@ -52,10 +72,14 @@
 
 采用容器技术部署，编写服务编排文件对微服务模块进行部署，部署到 Kubernetes 集群。支持可视化操作和无感知发布，具有自我恢复、滚动更新、负载均衡等功能。
 
+
+![弹性伸缩](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/11.jpeg)
 ### 弹性伸缩
 
 根据系统并发情况通过可视化操作对某个服务进行快速扩容，扩容后服务自动被微服务集群注册发现并提供服务。
 
+
+![网络隔离](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/base-services/12.jpeg)
 ### 网络隔离
 
 将容器网络与宿主机网络进行有效隔离，建立覆盖网络保障集群间通信。外界必须通过网关进行流量转发、认证鉴权才可到达微服务模块。

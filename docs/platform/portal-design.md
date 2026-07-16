@@ -1,3 +1,11 @@
+
+![设计](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/06.png)
+![如3.7.2门户页组件中所描述当拖动组件类型为系统内置组件时...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/09.png)
+![背景配置](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/10.png)
+
+
+![补充](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/07.png)
+
 # 门户页设计
 
 > 系统管理 → 低代码 → 门户页设计
@@ -43,3 +51,16 @@
 2. 拖拽门户组件到画布
 3. 配置组件数据源和样式
 4. 预览并保存发布
+
+
+
+![新增](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/08.png)
+![新增](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/05.png)
+![新增](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/01.png)
+![设计页面](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/02.png)
+![模板市场的页面设计与平台页面设计方式一致，也可以通过页面左侧...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/03.png)
+![门户页组件](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/04.png)
+
+![分享](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/11.png)
+
+![可视化大屏](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/portal-design/12.png)

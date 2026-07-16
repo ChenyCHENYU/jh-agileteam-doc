@@ -48,3 +48,15 @@
   ↓ 实时渲染
   ↓ 交互联动（筛选器 → 重新请求 → 刷新图表）
 ```
+
+![操作说明](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/dashboard/01.png)
+
+![分类管理](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/dashboard/02.png)
+
+![图片上传](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/dashboard/03.png)
+
+![菜单功能](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/dashboard/04.png)
+
+![导航栏](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/dashboard/05.png)
+
+![图层](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/dashboard/06.png)

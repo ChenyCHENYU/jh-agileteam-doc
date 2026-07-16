@@ -38,3 +38,36 @@
 ### 导出应用
 
 将当前平台中的业务模块打包导出为应用包，供其他平台实例安装。
+
+
+![一个应用是指可以导出给其他项目运行的程序，他可以是一个项目，...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/02.png)
+![一个应用是指可以导出给其他项目运行的程序，他可以是一个项目，...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/01.png)
+
+![登录系统后，若已切换到对应的应用，添加菜单时，默认使用当前选...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/03.png)
+
+![创建应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/04.png)
+
+
+
+![在此过程中，创建了页面、模型、接口、权限等操作。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/07.png)
+![在此过程中，创建了页面、模型、接口、权限等操作。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/06.png)
+![在此过程中，创建了页面、模型、接口、权限等操作。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/05.png)
+
+
+
+![导出应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/10.png)
+![导出应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/09.png)
+![导出应用数据](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/08.png)
+
+
+![小技巧：](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/12.png)
+![小技巧：](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/11.png)
+
+![导入事件发出后，可以查看日志信息，查看导入情况；导入完成后，...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/13.png)
+![若导入数据有误，可以点击恢复，恢复到导入之前的数据，状态将置...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/14.png)
+
+![老数据源分为三个部分 数据连接 类型和用户名称](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/15.png)
+
+
+![老数据源选择方式参见数据源详情上面描述](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/17.png)
+![老数据源选择方式参见数据源详情上面描述](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/app-market/16.png)

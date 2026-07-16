@@ -8,6 +8,12 @@
 
 ## 操作流程
 
+### 页面入口
+
+![快速搭建页面入口](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/01.png)
+
+系统入口为：系统管理 → 低代码 → 快速搭建。主要功能为新增菜单，使用现有或新增的模型快速搭建页面或审批流。
+
 ### 1. 选择应用
 
 选择需要搭建的页面所在应用，根据应用在左侧树中查询出该应用关联的所有子系统。
@@ -24,9 +30,13 @@
 
 点击新增按钮，录入弹框中的页面基本信息，点击确认后会在菜单下生成一条页面基本信息数据。可对该数据进行**设计、编辑、绑定菜单、绑定模型、删除**操作。
 
+![新建页面](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/02.png)
+
 ### 5. 设计业务
 
 选择页面基础信息数据，点击设计按钮进入设计页面。设计分为 **4 个步骤**：
+
+![设计页面](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/03.png)
 
 ```text
 基础信息 → 模型信息 → 页面设计 → 审批流（需在模型信息中开启审批流）
@@ -34,10 +44,14 @@
 
 #### 步骤一：基础信息
 
+![基础信息](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/04.png)
+
 - **模板类型**：页面生成或使用的模型类型（单表模型 / 关系模型），对应低代码目录中的「模型管理」和「关系模型」菜单
 - **程序编码 / 程序名称**：新建页面时录入的数据，可在此修改
 
 #### 步骤二：模型信息
+
+![模型信息](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/05.png)
 
 | 配置项 | 说明 |
 |--------|------|
@@ -49,9 +63,13 @@
 
 **新增字段**：点击新增字段按钮，右侧弹出字段维护抽屉，维护字段相关信息。
 
+![新增字段](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/06.png)
+
 **提交并执行 SQL**：生成数据库表及模型相关接口。接口可在系统管理 → 权限设置 → 接口管理中查询测试。
 
 #### 步骤三：页面设计
+
+![页面设计](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/07.png)
 
 - **快速创建**：进入后系统提示是否自动生成页面，点击「是」自动生成默认页面，可在此基础上修改
 - **大纲树**：整个页面的构成树形大纲
@@ -63,6 +81,8 @@
 - **保存**：保存发布页面
 
 #### 步骤四：审批流（可选）
+
+![审批流设计](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/08.png)
 
 需在模型信息中勾选审批流才显示：
 
@@ -77,6 +97,8 @@
 ### 提示编码已存在
 
 模型编码对应表名，如果模型已存在，可以在快速搭建页面**绑定模型**。
+
+![绑定模型](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/quick-start/09.png)
 
 ### 提示引导程序已存在
 

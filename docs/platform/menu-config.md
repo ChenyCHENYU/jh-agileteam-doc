@@ -2,6 +2,8 @@
 
 > 系统入口：系统管理 → 菜单程序配置
 
+
+![菜单管理](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/05.png)
 菜单是平台内部进行功能管理的入口，包含领域管理、子系统管理、菜单管理和独立页面。
 
 ---
@@ -14,8 +16,14 @@
 
 | 操作 | 说明 |
 |------|------|
+
+![新增领域](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/01.png)
+![填写相关信息后点击确定即可新增领域。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/02.png)
+
 | 新增领域 | 填写信息后点击确定 |
 | 编辑领域 | 修改信息、控制领域隐藏 |
+![可对领域的信息进行修改，控制领域的隐藏等。](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/03.png)
+
 | 导入导出 | 领域自动随应用导入导出，无需特殊操作 |
 
 ---
@@ -26,6 +34,8 @@
 
 子系统是平台提供的系统描述总称，也是菜单入口。新建子系统并挂上菜单后，具有系统菜单权限的用户可在首页看到系统入口。
 
+
+![字段](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/09.png)
 ### 字段说明
 
 | 字段 | 说明 |
@@ -71,3 +81,18 @@
 | 一级路由 | 仅配置组件路径时，生成一级路由页面 |
 | 二级路由 | 同时配置组件路径与二级路由组件路径时，生成嵌套路由结构 |
 | 删除 | 删除后页面路由访问失效 |
+
+![修改管理](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/04.png)
+
+![编辑管理](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/06.png)
+
+![菜单编辑框：](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/07.png)
+![动作编辑框：](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/08.png)
+
+![列表字段包括：领域、路径、是否白名单、菜单名称、组件路径及操...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/10.png)
+
+![一级路由预览效果](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/11.png)
+
+![二级路由预览效果](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/12.png)
+
+![删除独立页面](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/menu-config/13.png)

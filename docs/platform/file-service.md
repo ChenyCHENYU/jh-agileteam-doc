@@ -2,6 +2,8 @@
 
 > 系统管理 → 文件服务
 
+
+![文件管理](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/file-service/01.png)
 文件服务提供文件索引管理和文件管理能力。
 
 ---
@@ -36,3 +38,11 @@
 | 上传文件 | 支持拖拽上传、多文件上传 |
 | 预览/下载 | 在线预览图片/文档，下载文件 |
 | 删除文件 | 删除文件（同时清理索引） |
+
+![该页面列出系统所有文件，文件分类表示业务类型（relativ...](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/file-service/02.png)
+
+![逻辑删除](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/file-service/03.png)
+
+![批量授权](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/file-service/04.png)
+
+![2.4文件检索](https://cheny-chenyu.oss-cn-chengdu.aliyuncs.com/jh/platform/file-service/05.png)
