@@ -44,9 +44,11 @@ const handleMouseLeave = (event: MouseEvent) => {
         </div>
 
         <div class="member-info">
-          <h3 class="member-name">{{ member.name }}</h3>
+          <div class="member-name-row">
+            <h3 class="member-name">{{ member.name }}</h3>
+            <span v-if="member.employeeId" class="member-id">#{{ member.employeeId }}</span>
+          </div>
 
-          <p v-if="member.spotlight" class="member-spotlight">{{ member.spotlight }}</p>
           <p v-if="member.bio" class="member-bio">{{ member.bio }}</p>
 
           <div v-if="member.skills?.length" class="member-skills">
