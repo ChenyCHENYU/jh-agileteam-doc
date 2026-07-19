@@ -156,9 +156,9 @@ npx @agile-team/jh4j-cloud-cli doctor
 
 FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基础配置 / 权限菜单 / 流程人事 / 低代码开发 / 运维监控），含 426 张操作截图（托管于阿里云 OSS）。详见 [平台手册](/platform/)。
 
-## 后端 Skills 集合（v0.0.1 骨架）
+## 后端 Skills 集合（v0.16.0）
 
-`@agile-team/wl-skills-bd`：9 个核心 Skill，覆盖接口设计 → 代码生成 → DDL → 单测 → 规范审计全链路，与前端 Skills 三包协作。
+`@agile-team/wl-skills-bd`：16 个 MCP 工具 + 9 个核心 Skill，覆盖契约驱动代码生成、质量门、MCP、数据安全护栏、行为契约测试全链路，与前端 Skills 三包协作。
 
 ---
 

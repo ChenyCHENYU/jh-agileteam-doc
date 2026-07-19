@@ -1,7 +1,7 @@
 # 使用指南
 
 ::: warning ⚠️ 本页已迁移
-本页内容已过期并迁移至 **[前端 PC 端 Skills — 使用指南](/frontend/pc/skills/usage-guide)**（对应 `@agile-team/wl-skills-kit` v2.11.8）。请前往新位置查看最新内容。
+本页内容已过期并迁移至 **[前端 PC 端 Skills — 使用指南](/frontend/pc/skills/usage-guide)**（对应 `@agile-team/wl-skills-kit` v2.13.0）。请前往新位置查看最新内容。
 :::
 
 ## 工作流 A：Axure 原型 -> 代码（最常用）

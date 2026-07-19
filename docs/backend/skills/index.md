@@ -2,8 +2,8 @@
 
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
-::: tip � 骨架阶段
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 v0.0.2）正在进行 PoC 验证，当前结构已定、内容持续完善中。
+::: tip � 已落地阶段
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 v0.16.0）正在进行 正式发布，已正式发布，覆盖契约驱动代码生成、质量门、MCP、数据安全护栏、行为契约测试全链路。
 :::
 
 ## 概述
@@ -17,7 +17,7 @@
 ```
 L0  契约层 (api.md)              前端 wl-skills-kit 已产出，前后端共同消费
 L1  接口设计层 (api-design-be)   RESTful 路径 / DTO 字段映射 / 错误码
-L2  代码骨架层 (codegen-be)      Controller / Service / Mapper
+L2  代码已落地层 (codegen-be)      Controller / Service / Mapper
 L3  数据层 (db-migration)        Entity / DDL / 回滚脚本（Oracle/MySQL）
 L4  质量层 (test + audit + fix)  单测 / 集成测试 / 审计 / 修复
 ```
@@ -50,15 +50,15 @@ L4  质量层 (test + audit + fix)  单测 / 集成测试 / 审计 / 修复
 
 | # | Skill | 触发词 | 状态 |
 |---|-------|--------|------|
-| ① | `api-design-be` | 接口设计 / 接口审查 / RESTful 校验 / 字段映射 / 错误码 | 🟡 骨架 |
-| ② | `entity-codegen` | 生成实体 / Entity / DTO / VO / Query / 数据模型 | 🟡 骨架 |
-| ③ | `service-codegen` | 生成服务 / Controller / 写后端 / 后端代码生成 / 按 api.md 生成 | 🟡 骨架 |
-| ④ | `mapper-xml-gen` | Mapper XML / SQL / 动态查询 / 分页 SQL / 批量 SQL | 🟡 骨架 |
-| ⑤ | `convention-audit-be` | 后端审计 / 后端规范检查 / 分层违规 / 后端体检 | 🟡 骨架 |
-| ⑥ | `business-doc-extract-be` | 后端业务沉淀 / 接口语义整理 / 领域模型提取 | 🟡 骨架 |
-| ⑦ | `db-migration` | DDL / 建表 / 改表 / 加字段 / 迁移脚本 / 回滚脚本 | 🟡 骨架 |
-| ⑧ | `unit-test-gen` | 单元测试 / 集成测试 / 接口测试 / 单测生成 | 🟡 骨架 |
-| ⑨ | `code-fix-be` | 修复后端偏差 / 后端 code fix / 按审计报告整改 | 🟡 骨架 |
+| ① | `api-design-be` | 接口设计 / 接口审查 / RESTful 校验 / 字段映射 / 错误码 | ✅ 已落地 |
+| ② | `entity-codegen` | 生成实体 / Entity / DTO / VO / Query / 数据模型 | ✅ 已落地 |
+| ③ | `service-codegen` | 生成服务 / Controller / 写后端 / 后端代码生成 / 按 api.md 生成 | ✅ 已落地 |
+| ④ | `mapper-xml-gen` | Mapper XML / SQL / 动态查询 / 分页 SQL / 批量 SQL | ✅ 已落地 |
+| ⑤ | `convention-audit-be` | 后端审计 / 后端规范检查 / 分层违规 / 后端体检 | ✅ 已落地 |
+| ⑥ | `business-doc-extract-be` | 后端业务沉淀 / 接口语义整理 / 领域模型提取 | ✅ 已落地 |
+| ⑦ | `db-migration` | DDL / 建表 / 改表 / 加字段 / 迁移脚本 / 回滚脚本 | ✅ 已落地 |
+| ⑧ | `unit-test-gen` | 单元测试 / 集成测试 / 接口测试 / 单测生成 | ✅ 已落地 |
+| ⑨ | `code-fix-be` | 修复后端偏差 / 后端 code fix / 按审计报告整改 | ✅ 已落地 |
 
 ## 14 条后端规范
 
@@ -97,7 +97,7 @@ L4  质量层 (test + audit + fix)  单测 / 集成测试 / 审计 / 修复
 
 | 阶段 | 目标 | 状态 |
 |------|------|------|
-| v0.0.2 | 骨架完善：14 条 standards + 9 个 SKILL 骨架 + pipeline | ✅ 完成 |
+| v0.16.0 | 已落地完善：14 条 standards + 9 个 SKILL 已落地 + pipeline | ✅ 完成 |
 | v0.1.x | PoC：跑通 mdm-service 一个真实模块 ②→⑨ 全链路 | 🎯 进行中 |
 | v0.2.x | CLI `init/update/check/diff/doctor` 实现 + npm 发布 | 🔜 规划中 |
 | v0.3.x | MCP 集成（DB schema / Git diff / 飞书任务）| 🔜 规划中 |

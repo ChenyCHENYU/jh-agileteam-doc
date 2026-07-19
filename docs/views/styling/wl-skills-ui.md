@@ -1,6 +1,6 @@
 # @agile-team/wl-skills-ui — 企业级 UI 风格对齐框架
 
-> 版本：v1.8.13 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+> 版本：v1.9.0 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
 
 ---
 

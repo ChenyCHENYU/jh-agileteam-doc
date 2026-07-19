@@ -1,7 +1,7 @@
 # Skill 2：接口约定（api-contract）
 
 ::: warning ⚠️ 本页已迁移
-本页内容已过期并迁移至 **[前端 PC 端 Skills — ④ 接口约定](/frontend/pc/skills/api-contract)**（对应 `@agile-team/wl-skills-kit` v2.11.8）。请前往新位置查看最新内容。
+本页内容已过期并迁移至 **[前端 PC 端 Skills — ④ 接口约定](/frontend/pc/skills/api-contract)**（对应 `@agile-team/wl-skills-kit` v2.13.0）。请前往新位置查看最新内容。
 :::
 
 基于页面清单为每个页面生成 `api.md` 文件，放在**页面目录下**（和 index.vue 同级）。

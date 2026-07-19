@@ -66,7 +66,7 @@ L0 氛围编程（你现在在这）
     │
     └── 快车道：直接用 @agile-team/wl-skills-kit
         npx @agile-team/wl-skills-kit
-        一键导入 14 条规范 + 12 个 Skill + 17 个 MCP Tool
+        一键导入 14 条规范 + 12 个 Skill + 21 个 MCP Tool
         直接跳到 L2/L3 起手
 ```
 

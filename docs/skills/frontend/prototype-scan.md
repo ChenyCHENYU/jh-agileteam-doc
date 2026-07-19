@@ -1,7 +1,7 @@
 # Skill 1：原型扫描（prototype-scan）
 
 ::: warning ⚠️ 本页已迁移
-本页内容已过期并迁移至 **[前端 PC 端 Skills — ① 原型扫描](/frontend/pc/skills/prototype-scan)**（对应 `@agile-team/wl-skills-kit` v2.11.8）。请前往新位置查看最新内容。
+本页内容已过期并迁移至 **[前端 PC 端 Skills — ① 原型扫描](/frontend/pc/skills/prototype-scan)**（对应 `@agile-team/wl-skills-kit` v2.13.0）。请前往新位置查看最新内容。
 :::
 
 将 **Axure 导出的 HTML 原型包** 或 **详细设计文档（MD/Word/表格）** 解析为结构化的 **page-spec JSON 页面清单**，作为后续接口约定和代码生成的输入。

@@ -1,7 +1,7 @@
 # Skill 3：页面代码生成（page-codegen）
 
 ::: warning ⚠️ 本页已迁移
-本页内容已过期并迁移至 **[前端 PC 端 Skills — ⑤ 页面代码生成](/frontend/pc/skills/page-codegen)**（对应 `@agile-team/wl-skills-kit` v2.11.8）。请前往新位置查看最新内容。
+本页内容已过期并迁移至 **[前端 PC 端 Skills — ⑤ 页面代码生成](/frontend/pc/skills/page-codegen)**（对应 `@agile-team/wl-skills-kit` v2.13.0）。请前往新位置查看最新内容。
 :::
 
 基于页面清单 + 原型信息，生成符合项目规范的完整 Vue 3 页面代码。

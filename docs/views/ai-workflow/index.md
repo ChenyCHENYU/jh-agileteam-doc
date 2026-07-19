@@ -8,13 +8,13 @@
 > L1→L4 把每个细节做厚做扎实，L5 把它们串起来，就是全栈开发的工作流全貌。
 > L6 Multi-Agent 则是在工作流基础上引入多智能体并发分工——它是 L5 成熟后的自然演进，而不是跳跃。
 
-把 `prototype-scan → api-contract → page-codegen → convention-audit → menu-sync` 这条前端链路，再加上后端 `api-design-be → service-codegen → unit-test-gen → convention-audit-be`，最终形成**前后端全栈 AI 工作流**。当前阶段：前端链路 🟡 践行中，后端链路 🟡 骨架验证中。
+把 `prototype-scan → api-contract → page-codegen → convention-audit → menu-sync` 这条前端链路，再加上后端 `api-design-be → service-codegen → unit-test-gen → convention-audit-be`，最终形成**前后端全栈 AI 工作流**。当前阶段：前端链路 🟡 践行中，后端链路 ✅ 已正式发布。
 
 ---
 
 ## 前端开发工作流
 
-基于 `@agile-team/wl-skills-kit`（v2.11.8），当前已全面践行：
+基于 `@agile-team/wl-skills-kit`（v2.13.0），当前已全面践行：
 
 ```
 ① 详细设计（详设文档 / Axure 标注 / 口述需求）
@@ -53,7 +53,7 @@
 
 ## 后端开发工作流
 
-基于 `@agile-team/wl-skills-bd`（v0.0.2 骨架，PoC 验证中）：
+基于 `@agile-team/wl-skills-bd`（v0.16.0 正式版）：
 
 ```
 ① api.md（前端 api-contract 产出，或产品 input-spec）

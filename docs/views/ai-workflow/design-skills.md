@@ -1,6 +1,6 @@
 # @agile-team/wl-skills-design — 产品设计 AI 技能包
 
-> 版本：v0.7.0 · 9 条设计规范 + 8 个 AI Skill + 15 个 Copilot Prompt，支持 10 种 AI 编辑器
+> 版本：v0.8.0 · 9 条设计规范 + 8 个 AI Skill + 15 个 Copilot Prompt，支持 10 种 AI 编辑器
 
 ---
 

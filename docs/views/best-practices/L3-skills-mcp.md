@@ -76,7 +76,7 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 
 **在 wl-skills-kit 中**：MCP Server（`mcp/` 目录）注册了一系列工具，AI 在执行 Skill 时直接调用这些工具，无需人工复制粘贴接口结果。
 
-## 前端示例 — 已实现的 17 个 MCP Tools
+## 前端示例 — 已实现的 21 个 MCP Tools
 
 | 类别 | Tool | 能力 | 关联 Skill |
 |------|------|------|-----------|

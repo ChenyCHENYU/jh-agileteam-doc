@@ -1,6 +1,6 @@
 # AI 辅助开发全景分析
 
-> 基于 `@agile-team/wl-skills-kit` v2.11.8 架构梳理，更新日期：2026-06-27
+> 基于 `@agile-team/wl-skills-kit` v2.13.0 架构梳理，更新日期：2026-06-27
 
 <AuthorTag :authors="['CHENY']" />
 
@@ -62,7 +62,7 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | L6 | 高（多 Agent） | 高 | ⚠️ 编排复杂 | 高 | 并发 + 专业化 |
 | L7 | — | — | — | 极高 | 体系自优化 |
 
-## 当前项目位置（v2.11.8）
+## 当前项目位置（v2.13.0）
 
 | 层级 | 状态 | 说明 |
 |------|------|------|
@@ -76,7 +76,7 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | L7 自演化体系 | 🔭 终极形态 | 需 L5 稳定 + 审计报告 ≥ 50 份 + 模板提取 ≥ 3 次 |
 
 
-## 已实现的 17 个 MCP Tools
+## 已实现的 21 个 MCP Tools
 
 | 类别 | Tool | 能力 | 关联 Skill |
 |------|------|------|----------|
@@ -120,7 +120,7 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 
 - [L0 — 氛围编程](./L0-vibe)
 - [L2 — Skill](./L2-skill) — 12 个 Skill 详情
-- [L3 — MCP](./L3-skills-mcp) — 17 个 MCP Tool 详情
+- [L3 — MCP](./L3-skills-mcp) — 21 个 MCP Tool 详情
 - [L5 — Agent Pipeline](./L5-agent-pipeline) — Pipeline 协议与运行手册
 - [L6 — Multi-Agent 协同](./L6-multi-agent) — 多智能体分工设计
 
