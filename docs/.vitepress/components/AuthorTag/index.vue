@@ -217,7 +217,7 @@ const displayEmployeeId = computed(() => getDisplayEmployeeId(authorInfo.value))
 
 // 显示的部门：优先使用传入的 department，其次使用预定义的，最后使用默认值
 const getDisplayDepartment = (author: Author) => {
-  return props.department || author.department || "信息化部";
+  return props.department || author.department || "默认部门";
 };
 
 const displayDepartment = computed(() => getDisplayDepartment(authorInfo.value));

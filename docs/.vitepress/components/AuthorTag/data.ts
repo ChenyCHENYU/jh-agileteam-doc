@@ -36,7 +36,7 @@ export interface AuthorTagProps {
   role?: string;
   /** 工号（可选，默认 409322） */
   employeeId?: string;
-  /** 所属部门（可选，默认 信息化部） */
+  /** 所属部门（可选，默认 共享技术中心） */
   department?: string;
   /** 是否显示头像 */
   showAvatar?: boolean;
@@ -61,70 +61,70 @@ export const AUTHORS: Record<string, Author> = {
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YangTianGuang",
     role: "高级开发工程师",
     employeeId: "409102",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   ZhuXiang: {
     name: "朱祥",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ZhuXiang",
     role: "高级开发工程师",
     employeeId: "025877",
-    department: "研究院",
+    department: "平台室",
   },
   XieFei: {
     name: "谢飞",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=XieFei",
     role: "高级开发工程师",
     employeeId: "026789",
-    department: "信息化中心",
+    department: "平台室",
   },
   MaJiaRui: {
     name: "马佳瑞",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=SophiaLady",
     role: "开发工程师",
     employeeId: "409338",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   ZhongYu: {
     name: "仲于",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ZhongYu",
     role: "高级开发工程师",
     employeeId: "026397",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   XuQingYu: {
     name: "胥庆玉",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=LongHair06&beardProbability=0",
     role: "高级开发工程师",
     employeeId: "026117",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   ZhaoBaoShan: {
     name: "赵保山",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=choice008",
     role: "开发工程师",
     employeeId: "409345",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   YinHua: {
     name: "尹华",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YinHua",
     role: "开发工程师",
     employeeId: "028129",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   ZhangXiang: {
     name: "张祥",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_ZhangXiang",
     role: "高级开发工程师",
     employeeId: "026828",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   DaiAn: {
     name: "戴安",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_DaiAn",
     role: "高级开发工程师",
     employeeId: "026827",
-    department: "信息化中心",
+    department: "共享技术中心",
   },
   ZhangJie: {
     name: "张杰",
@@ -137,7 +137,8 @@ export const AUTHORS: Record<string, Author> = {
     name: "潘超越",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=PanChaoYue",
     role: "开发工程师",
-    department: "信息化中心",
+    employeeId: "409332",
+    department: "共享技术中心",
   },
 };
 
