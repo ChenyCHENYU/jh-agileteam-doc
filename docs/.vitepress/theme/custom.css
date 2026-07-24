@@ -282,26 +282,26 @@ html {
 }
 
 /* ================================================================
-   Table — 表格列宽自适应 + 表头渐变 + hover 行高亮
-   VitePress 默认 table 用 display:block 限死宽度导致列宽硬挤。
-   改为 display:table + width:100% 让列宽按内容自动分配。
-   超宽表格仍有 overflow-x:auto 横向滚动兜底。
+   Table — 表格始终约束在正文区域内
+   保留 block 滚动容器，避免宽表格侵入右侧页面导航。
+   单元格默认允许换行；确实无法压缩的内容只在表格内部横向滚动。
    ================================================================ */
 .vp-doc table {
-  display: table !important;
+  display: block !important;
   width: 100% !important;
+  max-width: 100% !important;
   table-layout: auto !important;
+  overflow-x: auto !important;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
-/* 短内容列（如状态、编号）自动收窄，长内容列（如说明）自动撑开 */
+/* 不假设说明列一定在最后一列，所有单元格均可按正文宽度自然换行 */
 .vp-doc table th,
 .vp-doc table td {
-  white-space: nowrap;
-}
-.vp-doc table td:last-child,
-.vp-doc table th:last-child {
   white-space: normal;
-  min-width: 200px;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .vp-doc table th {
