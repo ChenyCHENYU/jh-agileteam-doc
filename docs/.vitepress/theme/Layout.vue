@@ -20,6 +20,64 @@ onMounted(() => {
 const router = useRouter()
 const isNavigating = ref(false)
 
+const compactTableHeaders = new Set([
+  '层级',
+  '状态',
+  '序号',
+  '编号',
+  '名称',
+  '属性名',
+  '方法名',
+  '事件名',
+  '参数',
+  '类型',
+  '默认值',
+  '返回值',
+  '必填',
+  '版本',
+  '数量',
+  '操作'
+])
+
+const optimizeDocumentTables = () => {
+  document.querySelectorAll<HTMLTableElement>('.vp-doc table').forEach((table) => {
+    table.querySelectorAll('.is-compact-column').forEach((cell) => {
+      cell.classList.remove('is-compact-column')
+    })
+
+    const headers = Array.from(table.querySelectorAll<HTMLTableCellElement>('thead th'))
+    const rows = Array.from(table.querySelectorAll<HTMLTableRowElement>('tbody tr'))
+
+    headers.forEach((header, columnIndex) => {
+      const cells = rows
+        .map((row) => row.children.item(columnIndex))
+        .filter((cell): cell is Element => cell !== null)
+
+      const headerText = header.textContent?.replace(/\s+/g, '') ?? ''
+      const allCellsAreShort = cells.length > 0 && cells.every((cell) => {
+        const text = cell.textContent?.replace(/\s+/g, ' ').trim() ?? ''
+        const hasComplexContent = cell.querySelector('ul, ol, pre, br') !== null
+        return !hasComplexContent && text.length <= 12
+      })
+
+      if (compactTableHeaders.has(headerText) || allCellsAreShort) {
+        const compactCells = [header, ...cells]
+        compactCells.forEach((cell) => {
+          cell.classList.add('is-compact-column')
+        })
+      }
+    })
+  })
+}
+
+const scheduleTableOptimization = () => {
+  nextTick(() => {
+    requestAnimationFrame(optimizeDocumentTables)
+  })
+}
+
+onMounted(scheduleTableOptimization)
+
 watch(
   () => router.route.path,
   () => {
@@ -32,6 +90,7 @@ watch(
         isNavigating.value = false
       }, 350)
     })
+    scheduleTableOptimization()
   }
 )
 </script>

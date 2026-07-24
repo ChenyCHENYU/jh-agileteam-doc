@@ -300,8 +300,23 @@ html {
 .vp-doc table th,
 .vp-doc table td {
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   word-break: normal;
+  vertical-align: middle;
+}
+
+.vp-doc table th,
+.vp-doc table .is-compact-column {
+  white-space: nowrap;
+}
+
+.vp-doc table .is-compact-column {
+  width: 1%;
+  overflow-wrap: normal;
+}
+
+.vp-doc table .is-compact-column code {
+  white-space: nowrap;
 }
 
 .vp-doc table th {
