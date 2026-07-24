@@ -94,7 +94,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_YangTianGuang",
     role: "高级开发工程师",
     employeeId: "409102",
-    department: "共享技术中心",
+    department: "信息化中心",
     bio: "穷则独善其身，达则兼济天下。",
     skills: ["生产"],
   },

@@ -61,7 +61,7 @@ export const AUTHORS: Record<string, Author> = {
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YangTianGuang",
     role: "高级开发工程师",
     employeeId: "409102",
-    department: "共享技术中心",
+    department: "信息化中心",
   },
   ZhuXiang: {
     name: "朱祥",
