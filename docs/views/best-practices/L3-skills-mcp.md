@@ -76,14 +76,17 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 
 **在 wl-skills-kit 中**：MCP Server（`mcp/` 目录）注册了一系列工具，AI 在执行 Skill 时直接调用这些工具，无需人工复制粘贴接口结果。
 
-## 前端示例 — 已实现的 21 个 MCP Tools
+## 前端示例 — 已实现的 23 个 MCP Tools
 
 | 类别 | Tool | 能力 | 关联 Skill |
 |------|------|------|-----------|
+| 菜单 | `wls_domain_query` | 查询业务域 | menu-sync / dict-sync 前置 |
 | 菜单 | `wls_menu_query` | 查询完整菜单树 | menu-sync 前置读取 |
 | 菜单 | `wls_menu_upsert` | 批量新增/更新菜单 | menu-sync 执行 |
+| 菜单 | `wls_menu_delete` | 删除菜单 | menu-sync |
 | 菜单 | `wls_menu_sync_from_report` | 从报告文件确定性同步菜单 | menu-sync |
 | 字典 | `wls_dict_query` | 查询字典模块 | dict-sync 前置读取 |
+| 字典 | `wls_dict_bootstrap` | 字典基线拉取/对齐 | dict-sync |
 | 字典 | `wls_dict_upsert` | 新增/更新字典 | dict-sync 执行 |
 | 权限 | `wls_role_query` | 查询角色列表 | permission-sync |
 | 权限 | `wls_role_upsert` | 批量新增角色（按 code 去重） | permission-sync |
@@ -96,6 +99,9 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 | 项目感知 | `wls_validate_page` | 校验页面 AGGrid/cid/api.md/mock/操作列等 | convention-audit |
 | 项目感知 | `wls_doctor_ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | 全局 |
 | 项目感知 | `wls_git_log_extract` | 提取近期 Git 提交摘要 | changelog-gen |
+| 环境配置 | `wls_standard_env_scan` | 扫描环境变量偏差 | standard-env |
+| 环境配置 | `wls_standard_env_apply` | 应用环境配置计划（需确认） | standard-env |
+| 环境配置 | `wls_standard_env_verify` | 验证环境配置一致性 | standard-env |
 | 通知 | `wls_audit_report_push` | 推送审计报告到飞书 webhook（可选） | convention-audit |
 
 > 效果量化：菜单同步 token 节省约 **87%**，从 20 分钟 10 次手动操作 → **1 分钟 0 次手动操作**。权限同步原本需切换 3 个后台界面 ≥ 15 分钟，现在 **1 分钟 0 次手动操作**。

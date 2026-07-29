@@ -1,6 +1,6 @@
 # 前端 Skills 概述
 
-前端 Skills 基于 `@agile-team/wl-skills-kit` v2.13.0 — 一条命令，将 **14 条编码规范、12 个 AI Skill、21 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Kiro / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
+前端 Skills 基于 `@agile-team/wl-skills-kit` v2.13.9 — 一条命令，将 **14 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Kiro / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
 
 ## 快速开始
 
@@ -30,7 +30,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 | 类别              | 数量  | 说明                                                                         |
 | ----------------- | ----- | ---------------------------------------------------------------------------- |
 | **AI Skills**     | 12 个 | prototype-scan / spec-doc-parse / api-contract / page-codegen / business-doc-extract / menu-sync / dict-sync / permission-sync / convention-audit / template-extract / code-fix / env-config |
-| **MCP Tools**     | 17 个 | 菜单/字典/权限/代码扫描/路由检查/页面校验/UI诊断/Git日志/审计报告推送等      |
+| **MCP Tools**     | 23 个 | 菜单(含 domain_query/menu_delete)/字典/权限/代码扫描/路由检查/页面校验/UI诊断/Git日志/审计报告推送等      |
 | **编码规范**      | 14 条 | 模块化规范（01-工具链 ~ 14-布局容器），AI 自动门控加载                       |
 | **页面模板**      | 9 种  | LIST / FORM_ROUTE / MASTER_DETAIL / TREE_LIST / DETAIL_TABS 等               |
 | **组件 API 文档** | 12 个 | jh-select / jh-date / jh-drag-row / jh-pagination 等                         |

@@ -49,7 +49,7 @@ CLI 能力
 
 > **核心特征**：极简 Token（不需要 AI 推理）、零人工干预、可 CI/CD 集成。是整个 AI 体系中**可预测性最高**的一层。
 
-## 已实现的 11 条命令（v2.13.0）
+## 已实现的 14 条命令（v2.13.9）
 
 ```bash
 # 全量安装（默认）
@@ -90,6 +90,18 @@ wl-skills export
 # 清理 mock 文件（保留 _utils.ts）
 wl-skills mock-clean --domain mdata
 wl-skills mock-clean --all
+
+# 前后端 API 契约（profile / init / validate / compare / render）
+wl-skills contract validate
+wl-skills contract compare --strict
+
+# 标准业务组件治理（list / check / ensure）
+wl-skills component list
+wl-skills component ensure
+
+# 环境标准化（scan / plan / apply / verify）
+wl-skills standard-env scan
+wl-skills standard-env apply --confirm
 ```
 
 > 全局安装后也可直接用 `wl-skills` 命令（如 `wl-skills update`）。
@@ -109,6 +121,9 @@ wl-skills mock-clean --all
 | `doctor-ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | UI 体检 |
 | `export` | 导出菜单/字典/权限基线 xlsx | 交付/归档 |
 | `mock-clean` | 按域或全量清理 mock 文件（保留 `_utils.ts`） | 切换/清理 Mock 数据 |
+| `contract` | 前后端 API 契约：profile / init / validate / compare / render | 契约同源对齐 |
+| `component` | 标准业务组件治理：list / check / ensure（写锁 + 去重） | 组件一致性 |
+| `standard-env` | 环境标准化：scan / plan / apply / verify（取代 `env`） | 环境收口 |
 | `--dry-run` | 预览模式，不实际写入任何文件 | 确认变更范围 |
 | `--keep-reports` | clean 时额外保留 `reports/` | 保护菜单/字典积累数据 |
 

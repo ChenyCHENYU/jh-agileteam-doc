@@ -1,17 +1,17 @@
 # wl-skills-kit 工具
 
 ::: tip 这是哪个 CLI？
-本页讲的是 **Skills 体系安装器** `@agile-team/wl-skills-kit`（`init / update / validate / fix / clean` 等 11 个子命令），用于把规范、Skill、组件文档导入**已有项目**。
+本页讲的是 **Skills 体系安装器** `@agile-team/wl-skills-kit`（`init / update / validate / fix / clean` 等 14 个子命令），用于把规范、Skill、组件文档导入**已有项目**。
 从零**创建新项目**用的是另一个工具 —— 项目脚手架 [`@agile-team/jh4j-cloud-cli`](/scaffold/)（命令 `jh4j create`）。
 :::
 
-`@agile-team/wl-skills-kit`（v2.13.0）提供 11 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
+`@agile-team/wl-skills-kit`（v2.13.9）提供 14 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
 
 ## 命令速查
 
 | 命令 | 用途 |
 |------|------|
-| `init`（默认） | 全量安装（14 规范 + 12 Skill + 17 MCP + 10 编辑器配置 + 组件文档） |
+| `init`（默认） | 全量安装（14 规范 + 12 Skill + 23 MCP + 10 编辑器配置 + 组件文档） |
 | `update` | 增量更新（MD5 比对，仅覆盖变化文件，保护 reports/） |
 | `check` | 环境预检（Node / 工具链 / MCP / manifest） |
 | `diff` | 对比已安装文件与最新 kit 版本差异 |
@@ -22,6 +22,9 @@
 | `export` | 导出菜单/字典/权限基线为 xlsx |
 | `clean` | 构建前清理（保留 `src/components` + `src/types`） |
 | `mock-clean` | 清理 mock 文件（按域或全量，保留 `_utils.ts`） |
+| `contract` | 前后端 API 契约（profile / init / validate / compare / render） |
+| `component` | 标准业务组件治理（list / check / ensure，含写锁与去重） |
+| `standard-env` | 环境标准化（scan / plan / apply / verify，取代已停用的 `env`） |
 
 > 全局安装后也可直接用 `wl-skills` 命令（如 `wl-skills update`）。
 
