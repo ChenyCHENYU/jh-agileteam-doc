@@ -68,8 +68,10 @@
 ### 钉钉 JSAPI 鉴权与桥接
 
 - 进入子应用时惰性 `dd.config` 签名鉴权（拍照/定位为敏感 API，必须鉴权），按 URL 缓存
-- 52013 签名错误自动重试；非敏感 API（扫码）免鉴权
-- 子应用 iframe 受限无法直调 JSAPI，由基座统一代理，通过 `mbase-bridge` postMessage 桥接回传（拍照/上传/定位/扫码）
+- 非敏感 API（扫码）免鉴权
+- 子应用 iframe 受限无法直调 JSAPI，由基座统一代理
+- **推荐使用跨端媒体 SDK**：子应用加载 `/mbase/sdk/portal-media.js` 后通过 `window.WLPortalMedia.chooseImage / chooseImageAndUpload`（`source: 'camera'|'album'`，支持多图）完成拍摄/相册/上传，跨端一致；原始 `mbase-bridge` postMessage 协议仅作存量兼容与排障
+- 媒体 SDK 详细接入、错误码与验收清单见 [H5 子应用集成方案](./integration#六-桥接通信协议)，钉钉 SSO / JSAPI 鉴权 / 真机调试见 [钉钉集成方案](./dingtalk)
 
 ### HTTP 请求层
 
@@ -262,6 +264,7 @@ wl-mbase/
 | `getDingTalkAuthCode()`      | 获取免登 authCode                      |
 | `dingtalkTakePhoto()` / `dingtalkChooseImage()` | 拍照 / 选图（含 iOS 降级） |
 | `dingtalkTakePhotoAndUpload()` | 拍照直传后端                         |
+| `dingtalkChooseImageAndUpload()` | 选图直传后端（`source: 'camera'\|'album'`） |
 | `dingtalkGetLocation()`      | 定位（gcj02，需鉴权）                  |
 | `dingtalkScan()`             | 扫一扫（免鉴权）                       |
 | `getDingTalkDebugInfo()`     | 签名诊断信息                           |
@@ -277,8 +280,10 @@ wl-mbase/
 | 智慧安全 | `/mbase/aq` | 安全生产管理系统 | 拍照/上传/定位      |
 | 智慧安防 | `/mbase/af` | 安防监控管理系统 | 拍照/上传/定位/扫码 |
 | 智慧环保 | `/mbase/hb` | 环保监测管理系统 | -                   |
+| 智慧设备 | `/mbase/sb` | 设备管理系统     | 拍照/上传/定位/扫码 |
+| 智慧营销 | `/mbase/xs` | 营销管理系统     | 按需接入            |
 
-> `mpPath` 运行时与 `VITE_DOMAIN` 动态拼接，切换环境只改 env 文件。新增子应用时必须同步维护 `src/config/portal-apps.ts` 与 `public/relay.html` 的消息跳转白名单。
+> 智慧营销仅配置 `platforms: ['h5']`，用于钉钉和普通 H5 调试，不会出现在微信小程序或 App 工作台。`mpPath` 运行时与 `VITE_DOMAIN` 动态拼接，切换环境只改 env 文件。新增子应用时必须同步维护 `src/config/portal-apps.ts` 与 `public/relay.html` 的消息跳转白名单。
 
 详细集成方案（SSO 免登、消息单点跳转、JSAPI 桥接、访客模式、公司上下文、openid 分发）请参阅 [H5 子应用集成方案](./integration)。
 
@@ -336,3 +341,5 @@ wl-mbase/
 | 智慧安全 H5 | 本地 Vite 代理 `/mbase/aq`  | 子应用，iframe 嵌入 |
 | 智慧安防 H5 | 本地 Vite 代理 `/mbase/af`  | 子应用，iframe 嵌入 |
 | 智慧环保 H5 | 本地 Vite 代理 `/mbase/hb`  | 子应用，iframe 嵌入 |
+| 智慧设备 H5 | 本地 Vite 代理 `/mbase/sb`  | 子应用，iframe 嵌入 |
+| 智慧营销 H5 | 本地 Vite 代理 `/mbase/xs`  | 子应用，iframe 嵌入（仅 H5） |

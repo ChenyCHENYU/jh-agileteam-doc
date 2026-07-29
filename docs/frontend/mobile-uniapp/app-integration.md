@@ -161,8 +161,9 @@ window.addEventListener('mbase:bridge-result', (event: CustomEvent) => {
 | 智慧安全 | ✅ | ✅ | ✅ | ❌ | ✅ |
 | 智慧安防 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 智慧环保 | ❌ | ❌ | ❌ | ❌ | ✅ |
+| 智慧设备 | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-> 新增能力必须按应用显式增加，**不能全局放开**。未声明 `capabilities` 的应用只能调用 `debugInfo`。
+> 新增能力必须按应用显式增加，**不能全局放开**。未声明 `capabilities` 的应用只能调用 `debugInfo`。智慧营销仅配置 `platforms: ['h5']`，不出现在 App 工作台，因此不纳入 App 能力白名单。
 
 ---
 
