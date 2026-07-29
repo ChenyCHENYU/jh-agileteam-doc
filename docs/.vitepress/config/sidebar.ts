@@ -581,4 +581,18 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
   ],
+
+  // 测试
+  "/views/testing/": [
+    {
+      text: "测试",
+      collapsed: false,
+      items: [
+        { text: "概述", link: "/views/testing/" },
+        { text: "功能测试", link: "/views/testing/functional" },
+        { text: "自动化测试", link: "/views/testing/automation" },
+        { text: "性能测试", link: "/views/testing/performance" },
+      ],
+    },
+  ],
 };

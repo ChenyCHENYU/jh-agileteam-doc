@@ -140,6 +140,13 @@ export const AUTHORS: Record<string, Author> = {
     employeeId: "409332",
     department: "共享技术中心",
   },
+  ChangXing: {
+    name: "常兴",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ChangXing",
+    role: "测试工程师",
+    employeeId: "025192",
+    department: "共享技术中心",
+  },
 };
 
 /**

@@ -90,6 +90,11 @@ export const nav: DefaultTheme.NavItem[] = [
     ],
   },
   {
+    text: "测试",
+    link: "/views/testing/",
+    activeMatch: "/views/testing/",
+  },
+  {
     text: "工程脚手架",
     link: "/scaffold/",
     activeMatch: "/scaffold/",
