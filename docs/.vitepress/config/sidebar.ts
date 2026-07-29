@@ -267,6 +267,13 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
     {
+      text: "通用业务能力",
+      collapsed: false,
+      items: [
+        { text: "字典翻译", link: "/frontend/pc/capabilities/dict" },
+      ],
+    },
+    {
       text: "Skills 集合",
       collapsed: false,
       items: [
