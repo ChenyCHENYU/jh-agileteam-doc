@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip ✅ 已正式发布
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.17.8**）已正式发布，覆盖契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、生产保障、质量门、MCP 与安全修复闭环全链路。不再是骨架，已进入业务实证与持续打磨阶段。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.17.9**）已正式发布，覆盖生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、MCP 与安全修复闭环全链路。
 :::
 
 ## 概述
@@ -16,8 +16,8 @@
 
 | 维度 | 现状 |
 |---|---|
-| 版本 | v0.17.8 |
-| 规范 | 28 条后端规范（B1~B26 扫描 + J1~J8 质量门） |
+| 版本 | v0.17.9 |
+| 规范 | 29 条后端规范（B1~B27 扫描 + J1~J8 质量门） |
 | Skill | 12 个（10 已落地，1 部分落地，1 流程骨架） |
 | MCP 工具 | 16 个（CLI/MCP 复用同一 `lib/` 核心） |
 | 生成 Profile | `jh4j3-openapi3`（Java 8 / Spring Boot 2 / jh4j-cloud 3.1 / MyBatis-Plus / OpenAPI 3） |

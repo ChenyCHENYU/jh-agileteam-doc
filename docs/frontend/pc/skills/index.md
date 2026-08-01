@@ -1,6 +1,6 @@
 # 前端 Skills 概述
 
-前端 Skills 基于 `@agile-team/wl-skills-kit` v2.13.9 — 一条命令，将 **14 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Kiro / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
+前端 Skills 基于 `@agile-team/wl-skills-kit` v2.14.0 — 一条命令，将 **16 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Kiro / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
 
 ## 快速开始
 
@@ -118,7 +118,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 | ③  | business-doc-extract | 语义级触发（不依赖固定关键词）       | 原型/详设/字段资料 → 结构化业务文档    |
 | ④  | api-contract       | 接口约定 / api.md / 字段定义         | 生成接口约定文档（前后端零成本对齐）   |
 | ⑤  | page-codegen       | 生成页面 / 帮我生成 / 代码生成       | 生成 4 文件 + Mock + 菜单注册          |
-| ⑥  | convention-audit   | 规范审计 / 代码审计 / 项目体检       | 14 条规范扫描 + 偏差报告               |
+| ⑥  | convention-audit   | 规范审计 / 代码审计 / 项目体检       | 16 条规范扫描 + 偏差报告               |
 | ⑦  | template-extract   | 提取模板 / 沉淀模板 / 模板贡献       | 从标杆页面提取领域专属模板             |
 | ⑧  | menu-sync          | 创建菜单 / 同步菜单 / 补菜单         | 菜单数据同步到后端（MCP 驱动）         |
 | ⑨  | dict-sync          | 同步字典 / 创建字典 / 刷新字典基线   | 字典基线同步（pull / push / audit）    |
