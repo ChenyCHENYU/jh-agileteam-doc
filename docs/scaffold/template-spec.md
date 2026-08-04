@@ -30,7 +30,7 @@ scripts/validate-template.mjs
   "version": "1.1.0",
   "category": "frontend",
   "runtime": {
-    "node": "^22.12.0 || ^24.0.0",
+    "node": "^22.15.0 || ^24.0.0",
     "recommendedNode": "24",
     "packageManager": "pnpm@11.8.0"
   },

@@ -108,7 +108,7 @@ docs/
 
 ---
 
-## 前端 PC Skills 集合（v2.11.8）
+## 前端 PC Skills 集合（v2.15.0）
 
 12 个 AI 辅助研发 Skill + 17 个 MCP Tool + 11 条 CLI 命令，覆盖从需求到交付的完整链路：
 
@@ -156,9 +156,30 @@ npx @agile-team/jh4j-cloud-cli doctor
 
 FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基础配置 / 权限菜单 / 流程人事 / 低代码开发 / 运维监控），含 426 张操作截图（托管于阿里云 OSS）。详见 [平台手册](/platform/)。
 
-## 后端 Skills 集合（v0.17.10）
+## 后端 Skills 集合（v0.18.0）
 
-`@agile-team/wl-skills-bd`：16 个 MCP 工具 + 12 个 Skill，覆盖框架扩展点 Bean（B28）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路，与前端 Skills 三包协作。
+`@agile-team/wl-skills-bd`：16 个 MCP 工具 + 12 个 Skill，覆盖框架扩展点 Bean（B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路，与前端 Skills 三包协作。
+
+## 测试 Skills 集合（v0.5.0）
+
+`@agile-team/wl-skills-test`：12 个 MCP 工具 + 12 个 AI Skill + 20 条审计规则（T1-T20）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter），覆盖测试方案→用例→自动化脚本→执行→质量评估→上线判定全链路。**五包中唯一具备实际执行能力的包**。
+
+```bash
+npx @agile-team/wl-skills-test        # 安装
+npx @agile-team/wl-skills-test audit  # 审计测试代码
+npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json  # 执行API测试
+```
+
+### 五包能力矩阵
+
+| 能力维度 | design | kit | ui | bd | **test** |
+|---------|:------:|:---:|:--:|:--:|:--------:|
+| 版本 | v0.8.0 | v2.15.0 | v1.9.10 | v0.18.0 | **v0.5.0** |
+| MCP 工具 | 0 | 23 | 10 | 16 | **12** |
+| 审计规则 | — | R1-R16 | R001-R039 | B1-B29 | **T1-T20** |
+| 自动修复 | — | F1-F5 | 12 条 | B3/B5 | **F1-F6** |
+| 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
+| 质量门 | — | validate | check | J1-J8 | **DI 4 指标** |
 
 ---
 

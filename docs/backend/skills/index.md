@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip ✅ 已正式发布
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.17.10**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、MCP 与安全修复闭环全链路。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.18.0**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、MCP 与安全修复闭环全链路。
 :::
 
 ## 概述
@@ -16,8 +16,8 @@
 
 | 维度 | 现状 |
 |---|---|
-| 版本 | v0.17.10 |
-| 规范 | 28 条后端规范（B1~B28 扫描 + J1~J8 质量门） |
+| 版本 | v0.18.0 |
+| 规范 | 29 条后端规范（B1~B29 扫描 + J1~J8 质量门） |
 | Skill | 12 个（10 已落地，1 部分落地，1 流程骨架） |
 | MCP 工具 | 16 个（CLI/MCP 复用同一 `lib/` 核心） |
 | 生成 Profile | `jh4j3-openapi3`（Java 8 / Spring Boot 2 / jh4j-cloud 3.1 / MyBatis-Plus / OpenAPI 3） |
@@ -45,7 +45,7 @@ L3 CLI 适配              L3 MCP 适配        ← 二者只能适配同一 lib
 L4 工程产物    Java / XML / DDL / tests / contracts / catalog / docs + standards/skills/quality 配置
                     │
                     ▼
-L5 验证        B1~B28 + J1~J8 + strict contract diff + assurance evidence + 包自检
+L5 验证        B1~B29 + J1~J8 + strict contract diff + assurance evidence + 包自检
                     │
                     ▼
 L6 人工卡口    DDL/数据、权限发布、环境部署、破坏性 API、业务重构
@@ -89,7 +89,7 @@ wl-skills-bd codegen apply   wl-contract.json --plan-hash <sha256> --confirm
 
 > 当前 Profile 使用 **Controller → 直接 Service → Mapper**，不生成无业务价值的 `IService + ServiceImpl` 双层；Controller→Mapper 由 ArchUnit J1 阻断。
 
-## 28 条后端规范
+## 29 条后端规范
 
 AI 按**任务类型懒加载**相关条目，不全量加载；规范变更顺序追加，不复用废弃编号。
 
@@ -198,7 +198,7 @@ wl-skills-bd test gen      wl-contract.json --output src/test/java/.../XxxServic
 
 | 工具 | 写入 | 作用 |
 |---|:---:|---|
-| `wls_be_validate` | 否 | B1~B28 扫描 |
+| `wls_be_validate` | 否 | B1~B29 扫描 |
 | `wls_be_doctor` | 否 | JDK/Maven/Profile/质量门/租户证据/契约覆盖体检 |
 | `wls_be_codegen` | 条件 | 契约 validate/plan/apply |
 | `wls_be_contract` | 否 | 协作契约 show/diff（前端/OpenAPI/权限/kit api.md） |

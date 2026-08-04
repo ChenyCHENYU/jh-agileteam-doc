@@ -29,8 +29,8 @@ graph LR
 
 ```bash
 # 检查工具版本
-node -v   # >= 22.14.0
-pnpm -v   # >= 10.16.1
+node -v   # >= 22.15.0
+pnpm -v   # >= 10.18.0
 git -v    # >= 2.30.0
 ```
 
@@ -436,7 +436,7 @@ git push origin --delete feature/TASK-123-add-user-module
 
 - OS: [如 Windows 11]
 - Browser: [如 Chrome 120]
-- Node: [如 v22.14.0]
+- Node: [如 v22.15.0]
 - 项目版本: [如 1.2.0]
 
 ## 🔴 优先级
