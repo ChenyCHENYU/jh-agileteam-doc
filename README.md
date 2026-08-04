@@ -48,8 +48,8 @@ npx @agile-team/wl-skills-kit
 | MCP Tools | 17 个 | 菜单/字典/权限/代码扫描/页面校验等 |
 | 编码规范 | 14 条 | 模块化规范，AI 自动门控加载 |
 | 页面模板 | 9 种 | LIST / FORM / MASTER_DETAIL / TREE_LIST 等 |
-| 组件 API 文档 | 12 个 | 内置平台组件使用规范 |
-| 通用组件 | 15 个 | 全局 + 按需 + 远程 |
+| 组件 API 文档 | 11 个 | 内置平台组件使用规范 |
+| 通用组件 | 7 个 | local 4 + global 3 |
 | 领域样例 | 13 个 | 生产域 8 页 + 销售域 5 页 |
 | 编辑器配置 | 10 种 | Copilot / Cursor / Windsurf / Kiro / Trae 等 |
 

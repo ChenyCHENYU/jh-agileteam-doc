@@ -1,6 +1,6 @@
 # @agile-team/wl-skills-ui — 企业级 UI 风格对齐框架
 
-> 版本：v1.9.9 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+> 版本：v1.9.10 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
 
 ---
 
@@ -17,7 +17,7 @@
 ```
 L0  Design Tokens          颜色 / 间距 / 圆角 / 字号 / 阴影（"宪法"）
 L1  Element Plus 原子层    el-button / el-input / el-table ...
-L2  Vendors 封装组件层 ⭐  Base* / jh-* / C_*/c_* / AG Grid（化妆主战场）
+L2  Vendors 封装组件层 ⭐  Base* / jh-* / C_*/c_* / custom / AG Grid（老项目化妆主战场，无源码也能覆盖）
 L3  Page Layouts 骨架层    list-page / tree-list / form-dialog
 L4  Runtime 业务渲染层     defineColumns / renderOps / preset
 ```
@@ -27,7 +27,7 @@ L4  Runtime 业务渲染层     defineColumns / renderOps / preset
 | 模式 | 适用 | 包含层 | 接入方式 |
 |---|---|---|---|
 | **Native** | 新项目、完全可控 | L0+L1+L2+L3+L4 | `@use '.../styles' as *;` + `installCommonPreset()` |
-| **Skin** | 老项目、无源码 | L0+L1+L2 | `@use '.../styles/presets/skin' as *;`（不动业务代码） |
+| **Skin** | 老项目、无源码 | L0+L1+L2 | `@use '.../styles/presets/skin' as *;` + `import ".../runtime/auto"`（不动业务代码） |
 
 > **主题锁与逃生口（v1.9.2+）**：`installCommonPreset()` 会自动安装品牌主题锁，防止平台动态主题覆盖。需要定制视觉的页面可加 `.wl-ui-skin-exempt` 或 `[data-wl-ui-skin="off"]` 退出品牌锁定（登录页 `.lp-root` 自动识别豁免）。
 
@@ -63,6 +63,11 @@ npx wl-ui init --mode skin
 @use "@agile-team/wl-skills-ui/styles/presets/skin" as *;
 ```
 
+```ts
+// src/main.ts：安装包级保护（主题锁 + 普通表格长文本兜底），不接管页面布局或业务列定义
+import "@agile-team/wl-skills-ui/runtime/auto";
+```
+
 ---
 
 ## CLI 速查
@@ -70,12 +75,19 @@ npx wl-ui init --mode skin
 ```bash
 wl-ui init      [--mode native|skin] [--editor <e>]   # 初始化
 wl-ui update    [--editor all] [--force]              # 增量更新
-wl-ui scan      --target src [--layer L0,L1,L2]       # 扫描偏差
+wl-ui scan      --target src [--layer L0,L1,L2] [--vendor base-table,jh] [--mode skin|native]  # 扫描偏差
 wl-ui fix       --target src [--dry-run]              # 自动修复
 wl-ui check     --project .                           # 接入完整性检查
-wl-ui doctor    [--print-overrides]                   # 环境体检
-wl-ui diff                                            # 升级前对比
-wl-ui clean     [--dry-run]                           # 卸载清理
+wl-ui doctor    [--project .] [--print-overrides]     # 环境体检
+wl-ui diff      [--project .]                         # 升级前对比
+wl-ui clean     [--project .] [--dry-run]             # 卸载清理
+wl-ui audit     --target src [--output json] [--refresh-baseline]  # 全量审计 + 维护基线
+wl-ui drift     --baseline <file> --current <file>    # 基线漂移对比
+wl-ui exempt    init --project . --target src          # 智能豁免脚手架
+wl-ui snapshot  list|diff|rollback|clean              # 修复快照/回退
+wl-ui add-preset <name>                               # 业务 preset 脚手架
+wl-ui prompts                                         # AI 触发提示
+wl-ui all       --project .                           # 一键全流程（scan→fix→check）
 ```
 
 ---
@@ -89,7 +101,7 @@ wl-ui clean     [--dry-run]                           # 卸载清理
 | R021-R022 | L2 | BaseTable 必须 `render-type="agGrid"` + 唯一 `cid` |
 | R025-R027 | L2 | 语义合规 + 原生 HTML 拦截 + loading 遮罩 |
 | R031-R037 | L1 | 扩展组件族（card/tabs/descriptions/drawer/upload/steps/feedback） |
-| R038 | L2 | 新建类按钮必须用 `primary` 主色填充（可自动修复） |
+| R038 | L1 | 新建类按钮必须用 `primary` 主色填充（可自动修复） |
 | R039 | L1 | 普通数据列必须支持省略号 + hover 提示（可自动修复） |
 
 ---
@@ -99,11 +111,15 @@ wl-ui clean     [--dry-run]                           # 卸载清理
 | API | 说明 |
 |---|---|
 | `defineColumns(cols)` | 列定义，自动应用 `COLUMN_AUTO_MAP`（普通文本列自动省略号 + hover 提示，R039） |
-| `renderOps(items)` | 操作列图标按钮组（view/edit/del/log 预设） |
+| `renderOps(items)` | 操作列图标按钮组（view/edit/del/log/ok/send 预设） |
 | `renderTagNode(v, map)` | 状态 Tag 渲染 |
 | `renderClassifyTag(v, map)` | 分类 Tag 渲染 |
-| `installCommonPreset()` | 安装通用业务预设（v1.9.2 起自动安装品牌主题锁） |
-| `installBrandThemeLock()` | 品牌主题锁：`!important` + MutationObserver 运行时防护，抵御平台动态主题覆盖（v1.9.2） |
+| `renderBadge(v)` / `renderCountBadge(v)` | 编号 / 计数徽标 |
+| `renderRatingLevel(v)` | 评级颜色 |
+| `installCommonPreset()` | 安装通用业务预设（含主题锁 + 普通表格长文本包级保护） |
+| `installUiRuntimeGuards()` | 主题锁 + 普通表格长文本包级保护（auto 保护入口） |
+| `installOverflowTooltipGuard()` | 单独安装真实溢出 Tooltip 兜底 |
+| `createPreset(config)` / `installPreset(config)` | 自定义 preset 工厂 |
 | `registerColumnAutoMap(field, config)` | 注册新字段自动渲染 |
 | `setDictResolver(fn)` | 解耦动态字典查询 |
 
@@ -153,6 +169,6 @@ AbstractPageQueryHook + BaseQuery + BaseToolbar + BaseTable(render-type="agGrid"
 
 ## 设计令牌
 
-主色：`#4368ff` → `--el-color-primary`
+客户规范主色：`#002a8f` → `--el-color-primary`
 
 详见包内 `design/spec/`：color / typography / spacing 三份规范文档。

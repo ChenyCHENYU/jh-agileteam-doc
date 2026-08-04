@@ -17,7 +17,7 @@
 | 维度 | 现状 |
 |---|---|
 | 版本 | v0.17.10 |
-| 规范 | 30 条后端规范（B1~B28 扫描 + J1~J8 质量门） |
+| 规范 | 28 条后端规范（B1~B28 扫描 + J1~J8 质量门） |
 | Skill | 12 个（10 已落地，1 部分落地，1 流程骨架） |
 | MCP 工具 | 16 个（CLI/MCP 复用同一 `lib/` 核心） |
 | 生成 Profile | `jh4j3-openapi3`（Java 8 / Spring Boot 2 / jh4j-cloud 3.1 / MyBatis-Plus / OpenAPI 3） |
@@ -45,7 +45,7 @@ L3 CLI 适配              L3 MCP 适配        ← 二者只能适配同一 lib
 L4 工程产物    Java / XML / DDL / tests / contracts / catalog / docs + standards/skills/quality 配置
                     │
                     ▼
-L5 验证        B1~B26 + J1~J8 + strict contract diff + assurance evidence + 包自检
+L5 验证        B1~B28 + J1~J8 + strict contract diff + assurance evidence + 包自检
                     │
                     ▼
 L6 人工卡口    DDL/数据、权限发布、环境部署、破坏性 API、业务重构
@@ -124,13 +124,13 @@ wl-skills-bd task --list             # 列出 8 种任务
 
 | 任务 | 模式 | 触发词 | 规则子集 |
 |---|---|---|---|
-| new-service | full | 新开发/全套CRUD | B1-B26 子集 + J |
+| new-service | full | 新开发/全套CRUD | B1-B28 子集 + J |
 | add-api | incremental-contract | 加接口/加方法 | B1/B2/B5/B8/B12/B20/B24/B25/B26 |
 | add-field | incremental-contract | 加字段/落库 | B3/B4/B7/B18/B25/B26 |
 | add-business-cmd | incremental-contract | 加 submit/状态机 | B5/B8/B17/B20/B24/B25/B26 |
-| fix-bug | fix | 改 bug/修复 | B3/B5/B7/B8/B17/B18/B24/B25/B26 |
-| refactor | fix | 重构/优化 | B5-B12/B23/B24/B25/B26 |
-| audit | readonly | 审计/体检 | B1-B26 |
+| fix-bug | fix | 改 bug/修复 | B3/B5/B7/B8/B17/B18/B24/B25/B26/B28 |
+| refactor | fix | 重构/优化 | B5-B12/B23/B24/B25/B26/B28 |
+| audit | readonly | 审计/体检 | B1-B28 |
 | config-op | config | 配置/连不上 | config-doctor |
 
 > `task` 只读、不写文件；`task --apply` 会被明确拒绝，避免出现第二套无事务写入器。增量需求先更新 `wl-contract.json`，再走 codegen `planHash + --confirm + 回滚`。
@@ -198,7 +198,7 @@ wl-skills-bd test gen      wl-contract.json --output src/test/java/.../XxxServic
 
 | 工具 | 写入 | 作用 |
 |---|:---:|---|
-| `wls_be_validate` | 否 | B1~B26 扫描 |
+| `wls_be_validate` | 否 | B1~B28 扫描 |
 | `wls_be_doctor` | 否 | JDK/Maven/Profile/质量门/租户证据/契约覆盖体检 |
 | `wls_be_codegen` | 条件 | 契约 validate/plan/apply |
 | `wls_be_contract` | 否 | 协作契约 show/diff（前端/OpenAPI/权限/kit api.md） |
@@ -267,7 +267,7 @@ wl-skills-bd contract diff wl-contract.json \
 npx @agile-team/wl-skills-bd init --dry-run
 npx @agile-team/wl-skills-bd init
 npx @agile-team/wl-skills-bd doctor
-wl-skills-bd validate src/main --format sarif --output reports/backend.sarif
+npx @agile-team/wl-skills-bd validate src/main --format sarif --output reports/backend.sarif
 ```
 
 `init` 写入受管 manifest，重复执行不盲目覆盖本地修改；用 `diff` 查看漂移，`check` 验证安装完整性，`update` 增量升级，`clean --dry-run` 预览可清理资产。

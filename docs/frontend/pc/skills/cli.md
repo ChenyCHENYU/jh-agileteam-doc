@@ -15,7 +15,7 @@
 | `update` | 增量更新（MD5 比对，仅覆盖变化文件，保护 reports/） |
 | `check` | 环境预检（Node / 工具链 / MCP / manifest） |
 | `diff` | 对比已安装文件与最新 kit 版本差异 |
-| `validate` | 静态校验页面完整性 + AST 语义级 R1~R14（CI 卡门） |
+| `validate` | 静态校验页面完整性 + AST 语义级 R1~R16（CI 卡门） |
 | `validate-page` | 单页 / 指定目录校验 |
 | `fix` | 确定性机械修复（幂等安全，如缺 `render-type`、`::v-deep`→`:deep()`） |
 | `doctor-ui` | 检查 wl-skills-ui 接入完整性 |
@@ -63,7 +63,7 @@ npx @agile-team/wl-skills-kit check
 
 ## validate / validate-page
 
-静态校验页面文件完整性（4 文件、AGGrid、cid、mock、api.md），含 AST 语义级 R1~R14 检测。R13 圈复杂度 / R14 类型错误需 `--typecheck` 开启。
+静态校验页面文件完整性（4 文件、AGGrid、cid、mock、api.md），含 AST 语义级 R1~R16 检测。R13 圈复杂度、R15 分页边界、R16 运行时边界默认执行；R14 类型错误需 `--typecheck` 开启。
 
 ```bash
 npx @agile-team/wl-skills-kit validate                      # 全量校验

@@ -1,6 +1,6 @@
 # 前端 Skills 概述
 
-前端 Skills 基于 `@agile-team/wl-skills-kit` v2.14.3 — 一条命令，将 **16 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Kiro / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
+前端 Skills 基于 `@agile-team/wl-skills-kit` v2.14.3 — 一条命令，将 **14 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Kiro / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
 
 ## 快速开始
 
@@ -29,12 +29,12 @@ npx @agile-team/wl-skills-kit mock-clean --all
 
 | 类别              | 数量  | 说明                                                                         |
 | ----------------- | ----- | ---------------------------------------------------------------------------- |
-| **AI Skills**     | 12 个 | prototype-scan / spec-doc-parse / api-contract / page-codegen / business-doc-extract / menu-sync / dict-sync / permission-sync / convention-audit / template-extract / code-fix / env-config |
-| **MCP Tools**     | 23 个 | 菜单(含 domain_query/menu_delete)/字典/权限/代码扫描/路由检查/页面校验/UI诊断/Git日志/审计报告推送等      |
+| **AI Skills**     | 12 个 | prototype-scan / spec-doc-parse / api-contract / page-codegen / business-doc-extract / menu-sync / dict-sync / permission-sync / convention-audit / template-extract / code-fix / standard-env-config |
+| **MCP Tools**     | 23 个 | 菜单/字典/权限/代码扫描/路由检查/页面校验/UI诊断/Git日志/审计报告推送/环境(scan/apply/verify)等      |
 | **编码规范**      | 14 条 | 模块化规范（01-工具链 ~ 14-布局容器），AI 自动门控加载                       |
 | **页面模板**      | 9 种  | LIST / FORM_ROUTE / MASTER_DETAIL / TREE_LIST / DETAIL_TABS 等               |
-| **组件 API 文档** | 12 个 | jh-select / jh-date / jh-drag-row / jh-pagination 等                         |
-| **通用组件**      | 15 个 | 全局 6 + 按需 4 + 远程 5                                                     |
+| **组件 API 文档** | 11 个 | jh-select / jh-date / jh-drag-row / jh-pagination 等                         |
+| **通用组件**      | 7 个  | local 4（c_formModal/c_formSections/c_listModal/c_spliterTitle）+ global 3（C_ParentView/C_TagStatus/C_Tree） |
 | **领域样例**      | 13 个 | 生产域 8 页 + 销售域 5 页                                                    |
 | **编辑器配置**    | 10 个 | Copilot / Cursor / Windsurf / Kiro / Trae / Claude / Roo / Cline / AGENTS / Qoder  |
 
@@ -69,7 +69,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 │   │   │   └── env.local.json        ←   统一环境配置（gitignore）
 │   │   └── ops/
 │   │       ├── code-fix/             ←   ⑪ 受控自动修复
-│   │       └── env-config/           ←   ⑫ 环境标准化/迁移（dry-run → apply）
+│   │       └── standard-env-config/ ←   ⑫ 环境标准化/迁移（scan → plan → apply → verify）
 │   ├── guides/                       ← 人读指南
 │   └── reports/                      ← AI 生成报告目录
 │
@@ -118,13 +118,13 @@ npx @agile-team/wl-skills-kit mock-clean --all
 | ③  | business-doc-extract | 语义级触发（不依赖固定关键词）       | 原型/详设/字段资料 → 结构化业务文档    |
 | ④  | api-contract       | 接口约定 / api.md / 字段定义         | 生成接口约定文档（前后端零成本对齐）   |
 | ⑤  | page-codegen       | 生成页面 / 帮我生成 / 代码生成       | 生成 4 文件 + Mock + 菜单注册          |
-| ⑥  | convention-audit   | 规范审计 / 代码审计 / 项目体检       | 16 条规范扫描 + 偏差报告               |
+| ⑥  | convention-audit   | 规范审计 / 代码审计 / 项目体检       | 14 条规范扫描 + 双报告（AUDIT_AI + AUDIT_HUMAN） |
 | ⑦  | template-extract   | 提取模板 / 沉淀模板 / 模板贡献       | 从标杆页面提取领域专属模板             |
 | ⑧  | menu-sync          | 创建菜单 / 同步菜单 / 补菜单         | 菜单数据同步到后端（MCP 驱动）         |
 | ⑨  | dict-sync          | 同步字典 / 创建字典 / 刷新字典基线   | 字典基线同步（pull / push / audit）    |
 | ⑩  | permission-sync    | 权限同步 / 角色授权 / 挂动作         | 角色管理 + 菜单授权 + 动作挂载（MCP 驱动） |
 | ⑪  | code-fix           | 自动修复 / 整改偏差 / 规范整改       | 受控自动修复 🟡/🟢 等级偏差 + 强制复扫 |
-| ⑫  | env-config         | 切环境 / baseURL 标准化 / 客户迁移   | 环境扫描 → dry-run → apply（MCP 驱动） |
+| ⑫  | standard-env-config| 切环境 / baseURL 标准化 / 客户迁移   | 环境扫描 → dry-run → apply → verify（MCP 驱动） |
 
 ### 双线路由机制（v2.0+）
 
