@@ -12,6 +12,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "总览", link: "/platform/" },
+        { text: "核心概念", link: "/platform/overview" },
         { text: "快速搭建", link: "/platform/quick-start" },
       ],
     },
