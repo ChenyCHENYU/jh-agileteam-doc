@@ -1,6 +1,6 @@
 # 功能测试 Skills
 
-<AuthorTag author="ChangXing" />
+<AuthorTag :authors="['ChangXing','CHENY']" />
 
 功能测试 Skills 覆盖**从需求文档到发布决策**的完整功能测试设计链路：自动读取需求/详设文档，输出标准化 7 步测试方案、10 类业务场景建模、高覆盖度测试用例（P0–P3 分级）、5 维度用例评审，以及基于 DI 缺陷分析的多轮质量评估与 go/no-go 发布决策。
 

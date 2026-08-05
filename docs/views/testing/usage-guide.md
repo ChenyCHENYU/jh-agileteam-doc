@@ -1,6 +1,6 @@
 # 测试 Skills 使用指南
 
-<AuthorTag :authors="['ChangXing','YangChenYu']" />
+<AuthorTag :authors="['ChangXing','CHENY']" />
 
 > `@agile-team/wl-skills-test` v0.5.0 — 从安装到日常使用的完整指南。
 

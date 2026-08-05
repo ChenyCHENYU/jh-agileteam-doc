@@ -861,5 +861,5 @@ const customTools = [
 ## �📚 相关文档
 
 - [BaseForm 表单组件](./base-form)
-- [BaseToolbar 工具栏组件](../BaseToolbar/README.md)
+- [BaseToolbar 工具栏组件](./base-toolbar)
 - [BaseTable 表格组件](./base-table)

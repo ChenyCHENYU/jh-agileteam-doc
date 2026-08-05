@@ -206,7 +206,7 @@ modalRef.value?.edit(taskId);
 
 ### 修改样式
 
-编辑 [index.scss](index.scss) 文件：
+编辑 `index.scss` 文件：
 
 ```scss
 .dialog-footer {
@@ -218,7 +218,7 @@ modalRef.value?.edit(taskId);
 
 ### 扩展功能
 
-在 [data.ts](data.ts) 中新增方法：
+在 `data.ts` 中新增方法：
 
 ```typescript
 export function createFormModal(/* ... */) {

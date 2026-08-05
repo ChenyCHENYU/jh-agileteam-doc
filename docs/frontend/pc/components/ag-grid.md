@@ -526,5 +526,5 @@ const toolbarItems = computed(() => [
 ## 📚 相关文档
 
 - [BaseTable 表格组件](./base-table) - 完整的表格 Props 和列配置
-- [BaseToolbar 工具栏组件](../BaseToolbar/README.md) - 搭配工具栏使用
+- [BaseToolbar 工具栏组件](./base-toolbar) - 搭配工具栏使用
 - [AG Grid 官方文档](https://www.ag-grid.com/documentation/) - AG Grid 更多高级特性

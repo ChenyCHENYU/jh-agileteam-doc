@@ -937,5 +937,5 @@ const handleSave = () => {
 ## 📚 相关文档
 
 - [AGGrid 高级表格](./ag-grid)
-- [BaseToolbar 工具栏](../BaseToolbar/README.md)
+- [BaseToolbar 工具栏](./base-toolbar)
 - [BaseQuery 查询组件](./base-query)

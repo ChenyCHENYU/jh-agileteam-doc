@@ -1,6 +1,6 @@
 # 自动化测试 Skills
 
-<AuthorTag author="ChangXing" />
+<AuthorTag :authors="['ChangXing','CHENY']" />
 
 自动化测试 Skills 覆盖 **E2E 脚本生成、通用执行规则、冒烟筛选与执行**的自动化闭环：从页面 URL/截图自动生成可执行 Playwright 脚本，依托全模块通用测试规则基座（数据闭环 + 全按钮覆盖），并可筛选精简冒烟套件、按标准化标准执行并产出冒烟报告。
 

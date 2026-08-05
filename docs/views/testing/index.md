@@ -1,6 +1,6 @@
 # 测试工程技能包（wl-skills-test）
 
-<AuthorTag :authors="['ChangXing','YangChenYu']" />
+<AuthorTag :authors="['ChangXing','CHENY']" />
 
 ::: tip npm 已发布 v0.5.0
 ```bash
