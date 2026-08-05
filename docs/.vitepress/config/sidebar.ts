@@ -347,6 +347,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [
         { text: "概述", link: "/frontend/mobile-h5/skills" },
         { text: "AI Skill 流水线", link: "/frontend/mobile-h5/skill-pipeline" },
+        { text: "使用指南", link: "/frontend/mobile-h5/usage-guide" },
       ],
     },
     {

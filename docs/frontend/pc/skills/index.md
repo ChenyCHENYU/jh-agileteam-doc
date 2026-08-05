@@ -138,3 +138,13 @@ npx @agile-team/wl-skills-kit mock-clean --all
 ```
 
 > AI 根据输入自动判断走哪条线：路径含 `docs/spec/` 或文档含功能编码/IPO 表走规范线，其余走原型线。
+
+---
+
+## 伴生工程
+
+- 后端 Skills：[wl-skills-bd](/backend/skills/)（契约驱动代码生成）
+- 测试工程：[wl-skills-test](/views/testing/)（12 Skill + 20 审计规则 + 3 执行器）
+- 视觉一致性：[wl-skills-ui](/views/styling/wl-skills-ui)
+- 产品设计：[wl-skills-design](/views/ai-workflow/design-skills)
+- 后端使用指南：[后端 Skills 使用指南](/backend/skills/usage-guide)
