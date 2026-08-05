@@ -1,5 +1,7 @@
 # 质量领域模板
 
+<AuthorTag author="MaJiaRui" />
+
 > 质量领域相关的页面和组件模板
 
 ---
@@ -10,5 +12,4 @@
 - [质量跟踪](./quality-tracking.md)
 - [质量报表](./quality-report.md)
 
----
-<AuthorTag author="MaJiaRui" />
+---

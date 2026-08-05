@@ -1,5 +1,7 @@
 # 工程脚手架 — 概览 & 快速开始
 
+<AuthorTag author="CHENY" />
+
 `@agile-team/jh4j-cloud-cli`（当前 `0.6.1`）是 JH4J Cloud 企业内部标准化项目脚手架，用于从受控模板快速创建**结构一致、配置完整、可追溯**的工程。一条命令即可生成 PC 业务子系统或移动端 H5 应用，避免手工复制目录再逐文件查找替换。
 
 ::: tip 与 Skills Kit 的区别
@@ -132,5 +134,3 @@ jh4j cache list|clear                 管理模板缓存
 - [模板来源 & Catalog](./templates) — 来源解析、源站容灾、模板缓存、外部 Catalog
 - [模板接入规范](./template-spec) — manifest 契约、project.config、初始化脚本、元数据
 - [常见问题](./faq) — 模板拉取失败、手动安装依赖、强制指定模板源
-
-<AuthorTag author="CHENY" />

@@ -418,7 +418,11 @@ export const sidebar: DefaultTheme.Sidebar = {
     {
       text: "Skills 集合",
       collapsed: false,
-      items: [{ text: "概述", link: "/backend/skills/" }],
+      items: [
+        { text: "概述", link: "/backend/skills/" },
+        { text: "AI Skills 流水线", link: "/backend/skills/skill-pipeline" },
+        { text: "使用指南", link: "/backend/skills/usage-guide" },
+      ],
     },
   ],
 
@@ -593,6 +597,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "功能测试", link: "/views/testing/functional" },
         { text: "自动化测试", link: "/views/testing/automation" },
         { text: "性能测试", link: "/views/testing/performance" },
+        { text: "使用指南", link: "/views/testing/usage-guide" },
       ],
     },
   ],

@@ -1,5 +1,7 @@
 # 生产领域模板
 
+<AuthorTag author="CHENY" />
+
 > 生产领域相关的页面和组件模板
 
 ---
@@ -10,5 +12,4 @@
 - [工艺管理](./process-management.md)
 - [设备管理](./equipment-management.md)
 
----
-<AuthorTag author="CHENY" />
+---
