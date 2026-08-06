@@ -1,6 +1,6 @@
 # 测试工程技能包（wl-skills-test）
 
-<AuthorTag :authors="['ChangXing','CHENY']" />
+<AuthorTag author="ChangXing" />
 
 ::: tip npm 已发布 v0.5.0
 ```bash
@@ -8,7 +8,7 @@ npx @agile-team/wl-skills-test        # 安装（11 规范 + 12 Skill + 模板�
 npx @agile-team/wl-skills-test doctor # 环境体检
 npx @agile-team/wl-skills-test audit  # 审计测试代码（T1-T20）
 ```
-[npm 包地址](https://www.npmjs.com/package/@agile-team/wl-skills-test) · [GitHub](https://github.com/ChenyCHENYU/wl-skills-test) · 作者：常兴、杨晨誉
+[npm 包地址](https://www.npmjs.com/package/@agile-team/wl-skills-test) · [GitHub](https://github.com/ChenyCHENYU/wl-skills-test) · 作者：常兴
 :::
 
 ---

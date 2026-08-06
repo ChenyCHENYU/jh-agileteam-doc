@@ -1,6 +1,6 @@
 # 性能测试 Skills
 
-<AuthorTag :authors="['ChangXing','CHENY']" />
+<AuthorTag author="ChangXing" />
 
 性能测试 Skills 覆盖**压测方案设计、JMeter 脚本生成、结果分析**的完整性能闭环：从接口文档与业务需求产出标准化压测方案（场景设计、梯度并发、SLA 阈值、环境与监控），自动生成兼容 JMeter 5.6.3 的 `.jmx` 脚本与参数化数据，并解析 jtl/监控数据输出瓶颈诊断、优化建议与多版本趋势对比。
 

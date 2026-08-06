@@ -81,7 +81,7 @@
 
 | 你是… | 推荐路径 |
 |---|---|
-| **新入职前端** | [快速上手](/frontend/quick-start/) → [PC 架构设计](/frontend/pc/architecture) → [Skills 集合](/frontend/pc/skills/) |
+| **刚了解前端的小伙伴** | [快速上手](/frontend/quick-start/) → [PC 架构设计](/frontend/pc/architecture) → [Skills 集合](/frontend/pc/skills/) |
 | **移动端开发** | [快速上手](/frontend/quick-start/) → [H5 概览](/frontend/mobile-h5/) → [@robot-h5/core](/frontend/mobile-h5/h5-core/) |
 | **后端开发** | [后端概览](/backend/) → [后端 Skills](/backend/skills/) |
 | **测试工程师** | [AI 最佳实践](/views/best-practices/) → 测试规范（规划中） |
