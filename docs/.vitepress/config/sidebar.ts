@@ -313,6 +313,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "wl-skills-kit 工具", link: "/frontend/pc/skills/cli" },
+        { text: "form-validate 校验库", link: "/frontend/pc/skills/form-validate" },
       ],
     },
   ],
