@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang','ZhangXiang']" />
 
-> `@agile-team/wl-skills-bd` v0.18.0 — 契约驱动代码生成的完整链路：从需求评审 → 契约设计 → 代码生成 → 数据库迁移 → 单元测试 → 规范审计 → 安全修复。
+> `@agile-team/wl-skills-bd` v0.18.1 — 契约驱动代码生成的完整链路：从需求评审 → 契约设计 → 代码生成 → 数据库迁移 → 单元测试 → 规范审计 → 安全修复。
 
 ---
 

@@ -1,6 +1,6 @@
 # @agile-team/wl-skills-ui — 企业级 UI 风格对齐框架
 
-> 版本：v1.9.10 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+> 版本：v1.9.13 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
 
 ---
 
@@ -92,7 +92,7 @@ wl-ui all       --project .                           # 一键全流程（scan�
 
 ---
 
-## 扫描规则（35 条，R001–R039）
+## 扫描规则（36 条，R001–R040）
 
 | 规则 | 层级 | 说明 |
 |---|---|---|
@@ -103,6 +103,7 @@ wl-ui all       --project .                           # 一键全流程（scan�
 | R031-R037 | L1 | 扩展组件族（card/tabs/descriptions/drawer/upload/steps/feedback） |
 | R038 | L1 | 新建类按钮必须用 `primary` 主色填充（可自动修复） |
 | R039 | L1 | 普通数据列必须支持省略号 + hover 提示（可自动修复） |
+| R040 | L2 | 未知复合控件结构审查（要求人工核对后再增加精准适配） |
 
 ---
 
@@ -163,7 +164,7 @@ AbstractPageQueryHook + BaseQuery + BaseToolbar + BaseTable(render-type="agGrid"
 |---|---|---|
 | `element-plus` | `2.2.6-prod.3` | 集团 jh- 定制版 |
 | `@jhlc/jh-ui` | `3.1.0` | SCSS 皮肤包 |
-| `@agile-team/wl-skills-ui` | `^1.9.10` | 已对齐上述组合 |
+| `@agile-team/wl-skills-ui` | `^1.9.13` | 已对齐上述组合 |
 
 ---
 

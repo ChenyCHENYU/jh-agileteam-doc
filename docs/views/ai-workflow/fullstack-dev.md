@@ -18,7 +18,7 @@
               ▼                               ▼
     ┌─────────────────┐             ┌─────────────────┐
     │  前端 kit        │             │  后端 bd          │
-    │  v2.15.0        │             │  v0.18.0         │
+    │  v2.16.4        │             │  v0.18.1         │
     │                 │             │                  │
     │  page-spec      │             │  wl-contract.json │
     │  api.md         │             │  Entity/DTO/VO    │
@@ -51,14 +51,14 @@ api-contract → api.md（前后端共享契约）
   ↓
 page-codegen → 4 文件骨架（index.vue / data.ts / index.scss / api.md）
   ↓
-convention-audit → R1-R16 偏差清单
+convention-audit → R1-R18 偏差清单
   ↓
 code-fix → 规范收敛
   ↓
 menu-sync / dict-sync / permission-sync → 平台配置同步
 ```
 
-- Skills：[wl-skills-kit](/frontend/pc/skills/) v2.15.0
+- Skills：[wl-skills-kit](/frontend/pc/skills/) v2.16.4
 - 使用指南：[前端使用指南](/frontend/pc/skills/usage-guide)
 
 ---
@@ -85,7 +85,7 @@ convention-audit-be → B1-B29 + J1-J8 规范审计
 code-fix-be → B3/B5 安全修复
 ```
 
-- Skills：[wl-skills-bd](/backend/skills/) v0.18.0
+- Skills：[wl-skills-bd](/backend/skills/) v0.18.1
 - 流水线：[后端 AI Skills 流水线](/backend/skills/skill-pipeline)
 - 使用指南：[后端使用指南](/backend/skills/usage-guide)
 

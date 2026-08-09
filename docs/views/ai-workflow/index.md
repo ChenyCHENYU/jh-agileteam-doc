@@ -14,7 +14,7 @@
 
 ## 前端开发工作流
 
-基于 `@agile-team/wl-skills-kit`（v2.15.0），当前已全面践行：
+基于 `@agile-team/wl-skills-kit`（v2.16.4），当前已全面践行：
 
 ```
 ① 详细设计（详设文档 / Axure 标注 / 口述需求）
@@ -53,7 +53,7 @@
 
 ## 后端开发工作流
 
-基于 `@agile-team/wl-skills-bd`（v0.18.0 正式版）：
+基于 `@agile-team/wl-skills-bd`（v0.18.1 正式版）：
 
 ```
 ① api.md（前端 api-contract 产出，或产品 input-spec）

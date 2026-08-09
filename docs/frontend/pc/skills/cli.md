@@ -5,7 +5,7 @@
 从零**创建新项目**用的是另一个工具 —— 项目脚手架 [`@agile-team/jh4j-cloud-cli`](/scaffold/)（命令 `jh4j create`）。
 :::
 
-`@agile-team/wl-skills-kit`（v2.15.0）提供 14 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
+`@agile-team/wl-skills-kit`（v2.16.4）提供 14 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
 
 ## 命令速查
 
@@ -15,7 +15,7 @@
 | `update` | 增量更新（MD5 比对，仅覆盖变化文件，保护 reports/） |
 | `check` | 环境预检（Node / 工具链 / MCP / manifest） |
 | `diff` | 对比已安装文件与最新 kit 版本差异 |
-| `validate` | 静态校验页面完整性 + AST 语义级 R1~R16（CI 卡门） |
+| `validate` | 静态校验页面完整性 + AST 语义级 R1~R18（CI 卡门） |
 | `validate-page` | 单页 / 指定目录校验 |
 | `fix` | 确定性机械修复（幂等安全，如缺 `render-type`、`::v-deep`→`:deep()`） |
 | `doctor-ui` | 检查 wl-skills-ui 接入完整性 |
@@ -63,7 +63,7 @@ npx @agile-team/wl-skills-kit check
 
 ## validate / validate-page
 
-静态校验页面文件完整性（4 文件、AGGrid、cid、mock、api.md），含 AST 语义级 R1~R16 检测。R13 圈复杂度、R15 分页边界、R16 运行时边界默认执行；R14 类型错误需 `--typecheck` 开启。
+静态校验页面文件完整性（4 文件、AGGrid、cid、mock、api.md），含 AST 语义级 R1~R18 检测。R13 圈复杂度、R15 分页边界、R16 运行时边界默认执行；R14 类型错误需 `--typecheck` 开启；R17 表单仅必填开关按实际绑定逐项判断；R18 表单校验库版本检查。
 
 ```bash
 npx @agile-team/wl-skills-kit validate                      # 全量校验

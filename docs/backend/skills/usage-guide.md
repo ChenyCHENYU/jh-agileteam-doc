@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang']" />
 
-> `@agile-team/wl-skills-bd` v0.18.0 — 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-bd` v0.18.1 — 从安装到日常使用的完整指南。
 
 ---
 
