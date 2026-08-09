@@ -275,12 +275,14 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
     {
-      text: "Skills 集合",
+      text: "wl-skills-kit",
       collapsed: false,
       items: [
         { text: "概述", link: "/frontend/pc/skills/" },
         { text: "AI Skill 流水线", link: "/frontend/pc/skills/skill-pipeline" },
         { text: "使用指南", link: "/frontend/pc/skills/usage-guide" },
+        { text: "CLI 工具", link: "/frontend/pc/skills/cli" },
+        { text: "页面模板", link: "/frontend/pc/skills/page-templates" },
       ],
     },
     {
@@ -302,18 +304,17 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
     {
-      text: "页面模板",
+      text: "wl-skills-ui",
       collapsed: false,
       items: [
-        { text: "9 种模板总览", link: "/frontend/pc/skills/page-templates" },
+        { text: "视觉一致性技能包", link: "/views/styling/wl-skills-ui" },
       ],
     },
     {
-      text: "实践",
+      text: "依赖库",
       collapsed: false,
       items: [
-        { text: "wl-skills-kit 工具", link: "/frontend/pc/skills/cli" },
-        { text: "form-validate 校验库", link: "/frontend/pc/skills/form-validate" },
+        { text: "form-validate 表单校验", link: "/frontend/pc/skills/form-validate" },
       ],
     },
   ],
