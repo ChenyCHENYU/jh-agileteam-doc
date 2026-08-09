@@ -1,6 +1,6 @@
 # 前端 Skills 概述
 
-前端 Skills 基于 `@agile-team/wl-skills-kit` v2.16.4 — 一条命令，将 **14 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Kiro / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
+前端 Skills 基于 `@agile-team/wl-skills-kit` v2.16.4 — 一条命令，将 **14 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
 
 ## 快速开始
 
@@ -73,7 +73,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 │   ├── guides/                       ← 人读指南
 │   └── reports/                      ← AI 生成报告目录
 │
-├── docs/                             ← 12 个平台组件 API 文档
+├── docs/                             ← 11 个平台组件 API 文档
 ├── mock/
 │   └── _utils.ts                     ← Mock 共享工具（pageResult/ok/paginate）
 ├── src/components/                   ← 全局 + 按需 + 远程组件
@@ -138,6 +138,23 @@ npx @agile-team/wl-skills-kit mock-clean --all
 ```
 
 > AI 根据输入自动判断走哪条线：路径含 `docs/spec/` 或文档含功能编码/IPO 表走规范线，其余走原型线。
+
+---
+
+## 表单校验与"仅必填"快速填写（v2.16.x）
+
+v2.16.1 起新增统一表单能力，支持大表单中混合必填/非必填字段的"仅必填"模式切换：
+
+| 接入形态 | API / 属性 | 适用场景 |
+|---------|-----------|---------|
+| 弹窗表单 | `show-required-toggle` | c_formModal prop |
+| 分区表单 | `show-required-filter` | c_formSections prop |
+| 普通 BaseForm | `useFormRequiredOnly` composable | 页面内表单 |
+| 多 Tab 子表单 | 按实际绑定逐项控制 | 复杂表单 |
+
+**配套审计规则**：
+- **R17**：表单仅必填开关按每个实际绑定逐项判断（弹窗/独立页面/分区表单全覆盖）
+- **R18**：表单校验库 `@robot-admin/form-validate@^3.4.1` 版本范围检查（缺失依赖/废弃拆包/Naive API 误用/通用规则重复手写）
 
 ---
 

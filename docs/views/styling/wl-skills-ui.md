@@ -98,12 +98,29 @@ wl-ui all       --project .                           # 一键全流程（scan�
 |---|---|---|
 | R001-R015 | L1 | Element Plus 控件对齐（表格/表单/按钮/Tag/弹窗/分页） |
 | R016-R018 | L0 | 硬编码颜色检测（template/style/script） |
+| R019-R020 | L2 | 脚本式 columnsDef 编号/字典列缺渲染函数检测（renderBadge/renderDictClassifyTag） |
 | R021-R022 | L2 | BaseTable 必须 `render-type="agGrid"` + 唯一 `cid` |
 | R025-R027 | L2 | 语义合规 + 原生 HTML 拦截 + loading 遮罩 |
+| R028 | L0 | 业务 `<style>` 硬编码 `border-radius` 检测（提示改用 token） |
 | R031-R037 | L1 | 扩展组件族（card/tabs/descriptions/drawer/upload/steps/feedback） |
 | R038 | L1 | 新建类按钮必须用 `primary` 主色填充（可自动修复） |
 | R039 | L1 | 普通数据列必须支持省略号 + hover 提示（可自动修复） |
 | R040 | L2 | 未知复合控件结构审查（要求人工核对后再增加精准适配） |
+
+---
+
+## 复合控件结构契约（v1.9.12）
+
+`standards/component-structures.json` 登记了 common-core 复合控件（多标签、人员/部门/树选择、多选、混合数字输入、BaseToolbar 分裂按钮）的结构契约：
+
+| 契约项 | 说明 |
+|--------|------|
+| 边框所有者 | 只由最合理的外层容器绘制，内部层无描边 |
+| 高度策略 | 组合根统一 26px，左右图标统一 14px，纯图标附加段统一 32px |
+| 状态覆盖 | 五态（default/hover/focus/error/disabled）始终只有一层边框 |
+| Teleport 出口 | 多选/下拉类控件的弹出层出口位置 |
+
+R040 基于此契约扫描：已登记结构正常通过，**疑似新结构要求人工核对**后再增加精准适配，不执行机械修复。
 
 ---
 
@@ -120,9 +137,27 @@ wl-ui all       --project .                           # 一键全流程（scan�
 | `installCommonPreset()` | 安装通用业务预设（含主题锁 + 普通表格长文本包级保护） |
 | `installUiRuntimeGuards()` | 主题锁 + 普通表格长文本包级保护（auto 保护入口） |
 | `installOverflowTooltipGuard()` | 单独安装真实溢出 Tooltip 兜底 |
+| `installSplitGridResizeGuard()` | 上下分屏拖动后 AG Grid 宿主自动沿 pane 收缩（v1.9.13） |
 | `createPreset(config)` / `installPreset(config)` | 自定义 preset 工厂 |
 | `registerColumnAutoMap(field, config)` | 注册新字段自动渲染 |
 | `setDictResolver(fn)` | 解耦动态字典查询 |
+
+---
+
+## 发布门禁：Chromium 视觉回归（v1.9.12）
+
+npm 发布前强制通过真实浏览器视觉回归测试，覆盖 8 个维度：
+
+| 回归维度 | 说明 |
+|---------|------|
+| 主题防反覆盖 | 品牌主色不被平台动态主题覆盖 |
+| 按钮圆角 | 五态（default/hover/focus/error/disabled）一致 |
+| textarea focus | 品牌色边框 + 轻焦点环 |
+| 数字输入单描边 | 始终一层边框，无双描边 |
+| 复合输入自然增高 | 多标签/人员选择换行时自然增高 |
+| 长文本提示 | 真实溢出时省略号 + hover 可查看 |
+| 表格行状态 | hover/selected 优先级正确 |
+| 定制豁免 | 登录页/显式豁免区域保持自身设计 |
 
 ---
 

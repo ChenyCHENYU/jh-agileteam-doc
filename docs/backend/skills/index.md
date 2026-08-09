@@ -17,7 +17,7 @@
 | 维度 | 现状 |
 |---|---|
 | 版本 | v0.18.1 |
-| 规范 | 29 条后端规范（B1~B29 扫描 + J1~J8 质量门） |
+| 规范 | 28 条规范文档（B1~B29 扫描规则 + J1~J8 质量门） |
 | Skill | 12 个（10 已落地，1 部分落地，1 流程骨架） |
 | MCP 工具 | 16 个（CLI/MCP 复用同一 `lib/` 核心） |
 | 生成 Profile | `jh4j3-openapi3`（Java 8 / Spring Boot 2 / jh4j-cloud 3.1 / MyBatis-Plus / OpenAPI 3） |
@@ -124,13 +124,13 @@ wl-skills-bd task --list             # 列出 8 种任务
 
 | 任务 | 模式 | 触发词 | 规则子集 |
 |---|---|---|---|
-| new-service | full | 新开发/全套CRUD | B1-B28 子集 + J |
-| add-api | incremental-contract | 加接口/加方法 | B1/B2/B5/B8/B12/B20/B24/B25/B26 |
-| add-field | incremental-contract | 加字段/落库 | B3/B4/B7/B18/B25/B26 |
-| add-business-cmd | incremental-contract | 加 submit/状态机 | B5/B8/B17/B20/B24/B25/B26 |
-| fix-bug | fix | 改 bug/修复 | B3/B5/B7/B8/B17/B18/B24/B25/B26/B28 |
-| refactor | fix | 重构/优化 | B5-B12/B23/B24/B25/B26/B28 |
-| audit | readonly | 审计/体检 | B1-B28 |
+| new-service | full | 新开发/全套CRUD | B1-B29 子集 + J |
+| add-api | incremental-contract | 加接口/加方法 | B1/B2/B5/B8/B12/B20/B24/B25/B26/B29 |
+| add-field | incremental-contract | 加字段/落库 | B3/B4/B7/B18/B25/B26/B29 |
+| add-business-cmd | incremental-contract | 加 submit/状态机 | B5/B8/B17/B20/B24/B25/B26/B29 |
+| fix-bug | fix | 改 bug/修复 | B3/B5/B7/B8/B17/B18/B24/B25/B26/B28/B29 |
+| refactor | fix | 重构/优化 | B5-B12/B23/B24/B25/B26/B28/B29 |
+| audit | readonly | 审计/体检 | B1-B29 |
 | config-op | config | 配置/连不上 | config-doctor |
 
 > `task` 只读、不写文件；`task --apply` 会被明确拒绝，避免出现第二套无事务写入器。增量需求先更新 `wl-contract.json`，再走 codegen `planHash + --confirm + 回滚`。
