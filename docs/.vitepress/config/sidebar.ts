@@ -272,6 +272,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "字典翻译", link: "/frontend/pc/capabilities/dict" },
+        { text: "非必填过滤", link: "/frontend/pc/capabilities/required-only-filter" },
       ],
     },
     {
@@ -283,24 +284,6 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "使用指南", link: "/frontend/pc/skills/usage-guide" },
         { text: "CLI 工具", link: "/frontend/pc/skills/cli" },
         { text: "页面模板", link: "/frontend/pc/skills/page-templates" },
-      ],
-    },
-    {
-      text: "12 个 AI Skill",
-      collapsed: true,
-      items: [
-        { text: "① 原型扫描", link: "/frontend/pc/skills/prototype-scan" },
-        { text: "② 说明书解析", link: "/frontend/pc/skills/spec-doc-parse" },
-        { text: "③ 业务文档提取", link: "/frontend/pc/skills/business-doc-extract" },
-        { text: "④ 接口约定", link: "/frontend/pc/skills/api-contract" },
-        { text: "⑤ 页面代码生成", link: "/frontend/pc/skills/page-codegen" },
-        { text: "⑥ 规范审计", link: "/frontend/pc/skills/convention-audit" },
-        { text: "⑦ 模板提取", link: "/frontend/pc/skills/template-extract" },
-        { text: "⑧ 菜单同步", link: "/frontend/pc/skills/menu-sync" },
-        { text: "⑨ 字典同步", link: "/frontend/pc/skills/dict-sync" },
-        { text: "⑩ 权限同步", link: "/frontend/pc/skills/permission-sync" },
-        { text: "⑪ 受控自动修复", link: "/frontend/pc/skills/code-fix" },
-        { text: "⑫ 环境配置", link: "/frontend/pc/skills/env-config" },
       ],
     },
     {
