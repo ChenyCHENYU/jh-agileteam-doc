@@ -11,6 +11,8 @@
 
 `Robot_H5` 采用 **Apple HIG Liquid Glass** 设计语言，遵循 Linear 现代工具美学。项目内置权限体系、主题系统、原生桥接能力，可同时运行于移动浏览器、钉钉/微信 WebView、原生 App 内嵌等多端场景。
 
+`v1.7.0+` 默认采用 ES2018 / Chrome 61 CSS 构建目标、无 `@layer` 样式产物和媒体查询尺寸适配，并内置 wl-mbase 宿主识别、各宿主单头部与动态标题，以及 App/PDA 双向返回导航。新项目通过脚手架创建即可获得这些约束，无需从业务项目复制适配代码。
+
 ::: tip 项目仓库
 `Robot_H5` — 与 PC 端共用后端网关，前端独立部署。支持 **standalone（独立运行）** 和 **integrated（mbase 子应用）** 双模式。
 
@@ -31,7 +33,7 @@
 | 路由 | Vue Router 4 | ^4.5.1 |
 | 状态管理 | Pinia 3 + persistedstate | ^3.0.3 |
 | UI 组件库 | Vant 4（自动导入） | ^4.9.14 |
-| 样式方案 | UnoCSS + SCSS + CSS @layer | ^66.5.1 |
+| 样式方案 | UnoCSS + SCSS（`#app` 优先级，不使用旧 PDA 不识别的 `@layer`） | ^66.5.1 |
 | 图表 | ECharts 6 | ^6.0.0 |
 | 图标 | Iconify (Phosphor + Material) | 5.0.0 |
 | 工具库 | VueUse | ^13.9.0 |
@@ -80,7 +82,7 @@
 | 构建压缩 | esbuild（生产自动 drop console/debugger）+ Gzip |
 | 移动端适配 | `postcss-mobile-forever`（px → vw 自动转换，基准 375px） |
 | 代码分割 | `vendor-vue` / `vendor-vant` / `vendor-echarts` 三路分包 |
-| CSS 层级 | `@layer base, components, utilities` 级联控制 |
+| CSS 层级 | 组件 SCSS 正常级联；UnoCSS 通过 `#app` 提升优先级 |
 | Sourcemap | 生产关闭 |
 
 ---
@@ -237,13 +239,15 @@ GetUserInfo + loadPermissions(appId='robot-h5')
 | `--ds-glass-bg` | rgba(255,255,255,0.52) | rgba(30,30,35,0.68) | 毛玻璃背景 |
 | `--ds-glass-blur` | 40px | 40px | 毛玻璃模糊值 |
 
-### CSS @layer 优先级体系
+### PDA 兼容的样式优先级体系
 
 ```
-@layer base         ← UnoCSS preflight（reset），最低
-@layer components   ← 组件 SCSS（vite.config.ts 自动包裹），中
-@layer utilities    ← UnoCSS 工具类（flex / mb-4），最高
+common.scss         ← 全局基础样式与设计令牌
+组件 SCSS           ← 按正常导入顺序级联
+#app .工具类        ← UnoCSS 通过 important: '#app' 提升优先级
 ```
+
+禁止用 `@layer` 包裹业务样式：部分旧 Android WebView 会直接丢弃整个规则块。修改构建或样式体系后运行 `pnpm test:compat`，并确认构建产物不含 `@layer`。
 
 ### 排版 & 间距
 

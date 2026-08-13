@@ -72,15 +72,16 @@ defineOptions({ name: 'DemoForm' })
 }
 ```
 
-### CSS Layers 优先级
+### PDA 兼容的 CSS 优先级
 
 ```
-@layer base < components < utilities
+common.scss → 组件 SCSS → #app 下的 UnoCSS 工具类
 ```
 
-- `base`：UnoCSS preflights（reset）
-- `components`：`src/` 下的 `.scss` 自动包裹
-- `utilities`：UnoCSS 工具类（最高优先级）
+- 全局基础样式和设计令牌由 `common.scss` 维护。
+- 组件 SCSS 按正常导入顺序级联，不使用 CSS Cascade Layers。
+- UnoCSS 配置 `important: '#app'`，工具类通过选择器优先级覆盖组件默认值。
+- 禁止 `@layer` 包裹业务规则；修改样式构建后必须运行 `pnpm test:compat`。
 
 ### UnoCSS 快捷方式
 
