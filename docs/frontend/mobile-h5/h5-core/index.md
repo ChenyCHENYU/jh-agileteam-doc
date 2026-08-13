@@ -156,19 +156,19 @@ Hooks（15 个）
 
 ## 能力矩阵
 
-| 分类 | Hook | 功能 | 浏览器 | APP | 钉钉 | 微信 |
+| 分类 | Hook | 功能 | 浏览器 | mbase 基座 | 钉钉 | 微信 |
 |---|---|---|:---:|:---:|:---:|:---:|
 | 媒体捕获 | `useCamera` | 拍照/相册 + 压缩 | ✅ | ✅ | ✅ | ✅ |
 | | `useLocation` | GPS 单次/持续定位 | ✅ | ✅ | ✅ | ✅ |
 | | `useQrScanner` | 二维码/条形码扫描 | ⚠️ | ✅ | ✅ | ✅ |
-| | `useNfc` | NFC 读写 | ❌ | ✅ | ❌ | ❌ |
+| | `useNfc` | NFC 读写 | ❌ | ❌ | ❌ | ❌ |
 | 文件操作 | `useFileUpload` | 分片上传 + 断点续传 | ✅ | ✅ | ✅ | ✅ |
 | | `useFilePreview` | PDF/Office/图片预览 | ✅ | ✅ | ✅ | ✅ |
 | | `useFileDownload` | 文件下载 + 进度 | ✅ | ✅ | ✅ | ✅ |
 | 媒体处理 | `useSignature` | Canvas 手写签名 | ✅ | ✅ | ✅ | ✅ |
 | | `useAudioRecorder` | 录音 + 暂停恢复 | ✅ | ✅ | ✅ | ⚠️ |
 | | `useVideoRecorder` | 视频录制 + 预览 | ✅ | ✅ | ⚠️ | ⚠️ |
-| 连接/存储 | `useBluetooth` | 蓝牙设备连接 | ⚠️ | ✅ | ❌ | ❌ |
+| 连接/存储 | `useBluetooth` | 蓝牙设备连接 | ⚠️ | ❌ | ❌ | ❌ |
 | | `useOfflineStorage` | IndexedDB 离线存储 | ✅ | ✅ | ✅ | ⚠️ |
 | 系统 | `usePushNotification` | 推送通知 | ✅ | ✅ | ✅ | ✅ |
 | | `useWatermark` | 图片水印 | ✅ | ✅ | ✅ | ✅ |
@@ -190,7 +190,7 @@ Hooks（15 个）
 ├── bridge/         ← Bridge 适配层
 │   ├── detector    ← 平台自动检测
 │   ├── registry    ← 适配器注册表
-│   └── adapters/   ← 4 个内置适配器
+│   └── adapters/   ← 5 个内置适配器（browser/mbase/dingtalk/wechat/native）
 │       ├── browser    浏览器（降级）
 │       ├── native     APP WebView
 │       ├── dingtalk   钉钉

@@ -62,21 +62,23 @@ Robot_H5 `v1.7.1+` 已默认完成配置：在 `h5.config.ts` 声明精确的门
 ```ts
 import { useLocation, useCamera, useQrScanner } from '@robot-h5/core'
 
-// 定位
+// 定位（App 环境基座已处理 WGS-84→GCJ-02 转换）
 const { getCurrentPosition } = useLocation()
 const location = await getCurrentPosition()
-// → { latitude, longitude, accuracy, coordinateSystem, provider, sampleCount, ... }
+// → Coordinates: { longitude, latitude, altitude?, accuracy, timestamp }
 
-// 拍照
-const { takePhoto } = useCamera()
-const { images } = await takePhoto({ max: 1 })
-// → { images: string[] }（base64 dataURI）
+// 拍照（自动压缩）
+const { capture } = useCamera()
+const photo = await capture()
+// → File | null
 
 // 扫码
 const { scan } = useQrScanner()
-const { text } = await scan({ type: 'qrCode' })
-// → { text: string }
+const text = await scan({ type: 'qrcode' })
+// → string（扫码结果文本）
 ```
+
+> App 桥接层底层 API（`takePhoto`/`takePhotoAndUpload`/`getLocation`/`scan`/`debugInfo`）见 2.4 能力白名单。
 
 ::: warning 禁止事项
 - **禁止**子应用自行判断 Android/iOS 平台
@@ -246,10 +248,44 @@ Start-Process "$env:HBUILDERX_HOME\HBuilderX.exe"
 
 ### 6.4 调试技巧
 
-- 调用 `debugInfo` 能力获取基座诊断：`{ bridge, protocol, appVersion, environment, domain, platform, locationProvider }`
+- 调用 `debugInfo` 能力获取基座诊断：`{ bridge, protocol, appVersion, environment, domain, platform, locationProvider, sourceApi }`
+- 调用 `getMbaseTransportStatus()` 获取 Core 侧传输层诊断（初始化状态/origin 校验/SDK 加载/能力调用统计）
 - 连续定位采样 ≥ 10 次，记录 `coordinateSystem`/`accuracy`/`sampleCount`/距点位米数
 - 权限拒绝后检查：Android 设置 → 应用 → wl-mbase → 权限
 - WebView 控制台日志通过 HBuilderX「调试 → 调试 WebView」
+
+---
+
+## 6.5 Core 侧稳定错误码
+
+子应用通过 `@robot-h5/core` 调用能力时，Core 侧会返回以下稳定错误码：
+
+| 错误码 | 含义 | 排查 |
+|--------|------|------|
+| `mbase_origin_missing` | 未配置门户 origin 或 origin 为 `*` | 检查 `h5.config.ts` 的 `portal.origin` 配置 |
+| `app_sdk_url_missing` | App SDK（`uni.webview.1.5.8.js`）路径未配置 | 检查 `h5.config.ts` 的 `appSdkUrl` 配置 |
+| `app_bridge_not_ready` | App 桥接 SDK 尚未加载完成 | 确保在 App/PDA 环境中运行，等待 SDK 按需加载 |
+| `timeout` | 能力调用超时 | 检查网络、基座是否响应该能力、增加 timeout 配置 |
+
+> 普通第三方 iframe 不会被误判为基座；未嵌入基座时能力调用**立即拒绝**（而非挂起）。
+
+## 6.6 安全回传校验
+
+Core 对基座 `evalJS` 回传的结果执行双重校验：
+1. `event.source` 校验：确保回包来自正确的子 WebView
+2. `event.origin` 校验：确保回包来自配置的门户 origin
+
+两者不匹配时丢弃回包，不触发 resolve。
+
+## 6.7 会话与缓存管理（v1.7.0+）
+
+| 场景 | 行为 |
+|------|------|
+| 门户新 token 下发 | 覆盖旧 token + 清理子应用本地账号状态 |
+| 退出登录 | 同步清除本地用户、公司、权限缓存 |
+| App SDK 按需加载 | 普通 H5 / 微信 / 钉钉**主包不含 App SDK**，仅 App/PDA 首次通信时按需加载 |
+
+> **禁止**直接调用 `window.android` / `window.webkit` / `plus.webview` 等废弃返回桥（v1.7.0 已删除）。统一走 `@robot-h5/core` Hook API。
 
 ---
 
