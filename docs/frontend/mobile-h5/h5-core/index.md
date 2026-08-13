@@ -29,9 +29,9 @@
 | 属性 | 值 |
 |---|---|
 | 包名 | `@robot-h5/core` |
-| 版本 | `1.0.0` |
-| 构建产物 | ESM（`dist/index.mjs`） |
-| 类型声明 | `dist/index.d.ts` |
+| 版本 | `1.1.4` |
+| 构建产物 | ESM 多入口（主入口 / hooks / bridge / utils） |
+| 类型声明 | 各公共入口随包发布 |
 | 前置依赖 | `vue@^3.3.0` |
 | 副作用 | `sideEffects: false`（支持 Tree-shaking） |
 
@@ -50,7 +50,12 @@ import { useCamera } from '@robot-h5/core/hooks';
 import { useCamera } from '@robot-h5/core/hooks/useCamera';
 
 // Bridge 适配层
-import { useBridge, createBridge } from '@robot-h5/core/bridge';
+import {
+  useBridge,
+  createBridge,
+  invokeMbaseCapability,
+  getMbaseTransportStatus,
+} from '@robot-h5/core/bridge';
 
 // 工具函数
 import { compressImage, formatDate } from '@robot-h5/core/utils';
@@ -66,7 +71,7 @@ import { compressImage } from '@robot-h5/core/utils/image';
 ### 1. 安装
 
 ```bash
-pnpm add @robot-h5/core
+pnpm add @robot-h5/core@^1.1.4
 ```
 
 ### 2. 创建配置文件
@@ -76,6 +81,14 @@ pnpm add @robot-h5/core
 import { defineH5Config } from '@robot-h5/core';
 
 export default defineH5Config({
+  bridge: {
+    platform: 'auto',
+    mbase: {
+      origin: import.meta.env.VITE_MBASE_ORIGIN,
+      appBridgeTimeoutMs: 6000,
+      appSdkUrl: `${import.meta.env.BASE_URL}vendor/uni.webview.1.5.8.js`,
+    },
+  },
   // 上传接口
   upload: {
     action: '/api/file/upload',

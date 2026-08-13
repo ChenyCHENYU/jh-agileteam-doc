@@ -1,6 +1,6 @@
 # Bridge 适配层
 
-Bridge 是 `@robot-h5/core` 的平台抽象层，使 15 个 Hook 在不同宿主环境（浏览器、APP、钉钉、微信）下自动选择最佳实现。
+Bridge 是 `@robot-h5/core` 的平台抽象层，使 15 个 Hook 在不同宿主环境（浏览器、wl-mbase App/PDA/iframe、钉钉、微信）下自动选择最佳实现。
 
 ---
 
@@ -17,8 +17,8 @@ Bridge 是 `@robot-h5/core` 的平台抽象层，使 15 个 Hook 在不同宿主
 │  适配器选择器（Detector + Registry）              │
 │  自动检测 UA → 匹配适配器 → 注入 overrides       │
 ├──────────┬──────────┬──────────┬──────────────┤
-│ Browser  │ Native   │ Dingtalk │ Wechat       │
-│ 浏览器降级│ APP 原生  │ 钉钉     │ 微信/企微     │
+│ Browser  │ Mbase   │ Dingtalk │ Wechat       │
+│ 浏览器降级│ App/PDA │ 钉钉     │ 微信/企微     │
 └──────────┴──────────┴──────────┴──────────────┘
 ```
 
@@ -68,11 +68,12 @@ interface BridgeAdapter {
 
 ---
 
-## 4 个内置适配器
+## 内置适配器
 
 | 适配器 | 环境 | 检测条件 | 说明 |
 |---|---|---|---|
 | **BrowserBridge** | 浏览器 | 兜底默认 | Web 标准 API 降级实现 |
+| **MbaseBridge** | wl-mbase App/PDA/iframe | 明确的门户或 App 宿主标记 | 严格来源校验、统一能力协议与稳定错误码 |
 | **NativeBridge** | APP WebView | `nativeUA` 匹配 UA | 通过 `overrides` 注入 JSBridge |
 | **DingtalkBridge** | 钉钉 | UA 含 `DingTalk` | 通过 `overrides` 注入 dingtalk-jsapi |
 | **WechatBridge** | 微信/企微 | UA 含 `MicroMessenger` | 通过 `overrides` 注入 weixin-js-sdk |
@@ -80,6 +81,31 @@ interface BridgeAdapter {
 ::: info overrides 模式
 除 BrowserBridge 外，其他适配器的核心实现由**项目侧**通过 `overrides` 注入（三方 SDK 不打包进 core），保持 core 包零三方依赖。
 :::
+
+### wl-mbase 公共传输入口
+
+```ts
+import {
+  invokeMbaseCapability,
+  MbaseBridgeError,
+  getMbaseTransportStatus,
+} from '@robot-h5/core/bridge'
+
+try {
+  const result = await invokeMbaseCapability('chooseImage', {
+    source: 'album',
+    max: 1,
+  })
+} catch (error) {
+  if (error instanceof MbaseBridgeError) {
+    console.error(error.code, error.message, error.details)
+  }
+}
+
+console.table(getMbaseTransportStatus())
+```
+
+iframe 仅向配置的精确 `origin` 发送，并校验响应窗口与来源；App/PDA 的自托管 `uni.webview` SDK 仅在首次通信时按需加载。稳定错误码包括 `mbase_origin_missing`、`app_sdk_url_missing`、`app_bridge_not_ready` 和 `timeout`。
 
 ---
 

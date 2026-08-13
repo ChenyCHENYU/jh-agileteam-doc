@@ -50,8 +50,10 @@ wl-mbase App 采用**原生基座 + 远程 H5 子应用**形态：
 ### 2.1 升级依赖
 
 ```bash
-pnpm add @robot-h5/core@^1.1.1
+pnpm add @robot-h5/core@^1.1.4
 ```
+
+Robot_H5 `v1.7.1+` 已默认完成配置：在 `h5.config.ts` 声明精确的门户 `origin` 与自托管 `appSdkUrl`，Core 仅在 App/PDA 首次通信时加载官方 SDK。不要在 `index.html` 静态引入 SDK；普通 H5、微信和钉钉不下载、不执行 App 专属实现。
 
 ### 2.2 业务调用方式（零改动）
 

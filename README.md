@@ -20,6 +20,8 @@
 
 一个面向全栈研发团队的 **AI 工程化知识文档站**，沉淀团队在 AI 辅助研发实践中积累的 Skills、规范、工作流与组件体系。
 
+移动端工程基线：Robot_H5 `v1.7.1+`、`@robot-h5/core@^1.1.4`；包含 PDA 旧 WebView 兼容、wl-mbase 单头部/动态标题、可信桥接与 App SDK 按需加载规范。
+
 不是普通的 Wiki。它是一套可执行的工程化方法论 —— 每一个 Skill 都可以直接在 AI 编辑器（Copilot / Cursor / Windsurf 等）中调用，从 Axure 原型到可运行代码，一键完成。
 
 ---

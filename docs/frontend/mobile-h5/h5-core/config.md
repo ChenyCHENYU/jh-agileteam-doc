@@ -52,6 +52,11 @@ export default defineH5Config({
     nativeUA: 'MyApp',    // 自研 APP UA 特征
     dingtalk: { corpId: 'ding_xxx' },
     wechat: { appId: 'wx_xxx', jsApiList: ['scanQRCode'] },
+    mbase: {
+      origin: import.meta.env.VITE_MBASE_ORIGIN,
+      appBridgeTimeoutMs: 6000,
+      appSdkUrl: `${import.meta.env.BASE_URL}vendor/uni.webview.1.5.8.js`,
+    },
     overrides: { /* 平台 SDK 能力覆盖 */ },
   },
 
@@ -87,13 +92,19 @@ interface AppConfig {
 ```ts
 interface BridgeConfig {
   /** 平台类型，'auto' 为自动检测 */
-  platform?: 'auto' | 'native' | 'dingtalk' | 'wechat' | 'browser' | string;
+  platform?: 'auto' | 'native' | 'dingtalk' | 'mbase' | 'wechat' | 'browser' | string;
   /** APP 端自定义 UA 特征字符串 */
   nativeUA?: string;
   /** 钉钉配置 */
   dingtalk?: { corpId: string };
   /** 微信/企微配置 */
   wechat?: { appId: string; jsApiList?: string[] };
+  /** wl-mbase 可信桥接与 App/PDA SDK 按需加载 */
+  mbase?: {
+    origin?: string;
+    appBridgeTimeoutMs?: number;
+    appSdkUrl?: string;
+  };
   /** 项目侧 SDK 能力覆盖 */
   overrides?: BridgeAdapterOverrides;
 }

@@ -35,7 +35,7 @@ https://github.com/ChenyCHENYU/jh4j-ui-template.git
 → https://gitee.com/ycyplus163/jh4j-ui-template.git
 ```
 
-移动端模板按以下顺序尝试，并默认固定到 `v1.7.0`（内置 PDA 旧 WebView 兼容和 wl-mbase 导航协议）：
+移动端模板按以下顺序尝试，并默认固定到 `v1.7.1`（内置 PDA 旧 WebView 兼容、wl-mbase 导航协议，以及 `@robot-h5/core@^1.1.4` 严格桥接与 App SDK 按需加载）：
 
 ```text
 https://github.com/ChenyCHENYU/Robot_H5.git
