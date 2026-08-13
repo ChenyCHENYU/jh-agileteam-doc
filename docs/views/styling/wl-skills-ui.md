@@ -1,6 +1,6 @@
 # @agile-team/wl-skills-ui — 企业级 UI 风格对齐框架
 
-> 版本：v1.9.13 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+> 版本：v1.9.16 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
 
 ---
 
@@ -137,7 +137,8 @@ R040 基于此契约扫描：已登记结构正常通过，**疑似新结构要�
 | `installCommonPreset()` | 安装通用业务预设（含主题锁 + 普通表格长文本包级保护） |
 | `installUiRuntimeGuards()` | 主题锁 + 普通表格长文本包级保护（auto 保护入口） |
 | `installOverflowTooltipGuard()` | 单独安装真实溢出 Tooltip 兜底 |
-| `installSplitGridResizeGuard()` | 上下分屏拖动后 AG Grid 宿主自动沿 pane 收缩（v1.9.13） |
+| `installSplitGridResizeGuard()` | 上下分屏拖动后 AG Grid 宿主自动沿 pane 收缩（v1.9.16） |
+| `normalizeColumnAlignment(s)` | 把业务 `align/headerAlign` 桥接为 BaseTable/AG Grid 可消费的 `cellStyle/headerClass`，递归覆盖分组列（v1.9.16） |
 | `createPreset(config)` / `installPreset(config)` | 自定义 preset 工厂 |
 | `registerColumnAutoMap(field, config)` | 注册新字段自动渲染 |
 | `setDictResolver(fn)` | 解耦动态字典查询 |
@@ -158,6 +159,9 @@ npm 发布前强制通过真实浏览器视觉回归测试，覆盖 8 个维度�
 | 长文本提示 | 真实溢出时省略号 + hover 可查看 |
 | 表格行状态 | hover/selected 优先级正确 |
 | 定制豁免 | 登录页/显式豁免区域保持自身设计 |
+| 字体链统一（v1.9.14） | Element Table / BaseTable / AG Grid 中英文数字字体链一致 |
+| jh-input-number 五态（v1.9.14） | 复合数字框 26px 高度链 + 单描边 + controls 语义正确 |
+| 列对齐桥接（v1.9.16） | 业务 `align/headerAlign` 正确桥接为 `cellStyle/headerClass` |
 
 ---
 
@@ -199,7 +203,7 @@ AbstractPageQueryHook + BaseQuery + BaseToolbar + BaseTable(render-type="agGrid"
 |---|---|---|
 | `element-plus` | `2.2.6-prod.3` | 集团 jh- 定制版 |
 | `@jhlc/jh-ui` | `3.1.0` | SCSS 皮肤包 |
-| `@agile-team/wl-skills-ui` | `^1.9.13` | 已对齐上述组合 |
+| `@agile-team/wl-skills-ui` | `^1.9.16` | 已对齐上述组合 |
 
 ---
 

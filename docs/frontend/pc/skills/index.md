@@ -1,6 +1,6 @@
 # 前端 Skills 概述
 
-前端 Skills 基于 `@agile-team/wl-skills-kit` v2.16.4 — 一条命令，将 **14 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
+前端 Skills 基于 `@agile-team/wl-skills-kit` v2.16.9 — 一条命令，将 **14 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
 
 ## 快速开始
 
@@ -155,6 +155,11 @@ v2.16.1 起新增统一表单能力，支持大表单中混合必填/非必填�
 **配套审计规则**：
 - **R17**：表单仅必填开关按每个实际绑定逐项判断（弹窗/独立页面/分区表单全覆盖）
 - **R18**：表单校验库 `@robot-admin/form-validate@^3.4.1` 版本范围检查（缺失依赖/废弃拆包/Naive API 误用/通用规则重复手写）
+- **R19**：弹窗内 AG Grid 必须用 `v-if` 延迟挂载（防止弹窗动画期间初始化导致零高度渲染）
+
+**其他确定性门禁（v2.16.5–v2.16.6）**：
+- **D3**：字典字段绑定门禁，逐字段核对 `dict/dictCode/logicValue`，缺失或错绑给确定性错误
+- **S7**：进阶查询（lookupFlows）门禁，查询操作必须唯一、回填来源/目标字段必须覆盖
 
 ---
 

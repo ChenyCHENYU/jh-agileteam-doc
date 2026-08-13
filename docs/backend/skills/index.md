@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip ✅ 已正式发布
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.18.1**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、MCP 与安全修复闭环全链路。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.18.2**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、MCP 与安全修复闭环全链路。
 :::
 
 ## 概述
@@ -16,8 +16,8 @@
 
 | 维度 | 现状 |
 |---|---|
-| 版本 | v0.18.1 |
-| 规范 | 28 条规范文档（B1~B29 扫描规则 + J1~J8 质量门） |
+| 版本 | v0.18.2 |
+| 规范 | 29 条规范文档（B1~B30 扫描规则 + J1~J8 质量门） |
 | Skill | 12 个（10 已落地，1 部分落地，1 流程骨架） |
 | MCP 工具 | 16 个（CLI/MCP 复用同一 `lib/` 核心） |
 | 生成 Profile | `jh4j3-openapi3`（Java 8 / Spring Boot 2 / jh4j-cloud 3.1 / MyBatis-Plus / OpenAPI 3） |
@@ -45,7 +45,7 @@ L3 CLI 适配              L3 MCP 适配        ← 二者只能适配同一 lib
 L4 工程产物    Java / XML / DDL / tests / contracts / catalog / docs + standards/skills/quality 配置
                     │
                     ▼
-L5 验证        B1~B29 + J1~J8 + strict contract diff + assurance evidence + 包自检
+L5 验证        B1~B30 + J1~J8 + strict contract diff + assurance evidence + 包自检
                     │
                     ▼
 L6 人工卡口    DDL/数据、权限发布、环境部署、破坏性 API、业务重构
@@ -89,7 +89,7 @@ wl-skills-bd codegen apply   wl-contract.json --plan-hash <sha256> --confirm
 
 > 当前 Profile 使用 **Controller → 直接 Service → Mapper**，不生成无业务价值的 `IService + ServiceImpl` 双层；Controller→Mapper 由 ArchUnit J1 阻断。
 
-## 29 条后端规范
+## 30 条后端规范
 
 AI 按**任务类型懒加载**相关条目，不全量加载；规范变更顺序追加，不复用废弃编号。
 
@@ -106,7 +106,8 @@ AI 按**任务类型懒加载**相关条目，不全量加载；规范变更顺�
 | 稳定性 | 22–23 | 限流熔断（Feign 超时/重试/熔断/舱壁）/ 定时任务（@SchedulerLock/幂等/监控） |
 | 多环境与配置 | 24–25 | 多环境（profile/nacos/生产护栏）/ 配置分层（三层模型/env-matrix/体检/迁移/排查） |
 | 任务与上下文 | 26–27 | 任务驱动（8 种任务/规则子集/统一安全写链）/ 项目目录与精准上下文（增量扫描/一跳快照/去重） |
-| 生产保障 | 28 | 生产保障：SLO/RTO/RPO、安全、数据治理、并发一致性、韧性与六类交付证据 |
+| 生产保障 | 28–29 | 生产保障：SLO/RTO/RPO、安全、数据治理、并发一致性、韧性与六类交付证据 / 分页 DTO 与 Profile 默认值上限一致性 |
+| 路由闭环 | 30 | B30：从 Controller 源码提取真实 HTTP 路由（方法/类路径/方法路径/行号），输出端点清单并阻断重复完整路由 |
 
 完整门控与任务类型 → 必读规范映射见 `wl-skills-bd` 包内 `files/.github/standards/index.md`。
 
@@ -124,13 +125,13 @@ wl-skills-bd task --list             # 列出 8 种任务
 
 | 任务 | 模式 | 触发词 | 规则子集 |
 |---|---|---|---|
-| new-service | full | 新开发/全套CRUD | B1-B29 子集 + J |
+| new-service | full | 新开发/全套CRUD | B1-B30 子集 + J |
 | add-api | incremental-contract | 加接口/加方法 | B1/B2/B5/B8/B12/B20/B24/B25/B26/B29 |
 | add-field | incremental-contract | 加字段/落库 | B3/B4/B7/B18/B25/B26/B29 |
 | add-business-cmd | incremental-contract | 加 submit/状态机 | B5/B8/B17/B20/B24/B25/B26/B29 |
 | fix-bug | fix | 改 bug/修复 | B3/B5/B7/B8/B17/B18/B24/B25/B26/B28/B29 |
 | refactor | fix | 重构/优化 | B5-B12/B23/B24/B25/B26/B28/B29 |
-| audit | readonly | 审计/体检 | B1-B29 |
+| audit | readonly | 审计/体检 | B1-B30 |
 | config-op | config | 配置/连不上 | config-doctor |
 
 > `task` 只读、不写文件；`task --apply` 会被明确拒绝，避免出现第二套无事务写入器。增量需求先更新 `wl-contract.json`，再走 codegen `planHash + --confirm + 回滚`。
@@ -198,7 +199,7 @@ wl-skills-bd test gen      wl-contract.json --output src/test/java/.../XxxServic
 
 | 工具 | 写入 | 作用 |
 |---|:---:|---|
-| `wls_be_validate` | 否 | B1~B29 扫描 |
+| `wls_be_validate` | 否 | B1~B30 扫描 |
 | `wls_be_doctor` | 否 | JDK/Maven/Profile/质量门/租户证据/契约覆盖体检 |
 | `wls_be_codegen` | 条件 | 契约 validate/plan/apply |
 | `wls_be_contract` | 否 | 协作契约 show/diff（前端/OpenAPI/权限/kit api.md） |

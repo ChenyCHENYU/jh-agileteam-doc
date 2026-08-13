@@ -2,8 +2,8 @@
 
 <AuthorTag :authors="['YangTianGuang','DaiAn','ZhangXiang','ZhangJie','PanChaoYue']" />
 
-::: tip v0.18.1 已落地
-后端方向基于 **`@agile-team/wl-skills-bd`（v0.18.1）** 形成可安装、可验证、可回放的工程闭环，覆盖契约驱动生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、生产保障、质量门与 MCP 全链路。
+::: tip v0.18.2 已落地
+后端方向基于 **`@agile-team/wl-skills-bd`（v0.18.2）** 形成可安装、可验证、可回放的工程闭环，覆盖契约驱动生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、生产保障、质量门与 MCP 全链路。
 :::
 
 ---
@@ -39,13 +39,13 @@ npx @agile-team/wl-skills-bd doctor
 
 ---
 
-## 核心能力（v0.18.1）
+## 核心能力（v0.18.2）
 
 | 维度 | 数量 | 说明 |
 |------|:----:|------|
 | AI Skill | 12 | 契约设计→代码生成→DDL→单测→审计→修复 全链路 |
 | MCP 工具 | 16 | wls_be_* 前缀，全部实现 |
-| 后端规范 | 29 | B1~B29 确定性扫描（工程基线→安全护栏→稳定性→生产保障） |
+| 后端规范 | 29 | B1~B30 确定性扫描（工程基线→安全护栏→稳定性→生产保障） |
 | Java 质量门 | 8 | J1~J8（ArchUnit/Checkstyle/PMD/SpotBugs/Spotless/P3C/JaCoCo） |
 | 代码模板 | 16 | Entity/DTO/VO/Controller/Service/Mapper XML/DDL/Flyway/Test |
 | 任务驱动 | 8 种 | new-service/add-api/add-field/add-business-cmd/fix-bug/refactor/audit/config-op |
@@ -72,7 +72,7 @@ npx @agile-team/wl-skills-bd doctor
       ↓                                                              ↓
 ⑤ db-migration（DDL+Flyway）←───────────────────────────────────── ⑦ unit-test-gen
       ↓                                                              ↓
-⑥ convention-audit-be（B1-B29 + J1-J8）←───────────────────────── ⑧ code-fix-be
+⑥ convention-audit-be（B1-B30 + J1-J8）←───────────────────────── ⑧ code-fix-be
 ```
 
 详见 [AI Skills 流水线](./skills/skill-pipeline)。
