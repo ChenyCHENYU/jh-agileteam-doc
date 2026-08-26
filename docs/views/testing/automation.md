@@ -306,3 +306,29 @@ npx playwright test your-script.spec.js --reporter=list
 - [ ] 报告含基础统计、失败明细、最终结论
 - [ ] 报告文件已保存为 .md 格式（含 UTF-8 BOM）
 - [ ] 失败用例已区分「失败」和「阻塞」
+
+---
+
+## E2E 工程化生成（v0.8.0+，run-gen --type e2e）
+
+除 Skill 级脚本生成外，包 v0.8.0 起支持从 `page-spec.json` 批量生成**工程级 Playwright 工程**（对标 wl-ui-produce 32 页 e2e 实战并模板化超越）：
+
+| 能力 | 说明 |
+|------|------|
+| 7 层 project 编排 | auth-setup → round1-readonly → round1-detail → ui-contract → round2-write → quarantine → cleanup，A/B/C 风险分层 |
+| 用例归属强校验 | `fixtures/suites.js` 归属清单加载即断言：未归类/重复归属/缺安全标记/Bearer 截断/UI 契约缺 page.route 任一命中拒绝运行，杜绝假闭环 |
+| 显式路由映射 | `--routes routes.json`（pageId→路由）优先于目录推导，双向一致性校验，修复"路由与目录无关"的真实错配 |
+| 选择器适配层 | `--ui element-plus\|steel\|ant-design` 生成 `support/selectors.js` 集中管理选择器，换组件库只改一个文件 |
+| 工位页/子表页签模板 | `features.workstation` 生成查看态禁用断言、进阶查询回填、save/submit 契约（page.route 拦截零污染）；`subTables` 生成逐页签用例 |
+| e2e-check 独立卡门 | 对任意 e2e 工程独立执行归属闭环 + 静态安全扫描，CI 非零退出（CLI / MCP `wls_test_e2e_check`） |
+
+```bash
+# 从 page-spec + 路由映射生成 E2E 工程
+npx @agile-team/wl-skills-test run-gen --contract ./page-spec.json --type e2e \
+  --ui steel --routes ./routes.sit.json
+
+# 对已存在的 e2e 工程做强校验（CI 卡门）
+npx @agile-team/wl-skills-test e2e-check --target ./e2e/
+```
+
+沙箱模拟跑验证链（`scripts/simulate-e2e.mjs`）：真实 page-spec（32 页）→ 生成 → mock 前后端 → 真实浏览器逐页执行 ROUND1 五硬门 → 32/32 全绿 → 沙箱即删，源项目零写入。

@@ -133,22 +133,27 @@ node quality-gate.js \
 
 ---
 
-## MCP 工具（12 个）
+## MCP 工具（17 个）
 
 | 工具 | 用途 |
 |------|------|
 | `wls_test_standards` | 查询测试规范 |
 | `wls_test_contract_read` | 读取 kit/bd 契约 |
-| `wls_test_case_generate` | 生成测试用例 |
+| `wls_test_case_generate` | 生成测试用例（`granularity: "field"` 支持字段级细粒度） |
 | `wls_test_smoke_select` | 筛选冒烟套件 |
 | `wls_test_env_check` | 校验环境连通性 |
 | `wls_test_quality_analyze` | DI 质量评估 |
 | `wls_test_jmeter_validate` | 校验 JMeter jmx |
-| `wls_test_audit` | 审计测试代码 |
+| `wls_test_audit` | 审计测试代码（T1-T25） |
 | `wls_test_fix` | 自动修复反模式 |
-| `wls_test_run_api` | 执行 API 测试 |
+| `wls_test_run_api` | 执行深度 API 测试（DAG + 四层断言 + 负例 + 契约漂移） |
 | `wls_test_run_playwright` | 执行 Playwright |
 | `wls_test_run_jmeter` | 执行 JMeter |
+| `wls_test_e2e_generate` | 从 page-spec 生成 7 层 project 编排 E2E 工程（含工位/子表页签模板） |
+| `wls_test_report_generate` | 聚合 test-reports/ 生成规范报告 + 上线判定（`--trend` 趋势） |
+| `wls_test_e2e_check` | 对任意 E2E 工程独立执行归属闭环 + 静态安全扫描（CI 卡门） |
+| `wls_test_dict_sync` | 拉取系统字典归一化为 dict.json（三形态自动识别） |
+| `wls_test_gate` | 一键聚合质量门（审计 + e2e-check + 冒烟 + DI + 性能基线） |
 
 ---
 

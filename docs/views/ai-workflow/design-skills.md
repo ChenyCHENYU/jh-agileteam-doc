@@ -6,12 +6,13 @@
 
 ## 这是什么？
 
-一套面向**产品设计阶段**的 AI 技能包 — 覆盖从业务流程图、需求说明书、原型标注到数据库设计、接口设计、术语词典、变更影响分析、集成评审的完整链路。让 AI **按团队规范做设计，且生成即合规、自检、可追溯**。
+一套面向**产品设计阶段**的 AI 技能包 — 覆盖从业务流程图、需求说明书、原型标注、半成品文档接入到数据库设计、接口设计、术语词典、变更影响分析、代码结构设计、集成评审的完整链路。让 AI **按团队规范做设计，且生成即合规、自检、可追溯**（`[M]` 机械 / `[J]` 语义双轨验证，`verify` CLI 四域机械校验）。
 
-与 `wl-skills-kit`（前端代码生成）和 `wl-skills-ui`（UI 风格对齐）形成三包协作：
+作为五包生态的设计起点，与下游各包契约对齐：
 
 ```
-wl-skills-design（需求设计）→ wl-skills-kit（代码生成）→ wl-skills-ui（视觉一致性）
+wl-skills-design（需求设计）→ wl-skills-kit（前端代码）→ wl-skills-ui（视觉一致性）
+                            → wl-skills-bd（后端代码） → wl-skills-test（测试验证）
 ```
 
 ---
@@ -148,6 +149,24 @@ npx @agile-team/wl-skills-design verify api
 - D4 跨文档三角联动 18 项检查
 - 输出综合评分报告：仪表盘 + P0 阻断清单 + 追溯矩阵
 
+### 9. 代码结构设计（v0.8.0）
+
+```bash
+"为订单模块设计业务逻辑代码结构（模块边界 / 分层 / 依赖方向 / 质量门）"
+```
+
+- 按 AC01–AC20 输出设计开发就绪的模块、分层、依赖与质量门约定
+- 不生成具体业务代码，只固化结构契约；`validate-model` 可机械校验 design-model 的稳定 ID 与引用完整性
+
+### 10. 半成品文档接入 doc-intake（v0.10.0）
+
+```bash
+"评估 docs/legacy 下这批设计文档，输出差距报告和补全任务清单"
+```
+
+- 采集归位（未归类区）→ 机械 + 语义差距分析（含字典值漂移、名称近似漂移检测）
+- 输出 P0/P1/P2 补全任务清单；授权后补齐结构缺口，可 draft design-model 铸造
+
 ---
 
 ## 规范体系（9 条）
@@ -158,7 +177,7 @@ npx @agile-team/wl-skills-design verify api
 | 02 | 原型标注规范 | ✅ | 23 项 |
 | 03 | 数据库设计规范 | ✅ | 34 项 |
 | 04 | 接口设计规范 | ✅ | 38 项 |
-| 05 | 代码设计规范 | 🔲 | — |
+| 05 | 代码设计规范 | ✅ v1.0 | AC01–AC20（模块边界/分层/契约/依赖方向/测试与发布质量门） |
 | 06 | 需求设计说明书规范 | ✅ | 43 项 |
 | 07 | 设计集成评审规范 | ✅ | 18 项（D4 联动） |
 | 08 | 术语字段词典规范 | ✅ | 18 项 |
@@ -166,7 +185,7 @@ npx @agile-team/wl-skills-design verify api
 
 ---
 
-## VS Code Copilot Prompts（15 个）
+## VS Code Copilot Prompts（16 个）
 
 | Prompt | 用途 |
 |--------|------|
@@ -185,6 +204,7 @@ npx @agile-team/wl-skills-design verify api
 | `/analyze-change-impact` | 分析变更影响 |
 | `/validate-change-impact` | 验证变更影响 |
 | `/design-review` | 集成评审出报告 |
+| `/intake-docs`（v0.10.0） | 半成品文档接入：采集归位 → 机械+语义差距分析 → 补全任务清单 |
 
 ---
 
@@ -195,20 +215,20 @@ npx @agile-team/wl-skills-design verify api
 ├── .github/
 │   ├── copilot-instructions.md       AI 主入口
 │   ├── standards/                    9 条设计规范 + index.md 门控
-│   ├── skills/
+│   ├── skills/                       10 个 Skill（扁平目录）
 │   │   ├── _manifest.json            机器可读执行路由（触发词/状态/上下文/输出/闭环）
 │   │   ├── _registry.md              触发词路由表（人读索引）
 │   │   ├── _compat/                  多编辑器适配源
-│   │   ├── requirements/
-│   │   │   ├── flowchart/            流程图 Skill（SKILL + USAGE + templates + examples）
-│   │   │   ├── spec/                 需求说明书 Skill
-│   │   │   └── prototype/            原型标注 Skill
-│   │   ├── data/database/            数据库设计 Skill
-│   │   ├── api/restful/              接口设计 Skill
-│   │   └── cross/
-│   │       ├── design-review/        集成评审 Skill
-│   │       ├── glossary/             术语词典 Skill
-│   │       └── change-impact/        变更影响分析 Skill
+│   │   ├── requirements-flowchart/   流程图（SKILL + USAGE + templates + examples）
+│   │   ├── requirements-spec-doc/    需求说明书
+│   │   ├── requirements-prototype/   原型标注
+│   │   ├── data-database-design/     数据库设计
+│   │   ├── api-interface-design/     接口设计
+│   │   ├── cross-design-review/      集成评审
+│   │   ├── cross-glossary/           术语词典
+│   │   ├── cross-change-impact/      变更影响分析
+│   │   ├── code-architecture/        代码结构设计（AC01–AC20）
+│   │   └── doc-intake/               半成品文档接入
 │   ├── prompts/                      16 个 Copilot Prompt
 │   └── guides/                       使用指南
 ├── CLAUDE.md / AGENTS.md             Claude / Agents 规则
@@ -236,12 +256,14 @@ npx @agile-team/wl-skills-design verify api
 
 ---
 
-## 三包协作关系
+## 五包协作关系
 
 | 包 | 职责 | 面向角色 |
 |---|---|---|
-| `wl-skills-design` | 需求设计（流程图/说明书/原型/数据库/接口/术语词典/变更/评审） | 产品经理、架构师、设计师 |
+| `wl-skills-design` | 需求设计（流程图/说明书/原型/数据库/接口/术语词典/变更/评审/代码结构/文档接入） | 产品经理、架构师、设计师 |
 | `wl-skills-kit` | 前端代码生成（页面/规范/菜单/字典/权限） | 前端开发 |
 | `wl-skills-ui` | UI 风格对齐（设计令牌/化妆层/Runtime） | 前端开发 |
+| `wl-skills-bd` | 后端代码生成（契约/实体/服务/Mapper/DDL/质量门） | 后端开发 |
+| `wl-skills-test` | 测试验证（用例/自动化/执行/质量门/报告体系） | 测试工程师 |
 
-三包独立安装、契约对齐，共同消费同一份设计产出物。
+五包独立安装、契约对齐（统一 delivery profile `jh4j3-openapi3@1.0`），共同消费同一份设计产出物。
