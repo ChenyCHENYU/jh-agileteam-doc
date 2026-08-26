@@ -39,14 +39,14 @@ npx @agile-team/wl-skills-kit
 
 | 方向 | Skill 数量 | 覆盖链路 |
 |------|-----------|---------|
-| **PC 端前端** | 12 个 | 原型扫描 → 说明书解析 → 业务文档提取 → 接口约定 → 页面生成 → 规范审计 → 模板提取 → 菜单/字典/权限同步 → 自动修复 → 环境配置 |
+| **PC 端前端** | 13 个 | 原型扫描 → 说明书解析 → 业务文档提取 → 接口约定 → 页面生成 → 规范审计 → 模板提取 → 菜单/字典/权限同步 → 自动修复 → 环境配置 → 存量字典列 Tag 化 |
 | **移动端 H5** | 7 个 | 原型扫描 → 接口规格 → 接口约定 → 页面生成 → 路由注册 → Mock 生成 → 规范审计 |
 
 **套件包含内容**：
 
 | 分类 | 数量 | 说明 |
 |------|------|------|
-| AI Skills | 12 个 | 端到端代码生成全链路（含双线路由） |
+| AI Skills | 13 个 | 端到端代码生成全链路（含双线路由 + status-column-audit 存量改造） |
 | MCP Tools | 17 个 | 菜单/字典/权限/代码扫描/页面校验等 |
 | 编码规范 | 14 条 | 模块化规范，AI 自动门控加载 |
 | 页面模板 | 9 种 | LIST / FORM / MASTER_DETAIL / TREE_LIST 等 |
@@ -93,7 +93,7 @@ docs/
 │
 ├── frontend/
 │   ├── quick-start/        # 快速上手 + 16 条编码规范
-│   ├── pc/                 # PC 端：概览、架构、规范、34 个组件、12 个 Skill
+│   ├── pc/                 # PC 端：概览、架构、规范、34 个组件、13 个 Skill
 │   ├── mobile-h5/          # 移动端 H5：概览、规范、7 个 Skill、@robot-h5/core
 │   └── mobile-uniapp/      # 移动端 uniApp：基座、H5/App 集成、消息中心、钉钉
 │
@@ -110,9 +110,9 @@ docs/
 
 ---
 
-## 前端 PC Skills 集合（v2.16.9）
+## 前端 PC Skills 集合（v2.18.2）
 
-12 个 AI 辅助研发 Skill + 17 个 MCP Tool + 11 条 CLI 命令，覆盖从需求到交付的完整链路：
+13 个 AI 辅助研发 Skill + 23 个 MCP Tool + 14 条 CLI 命令，覆盖从需求到交付的完整链路：
 
 | # | Skill | 说明 |
 |---|---|---|
@@ -128,6 +128,9 @@ docs/
 | ⑩ | permission-sync | 角色+菜单授权+动作权限闭环 |
 | ⑪ | code-fix | 受控自动修复偏差代码 |
 | ⑫ | env-config | 环境标准化 / 客户迁移（dry-run → apply）|
+| ⑬ | status-column-audit | 存量字典列纯文本 → 语义自动判色 Tag（审计 + `--fix` + `--init-bridge`）|
+
+> v2.18.0 起 kit 审计规则编号由 R1~R19 重命名为 **K1~K19**（与 wl-skills-ui 的 R001~R040 编号空间解耦）；存量项目的 `wl-skills:ignore` 标记与 `.wl-skills-validate.json` 豁免同时兼容新旧前缀，零改动升级。
 
 ```bash
 # 在前端项目根目录执行（新项目接入）
@@ -142,7 +145,7 @@ npx @agile-team/wl-skills-kit check
 
 ## 工程脚手架（jh4j-cloud-cli）
 
-`@agile-team/jh4j-cloud-cli`（v0.6.1）—— 从受控模板一键创建结构一致、配置完整的 PC 业务子系统或移动端 H5 应用：
+`@agile-team/jh4j-cloud-cli`（v0.6.3）—— 从受控模板一键创建结构一致、配置完整的 PC 业务子系统或移动端 H5 应用：
 
 ```bash
 # 无需全局安装
@@ -152,19 +155,19 @@ npx @agile-team/jh4j-cloud-cli create my-project
 npx @agile-team/jh4j-cloud-cli doctor
 ```
 
-支持模板直选（PC/移动端）、快速/自定义双模式创建、GitHub→Gitee 主备源容灾、模板缓存、事务化生成与失败恢复。详见 [工程脚手架文档](/scaffold/)。
+支持模板直选（PC/移动端）、快速/自定义双模式创建、GitHub→Gitee 主备源容灾、模板缓存、事务化生成与失败恢复；移动端模板默认基线 Robot_H5 `v1.7.1` + `@robot-h5/core@^1.1.4`（可信桥接与 App/PDA SDK 按需加载）。详见 [工程脚手架文档](/scaffold/)。
 
 ## 低代码平台用户手册
 
 FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基础配置 / 权限菜单 / 流程人事 / 低代码开发 / 运维监控），含 426 张操作截图（托管于阿里云 OSS）。详见 [平台手册](/platform/)。
 
-## 后端 Skills 集合（v0.18.2）
+## 后端 Skills 集合（v0.20.1）
 
-`@agile-team/wl-skills-bd`：16 个 MCP 工具 + 12 个 Skill，覆盖框架扩展点 Bean（B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路，与前端 Skills 三包协作。
+`@agile-team/wl-skills-bd`：16 个 MCP 工具 + 12 个 Skill + 29 条规范，覆盖框架扩展点 Bean（B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash），与前端 Skills 三包协作。
 
-## 测试 Skills 集合（v0.5.0）
+## 测试 Skills 集合（v0.11.0）
 
-`@agile-team/wl-skills-test`：12 个 MCP 工具 + 12 个 AI Skill + 20 条审计规则（T1-T20）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter），覆盖测试方案→用例→自动化脚本→执行→质量评估→上线判定全链路。**五包中唯一具备实际执行能力的包**。
+`@agile-team/wl-skills-test`：17 个 MCP 工具 + 12 个 AI Skill + 25 条审计规则（T1-T25）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter），覆盖测试方案→用例→自动化脚本→执行→质量评估→上线判定全链路；v0.9 起 run-api 升级为 **DAG 编排 + 四层断言 + 负例 + 契约漂移检测**深度接口测试，v0.10 新增选择器适配层、沙箱模拟跑、工位模板、字典同步与 gate 聚合质量门，v0.11 落地 **test-reports 统一报告体系**（自动发现 + history.jsonl 历史趋势 + webhook 推送）与字段级细粒度用例生成。**五包中唯一具备实际执行能力的包**。
 
 ```bash
 npx @agile-team/wl-skills-test        # 安装
@@ -176,10 +179,10 @@ npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json  # 执行AP
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | v0.8.0 | v2.16.9 | v1.9.16 | v0.18.2 | **v0.5.0** |
-| MCP 工具 | 0 | 23 | 10 | 16 | **12** |
-| 审计规则 | — | R1-R19 | R001-R040 | B1-B30 | **T1-T20** |
-| 自动修复 | — | F1-F5 | 12 条 | B3/B5 | **F1-F6** |
+| 版本 | v0.11.1 | v2.18.2 | v1.11.1 | v0.20.1 | **v0.11.0** |
+| MCP 工具 | 0 | 23 | 13 | 16 | **17** |
+| 审计规则 | — | K1-K19 | R001-R042 | B1-B31 | **T1-T25** |
+| 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
 | 质量门 | — | validate | check | J1-J8 | **DI 4 指标** |
 

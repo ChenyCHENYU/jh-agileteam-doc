@@ -70,9 +70,9 @@
 
 ## 与 PC 端的差异对比
 
-| 对比项 | PC 端（12 个 Skill） | 移动端 H5（7 个 Skill） |
+| 对比项 | PC 端（13 个 Skill） | 移动端 H5（7 个 Skill） |
 |--------|---------------------|------------------------|
-| Skill 数量 | 12 个 | 7 个（聚焦代码生成链路） |
+| Skill 数量 | 13 个 | 7 个（聚焦代码生成链路） |
 | 双线入口 | prototype-scan + spec-doc-parse | 仅 prototype-scan |
 | 业务文档沉淀 | business-doc-extract | 无（移动端聚焦碎片化生成） |
 | 接口处理 | api-contract 一步到位 | api-spec + api-contract 两步拆分 |

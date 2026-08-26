@@ -1,6 +1,6 @@
 # @agile-team/wl-skills-ui — 企业级 UI 风格对齐框架
 
-> 版本：v1.9.16 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+> 版本：v1.11.1 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
 
 ---
 
@@ -92,7 +92,7 @@ wl-ui all       --project .                           # 一键全流程（scan�
 
 ---
 
-## 扫描规则（36 条，R001–R040）
+## 扫描规则（37 条，R001–R042）
 
 | 规则 | 层级 | 说明 |
 |---|---|---|
@@ -106,6 +106,10 @@ wl-ui all       --project .                           # 一键全流程（scan�
 | R038 | L1 | 新建类按钮必须用 `primary` 主色填充（可自动修复） |
 | R039 | L1 | 普通数据列必须支持省略号 + hover 提示（可自动修复） |
 | R040 | L2 | 未知复合控件结构审查（要求人工核对后再增加精准适配） |
+| R041（v1.10.3） | L1 | 按钮尺寸：`el-button` / `ElButton` / `BaseToolbar` 无显式 `size` 时告警并建议 `small`（已纳入 fixer） |
+| R042（v1.11.0） | L1 | Element Plus 日期/时间弹层几何隔离，阻断裸 `.el-date-picker` 宽高/定位样式误伤 Teleport 面板 |
+
+> scanner v1.11.0 起支持 `--changed --base <ref>` Git 增量扫描与 `--parser auto|fast|sfc`（优先复用目标项目本地 `@vue/compiler-sfc`，零依赖 fast 模式支持嵌套 template 与多块 style/script），并新增 `wl-ui-mcp` 可执行入口。
 
 ---
 
@@ -137,8 +141,11 @@ R040 基于此契约扫描：已登记结构正常通过，**疑似新结构要�
 | `installCommonPreset()` | 安装通用业务预设（含主题锁 + 普通表格长文本包级保护） |
 | `installUiRuntimeGuards()` | 主题锁 + 普通表格长文本包级保护（auto 保护入口） |
 | `installOverflowTooltipGuard()` | 单独安装真实溢出 Tooltip 兜底 |
-| `installSplitGridResizeGuard()` | 上下分屏拖动后 AG Grid 宿主自动沿 pane 收缩（v1.9.16） |
+| `installSplitGridResizeGuard()` | 上下分屏拖动后 AG Grid 宿主自动沿 pane 收缩（v1.9.16；v1.11.1 修复空态守护导致的手柄拖不动） |
 | `normalizeColumnAlignment(s)` | 把业务 `align/headerAlign` 桥接为 BaseTable/AG Grid 可消费的 `cellStyle/headerClass`，递归覆盖分组列（v1.9.16） |
+| `normalizeColumnAlignmentsWith(cols, { defaultAlign: "center" })` | 无显式对齐的列默认补齐居中（含表头 class 桥接，递归分组 children），`defaultAlign: null` 可退出（v1.10.0） |
+| `renderAutoTag(v, dictKey, fieldName?)` / `renderAutoTagByLabel(label, fieldName?)` | 文案语义自动判色 Tag：状态词实心、分类/形态词镂空、中性词纯文本兜底，零配色表覆盖上百字典列（v1.10.0，来源 wl-ui-ep 存量改造实战） |
+| AG Grid 空态守护 | 测量真实数据区为完整空态保留 160px，支持上下/左右分屏受控撑高与卸载清理（v1.10.3 runtime/ag-grid-empty-state） |
 | `createPreset(config)` / `installPreset(config)` | 自定义 preset 工厂 |
 | `registerColumnAutoMap(field, config)` | 注册新字段自动渲染 |
 | `setDictResolver(fn)` | 解耦动态字典查询 |
@@ -162,15 +169,18 @@ npm 发布前强制通过真实浏览器视觉回归测试，覆盖 8 个维度�
 | 字体链统一（v1.9.14） | Element Table / BaseTable / AG Grid 中英文数字字体链一致 |
 | jh-input-number 五态（v1.9.14） | 复合数字框 26px 高度链 + 单描边 + controls 语义正确 |
 | 列对齐桥接（v1.9.16） | 业务 `align/headerAlign` 正确桥接为 `cellStyle/headerClass` |
+| AG Grid 空态（v1.10.3） | 单层/分组表头、上下双空表滚动、数据区中心误差与数据恢复清理 |
+| 选择框对轴（v1.11.0） | AG Grid 选择列表头/行复选框横向几何对齐（5 项几何回归） |
+| 日期弹层隔离（v1.11.0） | Teleport 日期/时间面板不受业务样式误伤（R042 契约） |
 
 ---
 
-## MCP 工具（10 个）
+## MCP 工具（13 个）
 
 | Tool | 作用 |
 |---|---|
 | `wl_ui_check` | 检查 tokens/styles/runtime 接入完整性 |
-| `wl_ui_scan` | 扫描 UI 风格偏差 |
+| `wl_ui_scan` | 扫描 UI 风格偏差（默认 compact 分组 JSON） |
 | `wl_ui_fix_dry_run` | 预览自动修复 |
 | `wl_ui_detect_skin` | 检测项目 vendor 版本配对 |
 | `wl_ui_route_intent` | 自然语言识别 UI 治理意图 |
@@ -179,6 +189,9 @@ npm 发布前强制通过真实浏览器视觉回归测试，覆盖 8 个维度�
 | `wl_ui_list_rules` | 列出全部扫描规则及说明 |
 | `wl_ui_describe_rule` | 查询单条规则详情 |
 | `wl_ui_drift` | 对比基线漂移 |
+| `wl_ui_contract_extract`（v1.11.0） | 将成熟 Vue 页面提取为按领域/场景分类的脱敏 `wl-ui-contract.v1` |
+| `wl_ui_contract_validate`（v1.11.0） | 校验页面契约结构与脱敏边界 |
+| `wl_ui_contract_match`（v1.11.0） | 契约匹配复用（不保存源码/真实接口/业务字段值） |
 
 ---
 
@@ -203,7 +216,7 @@ AbstractPageQueryHook + BaseQuery + BaseToolbar + BaseTable(render-type="agGrid"
 |---|---|---|
 | `element-plus` | `2.2.6-prod.3` | 集团 jh- 定制版 |
 | `@jhlc/jh-ui` | `3.1.0` | SCSS 皮肤包 |
-| `@agile-team/wl-skills-ui` | `^1.9.16` | 已对齐上述组合 |
+| `@agile-team/wl-skills-ui` | `^1.11.1` | 已对齐上述组合 |
 
 ---
 

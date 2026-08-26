@@ -2,9 +2,9 @@
 
 <AuthorTag :authors="['ZhuXiang','CHENY','YangTianGuang']" />
 
-::: tip ✅ 已落地（wl-skills-design v0.8.0）
+::: tip ✅ 已落地（wl-skills-design v0.11.1）
 `02-prototype.md` 规范已完成，定义了原型标注的深度标准和输出格式。  
-原型标注 Skill 已随 `wl-skills-design` v0.8.0 发布，提供 `templates/`（空白模板）+ `examples/`（真实 D3 标注样例）双层资料，AI 生成后对照样例自检。
+原型标注 Skill 已随 `wl-skills-design` 发布，提供 `templates/`（空白模板）+ `examples/`（真实 D3 标注样例）双层资料，AI 生成后对照样例自检；v0.10.0 起 `verify spec` / `verify flowchart` 对生成物做机械校验，验证清单逐项标注 [M]（机械）/ [J]（语义）双轨执行方式。
 :::
 
 ## 版块定位
@@ -71,13 +71,14 @@ page-codegen（生成 Vue 代码）
 
 > D3 级原型 + prototype-scan 可达到 **95-100%** 的代码生成精度。
 
-## 落地情况（v0.8.0）
+## 落地情况（v0.11.1）
 
 - [x] 落地 `requirements/prototype/SKILL.md`（双层资料）
 - [x] `templates/`：`page-annotation.md` 空白模板（7 区块）
 - [x] `examples/`：炼钢计划列表 D3 完整标注（质量标杆）
 - [x] 2 个 prompt：`create-prototype` / `validate-prototype`
 - [x] 集成评审 D4 纳入原型维度校验
+- [x] v0.10.0+：`verify spec`（20 项机械检查）+ `[M]`/`[J]` 双轨验证清单
 
 ## 相关链接
 

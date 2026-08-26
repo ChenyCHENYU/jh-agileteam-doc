@@ -265,7 +265,7 @@ const asyncRule = toElementRule(
 
 ## 与 wl-skills-kit 的关系
 
-- **kit R18** 检测项目中是否正确安装 `@robot-admin/form-validate@^3.4.1`
+- **kit K18** 检测项目中是否正确安装 `@robot-admin/form-validate@^3.4.1`
 - **page-codegen** 生成的表单页面默认使用此库的 Element Plus 规则
 - **convention-audit** 检查是否手写了 Element 原生规则而未使用此库
 

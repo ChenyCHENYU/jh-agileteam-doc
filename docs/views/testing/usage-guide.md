@@ -2,7 +2,7 @@
 
 <AuthorTag author="ChangXing" />
 
-> `@agile-team/wl-skills-test` v0.5.0 — 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-test` v0.11.0 — 从安装到日常使用的完整指南。
 
 ---
 
@@ -83,7 +83,7 @@ npx @agile-team/wl-skills-test run-playwright --test-dir ./tests/
 npx @agile-team/wl-skills-test run-jmeter --jmx ./perf-test.jmx --threads 200
 ```
 
-run-api 执行后会自动生成冒烟测试报告（Markdown），含通过率、失败详情、转测判定。
+run-api 执行后统一产出到 `test-reports/`（`api-报告.md` + `api-result.json`），含 DAG 步骤明细、四层断言结果、负例/权限/契约漂移章节与转测判定；二次执行后 `report --trend` 可查看历史趋势。
 
 ---
 
@@ -92,7 +92,7 @@ run-api 执行后会自动生成冒烟测试报告（Markdown），含通过率�
 适用场景：检查已有测试代码的质量问题。
 
 ```bash
-# 审计测试代码（T1-T20 确定性规则）
+# 审计测试代码（T1-T25 确定性规则）
 npx @agile-team/wl-skills-test audit --target ./tests/
 
 # 自动修复反模式（F1-F6）

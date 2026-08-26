@@ -1,6 +1,6 @@
 # AI 辅助开发全景分析
 
-> 基于 `@agile-team/wl-skills-kit` v2.16.9 架构梳理，更新日期：2026-07-30
+> 基于 `@agile-team/wl-skills-kit` v2.18.2 架构梳理，更新日期：2026-08-27
 
 <AuthorTag :authors="['CHENY']" />
 
@@ -62,15 +62,15 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | L6 | 高（多 Agent） | 高 | ⚠️ 编排复杂 | 高 | 并发 + 专业化 |
 | L7 | — | — | — | 极高 | 体系自优化 |
 
-## 当前项目位置（v2.16.9）
+## 当前项目位置（v2.18.2）
 
 | 层级 | 状态 | 说明 |
 |------|------|------|
 | L0 氛围编程 | 了解 | 每个人都用过，边界已清晰 |
 | L1 提示词工程 | ✅ 已实现 | `copilot-instructions.md` + `standards` 懒加载 + 多编辑器适配 |
-| L2 Skills | ✅ 已实现 | 12 个 Skill（含 business-doc-extract），pre-flight + registry + 模板分层 |
-| L3 MCP | ✅ 已实现 | 17 个 Tool（菜单+字典+权限+项目感知+页面校验+UI体检+通知） |
-| L4 CLI | ✅ 已实现 | 11 条命令：init / update / clean / check / diff / validate / validate-page / doctor-ui / export / fix / mock-clean |
+| L2 Skills | ✅ 已实现 | 13 个 Skill（含 business-doc-extract、status-column-audit），pre-flight + registry + 模板分层 |
+| L3 MCP | ✅ 已实现 | 23 个 Tool（菜单+字典+权限+项目感知+页面校验+UI体检+通知+环境） |
+| L4 CLI | ✅ 已实现 | 14 条命令：init / update / clean / check / diff / validate / validate-page / fix / doctor-ui / export / mock-clean / contract / component / standard-env |
 | L5 Agent Pipeline | 🟡 试运行中 | `_pipeline.md` 协议已落地，进入试运行阶段 |
 | L6 Multi-Agent | ⏳ 远期 | L5 稳定后再规划 |
 | L7 自演化体系 | 🔭 终极形态 | 需 L5 稳定 + 审计报告 ≥ 50 份 + 模板提取 ≥ 3 次 |
@@ -82,9 +82,11 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 |------|------|------|----------|
 | 菜单 | `wls_menu_query` | 查询完整菜单树 | menu-sync 前置 |
 | 菜单 | `wls_menu_upsert` | 批量新增/更新菜单 | menu-sync 执行 |
+| 菜单 | `wls_menu_delete` | 删除菜单 | menu-sync |
 | 菜单 | `wls_menu_sync_from_report` | 从报告文件确定性同步菜单 | menu-sync |
 | 字典 | `wls_dict_query` | 查询字典模块 | dict-sync 前置 |
 | 字典 | `wls_dict_upsert` | 新增/更新字典 | dict-sync 执行 |
+| 字典 | `wls_dict_bootstrap` | 字典基线自举 | dict-sync |
 | 权限 | `wls_role_query` | 查询角色列表 | permission-sync |
 | 权限 | `wls_role_upsert` | 批量新增角色（按 code 去重） | permission-sync |
 | 权限 | `wls_assignable_menus_query` | 查询全量可授权菜单 | permission-sync |
@@ -96,11 +98,15 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | 项目感知 | `wls_validate_page` | 校验页面 AGGrid/cid/api.md/mock/操作列等 | convention-audit |
 | 项目感知 | `wls_doctor_ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | 全局 |
 | 项目感知 | `wls_git_log_extract` | 提取近期 Git 提交摘要 | changelog-gen |
+| 项目感知 | `wls_domain_query` | 查询业务域清单 | 通用 |
+| 环境标准化 | `wls_standard_env_scan` | 环境配置扫描 | standard-env-config |
+| 环境标准化 | `wls_standard_env_apply` | 环境配置应用（受控） | standard-env-config |
+| 环境标准化 | `wls_standard_env_verify` | 环境配置验证 | standard-env-config |
 | 通知 | `wls_audit_report_push` | 推送审计报告到飞书 webhook（可选） | convention-audit |
 
 > **整体效果**：菜单/权限同步 token 节省约 **87%**；操作时间压缩 **15-20 倍**；人工点击次数 → **0**。
 
-## 已实现的 11 条 CLI 命令
+## 已实现的 14 条 CLI 命令
 
 | 命令 | 用途 |
 |------|------|
@@ -115,11 +121,14 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | `export` | 导出菜单/字典/权限基线 xlsx |
 | `fix` | 确定性机械修复（缺 `render-type`、`::v-deep`→`:deep()` 等） |
 | `mock-clean` | 清理 mock 文件（按域或全量，保留 `_utils.ts`） |
+| `contract` | 独立 API 契约 init / validate / compare（前后端握手） |
+| `component` | 组件治理（封装组件登记与合规检查） |
+| `standard-env` | 环境标准化（scan → plan → apply → verify） |
 
 ## 延伸阅读
 
 - [L0 — 氛围编程](./L0-vibe)
-- [L2 — Skill](./L2-skill) — 12 个 Skill 详情
+- [L2 — Skill](./L2-skill) — 13 个 Skill 详情
 - [L3 — MCP](./L3-skills-mcp) — 23 个 MCP Tool 详情
 - [L5 — Agent Pipeline](./L5-agent-pipeline) — Pipeline 协议与运行手册
 - [L6 — Multi-Agent 协同](./L6-multi-agent) — 多智能体分工设计

@@ -18,7 +18,7 @@
               ▼                               ▼
     ┌─────────────────┐             ┌─────────────────┐
     │  前端 kit        │             │  后端 bd          │
-    │  v2.16.9        │             │  v0.18.2         │
+    │  v2.18.2        │             │  v0.20.1         │
     │                 │             │                  │
     │  page-spec      │             │  wl-contract.json │
     │  api.md         │             │  Entity/DTO/VO    │
@@ -30,7 +30,7 @@
                               ▼
                     ┌─────────────────┐
                     │  test 测试验证    │
-                    │  v0.5.0         │
+                    │  v0.11.0         │
                     │  消费双方契约     │
                     │  → 用例矩阵      │
                     │  → 自动化脚本    │
@@ -51,14 +51,14 @@ api-contract → api.md（前后端共享契约）
   ↓
 page-codegen → 4 文件骨架（index.vue / data.ts / index.scss / api.md）
   ↓
-convention-audit → R1-R19 偏差清单
+convention-audit → K1-K19 偏差清单
   ↓
 code-fix → 规范收敛
   ↓
 menu-sync / dict-sync / permission-sync → 平台配置同步
 ```
 
-- Skills：[wl-skills-kit](/frontend/pc/skills/) v2.16.9
+- Skills：[wl-skills-kit](/frontend/pc/skills/) v2.18.2
 - 使用指南：[前端使用指南](/frontend/pc/skills/usage-guide)
 
 ---
@@ -80,12 +80,12 @@ db-migration → DDL + Flyway（只生成不执行）
   ↓
 unit-test-gen → 行为契约测试
   ↓
-convention-audit-be → B1-B30 + J1-J8 规范审计
+convention-audit-be → B1-B31 + J1-J8 规范审计
   ↓
 code-fix-be → B3/B5 安全修复
 ```
 
-- Skills：[wl-skills-bd](/backend/skills/) v0.18.2
+- Skills：[wl-skills-bd](/backend/skills/) v0.20.1
 - 流水线：[后端 AI Skills 流水线](/backend/skills/skill-pipeline)
 - 使用指南：[后端使用指南](/backend/skills/usage-guide)
 

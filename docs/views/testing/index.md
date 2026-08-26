@@ -2,11 +2,12 @@
 
 <AuthorTag author="ChangXing" />
 
-::: tip npm 已发布 v0.5.0
+::: tip npm 已发布 v0.11.0
 ```bash
-npx @agile-team/wl-skills-test        # 安装（11 规范 + 12 Skill + 模板）
+npx @agile-team/wl-skills-test        # 安装（11 规范 + 12 Skill + 17 MCP）
 npx @agile-team/wl-skills-test doctor # 环境体检
-npx @agile-team/wl-skills-test audit  # 审计测试代码（T1-T20）
+npx @agile-team/wl-skills-test audit  # 审计测试代码（T1-T25）
+npx @agile-team/wl-skills-test gate   # 一键聚合质量门（审计+e2e-check+冒烟+DI+性能）
 ```
 [npm 包地址](https://www.npmjs.com/package/@agile-team/wl-skills-test) · [GitHub](https://github.com/ChenyCHENYU/wl-skills-test) · 作者：常兴
 :::
@@ -30,18 +31,18 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 
 ---
 
-## 核心能力（v0.5.0）
+## 核心能力（v0.11.0）
 
 | 维度 | 数量 | 说明 |
 |------|:----:|------|
 | 测试规范 | 11 | 对齐在线 QC 流程规范（01-流程 ~ 11-数据安全） |
 | AI Skill | 12 | 功能链 9 + 性能链 3 |
-| MCP 工具 | 12 | wls_test_* 前缀，全部实现并有测试覆盖 |
-| 审计规则 | 20 | T1-T20 确定性扫描器（Playwright/JMeter/用例/覆盖率） |
+| MCP 工具 | 17 | wls_test_* 前缀，全部实现并有测试覆盖 |
+| 审计规则 | 25 | T1-T25 确定性扫描器（Playwright/JMeter/用例/覆盖率/E2E 工程） |
 | 自动修复 | 6 | F1-F6（v-deep/beforeEach/waitForTimeout/硬编码/afterEach/测试名） |
 | 执行器 | 3 | API 接口测试 + Playwright 自动化 + JMeter 性能 |
-| CLI 命令 | 11 | init/update/doctor/validate/run-gen/audit/fix/run-api/run-playwright/run-jmeter/clean |
-| 单元测试 | 48 | 全部通过 |
+| CLI 命令 | 16 | init/update/doctor/validate/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/clean |
+| 单元测试 | 179 | 全部通过 |
 
 ---
 
@@ -86,15 +87,16 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 
 ---
 
-## 审计引擎（T1-T20）
+## 审计引擎（T1-T25）
 
-对标 kit R1-R19 / bd B1-B30 / ui R001-R040 的**确定性规则扫描器**（不靠 AI 自觉，脚本直接检测）：
+对标 kit K1-K19 / bd B1-B31 / ui R001-R042 的**确定性规则扫描器**（不靠 AI 自觉，脚本直接检测）：
 
 | 规则范围 | 对象 | 检测内容 |
 |---------|------|---------|
 | T1-T5, T12 | Playwright | beforeEach 缺失 / 硬编码 URL / 缺少断言 / 测试名 / 数据清理 / 硬等待 |
 | T6-T9, T13-T18 | JMeter | 聚合报告 / ConfigTestElement 致命坑 / SteppingThreadGroup / CSV / LoopController / Header / SLA / PerfMon / ramp |
 | T10-T11, T19-T20 | 用例 | P0 覆盖 / 预期结果 / 数量不足 / 异常场景缺失 |
+| T21-T25（v0.8.0+） | E2E 工程 | test.only 假闭环 / 受控写入缺安全标记 / 隔离声明漂移 / Bearer 截断 / UI 契约缺 page.route（源自 wl-ui-produce 实战约束） |
 
 ```bash
 # 审计测试代码
@@ -110,13 +112,14 @@ npx @agile-team/wl-skills-test fix --target ./tests/
 
 | 执行器 | 命令 | 说明 |
 |--------|------|------|
-| API 接口测试 | `run-api` | 从契约自动发 HTTP 请求 + 冒烟报告 |
-| Playwright | `run-playwright` | 调用 `playwright test` + 解析 passed/failed/skipped |
+| API 接口测试 | `run-api` | DAG 编排（列表冒烟→新增→写后读回→更新→详情→负例→重复提交→权限→分页→清理→零污染复查）+ 四层断言（成功信封/结构/数据正确性/负例与安全）+ 契约漂移检测 + 权限双账号 + 报文快照留证 |
+| Playwright | `run-playwright` | 调用 `playwright test` + 解析 passed/failed/skipped，提取失败明细 |
 | JMeter | `run-jmeter` | 调用 `jmeter -n -t` + 解析 jtl（P50/P95/P99/错误率/SLA） |
 
 ```bash
-# 执行 API 接口测试
-npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json --base-url http://localhost:8080
+# 深度 API 接口测试（v0.9.0+：负例 + 契约漂移 + 权限验证）
+npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json --base-url http://localhost:8080 \
+  --token-no-perm --dict-file ./dict.json
 
 # 执行 Playwright 自动化
 npx @agile-team/wl-skills-test run-playwright --test-dir ./tests/
@@ -125,13 +128,24 @@ npx @agile-team/wl-skills-test run-playwright --test-dir ./tests/
 npx @agile-team/wl-skills-test run-jmeter --jmx ./perf-test.jmx --threads 200
 ```
 
+### test-reports 统一报告体系（v0.11.0）
+
+所有报告统一产出到 `test-reports/`（`--reports-dir` 可改）：`api-报告.md` / `e2e-报告.md` / `perf-报告.md` / `audit-报告.md` / `测试报告.md` + 同名 `*-result.json`。`report` 不传参时自动发现各维度结果；`history.jsonl` 记录每次执行，`report --trend` 追加最近 5 次趋势表；`report --webhook <url>` 支持企微/钉钉推送。
+
+### 细粒度用例生成（v0.11.0）
+
+`run-gen --granularity field` 在基线矩阵之上追加字段级（必填置空/超长/数值边界/非法枚举/XSS·SQL 注入探测）与操作级（重复提交/不存在主键/重复删除/无权限/分页边界）用例，每条标注 autoExec 与 run-api DAG 步骤的对应关系，可执行闭环诚实标注。
+
 ---
 
 ## DI 质量门（CI 集成）
 
 ```bash
-# CI 中运行质量门（退出码 0=通过 / 1=阻断）
-node quality-gate.js --defects defects.json --cases 150 --audit-dir ./tests/
+# 一键聚合质量门（v0.10.0+：审计 T1-T25 + e2e-check + 冒烟通过率 + DI + 性能基线，任一失败 exit 1）
+npx @agile-team/wl-skills-test gate
+
+# 推送结论到企微/钉钉
+npx @agile-team/wl-skills-test gate --webhook <url>
 ```
 
 4 指标上线判定：DI 密度 < 0.3 · 致命关闭率 100% · 严重关闭率 100% · 模块收敛 ≤20%
@@ -158,11 +172,11 @@ npx @agile-team/wl-skills-test run-gen --contract ./wl-contract.json --type jmet
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | v0.8.0 | v2.16.9 | v1.9.16 | v0.18.2 | **v0.5.0** |
-| 审计规则 | — | R1-R19 | R001-R040 | B1-B30 | **T1-T20** |
-| 自动修复 | — | F1-F5 | 12 条 | B3/B5 | **F1-F6** |
+| 版本 | v0.11.1 | v2.18.2 | v1.11.1 | v0.20.1 | **v0.11.0** |
+| 审计规则 | — | K1-K19 | R001-R042 | B1-B31 | **T1-T25** |
+| 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
-| MCP 工具 | 0 | 23 | 10 | 16 | **12** |
+| MCP 工具 | 0 | 23 | 13 | 16 | **17** |
 
 ---
 

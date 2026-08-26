@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang','ZhangXiang']" />
 
-> `@agile-team/wl-skills-bd` v0.18.2 — 契约驱动代码生成的完整链路：从需求评审 → 契约设计 → 代码生成 → 数据库迁移 → 单元测试 → 规范审计 → 安全修复。
+> `@agile-team/wl-skills-bd` v0.20.1 — 契约驱动代码生成的完整链路：从需求评审 → 契约设计 → 代码生成 → 数据库迁移 → 单元测试 → 规范审计 → 安全修复。
 
 ---
 
@@ -23,7 +23,7 @@
          ↓
 ⑦ unit-test-gen        行为契约测试（正常路径/前置拒绝/状态转移/batch）
          ↓
-⑧ convention-audit-be  后端规范审计（B1~B30 + J1~J8）
+⑧ convention-audit-be  后端规范审计（B1~B31 + J1~J8）
          ↓
 ⑨ code-fix-be          可选自动修复（B3/B5）→ 复扫确认
          ↓
@@ -56,7 +56,7 @@
 
 | 步骤 | Skill | 输入 | 输出 | 状态 |
 |:----:|-------|------|------|:----:|
-| ⑦ | convention-audit-be | 项目源码 | B1~B30 偏差报告 + SARIF | ✅ |
+| ⑦ | convention-audit-be | 项目源码 | B1~B31 偏差报告 + SARIF | ✅ |
 | ⑧ | code-fix-be | 审计报告 | B3（SELECT \*→include）/ B5（@Transactional）修复 | ✅ |
 | ⑨ | data-safety | Redis/缓存/敏感写 | B13~B19 护栏校验 | ✅ |
 | ⑩ | standard-env-config-be | 配置文件 | L0~L8 体检 + 环境迁移 | ✅ |
@@ -80,13 +80,13 @@ wl-skills-bd task "连不上redis"          # → config-op
 
 | 任务 | 模式 | 加载规则子集 | 涉及 Skill |
 |------|------|------------|-----------|
-| new-service | 全链路 | B1-B30 子集 + J | ①→⑩ 全链路 |
+| new-service | 全链路 | B1-B31 子集 + J | ①→⑩ 全链路 |
 | add-api | 增量契约 | B1/B2/B5/B8/B12/B20/B24/B25/B26 | ②③④⑦ |
 | add-field | 增量契约 | B3/B4/B7/B18/B25/B26 | ②⑤⑦ |
 | add-business-cmd | 增量契约 | B5/B8/B17/B20/B24/B25/B26 | ②③④⑥⑦ |
 | fix-bug | 修复 | B3/B5/B7/B8/B17/B18/B24/B25/B26/B28 | ⑦⑧ |
 | refactor | 修复 | B5-B12/B23/B24/B25/B26/B28 | ⑦⑧ |
-| audit | 只读 | B1-B30 全量 | ⑦ |
+| audit | 只读 | B1-B31 全量 | ⑦ |
 | config-op | 配置 | config-doctor | ⑩ |
 
 ---

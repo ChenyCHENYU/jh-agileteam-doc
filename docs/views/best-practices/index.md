@@ -14,7 +14,7 @@
 
 | 能力维度 | 效果量化（前端场景） |
 |---------|------------------|
-| 规范对齐 | 16 条规范注入 Prompt，AI 生成代码违规率 < 5% |
+| 规范对齐 | 14 条规范注入 Prompt，AI 生成代码违规率 < 5% |
 | 开发提速 | 一个标准 LIST 页面（4 文件）从 45 分钟压缩到约 8 分钟 |
 | 菜单/权限同步 | 手工 10 次操作 20 分钟 → AI 1 分钟 0 次手动，token 节省 87% |
 | 规范审计 | 存量代码全量体检，偏差清单自动生成，告别"靠感觉 Review" |
@@ -50,9 +50,9 @@ CLI 层              ─── 聚合命令，固化流程，无人值守   ← 
 |---|---|---|---|
 | **L0** | 氛围编程 | 也行 | 纯对话驱动，AI 自由发挥，高随机性 |
 | **L1** | 提示词工程 | ✅ 已验证 | 结构化 Prompt + 规范注入 + 上下文压缩 |
-| **L2** | Skills | ✅ 已验证 | 12 个触发词驱动的结构化技能文件 → [速查表](/frontend/pc/skills/usage-guide) |
-| **L3** | MCP 工具调用 | ✅ 已验证 | 17 个 Tool，菜单/字典/角色/权限/项目感知/页面校验全覆盖 |
-| **L4** | CLI | ✅ 已验证 | 11 条命令：init / update / clean / check / diff / validate / validate-page / doctor-ui / export / fix / mock-clean |
+| **L2** | Skills | ✅ 已验证 | 13 个触发词驱动的结构化技能文件 → [速查表](/frontend/pc/skills/usage-guide) |
+| **L3** | MCP 工具调用 | ✅ 已验证 | 23 个 Tool，菜单/字典/角色/权限/项目感知/环境标准化全覆盖 |
+| **L4** | CLI | ✅ 已验证 | 14 条命令：init / update / clean / check / diff / validate / validate-page / fix / doctor-ui / export / mock-clean / contract / component / standard-env |
 | **L5** | Agent Pipeline | 🟡 践行中 | `_pipeline.md` 协议已落地，Skill 链式自动触发进入试运行 |
 | **L6** | Multi-Agent 协同 | ▶ 近期目标 | L5 试运行期间同步规划多智能体分工 |
 | **L7** | 自演化体系 | 🔭 终极形态 | 高质量产出反哺规范，正向飞轮 |

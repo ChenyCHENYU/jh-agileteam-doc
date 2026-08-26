@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang']" />
 
-> `@agile-team/wl-skills-bd` v0.18.2 — 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-bd` v0.20.1 — 从安装到日常使用的完整指南。
 
 ---
 
@@ -76,7 +76,7 @@ wl-skills-bd validate src/main --task add-api
 
 ```bash
 # 1. 审计定位
-wl-skills-bd validate src/main               # 全量 B1-B30 扫描
+wl-skills-bd validate src/main               # 全量 B1-B31 扫描
 
 # 2. 安全修复（仅 B3/B5 标记为可自动修复）
 wl-skills-bd safe-fix src/main --plan-hash <hash> --confirm

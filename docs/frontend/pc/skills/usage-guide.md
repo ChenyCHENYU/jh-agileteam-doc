@@ -128,7 +128,7 @@ page-spec JSON 是唯一可以低成本修正的节点：
 请提取到 src/components/local/c_customerTabs/
 ```
 
-## 12 个 Skill 触发词速查
+## 13 个 Skill 触发词速查
 
 | 操作 | 触发方式 | Skill |
 |------|---------|-------|
@@ -144,6 +144,7 @@ page-spec JSON 是唯一可以低成本修正的节点：
 | 解析说明书 | "解析说明书"、"规范文档转页面"、"IPO" | ⑩ spec-doc-parse |
 | 业务文档提取 | 语义级触发（不依赖固定关键词） | ⑪ business-doc-extract |
 | 环境配置 | "环境配置"、"切环境"、"baseURL 标准化"、"客户迁移"、"172迁移" | ⑫ env-config |
+| 字典列 Tag 化 | "字典列审计"、"状态列 Tag 化"、"存量改造" | ⑬ status-column-audit |
 
 ## 移植到新项目
 

@@ -1,7 +1,7 @@
 # AI Skill 流水线
 
-> **12 个 AI Skill** 按双线入口汇聚，串联形成完整的 **原型/说明书 → 代码 → 权限 → 审计 → 优化 → 环境迁移** 流水线。
-> 源自 `@agile-team/wl-skills-kit` v2.16.9+，本页同步最新流水线协议。
+> **13 个 AI Skill** 按双线入口汇聚，串联形成完整的 **原型/说明书 → 代码 → 权限 → 审计 → 优化 → 环境迁移 → 存量改造** 流水线。
+> 源自 `@agile-team/wl-skills-kit` v2.18.2，本页同步最新流水线协议。
 
 ---
 
@@ -46,7 +46,7 @@
 
 ---
 
-## 12 个 Skill 速查
+## 13 个 Skill 速查
 
 | # | Skill | 分类 | 输入 | 输出 | 典型场景 |
 |---|-------|------|------|------|---------|
@@ -62,6 +62,7 @@
 | ⑩ | [permission-sync](./permission-sync) | sync | env.local.json + 用户指令 | 角色/授权/动作 | 权限闭环 |
 | ⑪ | env-config | ops | 项目根目录 + 客户环境 Profile | `ENV_CONFIG_*.md` + env/Vite diff | 环境迁移/标准化 |
 | ⑫ | template-extract | core | 成熟页面目录 | `templates/domains/**/TPL-*.md` | 沉淀复用资产 |
+| ⑬ | status-column-audit | core | 存量列表页源码 | 字典列审计报告 / `dictAutoTag` 转换 diff / 本地桥接 | 存量字典列 Tag 化 |
 
 > **Skill 分类**：`core`（核心通用） / `sync`（数据同步） / `ops`（运维构建） / `domain`（领域专属，按域扩展）
 

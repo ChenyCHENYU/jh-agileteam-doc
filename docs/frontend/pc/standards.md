@@ -81,7 +81,7 @@ code-fix（自动修复）      → 全量（01–13）
 
 ```bash
 # 静态校验页面完整性（4 文件、AGGrid、cid、mock、api.md）
-# + AST 语义级 R1~R19 检测（圈复杂度、分页边界、运行时边界等）
+# + AST 语义级 K1~K19 检测（圈复杂度、分页边界、运行时边界等）
 npx @agile-team/wl-skills-kit validate
 
 # 单页面校验

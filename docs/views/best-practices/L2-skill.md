@@ -73,14 +73,14 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
          → 按 SKILL 流程执行 → 生成产物 + reports/ 追加
 ```
 
-## 前端示例 — 已启用的 12 个 Skill
+## 前端示例 — 已启用的 13 个 Skill
 
 | # | Skill | 路径 | 核心用途 |
 |---|-------|------|---------|
 | ① | `prototype-scan` | `skills/core/prototype-scan/` | 原型/详设/口述 → 页面清单 |
 | ② | `api-contract` | `skills/core/api-contract/` | 生成 api.md 前后端契约 |
 | ③ | `page-codegen` | `skills/core/page-codegen/` | 4 文件骨架生成 + 模板调度 |
-| ④ | `convention-audit` | `skills/core/convention-audit/` | 16 条规范扫描 + 双报告 |
+| ④ | `convention-audit` | `skills/core/convention-audit/` | 14 条规范扫描 + 双报告 |
 | ⑤ | `template-extract` | `skills/core/template-extract/` | 现有页面 → 领域模板 |
 | ⑥ | `business-doc-extract` | `skills/core/business-doc-extract/` | 业务文档/口述 → 结构化需求文档 |
 | ⑦ | `menu-sync` | `skills/sync/menu-sync/` | 菜单基线 ↔ 后端接口 |
@@ -89,6 +89,7 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
 | ⑩ | `code-fix` | `skills/ops/code-fix/` | 受控自动修复偏差 |
 | ⑪ | `spec-doc-parse` | `skills/core/spec-doc-parse/` | 标准说明书 → page-spec 解析报告 |
 | ⑫ | `env-config` | `skills/ops/env-config/` | 环境迁移 / baseURL 标准化 |
+| ⑬ | `status-column-audit` | `skills/core/status-column-audit/` | 存量字典列纯文本 → 语义自动判色 Tag |
 
 每个启用 Skill 同目录都有 **`SKILL.md`（AI 触发用）+ `USAGE.md`（团队成员阅读）**。
 
@@ -125,7 +126,7 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
 
 ## 延伸阅读
 
-- [Skills 详细文档](/frontend/pc/skills/) — 12 个 Skill 的完整使用指南
+- [Skills 详细文档](/frontend/pc/skills/) — 13 个 Skill 的完整使用指南
 - [L3 — MCP](./L3-skills-mcp) — 赋予 Skill "手和眼"（执行真实操作）
 - [全景分析](./ai-landscape)
 ## 参考资料

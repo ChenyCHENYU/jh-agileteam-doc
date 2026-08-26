@@ -2,7 +2,7 @@
 
 <AuthorTag author="CHENY" />
 
-`@agile-team/jh4j-cloud-cli`（当前 `0.6.1`）是 JH4J Cloud 企业内部标准化项目脚手架，用于从受控模板快速创建**结构一致、配置完整、可追溯**的工程。一条命令即可生成 PC 业务子系统或移动端 H5 应用，避免手工复制目录再逐文件查找替换。
+`@agile-team/jh4j-cloud-cli`（当前 `0.6.3`）是 JH4J Cloud 企业内部标准化项目脚手架，用于从受控模板快速创建**结构一致、配置完整、可追溯**的工程。一条命令即可生成 PC 业务子系统或移动端 H5 应用，避免手工复制目录再逐文件查找替换。移动端模板默认基线 Robot_H5 `v1.7.1` + `@robot-h5/core@^1.1.4`（可信桥接、可信赖源校验与 App/PDA SDK 按需加载）。
 
 ::: tip 与 Skills Kit 的区别
 本板块讲的是**项目脚手架** `@agile-team/jh4j-cloud-cli`（命令 `jh4j`，用于 `create / list / doctor / info`）。

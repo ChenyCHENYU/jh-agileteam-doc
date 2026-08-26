@@ -1,6 +1,6 @@
 # @agile-team/wl-skills-design — 产品设计 AI 技能包
 
-> 版本：v0.8.0 · 9 条设计规范 + 8 个 AI Skill + 15 个 Copilot Prompt，支持 10 种 AI 编辑器
+> 版本：v0.11.1 · 9 条设计规范 + 10 个 AI Skill + 16 个 Copilot Prompt，支持 10 种 AI 编辑器，机器语义双轨验证（[M]/[J]）+ verify CLI 四域机械校验（spec / flowchart / db / api）
 
 ---
 
@@ -27,6 +27,11 @@ npx @agile-team/wl-skills-design update
 
 # 预览安装内容
 npx @agile-team/wl-skills-design --dry-run
+
+# 四域机械验证（v0.10.0+：spec / flowchart / db / api 的 [M] 项由 CLI 直接执行）
+npx @agile-team/wl-skills-design verify spec
+npx @agile-team/wl-skills-design verify db
+npx @agile-team/wl-skills-design verify api
 ```
 
 安装完成后，直接在 AI 对话中描述设计需求即可触发对应 Skill。
@@ -52,14 +57,15 @@ npx @agile-team/wl-skills-design --dry-run
 | 设计域 | 技能 | 关联规范 | 验证项 | 状态 |
 |-------|------|---------|-------|------|
 | 系统需求 | draw.io 业务流程图（泳道图）| `01-flowchart.md` | 20 项 | ✅ v1.0 |
-| 系统需求 | 需求设计说明书（IPO / 流程说明 / 活动说明 / 报表）| `06-spec-doc.md` | 43 项 | ✅ v1.0 |
+| 系统需求 | 需求设计说明书（IPO / 流程说明 / 活动说明 / 报表，GB1–GB8 按钮级颗粒度基线）| `06-spec-doc.md` | 43 项 | ✅ v1.0 |
 | 系统需求 | 原型标注（交互模式 / 字段 / 组件 / D1–D3 深度）| `02-prototype.md` | 23 项 | ✅ v1.0 |
 | 数据设计 | 数据库设计（ER / DB 清单 / 数据字典 / DDL）| `03-database.md` | 34 项 | ✅ v1.0 |
 | 接口设计 | 接口设计（系统集成报文 / RESTful / OpenAPI）| `04-api-design.md` | 38 项 | ✅ v1.0 |
 | 跨域评审 | 设计集成评审（评分 / 追溯矩阵 / 跨文档一致性）| `07-design-review.md` | D4 18 项 | ✅ v1.0 |
 | 跨域词典 | 术语字段词典（中英文名 / 枚举 / 编码统一锚点）| `08-glossary.md` | 18 项 | ✅ v1.0 |
 | 跨域协同 | 变更影响分析（影响矩阵 / 补丁计划 / 复验顺序）| `09-change-impact.md` | 20 项 | ✅ v1.0 |
-| 代码设计 | 业务逻辑代码结构 | `05-code-design.md` | — | 🔲 规划中 |
+| 代码设计 | 业务逻辑代码结构（AC01–AC20：模块边界 / 分层 / 契约 / 依赖方向 / 测试与发布质量门）| `05-code-design.md` | AC01-AC20 | ✅ v0.8.0 |
+| 文档接入 | 半成品文档接入 doc-intake（采集归位 / 机械+语义差距分析 / 补全计划）| — | 四域 | ✅ v0.10.0 |
 
 ---
 
@@ -203,7 +209,7 @@ npx @agile-team/wl-skills-design --dry-run
 │   │       ├── design-review/        集成评审 Skill
 │   │       ├── glossary/             术语词典 Skill
 │   │       └── change-impact/        变更影响分析 Skill
-│   ├── prompts/                      15 个 Copilot Prompt
+│   ├── prompts/                      16 个 Copilot Prompt
 │   └── guides/                       使用指南
 ├── CLAUDE.md / AGENTS.md             Claude / Agents 规则
 ├── .cursorrules / .windsurfrules     Cursor / Windsurf 规则

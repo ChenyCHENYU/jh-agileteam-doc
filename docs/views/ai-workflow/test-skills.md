@@ -2,7 +2,7 @@
 
 > 详见 [测试工程技能包](/views/testing/) 完整文档。
 
-`@agile-team/wl-skills-test` v0.5.0 — 11 条规范 · 12 个 Skill · 12 个 MCP · 20 条审计 · 3 个执行器。
+`@agile-team/wl-skills-test` v0.11.0 — 11 条规范 · 12 个 Skill · 17 个 MCP · 25 条审计（T1-T25）· 3 个执行器 · test-reports 统一报告体系。
 
 作者：常兴、杨晨誉
 

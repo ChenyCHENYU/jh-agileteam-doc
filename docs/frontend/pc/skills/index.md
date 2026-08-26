@@ -1,6 +1,6 @@
 # 前端 Skills 概述
 
-前端 Skills 基于 `@agile-team/wl-skills-kit` v2.16.9 — 一条命令，将 **14 条编码规范、12 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
+前端 Skills 基于 `@agile-team/wl-skills-kit` v2.18.2 — 一条命令，将 **14 条编码规范、13 个 AI Skill、23 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
 
 ## 快速开始
 
@@ -29,7 +29,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 
 | 类别              | 数量  | 说明                                                                         |
 | ----------------- | ----- | ---------------------------------------------------------------------------- |
-| **AI Skills**     | 12 个 | prototype-scan / spec-doc-parse / api-contract / page-codegen / business-doc-extract / menu-sync / dict-sync / permission-sync / convention-audit / template-extract / code-fix / standard-env-config |
+| **AI Skills**     | 13 个 | prototype-scan / spec-doc-parse / api-contract / page-codegen / business-doc-extract / menu-sync / dict-sync / permission-sync / convention-audit / template-extract / code-fix / standard-env-config / status-column-audit |
 | **MCP Tools**     | 23 个 | 菜单/字典/权限/代码扫描/路由检查/页面校验/UI诊断/Git日志/审计报告推送/环境(scan/apply/verify)等      |
 | **编码规范**      | 14 条 | 模块化规范（01-工具链 ~ 14-布局容器），AI 自动门控加载                       |
 | **页面模板**      | 9 种  | LIST / FORM_ROUTE / MASTER_DETAIL / TREE_LIST / DETAIL_TABS 等               |
@@ -49,7 +49,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 │   │   ├── 01-toolchain.md
 │   │   ├── 02-code-structure.md
 │   │   └── ... (共 14 条，含 14-layout-containers)
-│   ├── skills/                       ← 12 个 AI Skill
+│   ├── skills/                       ← 13 个 AI Skill
 │   │   ├── _registry.md              ←   触发词路由表（单一数据源）
 │   │   ├── _best-practices.md        ←   场景索引（AI 每轮默认加载）
 │   │   ├── _pipeline.md              ←   流水线编排
@@ -69,7 +69,8 @@ npx @agile-team/wl-skills-kit mock-clean --all
 │   │   │   └── env.local.json        ←   统一环境配置（gitignore）
 │   │   └── ops/
 │   │       ├── code-fix/             ←   ⑪ 受控自动修复
-│   │       └── standard-env-config/ ←   ⑫ 环境标准化/迁移（scan → plan → apply → verify）
+│   │       ├── standard-env-config/  ←   ⑫ 环境标准化/迁移（scan → plan → apply → verify）
+│   │       └── status-column-audit/  ←   ⑬ 存量字典列 → 语义自动判色 Tag（审计 + --fix + --init-bridge）
 │   ├── guides/                       ← 人读指南
 │   └── reports/                      ← AI 生成报告目录
 │
@@ -109,7 +110,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 
 > v2.0 起，所有编辑器的编码规范 + Skill 调度均为**自动加载（零配置）**；`env.local.json` 填写一次，`menu-sync` / `dict-sync` 自动共用同一配置。
 
-## 12 个 Skill 速览
+## 13 个 Skill 速览
 
 | #  | Skill              | 触发关键词                           | 用途                                   |
 | -- | ------------------ | ------------------------------------ | -------------------------------------- |
@@ -125,6 +126,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 | ⑩  | permission-sync    | 权限同步 / 角色授权 / 挂动作         | 角色管理 + 菜单授权 + 动作挂载（MCP 驱动） |
 | ⑪  | code-fix           | 自动修复 / 整改偏差 / 规范整改       | 受控自动修复 🟡/🟢 等级偏差 + 强制复扫 |
 | ⑫  | standard-env-config| 切环境 / baseURL 标准化 / 客户迁移   | 环境扫描 → dry-run → apply → verify（MCP 驱动） |
+| ⑬  | status-column-audit| 字典列 Tag 化 / 状态列审计           | 存量列表页字典列纯文本 → 文案语义自动判色 Tag（审计 → `--fix` 自动转换 → `--init-bridge` 一键桥接 `renderAutoTagByLabel`，v2.17.0） |
 
 ### 双线路由机制（v2.0+）
 
@@ -152,10 +154,10 @@ v2.16.1 起新增统一表单能力，支持大表单中混合必填/非必填�
 | 普通 BaseForm | `useFormRequiredOnly` composable | 页面内表单 |
 | 多 Tab 子表单 | 按实际绑定逐项控制 | 复杂表单 |
 
-**配套审计规则**：
-- **R17**：表单仅必填开关按每个实际绑定逐项判断（弹窗/独立页面/分区表单全覆盖）
-- **R18**：表单校验库 `@robot-admin/form-validate@^3.4.1` 版本范围检查（缺失依赖/废弃拆包/Naive API 误用/通用规则重复手写）
-- **R19**：弹窗内 AG Grid 必须用 `v-if` 延迟挂载（防止弹窗动画期间初始化导致零高度渲染）
+**配套审计规则（v2.18.0 起编号命名空间与 wl-skills-ui 解耦，R 前缀更名为 K 前缀；存量豁免配置新旧前缀等价兼容）**：
+- **K17**（原 R17）：表单仅必填开关按每个实际绑定逐项判断（弹窗/独立页面/分区表单全覆盖）
+- **K18**（原 R18）：表单校验库 `@robot-admin/form-validate@^3.4.1` 版本范围检查（缺失依赖/废弃拆包/Naive API 误用/通用规则重复手写）
+- **K19**（原 R19）：弹窗内 AG Grid 必须用 `v-if` 延迟挂载（防止弹窗动画期间初始化导致零高度渲染）
 
 **其他确定性门禁（v2.16.5–v2.16.6）**：
 - **D3**：字典字段绑定门禁，逐字段核对 `dict/dictCode/logicValue`，缺失或错绑给确定性错误
@@ -165,8 +167,8 @@ v2.16.1 起新增统一表单能力，支持大表单中混合必填/非必填�
 
 ## 伴生工程
 
-- 后端 Skills：[wl-skills-bd](/backend/skills/)（契约驱动代码生成）
-- 测试工程：[wl-skills-test](/views/testing/)（12 Skill + 20 审计规则 + 3 执行器）
+- 后端 Skills：[wl-skills-bd](/backend/skills/)（契约驱动代码生成 + 数据库事实源治理）
+- 测试工程：[wl-skills-test](/views/testing/)（12 Skill + 25 条审计规则 + 3 个执行器 + 17 MCP）
 - 视觉一致性：[wl-skills-ui](/views/styling/wl-skills-ui)
 - 产品设计：[wl-skills-design](/views/ai-workflow/design-skills)
 - 后端使用指南：[后端 Skills 使用指南](/backend/skills/usage-guide)
