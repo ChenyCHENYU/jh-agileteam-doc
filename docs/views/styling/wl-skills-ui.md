@@ -1,6 +1,18 @@
 # @agile-team/wl-skills-ui — 企业级 UI 风格对齐框架
 
-> 版本：v1.11.1 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+> 版本：v1.12.0 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+
+::: tip 能力 Profile 体系（v1.12.0）
+按项目形态选择接入档位，统一声明 adapter、扫描规则、SCSS preset 与 runtime guard：
+
+| Profile | 适用 | 说明 |
+|---|---|---|
+| `native-element` | 原生 Element Plus 新项目 | `installCommonPreset()` **默认档**；无 AG Grid、无 `jh-*` 遗留适配 |
+| `legacy-jh-element` | jh-ui 存量项目 | Element Plus 2.2 + jh-ui 适配 |
+| `legacy-jh-ag` | BaseTable AG Grid 存量 | 仅此档启用 R021、AG 样式与分屏/空态 observers；非 AG 档编译产物零 `.ag-*` 选择器 |
+
+项目内以 `.wl-ui-profile.json` 声明，`wl-ui profiles` 查看与切换，依赖自动识别。旧 `runtime/auto` 与 `styles/skin` 入口保留 full legacy 兼容。
+:::
 
 ---
 
@@ -92,14 +104,14 @@ wl-ui all       --project .                           # 一键全流程（scan�
 
 ---
 
-## 扫描规则（37 条，R001–R042）
+## 扫描规则（39 条，R001–R043）
 
 | 规则 | 层级 | 说明 |
 |---|---|---|
 | R001-R015 | L1 | Element Plus 控件对齐（表格/表单/按钮/Tag/弹窗/分页） |
 | R016-R018 | L0 | 硬编码颜色检测（template/style/script） |
 | R019-R020 | L2 | 脚本式 columnsDef 编号/字典列缺渲染函数检测（renderBadge/renderDictClassifyTag） |
-| R021-R022 | L2 | BaseTable 必须 `render-type="agGrid"` + 唯一 `cid` |
+| R021-R022 | L2 | BaseTable 必须 `render-type="agGrid"` + 唯一 `cid`（仅 `legacy-jh-ag` Profile 启用） |
 | R025-R027 | L2 | 语义合规 + 原生 HTML 拦截 + loading 遮罩 |
 | R028 | L0 | 业务 `<style>` 硬编码 `border-radius` 检测（提示改用 token） |
 | R031-R037 | L1 | 扩展组件族（card/tabs/descriptions/drawer/upload/steps/feedback） |
@@ -108,8 +120,9 @@ wl-ui all       --project .                           # 一键全流程（scan�
 | R040 | L2 | 未知复合控件结构审查（要求人工核对后再增加精准适配） |
 | R041（v1.10.3） | L1 | 按钮尺寸：`el-button` / `ElButton` / `BaseToolbar` 无显式 `size` 时告警并建议 `small`（已纳入 fixer） |
 | R042（v1.11.0） | L1 | Element Plus 日期/时间弹层几何隔离，阻断裸 `.el-date-picker` 宽高/定位样式误伤 Teleport 面板 |
+| R043（v1.12.0） | L1 | 静态已知按钮文案到语义 icon 的确定性映射（含 fixer 与一致性门禁） |
 
-> scanner v1.11.0 起支持 `--changed --base <ref>` Git 增量扫描与 `--parser auto|fast|sfc`（优先复用目标项目本地 `@vue/compiler-sfc`，零依赖 fast 模式支持嵌套 template 与多块 style/script），并新增 `wl-ui-mcp` 可执行入口。
+> `standards/rules.json` 是 category / severity / layer / vendor / Profile / fixability 的运行期事实源（39 条元数据与 39 个实现一一对应，14 条可修规则与 fixer 集合一致）。scanner v1.11.0 起支持 `--changed --base <ref>` Git 增量扫描、`--parser auto|fast|sfc`（优先复用目标项目本地 `@vue/compiler-sfc`）与 `wl-ui-mcp` 可执行入口；v1.12.0 起 CLI 与 MCP 共享同一 `scanner/engine.mjs` 实现（MCP 不再逐次起 Node 子进程），报告协议升级 `summary.v1` / 可分页 `compact.v2`（规则公共字段集中 `ruleCatalog`，`limit/cursor` 续取），fixer 支持 `profile/only/skip` 范围约束、逐规则改动统计与 SHA-256 `planHash`（预览后 `--plan-hash` 拒绝漂移计划）。
 
 ---
 
@@ -216,7 +229,7 @@ AbstractPageQueryHook + BaseQuery + BaseToolbar + BaseTable(render-type="agGrid"
 |---|---|---|
 | `element-plus` | `2.2.6-prod.3` | 集团 jh- 定制版 |
 | `@jhlc/jh-ui` | `3.1.0` | SCSS 皮肤包 |
-| `@agile-team/wl-skills-ui` | `^1.11.1` | 已对齐上述组合 |
+| `@agile-team/wl-skills-ui` | `^1.12.0` | 已对齐上述组合 |
 
 ---
 

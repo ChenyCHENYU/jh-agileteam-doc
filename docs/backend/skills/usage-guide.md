@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang']" />
 
-> `@agile-team/wl-skills-bd` v0.20.1 — 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-bd` v0.24.0 — 从安装到日常使用的完整指南。
 
 ---
 
@@ -85,6 +85,11 @@ wl-skills-bd safe-fix src/main --plan-hash <hash> --confirm
 
 # 3. 复扫确认
 wl-skills-bd validate src/main               # 确认修复无引入新问题
+
+# 4. 变更审查统一质量门（v0.24：Git 变更 + 规则 + 历史基线 + 豁免 + 断言 + 平台适配 + 供应链 + 覆盖率）
+wl-skills-bd review run                      # 当前变更全量门禁
+wl-skills-bd review run --module order       # 仅目标模块（真实限制扫描范围）
+wl-skills-bd review baseline                 # 冻结历史基线，新增问题增量阻断
 ```
 
 ---

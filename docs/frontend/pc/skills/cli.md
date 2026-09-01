@@ -5,13 +5,13 @@
 从零**创建新项目**用的是另一个工具 —— 项目脚手架 [`@agile-team/jh4j-cloud-cli`](/scaffold/)（命令 `jh4j create`）。
 :::
 
-`@agile-team/wl-skills-kit`（v2.18.2）提供 14 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
+`@agile-team/wl-skills-kit`（v2.20.1）提供 18 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理、场景渲染全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
 
 ## 命令速查
 
 | 命令 | 用途 |
 |------|------|
-| `init`（默认） | 全量安装（14 规范 + 12 Skill + 23 MCP + 10 编辑器配置 + 组件文档） |
+| `init`（默认） | 全量安装（14 规范 + 13 Skill + 29 MCP + 10 编辑器配置 + 组件文档） |
 | `update` | 增量更新（MD5 比对，仅覆盖变化文件，保护 reports/） |
 | `check` | 环境预检（Node / 工具链 / MCP / manifest） |
 | `diff` | 对比已安装文件与最新 kit 版本差异 |
@@ -24,7 +24,10 @@
 | `mock-clean` | 清理 mock 文件（按域或全量，保留 `_utils.ts`） |
 | `contract` | 前后端 API 契约（profile / init / validate / compare / render） |
 | `component` | 标准业务组件治理（list / check / ensure，含写锁与去重） |
-| `standard-env` | 环境标准化（scan / plan / apply / verify，取代已停用的 `env`） |
+| `standard-env` | 环境标准化（scan / plan / apply / verify，`env` 为其兼容别名） |
+| `template` | 模板检索与治理（search / extract / validate / audit / diff，落盘需显式 `confirmWrite`） |
+| `snapshot` | 项目快照 / Page Blueprint（按页隔离、默认脱敏、fingerprint 防内容漂移，`wls_project_snapshot` 同源） |
+| `scenario` | 场景模板（validate / render / extract / verify / from-spec，wl-scenario JSON 确定性渲染 + W1 字节级防漂移） |
 
 > 全局安装后也可直接用 `wl-skills` 命令（如 `wl-skills update`）。
 

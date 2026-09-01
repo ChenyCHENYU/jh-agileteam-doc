@@ -76,7 +76,7 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 
 **在 wl-skills-kit 中**：MCP Server（`mcp/` 目录）注册了一系列工具，AI 在执行 Skill 时直接调用这些工具，无需人工复制粘贴接口结果。
 
-## 前端示例 — 已实现的 23 个 MCP Tools
+## 前端示例 — 已实现的 29 个 MCP Tools
 
 | 类别 | Tool | 能力 | 关联 Skill |
 |------|------|------|-----------|
@@ -99,6 +99,12 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 | 项目感知 | `wls_validate_page` | 校验页面 AGGrid/cid/api.md/mock/操作列等 | convention-audit |
 | 项目感知 | `wls_doctor_ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | 全局 |
 | 项目感知 | `wls_git_log_extract` | 提取近期 Git 提交摘要 | changelog-gen |
+| 项目感知 | `wls_project_snapshot` | 项目快照 / Page Blueprint（按页隔离、默认脱敏、fingerprint 防漂移） | page-codegen / template-extract |
+| 模板治理 | `wls_template_search` | 从快照检索候选页面（低 token 蓝图） | template-extract |
+| 模板治理 | `wls_template_extract` | 提取页面 Blueprint（`confirmWrite` 门禁） | template-extract |
+| 模板治理 | `wls_template_validate` | Blueprint 结构校验 | template-extract |
+| 模板治理 | `wls_template_audit` | 模板资产审计 | template-extract |
+| 模板治理 | `wls_template_diff` | Blueprint 差异比较（脱敏门禁） | template-extract |
 | 环境配置 | `wls_standard_env_scan` | 扫描环境变量偏差 | standard-env |
 | 环境配置 | `wls_standard_env_apply` | 应用环境配置计划（需确认） | standard-env |
 | 环境配置 | `wls_standard_env_verify` | 验证环境配置一致性 | standard-env |

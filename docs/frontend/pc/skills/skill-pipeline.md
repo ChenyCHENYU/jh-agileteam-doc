@@ -1,7 +1,7 @@
 # AI Skill 流水线
 
 > **13 个 AI Skill** 按双线入口汇聚，串联形成完整的 **原型/说明书 → 代码 → 权限 → 审计 → 优化 → 环境迁移 → 存量改造** 流水线。
-> 源自 `@agile-team/wl-skills-kit` v2.18.2，本页同步最新流水线协议。
+> 源自 `@agile-team/wl-skills-kit` v2.20.1，本页同步最新流水线协议。v2.20 起支持 **wl-scenario 确定性场景渲染**：结构事实以 JSON 描述、编译器出码（AI 零自由度、token 恒为 0），`validate` 内置字节级防漂移。
 
 ---
 

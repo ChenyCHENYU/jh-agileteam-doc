@@ -29,7 +29,7 @@
 | 属性 | 值 |
 |---|---|
 | 包名 | `@robot-h5/core` |
-| 版本 | `1.1.4` |
+| 版本 | `1.2.0` |
 | 构建产物 | ESM 多入口（主入口 / hooks / bridge / utils） |
 | 类型声明 | 各公共入口随包发布 |
 | 前置依赖 | `vue@^3.3.0` |
@@ -71,7 +71,7 @@ import { compressImage } from '@robot-h5/core/utils/image';
 ### 1. 安装
 
 ```bash
-pnpm add @robot-h5/core@^1.1.4
+pnpm add @robot-h5/core@^1.2.0
 ```
 
 ### 2. 创建配置文件

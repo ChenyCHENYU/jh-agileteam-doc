@@ -452,6 +452,12 @@ const watermarkedFile = await addWatermark(originalFile, {
 | `opacity` | `number` | `0.5` | 透明度 |
 | `quality` | `number` | `0.92` | 输出质量 |
 
+**v1.2.0 水印增强（服务端契约）**
+
+- `text` 支持多行文字；旧 WebView 图片元素解码失败自动降级；移动端 Canvas 尺寸保护与并发 loading；
+- 新增 `buildWatermarkFormData` 与统一 `watermarkPolicy` 服务端水印契约：拍照、相册、既有图片三条上传路径共用，输出使用实际 Blob MIME 并同步修正扩展名，不支持的原图格式安全回退 JPEG；
+- 参数边界、解码超时、结构化错误与 `failureMode: 'throw'`：必须水印的场景不再静默上传原图；未传策略或 `enabled=false` 时不增加任何上传字段，原有上传行为完全不变。
+
 ---
 
 ### usePermission — 系统权限查询/请求 {#usePermission}

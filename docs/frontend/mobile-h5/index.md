@@ -6,12 +6,12 @@
 
 | 项目 | 定位 | 框架 | UI 库 |
 |------|------|------|-------|
-| **Robot_H5** | 企业级 H5 应用框架（主力） | Vue 3.5 + Vite 7 | Vant 4 |
-| **wl-mbase** | Uniapp 跨端应用（H5 + 小程序） | Vue 3.5 + Vite 5（Uniapp） | uv-ui / Uniapp 内置 |
+| **Robot_H5** | 企业级 H5 应用框架（主力，当前 v1.8.0） | Vue 3.5 + Vite 7 | Vant 4 |
+| **wl-mbase** | Uniapp 跨端门户基座（H5 + 小程序 + 钉钉 + App/PDA，当前 v1.0.6） | Vue 3.5 + Vite 5（Uniapp） | uv-ui / Uniapp 内置 |
 
 `Robot_H5` 采用 **Apple HIG Liquid Glass** 设计语言，遵循 Linear 现代工具美学。项目内置权限体系、主题系统、原生桥接能力，可同时运行于移动浏览器、钉钉/微信 WebView、原生 App 内嵌等多端场景。
 
-`v1.7.0+` 默认采用 ES2018 / Chrome 61 CSS 构建目标、无 `@layer` 样式产物和媒体查询尺寸适配；`v1.7.1+` 统一使用 `@robot-h5/core@^1.1.4` 完成 wl-mbase 严格宿主识别、可信来源校验与 App SDK 按需加载，并内置各宿主单头部、动态标题及 App/PDA 双向返回导航。新项目通过脚手架创建即可获得这些约束，无需从业务项目复制适配代码。
+`v1.7.0+` 默认采用 ES2018 / Chrome 61 CSS 构建目标、无 `@layer` 样式产物和媒体查询尺寸适配；`v1.7.1+` 统一使用 `@robot-h5/core` 完成 wl-mbase 严格宿主识别、可信来源校验与 App SDK 按需加载，并内置各宿主单头部、动态标题及 App/PDA 双向返回导航；`v1.8.0+` 闭环 wl-mbase **公司上下文**——入口优先完成服务端公司切换再加载用户/菜单/权限（`server/explicit` 双模式、按公司隔离的业务缓存键、公司上下文失败诊断页），integrated 请求统一 Bearer Token 并兼容平台 `2000/4001` 状态码；模板默认基线同步升级为 `@robot-h5/core@^1.2.0`（新增水印服务端契约 `watermarkPolicy` / `buildWatermarkFormData`，拍照/相册/既有图片共用，`failureMode: 'throw'` 防止必须水印场景静默上传原图）。新项目通过脚手架创建即可获得这些约束，无需从业务项目复制适配代码。
 
 ::: tip 项目仓库
 `Robot_H5` — 与 PC 端共用后端网关，前端独立部署。支持 **standalone（独立运行）** 和 **integrated（mbase 子应用）** 双模式。

@@ -1,6 +1,6 @@
 # AI 辅助开发全景分析
 
-> 基于 `@agile-team/wl-skills-kit` v2.18.2 架构梳理，更新日期：2026-08-27
+> 基于 `@agile-team/wl-skills-kit` v2.20.1 架构梳理，更新日期：2026-09-01
 
 <AuthorTag :authors="['CHENY']" />
 
@@ -62,21 +62,21 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | L6 | 高（多 Agent） | 高 | ⚠️ 编排复杂 | 高 | 并发 + 专业化 |
 | L7 | — | — | — | 极高 | 体系自优化 |
 
-## 当前项目位置（v2.18.2）
+## 当前项目位置（v2.20.1）
 
 | 层级 | 状态 | 说明 |
 |------|------|------|
 | L0 氛围编程 | 了解 | 每个人都用过，边界已清晰 |
 | L1 提示词工程 | ✅ 已实现 | `copilot-instructions.md` + `standards` 懒加载 + 多编辑器适配 |
 | L2 Skills | ✅ 已实现 | 13 个 Skill（含 business-doc-extract、status-column-audit），pre-flight + registry + 模板分层 |
-| L3 MCP | ✅ 已实现 | 23 个 Tool（菜单+字典+权限+项目感知+页面校验+UI体检+通知+环境） |
-| L4 CLI | ✅ 已实现 | 14 条命令：init / update / clean / check / diff / validate / validate-page / fix / doctor-ui / export / mock-clean / contract / component / standard-env |
+| L3 MCP | ✅ 已实现 | 29 个 Tool（菜单+字典+权限+项目感知+页面校验+UI体检+通知+环境+快照+模板治理） |
+| L4 CLI | ✅ 已实现 | 18 条命令：init / update / clean / check / diff / validate / validate-page / fix / doctor-ui / export / mock-clean / contract / component / standard-env / template / snapshot / scenario / env |
 | L5 Agent Pipeline | 🟡 试运行中 | `_pipeline.md` 协议已落地，进入试运行阶段 |
 | L6 Multi-Agent | ⏳ 远期 | L5 稳定后再规划 |
 | L7 自演化体系 | 🔭 终极形态 | 需 L5 稳定 + 审计报告 ≥ 50 份 + 模板提取 ≥ 3 次 |
 
 
-## 已实现的 23 个 MCP Tools
+## 已实现的 29 个 MCP Tools
 
 | 类别 | Tool | 能力 | 关联 Skill |
 |------|------|------|----------|
@@ -99,14 +99,20 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | 项目感知 | `wls_doctor_ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | 全局 |
 | 项目感知 | `wls_git_log_extract` | 提取近期 Git 提交摘要 | changelog-gen |
 | 项目感知 | `wls_domain_query` | 查询业务域清单 | 通用 |
+| 项目感知 | `wls_project_snapshot` | 项目快照 / Page Blueprint（按页隔离、默认脱敏、fingerprint 防漂移） | page-codegen / template-extract |
+| 模板治理 | `wls_template_search` | 从快照检索候选页面（低 token 蓝图） | template-extract |
+| 模板治理 | `wls_template_extract` | 提取页面 Blueprint（`confirmWrite` 门禁） | template-extract |
+| 模板治理 | `wls_template_validate` | Blueprint 结构校验 | template-extract |
+| 模板治理 | `wls_template_audit` | 模板资产审计 | template-extract |
+| 模板治理 | `wls_template_diff` | Blueprint 差异比较（脱敏门禁） | template-extract |
 | 环境标准化 | `wls_standard_env_scan` | 环境配置扫描 | standard-env-config |
 | 环境标准化 | `wls_standard_env_apply` | 环境配置应用（受控） | standard-env-config |
 | 环境标准化 | `wls_standard_env_verify` | 环境配置验证 | standard-env-config |
 | 通知 | `wls_audit_report_push` | 推送审计报告到飞书 webhook（可选） | convention-audit |
 
-> **整体效果**：菜单/权限同步 token 节省约 **87%**；操作时间压缩 **15-20 倍**；人工点击次数 → **0**。
+> **整体效果**：菜单/权限同步 token 节省约 **87%**；操作时间压缩 **15-20 倍**；人工点击次数 → **0**。快照 + Blueprint 检索让 AI 消费页面结构事实，单页结构对比从"读全量源码"降到低 token 蓝图。
 
-## 已实现的 14 条 CLI 命令
+## 已实现的 18 条 CLI 命令
 
 | 命令 | 用途 |
 |------|------|
@@ -115,21 +121,25 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 | `clean` | 移除 AI 文件（保留 components + types） |
 | `check` | 一键环境预检：Node / 工具链 / env.local.json / MCP 连通性 |
 | `diff` | 对比已安装文件与最新 kit 版本差异 |
-| `validate` | 静态扫描页面完整性、AGGrid、cid、mock、api.md（CI 卡门）|
+| `validate` | 静态扫描页面完整性、AGGrid、cid、mock、api.md + 增量缓存 + W1 防漂移（CI 卡门）|
 | `validate-page` | `validate` 别名，支持单页/目录路径 |
 | `doctor-ui` | 检查 wl-skills-ui 接入完整性 |
 | `export` | 导出菜单/字典/权限基线 xlsx |
 | `fix` | 确定性机械修复（缺 `render-type`、`::v-deep`→`:deep()` 等） |
 | `mock-clean` | 清理 mock 文件（按域或全量，保留 `_utils.ts`） |
-| `contract` | 独立 API 契约 init / validate / compare（前后端握手） |
+| `contract` | 独立 API 契约 init / validate / compare / render（前后端握手） |
 | `component` | 组件治理（封装组件登记与合规检查） |
-| `standard-env` | 环境标准化（scan → plan → apply → verify） |
+| `standard-env` | 环境标准化（scan → plan → apply → verify；`env` 为兼容别名） |
+| `template` | 模板检索与治理（search / extract / validate / audit / diff） |
+| `snapshot` | 项目快照 / Page Blueprint 提取（脱敏 + fingerprint） |
+| `scenario` | wl-scenario 场景 validate / render / extract / verify / from-spec（确定性渲染） |
+| `--version` / `-v` | 纯版本查询（不可与其他命令混用） |
 
 ## 延伸阅读
 
 - [L0 — 氛围编程](./L0-vibe)
 - [L2 — Skill](./L2-skill) — 13 个 Skill 详情
-- [L3 — MCP](./L3-skills-mcp) — 23 个 MCP Tool 详情
+- [L3 — MCP](./L3-skills-mcp) — 29 个 MCP Tool 详情
 - [L5 — Agent Pipeline](./L5-agent-pipeline) — Pipeline 协议与运行手册
 - [L6 — Multi-Agent 协同](./L6-multi-agent) — 多智能体分工设计
 

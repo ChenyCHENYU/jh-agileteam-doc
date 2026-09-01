@@ -49,7 +49,7 @@ CLI 能力
 
 > **核心特征**：极简 Token（不需要 AI 推理）、零人工干预、可 CI/CD 集成。是整个 AI 体系中**可预测性最高**的一层。
 
-## 已实现的 14 条命令（v2.18.2）
+## 已实现的 18 条命令（v2.20.1）
 
 ```bash
 # 全量安装（默认）
@@ -115,7 +115,7 @@ wl-skills standard-env apply --confirm
 | `clean` | 移除 AI 文件（保留 components + types） | 构建前清理 |
 | `check` | 一键环境预检：Node / 工具链 / env.local.json / MCP 连通性 | 新成员接手项目 |
 | `diff` | 对比已安装文件与最新 kit 版本差异 | update 前决策依据 |
-| `validate` | 静态扫描页面 4 文件完整性、AGGrid、cid、mock、api.md + AST 语义级 R1~R14 | CI 卡门 |
+| `validate` | 静态扫描页面 4 文件完整性、AGGrid、cid、mock、api.md + AST 语义级 K1~K19（增量缓存） | CI 卡门 |
 | `validate-page` | 单页 / 指定目录校验 | 按路径校验 |
 | `fix` | 确定性机械修复：缺 `render-type`、`::v-deep`→`:deep()`、行尾空白等幂等问题 | 批量收口风格偏差 |
 | `doctor-ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | UI 体检 |
@@ -123,7 +123,10 @@ wl-skills standard-env apply --confirm
 | `mock-clean` | 按域或全量清理 mock 文件（保留 `_utils.ts`） | 切换/清理 Mock 数据 |
 | `contract` | 前后端 API 契约：profile / init / validate / compare / render | 契约同源对齐 |
 | `component` | 标准业务组件治理：list / check / ensure（写锁 + 去重） | 组件一致性 |
-| `standard-env` | 环境标准化：scan / plan / apply / verify（取代 `env`） | 环境收口 |
+| `standard-env` | 环境标准化：scan / plan / apply / verify（`env` 为兼容别名） | 环境收口 |
+| `template` | 模板检索与治理：search / extract / validate / audit / diff（落盘需 `confirmWrite`） | 模板资产化 |
+| `snapshot` | 项目快照 / Page Blueprint（按页隔离、默认脱敏、fingerprint 防漂移） | 低 token 结构事实 |
+| `scenario` | wl-scenario 场景：validate / render / extract / verify / from-spec（确定性渲染） | 确定性出码 |
 | `--dry-run` | 预览模式，不实际写入任何文件 | 确认变更范围 |
 | `--keep-reports` | clean 时额外保留 `reports/` | 保护菜单/字典积累数据 |
 

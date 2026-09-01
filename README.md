@@ -110,9 +110,9 @@ docs/
 
 ---
 
-## 前端 PC Skills 集合（v2.18.2）
+## 前端 PC Skills 集合（v2.20.1）
 
-13 个 AI 辅助研发 Skill + 23 个 MCP Tool + 14 条 CLI 命令，覆盖从需求到交付的完整链路：
+13 个 AI 辅助研发 Skill + 29 个 MCP Tool + 18 条 CLI 命令，覆盖从需求到交付的完整链路；v2.20 起**场景模板体系（wl-scenario）落地**——领域场景以 JSON 事实源描述，由 kit 编译器确定性渲染页面（AI 零自由度），render 单页 0.4~1ms、模型 token 恒为 0（对比 AI 主流程每页约 2 万 token 输入），配套 Page Blueprint 快照、字节级防漂移校验与往返等价性机器证明：
 
 | # | Skill | 说明 |
 |---|---|---|
@@ -130,7 +130,7 @@ docs/
 | ⑫ | env-config | 环境标准化 / 客户迁移（dry-run → apply）|
 | ⑬ | status-column-audit | 存量字典列纯文本 → 语义自动判色 Tag（审计 + `--fix` + `--init-bridge`）|
 
-> v2.18.0 起 kit 审计规则编号由 R1~R19 重命名为 **K1~K19**（与 wl-skills-ui 的 R001~R040 编号空间解耦）；存量项目的 `wl-skills:ignore` 标记与 `.wl-skills-validate.json` 豁免同时兼容新旧前缀，零改动升级。
+> v2.18.0 起 kit 审计规则编号由 R1~R19 重命名为 **K1~K19**（与 wl-skills-ui 的 R001~R043 编号空间解耦）；存量项目的 `wl-skills:ignore` 标记与 `.wl-skills-validate.json` 豁免同时兼容新旧前缀，零改动升级。v2.19.0 起 `wls_project_snapshot` 提供按页隔离、默认脱敏、带 fingerprint 的 Page Blueprint 快照，AI 优先消费页面结构事实以省 token。
 
 ```bash
 # 在前端项目根目录执行（新项目接入）
@@ -155,15 +155,15 @@ npx @agile-team/jh4j-cloud-cli create my-project
 npx @agile-team/jh4j-cloud-cli doctor
 ```
 
-支持模板直选（PC/移动端）、快速/自定义双模式创建、GitHub→Gitee 主备源容灾、模板缓存、事务化生成与失败恢复；移动端模板默认基线 Robot_H5 `v1.7.1` + `@robot-h5/core@^1.1.4`（可信桥接与 App/PDA SDK 按需加载）。详见 [工程脚手架文档](/scaffold/)。
+支持模板直选（PC/移动端）、快速/自定义双模式创建、GitHub→Gitee 主备源容灾、模板缓存、事务化生成与失败恢复；移动端模板默认基线 Robot_H5 `v1.8.0` + `@robot-h5/core@^1.2.0`（可信桥接与 App/PDA SDK 按需加载）。详见 [工程脚手架文档](/scaffold/)。
 
 ## 低代码平台用户手册
 
 FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基础配置 / 权限菜单 / 流程人事 / 低代码开发 / 运维监控），含 426 张操作截图（托管于阿里云 OSS）。详见 [平台手册](/platform/)。
 
-## 后端 Skills 集合（v0.20.1）
+## 后端 Skills 集合（v0.24.0）
 
-`@agile-team/wl-skills-bd`：16 个 MCP 工具 + 12 个 Skill + 29 条规范，覆盖框架扩展点 Bean（B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash），与前端 Skills 包协作。
+`@agile-team/wl-skills-bd`：17 个 MCP 工具 + 13 个 Skill + 30 条规范，覆盖框架扩展点 Bean（B28/B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash）；v0.21~v0.24 完成**准确率与性能优化**（规则短路/Source Index 缓存/MCP token 预算/eval:quality 门禁）、**多模块与契约分类**（crud/schema-mirror/integration-projection + contract inspect/migrate + impact field 字段影响链 + 集成投递机器契约）、**变更审查统一质量门**（review run/baseline：Git 变更 + B 规则 + 历史基线 + 豁免 + 平台适配 + 供应链 + JaCoCo 变更覆盖率），与前端 Skills 包协作。
 
 ## 测试 Skills 集合（v0.11.0）
 
@@ -179,9 +179,9 @@ npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json  # 执行AP
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | v0.11.1 | v2.18.2 | v1.11.1 | v0.20.1 | **v0.11.0** |
-| MCP 工具 | 0 | 23 | 13 | 16 | **17** |
-| 审计规则 | — | K1-K19 | R001-R042 | B1-B31 | **T1-T25** |
+| 版本 | v0.11.1 | v2.20.1 | v1.12.0 | v0.24.0 | **v0.11.0** |
+| MCP 工具 | 0 | 29 | 13 | 17 | **17** |
+| 审计规则 | — | K1-K19 | R001-R043 | B1-B31 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
 | 质量门 | — | validate | check | J1-J8 | **DI 4 指标** |

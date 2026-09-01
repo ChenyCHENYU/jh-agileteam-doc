@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip ✅ 已正式发布
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.20.1**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、MCP 与安全修复闭环全链路。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.24.0**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
 :::
 
 ## 概述
@@ -16,10 +16,10 @@
 
 | 维度 | 现状 |
 |---|---|
-| 版本 | v0.20.1 |
-| 规范 | 29 条规范文档（B1~B31 扫描规则 + J1~J8 质量门） |
-| Skill | 12 个（10 已落地，1 部分落地，1 流程骨架） |
-| MCP 工具 | 16 个（CLI/MCP 复用同一 `lib/` 核心） |
+| 版本 | v0.24.0 |
+| 规范 | 30 条规范文档（B1~B31 扫描规则 + J1~J8 质量门） |
+| Skill | 13 个（11 已落地，1 部分落地，1 流程骨架） |
+| MCP 工具 | 17 个（CLI/MCP 复用同一 `lib/` 核心） |
 | 生成 Profile | `jh4j3-openapi3`（Java 8 / Spring Boot 2 / jh4j-cloud 3.1 / MyBatis-Plus / OpenAPI 3） |
 
 ## 分层架构（L0 → L6）
@@ -86,10 +86,11 @@ wl-skills-bd codegen apply   wl-contract.json --plan-hash <sha256> --confirm
 | ⑩ | `code-fix-be` | ops | 修复后端偏差 / 按审计报告整改 | ✅ 已落地 |
 | ⑪ | `data-safety` | ops | 数据安全 / Redis 护栏 / 敏感写 / 全表写禁令 | ✅ 已落地 |
 | ⑫ | `standard-env-config-be` | ops | 配置分层 / 多环境 / 环境迁移 / 故障排查 | ✅ 已落地 |
+| ⑬ | `integration-adapter-be` | core | 平台集成适配：真实 Maven 坐标 / Producer·Consumer·配置·测试证据 / 方向门禁（项目 `integration-adapters.json` 声明，未配置返回 `not-configured`，不假设平台） | ✅ 已落地 |
 
 > 当前 Profile 使用 **Controller → 直接 Service → Mapper**，不生成无业务价值的 `IService + ServiceImpl` 双层；Controller→Mapper 由 ArchUnit J1 阻断。
 
-## 29 条后端规范
+## 30 条后端规范
 
 AI 按**任务类型懒加载**相关条目，不全量加载；规范变更顺序追加，不复用废弃编号。
 
@@ -108,6 +109,7 @@ AI 按**任务类型懒加载**相关条目，不全量加载；规范变更顺�
 | 任务与上下文 | 26–27 | 任务驱动（8 种任务/规则子集/统一安全写链）/ 项目目录与精准上下文（增量扫描/一跳快照/去重） |
 | 生产保障 | 28–29 | 生产保障：SLO/RTO/RPO、安全、数据治理、并发一致性、韧性与六类交付证据 / 数据库事实源治理（standards/29：基线表同名复用、全属性对账、扩展审批） |
 | 路由与事实源 | 30–31 | B30：Controller 真实路由提取（方法/类路径/方法路径/行号）+ 重复路由阻断；B31：数据库源头一致性（文档↔契约↔Flyway↔线上快照四方对账、事实源 fingerprint 进 planHash、drift/executed/ledger） |
+| 变更审查 | 30 | review 门禁：Git 变更 + B 规则 + 历史基线 + 有期限豁免 + 项目断言 + 平台适配 + 供应链 + JaCoCo 全量/变更行覆盖率，汇总为同一确定性质量门 |
 
 完整门控与任务类型 → 必读规范映射见 `wl-skills-bd` 包内 `files/.github/standards/index.md`。
 
@@ -208,7 +210,20 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 - **standards/29 基线复用**：文档基线表必须同名复用，字段名称/顺序/类型/可空性/默认值/注释精确对账；扩展字段末尾追加，新表/字段必须登记业务依据与审批；事实源 fingerprint 进入 `planHash`。
 - **环境分级执行**：dev/sit 一次 planHash 审批后连续执行；pre/prod 保留 DBA/CD、备份恢复和变更窗口。MySQL 统一 `lower_snake_case`（兼容 OceanBase），Oracle 保持 `UPPER_SNAKE_CASE`。
 
-## 16 个 MCP 工具
+## 多模块、字段影响与变更审查（v0.21~v0.24）
+
+| 能力 | 说明 |
+|------|------|
+| 多模块根发现（v0.23） | Catalog 驱动：doctor、配置体检与规则扫描按模块执行，聚合根只汇总；`review --module` 把 B1~B31 真实扫描限制到目标模块，未知模块 fail-closed |
+| 契约分类与迁移（v0.23） | `crud / schema-mirror / integration-projection` 三类契约 + 兼容描述符；`contract inspect / migrate` 存量迁移复用 planHash、受保护环境、备份、原子写与失败回滚 |
+| 字段影响分析（v0.23） | `impact field`：显式模块内关联字段/列、物理容量、Java 校验边界、数据所有权、Expand/Backfill/Contract 迁移链及文件行号证据 |
+| 集成投递机器契约（v0.23） | 逻辑 ID + 投递契约：算法版本/规范化/长度、生产者/消费者/载荷版本、排序、重试/确认/死信/重放、错误码引用；重复 StableBusinessId/PayloadHash 审计 |
+| 集成适配器治理（v0.24） | 项目自有 `integration-adapters.json` + `integration-adapter-be` Skill：平台团队声明真实 Maven 坐标与 Producer/Consumer/配置/测试/capability 证据；未配置返回 `not-configured`，不假设平台、不误报 MQ 规则 |
+| 变更审查质量门（v0.24） | `review run / baseline`：Git 变更 + B 规则 + 历史基线 + 有期限豁免 + 项目断言（`quality-assertions.json`）+ 平台适配 + 供应链（`supply-chain.json`）+ JaCoCo 全量/变更行覆盖率，汇总为同一确定性门；partial coverage 不能冒充完整审查 |
+| 精准修复（v0.24） | `fix advise` 修复分级：项目 recipe 生成与精确替换走 planHash/确认/事务写链；0 次或多次匹配、写前漂移、受保护环境、复验失败均阻断或回滚 |
+| 性能与准确率（v0.21） | B 规则执行计划 + ScanContext 按需读取、Source Index 两级缓存、MCP 统一 `response.mode/maxItems/maxBytes/cursor` 分页与 token 预算、`discover→context→validate→plan→approval→apply→verify` Pipeline DAG、`eval:quality` 准确率/P95 CI 门禁 |
+
+## 17 个 MCP 工具
 
 写工具默认停在 plan/preview；apply 必须显式确认。Cursor、VS Code、Kiro、Copilot、Claude Code 和通用 Agents 的配置随 `init` 安装。
 
@@ -219,7 +234,7 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 | `wls_be_codegen` | 条件 | 契约 validate/plan/apply |
 | `wls_be_contract` | 否 | 协作契约 show/diff（前端/OpenAPI/权限/kit api.md） |
 | `wls_be_safe_fix` | 条件 | B3/B5 安全修复闭环 |
-| `wls_be_standards` | 否 | 读取 29 条规范 |
+| `wls_be_standards` | 否 | 读取 30 条规范 |
 | `wls_be_templates` | 否 | 读取 16 个模板 |
 | `wls_be_db_preview` | 否 | 只读预览 CREATE/ALTER DDL + Expand-Contract 阶段 |
 | `wls_be_export_permissions` | 条件 | 导出权限码为 kit SYS_PERMISSION_INFO.md 片段 |
@@ -230,6 +245,7 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 | `wls_be_context` | 否 | 当前模块 + 一跳快照的有界上下文选择 |
 | `wls_be_commit` | 否 | `type(scope): 功能点-具体内容` 校验与 Hook doctor |
 | `wls_be_test` | 否 | 行为契约测试 gen/scenarios |
+| `wls_be_review` | 否 | 变更审查统一质量门 run/baseline（规则+基线+豁免+断言+平台适配+供应链+覆盖率） |
 
 ## Java 质量门（J1~J8）
 
@@ -274,7 +290,7 @@ wl-skills-bd contract diff wl-contract.json \
 
 ## 能力边界
 
-12 个 Skill 中 10 个已落地，1 个部分落地（`db-migration`：CREATE/ALTER/索引已自动生成，复杂数据回填仍是部分能力），1 个仍是诚实标记的流程骨架（`business-doc-extract-be`）。无执行器的能力不展示虚构命令，也不承诺自动应用。DDL 只生成，不连接数据库、不自动执行、不伪造自动回滚——生产变更由 DBA/CD 和人工审批负责。
+13 个 Skill 中 11 个已落地，1 个部分落地（`db-migration`：CREATE/ALTER/索引已自动生成，复杂数据回填仍是部分能力），1 个仍是流程骨架（`business-doc-extract-be`）。无执行器的能力不展示虚构命令，也不承诺自动应用。DDL 只生成，不连接数据库、不自动执行、不伪造自动回滚——生产变更由 DBA/CD 和人工审批负责。
 
 ## 快速开始
 

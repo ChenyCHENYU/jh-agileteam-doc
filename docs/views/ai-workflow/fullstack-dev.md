@@ -18,7 +18,7 @@
               ▼                               ▼
     ┌─────────────────┐             ┌─────────────────┐
     │  前端 kit        │             │  后端 bd          │
-    │  v2.18.2        │             │  v0.20.1         │
+    │  v2.20.1        │             │  v0.24.0         │
     │                 │             │                  │
     │  page-spec      │             │  wl-contract.json │
     │  api.md         │             │  Entity/DTO/VO    │
@@ -58,7 +58,7 @@ code-fix → 规范收敛
 menu-sync / dict-sync / permission-sync → 平台配置同步
 ```
 
-- Skills：[wl-skills-kit](/frontend/pc/skills/) v2.18.2
+- Skills：[wl-skills-kit](/frontend/pc/skills/) v2.20.1
 - 使用指南：[前端使用指南](/frontend/pc/skills/usage-guide)
 
 ---
@@ -85,7 +85,7 @@ convention-audit-be → B1-B31 + J1-J8 规范审计
 code-fix-be → B3/B5 安全修复
 ```
 
-- Skills：[wl-skills-bd](/backend/skills/) v0.20.1
+- Skills：[wl-skills-bd](/backend/skills/) v0.24.0
 - 流水线：[后端 AI Skills 流水线](/backend/skills/skill-pipeline)
 - 使用指南：[后端使用指南](/backend/skills/usage-guide)
 
