@@ -70,14 +70,15 @@ AI 在执行任何代码生成任务**之前**，必须检查以下三个特征�
 所有平台前端项目 · 完整模式（`@robot-admin/git-standards` full preset）
 :::
 
-团队使用 **Vue 3 + TypeScript + Oxlint 完整模式**，三层规则叠加：
+团队使用 **Vue 3 + TypeScript + ESLint（Vue essential + TS recommended）**，Prettier 互排：
 
 | 规则层 | 来源 | 说明 |
 | ------ | ---- | ---- |
-| Oxlint 推荐 | `oxlint.configs["flat/recommended"]` | 高性能基础规则，覆盖 no-unused-vars、no-undef 等 |
 | Vue 基础 | `pluginVue.configs["flat/essential"]` | Vue 模板语法、组件命名、指令用法 |
 | TypeScript 推荐 | `vueTsConfigs.recommended` | TS 类型安全、导入规范、接口约定 |
 | Prettier 互排 | `skipFormatting` | **关闭** ESLint 中所有格式化类规则，格式全权交给 Prettier |
+
+> 启用 `@robot-admin/git-standards` 完整预设的项目可叠加 Oxlint 作为提交期快速 lint；模板默认以 ESLint 为准。
 
 ### 关键规则说明
 

@@ -16,7 +16,7 @@
 
 [前端 → 快速上手](/frontend/quick-start/) — 环境搭建、VSCode 配置、项目结构、规范约定（⓪–⑪）、提交规范。
 
-[后端 → 快速上手](/backend/) — **内容规划中，敬请期待**。
+[后端 → 快速上手](/backend/) — 技术选型、Skills 安装、契约驱动生成、质量门与数据库治理流程。
 
 ---
 
@@ -37,31 +37,47 @@
 
 ---
 
+### 📦 五包工程能力
+
+> 五个 npm 包覆盖设计 → 前端 → 视觉 → 后端 → 测试全链路，契约同源、独立安装。
+
+| 包 | 文档入口 | 当前版本 |
+|---|---|---|
+| `wl-skills-design` | [产品设计 Skills](/views/ai-workflow/design-skills) | v0.11.1 |
+| `wl-skills-kit` | [前端 PC Skills](/frontend/pc/skills/) | v2.20.1 |
+| `wl-skills-ui` | [UI 统一规范](/views/styling/wl-skills-ui) | v1.12.0 |
+| `wl-skills-bd` | [后端 Skills](/backend/skills/) | v0.24.0 |
+| `wl-skills-test` | [测试工程 Skills](/views/testing/) | v0.11.0 |
+
+配套工具：[工程脚手架 jh4j-cloud-cli](/scaffold/)（PC / 移动端 H5 模板一键创建）。
+
+---
+
 ### 💻 前端
 
 > 按端拆分，每端包含概览、规范、Skills 集合。
 
-- **PC 端** — [概览 & 技术选型](/frontend/pc/) · [架构设计](/frontend/pc/architecture) · [扩展规范](/frontend/pc/standards) · [Skills 集合](/frontend/pc/skills/)
-- **移动端 H5** — [概览 & 技术选型](/frontend/mobile-h5/) · [扩展规范](/frontend/mobile-h5/standards) · [Skills 集合](/frontend/mobile-h5/skills) · [@robot-h5/core](/frontend/mobile-h5/h5-core/)
-- **移动端 uniApp** — [概览 & 技术选型](/frontend/mobile-uniapp/) · [H5 子应用集成方案](/frontend/mobile-uniapp/integration)
+- **PC 端** — [概览 & 技术选型](/frontend/pc/) · [架构设计](/frontend/pc/architecture) · [扩展规范](/frontend/pc/standards) · [Skills 集合](/frontend/pc/skills/) · [使用指南](/frontend/pc/skills/usage-guide)
+- **移动端 H5** — [概览 & 技术选型](/frontend/mobile-h5/) · [扩展规范](/frontend/mobile-h5/standards) · [Skills 集合](/frontend/mobile-h5/skills) · [使用指南](/frontend/mobile-h5/usage-guide) · [@robot-h5/core](/frontend/mobile-h5/h5-core/)
+- **移动端 uniApp（基座）** — [概览 & 技术选型](/frontend/mobile-uniapp/) · [H5 子应用集成](/frontend/mobile-uniapp/integration) · [钉钉集成](/frontend/mobile-uniapp/dingtalk) · [App 集成与发布](/frontend/mobile-uniapp/app-integration) · [消息中心](/frontend/mobile-uniapp/message-center)
 
 ---
 
 ### ⚙️ 后端
 
-> [概览 & 技术选型](/backend/) · [开发规范](/backend/standards) · [Skills 集合](/backend/skills/)
+> [概览 & 技术选型](/backend/) · [开发规范](/backend/standards) · [Skills 集合](/backend/skills/) · [使用指南](/backend/skills/usage-guide) · [契约流水线](/backend/skills/skill-pipeline)
 
 ---
 
-### 🧪 测试 <Badge type="warning" text="规划中" />
+### 🧪 测试
 
-测试规范、用例模板、AI 辅助测试。
+> [测试工程 Skills](/views/testing/)（v0.11.0）— 12 个 Skill、25 条审计规则（T1-T25）、3 个执行器（API/Playwright/JMeter）、test-reports 统一报告与 gate 质量门。[使用指南](/views/testing/usage-guide) · [功能链](/views/testing/functional) · [自动化](/views/testing/automation) · [性能](/views/testing/performance)。
 
 ---
 
-### 📋 产品 & 需求 <Badge type="warning" text="规划中" />
+### 📋 产品 & 需求
 
-需求文档规范、原型评审流程、AI 辅助需求分析。
+> [产品设计 Skills](/views/ai-workflow/design-skills)（wl-skills-design v0.11.1）— 流程图、需求说明书（IPO 按钮级颗粒度）、原型标注（D1–D3）、数据库/接口设计、术语词典、变更影响、集成评审；`verify` CLI 四域机械校验。[原型标注实战](/views/ai-workflow/prototype)。
 
 ---
 
@@ -82,10 +98,10 @@
 | 你是… | 推荐路径 |
 |---|---|
 | **刚了解前端的小伙伴** | [快速上手](/frontend/quick-start/) → [PC 架构设计](/frontend/pc/architecture) → [Skills 集合](/frontend/pc/skills/) |
-| **移动端开发** | [快速上手](/frontend/quick-start/) → [H5 概览](/frontend/mobile-h5/) → [@robot-h5/core](/frontend/mobile-h5/h5-core/) |
-| **后端开发** | [后端概览](/backend/) → [后端 Skills](/backend/skills/) |
-| **测试工程师** | [AI 最佳实践](/views/best-practices/) → 测试规范（规划中） |
-| **产品经理** | [AI 工作流](/views/ai-workflow/) → 产品规范（规划中） |
+| **移动端开发** | [快速上手](/frontend/quick-start/) → [H5 概览](/frontend/mobile-h5/) → [基座集成](/frontend/mobile-uniapp/integration) → [@robot-h5/core](/frontend/mobile-h5/h5-core/) |
+| **后端开发** | [后端概览](/backend/) → [后端 Skills](/backend/skills/) → [使用指南](/backend/skills/usage-guide) |
+| **测试工程师** | [测试工程 Skills](/views/testing/) → [使用指南](/views/testing/usage-guide) → [AI 最佳实践](/views/best-practices/) |
+| **产品经理** | [产品设计 Skills](/views/ai-workflow/design-skills) → [AI 工作流](/views/ai-workflow/) |
 | **想用 AI 提效** | [AI 最佳实践](/views/best-practices/) → [AI 工作流](/views/ai-workflow/) |
 
 ## 联系我们

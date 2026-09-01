@@ -12,14 +12,15 @@
 
 ## ESLint 规则体系
 
-团队使用 **Vue 3 + TypeScript + Oxlint 完整模式**，三层规则叠加：
+团队使用 **Vue 3 + TypeScript + ESLint（Vue essential + TS recommended）**，Prettier 互排：
 
 | 规则层 | 来源 | 说明 |
 | ------ | ---- | ---- |
-| Oxlint 推荐 | `oxlint.configs["flat/recommended"]` | 高性能基础规则，覆盖 no-unused-vars、no-undef 等 |
 | Vue 基础 | `pluginVue.configs["flat/essential"]` | Vue 模板语法、组件命名、指令用法 |
 | TypeScript 推荐 | `vueTsConfigs.recommended` | TS 类型安全、导入规范、接口约定 |
 | Prettier 互排 | `skipFormatting` | **关闭** ESLint 中所有格式化类规则，格式全权交给 Prettier |
+
+> 启用 `@robot-admin/git-standards` 完整预设的项目可叠加 Oxlint 作为提交期快速 lint。
 
 ---
 
@@ -147,7 +148,7 @@ const double = x => x * 2  // ← arrowParens: "avoid"，单参数省括号
 
 两者**不互相冲突**，通过 `skipFormatting` 完全分工：
 
-| 维度 | ESLint + Oxlint | Prettier |
+| 维度 | ESLint | Prettier |
 | ---- | --------------- | -------- |
 | **关注点** | 代码逻辑质量（潜在 bug、类型安全、规范违规） | 代码外观格式（缩进、引号、换行、逗号） |
 | **执行时机** | pre-commit 全量检查 + IDE 实时标红 | pre-commit 暂存区格式化 + IDE 保存时自动 |

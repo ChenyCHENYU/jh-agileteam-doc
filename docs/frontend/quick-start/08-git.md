@@ -43,9 +43,7 @@ bun run cz / git cz
 git commit（由 commitizen 触发）
     │
     ├─ .husky/pre-commit 触发：
-    │   1. oxlint --max-warnings 0       ← 快速全量 lint
-    │   2. lint-staged                   ← 增量检查暂存文件
-    │       ├─ oxlint --deny-warnings
+    │   1. lint-staged                   ← 增量检查暂存文件
     │       ├─ eslint --fix --no-cache
     │       └─ prettier --write
     │
@@ -170,10 +168,10 @@ bunx --no-install commitlint --edit "$1"
 ### .husky/pre-commit（完整模式）
 
 ```bash
-# 快速全量 Oxlint（50x faster）
-bunx oxlint --max-warnings 0
-# 暂存区增量检查
+# 暂存区增量检查（ESLint --fix + Prettier）
 bunx lint-staged
+# 完整预设（git-standards full）额外叠加 Oxlint 快速全量 lint
+bunx oxlint --max-warnings 0
 ```
 
 > hook 文件自动设置可执行权限（`chmod 755`），确保 Git Bash / WSL 正常运行。

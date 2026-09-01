@@ -115,6 +115,6 @@
 | 阶段 | 说明 | 状态 |
 |------|------|------|
 | **详细设计** | AI 辅助详设文档结构化，提取页面清单与接口语义 | 🟡 实践中 |
-| **原型设计** | AI 辅助需求分析与低保真原型生成 | 🔜 规划中 |
+| **原型设计** | 原型标注规范 D1–D3 与标注 Skill 已随 wl-skills-design 落地 | ✅ 已落地（[原型标注](/views/ai-workflow/prototype) · [设计 Skills](/views/ai-workflow/design-skills)） |
 | **全栈开发** | 前后端全栈 AI 辅助开发实践（当前核心模块）| 🟡 践行中 |
 | **测试实践** | AI 生成测试用例与自动化测试 | ✅ 已落地（[wl-skills-test](/views/testing/)） |

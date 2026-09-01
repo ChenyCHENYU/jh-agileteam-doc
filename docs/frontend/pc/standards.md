@@ -22,7 +22,7 @@
 | 🔒 安全 | 06 | `v-html` 防护、禁 `eval`、禁直连 `axios`、密钥管理 |
 | ⚙️ 配置与协作 | 05、07、08 | 日志管控、`VITE_` 环境变量、Git 分支与提交规范 |
 | 🗄️ 数据层 | 09、10 | TypeScript 类型约束、Pinia Store 结构 |
-| 🖼️ 视图层 | 11、14 | 表单校验、布局容器（规划中） |
+| 🖼️ 视图层 | 11、14 | 表单校验、布局容器（jh-drag-col / jh-drag-row，阻断式） |
 | 🧩 组件层 | 12、13 | BaseTable + AGGrid、平台封装组件合规 |
 
 ---
@@ -51,7 +51,7 @@
 | ---- | -------- | ------ | ---- |
 | [12](/frontend/pc/12-base-table) | BaseTable 渲染与 AGGrid cid 唯一性规范 | 🔴 必遵 | AGGrid 渲染模式、cid 全局唯一命名规则（base-36 时间戳） |
 | [13](/frontend/pc/13-platform-components) | 平台组件合规规范 | 🔴 阻断式 | 强制使用平台封装组件对照表，禁止直接使用 `el-*` 原生组件 |
-| 14 | 布局容器规范 | 📋 规划中 | 页面布局容器（`page-container` / `jh-drag-*`）约定，编号顺延 |
+| 14 | 布局容器规范 | 🔴 必遵 + 阻断式 | 左右分栏统一 `jh-drag-col`、上下分栏统一 `jh-drag-row`，禁止手写 flex 模拟分栏拖拽（lint 命中即报错） |
 
 ---
 
