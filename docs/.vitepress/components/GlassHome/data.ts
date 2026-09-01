@@ -18,6 +18,12 @@ export interface Stat {
 
 export const features: Feature[] = [
   {
+    icon: "📦",
+    title: "五包工程能力",
+    details: "design / kit / ui / bd / test 五包覆盖设计到测试全链路，契约同源、独立安装",
+    link: "/views/guide/",
+  },
+  {
     icon: "🤖",
     title: "AI 工作流",
     details: "AI 驱动的全流程工程化实践，从原型到测试的智能化协作",
@@ -36,10 +42,16 @@ export const features: Feature[] = [
     link: "/frontend/pc/skills/",
   },
   {
-    icon: "📖",
-    title: "知识库",
-    details: "组件库、模板库、样式方案等团队知识资产，统一沉淀共享",
-    link: "/views/guide/",
+    icon: "📱",
+    title: "移动端基座",
+    details: "wl-mbase 四端统一门户（小程序/钉钉/H5/App）与 Robot_H5 框架",
+    link: "/frontend/mobile-uniapp/",
+  },
+  {
+    icon: "🛠️",
+    title: "工程脚手架",
+    details: "jh4j-cloud-cli 一键创建 PC 子系统或移动端 H5 应用，结构一致可追溯",
+    link: "/scaffold/",
   },
   {
     icon: "🔥",
@@ -48,36 +60,36 @@ export const features: Feature[] = [
     link: "/views/troubleshooting/",
   },
   {
-    icon: "🤝",
-    title: "团队",
-    details: "业务、产品、前端、后端、测试全角色团队协作与分享",
-    link: "/views/team/",
+    icon: "📣",
+    title: "宣贯方案",
+    details: "五包落地宣贯文档：能力、场景、接入流程与验收清单",
+    link: "/views/rollout/",
   },
 ];
 
 export const stats: Stat[] = [
   {
-    icon: "🎯",
-    number: "✦",
-    label: "精选 Skill",
-    desc: "持续沉淀的工程化技能集合",
-  },
-  {
-    icon: "�",
-    number: "✦",
-    label: "最佳实践",
-    desc: "全链路 AI 工程化最佳实践",
+    icon: "📦",
+    number: "5",
+    label: "工程包",
+    desc: "design / kit / ui / bd / test 全链路覆盖",
   },
   {
     icon: "🤖",
-    number: "✦",
-    label: "AI 工作流",
-    desc: "AI 驱动的全流程开发实践",
+    number: "48",
+    label: "AI Skill",
+    desc: "触发词驱动的结构化技能",
+  },
+  {
+    icon: "🔌",
+    number: "76",
+    label: "MCP 工具",
+    desc: "菜单/权限/快照/生成/执行全覆盖",
   },
   {
     icon: "⚡",
-    number: "∞",
-    label: "持续迭代",
-    desc: "跟随前沿技术不断演进",
+    number: "114",
+    label: "确定性审计规则",
+    desc: "K19 + R39 + B31 + T25，机器判定",
   },
 ];

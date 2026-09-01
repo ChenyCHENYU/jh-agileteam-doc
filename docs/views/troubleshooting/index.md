@@ -123,6 +123,23 @@ npx @agile-team/wl-skills-test fix --target ./tests/
 
 ---
 
+## 五包工程
+
+| 现象 | 根因 | 处理 |
+|------|------|------|
+| kit `update` 提示本地修改，不敢覆盖 | 受管文件被手工改过（真实改动，非 CRLF） | 先 `wl-skills diff` 逐文件核对，改完备份后 `--force` |
+| Windows 下 update 报 132 个文件变更 | `core.autocrlf` 换行符差异 | kit 按 LF 计算内容身份，升级到近期版本即不再误报 |
+| `validate --pre-commit` 拦截了非页面提交 | v2.18.2 前的已知误报（共享模块/definitions 目录） | 升级 kit ≥ 2.18.2；或按 `docs/validate-exempt.md` 登记目录 |
+| 手改了 scenario 生成的页面又被 CI 拦截 | W1 字节级防漂移：scenarioRef 页面禁止手改 | 改 wl-scenario JSON 后 `scenario render --confirm` 重渲染 |
+| bd 安装中断后目录状态可疑 | v0.18.1 前无事务安装 | 升级 bd ≥ 0.18.1（写日志 + 失败自动回滚），重跑 `init` |
+| bd `codegen apply` 报 planHash 漂移 | plan 之后契约或数据库事实源变了 | 重新 `codegen plan` 取新 planHash 再 apply |
+| bd `review --module` 报未知模块 | 模块名不在 Catalog 注册 | 先 `catalog plan/apply` 登记模块，再按模块审查 |
+| `db drift` 冒出"无主变更"列 | 有人绕过流程手工直改了库 | 核实后 `db executed` 补登记（带审批引用）；真实废弃则走文档修订 |
+| test `doctor` 报 Playwright/JMeter 缺失 | 执行器环境未装或不在 PATH | 按 doctor 输出安装：`pnpm dlx playwright install`、JMeter 5.6.3 配置 |
+| design `verify` 对故意保留的旧格式报错 | 规范升级后 [M] 项口径收紧 | 按 verify 输出逐项整改；确认属业务特例再反馈归口 |
+
+---
+
 ## 调试技巧
 
 | 场景 | 工具/方法 |

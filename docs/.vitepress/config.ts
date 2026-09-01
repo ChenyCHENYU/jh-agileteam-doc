@@ -106,6 +106,6 @@ export default defineConfig({
   },
   // Vite 配置
   vite,
-  // 忽略死链检查（规划中页面较多，避免构建失败）
-  ignoreDeadLinks: true,
+  // 死链检查已开启（历史规划页均已落地；如临时需要跳过可设为 true）
+  ignoreDeadLinks: false,
 });

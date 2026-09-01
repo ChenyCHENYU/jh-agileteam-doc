@@ -2,6 +2,10 @@
 
 <AuthorTag :authors="['YangTianGuang','DaiAn','ZhangXiang','ZhangJie','PanChaoYue']" />
 
+::: tip 快速上手
+新成员请先看 [后端快速上手](/backend/quick-start)：环境准备 → 契约生成三段式 → 审计与质量门 → 数据库变更流程，约 30 分钟跑通最小闭环。
+:::
+
 ::: tip v0.24.0 已落地
 后端方向基于 **`@agile-team/wl-skills-bd`（v0.24.0）** 形成可安装、可验证、可回放的工程闭环，覆盖契约驱动生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、生产保障、质量门、数据库事实源治理、**变更审查统一质量门（review run/baseline）**、**多模块与字段影响分析**、**集成适配器治理** 与 MCP 全链路。
 :::

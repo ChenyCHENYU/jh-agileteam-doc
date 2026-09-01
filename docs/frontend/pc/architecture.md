@@ -1639,7 +1639,7 @@ onMounted(() => {
 </script>
 ```
 
-**详细文档**：[AbstractPageQueryHook 最佳实践](./page-query-hook-best-practices.md)
+**详细文档**：见上文 [9.2 AbstractPageQueryHook 基类](#_9-2-abstractpagequeryhook-基类)（独立最佳实践文档规划中）
 
 ### 9.3 API 封装策略
 

@@ -399,6 +399,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "概览 & 技术选型", link: "/backend/" },
+        { text: "快速上手", link: "/backend/quick-start", badge: { text: "新", type: "tip" } },
         { text: "开发规范", link: "/backend/standards" },
       ],
     },
@@ -521,6 +522,18 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "后端团队", link: "/views/team/backend" },
       ],
     },
+    {
+      text: "宣贯方案",
+      collapsed: false,
+      items: [
+        { text: "总览", link: "/views/rollout/" },
+        { text: "产品设计（design）", link: "/views/rollout/design" },
+        { text: "前端编码（kit）", link: "/views/rollout/kit" },
+        { text: "UI 统一（ui）", link: "/views/rollout/ui" },
+        { text: "后端开发（bd）", link: "/views/rollout/bd" },
+        { text: "测试工程（test）", link: "/views/rollout/test" },
+      ],
+    },
   ],
 
   // 疑难杂症
@@ -535,6 +548,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "模块联邦", link: "/views/troubleshooting/#模块联邦" },
         { text: "低代码平台", link: "/views/troubleshooting/#低代码平台" },
         { text: "测试", link: "/views/troubleshooting/#测试" },
+        { text: "五包工程", link: "/views/troubleshooting/#五包工程" },
         { text: "调试技巧", link: "/views/troubleshooting/#调试技巧" },
         { text: "问题反馈", link: "/views/troubleshooting/#问题反馈" },
       ],
