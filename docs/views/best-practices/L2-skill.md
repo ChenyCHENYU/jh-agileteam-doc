@@ -56,7 +56,7 @@ Skills 核心能力（Core 内核，纯 TS，MCP / CLI 共用底层）
 
 ## 什么是 Skill？
 
-Skill 是一个放在项目 `.github/skills/` 目录下的 Markdown 文件（`SKILL.md`），里面用自然语言描述：
+Skill 是一个放在项目 `.wl-skills/skills/` 目录下的 Markdown 文件（`SKILL.md`），里面用自然语言描述：
 - 何时触发（触发词）
 - 执行前声明什么（Pre-flight）
 - 按什么步骤执行
@@ -96,7 +96,7 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
 ## Skill 结构示例
 
 ```
-.github/skills/
+.wl-skills/skills/
 ├── _registry.md                  ← ★ 触发词 → SKILL 路径单一数据源
 ├── core/
 │   ├── prototype-scan/

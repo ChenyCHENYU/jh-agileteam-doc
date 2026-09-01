@@ -6,7 +6,7 @@
 
 ::: tip 版本要求
 - `@agile-team/wl-skills-kit` ≥ v2.16.0
-- `@robot-admin/form-validate` ≥ v3.4.1（R18 校验库版本检查）
+- `@robot-admin/form-validate` ≥ v3.4.1（K18 校验库版本检查）
 :::
 
 ---
@@ -118,8 +118,8 @@ const { filteredFields, showToggle, isRequiredOnly } = useFormRequiredOnly({
 
 | 规则 | 说明 |
 |------|------|
-| **R17** | 表单仅必填开关按每个实际绑定逐项判断（弹窗/独立页面/分区表单全覆盖） |
-| **R18** | 表单校验库 `@robot-admin/form-validate@^3.4.1` 版本范围检查 |
+| **K17** | 表单仅必填开关按每个实际绑定逐项判断（弹窗/独立页面/分区表单全覆盖） |
+| **K18** | 表单校验库 `@robot-admin/form-validate@^3.4.1` 版本范围检查 |
 
 convention-audit 会检测项目中是否正确使用 `show-required-toggle` / `show-required-filter` / `useFormRequiredOnly`，以及表单校验库版本是否达标。
 

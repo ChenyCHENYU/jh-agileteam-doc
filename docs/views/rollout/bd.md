@@ -7,7 +7,7 @@
 > 上游协作：`wl-skills-design`（需求与数据库/接口设计产出物）· `wl-skills-kit`（前端 api.md 契约）
 > 下游协作：`wl-skills-test`（消费 `wl-contract.json` 与 ServiceTest 执行深度接口测试）
 > 运行要求：包 CLI 需 Node.js ≥ 22；目标工程基线 Java 8 + Spring Boot 2 + jh4j-cloud 3.1
-> 当前核对版本：`0.20.1`（2026-08-22）
+> 当前核对版本：`0.24.0`（2026-08-31）
 
 ---
 
@@ -20,7 +20,7 @@
 本次会议结束后，各服务和模块负责人应明确以下事项：
 
 1. 为什么后端必须统一，以及当前分层混乱和数据安全隐患对线上稳定的影响；
-2. `wl-skills-bd` 的 12 个 Skill、16 个 MCP 工具、31 条 B 规则、8 个 J 质量门各管什么；
+2. `wl-skills-bd` 的 13 个 Skill、17 个 MCP 工具、31 条 B 规则、8 个 J 质量门各管什么；
 3. 新服务全链路生成、加接口增量契约、存量服务体检三种场景分别怎么做；
 4. 数据库变更的"四方对账 + 计划审批 + 环境分级执行"流程，DDL 与数据操作的红线在哪；
 5. 契约漂移或规则误报时，如何反馈和归口解决。
@@ -29,7 +29,7 @@
 
 > 一套后端规范、一个机器契约事实源、计划先行显式授权两种写入边界、B 系列 + J 系列 + 数据库治理三层确定性防线、一条"契约 → 生成 → 审计 → 修复"闭环。
 
-### 版本演进速览（v0.18.2 → v0.20.1）
+### 版本演进速览（v0.18.2 → v0.24.0）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -37,6 +37,10 @@
 | v0.19.0 | B31 源头一致性：文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账；DDL 执行账本；改名豁免审批通道 | "文档叫 A、库里叫 a_old"这类漂移在上线前被检出，且豁免必须留审批记录 |
 | v0.20.0 | standards/29 数据库事实源强门禁：基线表同名复用、字段顺序/类型/注释精确对账；事实源指纹进入 planHash；环境分级执行（dev/sit 一次审批连续执行，pre/prod 保留 DBA 流程） | 数据库改动绕不开文档对账；换序/改类型/漏注释都会在预览阶段报错 |
 | v0.20.1 | 0.20 能力正式发布补丁（npm 包、安装模板、徽章同步） | 安装即得完整数据库治理链路 |
+| v0.21.0 | 准确率与性能：B 规则执行计划 + ScanContext 按需读取、Source Index 两级缓存、MCP 统一分页与 token 预算、Pipeline DAG 节点契约、`eval:quality` 门禁 | 大仓扫描更快更准，输出体积可控 |
+| v0.22.0 | 契约事实源、通用文件事务链、多环境 fail-closed 写护栏、ID/审计列 Profile 单一策略 | 所有写入口统一预览/planHash/回滚，环境护栏不再漏 |
+| v0.23.0 | Catalog 多模块根发现；契约分类（crud/schema-mirror/integration-projection）与 `contract inspect/migrate`；`impact field` 字段影响链；集成投递机器契约（StableBusinessId/PayloadHash） | 多模块工程不误报；存量契约可迁移；改字段先看影响链 |
+| v0.24.0 | **变更审查统一质量门** `review run/baseline`；项目集成适配器（`integration-adapters.json` + Skill）；`quality-assertions.json` / `supply-chain.json`；`fix advise` 精准修复；standards/30 | Git 变更 + 规则 + 基线 + 豁免 + 平台适配 + 供应链 + 覆盖率汇总为一个确定性门 |
 
 ---
 
@@ -80,9 +84,9 @@
 
 `wl-skills-bd` 不是"一键出全套代码"的黑盒脚手架，也不是单纯的 Checkstyle 配置集。它是面向 jh4j-cloud 后端体系的**规范工程化执行框架**，包含：
 
-- 29 条后端规范（`.github/standards/01~29`）；
-- 12 个 AI Skill（core / data / ops / test 四组）；
-- 16 个 MCP 工具（CLI 与 MCP 复用同一核心实现）；
+- 30 条后端规范（`.github/standards/01~30`）；
+- 13 个 AI Skill（core / data / ops / test 四组，v0.24 新增 integration-adapter-be）；
+- 17 个 MCP 工具（CLI 与 MCP 复用同一核心实现，v0.24 新增 `wls_be_review`）；
 - B1~B31 确定性扫描规则 + safe-fix 受控修复；
 - J1~J8 Maven 质量门（ArchUnit / Checkstyle / PMD / SpotBugs / Spotless / P3C / OpenAPI / JaCoCo）；
 - 数据库源头治理工具链（drift / executed / ledger / preview）；
@@ -273,7 +277,7 @@ wl-skills-bd task --list             # 列出 8 种任务
 
 ## 六、Skill、MCP 与工程保障全景
 
-### 6.1 12 个 Skill
+### 6.1 13 个 Skill
 
 | # | Skill | 分类 | 能力 | 状态 |
 |---|-------|------|------|------|
@@ -289,10 +293,11 @@ wl-skills-bd task --list             # 列出 8 种任务
 | ⑩ | data-safety | ops | Redis / 敏感写 / 全表写护栏落地指引 | 已落地 |
 | ⑪ | standard-env-config-be | ops | 配置分层 / 多环境迁移 / 故障排查 | 已落地 |
 | ⑫ | business-doc-extract-be | core | 后端业务沉淀 / 领域模型提取 | 🟡 流程骨架（能力尚未闭环） |
+| ⑬ | integration-adapter-be | core | 平台集成适配：真实 Maven 坐标、Producer/Consumer/配置/测试/capability 证据与方向门禁（项目 `integration-adapters.json` 声明，未配置返回 `not-configured`） | 已落地 |
 
-### 6.2 16 个 MCP 工具
+### 6.2 17 个 MCP 工具
 
-`wls_be_validate`（B1~B31 扫描）· `doctor`（JDK/Maven/Profile/租户证据体检）· `codegen`（validate/plan/apply）· `contract`（show/diff 严格比对）· `safe_fix`（修复闭环）· `standards`（读取 29 条规范）· `templates`（读取 16 个模板）· `db_preview`（只读 DDL 预览 + Expand-Contract 阶段）· `export_permissions`（导出权限码给 kit）· `config`（init/migrate/doctor）· `troubleshoot`（10 类诊断树）· `task`（任务路由）· `catalog`（plan/apply/check/show）· `context`（有界上下文选择）· `commit`（提交校验 + Hook doctor）· `test`（gen/scenarios）
+`wls_be_validate`（B1~B31 扫描）· `doctor`（JDK/Maven/Profile/租户证据体检）· `codegen`（validate/plan/apply）· `contract`（show/diff 严格比对）· `safe_fix`（修复闭环）· `standards`（读取 30 条规范）· `templates`（读取 16 个模板）· `db_preview`（只读 DDL 预览 + Expand-Contract 阶段）· `export_permissions`（导出权限码给 kit）· `config`（init/migrate/doctor）· `troubleshoot`（10 类诊断树）· `task`（任务路由）· `catalog`（plan/apply/check/show）· `context`（有界上下文选择）· `commit`（提交校验 + Hook doctor）· `test`（gen/scenarios）· `review`（变更审查统一质量门 run/baseline）
 
 写类工具默认停在 plan/preview，apply 必须显式确认——这条对所有入口一致，AI 调用与人执行没有特权差异。
 
@@ -499,7 +504,7 @@ wl-skills-bd 实际版本：
 
 1. 确认 29 条规范与 `wl-skills-bd` 为后端统一事实来源；
 2. 确认各服务负责人与 DBA 对口人名单；
-3. 确认接入台账与目标版本（≥ 0.20.1）及升级节奏；
+3. 确认接入台账与目标版本（≥ 0.24.0）及升级节奏；
 4. 确认第一批试点（建议 1 个新服务走全链路生成 + 1 个存量服务做 validate 体检）；
 5. 确认数据库流程切换时间点：docs/db-spec 补齐 → drift 首轮对账 → 账本补录 → waivers 清理；
 6. 确认 pre/prod 写入边界的演练安排（验证零写入默认确实生效）；

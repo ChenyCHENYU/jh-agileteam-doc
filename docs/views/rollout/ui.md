@@ -6,7 +6,7 @@
 > 设计源文件：`D:\work\design-work\烟台华新数智化信息化改造项目UI规范v1.pptx`  
 > 工程载体：`@agile-team/wl-skills-ui`  
 > 工程目录：`D:\office-project\wl\wl-skills-ui`  
-> 当前核对版本：`1.11.1`（2026-08-26）
+> 当前核对版本：`1.12.0`（2026-08-30）
 
 ## 一、宣贯目标与核心结论
 
@@ -26,7 +26,7 @@
 
 > 一套设计基线、一个工程化事实源、两种接入模式、五层能力覆盖、一条持续治理闭环。
 
-### 版本演进速览（v1.9.11 → v1.11.1）
+### 版本演进速览（v1.9.11 → v1.12.0）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -35,6 +35,7 @@
 | v1.10.4 | 新旧 Element Plus / jh-ui 输入控件左右内边距统一、数字控件步进按钮几何统一 | 内容不贴边、箭头不错位 |
 | v1.11.0 | R042 日期/时间弹层几何隔离；AG Grid 选择框横向对轴修复；scanner `--changed --base` Git 增量 + `--parser auto` ；`wl-ui contract extract/validate/match` 页面契约三件套（MCP 同名工具） | Teleport 弹层不再被业务样式误伤；大仓库可增量扫描；成熟页面可提取为脱敏契约复用 |
 | v1.11.1 | 修复空态守护导致上下分栏（jh-drag-row）手柄失去拖动行程 | 空表分栏页手柄可正常拖动 |
+| v1.12.0 | **能力 Profile 体系**（native-element / legacy-jh-element / legacy-jh-ag）+ wl-ui profiles；R043 按钮 icon 语义规则；scanner 共享 engine 与 summary.v1/compact.v2 低 token 协议；fixer 支持 planHash | 按项目形态选档，非 AG 项目零 AG 包袱；报告更省 token，修复计划可防漂移 |
 
 ---
 

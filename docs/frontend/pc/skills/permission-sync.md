@@ -87,4 +87,4 @@ AI ：[Pre-flight] 模式 = action-attach
 
 ## 配置
 
-沿用 `.github/skills/sync/env.local.json` 中的公共配置（与 menu-sync / dict-sync 共用），无需额外配置文件。
+沿用 `.wl-skills/skills/sync/env.local.json` 中的公共配置（与 menu-sync / dict-sync 共用），无需额外配置文件。

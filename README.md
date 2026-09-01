@@ -155,7 +155,7 @@ npx @agile-team/jh4j-cloud-cli create my-project
 npx @agile-team/jh4j-cloud-cli doctor
 ```
 
-支持模板直选（PC/移动端）、快速/自定义双模式创建、GitHub→Gitee 主备源容灾、模板缓存、事务化生成与失败恢复；移动端模板默认基线 Robot_H5 `v1.8.0` + `@robot-h5/core@^1.2.0`（可信桥接与 App/PDA SDK 按需加载）。详见 [工程脚手架文档](/scaffold/)。
+支持模板直选（PC/移动端）、快速/自定义双模式创建、GitHub→Gitee 主备源容灾、模板缓存、事务化生成与失败恢复；移动端模板当前固定 Robot_H5 `v1.7.1` + `@robot-h5/core@^1.1.4`（模板仓库已发布 `v1.8.0` / core `^1.2.0`：wl-mbase 公司上下文闭环与水印服务端契约，脚手架升级 pin 后新项目自动跟进）。详见 [工程脚手架文档](/scaffold/)。
 
 ## 低代码平台用户手册
 

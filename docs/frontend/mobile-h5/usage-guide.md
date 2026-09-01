@@ -130,7 +130,7 @@ Step 4  输出审计报告 + 结论（✅ 通过 / ❌ 存在 P0）
 
 | 维度 | PC 端 | 移动端 H5 |
 |------|-------|----------|
-| Skill 数量 | 12 个 | **7 个**（聚焦代码生成链路） |
+| Skill 数量 | 13 个 | **7 个**（聚焦代码生成链路） |
 | 双线入口 | prototype-scan + spec-doc-parse | 仅 prototype-scan |
 | 接口处理 | api-contract 一步到位 | **api-spec + api-contract 两步** |
 | Mock 生成 | page-codegen 内置 | **mock-gen 独立 Skill**（双产物） |

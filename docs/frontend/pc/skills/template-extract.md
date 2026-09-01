@@ -1,6 +1,6 @@
 # Skill ⑧：模板提取（template-extract）
 
-从现有项目的成熟页面提取领域模板，沉淀到 `.github/skills/core/page-codegen/templates/domains/`，扩充团队 AI 模板库。
+从现有项目的成熟页面提取领域模板，沉淀到 `.wl-skills/skills/core/page-codegen/templates/domains/`，扩充团队 AI 模板库。
 
 > **核心理念**：模板贡献门槛极低 — 开发者只需说出一个页面目录路径，AI 完成 90% 的分析和写作。
 

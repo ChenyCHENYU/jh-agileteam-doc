@@ -13,7 +13,7 @@
 菜单同步与字典同步共用同一个配置文件：
 
 ```
-.github/skills/sync/env.local.json   ← 统一配置，不区分 Skill
+.wl-skills/skills/sync/env.local.json   ← 统一配置，不区分 Skill
 ```
 
 ```json
@@ -157,7 +157,7 @@ AI 在 page-codegen 时生成此文件（追加写入），格式如下：
 
 ## 配置（只需填 4 个字段）
 
-文件路径：`.github/skills/menu-sync/env/env.local.json`（已加入 `.gitignore`，本地维护）
+文件路径：`.wl-skills/skills/menu-sync/env/env.local.json`（已加入 `.gitignore`，本地维护）
 
 ```json
 {

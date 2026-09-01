@@ -73,7 +73,7 @@ wl-skills check
 # 比对本地与最新 kit 版本差异
 wl-skills diff
 
-# 静态扫描页面文件完整性 + AST 语义级 R1~R14（CI 卡门）
+# 静态扫描页面文件完整性 + AST 语义级 K1~K19（CI 卡门）
 wl-skills validate
 wl-skills validate --typecheck --strict   # 含类型检查 R14（发版前用）
 

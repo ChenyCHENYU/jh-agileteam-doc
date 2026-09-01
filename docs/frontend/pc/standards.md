@@ -12,7 +12,7 @@
 
 ## 规范全景
 
-前端编码规范共 **14 条**，由 `@agile-team/wl-skills-kit` 统一分发（`.github/standards/` 目录），按职责分为 8 大类，是 AI 生成代码、规范审计与 CI 卡门的唯一基线。
+前端编码规范共 **14 条**，由 `@agile-team/wl-skills-kit` 统一分发（`.wl-skills/standards/` 目录），按职责分为 8 大类，是 AI 生成代码、规范审计与 CI 卡门的唯一基线。
 
 | 分类 | 规范编号 | 覆盖范围 |
 |------|---------|---------|
@@ -61,7 +61,7 @@
 
 ### 第一层：AI 自动门控（生成阶段）
 
-`.github/standards/index.md` 是规范的门控中枢。AI 在执行任何代码生成任务**之前**，按**任务类型**自动加载相关规范子集（而非全量加载，节省上下文）：
+`.wl-skills/standards/index.md` 是规范的门控中枢。AI 在执行任何代码生成任务**之前**，按**任务类型**自动加载相关规范子集（而非全量加载，节省上下文）：
 
 ```
 任务类型 → 门控规则 → 加载哪几条规范
@@ -72,7 +72,7 @@ code-fix（自动修复）      → 全量（01–13）
 ```
 
 ::: tip 单一数据源
-14 条规范的唯一来源是 `.github/standards/01 ~ 14`，不接受"旧代码一直这么写"的辩解。规范升级时通过 `wl-skills-kit update` 增量覆盖。
+14 条规范的唯一来源是 `.wl-skills/standards/01 ~ 14`，不接受"旧代码一直这么写"的辩解。规范升级时通过 `wl-skills-kit update` 增量覆盖。
 :::
 
 ### 第二层：validate CI 卡门（提交阶段）
@@ -104,12 +104,12 @@ CI 中校验未通过 → **构建中止**，偏差代码无法进入主干。`c
 
 ## 与 convention-audit Skill 的关系
 
-[`convention-audit`](./skills/convention-audit) Skill 是 14 条规范的**执行引擎**：以 `.github/standards/` 为唯一基线，扫描项目源码，输出偏差报告与组件提取建议，写入 `reports/` 目录。
+[`convention-audit`](./skills/convention-audit) Skill 是 14 条规范的**执行引擎**：以 `.wl-skills/standards/` 为唯一基线，扫描项目源码，输出偏差报告与组件提取建议，写入 `reports/` 目录。
 
 | 维度 | 规范本身 | convention-audit |
 |------|---------|-----------------|
 | 角色 | 标准（应然） | 扫描器（实然 vs 应然） |
-| 产出 | `.github/standards/*.md` | `reports/规范审查报告.md` + `reports/组件提取建议.md` |
+| 产出 | `.wl-skills/standards/*.md` | `reports/规范审查报告.md` + `reports/组件提取建议.md` |
 | 动作 | 静态文本 | 发现偏差 + 给出整改建议，**不自动修复** |
 | 配合 Skill | — | `code-fix`（自动修 🟡🟢）· `page-codegen`（重生成 🔴）· `template-extract`（提取组件） |
 

@@ -37,6 +37,8 @@ https://github.com/ChenyCHENYU/jh4j-ui-template.git
 
 移动端模板按以下顺序尝试，并默认固定到 `v1.7.1`（内置 PDA 旧 WebView 兼容、wl-mbase 导航协议，以及 `@robot-h5/core@^1.1.4` 严格桥接与 App SDK 按需加载）：
 
+> 模板仓库已发布 `v1.8.0`（wl-mbase 公司上下文闭环、`@robot-h5/core@^1.2.0` 水印服务端契约），脚手架升级 pin 后新项目自动跟进；存量项目可手动合并模板变更。
+
 ```text
 https://github.com/ChenyCHENYU/Robot_H5.git
 → https://gitee.com/ycyplus163/robot_-h5.git

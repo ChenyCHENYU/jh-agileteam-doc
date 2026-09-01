@@ -1,6 +1,6 @@
 # env-config — 环境标准化 / 客户迁移
 
-> 📦 来源：`@agile-team/wl-skills-kit` → `.github/skills/ops/env-config/SKILL.md`
+> 📦 来源：`@agile-team/wl-skills-kit` → `.wl-skills/skills/ops/env-config/SKILL.md`
 
 > ⚠️ 高风险 Skill：执行前必须二次确认，`apply` 默认 dry-run。
 
@@ -80,4 +80,4 @@ ENV_CONFIG_*.md 报告（dry-run，不修改文件）
 
 ---
 
-> 📚 详细规则见项目内 `.github/skills/ops/env-config/SKILL.md`
+> 📚 详细规则见项目内 `.wl-skills/skills/ops/env-config/SKILL.md`

@@ -5,7 +5,7 @@
 > 工程载体：`@agile-team/wl-skills-kit`
 > 工程目录：`D:\office-project\wl\wl-skills-kit`
 > 配套组件：`@jhlc/common-core` · `@agile-team/wl-skills-ui` · `@robot-admin/form-validate`
-> 当前核对版本：`2.18.2`（2026-08-15）
+> 当前核对版本：`2.20.1`（2026-08-28）
 
 ---
 
@@ -27,7 +27,7 @@
 
 > 一套规范基线、一个工程化事实源、三层强制机制、14 条全覆盖规范、一条持续治理闭环。
 
-### 版本演进速览（v2.15.0 → v2.18.2）
+### 版本演进速览（v2.15.0 → v2.20.1）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -37,6 +37,9 @@
 | v2.17.0 | **status-column-audit 技能**（第 13 个 Skill） | 存量列表页"字典列纯文本 → 语义自动判色 Tag"审计+`--fix`+`--init-bridge` 一键桥接 |
 | v2.18.0 | 规则编号 R1~R19 更名为 **K1~K19** | 与 wl-skills-ui 的 R001~R040 编号空间解耦；存量豁免配置新旧前缀等价，零改动升级 |
 | v2.18.2 | `validate --pre-commit` 共享模块误报根治 | 仅 staged 共享模块/非页面目录的提交不再被误拦截，全量 validate 语义不变 |
+| v2.18.4 | `--version` 查询；Skill 注册表单一事实源 + 版本漂移门禁；validate 缓存；K12 漏检修复 | 升级决策有依据；豁免/规则口径不再漂移 |
+| v2.19.0 | 增量 validate 缓存、`wls_project_snapshot` 项目快照与 Page Blueprint 提取/校验 | AI 优先消费页面结构事实，减少逐页源码上下文与 token 消耗 |
+| v2.20.x | **wl-scenario 场景模板体系**：JSON 事实源 + 确定性渲染（9 种 pattern）、`scenario validate/render/extract/verify/from-spec`、W1 字节级防漂移、往返等价机器证明 | 领域页面出码 AI 零自由度，render 单页 0.4~1ms、模型 token 恒为 0 |
 
 ---
 
@@ -82,7 +85,7 @@
 
 - 14 条编码规范（`.wl-skills/standards/01~14`）
 - 13 个 AI Skill（`.wl-skills/skills/`，含 v2.17.0 新增的 status-column-audit 存量改造技能）
-- 23 个 MCP 工具
+- 29 个 MCP 工具（v2.19.0 新增 project_snapshot 与 template 治理 5 工具）
 - 9 个页面模板（TPL-\*.md）
 - 编辑器适配配置（10 种 AI 编辑器：Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）
 - 独立 API 契约（`wl-skills contract` 可脱离后端先行建立本项目契约）
@@ -543,7 +546,7 @@ CI 中校验未通过 → **构建中止**，偏差代码无法进入主干。
 | 详情 | `detail` | ❌ view/info/show |
 | 查询 | `get` | ❌ query/fetch/list |
 
-### 7.3 13 个 AI Skill 全景（v2.18.2）
+### 7.3 13 个 AI Skill 全景（v2.20.1）
 
 Skill 是规范的可执行剧本：每个 Skill 都有触发词路由（`_registry.md` 单一数据源）+ Pre-flight 声明（AI 执行前先报告已读文件，可观测）+ 产物落 `reports/` 追加。
 

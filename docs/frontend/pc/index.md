@@ -137,7 +137,7 @@ src/views/xxx/
 - [架构设计](./architecture) — 产品化理念、Module Federation、领域驱动、组件分层、API 层架构
 - [扩展规范](./standards) — BaseTable / AGGrid、平台组件合规等专项约定
 - [Base 核心组件 / jh- 平台组件](./components/base-table) — 全量组件文档
-- [Skills 集合](./skills/) — 12 个 AI 辅助研发 Skill
+- [Skills 集合](./skills/) — 13 个 AI 辅助研发 Skill
 - [页面模板](./skills/page-templates) — page-codegen 的 9 种页面模板
 - [wl-skills-kit 工具](./skills/cli) — Skills 体系安装器（init / update / validate / fix / clean）
 
