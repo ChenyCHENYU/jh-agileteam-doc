@@ -146,12 +146,6 @@ wl-skills-design ──► wl-skills-kit ──► wl-skills-ui    wl-skills-bd 
 
 ---
 
-### 📚 实战案例库
-
-> [真实项目案例](/views/cases/) — 炼钢全栈实践 / 37 spec E2E 工程化 / 存量接入 / 五子应用上基座 + 8 条反模式复盘。一案例一屏，数字先行。
-
----
-
 ## 我该从哪里开始？
 
 | 你是… | 推荐路径 | 预计耗时 |
