@@ -2,6 +2,8 @@
  * GlassHome 组件数据配置
  */
 
+import { siteStats } from "../PackagesTable/data";
+
 export interface Feature {
   icon: string;
   title: string;
@@ -70,25 +72,25 @@ export const features: Feature[] = [
 export const stats: Stat[] = [
   {
     icon: "📦",
-    number: "5",
+    number: String(siteStats.packages),
     label: "工程包",
     desc: "design / kit / ui / bd / test 全链路覆盖",
   },
   {
     icon: "🤖",
-    number: "48",
+    number: String(siteStats.skills),
     label: "AI Skill",
     desc: "触发词驱动的结构化技能",
   },
   {
     icon: "🔌",
-    number: "76",
+    number: String(siteStats.mcp),
     label: "MCP 工具",
     desc: "菜单/权限/快照/生成/执行全覆盖",
   },
   {
     icon: "⚡",
-    number: "114",
+    number: String(siteStats.rules),
     label: "确定性审计规则",
     desc: "K19 + R39 + B31 + T25，机器判定",
   },
