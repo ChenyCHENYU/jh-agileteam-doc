@@ -12,6 +12,7 @@ declare module 'vue' {
     BackendTeamHero: typeof import('./../.vitepress/components/BackendTeamHero/index.vue')['default']
     BusinessTeamHero: typeof import('./../.vitepress/components/BusinessTeamHero/index.vue')['default']
     GlassHome: typeof import('./../.vitepress/components/GlassHome/index.vue')['default']
+    LevelsTable: typeof import('./../.vitepress/components/LevelsTable/index.vue')['default']
     PackagesTable: typeof import('./../.vitepress/components/PackagesTable/index.vue')['default']
     TeamHero: typeof import('./../.vitepress/components/TeamHero/index.vue')['default']
   }

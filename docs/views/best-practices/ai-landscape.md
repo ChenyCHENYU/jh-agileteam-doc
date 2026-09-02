@@ -64,16 +64,9 @@ L7  自演化体系（Self-Evolving）                 ← 终极形态
 
 ## 当前项目位置（v2.20.1）
 
-| 层级 | 状态 | 说明 |
-|------|------|------|
-| L0 氛围编程 | 了解 | 每个人都用过，边界已清晰 |
-| L1 提示词工程 | ✅ 已实现 | `copilot-instructions.md` + `standards` 懒加载 + 多编辑器适配 |
-| L2 Skills | ✅ 已实现 | 13 个 Skill（含 business-doc-extract、status-column-audit），pre-flight + registry + 模板分层 |
-| L3 MCP | ✅ 已实现 | 29 个 Tool（菜单+字典+权限+项目感知+页面校验+UI体检+通知+环境+快照+模板治理） |
-| L4 CLI | ✅ 已实现 | 18 条命令：init / update / clean / check / diff / validate / validate-page / fix / doctor-ui / export / mock-clean / contract / component / standard-env / template / snapshot / scenario / env |
-| L5 Agent Pipeline | 🟡 试运行中 | `_pipeline.md` 协议已落地，进入试运行阶段 |
-| L6 Multi-Agent | ⏳ 远期 | L5 稳定后再规划 |
-| L7 自演化体系 | 🔭 终极形态 | 需 L5 稳定 + 审计报告 ≥ 50 份 + 模板提取 ≥ 3 次 |
+<LevelsTable mode="detail" />
+
+> 层级状态与 [AI 最佳实践总览](/views/best-practices/)、[指南页](/views/guide/) 同源维护（`LevelsTable/data.ts`）。
 
 
 ## 已实现的 29 个 MCP Tools

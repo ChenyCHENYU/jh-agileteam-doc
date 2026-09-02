@@ -46,16 +46,9 @@ CLI 层              ─── 聚合命令，固化流程，无人值守   ← 
 
 ## 层级体系
 
-| 层级 | 名称 | 状态 | 说明 |
-|---|---|---|---|
-| **L0** | 氛围编程 | 也行 | 纯对话驱动，AI 自由发挥，高随机性 |
-| **L1** | 提示词工程 | ✅ 已验证 | 结构化 Prompt + 规范注入 + 上下文压缩 |
-| **L2** | Skills | ✅ 已验证 | 13 个触发词驱动的结构化技能文件 → [速查表](/frontend/pc/skills/usage-guide) |
-| **L3** | MCP 工具调用 | ✅ 已验证 | 29 个 Tool，菜单/字典/角色/权限/项目感知/快照蓝图/环境标准化全覆盖 |
-| **L4** | CLI | ✅ 已验证 | 18 条命令：init / update / clean / check / diff / validate / validate-page / fix / doctor-ui / export / mock-clean / contract / component / standard-env / template / snapshot / scenario |
-| **L5** | Agent Pipeline | 🟡 践行中 | `_pipeline.md` 协议已落地，Skill 链式自动触发进入试运行 |
-| **L6** | Multi-Agent 协同 | ▶ 近期目标 | L5 试运行期间同步规划多智能体分工 |
-| **L7** | 自演化体系 | 🔭 终极形态 | 高质量产出反哺规范，正向飞轮 |
+<LevelsTable mode="detail" />
+
+> 各层级状态单一维护于组件数据源 `LevelsTable/data.ts`，与本站指南页、全景分析页自动同步。
 
 ## 快速导航
 

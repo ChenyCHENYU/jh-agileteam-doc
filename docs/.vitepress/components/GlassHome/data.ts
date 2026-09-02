@@ -2,7 +2,7 @@
  * GlassHome 组件数据配置
  */
 
-import { siteStats } from "../PackagesTable/data";
+import { packages, siteStats } from "../PackagesTable/data";
 
 export interface Feature {
   icon: string;
@@ -18,11 +18,13 @@ export interface Stat {
   desc: string;
 }
 
+const shortNames = packages.map((p) => p.name.replace("wl-skills-", "")).join(" / ");
+
 export const features: Feature[] = [
   {
     icon: "📦",
     title: "五包工程能力",
-    details: "design / kit / ui / bd / test 五包覆盖设计到测试全链路，契约同源、独立安装",
+    details: `${shortNames} 共 ${siteStats.packages} 包覆盖设计到测试全链路（${siteStats.skills} Skill / ${siteStats.mcp} MCP），契约同源、独立安装`,
     link: "/views/guide/",
   },
   {

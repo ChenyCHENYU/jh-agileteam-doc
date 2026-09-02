@@ -2,9 +2,26 @@
 
 <AuthorTag :authors="['ZhuXiang','YangTianGuang','CHENY','ZhongYu']" />
 
+::: tip 💡 全站搜索
+按 <kbd>Ctrl</kbd> + <kbd>K</kbd>（macOS 为 <kbd>⌘</kbd> + <kbd>K</kbd>）唤起搜索框，支持中文关键词检索全站标题与正文。
+:::
+
 欢迎来到 **AGILE TEAM** 工程体系文档——**金恒科技** 共享技术中心联合信息化中心交付团队的 AI 工程化实践知识库。
 
 本站服务于团队各角色成员，涵盖前端、后端、测试、产品、运维等，系统化整理 **AI 辅助研发** 过程中沉淀的标准流程、规范约定、技能包与最佳实践。欢迎您的建议、批评与指正，也诚邀您的参与和贡献。
+
+---
+
+## 最近更新
+
+> 各包逐版本明细以各自 CHANGELOG / npm 发布为准，此处只列文档站级别的变化。
+
+| 日期 | 更新 |
+|------|------|
+| 2026-09-02 | 指南页体验升级：五包版本数据源组件、任务直达、按场景选包、术语速查 |
+| 2026-09-01 | 全站同步至 kit v2.20.1 / ui v1.12.0 / bd v0.24.0（确定性场景渲染、能力 Profile 体系、变更审查质量门）；新增 [后端快速上手](/backend/quick-start)；[宣贯方案](/views/rollout/) 五份入站 |
+| 2026-08-27 | 移动端同步 Robot_H5 v1.8.0 / core v1.2.0 / mbase v1.0.6；疑难杂症新增五包工程章节 |
+| 2026-08-26 | 五包版本全站对齐 + 指南页重构 |
 
 ---
 
@@ -38,6 +55,19 @@
 
 配套工具：[工程脚手架 jh4j-cloud-cli](/scaffold/)（PC / 移动端 H5 模板一键创建）。
 
+五包协作链路与各自产出物（契约同源，下游消费上游）：
+
+```text
+   产品/设计            前端开发              前端开发             后端开发             测试工程师
+      │                   │                    │                  │                   │
+      ▼                   ▼                    ▼                  ▼                   ▼
+wl-skills-design ──► wl-skills-kit ──► wl-skills-ui    wl-skills-bd ──► wl-skills-test
+ 流程图/说明书/原型     页面/菜单/权限       视觉统一/扫描修复   代码/DDL/质量门    用例/执行/报告
+      │                   │                                      │                   │
+      │             page-spec / api.md                 wl-contract.json       消费契约生成用例
+      └───────────────────┴──────── 契约同源（jh4j3-openapi3@1.0）───────────┴───────────────────┘
+```
+
 ---
 
 ### 🎯 任务直达
@@ -59,18 +89,9 @@
 
 ### 🤖 AI 最佳实践
 
-> 按能力层级，循序渐进掌握 AI 辅助开发。
+> 按能力层级，循序渐进掌握 AI 辅助开发。完整层级详解见 [AI 最佳实践总览](/views/best-practices/)。
 
-| 层级 | 内容 | 状态 |
-|---|---|---|
-| [L0 — 氛围编程](/views/best-practices/L0-vibe) | 纯对话驱动，了解边界 | 已了解 |
-| [L1 — 提示词工程](/views/best-practices/L1-prompt) | 规范注入 + 上下文压缩 + 一致性保持 | ✅ 已实现 |
-| [L2 — Skill](/views/best-practices/L2-skill) | 13 个触发词驱动的结构化技能文件 | ✅ 已实现 |
-| [L3 — MCP 工具调用](/views/best-practices/L3-skills-mcp) | 29 个 Tool，菜单/字典/权限/项目感知/快照蓝图/环境标准化全覆盖 | ✅ 已实现 |
-| [L4 — CLI](/views/best-practices/L4-cli) | 18 条命令，覆盖安装/校验/修复/契约/场景渲染全生命周期 | ✅ 已实现 |
-| [L5 — Agent Pipeline](/views/best-practices/L5-agent-pipeline) | Skill 链式自动触发，_pipeline.md 协议已落地 | 🟡 践行中 |
-| [L6 — Multi-Agent 协同](/views/best-practices/L6-multi-agent) | 专家 Agent 分工 + 并发处理 | ▶ 近期目标 |
-| [L7 — 自演化体系](/views/best-practices/L7-self-evolving) | 高质量产出反哺规范，正向飞轮 | 🔭 终极形态 |
+<LevelsTable />
 
 ---
 
