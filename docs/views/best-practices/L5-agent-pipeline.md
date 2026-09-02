@@ -135,5 +135,5 @@ Pipeline **不是**强制线性流水线，任一步骤可单独触发：
 
 ## 延伸阅读
 
-- [全景分析](./ai-landscape) — L0-L7 完整能力谱系
+- [AI 最佳实践总览](./index) — L0-L7 完整能力谱系
 - [L6 — Multi-Agent 协同](./L6-multi-agent)

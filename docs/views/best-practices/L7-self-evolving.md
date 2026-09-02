@@ -109,6 +109,6 @@ convention-audit 报告积累                │
 
 ## 延伸阅读
 
-- [全景分析](./ai-landscape) — 完整架构蓝图
+- [AI 最佳实践总览](./index) — 完整架构蓝图
 - [L5 — Agent Pipeline](./L5-agent-pipeline) — 前置阶段
 - [L6 — Multi-Agent 协同](./L6-multi-agent)

@@ -1,163 +1,63 @@
 # L4 — CLI（命令行工具）
 
-> 将 AI 体系的安装/更新/清理固化为可复现的命令，无 AI 依赖即可执行，适合 CI/CD 集成。
+> 把 AI 体系的高频操作固化为可复现命令：无 AI 依赖、零推理 Token、可进 CI/CD。整个体系中**可预测性最高**的一层。
 
 <AuthorTag :authors="['CHENY']" />
 
-## 能力概览
+## 它解决什么问题
 
-CLI 层是体系的**固化执行层**——将高频 AI 操作聚合成可重复执行的命令，无需 AI 推理，适合 CI/CD 集成和批量自动化。
+| 没有 L4 | 有 L4 |
+|---------|-------|
+| 新人接手项目，靠文档口述装规范，装漏装错没人知道 | `npx @agile-team/wl-skills-kit init` 一条命令，manifest 可追溯 |
+| AI 生成的代码能不能合入，靠 Reviewer 记忆把关 | `validate` 进 CI，K1~K19 不过就阻断合并 |
+| 每次发版同步规范靠人工比对 | `diff` 一条命令看本地与最新 kit 的全部差异 |
 
-```
-CLI 能力
-│
-├── 1. 工程化批量指令
-│   ├── 一键同步：菜单 / 字典 / 接口 / 路由批量 sync
-│   ├── 一键審计：工程规范、代码、目录合规 audit
-│   ├── 批量修复：规范问题、格式问题 --fix 自动修复
-│   └── 全局扫描：全项目 / 指定目录结构化扫描
-│
-├── 2. 模板化一键生成
-│   ├── 页面级生成：列表 / 表单 / 详情标准页面
-│   ├── 模块级生成：完整业务 CRUD 模块脚手架
-│   ├── 文档生成：批量产出 api.md、详设片段
-│   └── 配置生成：工程基础配置、脚本配置初始化
-│
-├── 3. 工作流编排执行
-│   ├── 自定义 workflow 任务编排
-│   ├── YAML 流程定义、顺序 / 串行任务执行
-│   ├── 多步骤串联：解析 → 生成 → 格式化 → 校验
-│   └── 任务日志、执行结果标准化输出
-│
-├── 4. CI/CD 无人値守适配
-│   ├── 无交互静默执行、exit-code 状态返回
-│   ├── 流水线集成、构建前规范校验
-│   ├── 增量检测、仅变更内容处理
-│   └── 机器可读 JSON / 结构化输出
-│
-├── 5. 项目基线管控
-│   ├── 部门基线规则统一落地执行
-│   ├── 版本对齐、规范基线版本校验
-│   ├── 新人项目初始化、基线一键植入
-│   └── 统一输出口径，标准化交付物
-│
-└── 6. 轻量人机交互
-    ├── 简单参数传参、指令简写、别名兼容
-    ├── 彩色终端日志、执行进度、结果汇总
-    └── 错误友好提示、问题定位指引
-```
+**判断标准**：这件事需要 AI 判断吗？不需要判断、只要可复现结果的，就该沉到 CLI——省 Token、可进流水线、结果稳定。
 
-> **核心特征**：极简 Token（不需要 AI 推理）、零人工干预、可 CI/CD 集成。是整个 AI 体系中**可预测性最高**的一层。
+## 命令清单（权威版）
 
-## 已实现的 18 条命令（v2.20.1）
+kit（v2.20.1）共 **18 个命令字**，按场景分四组：
 
-```bash
-# 全量安装（默认）
-npx @agile-team/wl-skills-kit
+| 场景 | 命令 |
+|------|------|
+| 装与升级 | `init` · `update` · `diff` · `clean` · `check` |
+| 质量卡门 | `validate` · `validate-page` · `fix` · `doctor-ui` |
+| 数据与协作 | `export` · `mock-clean` · `contract` · `component` · `standard-env`（`env` 为兼容别名） |
+| 资产与场景 | `template` · `snapshot` · `scenario` |
 
-# 增量更新（仅覆盖有变化的文件，自动保护 reports/）
-npx @agile-team/wl-skills-kit update
+> 每条命令的参数与示例，唯一权威在 **[CLI 命令参考](/frontend/pc/skills/cli)**（含 `--dry-run` 预览、`--pre-commit` 增量卡门等细节），本页不再重复。
 
-# 构建前清理（保留 src/components + src/types）
-npx @agile-team/wl-skills-kit clean
+## 什么时候用 CLI，而不是让 AI 做
 
-# 清理但保留 reports/（菜单/字典/权限累积数据）
-npx @agile-team/wl-skills-kit clean --keep-reports
+| 场景 | 用 CLI | 用 AI Skill |
+|------|:------:|:-----------:|
+| 装规范 / 升级版本 / 清理文件 | ✅ 结果必须可复现 | — |
+| 提交前卡门、CI 阻断 | ✅ 零 Token、无推理 | — |
+| 生成一个新页面（要理解业务语义） | — | ✅ `page-codegen` |
+| 菜单同步时判断"这个页面挂哪个目录" | — | ✅ `menu-sync` |
+| 全量审计后批量修复已知反模式 | ✅ `fix` | ✅ `code-fix`（语义级修复） |
 
-# 任何命令都可加 --dry-run 预览，不实际写入
-npx @agile-team/wl-skills-kit update --dry-run
+一句话：**确定性执行交给 CLI，语义判断交给 AI**——两者是分工，不是替代。
 
-# 环境预检（新成员接手第一步）
-wl-skills check
+## CLI 与 AI 的分工实例
 
-# 比对本地与最新 kit 版本差异
-wl-skills diff
+| 能力 | CLI 做 | AI 做 |
+|------|--------|-------|
+| 安装/更新规范文件 | ✅ `init` / `update` | — |
+| 页面完整性校验 | ✅ `validate` / `validate-page` | ✅ `convention-audit`（语义级审计） |
+| 反模式修复 | ✅ `fix`（机械修复：`::v-deep`→`:deep()` 等） | ✅ `code-fix`（需要判断的修复） |
+| 生成页面代码 | — | ✅ `page-codegen` Skill |
+| 菜单/字典同步 | — | ✅ `menu-sync` / `dict-sync` Skill |
 
-# 静态扫描页面文件完整性 + AST 语义级 K1~K19（CI 卡门）
-wl-skills validate
-wl-skills validate --typecheck --strict   # 含类型检查 R14（发版前用）
-
-# 确定性机械修复（幂等安全：缺 render-type、::v-deep→:deep、行尾空白等）
-wl-skills fix
-wl-skills fix --dry-run
-
-# 检查 wl-skills-ui 接入完整性
-wl-skills doctor-ui
-
-# 导出菜单/字典/权限基线 xlsx
-wl-skills export
-
-# 清理 mock 文件（保留 _utils.ts）
-wl-skills mock-clean --domain mdata
-wl-skills mock-clean --all
-
-# 前后端 API 契约（profile / init / validate / compare / render）
-wl-skills contract validate
-wl-skills contract compare --strict
-
-# 标准业务组件治理（list / check / ensure）
-wl-skills component list
-wl-skills component ensure
-
-# 环境标准化（scan / plan / apply / verify）
-wl-skills standard-env scan
-wl-skills standard-env apply --confirm
-```
-
-> 全局安装后也可直接用 `wl-skills` 命令（如 `wl-skills update`）。
-
-## CLI 命令功能详解
-
-| 命令 | 功能 | 典型使用场景 |
-|------|------|------------|
-| `init`（默认） | 全量安装 + 多编辑器配置 + MCP 配置生成 | 新项目接入 |
-| `update` | MD5 比对增量更新，保护 `reports/` | kit 版本升级 |
-| `clean` | 移除 AI 文件（保留 components + types） | 构建前清理 |
-| `check` | 一键环境预检：Node / 工具链 / env.local.json / MCP 连通性 | 新成员接手项目 |
-| `diff` | 对比已安装文件与最新 kit 版本差异 | update 前决策依据 |
-| `validate` | 静态扫描页面 4 文件完整性、AGGrid、cid、mock、api.md + AST 语义级 K1~K19（增量缓存） | CI 卡门 |
-| `validate-page` | 单页 / 指定目录校验 | 按路径校验 |
-| `fix` | 确定性机械修复：缺 `render-type`、`::v-deep`→`:deep()`、行尾空白等幂等问题 | 批量收口风格偏差 |
-| `doctor-ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | UI 体检 |
-| `export` | 导出菜单/字典/权限基线 xlsx | 交付/归档 |
-| `mock-clean` | 按域或全量清理 mock 文件（保留 `_utils.ts`） | 切换/清理 Mock 数据 |
-| `contract` | 前后端 API 契约：profile / init / validate / compare / render | 契约同源对齐 |
-| `component` | 标准业务组件治理：list / check / ensure（写锁 + 去重） | 组件一致性 |
-| `standard-env` | 环境标准化：scan / plan / apply / verify（`env` 为兼容别名） | 环境收口 |
-| `template` | 模板检索与治理：search / extract / validate / audit / diff（落盘需 `confirmWrite`） | 模板资产化 |
-| `snapshot` | 项目快照 / Page Blueprint（按页隔离、默认脱敏、fingerprint 防漂移） | 低 token 结构事实 |
-| `scenario` | wl-scenario 场景：validate / render / extract / verify / from-spec（确定性渲染） | 确定性出码 |
-| `--dry-run` | 预览模式，不实际写入任何文件 | 确认变更范围 |
-| `--keep-reports` | clean 时额外保留 `reports/` | 保护菜单/字典积累数据 |
+> CLI 是"无 AI 时的兜底执行节点"，也是 L5 Agent Pipeline 的可靠底座——Pipeline 串联的每个节点，最终都以 CLI 的确定性退出码为准。当前 L5 已进入试运行（`_pipeline.md` Skill 间 I/O 契约已落地）。
 
 ## 受保护路径
 
 | 命令 | 保护路径 | 说明 |
 |------|----------|------|
-| `init` / `update` | `.github/reports/*.md` | 已存在则跳过，不覆盖累积数据 |
+| `init` / `update` | `.wl-skills/reports/*.md` | 已存在则跳过，不覆盖累积数据 |
 | `clean`（默认） | `src/components/` + `src/types/` | 业务代码必需，永不删除 |
-| `clean --keep-reports` | + `.github/reports/` | 额外保留菜单/字典/权限基线 |
-
-## CLI 与 AI 的分工
-
-| 能力 | CLI 做 | AI 做 |
-|------|--------|-------|
-| 安装/更新规范文件 | ✅ `init` / `update` | — |
-| 清理临时文件 | ✅ `clean` | — |
-| 环境预检 | ✅ `check` | — |
-| 版本对比 | ✅ `diff` | — |
-| 页面完整性校验 | ✅ `validate` / `validate-page` | ✅ `convention-audit` Skill |
-| UI 接入体检 | ✅ `doctor-ui` | — |
-| 基线导出 | ✅ `export` | — |
-| 生成页面代码 | — | ✅ `page-codegen` Skill |
-| 菜单/字典同步 | — | ✅ `menu-sync` / `dict-sync` Skill |
-
-> CLI 是"无 AI 时的兜底执行节点"。更高阶是 L5 Agent Pipeline：让 AI 自主串联多个 Skill，CLI 和 Agent Pipeline 并不冲突，前者是后者的可靠底座。当前 L5 已进入试运行阶段（`_pipeline.md` Skill 间 I/O 契约已落地）。
-
-## 延伸阅读
-
-- [L5 — Agent Pipeline](./L5-agent-pipeline) — CLI 之上的下一个层级
-- [PC Skills 使用指南](/frontend/pc/skills/usage-guide) — 完整工作流
+| `clean --keep-reports` | + `.wl-skills/reports/` | 额外保留菜单/字典/权限基线 |
 
 ## 业界实践参考
 
@@ -165,19 +65,14 @@ wl-skills standard-env apply --confirm
 
 | 公司 | 项目/工具 | 描述 |
 |------|---------|------|
-| **美团** | [ai-cli](https://tech.meituan.com/2024/11/29/the-evolution-and-prospect-of-meituan-agentic-ai.html) | 美团 AI 工程化落地，将 AI 能力封装为内部 CLI，支持代码生成、API Mock、规范检查等 CI 集成场景 |
-| **飞书（字节）** | [MCP + CLI 工程化](https://www.feishu.cn/articles/7467851562698424371) | 飞书开放平台将 AI 工具链封装为 CLI，支持 init / dev / deploy 全流程，并提供 MCP Server 插件扩展 |
+| **美团** | [ai-cli](https://tech.meituan.com/2024/11/29/the-evolution-and-prospect-of-meituan-agentic-ai.html) | 将 AI 能力封装为内部 CLI，支持代码生成、API Mock、规范检查等 CI 集成场景 |
+| **飞书（字节）** | [MCP + CLI 工程化](https://www.feishu.cn/articles/7467851562698424371) | 将 AI 工具链封装为 CLI，支持 init / dev / deploy 全流程，并提供 MCP Server 插件扩展 |
 | **Shopify** | [shopify-cli](https://shopify.dev/docs/apps/tools/cli) | 行业内最成熟的 CLI + AI 结合案例，支持 scaffold / deploy / ai-assist，与 GitHub Actions 深度集成 |
-| **Vercel** | [v0 CLI](https://vercel.com/docs/cli) | v0 将 AI 生成组件能力封装为 CLI 命令，支持 `vercel generate` 直接从描述生成并部署组件 |
-| **Nx（Nrwl）** | [nx generate + AI](https://nx.dev/features/generate-code) | monorepo 工程化 CLI，结合 AI 插件实现代码脚手架 + 依赖图分析，在大型前端团队中广泛使用 |
+| **Vercel** | [v0 CLI](https://vercel.com/docs/cli) | 将 AI 生成组件能力封装为 CLI 命令，支持 `vercel generate` 从描述直接生成并部署 |
+| **Nx（Nrwl）** | [nx generate + AI](https://nx.dev/features/generate-code) | monorepo 工程化 CLI，结合 AI 插件实现脚手架 + 依赖图分析 |
 
-## 参考资料
+## 延伸阅读
 
-| 资源 | 说明 |
-|------|------|
-| [美团 AI 工程化演进与展望](https://tech.meituan.com/2024/11/29/the-evolution-and-prospect-of-meituan-agentic-ai.html) | 美团技术博客，AI CLI 与 Agent 工程化实践 |
-| [飞书开放平台 MCP & CLI](https://www.feishu.cn/articles/7467851562698424371) | 飞书将 AI 工具链 CLI 化的官方方案 |
-| [Shopify CLI 官方文档](https://shopify.dev/docs/apps/tools/cli) | 成熟的 CLI+AI 脚手架参考实现 |
-| [Nx Code Generation](https://nx.dev/features/generate-code) | monorepo CLI + AI 代码生成，大规模团队参考 |
-| [npm — @anthropic-ai/claude-code](https://www.npmjs.com/package/@anthropic-ai/claude-code) | Claude 官方 CLI，AI + CLI 融合的最新形态 |
-
+- [CLI 命令参考（权威清单）](/frontend/pc/skills/cli)
+- [L5 — Agent Pipeline](./L5-agent-pipeline) — CLI 之上的下一个层级
+- [PC Skills 使用指南](/frontend/pc/skills/usage-guide) — 完整工作流

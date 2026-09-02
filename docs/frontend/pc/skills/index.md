@@ -34,7 +34,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 | 类别              | 数量  | 说明                                                                         |
 | ----------------- | ----- | ---------------------------------------------------------------------------- |
 | **AI Skills**     | 13 个 | prototype-scan / spec-doc-parse / api-contract / page-codegen / business-doc-extract / menu-sync / dict-sync / permission-sync / convention-audit / template-extract / code-fix / standard-env-config / status-column-audit |
-| **MCP Tools**     | 23 个 | 菜单/字典/权限/代码扫描/路由检查/页面校验/UI诊断/Git日志/审计报告推送/环境(scan/apply/verify)等      |
+| **MCP Tools**     | 29 个 | 菜单/字典/权限/项目感知/快照蓝图/模板治理/环境标准化/通知推送，全清单见下文 |
 | **编码规范**      | 14 条 | 模块化规范（01-工具链 ~ 14-布局容器），AI 自动门控加载                       |
 | **页面模板**      | 9 种  | LIST / FORM_ROUTE / MASTER_DETAIL / TREE_LIST / DETAIL_TABS 等               |
 | **组件 API 文档** | 11 个 | jh-select / jh-date / jh-drag-row / jh-pagination 等                         |
@@ -44,10 +44,11 @@ npx @agile-team/wl-skills-kit mock-clean --all
 
 ## 导入后的项目结构
 
-```
+```text
 你的项目/
 ├── .github/
-│   ├── copilot-instructions.md       ← AI 主入口（精简 ~320 行）
+│   └── copilot-instructions.md       ← AI 主入口（精简 ~320 行）
+├── .wl-skills/
 │   ├── standards/                    ← 14 条模块化规范
 │   │   ├── index.md                  ←   规范门控（任务类型 → 加载哪几条）
 │   │   ├── 01-toolchain.md
@@ -64,7 +65,8 @@ npx @agile-team/wl-skills-kit mock-clean --all
 │   │   │   ├── api-contract/         ←   ④ 接口约定
 │   │   │   ├── page-codegen/         ←   ⑤ 页面代码生成（含 9 个 TPL-*.md 模板）
 │   │   │   ├── convention-audit/     ←   ⑥ 规范审计
-│   │   │   └── template-extract/     ←   ⑦ 模板提取
+│   │   │   ├── template-extract/     ←   ⑦ 模板提取
+│   │   │   └── status-column-audit/  ←   ⑬ 存量字典列 → 语义自动判色 Tag
 │   │   ├── sync/
 │   │   │   ├── menu-sync/            ←   ⑧ 菜单同步
 │   │   │   ├── dict-sync/            ←   ⑨ 字典同步
@@ -73,11 +75,9 @@ npx @agile-team/wl-skills-kit mock-clean --all
 │   │   │   └── env.local.json        ←   统一环境配置（gitignore）
 │   │   └── ops/
 │   │       ├── code-fix/             ←   ⑪ 受控自动修复
-│   │       ├── standard-env-config/  ←   ⑫ 环境标准化/迁移（scan → plan → apply → verify）
-│   │       └── status-column-audit/  ←   ⑬ 存量字典列 → 语义自动判色 Tag（审计 + --fix + --init-bridge）
-│   ├── guides/                       ← 人读指南
-│   └── reports/                      ← AI 生成报告目录
-│
+│   │       └── standard-env-config/  ←   ⑫ 环境标准化/迁移（scan → plan → apply → verify）
+│   ├── contracts/                    ← 独立 API 契约（contract 命令产出）
+│   └── templates/                    ← 模板资产（Blueprint / TPL）
 ├── docs/                             ← 11 个平台组件 API 文档
 ├── mock/
 │   └── _utils.ts                     ← Mock 共享工具（pageResult/ok/paginate）
@@ -144,6 +144,44 @@ npx @agile-team/wl-skills-kit mock-clean --all
 ```
 
 > AI 根据输入自动判断走哪条线：路径含 `docs/spec/` 或文档含功能编码/IPO 表走规范线，其余走原型线。
+
+---
+
+## 29 个 MCP Tools（权威清单）
+
+| 类别 | Tool | 能力 | 关联 Skill |
+|------|------|------|----------|
+| 菜单 | `wls_menu_query` | 查询完整菜单树 | menu-sync 前置 |
+| 菜单 | `wls_menu_upsert` | 批量新增/更新菜单 | menu-sync 执行 |
+| 菜单 | `wls_menu_delete` | 删除菜单 | menu-sync |
+| 菜单 | `wls_menu_sync_from_report` | 从报告文件确定性同步菜单 | menu-sync |
+| 字典 | `wls_dict_query` | 查询字典模块 | dict-sync 前置 |
+| 字典 | `wls_dict_upsert` | 新增/更新字典 | dict-sync 执行 |
+| 字典 | `wls_dict_bootstrap` | 字典基线自举 | dict-sync |
+| 权限 | `wls_role_query` | 查询角色列表 | permission-sync |
+| 权限 | `wls_role_upsert` | 批量新增角色（按 code 去重） | permission-sync |
+| 权限 | `wls_assignable_menus_query` | 查询全量可授权菜单 | permission-sync |
+| 权限 | `wls_role_assign_menus` | 给角色批量分配菜单（全量覆盖） | permission-sync |
+| 权限 | `wls_action_query` | 查询页面下的动作（type=A） | permission-sync |
+| 权限 | `wls_action_upsert` | 批量新增动作（按 permission 去重） | permission-sync |
+| 项目感知 | `wls_code_scan` | 扫描页面目录和文件完整性 | convention-audit 前置 |
+| 项目感知 | `wls_route_check` | 检查页面是否在路由中可发现 | page-codegen 后置 |
+| 项目感知 | `wls_validate_page` | 校验页面 AGGrid/cid/api.md/mock/操作列等 | convention-audit |
+| 项目感知 | `wls_doctor_ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | 全局 |
+| 项目感知 | `wls_git_log_extract` | 提取近期 Git 提交摘要 | changelog-gen |
+| 项目感知 | `wls_domain_query` | 查询业务域清单 | 通用 |
+| 项目感知 | `wls_project_snapshot` | 项目快照 / Page Blueprint（按页隔离、默认脱敏、fingerprint 防漂移） | page-codegen / template-extract |
+| 模板治理 | `wls_template_search` | 从快照检索候选页面（低 token 蓝图） | template-extract |
+| 模板治理 | `wls_template_extract` | 提取页面 Blueprint（`confirmWrite` 门禁） | template-extract |
+| 模板治理 | `wls_template_validate` | Blueprint 结构校验 | template-extract |
+| 模板治理 | `wls_template_audit` | 模板资产审计 | template-extract |
+| 模板治理 | `wls_template_diff` | Blueprint 差异比较（脱敏门禁） | template-extract |
+| 环境标准化 | `wls_standard_env_scan` | 环境配置扫描 | standard-env-config |
+| 环境标准化 | `wls_standard_env_apply` | 环境配置应用（受控） | standard-env-config |
+| 环境标准化 | `wls_standard_env_verify` | 环境配置验证 | standard-env-config |
+| 通知 | `wls_audit_report_push` | 推送审计报告到飞书 webhook（可选） | convention-audit |
+
+> **整体效果**：菜单/权限同步 token 节省约 **87%**；操作时间压缩 **15-20 倍**；人工点击次数 → **0**。
 
 ---
 

@@ -76,39 +76,17 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 
 **在 wl-skills-kit 中**：MCP Server（`mcp/` 目录）注册了一系列工具，AI 在执行 Skill 时直接调用这些工具，无需人工复制粘贴接口结果。
 
-## 前端示例 — 已实现的 29 个 MCP Tools
+## kit 实现了哪些 Tool？
 
-| 类别 | Tool | 能力 | 关联 Skill |
-|------|------|------|-----------|
-| 菜单 | `wls_domain_query` | 查询业务域 | menu-sync / dict-sync 前置 |
-| 菜单 | `wls_menu_query` | 查询完整菜单树 | menu-sync 前置读取 |
-| 菜单 | `wls_menu_upsert` | 批量新增/更新菜单 | menu-sync 执行 |
-| 菜单 | `wls_menu_delete` | 删除菜单 | menu-sync |
-| 菜单 | `wls_menu_sync_from_report` | 从报告文件确定性同步菜单 | menu-sync |
-| 字典 | `wls_dict_query` | 查询字典模块 | dict-sync 前置读取 |
-| 字典 | `wls_dict_bootstrap` | 字典基线拉取/对齐 | dict-sync |
-| 字典 | `wls_dict_upsert` | 新增/更新字典 | dict-sync 执行 |
-| 权限 | `wls_role_query` | 查询角色列表 | permission-sync |
-| 权限 | `wls_role_upsert` | 批量新增角色（按 code 去重） | permission-sync |
-| 权限 | `wls_assignable_menus_query` | 查询全量可授权菜单 | permission-sync |
-| 权限 | `wls_role_assign_menus` | 给角色批量分配菜单（全量覆盖） | permission-sync |
-| 权限 | `wls_action_query` | 查询页面下的动作（type=A） | permission-sync |
-| 权限 | `wls_action_upsert` | 批量新增动作（按 permission 去重） | permission-sync |
-| 项目感知 | `wls_code_scan` | 扫描 `src/views/` 返回页面清单 | convention-audit 前置 |
-| 项目感知 | `wls_route_check` | 读取 `pages.ts`，验证路由注册情况 | page-codegen 后置 |
-| 项目感知 | `wls_validate_page` | 校验页面 AGGrid/cid/api.md/mock/操作列等 | convention-audit |
-| 项目感知 | `wls_doctor_ui` | 检查 wl-skills-ui tokens/styles/preset/runtime 接入 | 全局 |
-| 项目感知 | `wls_git_log_extract` | 提取近期 Git 提交摘要 | changelog-gen |
-| 项目感知 | `wls_project_snapshot` | 项目快照 / Page Blueprint（按页隔离、默认脱敏、fingerprint 防漂移） | page-codegen / template-extract |
-| 模板治理 | `wls_template_search` | 从快照检索候选页面（低 token 蓝图） | template-extract |
-| 模板治理 | `wls_template_extract` | 提取页面 Blueprint（`confirmWrite` 门禁） | template-extract |
-| 模板治理 | `wls_template_validate` | Blueprint 结构校验 | template-extract |
-| 模板治理 | `wls_template_audit` | 模板资产审计 | template-extract |
-| 模板治理 | `wls_template_diff` | Blueprint 差异比较（脱敏门禁） | template-extract |
-| 环境配置 | `wls_standard_env_scan` | 扫描环境变量偏差 | standard-env |
-| 环境配置 | `wls_standard_env_apply` | 应用环境配置计划（需确认） | standard-env |
-| 环境配置 | `wls_standard_env_verify` | 验证环境配置一致性 | standard-env |
-| 通知 | `wls_audit_report_push` | 推送审计报告到飞书 webhook（可选） | convention-audit |
+**29 个 Tool，六大类**（完整清单与参数见 [PC Skills — MCP 权威清单](/frontend/pc/skills/#_29-个-mcp-tools-权威清单)）：
+
+| 类别 | 数量 | 干什么 |
+|------|:---:|--------|
+| 菜单 / 字典 / 权限 | 13 | 基线查询与确定性同步，替代手工点后台 |
+| 项目感知 | 7 | 页面扫描、路由检查、页面校验、UI 体检、快照 Blueprint |
+| 模板治理 | 5 | 模板检索 / 提取 / 校验 / 审计 / 差异（`confirmWrite` 门禁） |
+| 环境标准化 | 3 | scan → apply（受控）→ verify |
+| 通知 | 1 | 审计报告推送飞书 webhook（可选） |
 
 > 效果量化：菜单同步 token 节省约 **87%**，从 20 分钟 10 次手动操作 → **1 分钟 0 次手动操作**。权限同步原本需切换 3 个后台界面 ≥ 15 分钟，现在 **1 分钟 0 次手动操作**。
 
@@ -137,7 +115,7 @@ AI 主动调用，有副作用（读写/调接口）。所有主流编辑器均�
 
 - [permission-sync Skill 文档](/frontend/pc/skills/permission-sync) — MCP 驱动的权限闭环
 - [L4 — CLI](./L4-cli) — MCP 与 CLI 的协作关系
-- [全景分析](./ai-landscape)
+- [AI 最佳实践总览](./index)
 
 ## 参考资料
 
