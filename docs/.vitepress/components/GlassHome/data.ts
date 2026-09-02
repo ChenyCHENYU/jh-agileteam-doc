@@ -58,6 +58,12 @@ export const features: Feature[] = [
     link: "/scaffold/",
   },
   {
+    icon: "📖",
+    title: "实战案例库",
+    details: "炼钢全栈 / 37 spec E2E / 存量接入 / 五子应用上基座 + 反模式复盘",
+    link: "/views/cases/",
+  },
+  {
     icon: "🔥",
     title: "爬坑建议",
     details: "收集常见问题和解决方案，快速定位和解决开发问题",

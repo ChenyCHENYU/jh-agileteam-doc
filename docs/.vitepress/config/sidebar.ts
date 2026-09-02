@@ -537,6 +537,22 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
+  // 实战案例库
+  "/views/cases/": [
+    {
+      text: "实战案例库",
+      collapsed: false,
+      items: [
+        { text: "案例地图", link: "/views/cases/" },
+        { text: "① 炼钢模块全栈实践", link: "/views/cases/produce-steelmaking" },
+        { text: "② 37 spec 的 E2E 工程化", link: "/views/cases/produce-e2e" },
+        { text: "③ 存量项目接入 kit", link: "/views/cases/mdata-legacy" },
+        { text: "④ 五个子应用上基座", link: "/views/cases/mbase-subapps" },
+        { text: "反模式合集", link: "/views/cases/anti-patterns" },
+      ],
+    },
+  ],
+
   // 疑难杂症
   "/views/troubleshooting/": [
     {
