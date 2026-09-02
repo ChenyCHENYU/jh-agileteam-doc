@@ -89,7 +89,7 @@ wl-skills-design ──► wl-skills-kit ──► wl-skills-ui    wl-skills-bd 
 
 ### 🤖 AI 最佳实践
 
-> 按能力层级，循序渐进掌握 AI 辅助开发。完整层级详解见 [AI 最佳实践总览](/views/best-practices/)。
+> 按能力层级，循序渐进掌握 AI 辅助开发。完整层级详解见 [AI 最佳实践总览](/views/best-practices/)；与部门人员定级（L0-L5）的映射见 [成熟度对照](/views/best-practices/maturity)。
 
 <LevelsTable />
 
