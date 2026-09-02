@@ -110,6 +110,19 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
 | `changelog-gen` | 从 git diff 提炼 Conventional Commits 条目 | wls_git_log_extract |
 | `perf-audit` | 扫描 AGGrid 列配置的性能反模式 | convention-audit |
 
+## 场景实践：两种输入，同一份 page-spec
+
+同样要生成"客户档案列表页"，两种输入殊途同归：
+
+| 你手里有什么 | 说一句话 | 走哪条线 | 产物 |
+|------------|---------|---------|------|
+| Axure 原型 / 截图 / 口述 | "扫描这些原型，出页面清单" | 原型线：prototype-scan | page-spec JSON |
+| 标准说明书（含功能编码 / IPO 表） | "解析这份说明书" | 规范线：spec-doc-parse | page-spec JSON |
+
+两线汇聚到**同一份 page-spec** 后，下游完全一致：api-contract → page-codegen → convention-audit → menu-sync。AI 按输入自动判线（路径含 `docs/spec/` 或文档含功能编码 / IPO 表走规范线），不需要人指定。
+
+**可观测性**：每次触发 Skill，AI 先输出 Pre-flight 声明（已读哪些文件、工具链状态）——没输出声明 = 没读规范 = 立即重触发，这让"AI 是否按剧本执行"变成可验证而非靠信任。
+
 ## 延伸阅读
 
 - [Skills 详细文档](/frontend/pc/skills/) — 13 个 Skill 的完整使用指南

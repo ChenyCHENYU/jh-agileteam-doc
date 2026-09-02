@@ -51,6 +51,20 @@ kit（v2.20.1）共 **18 个命令字**，按场景分四组：
 
 > CLI 是"无 AI 时的兜底执行节点"，也是 L5 Agent Pipeline 的可靠底座——Pipeline 串联的每个节点，最终都以 CLI 的确定性退出码为准。当前 L5 已进入试运行（`_pipeline.md` Skill 间 I/O 契约已落地）。
 
+## 场景实践：一次被 CI 拦下来的手改
+
+场景：开发者觉得 scenario 渲染出来的页面某列顺序不理想，直接手改了 `index.vue` 并提交。
+
+```text
+git commit → pre-commit validate
+  → 检测到 scenarioRef 页面内容与 Blueprint fingerprint 不一致（W1 防漂移）
+  → 阻断提交，提示：该页面由 wl-scenario 管理，请修改 wl-scenario JSON 后重新渲染
+```
+
+开发者改 JSON → `wl-skills scenario render --confirm` 重渲染（单页 0.4~1ms、模型 token 恒为 0）→ 再次提交通过。**想绕过门禁的手改，被流程结构拦在了合入之前**——这就是 L4"把规范变成机器执行"的意义。
+
+第二个场景是新人第一天：`init` 装规范 → `check` 环境体检 → `validate` 首轮基线体检。三步之后，他本地与团队基线的差距是一份明确的清单，而不是口口相传。
+
 ## 受保护路径
 
 | 命令 | 保护路径 | 说明 |
