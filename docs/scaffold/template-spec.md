@@ -144,3 +144,55 @@ jh4j list --json
 ```
 
 模板列表和完整定义可通过 `jh4j list --json` 查看；项目生成后的来源信息用 `jh4j info .` 查看（见 [命令参考](./commands)）。
+
+---
+
+---
+
+## 外部 Catalog：把团队模板接入 jh4j
+
+不想改动内置 Catalog 时，可以维护一份**外部 Catalog JSON**，让团队/部门的所有模板（含未来的后端模板）统一出现在 `jh4j list` 中。
+
+### 1. 编写 Catalog 文件
+
+结构由包内 `catalog.schema.json`（draft 2020-12）约束，最小示例：
+
+```json
+{
+  "schemaVersion": 1,
+  "templates": [
+    {
+      "id": "backend.jh4j-service",
+      "name": "jh4j 后端微服务",
+      "description": "Java 8 + Spring Boot 2 + jh4j-cloud 3.1 多模块服务",
+      "category": "backend",
+      "defaultSource": "https://gitee.com/your-org/jh4j-backend-template.git",
+      "defaultRef": "main",
+      "status": "active"
+    }
+  ]
+}
+```
+
+字段要点：`id` 小写开头（`^[a-z][a-z0-9.-]+$`）；`category` 三选一（frontend / backend / mobile）；`sources` 数组可选，用于主备源容灾。
+
+### 2. 启用（三种方式等价）
+
+```bash
+# 方式一：配置项
+jh4j config set catalogFile D:/catalogs/team-catalog.json
+
+# 方式二：环境变量
+set JH4J_CATALOG_FILE=D:/catalogs/team-catalog.json
+
+# 方式三：临时
+jh4j list --json
+```
+
+启用后 `jh4j list` 显示**内置 + 外部**合并结果；`jh4j create -t backend.jh4j-service` 即可按外部模板生成，拉取/缓存/安全生成链路完全一致。
+
+### 3. 治理建议
+
+- Catalog 文件入团队仓库版本管理，变更走评审；
+- 模板发新版只改 `defaultRef`，历史版本靠 Git tag 回退；
+- `jh4j template validate` 在接入前跑一遍，manifest 契约不过不入 Catalog。

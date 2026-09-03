@@ -393,6 +393,11 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: true,
       items: [{ text: "常见问题", link: "/scaffold/faq" }],
     },
+    {
+      text: "版本说明与升级",
+      collapsed: false,
+      items: [{ text: "版本说明与升级", link: "/scaffold/upgrade" }],
+    },
   ],
 
   // 后端

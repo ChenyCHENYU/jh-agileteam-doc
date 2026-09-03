@@ -24,6 +24,17 @@ jh4j doctor --json
 
 检查 Node、pnpm、Git 版本与模板环境是否满足要求。**新成员接手或模板拉取失败时的第一步。**
 
+### 检查项明细
+
+| 检查项 | 要求 | 不满足的表现 |
+|--------|------|-------------|
+| Node.js | `^22.12.0 \|\| ^24.0.0`（22.12+ 的 22.x 或 24.x） | CLI 拒绝执行 / 模板初始化脚本兼容性风险 |
+| pnpm | `>= 11.8.0` | doctor 报红；项目 `preinstall` 只允许 pnpm |
+| Git | 已安装且可用 | 模板拉取（Git 源）与 Git 初始化失败 |
+| 模板 runtime | 目标模板 `template.manifest.json` 声明的 `runtime.node` 范围匹配当前 Node | 模板初始化前即拦截，避免生成后才发现不兼容 |
+
+> 版本要求与 CLI `package.json` engines、doctor 源码三方一致；模板还可按需声明更严格的 runtime。
+
 ---
 
 ## info — 项目元数据
@@ -78,7 +89,7 @@ jh4j config reset
 | --- | --- |
 | `JH4J_HOME` | 修改 CLI 数据根目录（默认 `~/.jh4j`），影响 config 与 cache 位置 |
 | `JH4J_CATALOG_FILE` | 加载外部 Catalog，等价于配置项 `catalogFile` |
-| `JH4J_UI_TEMPLATE_SOURCE` | PC 模板专属源覆盖 |
+| `JH4J_UI_TEMPLATE_SOURCE` | PC 模板专属源覆盖（移动端无专属变量，换源用 `config set templateSource` 全局覆盖或 Catalog `sources` 容灾） |
 
 ---
 

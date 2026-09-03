@@ -58,7 +58,7 @@ jh4j create
 
 ## 环境要求
 
-- Node.js `^22.15.0 || ^24.0.0`，推荐 Node.js 24
+- Node.js `^22.12.0 || ^24.0.0`，推荐 Node.js 24
 - pnpm `>=11.8.0`
 - Git
 

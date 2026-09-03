@@ -81,3 +81,64 @@ jh4j create jh4j-ui-orders \
   --port 8123 \
   --skip-install
 ```
+
+---
+
+## doctor 报 pnpm 版本不满足
+
+doctor 要求 pnpm >= 11.8.0。升级方式：
+
+```bash
+corepack enable
+corepack prepare pnpm@latest --activate
+```
+
+或 
+pm i -g pnpm@latest。项目内 preinstall 只允许 pnpm，用 npm/yarn 安装会被直接拒绝。
+
+---
+
+## Node 版本不满足（22.12+ / 24.x）
+
+CLI 与 PC 模板 engines 都要求 Node ^22.12.0 || ^24.0.0。用 nvm-windows / fnm / volta 切换：
+
+```bash
+nvm install 22.12.0
+nvm use 22.12.0
+```
+
+注意 22.x 的早期小版本（< 22.12）不满足范围，doctor 会如实报红。
+
+---
+
+## 企业 Registry 报 401 / 私有包 404
+
+PC 模板包含 element-plus 企业定制版本等**非 scope 依赖**，默认 Registry 必须能提供这些包：
+
+1. 项目 .npmrc 已指向内部 Registry，确认该文件未被忽略提交；
+2. @jhlc scope 与非 scope 依赖**都要**能从该源获取；
+3. 401 通常是凭据过期：重新 pnpm login 或更新 .npmrc 的 authToken。
+
+---
+
+## 自定义了 JH4J_HOME 后缓存"丢了"
+
+缓存与配置都在 JH4J_HOME（默认 ~/.jh4j）下。设置过该环境变量的终端才有同一份缓存——换终端/换用户时要么统一环境变量，要么接受重新拉取模板。
+
+---
+
+## --force 覆盖目录，旧项目还能找回吗
+
+能。--force 会**先备份旧目录**再生成；模板初始化失败时旧目录保持不变。备份位置在创建输出的结果面板中有提示。
+
+---
+
+## 想试用比 Catalog 更新的模板版本
+
+Catalog 固定了每个模板的默认 ref（如移动端 1.7.1）。模板仓库已发布更新版本时，可用 --ref 覆盖先行试跑：
+
+```bash
+jh4j create my-app --category mobile --template mobile.robot-h5 --ref v1.8.0 --yes
+```
+
+试跑稳定后等 Catalog 跟进；详见[版本说明与升级](./upgrade)。

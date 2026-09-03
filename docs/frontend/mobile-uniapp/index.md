@@ -46,7 +46,7 @@
 | husky + lint-staged         | —      | Git 提交校验                  |
 | commitizen + commitlint     | —      | 交互式规范提交                |
 
-> 环境要求：Node.js >= 18、pnpm >= 10。
+> 环境要求：Node.js >= 22.12、pnpm >= 11.8（与脚手架/五包体系统一基线）。
 
 ---
 

@@ -155,6 +155,8 @@ CLI **不会**直接在目标目录边下载边修改。创建过程先在当前
 
 ## 下一步
 
+- 项目生成后第一件事：安装五包工程能力（PC：[wl-skills-kit](/frontend/pc/skills/) · 移动端：[wl-skills-test](/views/testing/) 等按需）；后端模板接入后对应 [wl-skills-bd](/backend/skills/)
 - 项目生成后如何对接模板：[PC 模板概览](/frontend/pc/) / [移动端 H5 概览](/frontend/mobile-h5/)
 - 查看命令全集：[命令参考](./commands)
 - 模板从哪来、如何缓存：[模板来源 & Catalog](./templates)
+- CLI 与模板版本策略：[版本说明与升级](./upgrade)
