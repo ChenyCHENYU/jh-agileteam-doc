@@ -49,4 +49,4 @@
 
 ## 相关页面
 
-- [integration-adapter-be](/backend/skills/integration-adapter-be) · [数据库治理实操](/backend/skills/db-governance) · [炼钢模块全栈案例](/views/cases/produce-steelmaking)
+- [integration-adapter-be](/backend/skills/integration-adapter-be) · [数据库治理实操](/backend/skills/db-governance) · 炼钢服务（wl-produce）为三路集成的落地实例

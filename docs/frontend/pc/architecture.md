@@ -12,9 +12,9 @@
 
 | 专项页 | 覆盖章节 |
 |---|---|
-| [领域驱动与代码组织](./domain-code-org) | 3 领域驱动设计（DDD） · 8 代码组织规范 |
-| [路由权限与状态管理](./routing-permission-state) | 5 路由与权限架构 · 6 状态管理架构 |
-| [组件设计与 API 层架构](./component-api) | 7 组件设计架构 · 9 API 层架构设计 |
+| [领域驱动与代码组织](./architecture/domain-code-org) | 3 领域驱动设计（DDD） · 8 代码组织规范 |
+| [路由权限与状态管理](./architecture/routing-permission-state) | 5 路由与权限架构 · 6 状态管理架构 |
+| [组件设计与 API 层架构](./architecture/component-api) | 7 组件设计架构 · 9 API 层架构设计 |
 
 
 ## 1. 产品化架构设计
@@ -406,15 +406,15 @@ registry=http://172.18.248.130/
 
 ## 3. 领域驱动设计（DDD）与 8. 代码组织规范
 
-> 已迁移至专项页 **[领域驱动与代码组织](./domain-code-org)**（DDD 分层模型、限界上下文、9 段式代码组织、目录约定与命名规范）。
+> 已迁移至专项页 **[领域驱动与代码组织](./architecture/domain-code-org)**（DDD 分层模型、限界上下文、9 段式代码组织、目录约定与命名规范）。
 
 ## 5. 路由与权限架构 / 6. 状态管理架构
 
-> 已迁移至专项页 **[路由权限与状态管理](./routing-permission-state)**（动态路由注册、权限指令、Pinia 模块划分与持久化）。
+> 已迁移至专项页 **[路由权限与状态管理](./architecture/routing-permission-state)**（动态路由注册、权限指令、Pinia 模块划分与持久化）。
 
 ## 7. 组件设计架构 / 9. API 层架构设计
 
-> 已迁移至专项页 **[组件设计与 API 层架构](./component-api)**（C_ 组件体系、AbstractPageQueryHook 基类、API 封装策略）。
+> 已迁移至专项页 **[组件设计与 API 层架构](./architecture/component-api)**（C_ 组件体系、AbstractPageQueryHook 基类、API 封装策略）。
 
 ## 10. 构建与部署架构
 
