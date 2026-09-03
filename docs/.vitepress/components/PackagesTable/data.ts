@@ -59,7 +59,7 @@ export const packages: Pkg[] = [
   },
   {
     name: "wl-skills-test",
-    version: "0.11.0",
+    version: "0.21.0",
     scope: "测试：用例生成 / 深度执行 / 统一报告 / 质量门",
     doc: "/views/testing/",
     docLabel: "测试工程 Skills",
@@ -71,7 +71,7 @@ export const packages: Pkg[] = [
 /** 站点级统计（GlassHome / 指南页共用，改包时同步维护） */
 export const siteStats = {
   packages: packages.length,
-  skills: 48, // kit 13 + design 10 + bd 13 + test 12
-  mcp: 76, // kit 29 + ui 13 + bd 17 + test 17
+  skills: 49, // kit 13 + design 10 + bd 13 + test 13
+  mcp: 77, // kit 29 + ui 13 + bd 17 + test 18
   rules: 114, // K19 + R39 + B31 + T25
 };

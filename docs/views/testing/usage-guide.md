@@ -2,7 +2,7 @@
 
 <AuthorTag author="ChangXing" />
 
-> `@agile-team/wl-skills-test` v0.11.0 — 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-test` v0.21.0 — 从安装到日常使用的完整指南。
 
 ---
 
@@ -152,7 +152,7 @@ node quality-gate.js \
 
 ---
 
-## MCP 工具（17 个）
+## MCP 工具（18 个）
 
 | 工具 | 用途 |
 |------|------|
@@ -173,6 +173,7 @@ node quality-gate.js \
 | `wls_test_e2e_check` | 对任意 E2E 工程独立执行归属闭环 + 静态安全扫描（CI 卡门） |
 | `wls_test_dict_sync` | 拉取系统字典归一化为 dict.json（三形态自动识别） |
 | `wls_test_gate` | 一键聚合质量门（审计 + e2e-check + 冒烟 + DI + 性能基线） |
+| `wls_test_contract_diff` | 契约变更影响面：操作/字段级变更 + 受影响用例清单（内容哈希精确到条） |
 
 ---
 

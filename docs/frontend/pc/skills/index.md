@@ -210,7 +210,7 @@ v2.16.1 起新增统一表单能力，支持大表单中混合必填/非必填�
 ## 伴生工程
 
 - 后端 Skills：[wl-skills-bd](/backend/skills/)（契约驱动代码生成 + 数据库事实源治理）
-- 测试工程：[wl-skills-test](/views/testing/)（12 Skill + 25 条审计规则 + 3 个执行器 + 17 MCP）
+- 测试工程：[wl-skills-test](/views/testing/)（13 Skill + 25 条审计规则 + 3 个执行器 + 18 MCP）
 - 视觉一致性：[wl-skills-ui](/views/styling/wl-skills-ui)
 - 产品设计：[wl-skills-design](/views/ai-workflow/design-skills)
 - 后端使用指南：[后端 Skills 使用指南](/backend/skills/usage-guide)

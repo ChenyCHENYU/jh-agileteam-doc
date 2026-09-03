@@ -1,47 +1,59 @@
 # 测试快速上手
 
-> 30 分钟跑通"安装 → 用例生成 → 审计 → 深度执行 → 质量门"最小闭环。前置：Node.js ≥ 20、pnpm。
+> 30 分钟跑通"安装 → 接入 → 用例生成 → 审计 → 深度执行 → 质量门"最小闭环。前置：Node.js ≥ 20、pnpm。
 
 ---
 
 ## 一、安装与体检（3 分钟）
 
 ```bash
-npx @agile-team/wl-skills-test init     # 11 规范 + 12 Skill + 17 MCP + 编辑器配置
-npx @agile-team/wl-skills-test doctor   # Node / Playwright / JMeter / 浏览器通道体检
+npx @agile-team/wl-skills-test init     # 11 规范 + 13 Skill + 18 MCP + 编辑器配置
+npx @agile-team/wl-skills-test doctor   # Node / Playwright / JMeter / 目录结构体检
 ```
 
 `doctor` 报缺什么装什么：Playwright 浏览器 `pnpm dlx playwright install`；JMeter 5.6.3 配置进 PATH。
 
 ---
 
-## 二、从契约生成用例（5 分钟）
+## 二、接入与用例生成（8 分钟）
 
-有上游契约（kit `wl-api-contract.json` / bd `wl-contract.json` / kit `page-spec.json`）时，**不要人工转录接口字段**：
+### 有上游契约（kit / bd）
 
 ```bash
-# CRUD 用例矩阵（接口契约）
+# CRUD 用例矩阵
 npx @agile-team/wl-skills-test run-gen --contract ./wl-contract.json
-
-# 字段级细粒度（v0.11.0：必填置空/超长/边界/非法枚举/注入探测，P0~P3 标注）
-npx @agile-team/wl-skills-test run-gen --granularity field
-
-# E2E 工程（从 page-spec，7 层编排）
+# E2E 工程（7 层编排）
 npx @agile-team/wl-skills-test run-gen --contract ./page-spec.json --type playwright
 ```
 
-没有契约也能用：把需求文档给 AI，`test-plan-generator` → `test-case-generator` 照样出方案与用例。
+### 没有契约（v0.21.0 新路径：从后端 Swagger 直接提取）
+
+```bash
+# 1. 接入探测：项目形态 + 接口来源 + 生成 wl-test.config.json 骨架 + 输出给 AI 的接入指令
+npx @agile-team/wl-skills-test setup --base-url http://localhost:8080
+
+# 2. OpenAPI/Swagger → 契约（required/maxLength/枚举全保留，五操作自动映射）
+npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/api-docs
+
+# 3. 契约校验（error 级阻断，不过不往下走）
+npx @agile-team/wl-skills-test validate-contract ./wl-contract.json
+
+# 4. 生成用例
+npx @agile-team/wl-skills-test run-gen --contract ./wl-contract.json
+```
+
+或者对 AI 说一句"**接入测试**"——`test-onboarding` Skill 按六步 SOP 编排以上全部步骤。
 
 ---
 
-## 三、审计生成物（3 分钟）
+## 三、审计与修复（3 分钟）
 
 ```bash
 npx @agile-team/wl-skills-test audit --target ./tests/    # T1-T25 确定性扫描
 npx @agile-team/wl-skills-test fix  --target ./tests/     # F1-F6 自动修复反模式
 ```
 
-零 error 是合入底线；E2E 工程另加 `e2e-check`（归属闭环 + 安全标记校验）。
+零 error 是合入底线；E2E 工程另加 `e2e-check`（归属闭环 + 安全标记校验）。**fix 后自动复验**：对修改文件 re-audit 并给出"剩余致命/错误"计数（v0.20.0+），修没修干净不再无人知晓。
 
 ---
 

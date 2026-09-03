@@ -5,7 +5,7 @@
 > 工程载体：`@agile-team/wl-skills-test`
 > 工程目录：`D:\office-project\wl\wl-skills-test`
 > 上游契约：`wl-skills-kit`（page-spec / wl-api-contract）· `wl-skills-bd`（wl-contract）
-> 当前核对版本：`0.11.0`（2026-08-15）
+> 当前核对版本：`0.21.0`（2026-09-03）
 
 ---
 
@@ -37,7 +37,7 @@
 | v0.10.0 | 选择器适配层（element-plus/steel/ant-design）、沙箱模拟跑、工位模板、`dict-sync`、`gate` 聚合质量门、webhook 推送 | 换组件库只改一个文件；在真实项目 32 个页面上完成端到端验证；一条命令聚合全部质量判定 |
 | v0.11.0 | **test-reports 统一报告体系**（7 类产物自动发现 + history.jsonl 历史趋势）；`run-gen --granularity field` 字段级细粒度用例 | 所有报告集中一处、二次执行出趋势表、跨版本质量可追踪；用例颗粒度细化到字段和操作 |
 
-> 单元测试 48 → **179 个**全部通过（含 mock 后端集成测试 14 个、正反例回归）。
+> 单元测试 48 → **248 个**全部通过（含 mock 后端集成测试与正反例回归），覆盖 0.12~0.21 十个版本的架构地基/引擎层/生成器/安全收口/可用性/有效性/性能工程化/报告门户/闭环收口/AI 接入迭代。
 
 ---
 
@@ -82,7 +82,7 @@
 
 - 11 条测试规范（`.github/standards/01~11`，对齐在线 QC 流程规范）；
 - 12 个 AI Skill（功能链 9 + 性能链 3）；
-- 17 个 MCP 工具（`wls_test_*` 前缀，全部实现并有测试覆盖）；
+- 18 个 MCP 工具（`wls_test_*` 前缀，全部实现并有测试覆盖，v0.17 新增 contract_diff）；
 - 25 条审计规则（T1-T25 确定性扫描器）；
 - 6 个自动修复（F1-F6）；
 - 3 个执行器（API / Playwright / JMeter）；
@@ -128,7 +128,7 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 11 条测试规范（唯一基线）
         │
         ▼
-12 个 AI Skill（意图触发 → 契约消费 → 生成）
+13 个 AI Skill（意图触发 → 契约消费 → 生成，含 test-onboarding 接入编排）
     ├── 功能链 9 个：方案 → 场景 → 用例 → 评审 → 冒烟筛选 → 冒烟执行 → 脚本 → 规则基座 → 质量评估
     └── 性能链 3 个：压测方案 → JMeter 脚本 → 报告分析
         │
@@ -289,7 +289,7 @@ npx @agile-team/wl-skills-test gate --webhook <url>
 
 ## 六、Skill 与工具全景
 
-### 6.1 12 个 AI Skill 流水线
+### 6.1 13 个 AI Skill 流水线
 
 **功能测试链（9 个）**：
 
@@ -308,7 +308,7 @@ npx @agile-team/wl-skills-test gate --webhook <url>
 
 **性能测试链（3 个）**：⑩ perf-plan-generator（方案/梯度/SLA）→ ⑪ perf-script-generator（.jmx+CSV+CLI）→ ⑫ perf-report-analyzer（jtl 解析/瓶颈诊断/3 版本趋势）。
 
-### 6.2 17 个 MCP 工具
+### 6.2 18 个 MCP 工具
 
 `wls_test_standards` / `contract_read` / `case_generate`（含 granularity:field）/ `smoke_select` / `env_check` / `quality_analyze` / `jmeter_validate` / `audit` / `fix` / `run_api`（透传全部深度参数）/ `run_playwright` / `run_jmeter` / `e2e_generate` / `report_generate` / `e2e_check` / `dict_sync` / `gate`——AI 编辑器内一句话即可触发，CLI 与 MCP 复用同一 `lib/` 核心。
 
@@ -447,7 +447,7 @@ npx @agile-team/wl-skills-test e2e-check --target ./e2e/
 ### 11.1 接入验收
 
 - [ ] `package.json` 和锁文件中的 `wl-skills-test` 版本一致；
-- [ ] `.github/skills/` 含 12 个 Skill、`.github/standards/` 含 11 条规范；
+- [ ] `.github/skills/` 含 13 个 Skill、`.github/standards/` 含 11 条规范；
 - [ ] `doctor` 通过（Node / Playwright / JMeter / 浏览器通道）；
 - [ ] MCP 配置随 init 正确生成。
 
@@ -513,7 +513,7 @@ test-reports/ 对应产物路径：
 
 1. 确认 11 条测试规范和 `wl-skills-test` 为测试侧统一事实来源；
 2. 确认各项目测试负责人名单；
-3. 确认接入台账与目标版本（≥ 0.11.0）；
+3. 确认接入台账与目标版本（≥ 0.21.0）；
 4. 确认第一批试点（建议 1 个项目走"契约→用例→执行→gate"全链路 + 1 批存量脚本 audit/fix）；
 5. 确认 gate 接入 CI 与阻断级别（建议 PR 阶段 audit+e2e-check 阻断、合并前 gate 阻断）；
 6. 确认 test-reports 归档位置与 webhook 推送群；

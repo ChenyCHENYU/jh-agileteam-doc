@@ -2,10 +2,11 @@
 
 <AuthorTag author="ChangXing" />
 
-::: tip npm 已发布 v0.11.0
+::: tip npm 已发布 v0.21.0
 ```bash
-npx @agile-team/wl-skills-test        # 安装（11 规范 + 12 Skill + 17 MCP）
+npx @agile-team/wl-skills-test        # 安装（11 规范 + 13 Skill + 18 MCP）
 npx @agile-team/wl-skills-test doctor # 环境体检
+npx @agile-team/wl-skills-test setup  # 接入探测引导（v0.21：没有契约也能开始）
 npx @agile-team/wl-skills-test audit  # 审计测试代码（T1-T25）
 npx @agile-team/wl-skills-test gate   # 一键聚合质量门（审计+e2e-check+冒烟+DI+性能）
 ```
@@ -33,22 +34,37 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 
 ---
 
-## 核心能力（v0.11.0）
+## 核心能力（v0.21.0）
 
 | 维度 | 数量 | 说明 |
 |------|:----:|------|
 | 测试规范 | 11 | 对齐在线 QC 流程规范（01-流程 ~ 11-数据安全） |
-| AI Skill | 12 | 功能链 9 + 性能链 3 |
-| MCP 工具 | 17 | wls_test_* 前缀，全部实现并有测试覆盖 |
-| 审计规则 | 25 | T1-T25 确定性扫描器（Playwright/JMeter/用例/覆盖率/E2E 工程） |
-| 自动修复 | 6 | F1-F6（v-deep/beforeEach/waitForTimeout/硬编码/afterEach/测试名） |
+| AI Skill | 13 | 功能链 9 + 性能链 3 + 接入编排 1（test-onboarding） |
+| MCP 工具 | 18 | wls_test_* 前缀，全部实现并有测试覆盖（v0.17 新增 contract_diff） |
+| 审计规则 | 25 | T1-T25 确定性扫描器（Playwright/JMeter/用例/E2E 工程），表驱动可扩展 |
+| 自动修复 | 6 | F1-F6（v-deep/beforeEach/waitForTimeout/硬编码/afterEach/测试名），修复后强制复验 |
 | 执行器 | 3 | API 接口测试 + Playwright 自动化 + JMeter 性能 |
-| CLI 命令 | 16 | init/update/doctor/validate/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/clean |
-| 单元测试 | 179 | 全部通过 |
+| CLI 命令 | 21 | init/update/setup/doctor/validate/gen-contract/validate-contract/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/ci/diff/clean |
+| 单元测试 | 248 | 全部通过 |
+
+### 版本演进亮点（0.12 → 0.21）
+
+| 版本 | 主题 |
+|------|------|
+| 0.12 | 架构地基：共享层（阈值/类型单一事实源）、CLI 分层、MCP parity 校验 |
+| 0.13 | 引擎层：jtl 流式解析（200k 行不 OOM）、执行器 spawn 异步化防注入、审计规则表驱动 |
+| 0.14 | 生成器精准化：FG 用例 ID 内容哈希化（防编号漂移）、基线去重、维度覆盖追溯 |
+| 0.15 | 安全收口：write-guard 字节级回滚、plan-hash 归一化、MCP fix root 约束、文档口径一致性测试 |
+| 0.16 | 可用性：`wl-test.config.json` 配置档案 + `--profile`、auth 自动登录、`ci` 流水线模板、失败 hint 诊断、MCP 紧凑输出（数十 KB → 1-2KB） |
+| 0.17 | 有效性：更新生效验证、非法枚举负例自动执行、并发重复探针、`diff` 契约变更影响面 + 第 18 个 MCP 工具 |
+| 0.18 | 性能工程化：p90/TPS/错误 TopN、基线自动管理（劣化不自动更新，防慢性漂移）、混合场景压测 |
+| 0.19 | 报告门户：**质量分 0-100 + A/B/C/D**、单文件 HTML 交互报告、SVG 趋势、飞书推送 |
+| 0.20 | 闭环收口：不存在主键/删除幂等探针、detail 漂移检测、fix 复验、`validate-contract` 校验前置 |
+| 0.21 | **AI 接入故事**：`gen-contract --swagger`（OpenAPI→契约）、`setup` 接入引导、第 13 个 Skill test-onboarding（六步 SOP） |
 
 ---
 
-## 12 个 Skill 流水线
+## 13 个 Skill 流水线
 
 ### 功能测试链（9 个）
 
@@ -87,11 +103,17 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 | ⑪ | perf-script-generator | JMeter 脚本 | .jmx + 参数化 CSV + CLI 命令，含登录鉴权/Token/断言 |
 | ⑫ | perf-report-analyzer | 性能报告 | 解析 jtl/监控 CSV，瓶颈诊断、优化建议、3 版本趋势对比 |
 
+### 接入编排（第 13 个 Skill，v0.21.0）
+
+| 步骤 | Skill | 用途 |
+|:----:|-------|------|
+| ⑬ | test-onboarding | 用户一句"接入测试"即触发六步 SOP：setup 探测 → gen-contract 提取（AI 不手写契约）→ validate-contract 把关（不过不往下走）→ 配置确认（凭据 `$ENV` 引用不碰明文）→ run-api 试跑 → 汇报 + 固化 CI。AI 只编排与理解文档，执行全部走确定性工具 |
+
 ---
 
 ## 审计引擎（T1-T25）
 
-对标 kit K1-K19 / bd B1-B31 / ui R001-R042 的**确定性规则扫描器**（不靠 AI 自觉，脚本直接检测）：
+对标 kit K1-K19 / bd B1-B31 / ui R001-R043 的**确定性规则扫描器**（不靠 AI 自觉，脚本直接检测）：
 
 | 规则范围 | 对象 | 检测内容 |
 |---------|------|---------|
@@ -114,9 +136,9 @@ npx @agile-team/wl-skills-test fix --target ./tests/
 
 | 执行器 | 命令 | 说明 |
 |--------|------|------|
-| API 接口测试 | `run-api` | DAG 编排（列表冒烟→新增→写后读回→更新→详情→负例→重复提交→权限→分页→清理→零污染复查）+ 四层断言（成功信封/结构/数据正确性/负例与安全）+ 契约漂移检测 + 权限双账号 + 报文快照留证 |
+| API 接口测试 | `run-api` | DAG 编排（列表冒烟→新增→写后读回→**更新生效验证**（差异化字段，防"更新被忽略"假覆盖）→详情读回逐字段比对→负例→重复提交→**并发重复探针**（5 并发暴露唯一约束缺失）→**不存在主键/删除幂等探针**→权限→分页→清理→零污染复查）+ 四层断言 + **detail 响应也参与契约漂移检测** + 权限双账号 + 报文快照留证 + **失败步骤自带 hint 诊断指引** |
 | Playwright | `run-playwright` | 调用 `playwright test` + 解析 passed/failed/skipped，提取失败明细 |
-| JMeter | `run-jmeter` | 调用 `jmeter -n -t` + 解析 jtl（P50/P95/P99/错误率/SLA） |
+| JMeter | `run-jmeter` | 调用 `jmeter -n -t` + jtl 流式解析（百 MB 级不 OOM），P50/P90/P95/P99/TPS/错误 TopN |
 
 ```bash
 # 深度 API 接口测试（v0.9.0+：负例 + 契约漂移 + 权限验证）
@@ -167,15 +189,35 @@ npx @agile-team/wl-skills-test run-gen --contract ./wl-contract.json --type jmet
 
 ---
 
+## AI 接入（v0.21.0）：没有契约也能开始
+
+> 接入从"人写契约"变成"AI 按引导读后端已有资产"。一句"接入测试"触发 `test-onboarding` 六步 SOP，每步绑定确定性工具。
+
+```bash
+# 1. 接入探测：项目形态（Java Maven/Gradle、前端框架）+ 接口来源（Swagger 在线探测 → openapi.json → api.md）
+npx @agile-team/wl-skills-test setup --base-url http://localhost:8080
+#    生成 wl-test.config.json 骨架（sit/uat 档案 + auth 凭据 $ENV 引用，不覆盖已有）
+#    输出可直接发给 AI 的标准接入指令
+
+# 2. OpenAPI/Swagger → 契约（人不再手写第二份契约）
+npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/api-docs --module 订单
+```
+
+`gen-contract` 的确定性转换：queryPage/save/getById/updateById/deleteById → 五标准操作；requestBody 解引用 → createRequest（**required/maxLength/min·max/枚举全保留**——这些正是负例与断言深度的来源）；OpenAPI v2/v3 兼容；转换结果强制过 `validate-contract`，并输出"需人工核对"清单（业务成功码默认 2000）。
+
+六步 SOP：**setup 探测 → gen-contract 提取 → validate-contract 把关（不过不往下走）→ 配置确认（凭据 `$ENV` 引用不碰明文）→ run-api 试跑 → 汇报 + 固化 CI**。AI 只编排与理解文档，执行全部走工具。
+
+---
+
 ## 五包能力对标
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | v0.11.1 | v2.20.1 | v1.12.0 | v0.24.0 | **v0.11.0** |
+| 版本 | v0.11.1 | v2.20.1 | v1.12.0 | v0.24.0 | **v0.21.0** |
 | 审计规则 | — | K1-K19 | R001-R043 | B1-B31 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
-| MCP 工具 | 0 | 29 | 13 | 17 | **17** |
+| MCP 工具 | 0 | 29 | 13 | 17 | **18** |
 
 ---
 
