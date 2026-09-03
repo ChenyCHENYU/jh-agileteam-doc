@@ -90,7 +90,6 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "概述", link: "/views/best-practices/" },
-        { text: "全景分析", link: "/views/best-practices/ai-landscape" },
         { text: "成熟度对照", link: "/views/best-practices/maturity", badge: { text: "新", type: "tip" } },
       ],
     },

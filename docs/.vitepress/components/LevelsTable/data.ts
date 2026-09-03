@@ -1,6 +1,6 @@
 /**
  * L0~L7 能力层级单一数据源
- * 指南页 / best-practices/index / ai-landscape 三处表格统一从这里渲染，改层级状态只改这里。
+ * 指南页 / best-practices/index 两处层级表统一从这里渲染，改层级状态只改这里。
  */
 
 export type LevelStatus = "known" | "done" | "doing" | "next" | "future";
@@ -12,7 +12,7 @@ export interface Level {
   name: string;
   /** 短描述（指南页 short 模式） */
   desc: string;
-  /** 长描述（detail 模式：best-practices / ai-landscape） */
+  /** 长描述（detail 模式：best-practices 总览 / 成熟度对照页） */
   detail: string;
   status: LevelStatus;
   statusText: string;
