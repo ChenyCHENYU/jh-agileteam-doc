@@ -113,7 +113,7 @@ wl-skills-design ──► wl-skills-kit ──► wl-skills-ui    wl-skills-bd 
 
 ### 🧪 测试
 
-> [测试工程 Skills](/views/testing/) — 五包中唯一带真实执行引擎的包：深度接口测试（DAG + 四层断言）、工程级 Playwright、JMeter 压测、test-reports 统一报告与 gate 质量门。子页：[使用指南](/views/testing/usage-guide) · [功能链](/views/testing/functional) · [自动化](/views/testing/automation) · [性能](/views/testing/performance)。
+> [测试工程 Skills](/views/testing/) — 真实执行引擎包：深度接口测试（DAG + 四层断言）、工程级 Playwright、JMeter 压测、test-reports 统一报告与 gate 质量门。[快速上手](/views/testing/quick-start) · [测试规范](/views/testing/standards/) · [度量与质量门](/views/testing/metrics) · [使用指南](/views/testing/usage-guide)。
 
 ---
 

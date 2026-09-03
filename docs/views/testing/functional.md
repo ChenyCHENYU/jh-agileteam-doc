@@ -6,7 +6,7 @@
 
 ---
 
-## test-plan-generator（v2.0.0）
+## test-plan-generator（Skill v2.0.0）
 
 ### 角色与定位
 
@@ -85,7 +85,7 @@
 
 ---
 
-## test-scenario-analyzer（v2.0.0）
+## test-scenario-analyzer（Skill v2.0.0）
 
 ### 角色与定位
 
@@ -161,7 +161,7 @@ Step 3（10 类场景）覆盖文档中的显性/半显性需求；Step 5（隐�
 
 ---
 
-## test-case-generator（v2.0.0）
+## test-case-generator（Skill v2.0.0）
 
 ### 角色与能力
 
@@ -236,7 +236,7 @@ Step 3（10 类场景）覆盖文档中的显性/半显性需求；Step 5（隐�
 
 ---
 
-## test-case-reviewer（v2.0.0）
+## test-case-reviewer（Skill v2.0.0）
 
 ### 角色与定位
 
@@ -284,7 +284,7 @@ Step 3（10 类场景）覆盖文档中的显性/半显性需求；Step 5（隐�
 
 ---
 
-## test-quality-analyzer（v2.0.0）
+## test-quality-analyzer（Skill v2.0.0）
 
 ### 角色与能力
 

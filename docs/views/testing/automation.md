@@ -6,7 +6,7 @@
 
 ---
 
-## test-script-generator（v2.0.0）
+## test-script-generator（Skill v2.0.0）
 
 ### 角色与能力
 
@@ -91,7 +91,7 @@ test('测试用例名称', async ({ page }) => {
 
 ---
 
-## universal-test-rules（v2.1.0）
+## universal-test-rules（Skill v2.1.0）
 
 ### 角色与定位
 
@@ -167,7 +167,7 @@ npx playwright test your-script.spec.js --reporter=list
 
 ---
 
-## smoke-test-selector（v2.0.0）
+## smoke-test-selector（Skill v2.0.0）
 
 ### 角色与定位
 
@@ -235,7 +235,7 @@ npx playwright test your-script.spec.js --reporter=list
 
 ---
 
-## smoke-test-executor（v2.0.0）
+## smoke-test-executor（Skill v2.0.0）
 
 ### 角色与定位
 

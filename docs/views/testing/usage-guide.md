@@ -108,6 +108,25 @@ npx @agile-team/wl-skills-test fix --target ./tests/
 | F5 | 补齐 `afterEach` 数据清理 |
 | F6 | 测试名规范化（加 should 前缀） |
 
+### 示例（示意）：一轮审计 + 修复的典型输出
+
+```text
+$ wl-skills-test audit --target ./tests/
+audit: 12 files scanned
+  ✗ T2  hardcoded-url     tests/login.spec.ts:8     "http://172.28.99.172:9000"
+  ✗ T12 hard-wait         tests/order.spec.ts:41     waitForTimeout(3000)
+  ⚠ F6  test-name         tests/smoke.spec.ts:15     缺少 should 前缀
+summary: 2 error / 1 warning
+
+$ wl-skills-test fix --target ./tests/
+fix: F3 修复 order.spec.ts:41（waitForTimeout → waitForSelector）
+fix: F4 修复 login.spec.ts:8（URL → BASE_URL）
+fix: F6 规范化 1 个测试名
+复扫: 0 error / 0 warning ✅
+```
+
+> 输出为示意格式，实际以命令执行结果为准。error 未清零不进入合入。
+
 ---
 
 ## 工作流 E：DI 质量门（CI 集成）

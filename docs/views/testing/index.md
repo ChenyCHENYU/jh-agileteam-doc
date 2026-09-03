@@ -10,6 +10,8 @@ npx @agile-team/wl-skills-test audit  # 审计测试代码（T1-T25）
 npx @agile-team/wl-skills-test gate   # 一键聚合质量门（审计+e2e-check+冒烟+DI+性能）
 ```
 [npm 包地址](https://www.npmjs.com/package/@agile-team/wl-skills-test) · [GitHub](https://github.com/ChenyCHENYU/wl-skills-test) · 作者：常兴
+
+新成员从这里开始：[快速上手](/views/testing/quick-start) → [测试规范](/views/testing/standards/) → [度量与质量门](/views/testing/metrics)
 :::
 
 ---
@@ -108,7 +110,7 @@ npx @agile-team/wl-skills-test fix --target ./tests/
 
 ---
 
-## 执行能力（五包中唯一）
+## 执行能力（真实执行引擎）
 
 | 执行器 | 命令 | 说明 |
 |--------|------|------|
@@ -130,7 +132,7 @@ npx @agile-team/wl-skills-test run-jmeter --jmx ./perf-test.jmx --threads 200
 
 ### test-reports 统一报告体系（v0.11.0）
 
-所有报告统一产出到 `test-reports/`（`--reports-dir` 可改）：`api-报告.md` / `e2e-报告.md` / `perf-报告.md` / `audit-报告.md` / `测试报告.md` + 同名 `*-result.json`。`report` 不传参时自动发现各维度结果；`history.jsonl` 记录每次执行，`report --trend` 追加最近 5 次趋势表；`report --webhook <url>` 支持企微/钉钉推送。
+所有报告统一产出到 `test-reports/`：7 类产物自动发现、`history.jsonl` 历史趋势、`--trend` 趋势表、webhook 推送。**详解见 [度量与质量门](/views/testing/metrics#三-test-reports-统一报告体系)**。
 
 ### 细粒度用例生成（v0.11.0）
 
@@ -138,17 +140,14 @@ npx @agile-team/wl-skills-test run-jmeter --jmx ./perf-test.jmx --threads 200
 
 ---
 
-## DI 质量门（CI 集成）
+## 质量门与上线判定
 
 ```bash
-# 一键聚合质量门（v0.10.0+：审计 T1-T25 + e2e-check + 冒烟通过率 + DI + 性能基线，任一失败 exit 1）
-npx @agile-team/wl-skills-test gate
-
-# 推送结论到企微/钉钉
-npx @agile-team/wl-skills-test gate --webhook <url>
+npx @agile-team/wl-skills-test gate                  # 一键聚合：审计+e2e-check+冒烟+DI+性能，任一失败 exit 1
+npx @agile-team/wl-skills-test gate --webhook <url>  # 推送结论到企微/钉钉
 ```
 
-4 指标上线判定：DI 密度 < 0.3 · 致命关闭率 100% · 严重关闭率 100% · 模块收敛 ≤20%
+4 指标上线判定：DI 密度 < 0.3 · 致命关闭率 100% · 严重关闭率 100% · 模块收敛 ≤20%。**口径定义与指标解读见 [度量与质量门](/views/testing/metrics)**。
 
 ---
 

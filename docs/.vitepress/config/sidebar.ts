@@ -583,16 +583,36 @@ export const sidebar: DefaultTheme.Sidebar = {
   ],
 
   // 测试
+  // 测试
   "/views/testing/": [
     {
-      text: "测试工程技能包",
+      text: "测试",
       collapsed: false,
       items: [
         { text: "wl-skills-test 概述", link: "/views/testing/" },
+        { text: "快速上手", link: "/views/testing/quick-start", badge: { text: "新", type: "tip" } },
         { text: "功能测试", link: "/views/testing/functional" },
         { text: "自动化测试", link: "/views/testing/automation" },
         { text: "性能测试", link: "/views/testing/performance" },
+        { text: "度量与质量门", link: "/views/testing/metrics" },
         { text: "使用指南", link: "/views/testing/usage-guide" },
+      ],
+    },
+    {
+      text: "测试规范（11 条）",
+      collapsed: true,
+      items: [
+        { text: "01 测试流程", link: "/views/testing/standards/01-test-process" },
+        { text: "02 用例设计标准", link: "/views/testing/standards/02-case-design" },
+        { text: "03 用例设计方法", link: "/views/testing/standards/03-case-method" },
+        { text: "04 测试策略", link: "/views/testing/standards/04-strategy" },
+        { text: "05 冒烟测试", link: "/views/testing/standards/05-smoke" },
+        { text: "06 自动化测试", link: "/views/testing/standards/06-automation" },
+        { text: "07 性能测试", link: "/views/testing/standards/07-performance" },
+        { text: "08 质量门禁", link: "/views/testing/standards/08-quality-gate" },
+        { text: "09 缺陷管理", link: "/views/testing/standards/09-defect-mgmt" },
+        { text: "10 测试报告", link: "/views/testing/standards/10-report" },
+        { text: "11 数据安全", link: "/views/testing/standards/11-data-safety" },
       ],
     },
   ],
