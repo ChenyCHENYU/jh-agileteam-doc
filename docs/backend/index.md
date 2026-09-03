@@ -20,6 +20,7 @@
 
 - [快速上手](./quick-start) — 30 分钟跑通契约生成最小闭环
 - [架构设计](./architecture) — 微服务拆分模型、服务接入三类注册、扩展点机制（以 wl-produce 为实例）
+- [MES 集成实战](./integration-mes) — QMS / L2 / MPS 三路对接协议与治理
 - [开发规范](./standards) — Java 编码规约基线（机器可判定部分已固化为 B 规则）
 - [Skills 集合](./skills/) — 13 个 Skill / 17 个 MCP / 30 条规范全景与使用指南
 

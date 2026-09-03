@@ -8,6 +8,8 @@
 
 ::: tip 与 wl-skills-bd 的关系
 本页是人工编码规约基线；后端 Skills 包（v0.24.0）已将其中**可机器判定的条目固化**为 B1~B31 确定性扫描规则与 J1~J8 质量门，并扩充至 30 条规范（含数据安全护栏、稳定性、多环境、数据库事实源治理、变更审查）。日常开发建议：本页理解约定，`wl-skills-bd validate` 负责把关，详见 [后端 Skills 集合](/backend/skills/)。
+
+**规范详解（精选 10 篇已入站，见侧边栏"规范详解（精选）"）**：[11 安全与权限](/backend/standards/11-security-permission) · [12 数据库 DDL](/backend/standards/12-database-ddl) · [20 Redis 与缓存](/backend/standards/20-redis-cache) · [21 敏感写护栏](/backend/standards/21-sensitive-write) · [22 稳定性](/backend/standards/22-resilience) · [25 配置分层](/backend/standards/25-config-layering) · [26 任务驱动](/backend/standards/26-task-driven) · [28 生产保障](/backend/standards/28-production-assurance) · [29 数据库事实源治理](/backend/standards/29-database-source-governance) · [30 变更审查与集成适配](/backend/standards/30-change-review-integration-adapter)
 :::
 
 ## 目录

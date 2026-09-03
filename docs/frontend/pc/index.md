@@ -114,7 +114,7 @@ src/views/xxx/
 └── detail/
 ```
 
-页面需在 `vite/plugins/shared/pages.ts` 中注册暴露，菜单需后台配置路由后才能看到。详见 [架构设计 — 代码组织规范](./architecture#代码组织规范) 与 [页面模板](./skills/page-templates)。
+页面需在 `vite/plugins/shared/pages.ts` 中注册暴露，菜单需后台配置路由后才能看到。详见 [架构设计 — 代码组织规范](./architecture/domain-code-org#_8-代码组织规范) 与 [页面模板](./skills/page-templates)。
 
 ---
 
