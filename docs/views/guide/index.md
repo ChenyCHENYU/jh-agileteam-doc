@@ -107,7 +107,7 @@ wl-skills-design ──► wl-skills-kit ──► wl-skills-ui    wl-skills-bd 
 
 ### ⚙️ 后端
 
-> [概览 & 技术选型](/backend/) · [开发规范](/backend/standards) · [Skills 集合](/backend/skills/) · [使用指南](/backend/skills/usage-guide) · [契约流水线](/backend/skills/skill-pipeline)
+> [概览 & 技术选型](/backend/) · [快速上手](/backend/quick-start) · [架构设计](/backend/architecture) · [开发规范](/backend/standards) · [Skills 集合](/backend/skills/) · [使用指南](/backend/skills/usage-guide) · [数据库治理实操](/backend/skills/db-governance)
 
 ---
 

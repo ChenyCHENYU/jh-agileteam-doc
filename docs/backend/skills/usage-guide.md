@@ -48,6 +48,19 @@ mvn verify -Pwl-quality                               # J1-J8 全部阻断
 wl-skills-bd validate src/main --format sarif --output reports/backend.sarif
 ```
 
+### 示例（示意）：含糊契约会被 validate 拒绝
+
+> 契约里 entity 只写了字段名，没写长度和必填（"后端看着办"），validate 的典型拒绝输出：
+
+```text
+✗ codegen validate 失败
+  - fields[2].name "customerName": 缺少 maxLength（数据库可证明的约束缺失）
+  - api[0].operations.create.request: 必填标记未声明约束来源
+  提示：契约是生成事实。补齐字段边界后重新 validate。
+```
+
+补齐约束来源 → validate 通过 → plan/apply 正常。**这不是工具挑剔：没有边界，DTO 校验注解和 DDL 就只能编造**——编造出来的约束联调时必然返工。
+
 ---
 
 ## 工作流 B：增量加接口（单点触发）

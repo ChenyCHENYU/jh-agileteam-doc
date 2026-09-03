@@ -16,6 +16,13 @@
 
 后端业务微服务标准模板基于 **Java 8 + Spring Boot 2 + jh4j-cloud 3.1**，采用 MyBatis-Plus + 原生 XML 双轨 ORM。每个微服务对应一个业务领域，独立 Git 仓库、独立部署，通过 Nacos 服务注册、Feign 远程调用、RocketMQ 异步消息组成分布式系统。
 
+## 版块导航
+
+- [快速上手](./quick-start) — 30 分钟跑通契约生成最小闭环
+- [架构设计](./architecture) — 微服务拆分模型、服务接入三类注册、扩展点机制（以 wl-produce 为实例）
+- [开发规范](./standards) — Java 编码规约基线（机器可判定部分已固化为 B 规则）
+- [Skills 集合](./skills/) — 13 个 Skill / 17 个 MCP / 30 条规范全景与使用指南
+
 ```bash
 # 安装后端 Skills（Node.js >= 22）
 npx @agile-team/wl-skills-bd init
