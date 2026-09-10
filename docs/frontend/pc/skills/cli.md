@@ -5,7 +5,7 @@
 从零**创建新项目**用的是另一个工具 —— 项目脚手架 [`@agile-team/jh4j-cloud-cli`](/scaffold/)（命令 `jh4j create`）。
 :::
 
-`@agile-team/wl-skills-kit`（v2.20.1）提供 18 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理、场景渲染全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
+`@agile-team/wl-skills-kit`（v2.20.4）提供 18 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理、场景渲染全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
 
 ## 命令速查
 
@@ -66,7 +66,7 @@ npx @agile-team/wl-skills-kit check
 
 ## validate / validate-page
 
-静态校验页面文件完整性（4 文件、AGGrid、cid、mock、api.md），含 AST 语义级 K1~K19 检测（v2.18.0 前编号为 R1~R19，豁免配置新旧前缀等价兼容）。K13 圈复杂度、K15 分页边界、K16 运行时边界默认执行；K14 类型错误需 `--typecheck` 开启；K17 表单仅必填开关按实际绑定逐项判断；K18 表单校验库版本检查；K19 弹窗内 AG Grid 必须用 `v-if` 延迟挂载（防零高度渲染）。v2.18.2 起 `validate --pre-commit` 修正共享模块/非页面 staged 提交的误报：无可校验页面时明确跳过，全量 validate 语义不变。
+静态校验页面文件完整性（4 文件、AGGrid、cid、mock、api.md），含 AST 语义级 K1~K19 检测（v2.18.0 前编号为 R1~R19，豁免配置新旧前缀等价兼容）。v2.20.2/v2.20.4 新增两类生成期阻断：**长工作台滚动裁切**与**分栏表格高度链断裂**。K13 圈复杂度、K15 分页边界、K16 运行时边界默认执行；K14 类型错误需 `--typecheck` 开启；K17 表单仅必填开关按实际绑定逐项判断；K18 表单校验库版本检查；K19 弹窗内 AG Grid 必须用 `v-if` 延迟挂载（防零高度渲染）。v2.18.2 起 `validate --pre-commit` 修正共享模块/非页面 staged 提交的误报：无可校验页面时明确跳过，全量 validate 语义不变。
 
 ```bash
 npx @agile-team/wl-skills-kit validate                      # 全量校验

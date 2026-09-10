@@ -32,7 +32,7 @@ export const packages: Pkg[] = [
   },
   {
     name: "wl-skills-kit",
-    version: "2.20.1",
+    version: "2.20.4",
     scope: "前端 PC：页面生成 / 规范审计 / 菜单字典权限同步 / 场景渲染",
     doc: "/frontend/pc/skills/",
     docLabel: "前端 PC Skills",

@@ -7,7 +7,7 @@
 ## 一、安装与体检（3 分钟）
 
 ```bash
-npx @agile-team/wl-skills-test init     # 11 规范 + 13 Skill + 18 MCP + 编辑器配置
+npx @agile-team/wl-skills-test init     # 11 规范 + 13 Skill + 19 MCP + 编辑器配置
 npx @agile-team/wl-skills-test doctor   # Node / Playwright / JMeter / 目录结构体检
 ```
 
@@ -26,14 +26,14 @@ npx @agile-team/wl-skills-test run-gen --contract ./wl-contract.json
 npx @agile-team/wl-skills-test run-gen --contract ./page-spec.json --type playwright
 ```
 
-### 没有契约（v0.21.0 新路径：从后端 Swagger 直接提取）
+### 没有契约（v0.22 新路径：从后端 Swagger 直接提取）
 
 ```bash
 # 1. 接入探测：项目形态 + 接口来源 + 生成 wl-test.config.json 骨架 + 输出给 AI 的接入指令
 npx @agile-team/wl-skills-test setup --base-url http://localhost:8080
 
-# 2. OpenAPI/Swagger → 契约（required/maxLength/枚举全保留，五操作自动映射）
-npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/api-docs
+# 2. OpenAPI/Swagger → 契约（required/maxLength/枚举全保留，五操作自动映射；v2 basePath 拼接、`--token` 过鉴权网关、响应/查询模型导入）
+npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/api-docs --token
 
 # 3. 契约校验（error 级阻断，不过不往下走）
 npx @agile-team/wl-skills-test validate-contract ./wl-contract.json

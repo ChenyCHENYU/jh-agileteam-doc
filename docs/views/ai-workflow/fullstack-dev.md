@@ -18,7 +18,7 @@
               ▼                               ▼
     ┌─────────────────┐             ┌─────────────────┐
     │  前端 kit        │             │  后端 bd          │
-    │  v2.20.1        │             │  v0.24.0         │
+    │  v2.20.4        │             │  v0.24.0         │
     │                 │             │                  │
     │  page-spec      │             │  wl-contract.json │
     │  api.md         │             │  Entity/DTO/VO    │
@@ -58,7 +58,7 @@ code-fix → 规范收敛
 menu-sync / dict-sync / permission-sync → 平台配置同步
 ```
 
-- Skills：[wl-skills-kit](/frontend/pc/skills/) v2.20.1
+- Skills：[wl-skills-kit](/frontend/pc/skills/) v2.20.4
 - 使用指南：[前端使用指南](/frontend/pc/skills/usage-guide)
 
 ---

@@ -2,9 +2,9 @@
 
 <AuthorTag author="ChangXing" />
 
-::: tip npm 已发布 v0.21.0
+::: tip npm 已发布 v0.22.0
 ```bash
-npx @agile-team/wl-skills-test        # 安装（11 规范 + 13 Skill + 18 MCP）
+npx @agile-team/wl-skills-test        # 安装（11 规范 + 13 Skill + 19 MCP）
 npx @agile-team/wl-skills-test doctor # 环境体检
 npx @agile-team/wl-skills-test setup  # 接入探测引导（v0.21：没有契约也能开始）
 npx @agile-team/wl-skills-test audit  # 审计测试代码（T1-T25）
@@ -34,20 +34,20 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 
 ---
 
-## 核心能力（v0.21.0）
+## 核心能力（v0.22.0）
 
 | 维度 | 数量 | 说明 |
 |------|:----:|------|
 | 测试规范 | 11 | 对齐在线 QC 流程规范（01-流程 ~ 11-数据安全） |
 | AI Skill | 13 | 功能链 9 + 性能链 3 + 接入编排 1（test-onboarding） |
-| MCP 工具 | 18 | wls_test_* 前缀，全部实现并有测试覆盖（v0.17 新增 contract_diff） |
+| MCP 工具 | 19 | wls_test_* 前缀，全部实现并有测试覆盖（v0.17 contract_diff · v0.22 gen_contract） |
 | 审计规则 | 25 | T1-T25 确定性扫描器（Playwright/JMeter/用例/E2E 工程），表驱动可扩展 |
 | 自动修复 | 6 | F1-F6（v-deep/beforeEach/waitForTimeout/硬编码/afterEach/测试名），修复后强制复验 |
 | 执行器 | 3 | API 接口测试 + Playwright 自动化 + JMeter 性能 |
 | CLI 命令 | 21 | init/update/setup/doctor/validate/gen-contract/validate-contract/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/ci/diff/clean |
-| 单元测试 | 248 | 全部通过 |
+| 单元测试 | 256 | 全部通过 |
 
-### 版本演进亮点（0.12 → 0.21）
+### 版本演进亮点（0.12 → 0.22）
 
 | 版本 | 主题 |
 |------|------|
@@ -61,6 +61,7 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 | 0.19 | 报告门户：**质量分 0-100 + A/B/C/D**、单文件 HTML 交互报告、SVG 趋势、飞书推送 |
 | 0.20 | 闭环收口：不存在主键/删除幂等探针、detail 漂移检测、fix 复验、`validate-contract` 校验前置 |
 | 0.21 | **AI 接入故事**：`gen-contract --swagger`（OpenAPI→契约）、`setup` 接入引导、第 13 个 Skill test-onboarding（六步 SOP） |
+| 0.22 | 内在深化：**数值边界 / 组合查询收敛探针转 autoExec**、严格成功码 `--strict-code`、swagger 导入增强（v2 basePath / `--token` / 响应与查询模型导入）、`run-jmeter --baseline-compare` 基线串联、第 19 个 MCP 工具 `wls_test_gen_contract` |
 
 ---
 
@@ -136,7 +137,7 @@ npx @agile-team/wl-skills-test fix --target ./tests/
 
 | 执行器 | 命令 | 说明 |
 |--------|------|------|
-| API 接口测试 | `run-api` | DAG 编排（列表冒烟→新增→写后读回→**更新生效验证**（差异化字段，防"更新被忽略"假覆盖）→详情读回逐字段比对→负例→重复提交→**并发重复探针**（5 并发暴露唯一约束缺失）→**不存在主键/删除幂等探针**→权限→分页→清理→零污染复查）+ 四层断言 + **detail 响应也参与契约漂移检测** + 权限双账号 + 报文快照留证 + **失败步骤自带 hint 诊断指引** |
+| API 接口测试 | `run-api` | DAG 编排（列表冒烟→新增→写后读回→**更新生效验证**（差异化字段，防"更新被忽略"假覆盖）→详情读回逐字段比对→负例→重复提交→**并发重复探针**（5 并发暴露唯一约束缺失）→**不存在主键/删除幂等探针**→权限→分页→清理→零污染复查）+ 四层断言 + **数值边界（min-1/max+1）/组合查询收敛/非法枚举转 autoExec** + **detail 响应也参与契约漂移检测** + 权限双账号 + 报文快照留证 + **失败步骤自带 hint 诊断指引** + `--strict-code` 严格成功码 + `--timeout` |
 | Playwright | `run-playwright` | 调用 `playwright test` + 解析 passed/failed/skipped，提取失败明细 |
 | JMeter | `run-jmeter` | 调用 `jmeter -n -t` + jtl 流式解析（百 MB 级不 OOM），P50/P90/P95/P99/TPS/错误 TopN |
 
@@ -156,9 +157,9 @@ npx @agile-team/wl-skills-test run-jmeter --jmx ./perf-test.jmx --threads 200
 
 所有报告统一产出到 `test-reports/`：7 类产物自动发现、`history.jsonl` 历史趋势、`--trend` 趋势表、webhook 推送。**详解见 [度量与质量门](/views/testing/metrics#三-test-reports-统一报告体系)**。
 
-### 细粒度用例生成（v0.11.0）
+### 细粒度用例生成（v0.11.0，v0.14/v0.17/v0.20/v0.22 持续精准化）
 
-`run-gen --granularity field` 在基线矩阵之上追加字段级（必填置空/超长/数值边界/非法枚举/XSS·SQL 注入探测）与操作级（重复提交/不存在主键/重复删除/无权限/分页边界）用例，每条标注 autoExec 与 run-api DAG 步骤的对应关系，可执行闭环诚实标注。
+`run-gen --granularity field` 在基线矩阵之上追加字段级（必填置空/超长/数值边界/非法枚举/XSS·SQL 注入探测）与操作级（重复提交/不存在主键/重复删除/无权限/分页边界）用例。**autoExec 持续翻转**（v0.22：数值边界 min-1/max+1、组合查询收敛、非法枚举、op-update/op-duplicate-concurrent 均可真执行）；FG 用例 ID 内容哈希化（契约增删字段不再引发编号漂移）；与基线矩阵自动去重；每条标注 autoExec 与 run-api DAG 步骤的对应关系，可执行闭环诚实标注。
 
 ---
 
@@ -213,7 +214,7 @@ npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/a
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | v0.11.1 | v2.20.1 | v1.12.0 | v0.24.0 | **v0.21.0** |
+| 版本 | v0.11.1 | v2.20.4 | v1.12.0 | v0.24.0 | **v0.22.0** |
 | 审计规则 | — | K1-K19 | R001-R043 | B1-B31 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |

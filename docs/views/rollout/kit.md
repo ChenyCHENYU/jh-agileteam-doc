@@ -5,7 +5,7 @@
 > 工程载体：`@agile-team/wl-skills-kit`
 > 工程目录：`D:\office-project\wl\wl-skills-kit`
 > 配套组件：`@jhlc/common-core` · `@agile-team/wl-skills-ui` · `@robot-admin/form-validate`
-> 当前核对版本：`2.20.1`（2026-08-28）
+> 当前核对版本：`2.20.4`（2026-09-10）
 
 ---
 
@@ -27,7 +27,7 @@
 
 > 一套规范基线、一个工程化事实源、三层强制机制、14 条全覆盖规范、一条持续治理闭环。
 
-### 版本演进速览（v2.15.0 → v2.20.1）
+### 版本演进速览（v2.15.0 → v2.20.4）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -39,7 +39,8 @@
 | v2.18.2 | `validate --pre-commit` 共享模块误报根治 | 仅 staged 共享模块/非页面目录的提交不再被误拦截，全量 validate 语义不变 |
 | v2.18.4 | `--version` 查询；Skill 注册表单一事实源 + 版本漂移门禁；validate 缓存；K12 漏检修复 | 升级决策有依据；豁免/规则口径不再漂移 |
 | v2.19.0 | 增量 validate 缓存、`wls_project_snapshot` 项目快照与 Page Blueprint 提取/校验 | AI 优先消费页面结构事实，减少逐页源码上下文与 token 消耗 |
-| v2.20.x | **wl-scenario 场景模板体系**：JSON 事实源 + 确定性渲染（9 种 pattern）、`scenario validate/render/extract/verify/from-spec`、W1 字节级防漂移、往返等价机器证明 | 领域页面出码 AI 零自由度，render 单页 0.4~1ms、模型 token 恒为 0 |
+| v2.20.0-2.20.1 | **wl-scenario 场景模板体系**：JSON 事实源 + 确定性渲染（9 种 pattern）、`scenario validate/render/extract/verify/from-spec`、W1 字节级防漂移、往返等价机器证明 | 领域页面出码 AI 零自由度，render 单页 0.4~1ms、模型 token 恒为 0 |
+| v2.20.2-2.20.4 | **validate 双类新阻断 + 交付 Profile 保全 + MCP 加固**：长工作台滚动裁切阻断、分栏表格高度链断裂阻断（2.20.2/2.20.4）；`update` 始终保留项目交付 Profile（2.20.3）；菜单可见性与角色指派 MCP 加固 | 体感：工作台类页面滚动/分栏高度问题生成前即拦；升级不再丢 Profile；MCP 同步更稳 |
 
 ---
 
@@ -546,7 +547,7 @@ CI 中校验未通过 → **构建中止**，偏差代码无法进入主干。
 | 详情 | `detail` | ❌ view/info/show |
 | 查询 | `get` | ❌ query/fetch/list |
 
-### 7.3 13 个 AI Skill 全景（v2.20.1）
+### 7.3 13 个 AI Skill 全景（v2.20.4）
 
 Skill 是规范的可执行剧本：每个 Skill 都有触发词路由（`_registry.md` 单一数据源）+ Pre-flight 声明（AI 执行前先报告已读文件，可观测）+ 产物落 `reports/` 追加。
 

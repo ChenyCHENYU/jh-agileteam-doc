@@ -5,7 +5,7 @@
 > 工程载体：`@agile-team/wl-skills-test`
 > 工程目录：`D:\office-project\wl\wl-skills-test`
 > 上游契约：`wl-skills-kit`（page-spec / wl-api-contract）· `wl-skills-bd`（wl-contract）
-> 当前核对版本：`0.21.0`（2026-09-03）
+> 当前核对版本：`0.22.0`（2026-09-03）
 
 ---
 
@@ -82,7 +82,7 @@
 
 - 11 条测试规范（`.github/standards/01~11`，对齐在线 QC 流程规范）；
 - 12 个 AI Skill（功能链 9 + 性能链 3）；
-- 18 个 MCP 工具（`wls_test_*` 前缀，全部实现并有测试覆盖，v0.17 新增 contract_diff）；
+- 19 个 MCP 工具（`wls_test_*` 前缀，全部实现并有测试覆盖，v0.17 contract_diff · v0.22 gen_contract）；
 - 25 条审计规则（T1-T25 确定性扫描器）；
 - 6 个自动修复（F1-F6）；
 - 3 个执行器（API / Playwright / JMeter）；
@@ -513,7 +513,7 @@ test-reports/ 对应产物路径：
 
 1. 确认 11 条测试规范和 `wl-skills-test` 为测试侧统一事实来源；
 2. 确认各项目测试负责人名单；
-3. 确认接入台账与目标版本（≥ 0.21.0）；
+3. 确认接入台账与目标版本（≥ 0.22.0）；
 4. 确认第一批试点（建议 1 个项目走"契约→用例→执行→gate"全链路 + 1 批存量脚本 audit/fix）；
 5. 确认 gate 接入 CI 与阻断级别（建议 PR 阶段 audit+e2e-check 阻断、合并前 gate 阻断）；
 6. 确认 test-reports 归档位置与 webhook 推送群；
