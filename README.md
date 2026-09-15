@@ -167,7 +167,7 @@ FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基
 
 ## 测试 Skills 集合（v0.21.0）
 
-`@agile-team/wl-skills-test`：18 个 MCP 工具 + 13 个 AI Skill + 25 条审计规则（T1-T25）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter）+ 21 条 CLI 命令，248 个单元测试；v0.9 起 run-api 升级为 **DAG 编排 + 四层断言 + 负例 + 契约漂移检测**深度接口测试，v0.10 新增选择器适配层、沙箱模拟跑、工位模板、字典同步与 gate 聚合质量门，v0.11 落地 **test-reports 统一报告体系**与字段级细粒度用例生成，v0.16~v0.19 补齐配置档案/auth 自动登录/CI 模板/失败 hint 诊断/**质量分 0-100**/单文件 HTML 报告/飞书推送，v0.20~v0.21 闭环收口（更新生效/并发重复/删除幂等探针、fix 复验、validate-contract 前置）并落地 **AI 接入故事**（setup 探测 + gen-contract 从 OpenAPI 提契约 + test-onboarding 六步 SOP，一句「接入测试」即可开始）。**五包中唯一具备实际执行能力的包**。
+`@agile-team/wl-skills-test`：18 个 MCP 工具 + 13 个 AI Skill + 25 条审计规则（T1-T25）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter）+ 21 条 CLI 命令，265 个单元测试；v0.9 起 run-api 升级为 **DAG 编排 + 四层断言 + 负例 + 契约漂移检测**深度接口测试，v0.10 新增选择器适配层、沙箱模拟跑、工位模板、字典同步与 gate 聚合质量门，v0.11 落地 **test-reports 统一报告体系**与字段级细粒度用例生成，v0.16~v0.19 补齐配置档案/auth 自动登录/CI 模板/失败 hint 诊断/**质量分 0-100**/单文件 HTML 报告/飞书推送，v0.20~v0.21 闭环收口（更新生效/并发重复/删除幂等探针、fix 复验、validate-contract 前置）并落地 **AI 接入故事**（setup 探测 + gen-contract 从 OpenAPI 提契约 + test-onboarding 六步 SOP，一句「接入测试」即可开始）。**五包中唯一具备实际执行能力的包**。
 
 ```bash
 npx @agile-team/wl-skills-test        # 安装

@@ -59,7 +59,7 @@ export const packages: Pkg[] = [
   },
   {
     name: "wl-skills-test",
-    version: "0.21.0",
+    version: "0.24.0",
     scope: "测试：用例生成 / 深度执行 / 统一报告 / 质量门",
     doc: "/views/testing/",
     docLabel: "测试工程 Skills",

@@ -2,7 +2,7 @@
 
 <AuthorTag author="ChangXing" />
 
-::: tip npm 已发布 v0.22.0
+::: tip npm 已发布 v0.24.0
 ```bash
 npx @agile-team/wl-skills-test        # 安装（11 规范 + 13 Skill + 19 MCP）
 npx @agile-team/wl-skills-test doctor # 环境体检
@@ -34,7 +34,7 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 
 ---
 
-## 核心能力（v0.22.0）
+## 核心能力（v0.24.0）
 
 | 维度 | 数量 | 说明 |
 |------|:----:|------|
@@ -45,7 +45,7 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 | 自动修复 | 6 | F1-F6（v-deep/beforeEach/waitForTimeout/硬编码/afterEach/测试名），修复后强制复验 |
 | 执行器 | 3 | API 接口测试 + Playwright 自动化 + JMeter 性能 |
 | CLI 命令 | 21 | init/update/setup/doctor/validate/gen-contract/validate-contract/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/ci/diff/clean |
-| 单元测试 | 256 | 全部通过 |
+| 单元测试 | 265 | 全部通过 |
 
 ### 版本演进亮点（0.12 → 0.22）
 
@@ -62,6 +62,8 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 | 0.20 | 闭环收口：不存在主键/删除幂等探针、detail 漂移检测、fix 复验、`validate-contract` 校验前置 |
 | 0.21 | **AI 接入故事**：`gen-contract --swagger`（OpenAPI→契约）、`setup` 接入引导、第 13 个 Skill test-onboarding（六步 SOP） |
 | 0.22 | 内在深化：**数值边界 / 组合查询收敛探针转 autoExec**、严格成功码 `--strict-code`、swagger 导入增强（v2 basePath / `--token` / 响应与查询模型导入）、`run-jmeter --baseline-compare` 基线串联、第 19 个 MCP 工具 `wls_test_gen_contract` |
+| 0.23 | 健壮性加固：run-api 总时长保护（`--max-duration`）、Windows 进程树终止（taskkill /T /F）、数值参数下限夹紧、MCP 数值类型校验、history.jsonl 500 行轮转 |
+| 0.24 | 产物 JSON 化统一（`run-gen --json` / `diff --json` / `perf-compare --json`）+ **测试计划数据侧 `report --plan-input`**（AI 写计划不再人肉拼数据）+ case_generate 紧凑化收尾（4 个大结果工具全部紧凑化） |
 
 ---
 
@@ -214,11 +216,11 @@ npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/a
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | v0.11.1 | v2.20.4 | v1.12.0 | v0.24.0 | **v0.22.0** |
+| 版本 | v0.11.1 | v2.20.4 | v1.12.0 | v0.24.0 | **v0.24.0** |
 | 审计规则 | — | K1-K19 | R001-R043 | B1-B31 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
-| MCP 工具 | 0 | 29 | 13 | 17 | **18** |
+| MCP 工具 | 0 | 29 | 13 | 17 | **19** |
 
 ---
 

@@ -47,7 +47,8 @@ gate 结果同样写入 `test-reports/history.jsonl`（kind=gate），CI 中作�
 | `perf-报告.md` / `perf-result.json` | run-jmeter |
 | `audit-报告.md` / `audit-result.json` | audit |
 | `测试报告.md` + `index.md` | report 聚合 |
-| `history.jsonl` | 每次执行记录（kind/time/通过率） |
+| `plan-input.json`（v0.24.0+） | `report --plan-input`：测试计划数据侧（判定/质量分/检查项/API 覆盖追溯/审计性能摘要/最近 10 次趋势） |
+| `history.jsonl` | 每次执行记录（kind/time/通过率），超 500 行自动轮转 |
 
 `report --trend` 追加最近 5 次趋势表；`report --webhook` 推送（失败明细 Markdown，推送失败仅告警不阻断）。
 
@@ -62,6 +63,10 @@ gate 结果同样写入 `test-reports/history.jsonl`（kind=gate），CI 中作�
 ### 飞书推送
 
 `report --webhook` 支持**飞书卡片**推送（企微/钉钉/raw 之外，v0.19.0+），质量分与失败明细随卡带出。
+
+### 测试计划数据侧（v0.24.0+）
+
+`report --plan-input` 把"写测试计划需要的一次性数据"聚合到 `plan-input.json`：本次判定 / 质量分 / 检查项、API 维度覆盖追溯、审计与性能摘要、最近 10 次历史趋势。**计划本身仍由 AI 按模板写**（决策文档），数据由工具给全——AI 写计划不再从多个 Markdown 报告里人肉拼数据。
 
 ---
 

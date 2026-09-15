@@ -81,7 +81,7 @@ npx @agile-team/wl-skills-test gate                  # 审计+e2e-check+冒烟+D
 npx @agile-team/wl-skills-test gate --webhook <url>  # 结果推送企微/钉钉
 ```
 
-上线判定 4 指标：**DI 密度 < 0.3 · 致命关闭率 100% · 严重关闭率 100% · 模块收敛 ≤ 20%**。
+上线判定 4 指标：**DI 密度 < 0.3 · 致命关闭率 100% · 严重关闭率 100% · 模块收敛 ≤ 20%**。eport --plan-input 可一键导出写计划所需的全部数据。
 
 ---
 
