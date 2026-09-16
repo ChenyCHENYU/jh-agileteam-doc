@@ -30,12 +30,12 @@ export default defineConfig({
     // Open Graph
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:title", content: "AGILE TEAM — AI 工程体系文档站" }],
-    ["meta", { property: "og:description", content: "金恒科技敏捷团队 AI 工程化知识库，涵盖 Skill 体系、规范、模板库与最佳实践" }],
+    ["meta", { property: "og:description", content: "从需求到上线的 AI 工程化体系 — 5 包全链路 · 14 个 npm 包 · 生态月下载 17 万+" }],
     ["meta", { property: "og:image", content: "/logo.png" }],
     // Twitter Card
     ["meta", { name: "twitter:card", content: "summary" }],
     ["meta", { name: "twitter:title", content: "AGILE TEAM — AI 工程体系" }],
-    ["meta", { name: "twitter:description", content: "金恒科技敏捷团队 AI 工程化知识库" }],
+    ["meta", { name: "twitter:description", content: "从需求到上线的 AI 工程化体系 — 5 包全链路 · 14 个 npm 包" }],
   ],
 
   // 主题配置
@@ -106,6 +106,10 @@ export default defineConfig({
   },
   // Vite 配置
   vite,
+  // 站点地图（对搜索引擎收录生效）
+  sitemap: {
+    hostname: "https://www.jhat.tech",
+  },
   // 死链检查已开启（历史规划页均已落地；如临时需要跳过可设为 true）
   ignoreDeadLinks: false,
 });

@@ -72,6 +72,6 @@ export const packages: Pkg[] = [
 export const siteStats = {
   packages: packages.length,
   skills: 49, // kit 13 + design 10 + bd 13 + test 13
-  mcp: 77, // kit 29 + ui 13 + bd 17 + test 18
+  mcp: 78, // kit 29 + ui 13 + bd 17 + test 19
   rules: 114, // K19 + R39 + B31 + T25
 };
