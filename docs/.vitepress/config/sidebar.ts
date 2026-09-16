@@ -83,6 +83,20 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
+  // 工程生态
+  "/views/ecosystem/": [
+    {
+      text: "工程生态",
+      collapsed: false,
+      items: [
+        { text: "生态全景", link: "/views/ecosystem/" },
+        { text: "MachTable 数据表格", link: "/views/ecosystem/mach-table" },
+        { text: "工程工具链", link: "/views/ecosystem/toolchain" },
+        { text: "基础设施库", link: "/views/ecosystem/foundation" },
+      ],
+    },
+  ],
+
   // 最佳实践
   "/views/best-practices/": [
     {

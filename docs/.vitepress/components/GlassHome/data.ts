@@ -58,6 +58,12 @@ export const features: Feature[] = [
     link: "/scaffold/",
   },
   {
+    icon: "🌍",
+    title: "工程生态",
+    details: "npm 数据看板 + MachTable 数据表格 + 工程工具链 + 基础设施库",
+    link: "/views/ecosystem/",
+  },
+  {
     icon: "🔥",
     title: "爬坑建议",
     details: "收集常见问题和解决方案，快速定位和解决开发问题",
