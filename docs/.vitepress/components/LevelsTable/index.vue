@@ -6,6 +6,7 @@
           <tr>
             <th>层级</th>
             <th>{{ mode === "detail" ? "说明" : "内容" }}</th>
+            <th v-if="mode === 'detail'">对应部门定级</th>
             <th>状态</th>
           </tr>
         </thead>
@@ -18,6 +19,7 @@
               </a>
             </td>
             <td>{{ mode === "detail" ? level.detail : level.desc }}</td>
+            <td v-if="mode === 'detail'" class="dept-cell">{{ level.dept }}</td>
             <td>
               <span class="level-status" :class="`status-${level.status}`">{{ level.statusText }}</span>
             </td>
@@ -25,6 +27,9 @@
         </tbody>
       </table>
     </div>
+    <p v-if="mode === 'detail'" class="dept-note">
+      「对应部门定级」为与本团队技术栈层级的<strong>典型对应区间</strong>（非硬性换算）：部门 L0-L5（含 L2+）是部门下发的参考定级标准，衡量人的熟练度与沉淀；本页 L0-L7 是团队自研的技术栈实践模型。完整映射与负向行为兜底见 <a href="./maturity">成熟度对照</a>。
+    </p>
   </div>
 </template>
 
@@ -79,6 +84,16 @@ th {
 .status-known,
 .status-next,
 .status-future {
+  color: var(--vp-c-text-2);
+}
+.dept-cell {
+  white-space: nowrap;
+  font-size: 0.85rem;
+  color: var(--vp-c-text-2);
+}
+.dept-note {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
   color: var(--vp-c-text-2);
 }
 </style>

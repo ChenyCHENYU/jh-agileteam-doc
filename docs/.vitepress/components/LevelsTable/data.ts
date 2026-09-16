@@ -28,6 +28,7 @@ export const levels: Level[] = [
     detail: "纯对话驱动，AI 自由发挥，高随机性",
     status: "known",
     statusText: "了解边界",
+    dept: "部门 L0 ~ L1",
     link: "/views/best-practices/L0-vibe",
   },
   {
@@ -37,6 +38,7 @@ export const levels: Level[] = [
     detail: "结构化 Prompt + 规范注入 + 上下文压缩（copilot-instructions.md + standards 懒加载 + 多编辑器适配）",
     status: "done",
     statusText: "✅ 已实现",
+    dept: "部门 L1 ~ L2",
     link: "/views/best-practices/L1-prompt",
   },
   {
@@ -46,6 +48,7 @@ export const levels: Level[] = [
     detail: "13 个触发词驱动的结构化技能文件 → 速查表见前端 Skills 使用指南",
     status: "done",
     statusText: "✅ 已实现",
+    dept: "部门 L2+ 沉淀输出",
     link: "/views/best-practices/L2-skill",
   },
   {
@@ -55,6 +58,7 @@ export const levels: Level[] = [
     detail: "29 个 Tool，菜单/字典/角色/权限/项目感知/快照蓝图/环境标准化全覆盖",
     status: "done",
     statusText: "✅ 已实现",
+    dept: "部门 L2+ ~ L3",
     link: "/views/best-practices/L3-skills-mcp",
   },
   {
@@ -64,6 +68,7 @@ export const levels: Level[] = [
     detail: "18 条命令：init / update / clean / check / diff / validate / validate-page / fix / doctor-ui / export / mock-clean / contract / component / standard-env / template / snapshot / scenario",
     status: "done",
     statusText: "✅ 已实现",
+    dept: "部门 L3 组合应用 · L4 建设",
     link: "/views/best-practices/L4-cli",
   },
   {
@@ -73,6 +78,7 @@ export const levels: Level[] = [
     detail: "_pipeline.md 协议已落地，Skill 链式自动触发进入试运行",
     status: "doing",
     statusText: "🟡 践行中",
+    dept: "部门 L4 ~ L5",
     link: "/views/best-practices/L5-agent-pipeline",
   },
   {
@@ -82,6 +88,7 @@ export const levels: Level[] = [
     detail: "L5 试运行期间同步规划多智能体分工",
     status: "next",
     statusText: "▶ 近期目标",
+    dept: "部门 L5",
     link: "/views/best-practices/L6-multi-agent",
   },
   {
@@ -91,6 +98,7 @@ export const levels: Level[] = [
     detail: "高质量产出反哺规范，正向飞轮（启动条件：L5 稳定 + 审计报告 ≥ 50 份 + 模板提取 ≥ 3 次）",
     status: "future",
     statusText: "🔭 终极形态",
+    dept: "部门 L5 终态",
     link: "/views/best-practices/L7-self-evolving",
   },
 ];
