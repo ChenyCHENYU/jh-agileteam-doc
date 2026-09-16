@@ -82,7 +82,7 @@
 - 非敏感 API（扫码）免鉴权
 - 子应用 iframe 受限无法直调 JSAPI，由基座统一代理
 - **推荐使用跨端媒体 SDK**：子应用加载 `/mbase/sdk/portal-media.js` 后通过 `window.WLPortalMedia.chooseImage / chooseImageAndUpload`（`source: 'camera'|'album'`，支持多图）完成拍摄/相册/上传，跨端一致；原始 `mbase-bridge` postMessage 协议仅作存量兼容与排障
-- 媒体 SDK 详细接入、错误码与验收清单见 [H5 子应用集成方案](./integration#六-桥接通信协议)，钉钉 SSO / JSAPI 鉴权 / 真机调试见 [钉钉集成方案](./dingtalk)
+- 媒体 SDK 详细接入、错误码与验收清单见 [H5 子应用集成方案](./integration#六、桥接通信协议)，钉钉 SSO / JSAPI 鉴权 / 真机调试见 [钉钉集成方案](./dingtalk)
 
 ### HTTP 请求层
 

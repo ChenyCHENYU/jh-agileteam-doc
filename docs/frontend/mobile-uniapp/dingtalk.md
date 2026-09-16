@@ -132,7 +132,7 @@ GET /auth/dingtalk/login?code={code}
 | ------ | ---- | ------------------------------------------------------------------- |
 | `code` | 是   | `requestAuthCode` 返回的一次性免登码，约 5 分钟内有效，只能使用一次 |
 
-免登登录接口不传 `companyId`；登录成功进入工作台后，前端通过 `/hrms/user/getCurUser` 与 `/hrms/user/getById` 获取该用户维护在平台里的 `userOrganizeInfo`，再选择主公司或用户上次选择的公司作为当前公司上下文。详见 [H5 子应用集成方案 · 公司上下文透传](/frontend/mobile-uniapp/integration#十-公司上下文透传)。
+免登登录接口不传 `companyId`；登录成功进入工作台后，前端通过 `/hrms/user/getCurUser` 与 `/hrms/user/getById` 获取该用户维护在平台里的 `userOrganizeInfo`，再选择主公司或用户上次选择的公司作为当前公司上下文。详见 [H5 子应用集成方案 · 公司上下文透传](/frontend/mobile-uniapp/integration#十、公司上下文透传)。
 
 ### 3.2 成功响应
 
@@ -409,7 +409,7 @@ const JS_API_LIST = [
 - 鉴权结果按签名 URL 缓存，同一 URL 不重复签名。
 - 非敏感 API（扫码 `biz.util.scan`）无需鉴权。
 
-兼容说明：原有 `takePhoto/takePhotoAndUpload` 链路仍固定使用 `camera`。新增相册能力通过 `chooseImage/chooseImageAndUpload` 调用，并要求子应用显式传入 `source: 'album'`，两条链路互不替换。子应用推荐直接接入跨端媒体 SDK（`window.WLPortalMedia`），详见 [H5 子应用集成方案 · 桥接通信协议](/frontend/mobile-uniapp/integration#六-桥接通信协议)。
+兼容说明：原有 `takePhoto/takePhotoAndUpload` 链路仍固定使用 `camera`。新增相册能力通过 `chooseImage/chooseImageAndUpload` 调用，并要求子应用显式传入 `source: 'album'`，两条链路互不替换。子应用推荐直接接入跨端媒体 SDK（`window.WLPortalMedia`），详见 [H5 子应用集成方案 · 桥接通信协议](/frontend/mobile-uniapp/integration#六、桥接通信协议)。
 
 ## 6. 联调约定
 

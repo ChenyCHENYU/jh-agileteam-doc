@@ -8,6 +8,14 @@ export const sidebar: DefaultTheme.Sidebar = {
   // 平台手册
   "/platform/": [
     {
+      text: "打印报表",
+      collapsed: false,
+      items: [
+        { text: "运维操作手册", link: "/platform/report-ops" },
+        { text: "业务工程接入指南", link: "/platform/report-guide" },
+      ],
+    },
+    {
       text: "平台手册",
       collapsed: false,
       items: [
@@ -340,6 +348,8 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "App 集成与发布", link: "/frontend/mobile-uniapp/app-integration" },
         { text: "消息中心架构设计", link: "/frontend/mobile-uniapp/message-center" },
         { text: "钉钉集成方案", link: "/frontend/mobile-uniapp/dingtalk" },
+        { text: "图片水印能力", link: "/frontend/mobile-uniapp/watermark" },
+        { text: "断点续传能力", link: "/frontend/mobile-uniapp/chunk-upload" },
       ],
     },
   ],
@@ -482,6 +492,22 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "详细设计", link: "/views/ai-workflow/detail-design" },
         { text: "契约驱动协作", link: "/views/ai-workflow/fullstack-dev", badge: { text: "已落地", type: "tip" } },
         { text: "测试阶段工作流", link: "/views/ai-workflow/testing", badge: { text: "已落地", type: "tip" } },
+      ],
+    },
+    {
+      text: "设计规范（9 条）",
+      collapsed: true,
+      items: [
+        { text: "索引", link: "/views/ai-workflow/design-standards/" },
+        { text: "01 业务流程图", link: "/views/ai-workflow/design-standards/01-flowchart" },
+        { text: "02 原型标注", link: "/views/ai-workflow/design-standards/02-prototype" },
+        { text: "03 数据库设计", link: "/views/ai-workflow/design-standards/03-database" },
+        { text: "04 接口设计", link: "/views/ai-workflow/design-standards/04-api-design" },
+        { text: "05 代码设计", link: "/views/ai-workflow/design-standards/05-code-design" },
+        { text: "06 需求说明书", link: "/views/ai-workflow/design-standards/06-spec-doc" },
+        { text: "07 集成评审", link: "/views/ai-workflow/design-standards/07-design-review" },
+        { text: "08 术语词典", link: "/views/ai-workflow/design-standards/08-glossary" },
+        { text: "09 变更影响", link: "/views/ai-workflow/design-standards/09-change-impact" },
       ],
     },
   ],

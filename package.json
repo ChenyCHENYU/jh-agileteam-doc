@@ -13,9 +13,10 @@
                         },
     "scripts":  {
                     "dev":  "vitepress dev docs",
-                    "build":  "node scripts/check-sidebar.mjs \u0026\u0026 vitepress build docs",
+                    "build":  "node scripts/check-sidebar.mjs \u0026\u0026 vitepress build docs \u0026\u0026 node scripts/check-anchors.mjs",
                     "preview":  "vitepress preview docs",
-                    "check:sidebar":  "node scripts/check-sidebar.mjs"
+                    "check:sidebar":  "node scripts/check-sidebar.mjs",
+                    "check:anchors":  "node scripts/check-anchors.mjs"
                 },
     "dependencies":  {
                          "@waline/client":  "^3.6.0",

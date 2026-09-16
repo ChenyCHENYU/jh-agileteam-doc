@@ -68,7 +68,7 @@ jh4j create jh4j-ui-orders \
 
 ## 模板缓存
 
-远程 Git 和压缩包模板缓存在 `~/.jh4j/cache/templates`，默认有效期 60 分钟，缓存键由 `source + ref` 计算。详见 [命令参考 — cache](./commands#cache-模板缓存)。
+远程 Git 和压缩包模板缓存在 `~/.jh4j/cache/templates`，默认有效期 60 分钟，缓存键由 `source + ref` 计算。详见 [命令参考 — cache](./commands#cache-—-模板缓存)。
 
 ---
 

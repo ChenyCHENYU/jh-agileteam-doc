@@ -2,7 +2,7 @@
 
 将 **`wl-skills-design` 产出的标准说明书**（含功能编码 / IPO 表 / 流程五要素）解析为结构化的 **page-spec JSON 页面清单**，作为 [prototype-scan](./prototype-scan) 的**规范线对等入口**。
 
-> **双线隔离**：`prototype-scan`（原型线）与 `spec-doc-parse`（规范线）是**互斥的两个入口**，按输入类型二选一，输出格式完全相同，下游 [api-contract](./api-contract) / [page-codegen](./page-codegen) 无感知。详见 [AI Skill 流水线](./skill-pipeline#双线路由机制)。
+> **双线隔离**：`prototype-scan`（原型线）与 `spec-doc-parse`（规范线）是**互斥的两个入口**，按输入类型二选一，输出格式完全相同，下游 [api-contract](./api-contract) / [page-codegen](./page-codegen) 无感知。详见 [AI Skill 流水线](./skill-pipeline#流水线全景-双线隔离)。
 
 ## 触发关键词
 

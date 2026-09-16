@@ -132,7 +132,7 @@ wl-skills-design ──► wl-skills-kit ──► wl-skills-ui    wl-skills-bd 
 
 > 独立页面规划中；以下能力已可直接使用：
 
-- **CI 质量门**：test [`gate`](/views/testing/#di-质量门-ci-集成)（审计 + e2e-check + DI + 性能基线，任一失败阻断）· bd [`review run`](/backend/skills/usage-guide)（规则 + 基线 + 豁免 + 覆盖率）
+- **CI 质量门**：test [`gate`](/views/testing/metrics#一、di-质量门-上线判定-4-指标)（审计 + e2e-check + DI + 性能基线，任一失败阻断）· bd [`review run`](/backend/skills/usage-guide)（规则 + 基线 + 豁免 + 覆盖率）
 - **提交规范**：[Git 分支 & 提交规范](/frontend/quick-start/08-git)（commitlint + husky，前后端通用）
 - **环境体检**：各包 `doctor` 命令（kit / bd / test 安装即带）
 - **环境迁移**：kit / bd [standard-env](/frontend/pc/skills/usage-guide)（scan → plan → apply → verify）

@@ -24,7 +24,7 @@
 - [7. 数组类型声明规范](#_7-数组类型声明规范)
 
 **多线程**
-- [8. 禁止显式创建线程，使用线程池](#_8-禁止显式创建线程使用线程池)
+- [8. 禁止显式创建线程，使用线程池](#_8-禁止显式创建线程-使用线程池)
 
 **编程规范**
 - [9. 禁止使用过时的方法和类](#_9-禁止使用过时的方法和类)
@@ -44,29 +44,29 @@
 
 **性能优化**
 - [23. 禁止使用 Apache BeanUtils 拷贝属性](#_23-禁止使用-apache-beanutils-拷贝属性)
-- [24. 获取毫秒数使用 System.currentTimeMillis()](#_24-获取毫秒数使用-systemcurrenttimemillis)
+- [24. 获取毫秒数使用 System.currentTimeMillis()](#_24-获取毫秒数使用-system-currenttimemillis)
 - [25. 集合初始化指定容量](#_25-集合初始化指定容量)
 - [26. 正则表达式使用预编译](#_26-正则表达式使用预编译)
 - [27. 循环内字符串拼接使用 StringBuilder](#_27-循环内字符串拼接使用-stringbuilder)
 
 **漏洞隐患**
-- [28. 禁止 new BigDecimal(float/double)](#_28-禁止-new-bigdecimalfloatdouble)
+- [28. 禁止 new BigDecimal(float/double)](#_28-禁止-new-bigdecimal-float-double)
 - [29. 布尔型变量名不以 is 开头](#_29-布尔型变量名不以-is-开头)
 - [30. 禁止在 Stream forEach 中修改集合](#_30-禁止在-stream-foreach-中修改集合)
-- [31. foreach 循环中禁止 remove/add](#_31-foreach-循环中禁止-removeadd)
+- [31. foreach 循环中禁止 remove/add](#_31-foreach-循环中禁止-remove-add)
 - [32. equals 使用常量在前](#_32-equals-使用常量在前)
 - [33. String/包装类型比较使用 equals()](#_33-string-包装类型比较使用-equals)
 - [34. 原子类比较使用 .get()](#_34-原子类比较使用-get)
-- [35. 禁止 float/double 等值判断](#_35-禁止-floatdouble-等值判断)
+- [35. 禁止 float/double 等值判断](#_35-禁止-float-double-等值判断)
 - [36. 基本类型返回值注意自动拆箱 NPE](#_36-基本类型返回值注意自动拆箱-npe)
-- [37. Arrays.asList() 不可修改](#_37-arraysaslist-不可修改)
+- [37. Arrays.asList() 不可修改](#_37-arrays-aslist-不可修改)
 - [38. 随机数获取规范](#_38-随机数获取规范)
-- [39. finally 中禁止 break/return/throw](#_39-finally-中禁止-breakreturnthrow)
+- [39. finally 中禁止 break/return/throw](#_39-finally-中禁止-break-return-throw)
 - [40. SimpleDateFormat 线程安全问题](#_40-simpledateformat-线程安全问题)
 - [41. toArray 需传入类型数组](#_41-toarray-需传入类型数组)
 - [42. 删除未使用的私有变量](#_42-删除未使用的私有变量)
 - [43. ThreadLocal 使用后必须清除](#_43-threadlocal-使用后必须清除)
-- [44. 日期格式化 y/Y 区分](#_44-日期格式化-yy-区分)
+- [44. 日期格式化 y/Y 区分](#_44-日期格式化-y-y-区分)
 
 ---
 

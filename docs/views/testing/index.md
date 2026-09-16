@@ -158,7 +158,7 @@ npx @agile-team/wl-skills-test run-jmeter --jmx ./perf-test.jmx --threads 200
 
 ### test-reports 统一报告体系（v0.11.0）
 
-所有报告统一产出到 `test-reports/`：7 类产物自动发现、`history.jsonl` 历史趋势、`--trend` 趋势表、webhook 推送。**详解见 [度量与质量门](/views/testing/metrics#三-test-reports-统一报告体系)**。
+所有报告统一产出到 `test-reports/`：7 类产物自动发现、`history.jsonl` 历史趋势、`--trend` 趋势表、webhook 推送。**详解见 [度量与质量门](/views/testing/metrics#三、test-reports-统一报告体系)**。
 
 ### 细粒度用例生成（v0.11.0，v0.14/v0.17/v0.20/v0.22 持续精准化）
 
