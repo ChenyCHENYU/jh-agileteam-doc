@@ -2,7 +2,6 @@
  * @Author: ChenYu ycyplus@gmail.com
  * @Date: 2025-10-14 15:02:42
  * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-05 10:08:52
  * @FilePath: \jh-agileteam-doc\docs\.vitepress\config\nav.ts
  * @Description: 头部导航栏配置文件
  * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
@@ -11,7 +10,7 @@ import type { DefaultTheme } from "vitepress";
 
 /**
  * 导航栏配置
- * @description 顶部导航栏的配置项（简化版，一级菜单）
+ * 原则：一级 ≤ 9 项；每个入口必须有真实落地页（禁止空 link 占位）
  */
 export const nav: DefaultTheme.NavItem[] = [
   {
@@ -20,9 +19,21 @@ export const nav: DefaultTheme.NavItem[] = [
     activeMatch: "/views/guide/",
   },
   {
-    text: "AI 最佳实践",
-    link: "/views/best-practices/",
-    activeMatch: "/views/best-practices/",
+    text: "工程生态",
+    items: [
+      { text: "生态全景", link: "/views/ecosystem/" },
+      { text: "MachTable 数据表格", link: "/views/ecosystem/mach-table" },
+      { text: "工程工具链", link: "/views/ecosystem/toolchain" },
+      { text: "基础设施库", link: "/views/ecosystem/foundation" },
+    ],
+  },
+  {
+    text: "AI 实践",
+    items: [
+      { text: "AI 最佳实践（L0-L7）", link: "/views/best-practices/" },
+      { text: "成熟度对照（部门 L0-L5）", link: "/views/best-practices/maturity" },
+      { text: "AI 工作流", link: "/views/ai-workflow/" },
+    ],
   },
   {
     text: "前端",
@@ -85,6 +96,9 @@ export const nav: DefaultTheme.NavItem[] = [
     text: "后端",
     items: [
       { text: "概览 & 技术选型", link: "/backend/" },
+      { text: "快速上手", link: "/backend/quick-start" },
+      { text: "架构设计", link: "/backend/architecture" },
+      { text: "MES 集成实战", link: "/backend/integration-mes" },
       { text: "开发规范", link: "/backend/standards" },
       { text: "Skills 集合", link: "/backend/skills/" },
     ],
@@ -100,33 +114,16 @@ export const nav: DefaultTheme.NavItem[] = [
     activeMatch: "/scaffold/",
   },
   {
-    text: "平台手册",
-    link: "/platform/",
-    activeMatch: "/platform/",
+    text: "宣贯方案",
+    link: "/views/rollout/",
+    activeMatch: "/views/rollout/",
   },
   {
-    text: "AI 工作流",
-    link: "/views/ai-workflow/",
-    activeMatch: "/views/ai-workflow/",
-  },
-  {
-    text: "知识库",
-    link: "",
-    activeMatch: "---",
-  },
-  {
-    text: "爬坑建议",
-    link: "",
-    activeMatch: "---",
-  },
-  {
-    text: "团队",
+    text: "更多",
     items: [
-      { text: "业务团队", link: "/views/team/business" },
-      { text: "产品团队", link: "", activeMatch: "---" },
-      { text: "前端团队", link: "/views/team/" },
-      { text: "后端团队", link: "/views/team/backend" },
-      { text: "测试团队", link: "", activeMatch: "---" },
+      { text: "平台手册", link: "/platform/" },
+      { text: "疑难杂症", link: "/views/troubleshooting/" },
+      { text: "团队", link: "/views/team/" },
     ],
   },
 ];

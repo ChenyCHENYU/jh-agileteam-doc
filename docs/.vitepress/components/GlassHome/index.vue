@@ -26,7 +26,7 @@
           <span class="title-base">AGILE</span><span class="title-gradient"> TEAM</span>
         </h1>
 
-        <p class="hero-tagline">提升交付效率，赋能团队协作</p>
+        <p class="hero-tagline">从需求到上线的 AI 工程化体系 · 5 包全链路 · 14 个 npm 包 · 生态月下载 17 万+</p>
 
         <div class="hero-cta">
           <a href="/frontend/quick-start/getting-started" class="cta-primary">
@@ -35,8 +35,8 @@
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="/frontend/pc/skills/" class="cta-secondary">
-            <span>探索 Skill</span>
+          <a href="/views/ecosystem/" class="cta-secondary">
+            <span>工程生态</span>
           </a>
         </div>
 
@@ -46,6 +46,12 @@
             <span class="stat-lbl">{{ stat.label }}</span>
           </div>
         </div>
+
+        <a href="/views/ecosystem/mach-table" class="hero-eco">
+          <span class="eco-star">★</span>
+          <span>MachTable 企业数据表格 — <strong>月下载 16 万+</strong> · <strong>28 个外部依赖方</strong>，生态中被第三方规模复用的明星包</span>
+          <span class="eco-arrow">→</span>
+        </a>
       </div>
     </section>
 
@@ -57,8 +63,8 @@
             <span class="eyebrow-line"></span>
             <span>核心能力</span>
           </div>
-          <h2 class="section-heading">六大模块，覆盖 AI 工程化全链路</h2>
-          <p class="section-sub">系统性开发工程能力沉淀，助力研发团队提质增效</p>
+          <h2 class="section-heading">从入门到落地，覆盖 AI 工程化全链路</h2>
+          <p class="section-sub">指南 · 生态 · 最佳实践 · 前后端测试 · 宣贯，九大入口直达</p>
         </header>
 
         <div class="feat-grid">

@@ -334,6 +334,50 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   animation: heroUp 0.65s ease 0.45s both;
 }
 
+/* 生态亮点条（Hero 底部，链接至 MachTable） */
+.hero-eco {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 10px 20px;
+  border: 1px solid var(--vp-c-brand-soft, rgba(59, 130, 246, 0.25));
+  border-radius: 999px;
+  background: var(--vp-c-bg-soft);
+  backdrop-filter: blur(10px);
+  font-size: 0.88rem;
+  color: var(--vp-c-text-2);
+  text-decoration: none;
+  transition: border-color $t-fast, transform $t-fast, color $t-fast;
+  animation: heroUp 0.65s ease 0.55s both;
+}
+
+.hero-eco:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-text-1);
+  transform: translateY(-1px);
+}
+
+.hero-eco strong {
+  color: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.hero-eco .eco-star {
+  color: var(--vp-c-brand-1);
+  font-size: 0.8rem;
+}
+
+.hero-eco .eco-arrow {
+  font-weight: 600;
+  transition: transform $t-fast;
+}
+
+.hero-eco:hover .eco-arrow {
+  transform: translateX(3px);
+}
+
+
 .stat-item {
   display: flex;
   flex-direction: column;
