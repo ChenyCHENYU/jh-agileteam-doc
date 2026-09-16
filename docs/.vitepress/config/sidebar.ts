@@ -478,11 +478,10 @@ export const sidebar: DefaultTheme.Sidebar = {
       items: [
         { text: "概述", link: "/views/ai-workflow/" },
         { text: "wl-skills-design 设计技能包", link: "/views/ai-workflow/design-skills" },
-        { text: "wl-skills-test 测试技能包", link: "/views/ai-workflow/test-skills" },
         { text: "原型设计", link: "/views/ai-workflow/prototype", badge: { text: "已落地", type: "tip" } },
         { text: "详细设计", link: "/views/ai-workflow/detail-design" },
-        { text: "全栈开发", link: "/views/ai-workflow/fullstack-dev", badge: { text: "已落地", type: "tip" } },
-        { text: "测试实践", link: "/views/ai-workflow/testing", badge: { text: "已落地", type: "tip" } },
+        { text: "契约驱动协作", link: "/views/ai-workflow/fullstack-dev", badge: { text: "已落地", type: "tip" } },
+        { text: "测试阶段工作流", link: "/views/ai-workflow/testing", badge: { text: "已落地", type: "tip" } },
       ],
     },
   ],
