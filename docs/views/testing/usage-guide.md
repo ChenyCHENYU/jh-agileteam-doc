@@ -2,7 +2,7 @@
 
 <AuthorTag author="ChangXing" />
 
-> `@agile-team/wl-skills-test` v0.24.0 — 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-test` v0.25.0 — 从安装到日常使用的完整指南。
 
 ---
 
