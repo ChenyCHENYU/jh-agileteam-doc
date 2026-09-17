@@ -5,7 +5,7 @@
 > 团队在 **@agile-team** scope 下共维护 **14 个 npm 包**，合计月下载约 **17.4 万次**，覆盖 AI 工程化、企业数据表格、工程工具链与基础库四层。本板块是生态的官方索引：每个包"是什么、什么时候用、和五包什么关系"。
 
 ::: tip 📊 数据说明
-下载量与版本数据来自 npm registry，**截至 2026-09-16**。各包逐版本变更以各自仓库 CHANGELOG 为准。
+下载量与版本数据来自 npm registry，**截至 2026-09-17**（版本列为最新发版，下载量为 09-16 采样）。各包逐版本变更以各自仓库 CHANGELOG 为准。
 :::
 
 ---
@@ -45,9 +45,9 @@
 | @agile-team/mach-table-vue | 0.29.2 | 2,394 | 同上 |
 | @agile-team/mach-table-react | 0.29.2 | 2,289 | 同上 |
 | @agile-team/mach-table-xlsx | 0.29.2 | 1,810 | 同上 |
-| @agile-team/wl-skills-kit | 2.20.4 | 2,365 | UNLICENSED |
+| @agile-team/wl-skills-kit | 2.21.0 | 2,365 | UNLICENSED |
 | @agile-team/wl-skills-ui | 1.12.0 | 1,810 | UNLICENSED |
-| @agile-team/wl-skills-bd | 0.24.0 | 1,523 | UNLICENSED |
+| @agile-team/wl-skills-bd | 0.26.0 | 1,523 | UNLICENSED |
 | @agile-team/jh4j-cloud-cli | 0.6.3 | 369 | — |
 | @agile-team/wl-skills-test | 0.25.0 | 1,011 | UNLICENSED |
 | @agile-team/robot-cli | 3.2.0 | 272 | MIT |

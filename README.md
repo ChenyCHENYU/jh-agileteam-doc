@@ -110,7 +110,7 @@ docs/
 
 ---
 
-## 前端 PC Skills 集合（v2.20.4）
+## 前端 PC Skills 集合（v2.21.0）
 
 13 个 AI 辅助研发 Skill + 29 个 MCP Tool + 18 条 CLI 命令，覆盖从需求到交付的完整链路；v2.20 起**场景模板体系（wl-scenario）落地**——领域场景以 JSON 事实源描述，由 kit 编译器确定性渲染页面（AI 零自由度），render 单页 0.4~1ms、模型 token 恒为 0（对比 AI 主流程每页约 2 万 token 输入），配套 Page Blueprint 快照、字节级防漂移校验与往返等价性机器证明：
 
@@ -161,9 +161,9 @@ npx @agile-team/jh4j-cloud-cli doctor
 
 FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基础配置 / 权限菜单 / 流程人事 / 低代码开发 / 运维监控），含 426 张操作截图（托管于阿里云 OSS）。详见 [平台手册](/platform/)。
 
-## 后端 Skills 集合（v0.24.0）
+## 后端 Skills 集合（v0.26.0）
 
-`@agile-team/wl-skills-bd`：17 个 MCP 工具 + 13 个 Skill + 30 条规范，覆盖框架扩展点 Bean（B28/B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash）；v0.21~v0.24 完成**准确率与性能优化**（规则短路/Source Index 缓存/MCP token 预算/eval:quality 门禁）、**多模块与契约分类**（crud/schema-mirror/integration-projection + contract inspect/migrate + impact field 字段影响链 + 集成投递机器契约）、**变更审查统一质量门**（review run/baseline：Git 变更 + B 规则 + 历史基线 + 豁免 + 平台适配 + 供应链 + JaCoCo 变更覆盖率），与前端 Skills 包协作。
+`@agile-team/wl-skills-bd`：18 个 MCP 工具 + 13 个 Skill + 30 条规范，覆盖框架扩展点 Bean（B28/B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash）；v0.21~v0.24 完成**准确率与性能优化**（规则短路/Source Index 缓存/MCP token 预算/eval:quality 门禁）、**多模块与契约分类**（crud/schema-mirror/integration-projection + contract inspect/migrate + impact field 字段影响链 + 集成投递机器契约）、**变更审查统一质量门**（review run/baseline：Git 变更 + B 规则 + 历史基线 + 豁免 + 平台适配 + 供应链 + JaCoCo 变更覆盖率）；v0.25 落地 **AI 精准接入**（capabilities 能力清单 + task Pre-flight 证据 + 入口防漂移，MCP 17→18）；v0.26 落地**业务闭环与数据库复核**（状态机闭环校验、codegen openQuestions 业务疑点确认门、`db review` 正向逐字段对账、`db snapshot-template` DBA 快照 SQL、ALTER 影响分析机器硬门 + 证据采集），与前端 Skills 包协作。
 
 ## 测试 Skills 集合（v0.21.0）
 
@@ -179,8 +179,8 @@ npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json  # 执行AP
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | v0.11.1 | v2.20.4 | v1.12.0 | v0.24.0 | **v0.25.0** |
-| MCP 工具 | 0 | 29 | 13 | 17 | **19** |
+| 版本 | v0.11.1 | v2.21.0 | v1.12.0 | v0.26.0 | **v0.25.0** |
+| MCP 工具 | 0 | 29 | 13 | 18 | **19** |
 | 审计规则 | — | K1-K19 | R001-R043 | B1-B31 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |

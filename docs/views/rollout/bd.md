@@ -7,7 +7,7 @@
 > 上游协作：`wl-skills-design`（需求与数据库/接口设计产出物）· `wl-skills-kit`（前端 api.md 契约）
 > 下游协作：`wl-skills-test`（消费 `wl-contract.json` 与 ServiceTest 执行深度接口测试）
 > 运行要求：包 CLI 需 Node.js ≥ 22；目标工程基线 Java 8 + Spring Boot 2 + jh4j-cloud 3.1
-> 当前核对版本：`0.24.0`（2026-08-31）
+> 当前核对版本：`0.26.0`（2026-09-17）
 
 ---
 
@@ -29,7 +29,7 @@
 
 > 一套后端规范、一个机器契约事实源、计划先行显式授权两种写入边界、B 系列 + J 系列 + 数据库治理三层确定性防线、一条"契约 → 生成 → 审计 → 修复"闭环。
 
-### 版本演进速览（v0.18.2 → v0.24.0）
+### 版本演进速览（v0.18.2 → v0.26.0）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -41,6 +41,7 @@
 | v0.22.0 | 契约事实源、通用文件事务链、多环境 fail-closed 写护栏、ID/审计列 Profile 单一策略 | 所有写入口统一预览/planHash/回滚，环境护栏不再漏 |
 | v0.23.0 | Catalog 多模块根发现；契约分类（crud/schema-mirror/integration-projection）与 `contract inspect/migrate`；`impact field` 字段影响链；集成投递机器契约（StableBusinessId/PayloadHash） | 多模块工程不误报；存量契约可迁移；改字段先看影响链 |
 | v0.24.0 | **变更审查统一质量门** `review run/baseline`；项目集成适配器（`integration-adapters.json` + Skill）；`quality-assertions.json` / `supply-chain.json`；`fix advise` 精准修复；standards/30 | Git 变更 + 规则 + 基线 + 豁免 + 平台适配 + 供应链 + 覆盖率汇总为一个确定性门 |
+| v0.25.0-v0.26.0 | **AI 精准接入与业务闭环**：capabilities 能力清单 + task Pre-flight 证据（MCP 17→18）；状态机闭环校验、openQuestions 疑点确认门、`db review` 正向对账、`db snapshot-template`、ALTER 影响机器硬门 | AI 一次调用拿全能力索引；死状态/缺终态生成前检出；数据库 apply 前有正向复核与证据链 |
 
 ---
 
@@ -86,7 +87,7 @@
 
 - 30 条后端规范（`.github/standards/01~30`）；
 - 13 个 AI Skill（core / data / ops / test 四组，v0.24 新增 integration-adapter-be）；
-- 17 个 MCP 工具（CLI 与 MCP 复用同一核心实现，v0.24 新增 `wls_be_review`）；
+- 18 个 MCP 工具（CLI 与 MCP 复用同一核心实现，v0.24 新增 `wls_be_review`、v0.25 新增 `wls_be_capabilities`）；
 - B1~B31 确定性扫描规则 + safe-fix 受控修复；
 - J1~J8 Maven 质量门（ArchUnit / Checkstyle / PMD / SpotBugs / Spotless / P3C / OpenAPI / JaCoCo）；
 - 数据库源头治理工具链（drift / executed / ledger / preview）；
@@ -295,7 +296,7 @@ wl-skills-bd task --list             # 列出 8 种任务
 | ⑫ | business-doc-extract-be | core | 后端业务沉淀 / 领域模型提取 | 🟡 流程骨架（能力尚未闭环） |
 | ⑬ | integration-adapter-be | core | 平台集成适配：真实 Maven 坐标、Producer/Consumer/配置/测试/capability 证据与方向门禁（项目 `integration-adapters.json` 声明，未配置返回 `not-configured`） | 已落地 |
 
-### 6.2 17 个 MCP 工具
+### 6.2 18 个 MCP 工具
 
 `wls_be_validate`（B1~B31 扫描）· `doctor`（JDK/Maven/Profile/租户证据体检）· `codegen`（validate/plan/apply）· `contract`（show/diff 严格比对）· `safe_fix`（修复闭环）· `standards`（读取 30 条规范）· `templates`（读取 16 个模板）· `db_preview`（只读 DDL 预览 + Expand-Contract 阶段）· `export_permissions`（导出权限码给 kit）· `config`（init/migrate/doctor）· `troubleshoot`（10 类诊断树）· `task`（任务路由）· `catalog`（plan/apply/check/show）· `context`（有界上下文选择）· `commit`（提交校验 + Hook doctor）· `test`（gen/scenarios）· `review`（变更审查统一质量门 run/baseline）
 
@@ -504,7 +505,7 @@ wl-skills-bd 实际版本：
 
 1. 确认 29 条规范与 `wl-skills-bd` 为后端统一事实来源；
 2. 确认各服务负责人与 DBA 对口人名单；
-3. 确认接入台账与目标版本（≥ 0.24.0）及升级节奏；
+3. 确认接入台账与目标版本（≥ 0.26.0）及升级节奏；
 4. 确认第一批试点（建议 1 个新服务走全链路生成 + 1 个存量服务做 validate 体检）；
 5. 确认数据库流程切换时间点：docs/db-spec 补齐 → drift 首轮对账 → 账本补录 → waivers 清理；
 6. 确认 pre/prod 写入边界的演练安排（验证零写入默认确实生效）；

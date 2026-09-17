@@ -8,6 +8,8 @@
 |------|------|------|
 | `db preview wl-contract.json` | DDL 预览 + 基线门禁 + 环境执行通道 | 生成后、执行前 |
 | `db drift --snapshot snapshot.json` | 线上结构与三方对账（不连库） | 周期性 / 发版前 |
+| `db review <contract> [--snapshot] [--output]`（v0.26） | 文档镜像/契约/线上快照**正向逐字段对账报告**（类型含长度/可空/默认值） | apply 前复核 |
+| `db snapshot-template [--database] [--output]`（v0.26） | 生成 DBA 快照导出 SQL（MySQL information_schema 只读查询），DBA 执行后即得标准 snapshot.json | 对账前采集 |
 | `db executed --table t --column c --approval-ref JIRA-123` | 现场 DDL 执行回执入账本 | 每次手工/DBA 执行后 |
 | `db ledger` | 审计 DDL 执行账本 | 复盘 / 审计 |
 

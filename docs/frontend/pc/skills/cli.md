@@ -5,7 +5,7 @@
 从零**创建新项目**用的是另一个工具 —— 项目脚手架 [`@agile-team/jh4j-cloud-cli`](/scaffold/)（命令 `jh4j create`）。
 :::
 
-`@agile-team/wl-skills-kit`（v2.20.4）提供 18 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理、场景渲染全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。
+`@agile-team/wl-skills-kit`（v2.21.0）提供 18 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理、场景渲染全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。v2.21.0 起**重引擎按命令懒加载**（validate/fix/contract/scenario 等进入对应命令才装载引擎链，轻命令零引擎成本），K18 表单校验探测按项目根 memoize（N 页项目每轮 validate 少约 2N 次同步读盘）。
 
 ## 命令速查
 

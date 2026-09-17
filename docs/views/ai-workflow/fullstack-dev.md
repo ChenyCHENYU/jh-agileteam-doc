@@ -15,7 +15,7 @@
                ┌───────────────┼───────────────┐
                ▼                               ▼
      ┌─────────────────┐             ┌─────────────────┐
-     │  前端 kit v2.20.4│             │  后端 bd v0.24.0 │
+     │  前端 kit v2.21.0│             │  后端 bd v0.26.0 │
      │  page-spec       │             │  wl-contract.json│
      │  api.md          │             │  codegen 三段式   │
      │  page-codegen    │             │  validate/review │

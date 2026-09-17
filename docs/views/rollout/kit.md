@@ -27,7 +27,7 @@
 
 > 一套规范基线、一个工程化事实源、三层强制机制、14 条全覆盖规范、一条持续治理闭环。
 
-### 版本演进速览（v2.15.0 → v2.20.4）
+### 版本演进速览（v2.15.0 → v2.21.0）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -41,6 +41,7 @@
 | v2.19.0 | 增量 validate 缓存、`wls_project_snapshot` 项目快照与 Page Blueprint 提取/校验 | AI 优先消费页面结构事实，减少逐页源码上下文与 token 消耗 |
 | v2.20.0-2.20.1 | **wl-scenario 场景模板体系**：JSON 事实源 + 确定性渲染（9 种 pattern）、`scenario validate/render/extract/verify/from-spec`、W1 字节级防漂移、往返等价机器证明 | 领域页面出码 AI 零自由度，render 单页 0.4~1ms、模型 token 恒为 0 |
 | v2.20.2-2.20.4 | **validate 双类新阻断 + 交付 Profile 保全 + MCP 加固**：长工作台滚动裁切阻断、分栏表格高度链断裂阻断（2.20.2/2.20.4）；`update` 始终保留项目交付 Profile（2.20.3）；菜单可见性与角色指派 MCP 加固 | 体感：工作台类页面滚动/分栏高度问题生成前即拦；升级不再丢 Profile；MCP 同步更稳 |
+| v2.21.0 | **引擎懒加载与数量门禁**：CLI 重引擎按命令懒加载（重命令进入才装载，轻命令零成本）；K18 探测 memoize（N 页少 2N 次读盘）；version:verify 新增 MCP 数量/规范条数一致性门禁；audit_report_push 生产闸门 | 大仓 validate 更快；文档计数漂移发版前拦截 |
 
 ---
 
@@ -547,7 +548,7 @@ CI 中校验未通过 → **构建中止**，偏差代码无法进入主干。
 | 详情 | `detail` | ❌ view/info/show |
 | 查询 | `get` | ❌ query/fetch/list |
 
-### 7.3 13 个 AI Skill 全景（v2.20.4）
+### 7.3 13 个 AI Skill 全景（v2.21.0）
 
 Skill 是规范的可执行剧本：每个 Skill 都有触发词路由（`_registry.md` 单一数据源）+ Pre-flight 声明（AI 执行前先报告已读文件，可观测）+ 产物落 `reports/` 追加。
 

@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip ✅ 已正式发布
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.24.0**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.26.0**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
 :::
 
 ## 概述
@@ -16,10 +16,10 @@
 
 | 维度 | 现状 |
 |---|---|
-| 版本 | v0.24.0 |
+| 版本 | v0.26.0 |
 | 规范 | 30 条规范文档（B1~B31 扫描规则 + J1~J8 质量门） |
 | Skill | 13 个（11 已落地，1 部分落地，1 流程骨架） |
-| MCP 工具 | 17 个（CLI/MCP 复用同一 `lib/` 核心） |
+| MCP 工具 | 18 个（CLI/MCP 复用同一 `lib/` 核心） |
 | 生成 Profile | `jh4j3-openapi3`（Java 8 / Spring Boot 2 / jh4j-cloud 3.1 / MyBatis-Plus / OpenAPI 3） |
 
 ## 分层架构（L0 → L6）
@@ -223,7 +223,19 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 | 精准修复（v0.24） | `fix advise` 修复分级：项目 recipe 生成与精确替换走 planHash/确认/事务写链；0 次或多次匹配、写前漂移、受保护环境、复验失败均阻断或回滚 |
 | 性能与准确率（v0.21） | B 规则执行计划 + ScanContext 按需读取、Source Index 两级缓存、MCP 统一 `response.mode/maxItems/maxBytes/cursor` 分页与 token 预算、`discover→context→validate→plan→approval→apply→verify` Pipeline DAG、`eval:quality` 准确率/P95 CI 门禁 |
 
-## 17 个 MCP 工具
+## AI 精准接入与业务闭环（v0.25 / v0.26）
+
+| 能力 | 说明 |
+|------|------|
+| 能力清单（v0.25） | `capabilities.json` 升级 schemaVersion 2 agent manifest：13 Skill 携带触发词与 `installedPath`、索引 MCP（含写入分级）与 CLI；`wl-skills-bd capabilities [--json]` 与 `wls_be_capabilities` 一次调用拿全 |
+| Pre-flight 证据（v0.25） | `task --json` 输出必读文件的 sha256 清单与 `preflightHash`——"宣称已读取"可被机器对账，不再只是自我报告 |
+| 入口防漂移（v0.25） | `AGENTS.md` 重写为"清单 + 10 条不变式 + 指针"；verify-version 新增 MCP 工具数/规范条数一致性门禁，文档计数漂移发版前拦截 |
+| 状态机闭环校验（v0.26） | 契约的 customOperations 状态前置 + patch 组合成转移图，从 initial 出发可达性分析——死状态、缺终态、不可触发操作在生成前检出 |
+| openQuestions 疑点确认门（v0.26） | codegen plan 机器枚举契约未声明的边界（空批语义/状态并发/命令防重/导出边界/ALTER 存量数据等），逐项人工确认后才可 apply |
+| db review / snapshot-template（v0.26） | 文档镜像 ↔ 契约 ↔ 线上快照**正向逐字段对账报告**（类型含长度/可空）；DBA 快照导出 SQL 一条命令生成（MySQL information_schema 只读查询） |
+| ALTER 机器硬门（v0.26） | 配置 Catalog 的项目由 codegen 自动执行逐列 impact 分析并留 reportHash 证据；DDL 预览附"变更前证据采集 SQL"支撑回溯恢复 |
+
+## 18 个 MCP 工具
 
 写工具默认停在 plan/preview；apply 必须显式确认。Cursor、VS Code、Kiro、Copilot、Claude Code 和通用 Agents 的配置随 `init` 安装。
 
@@ -246,6 +258,7 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 | `wls_be_commit` | 否 | `type(scope): 功能点-具体内容` 校验与 Hook doctor |
 | `wls_be_test` | 否 | 行为契约测试 gen/scenarios |
 | `wls_be_review` | 否 | 变更审查统一质量门 run/baseline（规则+基线+豁免+断言+平台适配+供应链+覆盖率） |
+| `wls_be_capabilities` | 否 | AI 单一机器能力清单：13 Skill 触发词/路径 + 规则范围 + MCP/CLI 索引（v0.25，替代 4 文件 474 行 bootstrap） |
 
 ## Java 质量门（J1~J8）
 
