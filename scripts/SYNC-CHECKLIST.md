@@ -43,6 +43,16 @@ pnpm build        # 含 sidebar 校验（导航坏链失败）+ 死链检查 + �
 - 发布后：`npm.cmd view <pkg> version` 验证 `dist-tags.latest`；本清单第一节起逐项同步；
 - 生态数据看板（ecosystem/index.md）：月下载/版本列按 registry 实测刷新并更新"数据截至"日期。
 
+## 六、mbase 文档同步（基座 docs 更新时）
+
+```bash
+node scripts/sync-mbase-docs.mjs
+```
+
+- 以 `wl-mbase/docs` 为单一事实源，全量刷新 4 份站内页（integration / message-center / app-integration / quick-access，含来源横幅与仓库内链映射）；
+- 仓库内链已映射到站内路径（./集成文档.md → ./integration 等）；新增 docs 文件需在脚本 `jobs` 里登记；
+- 同步后跑构建三门禁（锚点校验会抓出章节重编号导致的断锚）。
+
 ## 六、已知的历史漏改（引以为戒）
 
 | 漏改 | 教训 |

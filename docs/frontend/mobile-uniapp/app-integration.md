@@ -1,6 +1,6 @@
 # App 集成与发布
 
-> 📦 来源：`wl-mbase` 仓库 `docs/APP集成与发布.md`（2026-09 版，含统一头部与返回、构建与签名全流程）。
+> 📦 来源：`wl-mbase` 仓库 `docs/APP集成与发布.md`。
 
 <AuthorTag :authors="['CHENY']" />
 
@@ -65,7 +65,7 @@ Robot_H5 子应用升级 `@robot-h5/core` 到 `1.2.0+`：
 pnpm add @robot-h5/core@^1.2.0
 ```
 
-同时在 `h5.config.ts` 配置精确的门户 `origin` 与业务域名自托管的 `appSdkUrl`。不要在 `index.html` 静态注入 SDK；Core 只会在 App/PDA 首次通信时加载，普通 H5、微信与钉钉不下载、不执行。完整配置见[集成文档：App/PDA 双向返回导航](./integration#四、h5-子应用侧改造清单)。
+同时在 `h5.config.ts` 配置精确的门户 `origin` 与业务域名自托管的 `appSdkUrl`。不要在 `index.html` 静态注入 SDK；Core 只会在 App/PDA 首次通信时加载，普通 H5、微信与钉钉不下载、不执行。完整配置见[集成文档：App/PDA 双向返回导航](./integration#_6-app-pda-双向返回导航-单头部规则适用于所有宿主)。
 
 ### 2.2 业务调用方式（零改动）
 
@@ -195,7 +195,7 @@ App 的续传能力与原整文件上传完全隔离：
 
 App/PDA 的头部统一由基座原生导航栏显示。子应用识别 `mbase_host=app` 后隐藏自己的 `C_NavBar`，并通过 v1 导航协议上报 `title / canGoBack / seq`；基座原生返回键下发 `navigation:back`，子应用执行 `router.back()` 后用 `ackRequestId` 确认。
 
-未上报协议的存量子应用仍走原生 WebView 历史返回，不会被强制切换。完整可复制代码、路由根页约定、组件改法和验收清单见[集成文档：App/PDA 单头部导航](./integration#四、h5-子应用侧改造清单)。
+未上报协议的存量子应用仍走原生 WebView 历史返回，不会被强制切换。完整可复制代码、路由根页约定、组件改法和验收清单见[集成文档：App/PDA 单头部导航](./integration#_6-app-pda-双向返回导航-单头部规则适用于所有宿主)。
 
 > 只允许用 `mbase_host=app` 隐藏子应用头部。`from=portal` 同时存在于 H5/钉钉入口，用它判断会误伤其他端。
 

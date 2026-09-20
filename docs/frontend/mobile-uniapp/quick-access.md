@@ -14,6 +14,8 @@
 
 当前项目约定：已注册的内部子应用直接复用 URL 中的 `portal_token`，不要求子应用后端提供换 Token 接口。子应用必须始终用本次 URL 的 Token 覆盖本地旧 Token。
 
+OAuth 客户端只由认证平台和基座配置。子应用不得再配置 `client_id/client_secret`、生成 `client_code` 或调用 `sso_token_change`；公司切换继续复用当前 `portal_token`，只按下文同步公司上下文。移动端与 PC 的公司会话隔离由 Token 所属客户端保证。
+
 开始前向平台组确认：
 
 - `appId` 和部署路径，例如 `quality`、`/mbase/zl/`。
@@ -80,7 +82,8 @@ export async function bootstrapPortalSession() {
   authStore.clearUserAndPermissionCache()
   companyStore.setPortalCompany(context.companyId, context.companyName)
 
-  // 存量后端若依赖“当前公司”，先同步公司；显式 companyId 接口无需此调用。
+  // 存量后端若依赖“当前公司”，用同一个 portal_token 先同步公司；
+  // 不换 Token，不在子应用配置 OAuth client。显式 companyId 接口无需此调用。
   // await api.post(`/hrms/user/changeCompany?companyId=${encodeURIComponent(context.companyId)}`)
 
   await authStore.loadUser()
@@ -131,7 +134,7 @@ async function startApplication() {
 
 `access-denied` 页面至少显示原因、重新校验和返回入口；`unavailable` 页面至少显示重试、返回和可供排障的错误编号。空列表是正常业务状态，不能误判为无权限。
 
-页面状态上报完整代码见 [集成文档：权限与异常页面协同](./integration#四、h5-子应用侧改造清单)。基座收到后会在 H5/钉钉和 App/PDA 展示统一兜底；微信原生 `web-view` 的消息存在触发时机限制，因此子应用自己的状态页始终是第一责任层。
+页面状态上报完整代码见 [集成文档：权限与异常页面协同](./integration#_7-权限与异常页面协同-避免子应用空白)。基座收到后会在 H5/钉钉和 App/PDA 展示统一兜底；微信原生 `web-view` 的消息存在触发时机限制，因此子应用自己的状态页始终是第一责任层。
 
 ## 5. 接入标题和返回
 
