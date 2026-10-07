@@ -28,3 +28,6 @@ jobs:
       # 全量校验 + 构建：gen:data(发版数/日志) → sidebar/写死版本/死链 → SSG → 锚点
       - name: 构建与全量校验
         run: pnpm build
+
+      - name: 兜底版本漂移哨兵
+        run: pnpm check:fallback

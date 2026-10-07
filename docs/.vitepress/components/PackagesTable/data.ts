@@ -32,7 +32,7 @@ export const packages: Pkg[] = [
   },
   {
     name: "wl-skills-kit",
-    version: "2.21.0",
+    version: "2.25.0",
     scope: "前端 PC：页面生成 / 规范审计 / 菜单字典权限同步 / 场景渲染",
     doc: "/frontend/pc/skills/",
     docLabel: "前端 PC Skills",
@@ -41,7 +41,7 @@ export const packages: Pkg[] = [
   },
   {
     name: "wl-skills-ui",
-    version: "1.12.0",
+    version: "1.15.0",
     scope: "视觉一致：设计令牌 / 扫描修复 / 运行时守护 / 页面契约",
     doc: "/views/styling/wl-skills-ui",
     docLabel: "UI 统一规范",
@@ -50,7 +50,7 @@ export const packages: Pkg[] = [
   },
   {
     name: "wl-skills-bd",
-    version: "0.26.0",
+    version: "0.32.0",
     scope: "后端：契约驱动生成 / 数据治理 / 质量门 / 变更审查",
     doc: "/backend/skills/",
     docLabel: "后端 Skills",

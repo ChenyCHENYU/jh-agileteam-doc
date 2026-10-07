@@ -20,7 +20,7 @@ description: "把 AI 体系的高频操作固化为可复现命令：无 AI 依�
 
 ## 命令清单（权威版）
 
-kit（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.21.0" />）共 **18 个命令字**，按场景分四组：
+kit（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.25.0" />）共 **18 个命令字**，按场景分四组：
 
 | 场景 | 命令 |
 |------|------|

@@ -218,7 +218,7 @@ npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/a
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | <NpmVersion pkg="@agile-team/wl-skills-design" fallback="0.11.1" /> | <NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.21.0" /> | <NpmVersion pkg="@agile-team/wl-skills-ui" fallback="1.12.0" /> | <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.26.0" /> | **<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.25.0" />** |
+| 版本 | <NpmVersion pkg="@agile-team/wl-skills-design" fallback="0.11.1" /> | <NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.25.0" /> | <NpmVersion pkg="@agile-team/wl-skills-ui" fallback="1.15.0" /> | <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.32.0" /> | **<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.25.0" />** |
 | 审计规则 | — | K1-K19 | R001-R043 | B1-B32 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |

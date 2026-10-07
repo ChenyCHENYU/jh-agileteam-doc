@@ -26,9 +26,9 @@ const LTOOL = "工程工具链";
 
 export const ecoPackages: EcoPkg[] = [
   // ---- AI 工程五包 ----
-  { name: "@agile-team/wl-skills-kit", layer: L5, version: "2.21.0", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-ui", layer: L5, version: "1.12.0", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-bd", layer: L5, version: "0.26.0", license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-kit", layer: L5, version: "2.25.0", license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-ui", layer: L5, version: "1.15.0", license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-bd", layer: L5, version: "0.32.0", license: "UNLICENSED" },
   { name: "@agile-team/wl-skills-test", layer: L5, version: "0.25.0", license: "UNLICENSED" },
   { name: "@agile-team/wl-skills-design", layer: L5, version: "0.11.1", license: "Apache-2.0" },
   // ---- 基础设施库 ----

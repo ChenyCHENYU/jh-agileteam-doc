@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip ✅ 已正式发布
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.31.0" />）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.32.0" />）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
 :::
 
 ## 概述

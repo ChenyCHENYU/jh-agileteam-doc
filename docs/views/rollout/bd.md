@@ -33,7 +33,7 @@ description: "文档用途：项目组会宣贯、各服务接入执行、存量
 
 > 一套后端规范、一个机器契约事实源、计划先行显式授权两种写入边界、B 系列 + J 系列 + 数据库治理三层确定性防线、一条"契约 → 生成 → 审计 → 修复"闭环。
 
-### 版本演进速览（v0.18.2 → v0.26.0）
+### 版本演进速览（v0.18.2 → v0.31.0）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -46,6 +46,11 @@ description: "文档用途：项目组会宣贯、各服务接入执行、存量
 | v0.23.0 | Catalog 多模块根发现；契约分类（crud/schema-mirror/integration-projection）与 `contract inspect/migrate`；`impact field` 字段影响链；集成投递机器契约（StableBusinessId/PayloadHash） | 多模块工程不误报；存量契约可迁移；改字段先看影响链 |
 | v0.24.0 | **变更审查统一质量门** `review run/baseline`；项目集成适配器（`integration-adapters.json` + Skill）；`quality-assertions.json` / `supply-chain.json`；`fix advise` 精准修复；standards/30 | Git 变更 + 规则 + 基线 + 豁免 + 平台适配 + 供应链 + 覆盖率汇总为一个确定性门 |
 | v0.25.0-v0.26.0 | **AI 精准接入与业务闭环**：capabilities 能力清单 + task Pre-flight 证据（MCP 17→18）；状态机闭环校验、openQuestions 疑点确认门、`db review` 正向对账、`db snapshot-template`、ALTER 影响机器硬门 | AI 一次调用拿全能力索引；死状态/缺终态生成前检出；数据库 apply 前有正向复核与证据链 |
+| v0.27.0 | 数据库 `is_` 与 Java `isXxx` 命名禁令（B31 告警 + 契约/ALTER/生成强阻断，建议 `*_flag`/`xxxFlag`）；软删字段统一 `DELETE_FLAG/deleteFlag` | 需求照抄 `is_xxx` 不再进库；序列化歧义从源头消除 |
+| v0.28.0 | **B32 跨服务 DTO 反序列化门禁**：仅有参构造且缺无参构造/`@JsonCreator`/Jackson builder 时阻断 | 防止"提供方已提交、调用方解析失败"引发的重复重试 |
+| v0.29.0 | 业务生成闭环：契约 `businessKeys[]` 业务去重 + `batchPolicy` 批量策略；Flyway 确立为迁移唯一写入者，制品以实际文件 SHA-256 为准 | 生成的新增/修改自带查重与归一化；部署制品不可冒充 |
+| v0.30.0 | **写入安全升级**：init/update/clean 默认预览，写入需同一 planHash + `--confirm`；原子写 + 漂移回滚；`wl-skills-bd mcp` 启动 stdio | 所有安装/生成操作先预览后落盘；半安装状态成为历史 |
+| v0.31.0 | 共享资产保护：manifest 记录本包贡献哈希，共享 Markdown/MCP 配置按服务键合并，`--force` 只更新本包贡献 | 多包共存互不覆盖，用户配置永不被强制重置 |
 
 ---
 
