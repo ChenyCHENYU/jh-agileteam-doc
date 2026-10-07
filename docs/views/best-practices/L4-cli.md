@@ -80,7 +80,6 @@ git commit → pre-commit validate
 | 公司 | 项目/工具 | 描述 |
 |------|---------|------|
 | **美团** | [ai-cli](https://tech.meituan.com/2024/11/29/the-evolution-and-prospect-of-meituan-agentic-ai.html) | 将 AI 能力封装为内部 CLI，支持代码生成、API Mock、规范检查等 CI 集成场景 |
-| **飞书（字节）** | [MCP + CLI 工程化](https://www.feishu.cn/articles/7467851562698424371) | 将 AI 工具链封装为 CLI，支持 init / dev / deploy 全流程，并提供 MCP Server 插件扩展 |
 | **Shopify** | [shopify-cli](https://shopify.dev/docs/apps/tools/cli) | 行业内最成熟的 CLI + AI 结合案例，支持 scaffold / deploy / ai-assist，与 GitHub Actions 深度集成 |
 | **Vercel** | [v0 CLI](https://vercel.com/docs/cli) | 将 AI 生成组件能力封装为 CLI 命令，支持 `vercel generate` 从描述直接生成并部署 |
 | **Nx（Nrwl）** | [nx generate + AI](https://nx.dev/features/generate-code) | monorepo 工程化 CLI，结合 AI 插件实现脚手架 + 依赖图分析 |

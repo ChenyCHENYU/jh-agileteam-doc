@@ -140,6 +140,6 @@ AI 主动调用，有副作用（读写/调接口）。所有主流编辑器均�
 | [Model Context Protocol 官网](https://modelcontextprotocol.io/) | MCP 协议完整规范，L3 的底层标准 |
 | [MCP 规范 GitHub](https://github.com/modelcontextprotocol/specification) | MCP 协议源码与最新动态 |
 | [MCP Servers 社区目录](https://github.com/modelcontextprotocol/servers) | 社区贡献的各类 MCP Server，可直接复用 |
-| [GitHub Copilot MCP 文档](https://docs.github.com/en/copilot/customizing-copilot/using-model-context-protocol-tools) | Copilot 中配置 MCP 的官方指南 |
+| [GitHub Copilot MCP 文档](https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context) | Copilot 中配置 MCP 的官方指南 |
 | [Cursor MCP 配置文档](https://docs.cursor.com/advanced/mcp) | Cursor 中配置 MCP Server |
 

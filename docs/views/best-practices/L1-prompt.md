@@ -135,7 +135,7 @@ AI 的行为变化：`copilot-instructions.md` 已在系统级载入 → 匹配 
 | 资源 | 说明 |
 |------|------|
 | [OpenAI — Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering) | OpenAI 官方提示词工程指南，L1 基础 |
-| [Anthropic — Prompt Library](https://www.anthropic.com/prompt-library) | Anthropic 官方示例库，各场景提示词模板 |
+| [Anthropic — Prompt Library](https://docs.claude.com/en/prompt-library) | Anthropic 官方示例库，各场景提示词模板 |
 | [GitHub Copilot — 指令文件官方文档](https://docs.github.com/en/copilot/customizing-copilot/adding-repository-custom-instructions-for-github-copilot) | copilot-instructions.md 官方说明 |
 | [Cursor Rules 官方文档](https://docs.cursor.com/context/rules-for-ai) | Cursor .cursorrules / .cursor/rules 配置 |
 | [LearnPrompting.org](https://learnprompting.org/) | 提示词工程开源教程，覆盖 CoT / Few-shot / RAG 等技术 |

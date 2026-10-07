@@ -94,7 +94,7 @@ convention-audit 报告积累                │
 |------|---------|------|
 | **Cursor** | [AI 反馈训练](https://www.cursor.com/blog) | Cursor 通过用户接受/拒绝代码建议的行为数据持续改善模型偏好，是商业化自演化最典型案例 |
 | **GitHub Copilot** | [Copilot 自适应](https://github.blog/ai-and-ml/) | GitHub 利用代码接受率、编辑频率等指标不断调优 Copilot 建议质量 |
-| **谷歌 DeepMind** | [AlphaCode 2](https://deepmind.google/discover/blog/alphacode-2-competitive-programming-with-alphageometry/) | 通过竞技编程产出自动评估和强化学习，代码质量自演化典型 |
+| **谷歌 DeepMind** | [AlphaEvolve](https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) | Gemini 驱动的编码智能体，自动改进算法并被反哺回真实数据中心调度，代码自演化典型 |
 | **SWE-agent（普林斯顿）** | [SWE-agent](https://swe-agent.com/) | AI 自动修复 GitHub Issue，产出质量通过测试套件自动评估，形成闭环 |
 
 ## 参考资料
