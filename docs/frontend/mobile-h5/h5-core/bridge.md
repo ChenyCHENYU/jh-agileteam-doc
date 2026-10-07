@@ -1,3 +1,7 @@
+---
+description: "Bridge 是 @robot-h5/core 的平台抽象层，使 15 个 Hook 在不同宿主环境（浏览器、wl-mbase App/PDA/iframe、钉钉、微信）下自动…"
+---
+
 # Bridge 适配层
 
 Bridge 是 `@robot-h5/core` 的平台抽象层，使 15 个 Hook 在不同宿主环境（浏览器、wl-mbase App/PDA/iframe、钉钉、微信）下自动选择最佳实现。

@@ -1,3 +1,7 @@
+---
+description: "平台规范第 09 条 · 强制度：🟡 建议。项目使用 strict: false 宽松模式起步。"
+---
+
 # TypeScript 类型规范（09）
 
 > **平台规范第 09 条** · 强制度：🟡 建议。项目使用 `strict: false` 宽松模式起步。

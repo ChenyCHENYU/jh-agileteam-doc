@@ -1,3 +1,7 @@
+---
+description: "C 组件体系、AbstractPageQueryHook 基类与 MAxios 封装——页面与数据之间的全部约定。"
+---
+
 # 组件设计与 API 层架构
 
 > C_ 组件体系、AbstractPageQueryHook 基类与 MAxios 封装——页面与数据之间的全部约定。

@@ -1,3 +1,7 @@
+---
+description: "将前端 reports/SYSMENUINFO.md 中定义的菜单结构，自动同步到指定环境的数据库（通过后端管理 API 创建菜单记录）。"
+---
+
 # Skill ④：菜单同步（menu-sync）
 
 将前端 `reports/SYS_MENU_INFO.md` 中定义的菜单结构，自动同步到指定环境的数据库（通过后端管理 API 创建菜单记录）。

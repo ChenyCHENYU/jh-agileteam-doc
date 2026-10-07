@@ -1,3 +1,7 @@
+---
+description: "从现有项目的成熟页面提取领域模板，沉淀到 .wl-skills/skills/core/page-codegen/templates/domains/，扩充团队 AI 模板库。"
+---
+
 # Skill ⑧：模板提取（template-extract）
 
 从现有项目的成熟页面提取领域模板，沉淀到 `.wl-skills/skills/core/page-codegen/templates/domains/`，扩充团队 AI 模板库。

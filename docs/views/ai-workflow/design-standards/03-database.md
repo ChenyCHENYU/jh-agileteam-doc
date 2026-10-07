@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-design v0.11.1 · standards/03-database.md · 可判定条目由 verify（M 机械项）自动执行。"
+---
+
 # 03 — 数据库设计规范
 
 > 📦 来源：`wl-skills-design` v0.11.1 · `standards/03-database.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。

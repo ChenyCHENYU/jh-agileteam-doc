@@ -1,3 +1,7 @@
+---
+description: "触发词：审计 / 规范检查 / 代码审查 / check conventions"
+---
+
 # ⑦ 规范审计 convention-audit
 
 > 触发词：`审计` / `规范检查` / `代码审查` / `check conventions`

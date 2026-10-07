@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-design v0.11.1 · standards/08-glossary.md · 可判定条目由 verify（M 机械项）自动执行。"
+---
+
 # 08 — 术语 / 字段词典规范（Glossary · 统一语言）
 
 > 📦 来源：`wl-skills-design` v0.11.1 · `standards/08-glossary.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。

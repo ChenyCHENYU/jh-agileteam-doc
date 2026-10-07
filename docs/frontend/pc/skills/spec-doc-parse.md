@@ -1,3 +1,7 @@
+---
+description: "将 wl-skills-design 产出的标准说明书（含功能编码 / IPO 表 / 流程五要素）解析为结构化的 page-spec JSON 页面清单，作为 prototy…"
+---
+
 # Skill ②：说明书解析（spec-doc-parse）
 
 将 **`wl-skills-design` 产出的标准说明书**（含功能编码 / IPO 表 / 流程五要素）解析为结构化的 **page-spec JSON 页面清单**，作为 [prototype-scan](./prototype-scan) 的**规范线对等入口**。

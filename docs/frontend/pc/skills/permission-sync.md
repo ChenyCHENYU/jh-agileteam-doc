@@ -1,3 +1,7 @@
+---
+description: "@agile-team/wl-skills-kit 自 v2.3.6 起激活，路径：skills/sync/permission-sync/"
+---
+
 # ⑥ 权限同步（permission-sync）
 
 > `@agile-team/wl-skills-kit` 自 v2.3.6 起激活，路径：`skills/sync/permission-sync/`

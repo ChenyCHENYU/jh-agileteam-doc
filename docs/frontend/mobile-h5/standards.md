@@ -1,3 +1,7 @@
+---
+description: "本文档仅列出移动端 H5 独有的扩展规范。通用开发规范（三文件分离、文件命名、Git 提交、ESLint 规则等）请参阅 快速上手 — 开发规范/frontend/quick-…"
+---
+
 # 移动端 H5 — 扩展规范
 
 > 本文档仅列出移动端 H5 **独有**的扩展规范。通用开发规范（三文件分离、文件命名、Git 提交、ESLint 规则等）请参阅 [快速上手 — 开发规范](/frontend/quick-start/development-standards)。

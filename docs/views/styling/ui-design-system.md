@@ -1,3 +1,7 @@
+---
+description: "项目首页（GlassHome）明确标注 'Linear × Apple Premium Design'，整体属于 SaaS 产品级暗色优先文档站。"
+---
+
 # UI 风格分析与升级方案
 
 ## 一、当前设计风格识别

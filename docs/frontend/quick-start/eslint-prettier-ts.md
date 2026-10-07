@@ -1,3 +1,7 @@
+---
+description: "本页说明团队在 ESLint、Prettier 上约定了哪些规则、为什么这样约定，以及各工具的职责边界。工具链安装与配置见 ① 工具链检测规范./01-toolchain。"
+---
+
 # ESLint & Prettier 规范约定
 
 > 本页说明团队在 ESLint、Prettier 上约定了哪些规则、为什么这样约定，以及各工具的职责边界。工具链安装与配置见 [① 工具链检测规范](./01-toolchain)。

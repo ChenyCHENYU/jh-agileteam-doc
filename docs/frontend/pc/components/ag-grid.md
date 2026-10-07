@@ -1,3 +1,7 @@
+---
+description: "来源：@jhlc/common-core 远程组件"
+---
+
 ﻿# AGGrid 高性能表格
 
 > 来源：`@jhlc/common-core` 远程组件

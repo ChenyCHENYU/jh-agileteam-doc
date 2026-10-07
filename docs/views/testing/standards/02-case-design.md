@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-test v0.11.0 · standards/02-case-design.md · 可判定条目由 wl-skills-test audit…"
+---
+
 # 用例设计标准
 
 > 📦 来源：`wl-skills-test` v0.11.0 · `standards/02-case-design.md` · 可判定条目由 `wl-skills-test audit`（T 系列）与 `gate` 自动执行。

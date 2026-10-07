@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-design v0.11.1 · standards/07-design-review.md · 可判定条目由 verify（M 机械项）自动执…"
+---
+
 # 07 · 设计评审规范（Design Review · 集成评审）
 
 > 📦 来源：`wl-skills-design` v0.11.1 · `standards/07-design-review.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。

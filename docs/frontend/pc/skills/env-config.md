@@ -1,3 +1,7 @@
+---
+description: "📦 来源：@agile-team/wl-skills-kit → .wl-skills/skills/ops/env-config/SKILL.md"
+---
+
 # env-config — 环境标准化 / 客户迁移
 
 > 📦 来源：`@agile-team/wl-skills-kit` → `.wl-skills/skills/ops/env-config/SKILL.md`

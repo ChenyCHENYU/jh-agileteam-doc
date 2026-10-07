@@ -1,3 +1,7 @@
+---
+description: "::: tip 这是哪个 CLI？本页讲的是 Skills 体系安装器 @agile-team/wl-skills-kit（init / update / validate /…"
+---
+
 # wl-skills-kit 工具
 
 ::: tip 这是哪个 CLI？

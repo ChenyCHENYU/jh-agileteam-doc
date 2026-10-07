@@ -1,3 +1,7 @@
+---
+description: "平台规范第 08 条 · 强制度：🔴 必遵。本项目强制使用 @robot-admin/git-standards 完整模式（Commitizen + Commitlint +…"
+---
+
 # Git 分支 & 提交规范（08）
 
 > **平台规范第 08 条** · 强制度：🔴 必遵。本项目强制使用 `@robot-admin/git-standards` 完整模式（Commitizen + Commitlint + Husky + ESLint + Prettier + Oxlint + lint-staged）。

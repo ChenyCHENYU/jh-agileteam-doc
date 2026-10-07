@@ -1,3 +1,7 @@
+---
+description: "适用范围：PC 端业务前端（wl-ui-produce、wl-ui-safe、wl-ui-sale 等）。所有字典翻译均走后端字典系统，不前端写死——客户在字典后台维护选项后，…"
+---
+
 # 字典翻译
 
 > 适用范围：PC 端业务前端（`wl-ui-produce`、`wl-ui-safe`、`wl-ui-sale` 等）。所有字典翻译均走后端字典系统，不前端写死——客户在字典后台维护选项后，前端立即生效。

@@ -1,3 +1,7 @@
+---
+description: "前端 Skills 基于 @agile-team/wl-skills-kit（<NpmVersion pkg='@agile-team/wl-skills-kit' fallb…"
+---
+
 # 前端 Skills 概述
 
 前端 Skills 基于 `@agile-team/wl-skills-kit`（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.21.0" />）— 一条命令，将 **14 条编码规范、13 个 AI Skill、29 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。

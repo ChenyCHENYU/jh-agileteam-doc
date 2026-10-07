@@ -1,3 +1,7 @@
+---
+description: "炼钢 MES 与三路外部系统的真实对接：QMS 品质管控 / L2 炼钢智能化 / MPS 计划管理。本文是 integration-adapter-be 与集成投递机器契约的…"
+---
+
 # MES 集成实战（炼钢 · wl-produce）
 
 > 炼钢 MES 与三路外部系统的真实对接：**QMS 品质管控 / L2 炼钢智能化 / MPS 计划管理**。本文是 `integration-adapter-be` 与集成投递机器契约的落地实证。

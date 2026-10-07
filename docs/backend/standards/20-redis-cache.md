@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-bd v0.24.0 · standards/20-redis-cache.md · 本文可判定条目由 wl-skills-bd validat…"
+---
+
 # 20 · Redis 与缓存规范（✅ 已落地）
 
 > 📦 来源：`wl-skills-bd` v0.24.0 · `standards/20-redis-cache.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。

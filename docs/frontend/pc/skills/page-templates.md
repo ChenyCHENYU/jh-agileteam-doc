@@ -1,3 +1,7 @@
+---
+description: "page-codegen Skill 支持 9 种页面模板，每种模板对应一个独立的 TPL-.md 文件，AI 会根据 page-spec 中的 pattern 自动选择对应模…"
+---
+
 # 9 种页面模板
 
 page-codegen Skill 支持 9 种页面模板，每种模板对应一个独立的 `TPL-*.md` 文件，AI 会根据 page-spec 中的 `pattern` 自动选择对应模板生成代码。

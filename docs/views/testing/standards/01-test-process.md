@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-test v0.11.0 · standards/01-test-process.md · 可判定条目由 wl-skills-test audi…"
+---
+
 # 测试流程规范
 
 > 📦 来源：`wl-skills-test` v0.11.0 · `standards/01-test-process.md` · 可判定条目由 `wl-skills-test audit`（T 系列）与 `gate` 自动执行。

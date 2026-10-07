@@ -1,3 +1,7 @@
+---
+description: "从原型目录 / 详细设计 / 字段字典资料中提取结构化业务文档，沉淀模块级的业务知识，作为 api-contract./api-contract 和 page-codegen.…"
+---
+
 # Skill ③：业务文档提取（business-doc-extract）
 
 从**原型目录 / 详细设计 / 字段字典资料**中提取结构化**业务文档**，沉淀模块级的业务知识，作为 [api-contract](./api-contract) 和 [page-codegen](./page-codegen) 的语义补充。

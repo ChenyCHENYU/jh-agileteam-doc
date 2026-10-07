@@ -1,3 +1,7 @@
+---
+description: "来源：@jhlc/common-core 远程组件"
+---
+
 ﻿# BaseForm 表单组件
 
 > 来源：`@jhlc/common-core` 远程组件

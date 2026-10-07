@@ -1,3 +1,7 @@
+---
+description: "生成 CREATE TABLE / 分阶段 ALTER / 索引 / DDL 预览，产物落 reports/DDLPREVIEW.md 等待人工确认。AI 不直接执行数据库操作…"
+---
+
 # db-migration — DDL 与数据迁移生成
 
 > 生成 **CREATE TABLE / 分阶段 ALTER / 索引 / DDL 预览**，产物落 `reports/DDL_PREVIEW_*.md` 等待人工确认。**AI 不直接执行数据库操作**。🔴 高风险（必经人工确认）。

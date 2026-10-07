@@ -1,3 +1,7 @@
+---
+description: "当前项目核心。触发词驱动 → SKILL.md → 规范门控 → Pre-flight 声明 → 生成产物追加到 reports/。"
+---
+
 # L2 — Skill（结构化技能文件）
 
 > 当前项目核心。触发词驱动 → SKILL.md → 规范门控 → Pre-flight 声明 → 生成产物追加到 reports/。

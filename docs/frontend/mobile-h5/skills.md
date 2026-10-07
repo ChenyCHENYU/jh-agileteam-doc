@@ -1,3 +1,7 @@
+---
+description: "移动端 H5 项目内置 7 个 AI Skill，覆盖从原型分析到规范审计的完整研发链路。所有 Skill 均已注册到 AI 编辑器（Copilot / Cursor / Wi…"
+---
+
 # 移动端 H5 — Skills 概述
 
 移动端 H5 项目内置 **7 个 AI Skill**，覆盖从原型分析到规范审计的完整研发链路。所有 Skill 均已注册到 AI 编辑器（Copilot / Cursor / Windsurf / Claude Code），支持通过**触发词自动调度**。

@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-bd v0.24.0 · standards/22-resilience.md · 本文可判定条目由 wl-skills-bd validate…"
+---
+
 # 22 · 限流熔断与外部调用规范（✅ 已落地）
 
 > 📦 来源：`wl-skills-bd` v0.24.0 · `standards/22-resilience.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。

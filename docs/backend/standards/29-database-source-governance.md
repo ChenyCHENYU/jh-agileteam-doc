@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-bd v0.24.0 · standards/29-database-source-governance.md · 本文可判定条目由 wl-sk…"
+---
+
 # 29 · 数据库事实源与结构收敛规范（🔴 阻断）
 
 > 📦 来源：`wl-skills-bd` v0.24.0 · `standards/29-database-source-governance.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。

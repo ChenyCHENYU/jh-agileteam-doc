@@ -1,3 +1,7 @@
+---
+description: "零依赖工具函数，不依赖 Vue / Bridge / Config，可独立使用。"
+---
+
 # 工具函数库
 
 零依赖工具函数，不依赖 Vue / Bridge / Config，可独立使用。

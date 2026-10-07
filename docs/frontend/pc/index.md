@@ -1,3 +1,7 @@
+---
+description: "PC 端业务子系统标准模板为 jh4j-ui-template（模板 ID web.jh4j-mf-remote，当前 1.1.0）—— 基于 Vue 3 + Vite + M…"
+---
+
 # PC 端前端 — 概览 & 技术选型
 
 ## 项目简介

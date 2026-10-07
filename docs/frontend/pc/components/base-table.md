@@ -1,3 +1,7 @@
+---
+description: "来源：@jhlc/common-core 远程组件"
+---
+
 ﻿# BaseTable 表格组件
 
 > 来源：`@jhlc/common-core` 远程组件

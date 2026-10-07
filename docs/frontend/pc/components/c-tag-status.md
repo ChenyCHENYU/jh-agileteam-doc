@@ -1,3 +1,7 @@
+---
+description: "CTagStatus 是一个统一的状态标签组件，基于 Element Plus 的 el-tag 封装，用于在表格、表单等场景中展示各种状态信息。"
+---
+
 # C_TagStatus 状态标签组件
 
 ## 📖 简介

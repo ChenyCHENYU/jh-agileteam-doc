@@ -1,3 +1,7 @@
+---
+description: "将 data.ts 中引用的数据字典（logicType: BusLogicDataType.dict, logicValue: 'DICTCODE'）同步到后端字典表，保持本…"
+---
+
 # Skill ⑤：字典同步（dict-sync）
 
 将 `data.ts` 中引用的数据字典（`logicType: BusLogicDataType.dict, logicValue: "DICT_CODE"`）同步到后端字典表，保持本地基线与线上一致。

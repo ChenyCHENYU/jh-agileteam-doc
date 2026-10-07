@@ -1,3 +1,7 @@
+---
+description: "分级修复：只有满足确定性前置条件的 B3（SELECT → BaseColumns）/ B5（补 @TransactionalrollbackFor），或项目批准的单次精确替换…"
+---
+
 # code-fix-be — 受控修复
 
 > 分级修复：只有满足确定性前置条件的 **B3（`SELECT *` → BaseColumns）/ B5（补 `@Transactional(rollbackFor)`）**，或项目批准的单次精确替换可自动修改。其余规则**不猜**。

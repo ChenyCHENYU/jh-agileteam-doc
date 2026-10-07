@@ -1,3 +1,7 @@
+---
+description: "::: tip 🟡 试运行中pipeline.md 协议已落地（v2.7.3），Skill 间 I/O 契约已定义，当前进入试运行阶段。正在真实项目中验证完整 Pipelin…"
+---
+
 ﻿# L5 — Agent Pipeline（智能体流水线）
 
 ::: tip 🟡 试运行中

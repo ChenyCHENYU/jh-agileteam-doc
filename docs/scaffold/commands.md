@@ -1,3 +1,7 @@
+---
+description: "脚手架提供 7 类命令：create（见 创建项目./create）、list、doctor、info、template validate、config、cache。除 cre…"
+---
+
 # 命令参考
 
 脚手架提供 7 类命令：`create`（见 [创建项目](./create)）、`list`、`doctor`、`info`、`template validate`、`config`、`cache`。除 `create` 外均可加 `--json` 输出结构化结果，便于脚本消费。

@@ -1,3 +1,7 @@
+---
+description: "移动端 AI Skill 流水线以 RobotH5 项目（Vant 4 + Vue 3.5 + Vite 7）为参考实现，同时适配 wl-mbase（Uniapp 跨端）项目。…"
+---
+
 # AI Skill 流水线（移动端 H5）
 
 > 移动端 AI Skill 流水线以 **Robot_H5** 项目（Vant 4 + Vue 3.5 + Vite 7）为参考实现，

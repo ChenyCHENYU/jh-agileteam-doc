@@ -211,6 +211,8 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "参考 & 附录",
       collapsed: true,
       items: [
+        { text: "Git 提交规范", link: "/frontend/quick-start/commit-standards" },
+        { text: "评论区使用", link: "/frontend/quick-start/waline-usage" },
         { text: "贡献指南", link: "/frontend/quick-start/contributing" },
         { text: "ESLint & Prettier 规范约定", link: "/frontend/quick-start/eslint-prettier-ts" },
         { text: "Waline 评论系统", link: "/frontend/quick-start/waline-usage" },
@@ -319,6 +321,24 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "使用指南", link: "/frontend/pc/skills/usage-guide" },
         { text: "CLI 工具", link: "/frontend/pc/skills/cli" },
         { text: "页面模板", link: "/frontend/pc/skills/page-templates" },
+      ],
+    },
+    {
+      text: "Skill 详解",
+      collapsed: true,
+      items: [
+        { text: "① 原型扫描 prototype-scan", link: "/frontend/pc/skills/prototype-scan" },
+        { text: "② 说明书解析 spec-doc-parse", link: "/frontend/pc/skills/spec-doc-parse" },
+        { text: "③ 业务文档提取 business-doc-extract", link: "/frontend/pc/skills/business-doc-extract" },
+        { text: "④ 接口约定 api-contract", link: "/frontend/pc/skills/api-contract" },
+        { text: "⑤ 页面代码生成 page-codegen", link: "/frontend/pc/skills/page-codegen" },
+        { text: "⑥ 规范审计 convention-audit", link: "/frontend/pc/skills/convention-audit" },
+        { text: "⑦ 模板提取 template-extract", link: "/frontend/pc/skills/template-extract" },
+        { text: "⑧ 菜单同步 menu-sync", link: "/frontend/pc/skills/menu-sync" },
+        { text: "⑨ 字典同步 dict-sync", link: "/frontend/pc/skills/dict-sync" },
+        { text: "⑩ 权限同步 permission-sync", link: "/frontend/pc/skills/permission-sync" },
+        { text: "⑪ 自动修复 code-fix", link: "/frontend/pc/skills/code-fix" },
+        { text: "⑫ 环境标准化 env-config", link: "/frontend/pc/skills/env-config" },
       ],
     },
     {
@@ -556,6 +576,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "生产领域",
       collapsed: false,
       items: [
+        { text: "领域总览", link: "/templates/produce/" },
         {
           text: "【棒线材】精整实绩",
           link: "/templates/produce/production-plan",
@@ -568,6 +589,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "质量领域",
       collapsed: false,
       items: [
+        { text: "领域总览", link: "/templates/quality/" },
         { text: "质量检验", link: "/templates/quality/quality-inspection" },
         { text: "质量跟踪", link: "/templates/quality/quality-tracking" },
         { text: "质量报表", link: "/templates/quality/quality-report" },
@@ -577,6 +599,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "销售领域",
       collapsed: false,
       items: [
+        { text: "领域总览", link: "/templates/sale/" },
         { text: "订单管理", link: "/templates/sale/order-management" },
         { text: "客户管理", link: "/templates/sale/customer-management" },
         { text: "销售分析", link: "/templates/sale/sales-analysis" },
@@ -586,6 +609,7 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "成本领域",
       collapsed: false,
       items: [
+        { text: "领域总览", link: "/templates/cost/" },
         { text: "成本核算", link: "/templates/cost/cost-accounting" },
         { text: "成本分析", link: "/templates/cost/cost-analysis" },
         { text: "成本报表", link: "/templates/cost/cost-report" },
@@ -657,6 +681,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "性能测试", link: "/views/testing/performance" },
         { text: "度量与质量门", link: "/views/testing/metrics" },
         { text: "使用指南", link: "/views/testing/usage-guide" },
+        { text: "测试规范", link: "/views/testing/standards/" },
       ],
     },
     {

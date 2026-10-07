@@ -1,3 +1,7 @@
+---
+description: "以 .wl-skills/standards/ 14 条规范为唯一基线，扫描项目源码，输出偏差报告和组件提取建议到 reports/ 目录。"
+---
+
 # Skill ⑥：规范审计（convention-audit）
 
 以 `.wl-skills/standards/` **14 条规范**为唯一基线，扫描项目源码，输出**偏差报告**和**组件提取建议**到 `reports/` 目录。

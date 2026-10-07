@@ -1,15 +1,14 @@
 import type { DefaultTheme } from "vitepress";
 
 /**
- * 搜索配置
- * @description 本地搜索配置，支持中文搜索
+ * 本地搜索配置，支持中文搜索
+ *
+ * 说明：vitepress 2.0.0-alpha.20 起 `_tokenize` 已移除，CJK 分词由框架内置，
+ * 本文件仅保留界面文案定制。
  */
 export const search: DefaultTheme.Config["search"] = {
   provider: "local",
   options: {
-    // 中文分词：按字切割，提升中文搜索命中率
-    _tokenize: (text: string, locale?: string) =>
-      locale === "root" ? [...text] : text.split(/\s+/),
     locales: {
       root: {
         translations: {

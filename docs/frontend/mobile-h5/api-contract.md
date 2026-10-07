@@ -1,3 +1,7 @@
+---
+description: "触发词：生成接口 / 接口约定 / 生成 api.md"
+---
+
 # ③ 接口约定 api-contract
 
 > 触发词：`生成接口` / `接口约定` / `生成 api.md`

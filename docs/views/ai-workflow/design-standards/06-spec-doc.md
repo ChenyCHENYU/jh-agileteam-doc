@@ -1,3 +1,7 @@
+---
+description: "📦 来源：wl-skills-design v0.11.1 · standards/06-spec-doc.md · 可判定条目由 verify（M 机械项）自动执行。"
+---
+
 # 06 · 需求设计说明书规范
 
 > 📦 来源：`wl-skills-design` v0.11.1 · `standards/06-spec-doc.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。

@@ -1,3 +1,7 @@
+---
+description: "脚手架支持本地、Git、压缩包等多种模板来源，内置模板按 GitHub → Gitee 主备源拉取并自动降级，远程模板按 source + ref 缓存。可通过外部 Catal…"
+---
+
 # 模板来源 & Catalog
 
 脚手架支持本地、Git、压缩包等多种模板来源，内置模板按 GitHub → Gitee 主备源拉取并自动降级，远程模板按 `source + ref` 缓存。可通过外部 Catalog 覆盖或追加模板定义。

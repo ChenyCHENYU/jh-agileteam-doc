@@ -1,3 +1,7 @@
+---
+description: "wl-mbase（华新移动端门户基座，当前 v1.0.6）是基于 Vue 3 + UniApp + TypeScript 的企业移动端统一入口——不是业务应用，而是承载所有业务…"
+---
+
 # 移动端 uniApp — 概览 & 技术选型
 
 ## 基座定位

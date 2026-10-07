@@ -1,3 +1,7 @@
+---
+description: "'Just vibe with the AI. Stop being a keyboard monkey.'—— Andrej Karpathy，2025年2月（'Vibe C…"
+---
+
 # L0 — 氛围编程（Vibe Coding）
 
 > "Just vibe with the AI. Stop being a keyboard monkey."  
