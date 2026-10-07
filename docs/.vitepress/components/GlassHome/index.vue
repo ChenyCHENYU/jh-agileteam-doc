@@ -26,7 +26,7 @@
           <span class="title-base">AGILE</span><span class="title-gradient"> TEAM</span>
         </h1>
 
-        <p class="hero-tagline">从需求到上线的 AI 工程化体系 · 5 包全链路 · 14 个 npm 包 · 生态月下载 17 万+</p>
+        <p class="hero-tagline">从需求到上线的 AI 工程化体系 · 5 包全链路 · 14 个 npm 包 · 累计发版 385+ 次</p>
 
         <div class="hero-cta">
           <a href="/frontend/quick-start/getting-started" class="cta-primary">
