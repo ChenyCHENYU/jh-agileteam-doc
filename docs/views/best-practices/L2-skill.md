@@ -75,7 +75,7 @@ AI 在对话时读取 SKILL.md，然后严格按照描述的流程执行——**
 
 ## 前端示例 — 已启用的 13 个 Skill
 
-13 个 Skill 覆盖"原型 → 页面 → 同步 → 审计 → 修复 → 沉淀"全链路，分组为 core（9）/ sync（3）/ ops（2）。**完整速查表与触发词见 [PC Skills 概述](/frontend/pc/skills/#_13-个-skill-速览)**，本页不重复。
+13 个 Skill 覆盖"原型 → 页面 → 同步 → 审计 → 修复 → 沉淀"全链路，分组为 core（8）/ sync（3）/ ops（2）。**完整速查表与触发词见 [PC Skills 概述](/frontend/pc/skills/#_13-个-skill-速览)**，本页不重复。
 
 每个启用 Skill 同目录都有 **`SKILL.md`（AI 触发用）+ `USAGE.md`（团队成员阅读）**。
 

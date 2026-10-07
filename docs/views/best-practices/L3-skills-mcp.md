@@ -78,7 +78,7 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 
 ## kit 实现了哪些 Tool？
 
-**29 个 Tool，六大类**（完整清单与参数见 [PC Skills — MCP 权威清单](/frontend/pc/skills/#_29-个-mcp-tools-权威清单)）：
+**29 个 Tool，五大类**（完整清单与参数见 [PC Skills — MCP 权威清单](/frontend/pc/skills/#_29-个-mcp-tools-权威清单)）：
 
 | 类别 | 数量 | 干什么 |
 |------|:---:|--------|
