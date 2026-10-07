@@ -14,7 +14,7 @@
 | 移动端 H5 | [Robot_H5 模板](/frontend/mobile-h5/) + [@robot-h5/core](/frontend/mobile-h5/h5-core/) 运行时核心 |
 | 移动端基座 | [wl-mbase 四端统一门户](/frontend/mobile-uniapp/)（小程序 / 钉钉 / 浏览器 / App·PDA） |
 | 设计协作 | [wl-skills-design](/views/ai-workflow/design-skills) 产品设计规范与 verify 机械校验 |
-| 组件资产 | 35+ 平台组件（[组件中心](/frontend/pc/components/jh-button)）· MachTable 数据表格（见[工程生态](/views/ecosystem/mach-table)） |
+| 组件资产 | 35+ 平台组件（[组件中心](/frontend/pc/components/jh-button)）· 平台打印报表插件 `jh4j-cloud-report`（[接入指南](/platform/report-guide)）；超大数据量 / 复杂可编辑表格场景备选 [MachTable](/views/ecosystem/mach-table) |
 
 ## 文档贡献
 
