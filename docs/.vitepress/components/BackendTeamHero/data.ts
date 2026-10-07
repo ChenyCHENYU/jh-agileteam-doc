@@ -27,6 +27,15 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
     skills: ["销售", "质量"],
   },
   {
+    name: "茆荣伟",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_MaoRongWei",
+    role: "开发工程师",
+    employeeId: "023958",
+    department: "共享技术中心",
+    bio: "不积跬步，无以至千里。",
+    skills: ["生产"],
+  },
+  {
     name: "谷茂彧",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_GuMaoYu&glasses=variant01&glassesProbability=100",
     role: "开发工程师",
@@ -70,6 +79,15 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
     department: "共享技术中心",
     bio: "苟日新，日日新，又日新。",
     skills: ["安全"],
+  },
+  {
+    name: "华路",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_HuaLu",
+    role: "开发工程师",
+    employeeId: "027575",
+    department: "共享技术中心",
+    bio: "路虽远，行则将至。",
+    skills: ["生产"],
   },
   {
     name: "邓守彬",

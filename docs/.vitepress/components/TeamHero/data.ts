@@ -30,11 +30,12 @@ export interface TeamMember {
 export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "李嘉诚",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=LiJiaCheng",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=fe_LiJiaCheng&beardProbability=30",
     role: "前端工程师",
     employeeId: "027015",
     department: "共享技术中心",
-    skills: ["前端开发"],
+    bio: "把每一行代码，当作要维护十年的代码来写。",
+    skills: ["前端开发", "PC 端"],
   },
   {
     name: "朱祥",
