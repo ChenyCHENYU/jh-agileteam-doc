@@ -1,8 +1,9 @@
 /**
  * GlassHome 组件数据配置
+ * 面向内部团队：只描述站内真实内容与入口，不做对外宣传
  */
 
-import { packages, siteStats } from "../PackagesTable/data";
+import { packages } from "../PackagesTable/data";
 
 export interface Feature {
   icon: string;
@@ -11,32 +12,40 @@ export interface Feature {
   link: string;
 }
 
-export interface Stat {
-  icon: string;
-  number: string;
+export interface QuickLink {
   label: string;
-  desc: string;
+  link: string;
 }
 
 const shortNames = packages.map((p) => p.name.replace("wl-skills-", "")).join(" / ");
+
+/** 高频直达入口（团队日常最常查阅的板块） */
+export const quickLinks: QuickLink[] = [
+  { label: "前端", link: "/frontend/quick-start/" },
+  { label: "后端", link: "/backend/" },
+  { label: "测试", link: "/views/testing/" },
+  { label: "平台手册", link: "/platform/" },
+  { label: "模板库", link: "/templates/" },
+  { label: "疑难杂症", link: "/views/troubleshooting/" },
+];
 
 export const features: Feature[] = [
   {
     icon: "📦",
     title: "五包工程能力",
-    details: `${shortNames} 共 ${siteStats.packages} 包覆盖设计到测试全链路（${siteStats.skills} Skill / ${siteStats.mcp} MCP），契约同源、独立安装`,
+    details: `${shortNames} 五个工程包的安装配置、Skills 用法与规则说明，契约同源、独立安装`,
     link: "/views/guide/",
   },
   {
     icon: "🤖",
     title: "AI 工作流",
-    details: "AI 驱动的全流程工程化实践，从原型到测试的智能化协作",
+    details: "AI 驱动的全流程工程化实践，从需求设计、原型到测试的智能化协作流程",
     link: "/views/ai-workflow/",
   },
   {
     icon: "📚",
     title: "AI 最佳实践",
-    details: "L1 提示词 → L2 Skill → L3 Skills & MCP → L4 CLI，四级能力体系",
+    details: "L1 提示词 → L2 Skill → L3 Skills & MCP → L4 CLI，四级能力体系与部门成熟度对照",
     link: "/views/best-practices/",
   },
   {
@@ -48,7 +57,7 @@ export const features: Feature[] = [
   {
     icon: "📱",
     title: "移动端基座",
-    details: "wl-mbase 四端统一门户（小程序/钉钉/H5/App）与 Robot_H5 框架",
+    details: "wl-mbase 四端统一门户（小程序/钉钉/H5/App）与 Robot_H5 框架的接入文档",
     link: "/frontend/mobile-uniapp/",
   },
   {
@@ -60,7 +69,7 @@ export const features: Feature[] = [
   {
     icon: "🌍",
     title: "工程生态",
-    details: "npm 数据看板 + MachTable 数据表格 + 工程工具链 + 基础设施库",
+    details: "MachTable 数据表格、工程工具链与基础设施库的使用文档",
     link: "/views/ecosystem/",
   },
   {
@@ -75,31 +84,22 @@ export const features: Feature[] = [
     details: "五包落地宣贯文档：能力、场景、接入流程与验收清单",
     link: "/views/rollout/",
   },
-];
-
-export const stats: Stat[] = [
   {
-    icon: "📦",
-    number: String(siteStats.packages),
-    label: "工程包",
-    desc: "design / kit / ui / bd / test 全链路覆盖",
+    icon: "🏢",
+    title: "平台手册",
+    details: "FSI2 低代码平台操作手册：工作流、权限、菜单、报表、API 管理等日常配置",
+    link: "/platform/",
   },
   {
-    icon: "🤖",
-    number: String(siteStats.skills),
-    label: "AI Skill",
-    desc: "触发词驱动的结构化技能",
+    icon: "🗂️",
+    title: "模板库",
+    details: "生产、销售、成本、质量领域的业务页面模板，新页面直接复用起步",
+    link: "/templates/",
   },
   {
-    icon: "🔌",
-    number: String(siteStats.mcp),
-    label: "MCP 工具",
-    desc: "菜单/权限/快照/生成/执行全覆盖",
-  },
-  {
-    icon: "⚡",
-    number: String(siteStats.rules),
-    label: "确定性审计规则",
-    desc: "K19 + R39 + B31 + T25，机器判定",
+    icon: "🎨",
+    title: "样式方案",
+    details: "UnoCSS 与 SCSS 的样式规范和最佳实践，保持页面视觉一致",
+    link: "/views/styling/",
   },
 ];

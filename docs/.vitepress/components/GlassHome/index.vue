@@ -19,14 +19,14 @@
       <div class="hero-inner">
         <div class="hero-badge">
           <span class="badge-dot"></span>
-          <span class="badge-label">Next Generation · AI工程体系</span>
+          <span class="badge-label">内部团队知识库 · 持续更新</span>
         </div>
 
         <h1 class="hero-title">
           <span class="title-base">AGILE</span><span class="title-gradient"> TEAM</span>
         </h1>
 
-        <p class="hero-tagline">从需求到上线的 AI 工程化体系 · 5 包全链路 · 14 个 npm 包 · 生态月下载 17 万+</p>
+        <p class="hero-tagline">团队工程文档中心：前端 / 后端 / 测试 / 平台 / AI 实践的规范、指南与最佳实践，从快速上手到疑难排查，一站可查</p>
 
         <div class="hero-cta">
           <a href="/frontend/quick-start/getting-started" class="cta-primary">
@@ -35,23 +35,19 @@
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </a>
-          <a href="/views/ecosystem/" class="cta-secondary">
-            <span>工程生态</span>
+          <a href="/views/guide/" class="cta-secondary">
+            <span>站点指南</span>
           </a>
         </div>
 
-        <div class="hero-stats">
-          <div v-for="stat in stats" :key="stat.label" class="stat-item">
-            <span class="stat-num">{{ stat.number }}</span>
-            <span class="stat-lbl">{{ stat.label }}</span>
+        <div class="hero-quick">
+          <span class="quick-label">高频入口</span>
+          <div class="quick-links">
+            <a v-for="q in quickLinks" :key="q.link" :href="q.link" class="quick-chip">
+              {{ q.label }}
+            </a>
           </div>
         </div>
-
-        <a href="/views/ecosystem/mach-table" class="hero-eco">
-          <span class="eco-star">★</span>
-          <span>MachTable 企业数据表格 — <strong>月下载 16 万+</strong> · <strong>28 个外部依赖方</strong>，生态中被第三方规模复用的明星包</span>
-          <span class="eco-arrow">→</span>
-        </a>
       </div>
     </section>
 
@@ -61,10 +57,10 @@
         <header class="section-header reveal-item">
           <div class="section-eyebrow">
             <span class="eyebrow-line"></span>
-            <span>核心能力</span>
+            <span>内容导航</span>
           </div>
-          <h2 class="section-heading">从入门到落地，覆盖 AI 工程化全链路</h2>
-          <p class="section-sub">指南 · 生态 · 最佳实践 · 前后端测试 · 宣贯，九大入口直达</p>
+          <h2 class="section-heading">站内全部板块，点击直达对应文档</h2>
+          <p class="section-sub">规范 · 指南 · 手册 · 最佳实践 · 疑难排查，每个板块都是可查阅的落地文档</p>
         </header>
 
         <div class="feat-grid">
@@ -96,7 +92,7 @@
 
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { features, stats } from "./data";
+import { features, quickLinks } from "./data";
 
 onMounted(() => {
   const items = document.querySelectorAll('.reveal-item');

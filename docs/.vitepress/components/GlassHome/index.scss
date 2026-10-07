@@ -218,7 +218,7 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 56px;
+  margin-bottom: 44px;
   animation: heroUp 0.65s ease 0.35s both;
 }
 
@@ -323,111 +323,54 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 16px rgba(129, 140, 248, 0.14);
 }
 
-// --- Stats Row ---
-.hero-stats {
-  display: flex;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--vp-c-bg-soft);
-  backdrop-filter: blur(14px);
-  animation: heroUp 0.65s ease 0.45s both;
-}
-
-/* 生态亮点条（Hero 底部，链接至 MachTable） */
-.hero-eco {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 18px;
-  padding: 10px 20px;
-  border: 1px solid var(--vp-c-brand-soft, rgba(59, 130, 246, 0.25));
-  border-radius: 999px;
-  background: var(--vp-c-bg-soft);
-  backdrop-filter: blur(10px);
-  font-size: 0.88rem;
-  color: var(--vp-c-text-2);
-  text-decoration: none;
-  transition: border-color $t-fast, transform $t-fast, color $t-fast;
-  animation: heroUp 0.65s ease 0.55s both;
-}
-
-.hero-eco:hover {
-  border-color: var(--vp-c-brand-1);
-  color: var(--vp-c-text-1);
-  transform: translateY(-1px);
-}
-
-.hero-eco strong {
-  color: var(--vp-c-brand-1);
-  font-weight: 600;
-}
-
-.hero-eco .eco-star {
-  color: var(--vp-c-brand-1);
-  font-size: 0.8rem;
-}
-
-.hero-eco .eco-arrow {
-  font-weight: 600;
-  transition: transform $t-fast;
-}
-
-.hero-eco:hover .eco-arrow {
-  transform: translateX(3px);
-}
-
-
-.stat-item {
+// --- Quick Links（高频入口） ---
+.hero-quick {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 18px 38px;
-  gap: 5px;
-  position: relative;
-  transition: background-color $t-fast;
-  }
-  
-  .stat-item:hover {
-    background-color: rgba(99, 102, 241, 0.04);
-  }
-  
-  .dark .stat-item:hover {
-    background-color: rgba(129, 140, 248, 0.06);
-  }
-  
-  .stat-item:hover .stat-num {
-    color: $accent;
-  }
-  
-  .dark .stat-item:hover .stat-num {
-    color: $accent-d;
+  gap: 14px;
+  animation: heroUp 0.65s ease 0.45s both;
 }
 
-.stat-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 18%;
-  height: 64%;
-  width: 1px;
-  background: var(--vp-c-divider);
-}
-
-.stat-num {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--vp-c-text-1);
-  line-height: 1;
-}
-
-.stat-lbl {
+.quick-label {
   font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--vp-c-text-3, var(--vp-c-text-2));
+}
+
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quick-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  background: var(--vp-c-bg-soft);
+  backdrop-filter: blur(10px);
+  font-size: 13px;
   font-weight: 500;
   color: var(--vp-c-text-2);
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+  text-decoration: none;
+  transition: color $t-fast, border-color $t-fast, background $t-fast, transform $t-fast;
+}
+
+.quick-chip:hover {
+  color: var(--vp-c-text-1);
+  border-color: $accent-border;
+  background: $accent-bg;
+  transform: translateY(-1px);
+}
+
+.dark .quick-chip:hover {
+  border-color: $accent-d-border;
+  background: $accent-d-bg;
 }
 
 @keyframes heroUp {
@@ -739,8 +682,6 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
   .hero-tagline { font-size: 18px; }
 
-  .stat-item { padding: 15px 24px; }
-
   .feat-grid { grid-template-columns: repeat(2, 1fr); }
 
   .section-heading { font-size: 30px; }
@@ -769,17 +710,14 @@ $t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
     justify-content: center;
   }
 
-  .hero-stats {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+  .hero-quick { gap: 10px; }
 
-  .hero-stats .stat-item {
-    flex-shrink: 0;
-    padding: 14px 22px;
-  }
+  .quick-links { gap: 8px; }
 
-  .stat-num { font-size: 22px; }
+  .quick-chip {
+    padding: 7px 14px;
+    font-size: 12.5px;
+  }
 
   .feat-grid { grid-template-columns: 1fr; }
 

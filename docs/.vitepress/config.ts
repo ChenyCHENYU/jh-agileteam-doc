@@ -19,7 +19,7 @@ import { vite } from "./config/vite";
  */
 export default defineConfig({
   title: "AGILE TEAM",
-  description: "从需求到上线的 AI 工程化体系 — 5 包全链路 · 14 个 npm 包 · 生态月下载 17 万+",
+  description: "AGILE TEAM 内部工程文档中心 — 前端 / 后端 / 测试 / 平台 / AI 实践的规范、指南与最佳实践",
   lang: "zh-CN",
 
   // 站点图标
@@ -30,12 +30,12 @@ export default defineConfig({
     // Open Graph
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:title", content: "AGILE TEAM — AI 工程体系文档站" }],
-    ["meta", { property: "og:description", content: "从需求到上线的 AI 工程化体系 — 5 包全链路 · 14 个 npm 包 · 生态月下载 17 万+" }],
+    ["meta", { property: "og:description", content: "AGILE TEAM 内部工程文档中心 — 前端 / 后端 / 测试 / 平台 / AI 实践的规范、指南与最佳实践" }],
     ["meta", { property: "og:image", content: "/logo.png" }],
     // Twitter Card
     ["meta", { name: "twitter:card", content: "summary" }],
     ["meta", { name: "twitter:title", content: "AGILE TEAM — AI 工程体系" }],
-    ["meta", { name: "twitter:description", content: "从需求到上线的 AI 工程化体系 — 5 包全链路 · 14 个 npm 包" }],
+    ["meta", { name: "twitter:description", content: "AGILE TEAM 内部工程文档中心 — 规范、指南与最佳实践" }],
   ],
 
   // 主题配置
