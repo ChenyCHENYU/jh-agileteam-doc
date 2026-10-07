@@ -4,6 +4,8 @@
 
 > 共享技术中心后端组：jh4j-cloud 微服务体系与 wl-skills-bd 工程闭环的建设方。
 
+<BackendTeamHero />
+
 ## 职责范围
 
 | 方向 | 内容 |
