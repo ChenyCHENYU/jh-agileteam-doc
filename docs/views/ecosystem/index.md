@@ -2,10 +2,10 @@
 
 <AuthorTag :authors="['CHENY']" />
 
-> 团队在 **@agile-team** scope 下共维护 **14 个 npm 包**，合计月下载约 **17.4 万次**，覆盖 AI 工程化、企业数据表格、工程工具链与基础库四层。本板块是生态的官方索引：每个包"是什么、什么时候用、和五包什么关系"。
+> 团队在 **@agile-team** scope 下共维护 **14 个 npm 包**，覆盖 AI 工程化、企业数据表格、工程工具链与基础库四层。本板块是生态的官方索引：每个包"是什么、什么时候用、和五包什么关系"。
 
 ::: tip 📊 数据说明
-下载量与版本数据来自 npm registry，**截至 2026-09-17**（版本列为最新发版，下载量为 09-16 采样）。各包逐版本变更以各自仓库 CHANGELOG 为准。
+下方看板的版本与月下载数据来自 npm 实时接口，自动更新、无需人工维护；各包逐版本变更以各自仓库 CHANGELOG 为准。
 :::
 
 ---
@@ -27,7 +27,7 @@
                            │ 服务于
 ┌──────────────────────────┴────────────────────────────────────┐
 │ 企业数据表格                                                    │
-│  MachTable 四件套：core / vue / react / xlsx（16 万月下载）      │
+│  MachTable 四件套：core / vue / react / xlsx                    │
 ├────────────────────────────────────────────────────────────────┤
 │ 工程工具链                                                      │
 │  vscode-config（五编辑器标准化）· vscode-config-extensions      │
@@ -39,22 +39,7 @@
 
 ## npm 数据看板
 
-| 包 | 版本 | 月下载 | 许可证 |
-|----|------|-------:|--------|
-| **@agile-team/mach-table** | 0.29.2 | **160,399** | Source-Available（商用需授权） |
-| @agile-team/mach-table-vue | 0.29.2 | 2,394 | 同上 |
-| @agile-team/mach-table-react | 0.29.2 | 2,289 | 同上 |
-| @agile-team/mach-table-xlsx | 0.29.2 | 1,810 | 同上 |
-| @agile-team/wl-skills-kit | 2.21.0 | 2,365 | UNLICENSED |
-| @agile-team/wl-skills-ui | 1.12.0 | 1,810 | UNLICENSED |
-| @agile-team/wl-skills-bd | 0.26.0 | 1,523 | UNLICENSED |
-| @agile-team/jh4j-cloud-cli | 0.6.3 | 369 | — |
-| @agile-team/wl-skills-test | 0.25.0 | 1,011 | UNLICENSED |
-| @agile-team/robot-cli | 3.2.0 | 272 | MIT |
-| @agile-team/vscode-config | 3.14.5 | 247 | MIT |
-| @agile-team/wl-skills-design | 0.11.1 | 727 | Apache-2.0 |
-| @agile-team/vscode-config-extensions | 1.1.0 | 17 | MIT |
-| @agile-team/naive-ui-components | 0.1.4 | 23 | MIT |
+<EcosystemTable />
 
 > mach-table 系列另有 **28 个外部依赖方**——是生态中唯一已被第三方项目规模复用的包。
 
