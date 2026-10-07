@@ -435,3 +435,26 @@ html {
   color: var(--vp-c-text-3);
   font-size: 0.88rem;
 }
+
+/* ================================================================
+   页面切换品牌过渡 — 正文淡入上浮（layout watcher 触发，非阻塞）
+   与首次整屏加载动画呼应，但重量级正确：快速、轻盈、不打断阅读
+   ================================================================ */
+@keyframes pageFadeUp {
+  from {
+    opacity: 0.55;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-transition {
+  animation: pageFadeUp 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none; /* 尊重系统减弱动效设置 */
+  }
+}

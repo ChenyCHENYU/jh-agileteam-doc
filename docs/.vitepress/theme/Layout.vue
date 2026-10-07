@@ -91,6 +91,16 @@ watch(
       }, 350)
     })
     scheduleTableOptimization()
+    // 内容区品牌过渡：切换时正文快速淡入上浮（非阻塞，区别于整屏首载动画）
+    nextTick(() => {
+      const content = document.querySelector('.VPContent')
+      if (!content) return
+      content.classList.remove('page-transition')
+      // 强制 reflow，确保连续切换时动画能重新触发
+      void (content as HTMLElement).offsetWidth
+      content.classList.add('page-transition')
+      setTimeout(() => content.classList.remove('page-transition'), 400)
+    })
   }
 )
 </script>
