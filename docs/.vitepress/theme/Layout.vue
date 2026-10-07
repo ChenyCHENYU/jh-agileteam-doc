@@ -12,7 +12,7 @@ onMounted(() => {
   requestAnimationFrame(() => {
     setTimeout(() => {
       showLoading.value = false
-    }, 600)
+    }, 300)
   })
 })
 

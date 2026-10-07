@@ -33,21 +33,22 @@ export function useWalineComments(options: WalineCommentsOptions) {
         }
 
         // 动态导入 Waline（首次触发时才加载 JS + CSS）
+        // 发版后 chunk hash 变化可能导致 import 404——评论区非关键路径，静默降级
         if (!walineLoaded) {
-          const [{ init }] = await Promise.all([
-            import("@waline/client"),
-            import("@waline/client/style"),
-          ]);
-          walineLoaded = true;
-
           try {
+            const [{ init }] = await Promise.all([
+              import("@waline/client"),
+              import("@waline/client/style"),
+            ]);
+            walineLoaded = true;
+
             walineInstance = init({
               ...options,
               el: target,
               dark: isDark,
             });
           } catch (error) {
-            console.error("[Waline] 初始化失败:", error);
+            console.warn("[Waline] 资源加载失败（发版后缓存失联属正常，刷新即恢复）:", error);
           }
         }
       };
