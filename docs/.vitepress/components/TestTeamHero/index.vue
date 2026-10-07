@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { BACKEND_TEAM_MEMBERS } from "./data";
-import "../TeamHero/index.scss";
+import { TEST_TEAM_MEMBERS } from "./data";
+import "./index.scss";
 
-const teamCount = BACKEND_TEAM_MEMBERS.length;
+const teamCount = TEST_TEAM_MEMBERS.length;
 
 const handleMouseMove = (event: MouseEvent) => {
   const card = event.currentTarget as HTMLElement;
@@ -28,12 +28,13 @@ const handleMouseLeave = (event: MouseEvent) => {
         <span class="team-tag">{{ teamCount }}人</span>
       </div>
       <div class="team-note">
-        <span>📢 未知或者信息错漏的请相关伙伴告知补充，目前顺序按工号先后排列</span>
+        <span class="i-megaphone text-red-500"></span>
+        <span>📢 未知或者信息错漏的的请相关伙伴告知补充</span>
       </div>
     </div>
     <div class="team-grid">
       <div
-        v-for="member in BACKEND_TEAM_MEMBERS"
+        v-for="member in TEST_TEAM_MEMBERS"
         :key="member.employeeId"
         class="member-card"
         @mousemove="handleMouseMove"

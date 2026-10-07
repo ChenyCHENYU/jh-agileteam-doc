@@ -602,6 +602,7 @@ export const sidebar: DefaultTheme.Sidebar = {
         { text: "业务团队", link: "/views/team/business" },
         { text: "前端团队", link: "/views/team/" },
         { text: "后端团队", link: "/views/team/backend" },
+        { text: "测试团队", link: "/views/team/test" },
       ],
     },
     {

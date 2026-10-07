@@ -29,6 +29,14 @@ export interface TeamMember {
  */
 export const TEAM_MEMBERS: TeamMember[] = [
   {
+    name: "李嘉诚",
+    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=LiJiaCheng",
+    role: "前端工程师",
+    employeeId: "027015",
+    department: "共享技术中心",
+    skills: ["前端开发"],
+  },
+  {
     name: "朱祥",
     avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ZhuXiang",
     role: "全栈工程师",

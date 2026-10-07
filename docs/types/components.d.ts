@@ -17,5 +17,6 @@ declare module 'vue' {
     NpmVersion: typeof import('./../.vitepress/components/NpmVersion/index.vue')['default']
     PackagesTable: typeof import('./../.vitepress/components/PackagesTable/index.vue')['default']
     TeamHero: typeof import('./../.vitepress/components/TeamHero/index.vue')['default']
+    TestTeamHero: typeof import('./../.vitepress/components/TestTeamHero/index.vue')['default']
   }
 }
