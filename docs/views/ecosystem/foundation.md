@@ -10,7 +10,7 @@
 | `@robot-admin/git-standards` | <NpmVersion pkg="@robot-admin/git-standards" fallback="1.0.5" /> | `init` 安装 Husky/Commitlint/ESLint/Prettier/lint-staged | 新项目工程化前置（强制） |
 | `@robot-admin/form-validate` | <NpmVersion pkg="@robot-admin/form-validate" fallback="3.4.2" /> | 表单 rules 校验函数库 | PC 表单（K18 校验其版本与用法） |
 | `@robot-h5/core` | <NpmVersion pkg="@robot-h5/core" fallback="1.2.0" /> | H5 运行时：宿主识别/桥接/15 Hooks/水印 | Robot_H5 模板与移动端子应用 |
-| `@agile-team/naive-ui-components` | <NpmVersion pkg="@agile-team/naive-ui-components" fallback="0.1.4" /> | Vue 3 组件库（Naive UI 基座） | 早期项目（孵化中） |
+| `@agile-team/naive-ui-components` | <NpmVersion pkg="@agile-team/naive-ui-components" fallback="0.1.4" /> | Vue 3 组件库（Naive UI 基座） | 非 jh4j / Element Plus 基线项目 |
 
 ---
 
@@ -52,10 +52,11 @@ npx @robot-admin/git-standards init
 
 ---
 
-## naive-ui-components — Naive UI 组件库（孵化中）
+## naive-ui-components — Naive UI 组件库
 
-- 基于 Naive UI 的 Vue 3 组件库（<NpmVersion pkg="@agile-team/naive-ui-components" fallback="0.1.4" />），用于非 jh4j 技术基线的项目；
-- 早期阶段：API 未冻结，暂不建议新项目直接依赖。
+- 基于 Naive UI 的 Vue 3 组件库（<NpmVersion pkg="@agile-team/naive-ui-components" fallback="0.1.4" />），可直接使用；
+- 面向**非 jh4j / Element Plus 技术基线**的项目：未适配 Element Plus 与 `jh-*` 平台组件体系，两套组件不要在同一项目混用；
+- jh4j 体系项目请使用 `@jhlc/common-core` 平台组件基座。
 
 ---
 
