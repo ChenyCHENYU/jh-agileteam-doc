@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['CHENY']" />
 
-> 当前 CLI：`@agile-team/jh4j-cloud-cli@0.6.3`。完整变更见仓库 `CHANGELOG.md`，本页只讲**使用者需要知道的事**。
+> 当前 CLI：`@agile-team/jh4j-cloud-cli`（<NpmVersion pkg="@agile-team/jh4j-cloud-cli" fallback="0.6.3" />）。完整变更见仓库 `CHANGELOG.md`，本页只讲**使用者需要知道的事**。
 
 ---
 
@@ -12,7 +12,7 @@
 
 | 版本 | 当前 | 谁决定 | 升级方式 |
 |------|------|--------|---------|
-| CLI 版本 | `0.6.3` | 脚手架仓库发版 | `pnpm add -g @agile-team/jh4j-cloud-cli@latest`（全局安装）或 npx 每次拉最新 |
+| CLI 版本 | <NpmVersion pkg="@agile-team/jh4j-cloud-cli" fallback="0.6.3" /> | 脚手架仓库发版 | `pnpm add -g @agile-team/jh4j-cloud-cli@latest`（全局安装）或 npx 每次拉最新 |
 | 模板版本 | Catalog 固定 **`v1.7.1`**（mobile.robot-h5） | Catalog `defaultRef` | CLI 升级 Catalog 后自动跟进；也可 `--ref` 提前覆盖试用 |
 
 - PC 模板（`jh4j-ui-template`）跟随 main 分支，无独立 pin；
