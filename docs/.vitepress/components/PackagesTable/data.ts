@@ -4,9 +4,9 @@
  */
 
 export interface Pkg {
-  /** npm 包名 */
+  /** npm 包名（不含 scope） */
   name: string;
-  /** 当前发布版本 */
+  /** 构建时兜底版本：页面加载后自动从 npm registry 拉取最新，仅网络失败时展示此值 */
   version: string;
   /** 一句话定位 */
   scope: string;
