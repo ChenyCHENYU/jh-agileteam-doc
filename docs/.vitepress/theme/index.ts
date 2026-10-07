@@ -66,9 +66,27 @@ export default {
   extends: DefaultTheme,
   Layout,
   enhanceApp({ app }) {
-    // 全局错误可见化：水合/渲染错误打到控制台，而不是静默挂死
+    // 全局错误可见化：水合/渲染错误打到控制台，而不是静默挂死；
+    // 若构建时配置了 VITE_ERROR_REPORT_URL（如飞书群机器人中转），同时上报
     app.config.errorHandler = (err, _instance, info) => {
       console.error(`[Vue] ${info}:`, err);
+      const reportUrl = (import.meta as unknown as { env?: Record<string, string> }).env
+        ?.VITE_ERROR_REPORT_URL;
+      if (reportUrl) {
+        try {
+          navigator.sendBeacon?.(
+            reportUrl,
+            JSON.stringify({
+              msg_type: "text",
+              content: {
+                text: `🚨 文档站前端错误\n路径: ${location.href}\n信息: ${info}\n错误: ${String(err).slice(0, 300)}`,
+              },
+            })
+          );
+        } catch {
+          /* 上报失败不影响页面 */
+        }
+      }
     };
 
     // Waline 评论系统（懒加载 — 滚动到评论区域时才加载资源）

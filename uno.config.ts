@@ -44,12 +44,6 @@ export default defineConfig({
     ],
   ],
 
-  // 快捷方式（保留必要的）
-  shortcuts: {
-    btn: "px-4 py-2 rounded inline-block bg-primary text-white cursor-pointer hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
-    "icon-btn":
-      "inline-block cursor-pointer select-none opacity-75 transition-all duration-200 hover:opacity-100 hover:text-primary",
-  },
 
   // 主题扩展
   theme: {

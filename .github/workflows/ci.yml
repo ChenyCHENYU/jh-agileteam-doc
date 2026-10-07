@@ -31,3 +31,18 @@ jobs:
 
       - name: 兜底版本漂移哨兵
         run: pnpm check:fallback
+
+      # 构建失败通知飞书群（在仓库 Settings → Secrets 配置 FEISHU_WEBHOOK_URL 后生效）
+      - name: 飞书失败通知
+        if: failure()
+        run: |
+          if [ -z "${{ secrets.FEISHU_WEBHOOK_URL }}" ]; then
+            echo "未配置 FEISHU_WEBHOOK_URL，跳过通知"
+            exit 0
+          fi
+          curl -s -X POST "${{ secrets.FEISHU_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"msg_type\": \"text\",
+              \"content\": {\"text\": \"🚨 文档站 CI 失败\n仓库: ${{ github.repository }}\n提交: ${{ github.event.head_commit.message }}\n触发人: ${{ github.actor }}\n详情: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}
+            }"

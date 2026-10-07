@@ -194,7 +194,7 @@ GET /auth/dingtalk/login?code={code}
 
 `VITE_DINGTALK_CORP_ID` 已放在 `env/.env`，各 mode 会继承：
 
-```env
+```ini
 VITE_DINGTALK_CORP_ID=ding20410a13904f00c74ac5d6980864d335
 ```
 
