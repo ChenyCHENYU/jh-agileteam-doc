@@ -90,9 +90,18 @@ html {
     box-sizing: border-box;
   }
 
-  /* 宽表格/代码块优先受益：撑满内容区 */
+  /* 宽表格/代码块优先受益：撑满内容区
+     VitePress 默认 .vp-doc table 是 display:block（滚动容器），
+     内部表格盒收缩到内容宽——恢复 display:table 才能真正撑满；
+     长内容列用 break-word 断行，避免超宽表格溢出内容区 */
   .VPDoc.has-aside .vp-doc table {
+    display: table;
     width: 100%;
+  }
+
+  .VPDoc.has-aside .vp-doc th,
+  .VPDoc.has-aside .vp-doc td {
+    overflow-wrap: break-word;
   }
 }
 
