@@ -47,9 +47,9 @@
           </div>
         </div>
 
-        <a href="/views/ecosystem/mach-table" class="hero-eco">
+        <a href="/platform/" class="hero-eco">
           <span class="eco-star">★</span>
-          <span>MachTable 企业数据表格 — <strong>月下载 16 万+</strong> · <strong>28 个外部依赖方</strong>，生态中被第三方规模复用的明星包</span>
+          <span>平台手册 — <strong>FSI2 低代码平台</strong> 操作指南：工作流 / 权限 / 菜单 / 报表 / API 管理，日常配置一站可查</span>
           <span class="eco-arrow">→</span>
         </a>
       </div>
