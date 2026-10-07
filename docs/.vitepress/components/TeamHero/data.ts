@@ -34,7 +34,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     role: "前端工程师",
     employeeId: "027015",
     department: "共享技术中心",
-    bio: "把每一行代码，当作要维护十年的代码来写。",
+    bio: "操千曲而后晓声，观千剑而后识器。",
     skills: ["前端开发", "PC 端"],
   },
   {
