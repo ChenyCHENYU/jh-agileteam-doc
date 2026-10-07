@@ -68,7 +68,7 @@ export const packages: Pkg[] = [
   },
 ];
 
-/** 站点级统计（如其他页面需要展示请自行引用，改包时同步维护） */
+/** 站点级统计（GlassHome / 指南页共用，改包时同步维护） */
 export const siteStats = {
   packages: packages.length,
   skills: 49, // kit 13 + design 10 + bd 13 + test 13
