@@ -14,6 +14,7 @@ declare module 'vue' {
     EcosystemTable: typeof import('./../.vitepress/components/EcosystemTable/index.vue')['default']
     GlassHome: typeof import('./../.vitepress/components/GlassHome/index.vue')['default']
     LevelsTable: typeof import('./../.vitepress/components/LevelsTable/index.vue')['default']
+    NpmVersion: typeof import('./../.vitepress/components/NpmVersion/index.vue')['default']
     PackagesTable: typeof import('./../.vitepress/components/PackagesTable/index.vue')['default']
     TeamHero: typeof import('./../.vitepress/components/TeamHero/index.vue')['default']
   }

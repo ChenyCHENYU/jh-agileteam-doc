@@ -6,9 +6,9 @@
 
 | 包 | 版本 | 定位 |
 |----|------|------|
-| `@agile-team/vscode-config` | 3.14.5 | 一键安装团队标准编辑器配置（VS Code / Cursor / Windsurf / Kiro / Qoder） |
-| `@agile-team/vscode-config-extensions` | 1.1.0 | 配套离线扩展包（vsix，不含 AI 类扩展）——云桌面 / 内网环境 |
-| `@agile-team/robot-cli` | 3.2.0 | 多栈通用脚手架（vue / react / node / h5-vant / webview / electron），bun 优先兼容 npm/pnpm/yarn |
+| `@agile-team/vscode-config` | <NpmVersion pkg="@agile-team/vscode-config" fallback="3.14.5" /> | 一键安装团队标准编辑器配置（VS Code / Cursor / Windsurf / Kiro / Qoder） |
+| `@agile-team/vscode-config-extensions` | <NpmVersion pkg="@agile-team/vscode-config-extensions" fallback="1.1.0" /> | 配套离线扩展包（vsix，不含 AI 类扩展）——云桌面 / 内网环境 |
+| `@agile-team/robot-cli` | <NpmVersion pkg="@agile-team/robot-cli" fallback="3.2.0" /> | 多栈通用脚手架（vue / react / node / h5-vant / webview / electron），bun 优先兼容 npm/pnpm/yarn |
 
 ---
 

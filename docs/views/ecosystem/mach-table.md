@@ -1,6 +1,6 @@
 # MachTable — 企业数据表格
 
-> 面向复杂 B 端业务的高性能 TypeScript 数据表格：框架无关内核、零核心运行时依赖、Vue 3 优先 + React 18+ 官方适配。生态中**下载量最高**的包（月下载 16 万+，28 个外部依赖方）。
+> 面向复杂 B 端业务的高性能 TypeScript 数据表格：框架无关内核、零核心运行时依赖、Vue 3 优先 + React 18+ 官方适配；生态中**被第三方复用最多**的包（28 个外部依赖方），下载量见[生态看板](/views/ecosystem/)。
 
 ::: warning 授权说明
 MachTable 采用 **Source-Available License 1.0**——源码可见但**不是开源软件**：安装、运行、修改、集成、分发或商业使用均须事先取得作者书面授权（团队内部项目已有授权体系）。详见仓库 `LICENSING.md`。
@@ -15,7 +15,7 @@ MachTable 采用 **Source-Available License 1.0**——源码可见但**不是�
 | `@agile-team/mach-table-react` | React 18+ 官方适配 |
 | `@agile-team/mach-table-xlsx` | 可选 XLSX 导入导出扩展 |
 
-版本统一发布（当前 0.29.2）；业务**只装一个适配包**，Core 自动带入。
+版本统一发布（当前 <NpmVersion pkg="@agile-team/mach-table" fallback="0.29.2" />）；业务**只装一个适配包**，Core 自动带入。
 
 ---
 

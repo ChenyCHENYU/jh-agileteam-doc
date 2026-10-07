@@ -41,7 +41,7 @@ pnpm build        # 含 sidebar 校验（导航坏链失败）+ 死链检查 + �
 - 发布前：确认 `package.json` version 已 bump、CHANGELOG 有对应条目、工作区干净；
 - 发布：`npm.cmd publish --access public`（`prepublishOnly` 自动跑全量测试作发布门）；
 - 发布后：`npm.cmd view <pkg> version` 验证 `dist-tags.latest`；本清单第一节起逐项同步；
-- 生态数据看板（ecosystem/index.md）：月下载/版本列按 registry 实测刷新并更新"数据截至"日期。
+- 生态数据看板（ecosystem/index.md）：版本/月下载已实时化（浏览器端直查 npm registry），**无需手动刷新**；仅新增包时在 `EcosystemTable/data.ts` 追加一行。
 
 ## 六、mbase 文档同步（基座 docs 更新时）
 
