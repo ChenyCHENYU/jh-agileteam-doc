@@ -73,7 +73,7 @@ document-meta:
 | restore drill | 备份可用性、恢复步骤、实际 RTO/RPO 和演练日期 |
 | data review | 字段口径、分级、脱敏、留存、所有者和唯一事实源 |
 
-发布前至少执行：契约校验与 strict diff、B1~B31、`mvn verify -Pwl-quality`、目标数据库集成测试、权限负向测试、并发/幂等测试、压测、迁移演练和恢复演练。quick/staged 结果若为 partial 不能替代 full。新增框架扩展点 Bean 时必须运行最小 Spring 容器装配测试，不能只运行直接实例化的单元测试。Controller 的真实端点清单必须与机器契约、前端调用和网关前缀对账；静态无法解析的常量路径由编译后契约测试/OpenAPI 补证。SAST、SCA、secret scan、SBOM、镜像/IaC 扫描属于 CI/安全平台职责；本包负责提醒和证据闭环，不伪装成已内置扫描器。
+发布前至少执行：契约校验与 strict diff、B1~B32、`mvn verify -Pwl-quality`、目标数据库集成测试、权限负向测试、并发/幂等测试、压测、迁移演练和恢复演练。quick/staged 结果若为 partial 不能替代 full。新增框架扩展点 Bean 时必须运行最小 Spring 容器装配测试，不能只运行直接实例化的单元测试。Controller 的真实端点清单必须与机器契约、前端调用和网关前缀对账；静态无法解析的常量路径由编译后契约测试/OpenAPI 补证。SAST、SCA、secret scan、SBOM、镜像/IaC 扫描属于 CI/安全平台职责；本包负责提醒和证据闭环，不伪装成已内置扫描器。
 
 ## 7. 完成定义
 

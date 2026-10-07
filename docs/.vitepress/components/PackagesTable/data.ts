@@ -55,7 +55,7 @@ export const packages: Pkg[] = [
     doc: "/backend/skills/",
     docLabel: "后端 Skills",
     install: "npx @agile-team/wl-skills-bd",
-    rules: "B1~B31 + J1~J8",
+    rules: "B1~B32 + J1~J8",
   },
   {
     name: "wl-skills-test",
@@ -73,5 +73,5 @@ export const siteStats = {
   packages: packages.length,
   skills: 49, // kit 13 + design 10 + bd 13 + test 13
   mcp: 79, // kit 29 + ui 13 + bd 18 + test 19
-  rules: 114, // K19 + R39 + B31 + T25
+  rules: 115, // K19 + R39 + B32 + T25
 };

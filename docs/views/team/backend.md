@@ -9,7 +9,7 @@
 | 方向 | 内容 |
 |------|------|
 | 微服务架构 | [架构设计](/backend/architecture)：七模块拆分、服务接入三类注册、平台扩展点机制 |
-| 工程闭环 | [wl-skills-bd](/backend/skills/)：13 Skill / 18 MCP / 30 条规范 / B1~B31 + J1~J8 门禁 |
+| 工程闭环 | [wl-skills-bd](/backend/skills/)：13 Skill / 18 MCP / 30 条规范 / B1~B32 + J1~J8 门禁 |
 | 数据治理 | [数据库治理实操](/backend/skills/db-governance)：四方对账、执行账本、环境分级 |
 | 外部集成 | [MES 三路对接](/backend/integration-mes)（QMS / L2 / MPS）与集成适配器治理 |
 | 生产域落地 | wl-produce（炼钢等业务服务，bd review canary 试点） |

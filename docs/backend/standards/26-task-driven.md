@@ -58,7 +58,7 @@ discover → context → validate → plan → approval → apply → verify
 | `add-business-cmd` | incremental-contract | `customOperations` | B5/B8/B17/B20 + completion |
 | `fix-bug` | fix | troubleshoot + safe-fix/人工最小修复 | B3/B5/B7/B8/B17/B18 |
 | `refactor` | fix | 基线审计 + 小步重构 | B5~B12/B23/B24/B25/B26 + Maven |
-| `audit` | readonly | doctor + validate | B1~B31 + J1~J8 + production assurance；quick/staged 需补 full |
+| `audit` | readonly | doctor + validate | B1~B32 + J1~J8 + production assurance；quick/staged 需补 full |
 | `config-op` | config | config doctor/init/migrate/fix | standards/24/25 |
 
 规则子集用于单点任务的快速反馈，不替代发布前全量质量门。

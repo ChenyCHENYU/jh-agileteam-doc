@@ -13,7 +13,7 @@
   └──► 需求说明书 ──► page-spec / api.md ──► wl-contract.json ──► 用例矩阵 ──► 质量门
        原型标注 D1-D3    （前后端共享契约）   （机器契约）      （消费双方契约）   （DI 4 指标）
            │                   │              │                  │
-        verify 四域      validate K1~K19   validate B1~B31     audit T1~T25
+        verify 四域      validate K1~K19   validate B1~B32     audit T1~T25
 ```
 
 **契约从左到右单向流动、逐段机器校验**——上游改契约，下游 `diff` 即知受影响用例与页面（test `contract_diff` / kit `contract compare --strict`）。

@@ -234,7 +234,7 @@ npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json \
 
 ### 5.5 确定性审计引擎（T1-T25）
 
-不靠 AI 自觉，脚本直接检测（对标 kit K1-K19 / bd B1-B31 / ui R001-R042）：
+不靠 AI 自觉，脚本直接检测（对标 kit K1-K19 / bd B1-B32 / ui R001-R043）：
 
 | 规则范围 | 对象 | 检测内容 |
 |---------|------|---------|

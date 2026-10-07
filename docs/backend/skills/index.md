@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip ✅ 已正式发布
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 **v0.26.0**）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.31.0" />）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
 :::
 
 ## 概述
@@ -16,8 +16,8 @@
 
 | 维度 | 现状 |
 |---|---|
-| 版本 | v0.26.0 |
-| 规范 | 30 条规范文档（B1~B31 扫描规则 + J1~J8 质量门） |
+| 版本 | <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.31.0" /> |
+| 规范 | 30 条规范文档（B1~B32 扫描规则 + J1~J8 质量门） |
 | Skill | 13 个（11 已落地，1 部分落地，1 流程骨架） |
 | MCP 工具 | 18 个（CLI/MCP 复用同一 `lib/` 核心） |
 | 生成 Profile | `jh4j3-openapi3`（Java 8 / Spring Boot 2 / jh4j-cloud 3.1 / MyBatis-Plus / OpenAPI 3） |
@@ -45,7 +45,7 @@ L3 CLI 适配              L3 MCP 适配        ← 二者只能适配同一 lib
 L4 工程产物    Java / XML / DDL / tests / contracts / catalog / docs + standards/skills/quality 配置
                     │
                     ▼
-L5 验证        B1~B31 + J1~J8 + strict contract diff + assurance evidence + 包自检
+L5 验证        B1~B32 + J1~J8 + strict contract diff + assurance evidence + 包自检
                     │
                     ▼
 L6 人工卡口    DDL/数据、权限发布、环境部署、破坏性 API、业务重构
@@ -127,13 +127,13 @@ wl-skills-bd task --list             # 列出 8 种任务
 
 | 任务 | 模式 | 触发词 | 规则子集 |
 |---|---|---|---|
-| new-service | full | 新开发/全套CRUD | B1-B31 子集 + J |
+| new-service | full | 新开发/全套CRUD | B1-B32 子集 + J |
 | add-api | incremental-contract | 加接口/加方法 | B1/B2/B5/B8/B12/B20/B24/B25/B26/B29 |
 | add-field | incremental-contract | 加字段/落库 | B3/B4/B7/B18/B25/B26/B29 |
 | add-business-cmd | incremental-contract | 加 submit/状态机 | B5/B8/B17/B20/B24/B25/B26/B29 |
 | fix-bug | fix | 改 bug/修复 | B3/B5/B7/B8/B17/B18/B24/B25/B26/B28/B29 |
 | refactor | fix | 重构/优化 | B5-B12/B23/B24/B25/B26/B28/B29 |
-| audit | readonly | 审计/体检 | B1-B31 |
+| audit | readonly | 审计/体检 | B1-B32 |
 | config-op | config | 配置/连不上 | config-doctor |
 
 > `task` 只读、不写文件；`task --apply` 会被明确拒绝，避免出现第二套无事务写入器。增量需求先更新 `wl-contract.json`，再走 codegen `planHash + --confirm + 回滚`。
@@ -214,7 +214,7 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 
 | 能力 | 说明 |
 |------|------|
-| 多模块根发现（v0.23） | Catalog 驱动：doctor、配置体检与规则扫描按模块执行，聚合根只汇总；`review --module` 把 B1~B31 真实扫描限制到目标模块，未知模块 fail-closed |
+| 多模块根发现（v0.23） | Catalog 驱动：doctor、配置体检与规则扫描按模块执行，聚合根只汇总；`review --module` 把 B1~B32 真实扫描限制到目标模块，未知模块 fail-closed |
 | 契约分类与迁移（v0.23） | `crud / schema-mirror / integration-projection` 三类契约 + 兼容描述符；`contract inspect / migrate` 存量迁移复用 planHash、受保护环境、备份、原子写与失败回滚 |
 | 字段影响分析（v0.23） | `impact field`：显式模块内关联字段/列、物理容量、Java 校验边界、数据所有权、Expand/Backfill/Contract 迁移链及文件行号证据 |
 | 集成投递机器契约（v0.23） | 逻辑 ID + 投递契约：算法版本/规范化/长度、生产者/消费者/载荷版本、排序、重试/确认/死信/重放、错误码引用；重复 StableBusinessId/PayloadHash 审计 |
@@ -223,7 +223,7 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 | 精准修复（v0.24） | `fix advise` 修复分级：项目 recipe 生成与精确替换走 planHash/确认/事务写链；0 次或多次匹配、写前漂移、受保护环境、复验失败均阻断或回滚 |
 | 性能与准确率（v0.21） | B 规则执行计划 + ScanContext 按需读取、Source Index 两级缓存、MCP 统一 `response.mode/maxItems/maxBytes/cursor` 分页与 token 预算、`discover→context→validate→plan→approval→apply→verify` Pipeline DAG、`eval:quality` 准确率/P95 CI 门禁 |
 
-## AI 精准接入与业务闭环（v0.25 / v0.26）
+## AI 精准接入与业务闭环（v0.25 ~ v0.31）
 
 | 能力 | 说明 |
 |------|------|
@@ -234,6 +234,11 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 | openQuestions 疑点确认门（v0.26） | codegen plan 机器枚举契约未声明的边界（空批语义/状态并发/命令防重/导出边界/ALTER 存量数据等），逐项人工确认后才可 apply |
 | db review / snapshot-template（v0.26） | 文档镜像 ↔ 契约 ↔ 线上快照**正向逐字段对账报告**（类型含长度/可空）；DBA 快照导出 SQL 一条命令生成（MySQL information_schema 只读查询） |
 | ALTER 机器硬门（v0.26） | 配置 Catalog 的项目由 codegen 自动执行逐列 impact 分析并留 reportHash 证据；DDL 预览附"变更前证据采集 SQL"支撑回溯恢复 |
+| `is_` 字段禁令（v0.27） | 数据库 `is_` 与 Java `isXxx` 命名禁令：B31 需求镜像告警，受管契约 / ALTER 新增字段 / 代码生成强阻断并建议 `*_flag`/`xxxFlag`；软删治理字段统一为 `DELETE_FLAG/deleteFlag` |
+| B32 跨服务 DTO 反序列化门禁（v0.28） | request/response DTO 仅有有参构造且缺无参构造、`@JsonCreator` 或 Jackson builder 配置时阻断——防"提供方事务已提交、调用方解析失败"引发重复重试 |
+| 业务生成闭环（v0.29） | 契约新增 `businessKeys[]` 业务去重与 `batchPolicy` 批量策略：新增/修改归一化、租户+有效数据查重、更新排除自身、selected-only 一致性门禁；Flyway 明确为迁移唯一写入者，部署制品以实际文件 SHA-256 为准 |
+| 写入安全升级（v0.30） | `init/update/clean` 默认预览，写入需同一 `planHash` + `--confirm`；安装/生成目标原子写、漂移检测、失败回滚；`wl-skills-bd mcp` 可直接启动 stdio 服务；扫描目录不可读时明确降级 `partial`，不再空扫描误报通过 |
+| 共享资产保护（v0.31） | manifest 记录本包贡献哈希：共享 Markdown / MCP 配置按服务键合并，保留其他包与用户内容；`--force` 只能更新本包贡献，Delivery Profile 与业务配置不会被强制重置 |
 
 ## 18 个 MCP 工具
 
@@ -241,7 +246,7 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 
 | 工具 | 写入 | 作用 |
 |---|:---:|---|
-| `wls_be_validate` | 否 | B1~B31 扫描 |
+| `wls_be_validate` | 否 | B1~B32 扫描 |
 | `wls_be_doctor` | 否 | JDK/Maven/Profile/质量门/租户证据/契约覆盖体检 |
 | `wls_be_codegen` | 条件 | 契约 validate/plan/apply |
 | `wls_be_contract` | 否 | 协作契约 show/diff（前端/OpenAPI/权限/kit api.md） |
@@ -308,14 +313,13 @@ wl-skills-bd contract diff wl-contract.json \
 ## 快速开始
 
 ```bash
-# 要求 Node.js >= 22
-npx @agile-team/wl-skills-bd init --dry-run
+# 要求 Node.js >= 22；v0.30 起 init 默认预览，确认写入需 --plan-hash <hash> --confirm
 npx @agile-team/wl-skills-bd init
 npx @agile-team/wl-skills-bd doctor
 npx @agile-team/wl-skills-bd validate src/main --format sarif --output reports/backend.sarif
 ```
 
-`init` 写入受管 manifest，重复执行不盲目覆盖本地修改；用 `diff` 查看漂移，`check` 验证安装完整性，`update` 增量升级，`clean --dry-run` 预览可清理资产。
+`init` 写入受管 manifest，重复执行不盲目覆盖本地修改；v0.31 起共享资产（AGENTS.md / MCP 配置）按贡献哈希合并，`--force` 只更新本包贡献。用 `diff` 查看漂移，`check` 验证安装完整性，`update` 增量升级，`clean --dry-run` 预览可清理资产。
 
 ## 伴生工程
 

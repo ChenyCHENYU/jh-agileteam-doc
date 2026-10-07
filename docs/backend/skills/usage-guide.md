@@ -10,12 +10,12 @@
 
 ```bash
 # 要求 Node.js >= 22
-npx @agile-team/wl-skills-bd init --dry-run   # 预览
-npx @agile-team/wl-skills-bd init              # 安装
+npx @agile-team/wl-skills-bd init   # 预览安装计划（v0.30 起默认预览）
+npx @agile-team/wl-skills-bd init --plan-hash <hash> --confirm   # 确认写入
 npx @agile-team/wl-skills-bd doctor            # 体检
 ```
 
-`init` 写入受管 manifest（`.wl-skills-bd/`），重复执行不盲目覆盖本地修改。`diff` 查看漂移，`check` 验证安装完整性，`update` 增量升级。
+`init` 写入受管 manifest（`.wl-skills-bd/`），重复执行不盲目覆盖本地修改；v0.31 起共享文件按本包贡献哈希合并，`--force` 也不会覆盖用户与其他包的内容。`diff` 查看漂移，`check` 验证安装完整性，`update` 增量升级。
 
 ---
 
@@ -89,7 +89,7 @@ wl-skills-bd validate src/main --task add-api
 
 ```bash
 # 1. 审计定位
-wl-skills-bd validate src/main               # 全量 B1-B31 扫描
+wl-skills-bd validate src/main               # 全量 B1-B32 扫描
 
 # 2. 安全修复（仅 B3/B5 标记为可自动修复）
 wl-skills-bd safe-fix src/main --plan-hash <hash> --confirm

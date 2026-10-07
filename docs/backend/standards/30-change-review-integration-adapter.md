@@ -9,7 +9,7 @@
 
 | 层 | 事实源 | 边界 |
 |---|---|---|
-| 事实 | Git diff、B1~B31、Maven POM、JaCoCo XML、项目证据文件 | 只采集可复现事实，不猜业务语义 |
+| 事实 | Git diff、B1~B32、Maven POM、JaCoCo XML、项目证据文件 | 只采集可复现事实，不猜业务语义 |
 | 策略 | `quality-gate.json`、`integration-adapters.json`、`quality-assertions.json`、`supply-chain.json` | 由项目/平台团队维护并明确 owner/sourceRef |
 | 动作 | review、适配实现 plan、精确修复 plan | 写操作必须 planHash、确认、备份、复验和失败回滚 |
 

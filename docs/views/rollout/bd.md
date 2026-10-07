@@ -72,7 +72,7 @@
 |------|-----------|--------------|
 | 规范 | 存在但分散在 Wiki 和复盘纪要 | 单一规范基线（30 条 + B/J 规则编号化） |
 | 生成 | 各服务手工起样板，风格随人 | 契约驱动生成 + 统一交付 profile |
-| 检查 | 依赖 code review 人眼 | B1~B31 确定性扫描 + J1~J8 Maven 质量门 |
+| 检查 | 依赖 code review 人眼 | B1~B32 确定性扫描 + J1~J8 Maven 质量门 |
 | 写库 | 文档、迁移、手工 DDL 各行其道 | 四方对账 + planHash 审批 + 分级执行 |
 | 安全 | 事故后口头强调 | 护栏规则固化（Redis/事务/全表写等） |
 | 演进 | 教训一次性消耗 | `naming-waivers` 审批留痕 + 规则版本化升级 |
@@ -88,7 +88,7 @@
 - 30 条后端规范（`.github/standards/01~30`）；
 - 13 个 AI Skill（core / data / ops / test 四组，v0.24 新增 integration-adapter-be）；
 - 18 个 MCP 工具（CLI 与 MCP 复用同一核心实现，v0.24 新增 `wls_be_review`、v0.25 新增 `wls_be_capabilities`）；
-- B1~B31 确定性扫描规则 + safe-fix 受控修复；
+- B1~B32 确定性扫描规则 + safe-fix 受控修复；
 - J1~J8 Maven 质量门（ArchUnit / Checkstyle / PMD / SpotBugs / Spotless / P3C / OpenAPI / JaCoCo）；
 - 数据库源头治理工具链（drift / executed / ledger / preview）；
 - 统一交付 profile `jh4j3-openapi3@1.0`。
@@ -138,7 +138,7 @@ L2  确定性核心    install / contract / codegen / audit / safe-fix / config 
 L4  工程产物      Java / XML / DDL / tests / contracts / catalog / docs
         │
         ▼
-L5  验证          B1~B31 + J1~J8 + strict contract diff + 生产证据链 + 包自检
+L5  验证          B1~B32 + J1~J8 + strict contract diff + 生产证据链 + 包自检
         │
         ▼
 L6  人工卡口      DDL 与数据、权限发布、环境部署、破坏性 API、业务重构
@@ -256,10 +256,10 @@ wl-skills-bd task --list             # 列出 8 种任务
 
 | 任务 | 模式 | 规则子集示例 |
 |------|------|------------|
-| new-service | 全链路 | B1-B31 子集 + J |
+| new-service | 全链路 | B1-B32 子集 + J |
 | add-api / add-field / add-business-cmd | 增量契约 | 相关 B 规则子集 |
 | fix-bug / refactor | 修复 | safe-fix（B3/B5）相关子集 |
-| audit | 只读 | B1-B31 全量 |
+| audit | 只读 | B1-B32 全量 |
 | config-op | 配置 | config-doctor 诊断树 |
 
 > `task` 只读路由，不写文件；增量需求先改契约再生成，不存在第二条无事务写入路径。
@@ -298,7 +298,7 @@ wl-skills-bd task --list             # 列出 8 种任务
 
 ### 6.2 18 个 MCP 工具
 
-`wls_be_validate`（B1~B31 扫描）· `doctor`（JDK/Maven/Profile/租户证据体检）· `codegen`（validate/plan/apply）· `contract`（show/diff 严格比对）· `safe_fix`（修复闭环）· `standards`（读取 30 条规范）· `templates`（读取 16 个模板）· `db_preview`（只读 DDL 预览 + Expand-Contract 阶段）· `export_permissions`（导出权限码给 kit）· `config`（init/migrate/doctor）· `troubleshoot`（10 类诊断树）· `task`（任务路由）· `catalog`（plan/apply/check/show）· `context`（有界上下文选择）· `commit`（提交校验 + Hook doctor）· `test`（gen/scenarios）· `review`（变更审查统一质量门 run/baseline）
+`wls_be_validate`（B1~B32 扫描）· `doctor`（JDK/Maven/Profile/租户证据体检）· `codegen`（validate/plan/apply）· `contract`（show/diff 严格比对）· `safe_fix`（修复闭环）· `standards`（读取 30 条规范）· `templates`（读取 16 个模板）· `db_preview`（只读 DDL 预览 + Expand-Contract 阶段）· `export_permissions`（导出权限码给 kit）· `config`（init/migrate/doctor）· `troubleshoot`（10 类诊断树）· `task`（任务路由）· `catalog`（plan/apply/check/show）· `context`（有界上下文选择）· `commit`（提交校验 + Hook doctor）· `test`（gen/scenarios）· `review`（变更审查统一质量门 run/baseline）
 
 写类工具默认停在 plan/preview，apply 必须显式确认——这条对所有入口一致，AI 调用与人执行没有特权差异。
 
@@ -346,7 +346,7 @@ wl-skills-bd codegen apply   wl-contract.json --plan-hash <hash> --confirm
 
 ```bash
 wl-skills-bd init                       # 先装规范（不覆盖本地修改）
-wl-skills-bd validate src/main          # B1~B31 全量，SARIF 可贴 CI/IDE
+wl-skills-bd validate src/main          # B1~B32 全量，SARIF 可贴 CI/IDE
 wl-skills-bd task "改个空指针bug"        # 增量任务按子集整改
 # 数据库侧：快照对账 + 账本补录
 wl-skills-bd db drift --snapshot ./snapshot.json

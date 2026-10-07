@@ -19,7 +19,8 @@
 | Git | — | 提交规范（commitlint 校验） |
 
 ```bash
-# 一条命令安装（规范 + 模板 + 编辑器/MCP 配置；先预览可加 --dry-run）
+# 一条命令安装（规范 + 模板 + 编辑器/MCP 配置）
+# v0.30 起默认预览安装计划，确认写入：init --plan-hash <hash> --confirm
 npx @agile-team/wl-skills-bd init
 
 # 环境体检：JDK/Maven/Profile/质量门探针
