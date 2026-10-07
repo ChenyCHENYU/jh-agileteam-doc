@@ -2,7 +2,7 @@
 
 <AuthorTag author="ChangXing" />
 
-> `@agile-team/wl-skills-test` v0.25.0 — 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-test`（<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.26.0" />）— 从安装到日常使用的完整指南。
 
 ---
 
