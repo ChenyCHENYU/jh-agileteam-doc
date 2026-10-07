@@ -79,10 +79,37 @@ html {
     margin: 0 !important;
   }
 
-  /* 文档限宽 960px + 居中 — 保证阅读舒适 */
+  /* 文档限宽 + 居中 — 上限随视口逐级撑开，宽屏不再浪费两侧空间 */
   .VPDoc.has-aside .main {
+    width: 100%;
     max-width: 960px;
     margin: 0 auto;
+  }
+
+  /* 宽表格/代码块优先受益：撑满内容区 */
+  .VPDoc.has-aside .vp-doc table {
+    width: 100%;
+  }
+}
+
+/* ≥1600px：正文 1120px */
+@media (min-width: 1600px) {
+  .VPDoc.has-aside .main {
+    max-width: 1120px;
+  }
+}
+
+/* ≥1920px：正文 1280px（常见 1080p/2K 全屏） */
+@media (min-width: 1920px) {
+  .VPDoc.has-aside .main {
+    max-width: 1280px;
+  }
+}
+
+/* ≥2560px：正文 1440px 封顶（超宽屏保持阅读行长上限） */
+@media (min-width: 2560px) {
+  .VPDoc.has-aside .main {
+    max-width: 1440px;
   }
 }
 
