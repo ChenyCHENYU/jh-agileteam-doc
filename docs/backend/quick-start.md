@@ -4,7 +4,7 @@
 
 ::: tip 前置知识
 - 基线：**Java 8 + Spring Boot 2 + jh4j-cloud 3.1 + MyBatis-Plus**，交付 profile `jh4j3-openapi3@1.0`
-- 工具包：`@agile-team/wl-skills-bd`（当前 v0.24.0），完整能力见 [Skills 集合](/backend/skills/)
+- 工具包：`@agile-team/wl-skills-bd`（<NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.31.0" />），完整能力见 [Skills 集合](/backend/skills/)
 :::
 
 ---

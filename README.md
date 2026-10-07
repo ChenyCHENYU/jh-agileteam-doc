@@ -47,10 +47,10 @@ npx @agile-team/wl-skills-kit
 | 分类 | 数量 | 说明 |
 |------|------|------|
 | AI Skills | 13 个 | 端到端代码生成全链路（含双线路由 + status-column-audit 存量改造） |
-| MCP Tools | 17 个 | 菜单/字典/权限/代码扫描/页面校验等 |
+| MCP Tools | 29 个 | 菜单/字典/权限/代码扫描/页面校验等 |
 | 编码规范 | 14 条 | 模块化规范，AI 自动门控加载 |
 | 页面模板 | 9 种 | LIST / FORM / MASTER_DETAIL / TREE_LIST 等 |
-| 组件 API 文档 | 11 个 | 内置平台组件使用规范 |
+| 组件 API 文档 | 20 个 | 内置平台组件使用规范 |
 | 通用组件 | 7 个 | local 4 + global 3 |
 | 领域样例 | 13 个 | 生产域 8 页 + 销售域 5 页 |
 | 编辑器配置 | 10 种 | Copilot / Cursor / Windsurf / Kiro / Trae 等 |
@@ -58,7 +58,7 @@ npx @agile-team/wl-skills-kit
 ### 📐 AI 最佳实践 — L0 → L7 能力体系
 
 ```
-L0  氛围编程        — 让 AI 感知项目上下文，告别泛化回答
+L0  氛围编程        — 纯自然语言自由发挥，适合探索，无规范约束
 L1  提示词工程      — 结构化 Prompt，精准控制 AI 输出质量
 L2  Skill          — 可复用的 AI 任务单元，沉淀团队最佳实践
 L3  Skills & MCP   — Skill 组合 + MCP 工具调用，突破上下文限制
@@ -87,13 +87,16 @@ docs/
 │   ├── guide/              # 上手指南与站点地图
 │   ├── best-practices/     # AI 最佳实践（L0-L7 能力层级）
 │   ├── ai-workflow/        # AI 工作流（设计技能 / 原型 / 详设 / 全栈 / 测试）
-│   ├── team/               # 团队介绍（前端 / 后端 / 业务）
+│   ├── team/               # 团队介绍（前端 / 后端 / 业务 / 测试 · 团队英雄墙）
+│   ├── testing/            # 测试工程 Skills（T1-T25 审计 / 质量门）
+│   ├── ecosystem/          # 工程生态（npm 实时看板 / MachTable / 工具链）
+│   └── rollout/            # 五包落地宣贯方案
 │   ├── styling/            # 样式方案（UnoCSS / SCSS / UI 设计系统）
 │   └── troubleshooting/    # 疑难杂症
 │
 ├── frontend/
-│   ├── quick-start/        # 快速上手 + 16 条编码规范
-│   ├── pc/                 # PC 端：概览、架构、规范、34 个组件、13 个 Skill
+│   ├── quick-start/        # 快速上手 + 规范详解（⓪–⑪）+ 提交规范
+│   ├── pc/                 # PC 端：概览、架构、规范、35 个组件、13 个 Skill
 │   ├── mobile-h5/          # 移动端 H5：概览、规范、7 个 Skill、@robot-h5/core
 │   └── mobile-uniapp/      # 移动端 uniApp：基座、H5/App 集成、消息中心、钉钉
 │
@@ -110,7 +113,7 @@ docs/
 
 ---
 
-## 前端 PC Skills 集合（v2.21.0）
+## 前端 PC Skills 集合
 
 13 个 AI 辅助研发 Skill + 29 个 MCP Tool + 18 条 CLI 命令，覆盖从需求到交付的完整链路；v2.20 起**场景模板体系（wl-scenario）落地**——领域场景以 JSON 事实源描述，由 kit 编译器确定性渲染页面（AI 零自由度），render 单页 0.4~1ms、模型 token 恒为 0（对比 AI 主流程每页约 2 万 token 输入），配套 Page Blueprint 快照、字节级防漂移校验与往返等价性机器证明：
 
@@ -127,7 +130,7 @@ docs/
 | ⑨ | dict-sync | MCP 驱动同步字典基线 |
 | ⑩ | permission-sync | 角色+菜单授权+动作权限闭环 |
 | ⑪ | code-fix | 受控自动修复偏差代码 |
-| ⑫ | env-config | 环境标准化 / 客户迁移（dry-run → apply）|
+| ⑫ | standard-env-config | 环境标准化 / 客户迁移（dry-run → apply）|
 | ⑬ | status-column-audit | 存量字典列纯文本 → 语义自动判色 Tag（审计 + `--fix` + `--init-bridge`）|
 
 > v2.18.0 起 kit 审计规则编号由 R1~R19 重命名为 **K1~K19**（与 wl-skills-ui 的 R001~R043 编号空间解耦）；存量项目的 `wl-skills:ignore` 标记与 `.wl-skills-validate.json` 豁免同时兼容新旧前缀，零改动升级。v2.19.0 起 `wls_project_snapshot` 提供按页隔离、默认脱敏、带 fingerprint 的 Page Blueprint 快照，AI 优先消费页面结构事实以省 token。
@@ -145,7 +148,7 @@ npx @agile-team/wl-skills-kit check
 
 ## 工程脚手架（jh4j-cloud-cli）
 
-`@agile-team/jh4j-cloud-cli`（v0.6.3）—— 从受控模板一键创建结构一致、配置完整的 PC 业务子系统或移动端 H5 应用：
+`@agile-team/jh4j-cloud-cli` —— 从受控模板一键创建结构一致、配置完整的 PC 业务子系统或移动端 H5 应用：
 
 ```bash
 # 无需全局安装
@@ -161,13 +164,13 @@ npx @agile-team/jh4j-cloud-cli doctor
 
 FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基础配置 / 权限菜单 / 流程人事 / 低代码开发 / 运维监控），含 426 张操作截图（托管于阿里云 OSS）。详见 [平台手册](/platform/)。
 
-## 后端 Skills 集合（v0.26.0）
+## 后端 Skills 集合
 
-`@agile-team/wl-skills-bd`：18 个 MCP 工具 + 13 个 Skill + 30 条规范，覆盖框架扩展点 Bean（B28/B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash）；v0.21~v0.24 完成**准确率与性能优化**（规则短路/Source Index 缓存/MCP token 预算/eval:quality 门禁）、**多模块与契约分类**（crud/schema-mirror/integration-projection + contract inspect/migrate + impact field 字段影响链 + 集成投递机器契约）、**变更审查统一质量门**（review run/baseline：Git 变更 + B 规则 + 历史基线 + 豁免 + 平台适配 + 供应链 + JaCoCo 变更覆盖率）；v0.25 落地 **AI 精准接入**（capabilities 能力清单 + task Pre-flight 证据 + 入口防漂移，MCP 17→18）；v0.26 落地**业务闭环与数据库复核**（状态机闭环校验、codegen openQuestions 业务疑点确认门、`db review` 正向逐字段对账、`db snapshot-template` DBA 快照 SQL、ALTER 影响分析机器硬门 + 证据采集），与前端 Skills 包协作。
+`@agile-team/wl-skills-bd`：19 个 MCP 工具 + 13 个 Skill + 30 条规范，覆盖框架扩展点 Bean（B28/B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash）；v0.21~v0.24 完成**准确率与性能优化**（规则短路/Source Index 缓存/MCP token 预算/eval:quality 门禁）、**多模块与契约分类**（crud/schema-mirror/integration-projection + contract inspect/migrate + impact field 字段影响链 + 集成投递机器契约）、**变更审查统一质量门**（review run/baseline：Git 变更 + B 规则 + 历史基线 + 豁免 + 平台适配 + 供应链 + JaCoCo 变更覆盖率）；v0.25 落地 **AI 精准接入**（capabilities 能力清单 + task Pre-flight 证据 + 入口防漂移，MCP 17→18）；v0.26 落地**业务闭环与数据库复核**（状态机闭环校验、codegen openQuestions 业务疑点确认门、`db review` 正向逐字段对账、`db snapshot-template` DBA 快照 SQL、ALTER 影响分析机器硬门 + 证据采集），与前端 Skills 包协作。
 
-## 测试 Skills 集合（v0.21.0）
+## 测试 Skills 集合
 
-`@agile-team/wl-skills-test`：18 个 MCP 工具 + 13 个 AI Skill + 25 条审计规则（T1-T25）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter）+ 21 条 CLI 命令，268 个单元测试；v0.9 起 run-api 升级为 **DAG 编排 + 四层断言 + 负例 + 契约漂移检测**深度接口测试，v0.10 新增选择器适配层、沙箱模拟跑、工位模板、字典同步与 gate 聚合质量门，v0.11 落地 **test-reports 统一报告体系**与字段级细粒度用例生成，v0.16~v0.19 补齐配置档案/auth 自动登录/CI 模板/失败 hint 诊断/**质量分 0-100**/单文件 HTML 报告/飞书推送，v0.20~v0.21 闭环收口（更新生效/并发重复/删除幂等探针、fix 复验、validate-contract 前置）并落地 **AI 接入故事**（setup 探测 + gen-contract 从 OpenAPI 提契约 + test-onboarding 六步 SOP，一句「接入测试」即可开始）。**五包中唯一具备实际执行能力的包**。
+`@agile-team/wl-skills-test`：19 个 MCP 工具 + 13 个 AI Skill + 25 条审计规则（T1-T25）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter）+ 21 条 CLI 命令，291 个单元测试；v0.9 起 run-api 升级为 **DAG 编排 + 四层断言 + 负例 + 契约漂移检测**深度接口测试，v0.10 新增选择器适配层、沙箱模拟跑、工位模板、字典同步与 gate 聚合质量门，v0.11 落地 **test-reports 统一报告体系**与字段级细粒度用例生成，v0.16~v0.19 补齐配置档案/auth 自动登录/CI 模板/失败 hint 诊断/**质量分 0-100**/单文件 HTML 报告/飞书推送，v0.20~v0.21 闭环收口（更新生效/并发重复/删除幂等探针、fix 复验、validate-contract 前置）并落地 **AI 接入故事**（setup 探测 + gen-contract 从 OpenAPI 提契约 + test-onboarding 六步 SOP，一句「接入测试」即可开始）。**五包中唯一具备实际执行能力的包**。
 
 ```bash
 npx @agile-team/wl-skills-test        # 安装
@@ -177,11 +180,12 @@ npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json  # 执行AP
 
 ### 五包能力矩阵
 
+> 各包最新版本与下载数据在[站内生态看板](https://www.jhat.tech/views/ecosystem/)实时展示，此处不再写死。
+
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | v0.11.1 | v2.21.0 | v1.12.0 | v0.26.0 | **v0.25.0** |
 | MCP 工具 | 0 | 29 | 13 | 18 | **19** |
-| 审计规则 | — | K1-K19 | R001-R043 | B1-B31 | **T1-T25** |
+| 审计规则 | — | K1-K19 | R001-R043 | B1-B32 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
 | 质量门 | — | validate | check | J1-J8 | **DI 4 指标** |
@@ -210,7 +214,7 @@ pnpm build
 pnpm preview
 ```
 
-访问 `http://localhost:5173` 查看文档站。
+访问 `http://localhost:8866` 查看文档站（见 `vite.ts` 配置）。
 
 ---
 

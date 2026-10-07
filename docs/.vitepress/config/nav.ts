@@ -124,6 +124,7 @@ export const nav: DefaultTheme.NavItem[] = [
       { text: "平台手册", link: "/platform/" },
       { text: "疑难杂症", link: "/views/troubleshooting/" },
       { text: "团队", link: "/views/team/" },
+      { text: "更新日志", link: "/views/changelog/" },
     ],
   },
 ];

@@ -420,3 +420,18 @@ html {
   padding-left: 4px !important;
   color: var(--vp-c-brand-1) !important;
 }
+
+/* 平台手册 OSS 截图加载失败的占位块（theme/index.ts 注入） */
+.oss-img-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  margin: 12px 0;
+  padding: 16px;
+  border: 1px dashed var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-3);
+  font-size: 0.88rem;
+}

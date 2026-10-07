@@ -11,6 +11,7 @@ declare module 'vue' {
     AuthorTag: typeof import('./../.vitepress/components/AuthorTag/index.vue')['default']
     BackendTeamHero: typeof import('./../.vitepress/components/BackendTeamHero/index.vue')['default']
     BusinessTeamHero: typeof import('./../.vitepress/components/BusinessTeamHero/index.vue')['default']
+    ChangelogList: typeof import('./../.vitepress/components/ChangelogList/index.vue')['default']
     EcosystemTable: typeof import('./../.vitepress/components/EcosystemTable/index.vue')['default']
     GlassHome: typeof import('./../.vitepress/components/GlassHome/index.vue')['default']
     LevelsTable: typeof import('./../.vitepress/components/LevelsTable/index.vue')['default']

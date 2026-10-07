@@ -26,7 +26,7 @@
           <span class="title-base">AGILE</span><span class="title-gradient"> TEAM</span>
         </h1>
 
-        <p class="hero-tagline">从需求到上线的 AI 工程化体系 · 5 包全链路 · 14 个 npm 包 · 累计发版 385+ 次</p>
+        <p class="hero-tagline">从需求到上线的 AI 工程化体系 · 5 包全链路 · 14 个 npm 包 · {{ releaseCount ? `累计发版 ${releaseCount}+ 次` : "累计发版 385+ 次" }}</p>
 
         <div class="hero-cta">
           <a href="/frontend/quick-start/getting-started" class="cta-primary">
@@ -95,10 +95,23 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { features, stats } from "./data";
 
-onMounted(() => {
+/** 累计发版次数：随站点部署自动刷新（scripts/gen-site-data.mjs 生成） */
+const releaseCount = ref<number | null>(null);
+
+onMounted(async () => {
+  try {
+    const res = await fetch("/data/release-count.json");
+    if (res.ok) {
+      const data = (await res.json()) as { total: number | null };
+      if (data.total) releaseCount.value = data.total;
+    }
+  } catch {
+    /* 网络失败时保持静态文案 */
+  }
+
   const items = document.querySelectorAll('.reveal-item');
   if (!items.length) return;
 

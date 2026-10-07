@@ -40,6 +40,23 @@ if (typeof window !== "undefined") {
   window.setTimeout(() => {
     document.querySelectorAll(".app-loading").forEach((el) => el.remove());
   }, 5_000);
+
+  // 平台手册截图容错：OSS 图片加载失败时替换为占位提示，不留空白
+  window.addEventListener(
+    "error",
+    (event) => {
+      const target = event.target as HTMLImageElement | null;
+      if (!target || target.tagName !== "IMG") return;
+      if (!/(aliyuncs|oss)/i.test(target.src)) return;
+      if (target.dataset.ossFallbackApplied) return;
+      target.dataset.ossFallbackApplied = "1";
+      const placeholder = document.createElement("div");
+      placeholder.className = "oss-img-fallback";
+      placeholder.textContent = "[截图暂不可用，完整截图见原始 Word 手册]";
+      target.replaceWith(placeholder);
+    },
+    true
+  );
 }
 
 /**

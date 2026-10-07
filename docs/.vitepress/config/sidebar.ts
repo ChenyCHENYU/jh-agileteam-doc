@@ -606,6 +606,11 @@ export const sidebar: DefaultTheme.Sidebar = {
       ],
     },
     {
+      text: "站点",
+      collapsed: false,
+      items: [{ text: "更新日志", link: "/views/changelog/" }],
+    },
+    {
       text: "宣贯方案",
       collapsed: false,
       items: [

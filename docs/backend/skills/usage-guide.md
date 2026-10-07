@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang']" />
 
-> `@agile-team/wl-skills-bd` v0.26.0 — 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-bd`（<NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.31.0" />）— 从安装到日常使用的完整指南。
 
 ---
 
