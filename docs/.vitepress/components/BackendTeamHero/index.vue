@@ -4,5 +4,5 @@ import { BACKEND_TEAM_MEMBERS } from "./data";
 </script>
 
 <template>
-  <TeamWall :members="BACKEND_TEAM_MEMBERS" />
+  <TeamWall title="契约守卫局 · 后端团队" :members="BACKEND_TEAM_MEMBERS" />
 </template>

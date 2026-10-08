@@ -4,5 +4,5 @@ import { TEST_TEAM_MEMBERS } from "./data";
 </script>
 
 <template>
-  <TeamWall :members="TEST_TEAM_MEMBERS" />
+  <TeamWall title="谛听小队 · 测试团队" :members="TEST_TEAM_MEMBERS" />
 </template>
