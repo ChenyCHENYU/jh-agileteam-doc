@@ -1,5 +1,4 @@
-# 前端团队
-
+# 鲁班营
 <AuthorTag :authors="['ZhuXiang','CHENY']" />
 
 > 共享技术中心前端组：负责 PC / 移动端 H5 / uniApp 基座三条线的工程体系与五包中的前端侧建设。

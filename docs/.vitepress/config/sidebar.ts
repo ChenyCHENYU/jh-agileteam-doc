@@ -623,10 +623,10 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "团队英雄墙",
       collapsed: false,
       items: [
-        { text: "蓝图摆渡人 · 业务团队", link: "/views/team/business" },
-        { text: "鲁班营 · 前端团队", link: "/views/team/" },
-        { text: "契约守卫局 · 后端团队", link: "/views/team/backend" },
-        { text: "谛听小队 · 测试团队", link: "/views/team/test" },
+        { text: "蓝图摆渡人", link: "/views/team/business" },
+        { text: "鲁班营", link: "/views/team/" },
+        { text: "契约守卫局", link: "/views/team/backend" },
+        { text: "谛听小队", link: "/views/team/test" },
       ],
     },
     {

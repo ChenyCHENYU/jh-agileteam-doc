@@ -28,16 +28,7 @@ export interface TeamMember {
  * 团队成员列表
  */
 export const TEAM_MEMBERS: TeamMember[] = [
-  {
-    name: "李嘉诚",
-    avatar: "/avatars/d8-6ce59dd8c6d4.svg",
-    role: "前端工程师",
-    employeeId: "027015",
-    department: "共享技术中心",
-    bio: "操千曲而后晓声，观千剑而后识器。",
-    skills: ["前端开发", "PC 端"],
-  },
-  {
+    {
     name: "朱祥",
     avatar: "/avatars/d8-58ae4a4f51c6.svg",
     role: "全栈工程师",
@@ -72,6 +63,15 @@ export const TEAM_MEMBERS: TeamMember[] = [
     department: "平台室",
     bio: "工欲善其事，必先利其器。",
     skills: ["组件库", "工程化"],
+  },
+{
+    name: "李嘉诚",
+    avatar: "/avatars/d8-6ce59dd8c6d4.svg",
+    role: "前端工程师",
+    employeeId: "027015",
+    department: "共享技术中心",
+    bio: "操千曲而后晓声，观千剑而后识器。",
+    skills: ["前端开发", "PC 端"],
   },
   {
     name: "尹华",

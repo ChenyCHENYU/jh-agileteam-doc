@@ -118,7 +118,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "潘超越",
-    avatar: "/avatars/d8-31775c1614ce.svgBig",
+    avatar: "/avatars/d8-31775c1614ce.svg",
     role: "开发工程师",
     employeeId: "409332",
     department: "共享技术中心",

@@ -21,7 +21,16 @@ export interface TestTeamMember {
 }
 
 export const TEST_TEAM_MEMBERS: TestTeamMember[] = [
-  {
+    {
+    name: "常兴",
+    avatar: "/avatars/d8-14f03e1b1a2a.svg",
+    role: "测试工程师 · wl-skills-test 维护者",
+    employeeId: "025192",
+    department: "共享技术中心",
+    bio: "程序测试可以证明缺陷存在，却无法证明缺陷不存在。",
+    skills: ["自动化", "性能测试", "质量门禁"],
+  },
+{
     name: "胡波",
     avatar: "/avatars/d8-fe7fa2eca48b.svg",
     role: "测试工程师",
@@ -47,14 +56,5 @@ export const TEST_TEAM_MEMBERS: TestTeamMember[] = [
     department: "共享技术中心",
     bio: "发现缺陷越早，修复代价越小。",
     skills: ["自动化测试", "Playwright"],
-  },
-  {
-    name: "常兴",
-    avatar: "/avatars/d8-14f03e1b1a2a.svg",
-    role: "测试工程师 · wl-skills-test 维护者",
-    employeeId: "025192",
-    department: "共享技术中心",
-    bio: "程序测试可以证明缺陷存在，却无法证明缺陷不存在。",
-    skills: ["自动化", "性能测试", "质量门禁"],
   },
 ];

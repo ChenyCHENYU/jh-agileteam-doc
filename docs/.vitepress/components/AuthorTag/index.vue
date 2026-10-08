@@ -181,18 +181,21 @@ const handleAvatarLoad = (index: number = 0) => {
 };
 
 // 本地头像可能在 Vue 水合前就完成加载（@load 监听尚未挂上，事件被错过），
-// 挂载后统一补检一次 img.complete
+// 挂载后统一补检一次 img.complete（覆盖单作者卡与多作者胶囊）
 onMounted(async () => {
   await nextTick();
-  const imgs = document.querySelectorAll<HTMLImageElement>('.author-tag img.author-avatar-image');
+  const imgs = document.querySelectorAll<HTMLImageElement>(
+    ".author-tag img.author-avatar-image, .author-tag img.pill-avatar-image"
+  );
   imgs.forEach((img) => {
-    if (img.complete && img.naturalWidth > 0) {
-      // 同一页面可能有多个 AuthorTag 实例，按实例内索引补检
-      const container = img.closest('.author-tag');
-      if (!container) return;
-      const all = Array.from(container.querySelectorAll('img.author-avatar-image'));
-      handleAvatarLoad(all.indexOf(img));
-    }
+    if (!img.complete || img.naturalWidth === 0) return;
+    const container = img.closest(".author-tag");
+    if (!container) return;
+    const peerSelector = img.classList.contains("pill-avatar-image")
+      ? "img.pill-avatar-image"
+      : "img.author-avatar-image";
+    const peers = Array.from(container.querySelectorAll<HTMLImageElement>(peerSelector));
+    handleAvatarLoad(peers.indexOf(img));
   });
 });
 

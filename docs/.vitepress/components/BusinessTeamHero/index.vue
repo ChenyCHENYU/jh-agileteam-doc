@@ -44,7 +44,7 @@ const handleMouseLeave = (event: MouseEvent) => {
   <div class="team-hero">
     <div class="team-header">
       <div class="team-title-row">
-        <h2 class="team-title">蓝图摆渡人 · 业务团队</h2>
+        <h2 class="team-title">团队英雄墙</h2>
         <span class="team-tag">{{ totalCount }}人</span>
       </div>
       <div class="team-note">
