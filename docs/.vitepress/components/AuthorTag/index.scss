@@ -81,6 +81,7 @@
     }
 
     .pill-avatar {
+      margin: 0; /* 对冲 .vp-doc img 全局边距 */
       position: absolute;
       inset: 1.5px;
       width: calc(100% - 3px);
@@ -232,6 +233,7 @@
       flex-shrink: 0;
     }
   .author-avatar {
+    margin: 0; /* 对冲 .vp-doc img 全局 16px 边距，保证居中于圆环 */
     width: 56px;
     height: 56px;
     border-radius: 50%;

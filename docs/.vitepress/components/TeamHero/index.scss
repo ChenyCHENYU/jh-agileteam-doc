@@ -141,6 +141,7 @@
     }
 
     .member-avatar {
+      margin: 0; /* 对冲 .vp-doc img 全局 16px 边距 */
       display: block;
       width: 108px;
       height: 108px;

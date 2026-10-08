@@ -113,7 +113,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import { getAuthorInfo } from "./data";
 import type { AuthorTagProps, Author } from "./data";
 
@@ -179,6 +179,22 @@ const handleAvatarLoad = (index: number = 0) => {
     avatarsLoadedState.value[index].error = false;
   }
 };
+
+// 本地头像可能在 Vue 水合前就完成加载（@load 监听尚未挂上，事件被错过），
+// 挂载后统一补检一次 img.complete
+onMounted(async () => {
+  await nextTick();
+  const imgs = document.querySelectorAll<HTMLImageElement>('.author-tag img.author-avatar-image');
+  imgs.forEach((img) => {
+    if (img.complete && img.naturalWidth > 0) {
+      // 同一页面可能有多个 AuthorTag 实例，按实例内索引补检
+      const container = img.closest('.author-tag');
+      if (!container) return;
+      const all = Array.from(container.querySelectorAll('img.author-avatar-image'));
+      handleAvatarLoad(all.indexOf(img));
+    }
+  });
+});
 
 // 头像加载失败（统一处理）
 const handleAvatarError = (index: number = 0) => {
