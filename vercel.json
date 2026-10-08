@@ -1,6 +1,7 @@
 {
   "buildCommand": "pnpm run build",
   "outputDirectory": "docs/.vitepress/dist",
+  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",
