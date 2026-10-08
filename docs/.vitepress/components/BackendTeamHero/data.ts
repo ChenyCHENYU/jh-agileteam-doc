@@ -19,7 +19,7 @@ export interface BackendTeamMember {
 export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   {
     name: "何光明",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_HeGuangMing",
+    avatar: "/avatars/d8-9a7a071f0da9.svg",
     role: "高级开发工程师",
     employeeId: "022193",
     department: "共享技术中心",
@@ -28,7 +28,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "茆荣伟",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_MaoRongWei",
+    avatar: "/avatars/d8-1fcf29316fd5.svg",
     role: "开发工程师",
     employeeId: "023958",
     department: "共享技术中心",
@@ -37,7 +37,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "谷茂彧",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_GuMaoYu&glasses=variant01&glassesProbability=100",
+    avatar: "/avatars/d8-8134721af4f8.svg",
     role: "开发工程师",
     employeeId: "026266",
     department: "共享技术中心",
@@ -46,7 +46,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "冀振威",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_JiZhenWei&glasses=variant01&glassesProbability=100",
+    avatar: "/avatars/d8-d4b2a35414e5.svg",
     role: "开发工程师",
     employeeId: "026526",
     department: "共享技术中心",
@@ -55,7 +55,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "戴安",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_DaiAn",
+    avatar: "/avatars/d8-2508c1f9b762.svg",
     role: "高级开发工程师",
     employeeId: "026827",
     department: "共享技术中心",
@@ -64,7 +64,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "张祥",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_ZhangXiang",
+    avatar: "/avatars/d8-c41a5c29333a.svg",
     role: "高级开发工程师",
     employeeId: "026828",
     department: "共享技术中心",
@@ -73,7 +73,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "黄鹏飞",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_HuangPengFei&glasses=variant01&glassesProbability=100",
+    avatar: "/avatars/d8-e5ecec44114b.svg",
     role: "开发工程师",
     employeeId: "027489",
     department: "共享技术中心",
@@ -82,7 +82,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "华路",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_HuaLu",
+    avatar: "/avatars/d8-09a35151b6c9.svg",
     role: "开发工程师",
     employeeId: "027575",
     department: "共享技术中心",
@@ -91,7 +91,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "邓守彬",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_DengShouBin",
+    avatar: "/avatars/d8-29241c08f9b6.svg",
     role: "开发工程师",
     employeeId: "028134",
     department: "共享技术中心",
@@ -100,7 +100,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "钟文",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_ZhongWen",
+    avatar: "/avatars/d8-c4cbaa2ed278.svg",
     role: "高级开发工程师",
     employeeId: "408967",
     department: "共享技术中心",
@@ -109,7 +109,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "杨天广",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_YangTianGuang",
+    avatar: "/avatars/d8-cc2961165bfb.svg",
     role: "高级开发工程师",
     employeeId: "409102",
     department: "信息化中心",
@@ -118,7 +118,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "潘超越",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=PanChaoYueBig",
+    avatar: "/avatars/d8-31775c1614ce.svgBig",
     role: "开发工程师",
     employeeId: "409332",
     department: "共享技术中心",
@@ -127,7 +127,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "张杰",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_ZhangJie",
+    avatar: "/avatars/d8-b3b03f40ccec.svg",
     role: "开发工程师",
     employeeId: "409336",
     department: "共享技术中心",
@@ -136,7 +136,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "罗栋楠",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_LuoDongNan",
+    avatar: "/avatars/d8-13dc43e325b2.svg",
     role: "开发工程师",
     employeeId: "409337",
     department: "共享技术中心",
@@ -145,7 +145,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "肖斌",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_XiaoBin",
+    avatar: "/avatars/d8-55df631bcc2b.svg",
     role: "高级开发工程师",
     employeeId: "409339",
     department: "共享技术中心",
@@ -154,7 +154,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "马钧",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_MaJun",
+    avatar: "/avatars/d8-56f830e48b44.svg",
     role: "开发工程师",
     employeeId: "409342",
     department: "共享技术中心",
@@ -163,7 +163,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "王云一",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_WangYunYi",
+    avatar: "/avatars/d8-60a0bceb2f03.svg",
     role: "开发工程师",
     employeeId: "409352",
     department: "共享技术中心",
@@ -172,7 +172,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "奚文",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_XiWen",
+    avatar: "/avatars/d8-80c1d8291a68.svg",
     role: "高级开发工程师",
     employeeId: "409668",
     department: "共享技术中心",
@@ -181,7 +181,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "李杰",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_LiJie",
+    avatar: "/avatars/d8-5a28609a31ea.svg",
     role: "开发工程师",
     employeeId: "409821",
     department: "共享技术中心",
@@ -190,7 +190,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "丁世泰",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_DingShiTai",
+    avatar: "/avatars/d8-3c9ea7c3d532.svg",
     role: "高级开发工程师",
     employeeId: "409946",
     department: "共享技术中心",
@@ -199,7 +199,7 @@ export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   },
   {
     name: "吴多粒",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=backend_WuDuoLi",
+    avatar: "/avatars/d8-1120336c27ee.svg",
     role: "开发工程师",
     employeeId: "410094",
     department: "共享技术中心",

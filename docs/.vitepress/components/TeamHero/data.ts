@@ -30,7 +30,7 @@ export interface TeamMember {
 export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "李嘉诚",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=fe_LiJiaCheng&beardProbability=30",
+    avatar: "/avatars/d8-6ce59dd8c6d4.svg",
     role: "前端工程师",
     employeeId: "027015",
     department: "共享技术中心",
@@ -39,7 +39,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "朱祥",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ZhuXiang",
+    avatar: "/avatars/d8-58ae4a4f51c6.svg",
     role: "全栈工程师",
     employeeId: "025877",
     department: "平台室",
@@ -48,7 +48,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "胥庆玉",
-    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=QingYuFemale",
+    avatar: "/avatars/d8-4639a74e1e21.svg",
     role: "前端工程师",
     employeeId: "026117",
     department: "共享技术中心",
@@ -57,7 +57,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "仲于",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ZhongYu",
+    avatar: "/avatars/d8-ebc222b9e809.svg",
     role: "全栈工程师",
     employeeId: "026397",
     department: "共享技术中心",
@@ -66,7 +66,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "谢飞",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=XieFei",
+    avatar: "/avatars/d8-c3bb95264a17.svg",
     role: "前端工程师",
     employeeId: "026789",
     department: "平台室",
@@ -75,7 +75,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "尹华",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YinHua",
+    avatar: "/avatars/d8-66ab1c162928.svg",
     role: "前端工程师",
     employeeId: "028129",
     department: "共享技术中心",
@@ -84,7 +84,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "陈竹林",
-    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=ChenZhuLin",
+    avatar: "/avatars/d8-45f9d06ae18a.svg",
     role: "前端工程师",
     employeeId: "028130",
     department: "共享技术中心",
@@ -93,7 +93,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "袁茂超",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=YuanMaoChao",
+    avatar: "/avatars/d8-404b5f112c47.svg",
     role: "前端工程师",
     employeeId: "028138",
     department: "共享技术中心",
@@ -102,7 +102,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "张东",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=RuiHan",
+    avatar: "/avatars/d8-fcff9d2a61bd.svg",
     role: "前端工程师",
     employeeId: "409321",
     department: "共享技术中心",
@@ -111,7 +111,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "杨晨誉",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=LeoYangCY&glasses=variant01&glassesProbability=100",
+    avatar: "/avatars/d8-a368c6ca2233.svg",
     role: "全栈工程师",
     employeeId: "409322",
     department: "共享技术中心",
@@ -120,7 +120,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "赵成刚",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=QingYao",
+    avatar: "/avatars/d8-f77f90f3d873.svg",
     role: "前端工程师",
     employeeId: "409324",
     department: "共享技术中心",
@@ -129,7 +129,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "曹翔",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=CaoXiang",
+    avatar: "/avatars/d8-af3c86b0acbe.svg",
     role: "前端工程师",
     employeeId: "409333",
     department: "共享技术中心",
@@ -139,7 +139,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "董亚婷",
     avatar:
-      "https://api.dicebear.com/8.x/lorelei/svg?seed=DongYaTing&glasses=variant01&glassesProbability=100",
+      "/avatars/d8-c717dcab35e6.svg",
     role: "前端工程师",
     employeeId: "409334",
     department: "共享技术中心",
@@ -148,7 +148,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "马佳瑞",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=MaJiaRuiDevs&glasses=variant01&glassesProbability=100",
+    avatar: "/avatars/d8-eb49f2bc7fd1.svg",
     role: "全栈工程师",
     employeeId: "409338",
     department: "共享技术中心",
@@ -157,7 +157,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "赵保山",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=choice008",
+    avatar: "/avatars/d8-899e176b5eb5.svg",
     role: "全栈工程师",
     employeeId: "409345",
     department: "共享技术中心",
@@ -167,7 +167,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "陈晶华",
     avatar:
-      "https://api.dicebear.com/8.x/lorelei/svg?seed=EmmaGlasses&glasses=variant01&glassesProbability=100",
+      "/avatars/d8-63455b4f1003.svg",
     role: "前端工程师",
     employeeId: "409347",
     department: "共享技术中心",

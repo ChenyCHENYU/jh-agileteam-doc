@@ -21,7 +21,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 生产领域 ──
   {
     name: "章劲柏",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_ZhangJinBai",
+    avatar: "/avatars/d8-483874990632.svg",
     role: "生产领域专家",
     employeeId: "002181",
     domain: "生产领域",
@@ -29,7 +29,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "高钰",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_GaoYu",
+    avatar: "/avatars/d8-d9906a4ef323.svg",
     role: "业务经理",
     employeeId: "020900",
     domain: "生产领域",
@@ -37,7 +37,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "朱鹏",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_ZhuPeng",
+    avatar: "/avatars/d8-f7c9d54f9387.svg",
     role: "业务经理",
     employeeId: "020920",
     domain: "生产领域",
@@ -45,7 +45,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "史福荣",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_ShiFuRong",
+    avatar: "/avatars/d8-80bb9ca82d43.svg",
     role: "业务经理",
     employeeId: "023893",
     domain: "生产领域",
@@ -54,7 +54,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 销售领域 ──
   {
     name: "杨国栋",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_YangGuoDong",
+    avatar: "/avatars/d8-8a64a7f7373d.svg",
     role: "项目经理",
     employeeId: "018986",
     domain: "销售领域",
@@ -62,7 +62,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "潘灵连",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=PanLingLian&glasses=variant01&glassesProbability=100",
+    avatar: "/avatars/d8-c39b502982bc.svg",
     role: "业务经理",
     employeeId: "409667",
     domain: "销售领域",
@@ -71,7 +71,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 质量领域 ──
   {
     name: "蔡正华",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_CaiZhengHua",
+    avatar: "/avatars/d8-515b5ea8591e.svg",
     role: "项目经理",
     employeeId: "018996",
     domain: "质量领域",
@@ -80,7 +80,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 成本领域 ──
   {
     name: "柏旭",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_BaiXu",
+    avatar: "/avatars/d8-1178f8305b37.svg",
     role: "联席部长",
     employeeId: "409753",
     domain: "成本领域",
@@ -88,7 +88,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "周礼文",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_ZhouLiWen",
+    avatar: "/avatars/d8-62adfa85a3df.svg",
     role: "技术副总监",
     employeeId: "410236",
     domain: "成本领域",
@@ -97,7 +97,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 采购领域 ──
   {
     name: "王强",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_WangQiang",
+    avatar: "/avatars/d8-34de16a20fb7.svg",
     role: "高级项目经理",
     employeeId: "012176",
     domain: "采购领域",
@@ -105,7 +105,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "白彬彬",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_BaiBinBin",
+    avatar: "/avatars/d8-df356ea6d35a.svg",
     role: "项目经理",
     employeeId: "409353",
     domain: "采购领域",
@@ -114,7 +114,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 安全领域 ──
   {
     name: "许峰",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_XuFeng",
+    avatar: "/avatars/d8-56b12c50b682.svg",
     role: "项目经理",
     employeeId: "027707",
     domain: "安全领域",
@@ -123,7 +123,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 安防领域 ──
   {
     name: "杨孔政",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_YangKongZheng",
+    avatar: "/avatars/d8-fc2b67412089.svg",
     role: "高级项目经理",
     employeeId: "017503",
     domain: "安防领域",
@@ -131,7 +131,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "龚熠",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_GongYi",
+    avatar: "/avatars/d8-f16adf5733a0.svg",
     role: "初级项目经理",
     employeeId: "022294",
     domain: "安防领域",
@@ -140,7 +140,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 物流领域 ──
   {
     name: "张凯",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_ZhangKai",
+    avatar: "/avatars/d8-b9b6c8b0107b.svg",
     role: "项目经理",
     employeeId: "021523",
     domain: "物流领域",
@@ -148,7 +148,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "陈小小",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=ChenXiaoXiao",
+    avatar: "/avatars/d8-45fe85660eb1.svg",
     role: "项目经理",
     employeeId: "027116",
     domain: "物流领域",
@@ -156,7 +156,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "丁云",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_DingYun",
+    avatar: "/avatars/d8-1073b06b72cf.svg",
     role: "高级项目经理",
     employeeId: "027264",
     domain: "物流领域",
@@ -164,7 +164,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   },
   {
     name: "陶夺旗",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_TaoDuoQi",
+    avatar: "/avatars/d8-da714e933756.svg",
     role: "初级项目经理",
     employeeId: "409328",
     domain: "物流领域",
@@ -173,7 +173,7 @@ export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [
   // ── 综合管理 ──
   {
     name: "樊聪",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=biz_FanCong",
+    avatar: "/avatars/d8-11a61c9082fa.svg",
     role: "业务经理",
     employeeId: "409354",
     domain: "综合管理",

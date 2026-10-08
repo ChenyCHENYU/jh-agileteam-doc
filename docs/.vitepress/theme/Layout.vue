@@ -88,12 +88,13 @@ watch(
     nextTick(() => {
       setTimeout(() => {
         isNavigating.value = false
-      }, 350)
+      }, 480)
     })
     scheduleTableOptimization()
-    // 内容区品牌过渡：切换时正文快速淡入上浮（非阻塞，区别于整屏首载动画）
+    // 内容区品牌过渡：只动画正文列（.VPDoc .main），不碰整个 VPContent——
+    // transform 会破坏侧边栏/TOC 的 position:sticky（表现为栏目"掉下来"）
     nextTick(() => {
-      const content = document.querySelector('.VPContent')
+      const content = document.querySelector('.VPDoc .main')
       if (!content) return
       content.classList.remove('page-transition')
       // 强制 reflow，确保连续切换时动画能重新触发
@@ -268,10 +269,10 @@ watch(
 }
 
 .nav-progress-enter-active {
-  transition: opacity 0.15s ease;
+  transition: opacity 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .nav-progress-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 .nav-progress-enter-from,
 .nav-progress-leave-to {

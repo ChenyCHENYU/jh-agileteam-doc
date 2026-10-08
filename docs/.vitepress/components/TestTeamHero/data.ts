@@ -23,7 +23,7 @@ export interface TestTeamMember {
 export const TEST_TEAM_MEMBERS: TestTeamMember[] = [
   {
     name: "胡波",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=test_HuBo&beardProbability=30",
+    avatar: "/avatars/d8-fe7fa2eca48b.svg",
     role: "测试工程师",
     employeeId: "025269",
     department: "共享技术中心",
@@ -32,7 +32,7 @@ export const TEST_TEAM_MEMBERS: TestTeamMember[] = [
   },
   {
     name: "李星辉",
-    avatar: "https://api.dicebear.com/8.x/lorelei/svg?seed=LiXingHuiFemale",
+    avatar: "/avatars/d8-1029c1c484f1.svg",
     role: "测试工程师",
     employeeId: "025271",
     department: "共享技术中心",
@@ -41,7 +41,7 @@ export const TEST_TEAM_MEMBERS: TestTeamMember[] = [
   },
   {
     name: "王超",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=test_WangChao&beardProbability=30",
+    avatar: "/avatars/d8-8547ed3f4a39.svg",
     role: "测试工程师",
     employeeId: "409351",
     department: "共享技术中心",
@@ -50,7 +50,7 @@ export const TEST_TEAM_MEMBERS: TestTeamMember[] = [
   },
   {
     name: "常兴",
-    avatar: "https://api.dicebear.com/8.x/notionists/svg?seed=test_ChangXing&beardProbability=30",
+    avatar: "/avatars/d8-14f03e1b1a2a.svg",
     role: "测试工程师 · wl-skills-test 维护者",
     employeeId: "025192",
     department: "共享技术中心",
