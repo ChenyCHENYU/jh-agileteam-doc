@@ -620,7 +620,7 @@ export const sidebar: DefaultTheme.Sidebar = {
   // 团队
   "/views/team/": [
     {
-      text: "团队",
+      text: "团队英雄墙",
       collapsed: false,
       items: [
         { text: "业务团队", link: "/views/team/business" },
