@@ -49,29 +49,5 @@ async function genReleaseCount() {
   }
 }
 
-// ---------- 2) 更新日志（git log 最近 60 条） ----------
-function genChangelog() {
-  try {
-    const raw = execSync(
-      `git log -60 --date=short --pretty=format:"%h|%ad|%s"`,
-      { cwd: root, encoding: "utf8" }
-    ).trim();
-    const items = raw
-      .split("\n")
-      .filter(Boolean)
-      .map((line) => {
-        const [hash, date, ...rest] = line.split("|");
-        return { hash, date, subject: rest.join("|") };
-      });
-    writeFileSync(join(outDir, "changelog.json"), JSON.stringify({ items }, null, 2));
-    console.log(`changelog.json：${items.length} 条提交`);
-  } catch (err) {
-    console.warn(`⚠ changelog 生成失败（保留旧产物）：${err.message}`);
-    if (!existsSync(join(outDir, "changelog.json"))) {
-      writeFileSync(join(outDir, "changelog.json"), JSON.stringify({ items: [] }));
-    }
-  }
-}
 
-await genReleaseCount();
-genChangelog();
+// （更新日志板块已按需求移除，不再生成 changelog.json）
