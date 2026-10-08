@@ -13,14 +13,15 @@
   },
   "scripts": {
     "dev": "vitepress dev docs",
-    "build": "node scripts/gen-site-data.mjs && node scripts/check-sidebar.mjs && node scripts/check-data.mjs && node scripts/check-links.mjs && vitepress build docs && node scripts/fix-sitemap.mjs && node scripts/check-bundle.mjs && node scripts/check-anchors.mjs",
+    "build": "node scripts/gen-site-data.mjs && node scripts/localize-avatars.mjs --rewrite && node scripts/check-sidebar.mjs && node scripts/check-data.mjs && node scripts/check-links.mjs && vitepress build docs && node scripts/fix-sitemap.mjs && node scripts/check-bundle.mjs && node scripts/check-anchors.mjs",
     "preview": "vitepress preview docs",
     "check:sidebar": "node scripts/check-sidebar.mjs",
     "check:anchors": "node scripts/check-anchors.mjs",
     "check:data": "node scripts/check-data.mjs",
     "check:links": "node scripts/check-links.mjs",
     "gen:data": "node scripts/gen-site-data.mjs",
-    "check:fallback": "node scripts/check-fallback.mjs"
+    "check:fallback": "node scripts/check-fallback.mjs",
+    "avatars:local": "node scripts/localize-avatars.mjs --rewrite"
   },
   "dependencies": {
     "@waline/client": "^3.16.0",

@@ -42,6 +42,7 @@ pnpm build        # 含 sidebar 校验（导航坏链失败）+ 死链检查 + �
 - 发布：`npm.cmd publish --access public`（`prepublishOnly` 自动跑全量测试作发布门）；
 - 发布后：`npm.cmd view <pkg> version` 验证 `dist-tags.latest`；本清单第一节起逐项同步；
 - 生态数据看板（ecosystem/index.md）：版本/月下载已实时化（浏览器端直查 npm registry），**无需手动刷新**；仅新增包时在 `EcosystemTable/data.ts` 追加一行。
+- 团队成员头像：新增成员时 data.ts 里先写 dicebear URL 即可，构建链会自动 `localize-avatars`（下载到 `public/avatars/` 并改写为本地路径，幂等）；建议构建后把改写结果一并提交。
 
 ## 六、mbase 文档同步（基座 docs 更新时）
 
