@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['ZhuXiang','CHENY','YangTianGuang']" />
 
-::: tip ✅ 已落地（wl-skills-design v0.11.1）
+::: tip ✅ 已落地（wl-skills-design v0.14.0）
 `02-prototype.md` 规范已完成，定义了原型标注的深度标准和输出格式。  
 原型标注 Skill 已随 `wl-skills-design` 发布，提供 `templates/`（空白模板）+ `examples/`（真实 D3 标注样例）双层资料，AI 生成后对照样例自检；v0.10.0 起 `verify spec` / `verify flowchart` 对生成物做机械校验，验证清单逐项标注 [M]（机械）/ [J]（语义）双轨执行方式。
 :::
@@ -71,7 +71,7 @@ page-codegen（生成 Vue 代码）
 
 > D3 级原型 + prototype-scan 可达到 **95-100%** 的代码生成精度。
 
-## 落地情况（v0.11.1）
+## 落地情况（v0.14.0）
 
 - [x] 落地 `requirements/prototype/SKILL.md`（双层资料）
 - [x] `templates/`：`page-annotation.md` 空白模板（7 区块）

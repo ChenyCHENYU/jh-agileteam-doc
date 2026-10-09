@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/12-database-ddl.md · 本文可判定条目由 wl-skills-bd valida…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/12-database-ddl.md · 本文可判定条目由 wl-skills-bd valida…"
 ---
 
 # 12 · 数据库 DDL 与迁移规范（✅ 已落地）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/12-database-ddl.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/12-database-ddl.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > DDL、数据回填和生产写操作必须先生成差异与风险报告，等待人工确认后由流水线执行。AI/MCP 默认只允许 plan/dry-run。

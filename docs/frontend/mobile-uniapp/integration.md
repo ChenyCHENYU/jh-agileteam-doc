@@ -1,14 +1,10 @@
----
-description: "📦 来源：wl-mbase 仓库 docs/集成文档.md——本页以仓库为单一事实源，基座发版后同步刷新。"
----
-
 # 华新移动端门户 · 多端子应用集成文档
 
 > 📦 来源：`wl-mbase` 仓库 `docs/集成文档.md`——本页以仓库为单一事实源，基座发版后同步刷新。
 
 <AuthorTag :authors="['CHENY']" />
 
-> 版本：v3.2 · 更新：2026-09-16
+> 版本：v3.3 · 更新：2026-10-09
 > 适用范围：移动端门户（wl-mbase）对接 H5/钉钉、微信 WebView 与 App/PDA 子应用的完整参考手册
 
 ---
@@ -20,6 +16,7 @@ description: "📦 来源：wl-mbase 仓库 docs/集成文档.md——本页以�
 2. [免登（SSO）实现原理](#二、免登-sso-实现原理)
    - [钉钉消息单点跳转](#钉钉消息单点跳转)
    - [审批流消息分流](#审批流消息分流)
+   - [普通消息与审批业务页面的后端配置](#普通消息与审批业务页面的后端配置)
    - [审批业务页面与移动客户端配置](#审批业务页面与移动客户端配置)
 3. [门户侧已完成内容](#三、门户侧已完成内容)
 4. [H5 子应用侧改造清单](#四、h5-子应用侧改造清单)
@@ -151,7 +148,7 @@ Nginx 分流
 
 ### 钉钉消息单点跳转
 
-本节只保留门户集成入口。消息模板、推送端、字段、状态、审批策略、测试和排障统一见 [移动端消息中心使用与架构说明](./message-center)，不在两份文档中重复维护。
+本节保留门户集成入口和业务地址的后端配置参考。消息模板、推送端、完整字段、状态、审批策略、测试和排障统一见 [移动端消息中心使用与架构说明](./message-center)。
 
 普通业务消息统一使用静态中转页：
 
@@ -186,6 +183,110 @@ https://{VITE_DOMAIN}/mbase/relay.html?target=flow&provider=platform&templateCod
 ```
 
 当前静态中转页只把 `FLOW_COMMENTS` 直接交给基座审批详情；其它 `FLOW_*` 按临时安全域规则或 `returnUrl` 处理。基座内部消息中心可读取所有带有效流程参数的 `FLOW_*`。两条入口的现状差异、`FLOW_REFUSE` 重新发起和迁移要求以消息中心说明为准。
+
+其中 `returnUrl` 是链接生成方按既有协议编码透传的内部参数，不是普通消息字段，也不是要求业务方额外配置的流程发起字段。审批业务页面的配置源仍是发起流程时的 `mobileBusinessUrl`。
+
+### 普通消息与审批业务页面的后端配置
+
+先判断入口，再配置对应字段：
+
+| 场景 | 后端配置位置 | mbase 实际读取 | 地址含义 |
+| --- | --- | --- | --- |
+| 普通业务通知、普通业务待办（非 `FLOW_*`） | `OaMessageBuilder.setShowUrl(showUrl)` | 消息记录 `showUrl` | 子应用完整移动页面地址 |
+| 审批详情中的“业务页面” | 最终发起流程请求的 `mobileBusinessUrl` | 审批响应 `flowInstance.mobileBusinessUrl` | 子应用完整移动业务页面地址 |
+| `FLOW_*` 审批消息进入内置审批详情 | 流程消息生成处的 `showUrl`、`relativeId` | `showUrl` 中的 `id/commentId` 等流程参数 | 流程入口，不是普通消息的业务页面地址 |
+| 普通消息 PC 页面 | `OaMessageBuilder.setPcShowUrl(pcShowUrl)` | PC 查询响应，需核对 SDK/服务端映射 | PC 页面地址，不参与移动选址 |
+
+普通消息只读 `showUrl`，审批“业务页面”只读 `flowInstance.mobileBusinessUrl`。普通消息不需要新增 `returnUrl/mobileBusinessUrl`；流程发起也不需要额外新增 `returnUrl`。审批未配置移动业务地址时，“业务页面”按钮不显示，仍可在基座查看和办理审批。
+
+#### 普通业务消息：在发送消息时设置 showUrl
+
+下例根据环保项目提供的伪代码整理，Builder 调用方式沿用该例。SDK 导入、枚举和服务对象使用项目现有定义；本工作区没有后端 SDK 源码，示例不代表已完成后端编译或联调。
+
+```java
+private void sendBusinessMessage(
+        String tempNo,
+        String id,
+        Map<String, String> contentMap,
+        MsgRelativeType relativeType,
+        String userNo,
+        String showUrl,
+        String pcShowUrl) {
+    messageServiceUtil.send(new OaMessageBuilder()
+        .setTempNo(tempNo)
+        .setRelativeType(relativeType)
+        .setRelativeId(id)
+        // 完整移动页面地址：已注册 mpPath + 子应用真实路由。
+        // 不是从 PC views 目录开始的 Vue 文件/组件路径。
+        .setShowUrl(showUrl)
+        .setContentMap(contentMap)
+        .setUserNo(userNo)
+        // PC 地址单独配置，不用于 mbase 的移动跳转。
+        .setPcShowUrl(pcShowUrl));
+}
+```
+
+环保项目给出的路由常量可以作为以下参考。它们属于业务后端配置，不写进基座前端的诊断规则；实际移动页面和部署路由仍需环保项目验收。
+
+```java
+public static final String RECTIFICATION_MOBILE_URL =
+    "/mbase/hb/ep/hazard/rectification";
+public static final String DANGER_CHECK_CC_MOBILE_URL =
+    "/mbase/hb/ep/hazard/rectification";
+public static final String MONITOR_REPORT_MOBILE_URL =
+    "/mbase/hb/envMonitor/rectification";
+public static final String AUDIT_RECORD_CIRCULATE_MOBILE_URL =
+    "/mbase/hb/ep/waste/vendor";
+
+// 普通隐患排查通知示意；其余参数沿用业务系统已有值。
+sendBusinessMessage("EP_DANGER_CHECK_TASK", businessId, contentMap,
+    relativeType, userNo, RECTIFICATION_MOBILE_URL, pcShowUrl);
+```
+
+列表页可以不带业务 ID；详情页只追加该页面实际约定的参数，并正确编码参数值。`relativeId` 是消息的业务关联 ID，基座不会自动把它改成某个 `id` 查询参数。不要未经页面契约确认就为所有地址拼接 `?id=...`。
+
+普通消息发送后，先检查 mbase 消息列表响应的 `showUrl` 是否为上述移动地址，再检查它是否命中当前注册表的 `mpPath`。例如环保前缀是 `/mbase/hb/`，不能只配置 `/hiddendangermanagement/...` 或子应用内部相对路径。`?` 说明根据运行时注册表生成示例，不按消息标题、模板编码猜所属应用。
+
+PC 双端需单独验收：本地 `wl-ui-public` 展示代码读取 PC 查询响应中的 `showUrl`，而发送端配置了独立的 `pcShowUrl`。本工作区缺少 OAMS/SDK 的映射源码，需在实际 SDK/服务端确认 PC 查询使用 PC 地址、mbase 查询的 `showUrl` 使用移动地址；不能仅凭 `setPcShowUrl` 存在就认定映射已生效。
+
+#### 审批业务页面：在发起流程时设置 mobileBusinessUrl
+
+它属于流程发起请求，不是 `OaMessageBuilder` 的消息地址字段。下面仅演示业务后端组装最终发起请求的位置，DTO、客户端类名和调用方法均为伪代码，替换成项目已有流程 SDK，保留原流程发起的其他必填参数和调用方式。
+
+```java
+private void startBusinessFlow(
+        String businessId,
+        String mobileBusinessUrl,
+        String pcBusinessUrl) {
+    FlowStartRequest request = buildExistingFlowStartRequest(businessId);
+    request.setBusinessUrl(pcBusinessUrl);
+    // 在最终发往流程服务的请求中配置，不能只存在于业务服务的临时变量。
+    request.setMobileBusinessUrl(mobileBusinessUrl);
+    flowClient.startFlow(request);
+}
+```
+
+最终请求中与业务地址有关的部分应为：
+
+```json
+{
+  "businessId": "<业务ID>",
+  "businessUrl": "<PC业务页面地址>",
+  "mobileBusinessUrl": "/mbase/<已注册应用路径>/<真实移动页面路由>?<业务参数名>=<业务参数值>"
+}
+```
+
+`<...>` 是占位符，按真实 `mpPath`、移动路由和页面参数替换。路径构成及网关要求与普通消息一致。若业务服务发起时只有业务 ID，由业务服务查询业务记录并组装地址，基座不根据模板编码猜业务页面。
+
+按以下顺序验收，即可定位地址在哪一步丢失：
+
+1. 业务服务**最终发给流程服务的请求**包含正确的 `mobileBusinessUrl`。
+2. 流程服务持久化该值。
+3. 待办或只读审批详情响应（`getFlowCommentInfo/getFlowInfo`）的 `flowInstance.mobileBusinessUrl` 返回同一地址。
+4. 点击“业务页面”后命中已注册子应用，网关加载移动站点，子应用按自己的参数契约打开页面。
+5. 用新发起实例验收；修改发起代码不会自动补齐历史流程实例。
+
+如果第 3 步响应为空，前端只能确认“审批响应缺少移动业务地址”，无法单凭该响应区分第 1 步未传、第 2 步未保存或查询时未返回。`?` 说明会标明读取字段和配置位置，并提示检查这条链路，不把未经验证的后端原因当成结论。流程消息参数和摘要展示的完整契约见 [消息中心说明 §6](./message-center#_6-移动端地址与消息路由契约) 与 [§7.3](./message-center#_7-3-审批详情)。
 
 ### 审批业务页面与移动客户端配置
 
@@ -229,19 +330,19 @@ wl-mbase 移动 OAuth client
 
 `mobileBusinessUrl` 是否有效与 OAuth 客户端是否创建是两项独立条件。业务系统不需要为每条审批、每个页面或每个子应用单独创建客户端；所有通过 wl-mbase 进入的移动子应用统一复用基座 Token。
 
-SIT 当前约定如下：
+移动门户各环境统一约定如下（OAuth 客户端不按环境区分）：
 
-| 配置位置                | 配置项                     | SIT 约定                                                               | 责任方       |
-| ----------------------- | -------------------------- | ---------------------------------------------------------------------- | ------------ |
-| 平台「客户端管理」      | 客户端 ID                  | `hb_ydd`                                                               | 平台认证服务 |
-| 平台「客户端管理」      | 原始客户端密钥             | 与 `hb_ydd` 客户端创建时录入的原始值一致；SIT 当前约定与客户端 ID 同值 | 平台认证服务 |
-| 平台「客户端管理」      | 授权模式                   | 至少开启“资源拥有者/密码模式”和“刷新 Token”                            | 平台认证服务 |
-| 平台「客户端管理」      | 权限集                     | `all`，或覆盖移动门户及已接入业务所需接口的最小权限集                  | 平台认证服务 |
-| `wl-mbase/env/.env.sit` | `VITE_OAUTH_CLIENT_ID`     | `hb_ydd`                                                               | 基座         |
-| `wl-mbase/env/.env.sit` | `VITE_OAUTH_CLIENT_SECRET` | 平台录入的原始值；不能使用管理页面显示的 BCrypt 哈希                   | 基座         |
-| 各子应用                | OAuth client               | 不配置，复用 `portal_token`                                            | 子应用       |
+| 配置位置                                               | 配置项              | 约定                                                               | 责任方       |
+| ------------------------------------------------------ | ------------------- | ------------------------------------------------------------------ | ------------ |
+| 平台「客户端管理」                                     | 客户端 ID           | `hb_ydd`                                                           | 平台认证服务 |
+| 平台「客户端管理」                                     | 原始客户端密钥      | 与 `hb_ydd` 客户端创建时录入的原始值一致；当前约定与客户端 ID 同值 | 平台认证服务 |
+| 平台「客户端管理」                                     | 授权模式            | 至少开启“资源拥有者/密码模式”和“刷新 Token”                        | 平台认证服务 |
+| 平台「客户端管理」                                     | 权限集              | `all`，或覆盖移动门户及已接入业务所需接口的最小权限集              | 平台认证服务 |
+| `wl-mbase/scripts/build-environment.mjs`（共享默认值） | `oauthClientId`     | `hb_ydd`，全部环境一致，一处维护                                   | 基座         |
+| `wl-mbase/scripts/build-environment.mjs`（共享默认值） | `oauthClientSecret` | 平台录入的原始值；不能使用管理页面显示的 BCrypt 哈希               | 基座         |
+| 各子应用                                               | OAuth client        | 不配置，复用 `portal_token`                                        | 子应用       |
 
-这套移动客户端的目的，是让移动端 Token 及其公司上下文与 PC 的 `c1` 隔离；它不会改变审批路由，也不会替代 `mobileBusinessUrl`。其他环境必须使用该环境认证服务中真实创建的移动客户端配置，不能未经确认直接复制 SIT 凭据。
+这套移动客户端的目的，是让移动端 Token 及其公司上下文与 PC 的 `c1` 隔离；它不会改变审批路由，也不会替代 `mobileBusinessUrl`。移动门户所有环境统一使用 `hb_ydd`；各环境认证服务需各自完成该客户端的创建与授权配置。
 
 客户端归属只在“签发 Token”时确定，后续切换公司不重新生成 Token。标准链路是：基座使用当前环境的移动客户端完成登录/刷新 → 每次打开子应用都注入最新 `portal_token` → 子应用用同一个 Token 调用业务接口；若存量平台接口依赖“当前公司”，子应用只需先调用 `POST /hrms/user/changeCompany?companyId=<companyId>`。平台按 Token 所属客户端隔离当前公司，因此移动端 `hb_ydd` 的切换不会修改 PC `c1` 的当前公司，反向也一样。
 
@@ -255,7 +356,7 @@ SIT 当前约定如下：
 2. 移动端切换公司后，PC 刷新仍保持原公司；PC 切换公司也不影响移动端。
 3. Token 临近过期时可以使用 `hb_ydd` 完成刷新；若首次登录成功但到期退出，优先检查是否遗漏“刷新 Token”授权模式。
 4. 从审批消息进入基座审批详情，再点击“业务页面”，能够进入正确子应用和业务单据。
-5. 缺少或错误的 `mobileBusinessUrl` 应提示地址配置问题；这类错误与 `client_id/client_secret` 无关。
+5. 缺少 `flowInstance.mobileBusinessUrl` 时不显示“业务页面”按钮；已返回地址但打开失败时，查看地址诊断说明。这类配置与 OAuth 客户端配置分别验收。
 
 ---
 

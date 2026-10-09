@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-design v0.11.1 · standards/02-prototype.md · 可判定条目由 verify（M 机械项）自动执行。"
+description: "📦 来源：wl-skills-design v0.14.0 · standards/02-prototype.md · 可判定条目由 verify（M 机械项）自动执行。"
 ---
 
 # 02 — 原型设计规范
 
-> 📦 来源：`wl-skills-design` v0.11.1 · `standards/02-prototype.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
+> 📦 来源：`wl-skills-design` v0.14.0 · `standards/02-prototype.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
 
 
 > **wl-skills-design · requirements-prototype**

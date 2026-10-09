@@ -2,7 +2,7 @@
 
 <AuthorTag author="ChangXing" />
 
-::: tip npm 已发布 <NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.26.0" />
+::: tip npm 已发布 <NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.28.0" />
 ```bash
 npx @agile-team/wl-skills-test        # 安装（11 规范 + 13 Skill + 19 MCP）
 npx @agile-team/wl-skills-test doctor # 环境体检
@@ -40,14 +40,14 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 |------|:----:|------|
 | 测试规范 | 11 | 对齐在线 QC 流程规范（01-流程 ~ 11-数据安全） |
 | AI Skill | 13 | 功能链 9 + 性能链 3 + 接入编排 1（test-onboarding） |
-| MCP 工具 | 19 | wls_test_* 前缀，全部实现并有测试覆盖（v0.17 contract_diff · v0.22 gen_contract） |
+| MCP 工具 | 20 | wls_test_* 前缀，全部实现并有测试覆盖（v0.22 gen_contract · v0.27 task） |
 | 审计规则 | 25 | T1-T25 确定性扫描器（Playwright/JMeter/用例/E2E 工程），表驱动可扩展 |
 | 自动修复 | 6 | F1-F6（v-deep/beforeEach/waitForTimeout/硬编码/afterEach/测试名），修复后强制复验 |
 | 执行器 | 3 | API 接口测试 + Playwright 自动化 + JMeter 性能 |
-| CLI 命令 | 21 | init/update/setup/doctor/validate/gen-contract/validate-contract/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/ci/diff/clean |
-| 单元测试 | 291 | 全部通过 |
+| CLI 命令 | 27 | init/update/setup/doctor/validate/gen-contract/validate-contract/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/ci/diff/clean + task/route/explain/status/doctor-host/protocol |
+| 单元测试 | 316 | 全部通过 |
 
-### 版本演进亮点（0.12 → 0.26）
+### 版本演进亮点（0.12 → 0.28）
 
 | 版本 | 主题 |
 |------|------|
@@ -66,6 +66,8 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 | 0.24 | 产物 JSON 化统一（`run-gen --json` / `diff --json` / `perf-compare --json`）+ **测试计划数据侧 `report --plan-input`**（AI 写计划不再人肉拼数据）+ case_generate 紧凑化收尾（4 个大结果工具全部紧凑化） |
 | 0.25 | 软失败检出：业务码成功但 `message` 提示异常的假成功不再漏检，DAG 按失败处理并给诊断指引 |
 | 0.26 | 独立与共存：安装归属保护（manifest 记录本包贡献、冲突保留、`--force` 只动本包）、共享文件按标记区块合并、**真实契约联动**（页面相对路径 `apiContract` + delivery Profile 驱动真实方法/路径/成功码，缺项拒绝而非猜默认）、独立页面测试（无契约页面保留 UI/E2E 用例，接口事实标记未决） |
+| 0.27 | **任务路由与真实执行证据**：task/route/explain/status/doctor-host + MCP `wls_test_task`（第 20 个工具），13 个业务 Skill 可解释路由；同 runId 任务/工具回执保存输入与检查文件哈希，执行与验证分开记录，报告按 runId 聚合并拒绝不匹配证据 |
+| 0.28 | **公开集成协议**：describe/request 统一信封（能力清单/路由语料/判定结果按公开契约暴露）；ESM 静态导入修复，MCP 目录 Node 20 可用；补 context null 与空 targets 回归 |
 
 ---
 
@@ -118,7 +120,7 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 
 ## 审计引擎（T1-T25）
 
-对标 kit K1-K19 / bd B1-B32 / ui R001-R043 的**确定性规则扫描器**（不靠 AI 自觉，脚本直接检测）：
+对标 kit K1-K22 / bd B1-B32 / ui R001-R044 的**确定性规则扫描器**（不靠 AI 自觉，脚本直接检测）：
 
 | 规则范围 | 对象 | 检测内容 |
 |---------|------|---------|
@@ -218,11 +220,11 @@ npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/a
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | <NpmVersion pkg="@agile-team/wl-skills-design" fallback="0.11.1" /> | <NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.25.0" /> | <NpmVersion pkg="@agile-team/wl-skills-ui" fallback="1.15.0" /> | <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.32.0" /> | **<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.25.0" />** |
-| 审计规则 | — | K1-K19 | R001-R043 | B1-B32 | **T1-T25** |
-| 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
+| 版本 | <NpmVersion pkg="@agile-team/wl-skills-design" fallback="0.14.0" /> | <NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.27.0" /> | <NpmVersion pkg="@agile-team/wl-skills-ui" fallback="1.16.0" /> | <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.34.0" /> | **<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.28.0" />** |
+| 审计规则 | — | K1-K22 | R001-R044 | B1-B32 | **T1-T25** |
+| 自动修复 | — | F1-F6 | 14 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
-| MCP 工具 | 0 | 29 | 13 | 18 | **19** |
+| MCP 工具 | 0 | 34 | 18 | 18 | **20** |
 
 ---
 

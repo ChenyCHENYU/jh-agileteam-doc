@@ -23,7 +23,7 @@ export interface Pkg {
 export const packages: Pkg[] = [
   {
     name: "wl-skills-design",
-    version: "0.11.1",
+    version: "0.14.0",
     scope: "需求设计：流程图 / 说明书 / 原型标注 / 数据库 / 接口 / 评审",
     doc: "/views/ai-workflow/design-skills",
     docLabel: "产品设计 Skills",
@@ -32,25 +32,25 @@ export const packages: Pkg[] = [
   },
   {
     name: "wl-skills-kit",
-    version: "2.25.0",
+    version: "2.27.0",
     scope: "前端 PC：页面生成 / 规范审计 / 菜单字典权限同步 / 场景渲染",
     doc: "/frontend/pc/skills/",
     docLabel: "前端 PC Skills",
     install: "npx @agile-team/wl-skills-kit",
-    rules: "K1~K19",
+    rules: "K1~K22",
   },
   {
     name: "wl-skills-ui",
-    version: "1.15.0",
+    version: "1.16.0",
     scope: "视觉一致：设计令牌 / 扫描修复 / 运行时守护 / 页面契约",
     doc: "/views/styling/wl-skills-ui",
     docLabel: "UI 统一规范",
     install: "npx @agile-team/wl-skills-ui",
-    rules: "R001~R043",
+    rules: "R001~R044",
   },
   {
     name: "wl-skills-bd",
-    version: "0.32.0",
+    version: "0.34.0",
     scope: "后端：契约驱动生成 / 数据治理 / 质量门 / 变更审查",
     doc: "/backend/skills/",
     docLabel: "后端 Skills",
@@ -59,7 +59,7 @@ export const packages: Pkg[] = [
   },
   {
     name: "wl-skills-test",
-    version: "0.25.0",
+    version: "0.28.0",
     scope: "测试：用例生成 / 深度执行 / 统一报告 / 质量门",
     doc: "/views/testing/",
     docLabel: "测试工程 Skills",
@@ -72,6 +72,6 @@ export const packages: Pkg[] = [
 export const siteStats = {
   packages: packages.length,
   skills: 49, // kit 13 + design 10 + bd 13 + test 13
-  mcp: 79, // kit 29 + ui 13 + bd 18 + test 19
-  rules: 115, // K19 + R39 + B32 + T25
+  mcp: 90, // kit 34 + ui 18 + bd 18 + test 20
+  rules: 119, // K22 + R40 + B32 + T25
 };

@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/30-change-review-integration-adapter.md · 本文可判定条目…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/30-change-review-integration-adapter.md · 本文可判定条目…"
 ---
 
 # 30 · 变更审查与平台集成适配（✅ 已落地）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/30-change-review-integration-adapter.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/30-change-review-integration-adapter.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > 目标：把代码规则、覆盖率、平台封装、供应链和修复证据汇总为可复现的变更门禁，同时不把 BD 自身约定强加给不同平台。

@@ -5,21 +5,21 @@ description: "::: tip 这是哪个 CLI？本页讲的是 Skills 体系安装器 
 # wl-skills-kit 工具
 
 ::: tip 这是哪个 CLI？
-本页讲的是 **Skills 体系安装器** `@agile-team/wl-skills-kit`（`init / update / validate / fix / clean` 等 14 个子命令），用于把规范、Skill、组件文档导入**已有项目**。
+本页讲的是 **Skills 体系安装器** `@agile-team/wl-skills-kit`（`init / update / validate / fix / clean` 等 24 个子命令），用于把规范、Skill、组件文档导入**已有项目**。
 从零**创建新项目**用的是另一个工具 —— 项目脚手架 [`@agile-team/jh4j-cloud-cli`](/scaffold/)（命令 `jh4j create`）。
 :::
 
-`@agile-team/wl-skills-kit`（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.25.0" />）提供 18 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理、场景渲染全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。v2.21.0 起**重引擎按命令懒加载**（validate/fix/contract/scenario 等进入对应命令才装载引擎链，轻命令零引擎成本），K18 表单校验探测按项目根 memoize（N 页项目每轮 validate 少约 2N 次同步读盘）。
+`@agile-team/wl-skills-kit`（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.27.0" />）提供 24 个 CLI 子命令，覆盖安装、升级、清理、校验、修复、体检、导出、契约、组件治理、场景渲染、任务观测全生命周期。所有命令默认作用于当前工作目录，均可加 `--dry-run` 预览。v2.21.0 起**重引擎按命令懒加载**（validate/fix/contract/scenario 等进入对应命令才装载引擎链，轻命令零引擎成本），K18 表单校验探测按项目根 memoize（N 页项目每轮 validate 少约 2N 次同步读盘）。
 
 ## 命令速查
 
 | 命令 | 用途 |
 |------|------|
-| `init`（默认） | 全量安装（14 规范 + 13 Skill + 29 MCP + 10 编辑器配置 + 组件文档） |
+| `init`（默认） | 全量安装（14 规范 + 13 Skill + 34 MCP + 10 编辑器配置 + 组件文档） |
 | `update` | 增量更新（MD5 比对，仅覆盖变化文件，保护 reports/） |
 | `check` | 环境预检（Node / 工具链 / MCP / manifest） |
 | `diff` | 对比已安装文件与最新 kit 版本差异 |
-| `validate` | 静态校验页面完整性 + AST 语义级 K1~K19（CI 卡门；v2.18.0 前为 R1~R19，豁免配置新旧前缀等价） |
+| `validate` | 静态校验页面完整性 + AST 语义级 K1~K22（CI 卡门；v2.18.0 前为 R1~R19，豁免配置新旧前缀等价） |
 | `validate-page` | 单页 / 指定目录校验 |
 | `fix` | 确定性机械修复（幂等安全，如缺 `render-type`、`::v-deep`→`:deep()`） |
 | `doctor-ui` | 检查 wl-skills-ui 接入完整性 |
@@ -32,6 +32,11 @@ description: "::: tip 这是哪个 CLI？本页讲的是 Skills 体系安装器 
 | `template` | 模板检索与治理（search / extract / validate / audit / diff，落盘需显式 `confirmWrite`） |
 | `snapshot` | 项目快照 / Page Blueprint（按页隔离、默认脱敏、fingerprint 防内容漂移，`wls_project_snapshot` 同源） |
 | `scenario` | 场景模板（validate / render / extract / verify / from-spec，wl-scenario JSON 确定性渲染 + W1 字节级防漂移） |
+| `task` | 任务判定并登记计划（记录 runId，未执行不冒充已跑） |
+| `route` / `explain` | 只读任务路由与解释（匹配/歧义/缺口/不适用/缺上下文） |
+| `status` | 查看同 runId 实际执行、验证状态、检查范围与过期证据 |
+| `doctor-host` | 静态宿主入口诊断（不声称宿主已加载） |
+| `protocol` | 公开集成协议（describe 能力清单 / request 统一判定，JSON 信封） |
 
 > 全局安装后也可直接用 `wl-skills` 命令（如 `wl-skills update`）。
 
@@ -70,7 +75,7 @@ npx @agile-team/wl-skills-kit check
 
 ## validate / validate-page
 
-静态校验页面文件完整性（4 文件、AGGrid、cid、mock、api.md），含 AST 语义级 K1~K19 检测（v2.18.0 前编号为 R1~R19，豁免配置新旧前缀等价兼容）。v2.20.2/v2.20.4 新增两类生成期阻断：**长工作台滚动裁切**与**分栏表格高度链断裂**。K13 圈复杂度、K15 分页边界、K16 运行时边界默认执行；K14 类型错误需 `--typecheck` 开启；K17 表单仅必填开关按实际绑定逐项判断；K18 表单校验库版本检查；K19 弹窗内 AG Grid 必须用 `v-if` 延迟挂载（防零高度渲染）。v2.18.2 起 `validate --pre-commit` 修正共享模块/非页面 staged 提交的误报：无可校验页面时明确跳过，全量 validate 语义不变。
+静态校验页面文件完整性（4 文件、AGGrid、cid、mock、api.md），含 AST 语义级 K1~K22 检测（v2.18.0 前编号为 R1~R19，豁免配置新旧前缀等价兼容）。v2.20.2/v2.20.4 新增两类生成期阻断：**长工作台滚动裁切**与**分栏表格高度链断裂**。K13 圈复杂度、K15 分页边界、K16 运行时边界默认执行；K14 类型错误需 `--typecheck` 开启；K17 表单仅必填开关按实际绑定逐项判断；K18 表单校验库版本检查；K19 弹窗内 AG Grid 必须用 `v-if` 延迟挂载（防零高度渲染）。v2.18.2 起 `validate --pre-commit` 修正共享模块/非页面 staged 提交的误报：无可校验页面时明确跳过，全量 validate 语义不变。
 
 ```bash
 npx @agile-team/wl-skills-kit validate                      # 全量校验

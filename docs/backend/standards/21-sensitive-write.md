@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/21-sensitive-write.md · 本文可判定条目由 wl-skills-bd val…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/21-sensitive-write.md · 本文可判定条目由 wl-skills-bd val…"
 ---
 
 # 21 · 数据库敏感写操作规范（✅ 已落地）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/21-sensitive-write.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/21-sensitive-write.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > DDL 有 plan/apply 兜底，但**业务级 DML（写/删/批量）目前只有事务层**，缺分级与护栏。本规范把"误删全表""锁表 30 分钟""重复下单"等事故源降到机器兜底层。

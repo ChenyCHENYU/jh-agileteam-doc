@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-design v0.11.1 · standards/06-spec-doc.md · 可判定条目由 verify（M 机械项）自动执行。"
+description: "📦 来源：wl-skills-design v0.14.0 · standards/06-spec-doc.md · 可判定条目由 verify（M 机械项）自动执行。"
 ---
 
 # 06 · 需求设计说明书规范
 
-> 📦 来源：`wl-skills-design` v0.11.1 · `standards/06-spec-doc.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
+> 📦 来源：`wl-skills-design` v0.14.0 · `standards/06-spec-doc.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
 
 
 > 本规范定义需求设计说明书的结构、深度、追溯与验证口径。示例均为匿名合成内容，不对应任何组织、项目、地点、人员或线上数据。

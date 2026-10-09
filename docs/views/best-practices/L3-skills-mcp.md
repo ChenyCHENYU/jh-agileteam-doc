@@ -82,7 +82,7 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 
 ## kit 实现了哪些 Tool？
 
-**29 个 Tool，五大类**（完整清单与参数见 [PC Skills — MCP 权威清单](/frontend/pc/skills/#_29-个-mcp-tools-权威清单)）：
+**34 个 Tool，六大类**（完整清单与参数见 [PC Skills — MCP 权威清单](/frontend/pc/skills/#_34-个-mcp-tools-权威清单)）：
 
 | 类别 | 数量 | 干什么 |
 |------|:---:|--------|
@@ -90,6 +90,7 @@ MCP（Model Context Protocol）是 AI 调用外部工具的标准协议。通过
 | 项目感知 | 7 | 页面扫描、路由检查、页面校验、UI 体检、快照 Blueprint |
 | 模板治理 | 5 | 模板检索 / 提取 / 校验 / 审计 / 差异（`confirmWrite` 门禁） |
 | 环境标准化 | 3 | scan → apply（受控）→ verify |
+| 任务观测 | 5 | task 登记 / route 路由 / explain 解释 / status 回执 / doctor-host 诊断（v2.25 起） |
 | 通知 | 1 | 审计报告推送飞书 webhook（可选） |
 
 > 效果量化：菜单同步 token 节省约 **87%**，从 20 分钟 10 次手动操作 → **1 分钟 0 次手动操作**。权限同步原本需切换 3 个后台界面 ≥ 15 分钟，现在 **1 分钟 0 次手动操作**。

@@ -10,7 +10,7 @@ description: "文档用途：项目组会宣贯、各项目接入执行、存量
 > 设计源文件：`D:\work\design-work\烟台华新数智化信息化改造项目UI规范v1.pptx`  
 > 工程载体：`@agile-team/wl-skills-ui`  
 > 工程目录：`D:\office-project\wl\wl-skills-ui`  
-> 当前核对版本：`1.12.0`（2026-08-30）
+> 当前核对版本：`1.16.0`（2026-10-09）
 
 ## 一、宣贯目标与核心结论
 
@@ -30,7 +30,7 @@ description: "文档用途：项目组会宣贯、各项目接入执行、存量
 
 > 一套设计基线、一个工程化事实源、两种接入模式、五层能力覆盖、一条持续治理闭环。
 
-### 版本演进速览（v1.9.11 → v1.12.0）
+### 版本演进速览（v1.9.11 → v1.16.0）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -40,6 +40,10 @@ description: "文档用途：项目组会宣贯、各项目接入执行、存量
 | v1.11.0 | R042 日期/时间弹层几何隔离；AG Grid 选择框横向对轴修复；scanner `--changed --base` Git 增量 + `--parser auto` ；`wl-ui contract extract/validate/match` 页面契约三件套（MCP 同名工具） | Teleport 弹层不再被业务样式误伤；大仓库可增量扫描；成熟页面可提取为脱敏契约复用 |
 | v1.11.1 | 修复空态守护导致上下分栏（jh-drag-row）手柄失去拖动行程 | 空表分栏页手柄可正常拖动 |
 | v1.12.0 | **能力 Profile 体系**（native-element / legacy-jh-element / legacy-jh-ag）+ wl-ui profiles；R043 按钮 icon 语义规则；scanner 共享 engine 与 summary.v1/compact.v2 低 token 协议；fixer 支持 planHash | 按项目形态选档，非 AG 项目零 AG 包袱；报告更省 token，修复计划可防漂移 |
+| v1.13.x | **native-jh-ag 终态 Profile**：native 运行时叠 jh/Base 封装、AG 经 npm 或 Module Federation 远程提供；R044 多列表单标签预算（≥240px）人工复核；R008 补齐 BaseForm/BaseQuery 静态 label-width 检测 | 平台子应用终态形态有档可选；宽标签截断与输入区挤压在扫描期提醒，不做危险全局改写 |
+| v1.14.0 | **机读能力边界与贡献保护**：`bin/capabilities.json` 声明 CLI/安装器/MCP 独立使用；`.clinerules` 独有文件名；tokens link 登记归属，清理只移除未修改的本包插入；共享文件原子替换 | 与其他包共同安装互不覆盖；用户改动的文件永不被强制重置 |
+| v1.15.0 | **任务可观测**：task/route/explain/status/doctor-host CLI 与 5 个 MCP 工具（MCP 13→18）；执行/验证状态与过期证据分开记录；真实 Vue SFC 解析错误形成不可被 only/skip 隐藏的 SFC_PARSE 诊断 | AI 是否真跑过扫描一查便知；语法坏文件无法被选择性忽略蒙混过关 |
+| v1.16.0 | **公开集成协议**：describe/request 统一信封（能力清单/路由语料经真实打包产物验证）；MCP 目录对齐真实 `tools/list` 的 18 项；context null、空 targets 边界输入可解释拒绝 | 外部宿主与适配器按公开契约稳定接入；目录声明与实际暴露不再不一致 |
 
 ---
 

@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/22-resilience.md · 本文可判定条目由 wl-skills-bd validate…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/22-resilience.md · 本文可判定条目由 wl-skills-bd validate…"
 ---
 
 # 22 · 限流熔断与外部调用规范（✅ 已落地）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/22-resilience.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/22-resilience.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > 微服务架构下，一个下游慢能拖垮整条调用链，最终雪崩。本规范把"超时、重试、熔断、舱壁、限流"固化为团队基线。

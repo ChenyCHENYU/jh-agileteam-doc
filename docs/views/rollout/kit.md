@@ -9,7 +9,7 @@ description: "文档用途：项目组会宣贯、各项目接入执行、存量
 > 工程载体：`@agile-team/wl-skills-kit`
 > 工程目录：`D:\office-project\wl\wl-skills-kit`
 > 配套组件：`@jhlc/common-core` · `@agile-team/wl-skills-ui` · `@robot-admin/form-validate`
-> 当前核对版本：`2.20.4`（2026-09-10）
+> 当前核对版本：`2.27.0`（2026-10-09）
 
 ---
 
@@ -31,7 +31,7 @@ description: "文档用途：项目组会宣贯、各项目接入执行、存量
 
 > 一套规范基线、一个工程化事实源、三层强制机制、14 条全覆盖规范、一条持续治理闭环。
 
-### 版本演进速览（v2.15.0 → v2.21.0）
+### 版本演进速览（v2.15.0 → v2.27.0）
 
 | 版本 | 落地能力 | 对使用者的意义 |
 |------|---------|--------------|
@@ -39,13 +39,19 @@ description: "文档用途：项目组会宣贯、各项目接入执行、存量
 | v2.16.4 | "仅必填"切换扩展为统一表单能力 | 大表单必填/非必填混合场景一键切换，隐藏字段校验同步清理 |
 | v2.16.5–v2.16.6 | D3 字典字段绑定门禁、S7 进阶查询（lookupFlows）门禁 | 字典错绑、查询操作不唯一、回填字段缺失均为确定性报错 |
 | v2.17.0 | **status-column-audit 技能**（第 13 个 Skill） | 存量列表页"字典列纯文本 → 语义自动判色 Tag"审计+`--fix`+`--init-bridge` 一键桥接 |
-| v2.18.0 | 规则编号 R1~R19 更名为 **K1~K19** | 与 wl-skills-ui 的 R001~R040 编号空间解耦；存量豁免配置新旧前缀等价，零改动升级 |
+| v2.18.0 | 规则编号 R1~R19 更名为 **K1~K22** | 与 wl-skills-ui 的 R001~R040 编号空间解耦；存量豁免配置新旧前缀等价，零改动升级 |
 | v2.18.2 | `validate --pre-commit` 共享模块误报根治 | 仅 staged 共享模块/非页面目录的提交不再被误拦截，全量 validate 语义不变 |
 | v2.18.4 | `--version` 查询；Skill 注册表单一事实源 + 版本漂移门禁；validate 缓存；K12 漏检修复 | 升级决策有依据；豁免/规则口径不再漂移 |
 | v2.19.0 | 增量 validate 缓存、`wls_project_snapshot` 项目快照与 Page Blueprint 提取/校验 | AI 优先消费页面结构事实，减少逐页源码上下文与 token 消耗 |
 | v2.20.0-2.20.1 | **wl-scenario 场景模板体系**：JSON 事实源 + 确定性渲染（9 种 pattern）、`scenario validate/render/extract/verify/from-spec`、W1 字节级防漂移、往返等价机器证明 | 领域页面出码 AI 零自由度，render 单页 0.4~1ms、模型 token 恒为 0 |
 | v2.20.2-2.20.4 | **validate 双类新阻断 + 交付 Profile 保全 + MCP 加固**：长工作台滚动裁切阻断、分栏表格高度链断裂阻断（2.20.2/2.20.4）；`update` 始终保留项目交付 Profile（2.20.3）；菜单可见性与角色指派 MCP 加固 | 体感：工作台类页面滚动/分栏高度问题生成前即拦；升级不再丢 Profile；MCP 同步更稳 |
 | v2.21.0 | **引擎懒加载与数量门禁**：CLI 重引擎按命令懒加载（重命令进入才装载，轻命令零成本）；K18 探测 memoize（N 页少 2N 次读盘）；version:verify 新增 MCP 数量/规范条数一致性门禁；audit_report_push 生产闸门 | 大仓 validate 更快；文档计数漂移发版前拦截 |
+| v2.22.x | **业务验收契约**：`page-spec.features.acceptance` 落地查询上下键、默认日期、长文本完整显示、业务去重、selected-only 批量与鉴权/查询/写后回查矩阵；业务闭环 playbook | 炉号上下键、默认日期等业务规则先结构化再生成，伪缺陷不再进验收结论 |
+| v2.23.0 | **实现驱动的领域镜像**：`template mirror` 从实际实现留存定义/模板绑定/源码证据（`--bundle` 导出闭包）；普通页面以 data.ts 为业务定义事实源，取消强制 JSON/scenario 化 | 成熟页面可反向沉淀为领域模板；新页面写法更自然，不被迫维护 scenario JSON |
+| v2.24.0-2.24.2 | **独立能力与扁平表单范式**：`capabilities.json` 机读能力边界；编辑器入口 marker 区块安装贡献保护（保留用户字节与其他包内容）；`useBaseForm` 公开挂载钩子连接 Element Plus 原生表单上下文，补齐整表/单字段/清除/重置校验 | 多包共存互不覆盖；独立表单不再需要页面外层 el-form 胶水，校验语义与原生一致 |
+| v2.25.0 | **任务可观测与宿主入口**：task/route/explain/status/doctor-host CLI 与 5 个 MCP 工具（MCP 29→34）；执行/验证状态、检查范围与过期证据分开记录，runId 跨包复用；`.agents/skills` 原生薄入口 | AI 是否真跑过检查一查便知；模型自报不再冒充执行证据 |
+| v2.26.0 | **公开集成协议与迁移事务化**：describe/request 统一信封（能力清单/路由语料/判定结果按公开契约暴露）；安装迁移字节级备份、失败自动回滚 | 外部宿主与适配器可稳定接入；升级中断不再留半安装状态 |
+| v2.27.0 | **前端注释闭环**：03-comments 规范独立提供，page-codegen/code-fix/convention-audit 引用闭环；K22 文件头结构检查（页面 Vue/TS/SCSS，识别空值/占位，不误报字符串）；scenario 全轨生成基于事实的职责头 | 生成的页面自带真实职责说明；"无注释/占位注释"在 validate 阶段可检出 |
 
 ---
 
@@ -91,7 +97,7 @@ description: "文档用途：项目组会宣贯、各项目接入执行、存量
 
 - 14 条编码规范（`.wl-skills/standards/01~14`）
 - 13 个 AI Skill（`.wl-skills/skills/`，含 v2.17.0 新增的 status-column-audit 存量改造技能）
-- 29 个 MCP 工具（v2.19.0 新增 project_snapshot 与 template 治理 5 工具）
+- 34 个 MCP 工具（v2.19.0 新增 project_snapshot 与 template 治理 5 工具；v2.25.0 新增 task/route/explain/status/doctor-host 任务观测 5 工具）
 - 9 个页面模板（TPL-\*.md）
 - 编辑器适配配置（10 种 AI 编辑器：Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）
 - 独立 API 契约（`wl-skills contract` 可脱离后端先行建立本项目契约）
@@ -114,10 +120,10 @@ description: "文档用途：项目组会宣贯、各项目接入执行、存量
 | 管控方式 | 适用内容 | 示例 |
 |---------|---------|------|
 | AI 自动门控 | 代码生成阶段按任务类型加载相关规范 | page-codegen 自动加载 02+04+06+09+12+13 |
-| 确定性审计 | 从源码静态扫描的规范偏差 | K1~K19 AST 语义级检测 + D3 字典绑定 + S7 进阶查询门禁 |
+| 确定性审计 | 从源码静态扫描的规范偏差 | K1~K22 AST 语义级检测 + D3 字典绑定 + S7 进阶查询门禁 |
 | 模板与人工验收 | 涉及业务语义和交互的内容 | 页面模式选择、表单校验时机 |
 
-> **规则编号说明（v2.18.0）**：kit 全部规则编号由 `R1~R19` 更名为 `K1~K19`（K=Kit），与 `wl-skills-ui` 扫描器的 `R001~R040` 编号空间彻底区分。存量项目的 `wl-skills:ignore` 行内标记与 `.wl-skills-validate.json` 豁免配置**同时接受新旧前缀**（同号等价，大小写不敏感），升级零改动。
+> **规则编号说明（v2.18.0）**：kit 全部规则编号由 `R1~R19` 更名为 `K1~K22`（K=Kit），与 `wl-skills-ui` 扫描器的 `R001~R040` 编号空间彻底区分。存量项目的 `wl-skills:ignore` 行内标记与 `.wl-skills-validate.json` 豁免配置**同时接受新旧前缀**（同号等价，大小写不敏感），升级零改动。
 
 ---
 
@@ -496,7 +502,7 @@ code-fix（自动修复）      → 加载全量 01-14
 
 ```bash
 # 静态校验页面完整性（4 文件、AGGrid、cid、mock、api.md）
-# + AST 语义级 K1~K19 检测（圈复杂度、分页边界、运行时边界、表单开关、校验库、弹窗 AG Grid）
+# + AST 语义级 K1~K22 检测（圈复杂度、分页边界、运行时边界、表单开关、校验库、弹窗 AG Grid）
 npx @agile-team/wl-skills-kit validate
 
 # 提交阶段增量卡门（v2.18.2：仅共享模块/非页面 staged 变更自动跳过，不再误拦截）
@@ -512,7 +518,7 @@ CI 中校验未通过 → **构建中止**，偏差代码无法进入主干。
 
 ```
 本地 husky 拦截（08 提交规范 + console 清理）
-    → CI validate 卡门（02/12/13 等 + K1~K19）
+    → CI validate 卡门（02/12/13 等 + K1~K22）
         → convention-audit 体检（全量 01-14）
 ```
 
@@ -737,7 +743,7 @@ npx @agile-team/wl-skills-kit@latest update
 
 ### 12.3 工程验收
 
-- [ ] `validate` 零阻断项（K1-K19 通过）；
+- [ ] `validate` 零阻断项（K1-K22 通过）；
 - [ ] ESLint 0 error；
 - [ ] `pnpm build` 构建通过；
 - [ ] TypeScript `tsc --noEmit` 无致命错误。

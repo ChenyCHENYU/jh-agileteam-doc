@@ -1,10 +1,10 @@
 ---
-description: "版本：v1.12.0 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。"
+description: "版本：v1.16.0 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。"
 ---
 
 # @agile-team/wl-skills-ui — 企业级 UI 风格对齐框架
 
-> 版本：v1.12.0 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+> 版本：v1.16.0 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
 
 ::: tip 能力 Profile 体系（v1.12.0）
 按项目形态选择接入档位，统一声明 adapter、扫描规则、SCSS preset 与 runtime guard：
@@ -108,7 +108,7 @@ wl-ui all       --project .                           # 一键全流程（scan�
 
 ---
 
-## 扫描规则（39 条，R001–R043）
+## 扫描规则（40 条，R001–R044）
 
 | 规则 | 层级 | 说明 |
 |---|---|---|
@@ -125,8 +125,9 @@ wl-ui all       --project .                           # 一键全流程（scan�
 | R041（v1.10.3） | L1 | 按钮尺寸：`el-button` / `ElButton` / `BaseToolbar` 无显式 `size` 时告警并建议 `small`（已纳入 fixer） |
 | R042（v1.11.0） | L1 | Element Plus 日期/时间弹层几何隔离，阻断裸 `.el-date-picker` 宽高/定位样式误伤 Teleport 面板 |
 | R043（v1.12.0） | L1 | 静态已知按钮文案到语义 icon 的确定性映射（含 fixer 与一致性门禁） |
+| R044（v1.16.0） | L1 | 密集多列表单标签预算人工复核：静态标签宽度或动态绑定字面量兜底达到 240px 时提醒核对留白与输入区宽度（不做全局自动改写） |
 
-> `standards/rules.json` 是 category / severity / layer / vendor / Profile / fixability 的运行期事实源（39 条元数据与 39 个实现一一对应，14 条可修规则与 fixer 集合一致）。scanner v1.11.0 起支持 `--changed --base <ref>` Git 增量扫描、`--parser auto|fast|sfc`（优先复用目标项目本地 `@vue/compiler-sfc`）与 `wl-ui-mcp` 可执行入口；v1.12.0 起 CLI 与 MCP 共享同一 `scanner/engine.mjs` 实现（MCP 不再逐次起 Node 子进程），报告协议升级 `summary.v1` / 可分页 `compact.v2`（规则公共字段集中 `ruleCatalog`，`limit/cursor` 续取），fixer 支持 `profile/only/skip` 范围约束、逐规则改动统计与 SHA-256 `planHash`（预览后 `--plan-hash` 拒绝漂移计划）。
+> `standards/rules.json` 是 category / severity / layer / vendor / Profile / fixability 的运行期事实源（40 条元数据与 40 个实现一一对应，14 条可修规则与 fixer 集合一致）。scanner v1.11.0 起支持 `--changed --base <ref>` Git 增量扫描、`--parser auto|fast|sfc`（优先复用目标项目本地 `@vue/compiler-sfc`）与 `wl-ui-mcp` 可执行入口；v1.12.0 起 CLI 与 MCP 共享同一 `scanner/engine.mjs` 实现（MCP 不再逐次起 Node 子进程），报告协议升级 `summary.v1` / 可分页 `compact.v2`（规则公共字段集中 `ruleCatalog`，`limit/cursor` 续取），fixer 支持 `profile/only/skip` 范围约束、逐规则改动统计与 SHA-256 `planHash`（预览后 `--plan-hash` 拒绝漂移计划）。
 
 ---
 
@@ -192,7 +193,7 @@ npm 发布前强制通过真实浏览器视觉回归测试，覆盖 8 个维度�
 
 ---
 
-## MCP 工具（13 个）
+## MCP 工具（18 个）
 
 | Tool | 作用 |
 |---|---|
@@ -209,6 +210,11 @@ npm 发布前强制通过真实浏览器视觉回归测试，覆盖 8 个维度�
 | `wl_ui_contract_extract`（v1.11.0） | 将成熟 Vue 页面提取为按领域/场景分类的脱敏 `wl-ui-contract.v1` |
 | `wl_ui_contract_validate`（v1.11.0） | 校验页面契约结构与脱敏边界 |
 | `wl_ui_contract_match`（v1.11.0） | 契约匹配复用（不保存源码/真实接口/业务字段值） |
+| `wl_ui_task`（v1.15.0） | 任务判定并登记计划（记录 runId，未执行不冒充已跑） |
+| `wl_ui_route`（v1.15.0） | 只读任务路由（匹配/基础规范/歧义/缺口/不适用/缺上下文） |
+| `wl_ui_explain`（v1.15.0） | 只读解释候选 Skill、适用规则与缺口建议 |
+| `wl_ui_status`（v1.15.0） | 查看实际执行、验证状态、检查范围与过期证据 |
+| `wl_ui_doctor_host`（v1.15.0） | 静态宿主入口诊断（不声称宿主已加载） |
 
 ---
 

@@ -47,7 +47,7 @@ npx @agile-team/wl-skills-kit
 | 分类 | 数量 | 说明 |
 |------|------|------|
 | AI Skills | 13 个 | 端到端代码生成全链路（含双线路由 + status-column-audit 存量改造） |
-| MCP Tools | 29 个 | 菜单/字典/权限/代码扫描/页面校验等 |
+| MCP Tools | 34 个 | 菜单/字典/权限/代码扫描/页面校验/任务观测等 |
 | 编码规范 | 14 条 | 模块化规范，AI 自动门控加载 |
 | 页面模板 | 9 种 | LIST / FORM / MASTER_DETAIL / TREE_LIST 等 |
 | 组件 API 文档 | 20 个 | 内置平台组件使用规范 |
@@ -115,7 +115,7 @@ docs/
 
 ## 前端 PC Skills 集合
 
-13 个 AI 辅助研发 Skill + 29 个 MCP Tool + 18 条 CLI 命令，覆盖从需求到交付的完整链路；v2.20 起**场景模板体系（wl-scenario）落地**——领域场景以 JSON 事实源描述，由 kit 编译器确定性渲染页面（AI 零自由度），render 单页 0.4~1ms、模型 token 恒为 0（对比 AI 主流程每页约 2 万 token 输入），配套 Page Blueprint 快照、字节级防漂移校验与往返等价性机器证明：
+13 个 AI 辅助研发 Skill + 34 个 MCP Tool + 24 条 CLI 命令，覆盖从需求到交付的完整链路；v2.20 起**场景模板体系（wl-scenario）落地**——领域场景以 JSON 事实源描述，由 kit 编译器确定性渲染页面（AI 零自由度），render 单页 0.4~1ms、模型 token 恒为 0（对比 AI 主流程每页约 2 万 token 输入），配套 Page Blueprint 快照、字节级防漂移校验与往返等价性机器证明：
 
 | # | Skill | 说明 |
 |---|---|---|
@@ -166,11 +166,11 @@ FSI2 低代码平台 V3.1.0 完整操作手册，覆盖 18 个功能模块（基
 
 ## 后端 Skills 集合
 
-`@agile-team/wl-skills-bd`：19 个 MCP 工具 + 13 个 Skill + 30 条规范，覆盖框架扩展点 Bean（B28/B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash）；v0.21~v0.24 完成**准确率与性能优化**（规则短路/Source Index 缓存/MCP token 预算/eval:quality 门禁）、**多模块与契约分类**（crud/schema-mirror/integration-projection + contract inspect/migrate + impact field 字段影响链 + 集成投递机器契约）、**变更审查统一质量门**（review run/baseline：Git 变更 + B 规则 + 历史基线 + 豁免 + 平台适配 + 供应链 + JaCoCo 变更覆盖率）；v0.25 落地 **AI 精准接入**（capabilities 能力清单 + task Pre-flight 证据 + 入口防漂移，MCP 17→18）；v0.26 落地**业务闭环与数据库复核**（状态机闭环校验、codegen openQuestions 业务疑点确认门、`db review` 正向逐字段对账、`db snapshot-template` DBA 快照 SQL、ALTER 影响分析机器硬门 + 证据采集），与前端 Skills 包协作。
+`@agile-team/wl-skills-bd`：18 个 MCP 工具 + 13 个 Skill + 30 条规范，覆盖框架扩展点 Bean（B28/B29）、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试全链路；v0.19 起新增**数据库源头一致性闭环**（文档 ↔ 契约 ↔ Flyway ↔ 线上快照四方对账、DDL 执行账本、改名豁免审批），v0.20 落地**数据库事实源强门禁**（standards/29 基线表同名复用 + 全属性漂移检测 + B31 事实源指纹进入 planHash）；v0.21~v0.24 完成**准确率与性能优化**（规则短路/Source Index 缓存/MCP token 预算/eval:quality 门禁）、**多模块与契约分类**（crud/schema-mirror/integration-projection + contract inspect/migrate + impact field 字段影响链 + 集成投递机器契约）、**变更审查统一质量门**（review run/baseline：Git 变更 + B 规则 + 历史基线 + 豁免 + 平台适配 + 供应链 + JaCoCo 变更覆盖率）；v0.25 落地 **AI 精准接入**（capabilities 能力清单 + task Pre-flight 证据 + 入口防漂移，MCP 17→18）；v0.26 落地**业务闭环与数据库复核**（状态机闭环校验、codegen openQuestions 业务疑点确认门、`db review` 正向逐字段对账、`db snapshot-template` DBA 快照 SQL、ALTER 影响分析机器硬门 + 证据采集）；v0.33 起落地**公开集成协议**（describe/request 统一信封 + `doctor-host` 修复 + 能力清单只反映真实安装技能），v0.34 **后端注释规范 §9 收敛单一事实源**（B12 拒绝空/仅标签 Javadoc、Service/Mapper 生成产物补业务边界注释），与前端 Skills 包协作。
 
 ## 测试 Skills 集合
 
-`@agile-team/wl-skills-test`：19 个 MCP 工具 + 13 个 AI Skill + 25 条审计规则（T1-T25）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter）+ 21 条 CLI 命令，291 个单元测试；v0.9 起 run-api 升级为 **DAG 编排 + 四层断言 + 负例 + 契约漂移检测**深度接口测试，v0.10 新增选择器适配层、沙箱模拟跑、工位模板、字典同步与 gate 聚合质量门，v0.11 落地 **test-reports 统一报告体系**与字段级细粒度用例生成，v0.16~v0.19 补齐配置档案/auth 自动登录/CI 模板/失败 hint 诊断/**质量分 0-100**/单文件 HTML 报告/飞书推送，v0.20~v0.21 闭环收口（更新生效/并发重复/删除幂等探针、fix 复验、validate-contract 前置）并落地 **AI 接入故事**（setup 探测 + gen-contract 从 OpenAPI 提契约 + test-onboarding 六步 SOP，一句「接入测试」即可开始）。**五包中唯一具备实际执行能力的包**。
+`@agile-team/wl-skills-test`：20 个 MCP 工具 + 13 个 AI Skill + 25 条审计规则（T1-T25）+ 6 个自动修复（F1-F6）+ 3 个执行器（API/Playwright/JMeter）+ 27 条 CLI 命令，316 个单元测试；v0.9 起 run-api 升级为 **DAG 编排 + 四层断言 + 负例 + 契约漂移检测**深度接口测试，v0.10 新增选择器适配层、沙箱模拟跑、工位模板、字典同步与 gate 聚合质量门，v0.11 落地 **test-reports 统一报告体系**与字段级细粒度用例生成，v0.16~v0.19 补齐配置档案/auth 自动登录/CI 模板/失败 hint 诊断/**质量分 0-100**/单文件 HTML 报告/飞书推送，v0.20~v0.21 闭环收口（更新生效/并发重复/删除幂等探针、fix 复验、validate-contract 前置）并落地 **AI 接入故事**（setup 探测 + gen-contract 从 OpenAPI 提契约 + test-onboarding 六步 SOP，一句「接入测试」即可开始）；v0.27 起补齐**任务路由与真实执行证据**（task/route/explain/status/doctor-host + `wls_test_task`，同 runId 回执跨包关联），v0.28 落地**公开集成协议**（describe/request 统一信封 + ESM 静态导入修复，MCP 目录 Node 20 可用）。**五包中唯一具备实际执行能力的包**。
 
 ```bash
 npx @agile-team/wl-skills-test        # 安装
@@ -184,8 +184,8 @@ npx @agile-team/wl-skills-test run-api --contract ./wl-contract.json  # 执行AP
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| MCP 工具 | 0 | 29 | 13 | 18 | **19** |
-| 审计规则 | — | K1-K19 | R001-R043 | B1-B32 | **T1-T25** |
+| MCP 工具 | 0 | 34 | 18 | 18 | **20** |
+| 审计规则 | — | K1-K22 | R001-R044 | B1-B32 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 12 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
 | 质量门 | — | validate | check | J1-J8 | **DI 4 指标** |

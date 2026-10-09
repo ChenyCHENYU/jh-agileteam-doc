@@ -2,7 +2,7 @@
 
 <AuthorTag author="ChangXing" />
 
-> `@agile-team/wl-skills-test`（<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.26.0" />）— 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-test`（<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.28.0" />）— 从安装到日常使用的完整指南。
 
 ---
 
@@ -152,10 +152,11 @@ node quality-gate.js \
 
 ---
 
-## MCP 工具（19 个）
+## MCP 工具（20 个）
 
 | 工具 | 用途 |
 |------|------|
+| `wls_test_task` | 任务技能路由/约束/缺口与可观测回执（task 仅登记计划；route/explain/status/doctor-host 只读，v0.27 起） |
 | `wls_test_standards` | 查询测试规范 |
 | `wls_test_contract_read` | 读取 kit/bd 契约 |
 | `wls_test_case_generate` | 生成测试用例（`granularity: "field"` 支持字段级细粒度） |

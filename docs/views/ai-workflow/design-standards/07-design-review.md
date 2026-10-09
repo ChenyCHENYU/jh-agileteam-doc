@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-design v0.11.1 · standards/07-design-review.md · 可判定条目由 verify（M 机械项）自动执…"
+description: "📦 来源：wl-skills-design v0.14.0 · standards/07-design-review.md · 可判定条目由 verify（M 机械项）自动执…"
 ---
 
 # 07 · 设计评审规范（Design Review · 集成评审）
 
-> 📦 来源：`wl-skills-design` v0.11.1 · `standards/07-design-review.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
+> 📦 来源：`wl-skills-design` v0.14.0 · `standards/07-design-review.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
 
 
 > **定位**：本规范定义**跨域集成评审**——把需求设计（spec）、数据库设计（DB）、接口设计（IF）三份产物**聚合成一份评审报告**，给出量化评分、跨文档一致性结论、按优先级排序的问题清单与修复任务。

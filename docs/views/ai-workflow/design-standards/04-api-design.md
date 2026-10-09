@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-design v0.11.1 · standards/04-api-design.md · 可判定条目由 verify（M 机械项）自动执行。"
+description: "📦 来源：wl-skills-design v0.14.0 · standards/04-api-design.md · 可判定条目由 verify（M 机械项）自动执行。"
 ---
 
 # 04 · 接口设计规范
 
-> 📦 来源：`wl-skills-design` v0.11.1 · `standards/04-api-design.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
+> 📦 来源：`wl-skills-design` v0.14.0 · `standards/04-api-design.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
 
 
 > 本规范覆盖 HTTP API、系统集成消息和可选 OpenAPI 3.1 契约。示例均为匿名合成内容，不对应任何组织、系统或线上流量。

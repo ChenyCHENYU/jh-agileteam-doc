@@ -1,7 +1,3 @@
----
-description: "📦 来源：wl-mbase 仓库 docs/移动端消息中心使用与架构说明.md。"
----
-
 # 移动端消息中心使用与架构说明
 
 > 📦 来源：`wl-mbase` 仓库 `docs/移动端消息中心使用与架构说明.md`。
@@ -67,7 +63,7 @@ description: "📦 来源：wl-mbase 仓库 docs/移动端消息中心使用与�
 ### 0.3 当前最重要的配置提醒
 
 - `/listMy` 在服务端固定按 `terminals` 包含 `pc` 过滤。模板只选钉钉、不选 `pc` 时，用户可能收到钉钉通知，但 PC 和移动消息中心都看不到。
-- PC 模板页面的“详情页组件”面向 PC；普通业务如果要在移动端直达页面，还需要消息记录提供 `returnUrl/mobileBusinessUrl`，或在兼容阶段提供可识别的移动 `showUrl`。
+- 普通业务通知和业务待办通过 `showUrl` 配置移动页面，PC 地址另配 `pcShowUrl`。审批业务页面通过发起流程的 `mobileBusinessUrl` 配置；两类场景不共用地址字段。
 - FLOW 的 `showUrl` 可以同时服务 PC 和移动端，例如 `flowHandle?commentId=...&id=...`，移动端会解析其中的流程参数。
 - `FLOW_REFUSE` 在当前移动代码中不是一律只读。它属于可处理模板，满足后端 `handle=true` 等条件时可显示“重新发起”。
 
@@ -261,7 +257,7 @@ PUT /oams/oaMessage/unStar?id={messageId}
 | 标题编码                | 不含中文，供国际化解析                                 | OAMS 查询时解析为展示标题                              |
 | 内容                    | 支持 `${name}` 占位符                                  | 列表与外部通知正文                                     |
 | 内容编码                | 不含中文                                               | OAMS 查询时解析为展示内容                              |
-| 详情页组件 `showUrl`    | PC 组件路径；发送时可被本次消息覆盖                    | FLOW 可从中解析 `id/commentId`；普通业务需另配移动地址 |
+| 详情页组件 `showUrl`    | 按消息场景填写；发送时可被本次消息覆盖                    | FLOW 从中解析 `id/commentId`；普通业务从中读取完整移动地址 |
 | 类型 `type`             | `1` 讯息；`2` 待办                                     | 决定使用 `hasRead` 还是 `handled`                      |
 | 业务类型 `resourceType` | 从 `businessType` 字典选择                             | 决定消息中心分类                                       |
 | 图标                    | 从 PC 图标库选择                                       | OAMS 返回模板图标，移动端 FLOW 仍使用统一流程图标      |
@@ -477,50 +473,36 @@ messageServiceUtil.updateUserNo(
 
 ## 6. 移动端地址与消息路由契约
 
-### 6.1 普通业务消息
+### 6.1 两种配置场景，先选对字段
 
-移动端按以下优先级取目标地址：
+| 场景 | 在哪里配置 | 字段 | 移动端如何使用 |
+| --- | --- | --- | --- |
+| 普通业务通知或业务待办（非 `FLOW_*`） | 业务发送消息的代码 | `showUrl` | 消息中心直接打开已注册子应用中的移动页面；`type=1/2` 不改变地址字段 |
+| 审批关联的完整业务页面 | 发起流程接口的最终请求 | `mobileBusinessUrl` | 流程服务持久化，审批详情返回 `flowInstance.mobileBusinessUrl`；用户点击“业务页面”时打开 |
+| 审批任务、审批结果通知（`FLOW_*`）进入基座审批页 | 流程消息生成代码 | `showUrl` 中的流程参数 | 解析 `id/commentId` 和处理/查看模式；不把这个 `showUrl` 当成完整业务页面地址 |
+| 普通消息的 PC 页面 | 业务发送消息的代码 | `pcShowUrl` | 供 PC 使用，不参与 mbase 普通消息选址；需确认 PC 查询结果的字段映射 |
 
-1. `returnUrl`
-2. `mobileBusinessUrl`
-3. `showUrl`
+普通业务消息**只读取 `showUrl`**。审批“业务页面”**只读取 `flowInstance.mobileBusinessUrl`**，不回退到 PC 的 `businessUrl` 或流程链接的 `returnUrl`。因此错误地附带其它地址字段不会盖过正确配置，也不会把 PC 页面当成移动业务页面打开。
 
-目标必须满足：
+两种移动业务地址均须满足：
 
-- `http/https`。
-- 与基座同源。
-- 路径命中 `src/config/portal-apps.ts` 中已启用应用的 `mpPath`。
-- 相对地址必须以 `/` 开头。
+- 以 `/` 开头的完整子应用路径，或当前基座允许的可信 `http/https` 来源。
+- 路径命中 `src/config/portal-apps.ts` 注册的 `mpPath`；生产接入还需正确启用应用和配置目标平台。
+- 子应用真实实现目标路由，并按页面契约接收业务参数。进入任务列表可以不传 ID；进入特定单据详情则按该页面实际参数名传 ID，不由基座猜测。
 
-命中后基座会注入或覆盖：
+命中后基座注入或覆盖 `portal_token/from=portal/user_id/companyId`。发送方不要手工拼免登凭证，也不要根据标题或模板名推测移动页面。
 
-```text
-portal_token
-from=portal
-user_id
-companyId
-```
+### 6.2 后端参考与内部参数边界
 
-不允许根据消息标题或模板编码硬猜业务页面。
+后端 Java 参考、环保项目路由常量及流程发起伪代码集中在 [集成文档：普通消息与审批业务页面的后端配置](./integration#普通消息与审批业务页面的后端配置)。接入普通消息无需给 OAMS 新增 `returnUrl` 或 `mobileBusinessUrl` 字段。
 
-### 6.2 当前后端字段现实
+`mobileBusinessUrl` 属于**发起流程入参**，不是普通消息列表的地址字段。业务服务只收到业务 ID 时，应由业务服务查询记录并组装移动地址，写入最终发给流程服务的请求；流程服务必须持久化并在审批详情响应中返回它。审批页面收到地址后才显示“业务页面”入口；只有 PC `businessUrl` 时不显示该入口，审批本身仍可在基座办理。
 
-`wl-mbase` 已识别：
+`returnUrl` 是现有基座 FLOW 深链、静态中转和审批返回导航的**内部传递参数**。链接生成方按既有协议编码透传已配置的移动地址，不要求业务方在普通消息或发起流程接口额外配置一个 `returnUrl`。内部导航协议和旧钉钉流程入口继续透传该参数；`returnUrl` 不作为审批“业务页面”按钮的候选地址。
 
-- `returnUrl`
-- `mobileBusinessUrl`
-- `businessType`
-- `domainCode`
-- `appCode`
+“从 views 目录开始的详情 vue 地址”不适合描述普通消息的移动 `showUrl`。移动地址应是 `/mbase/<应用>/<实际移动页面路由>`；PC 地址应按当前 PC 项目的真实菜单/组件契约另行配置。
 
-但当前 OAMS 消息契约中的通用字段仍以 `showUrl` 为主，`OaMessage/OaMessageBuilder` 尚未完整声明这些移动专用字段。
-
-因此项目接入有两种方式：
-
-1. 推荐：扩展 OAMS 实体、Builder、表结构和查询 DTO，正式提供 `mobileBusinessUrl` 或 `returnUrl`。
-2. 兼容：普通业务消息把移动端同源地址写入 `showUrl`。这种方式可能与 PC 动态组件路径冲突，只适合 PC 不需要独立详情组件的消息。
-
-如果同一条普通业务消息既需要 PC 组件详情，又需要移动子应用详情，必须采用第一种方式，不能让一个 `showUrl` 同时承担两种格式。
+PC 双端验收需特别检查：后端参考 Builder 配置了 `pcShowUrl`，而当前 `wl-ui-public` 展示逻辑读取的是 PC 查询结果中的 `showUrl`。本工作区未提供 OAMS/SDK 的字段映射源码，不能仅凭 Builder 有 `setPcShowUrl` 就认定 PC 已完成映射；需在项目实际 SDK/服务端确认 PC 结果使用 PC 地址，mbase 结果的 `showUrl` 使用移动地址。
 
 ### 6.3 新增子应用
 
@@ -530,7 +512,7 @@ companyId
 2. 在 `public/relay.html` 的 `APP_PATHS` 增加相同 `mpPath`。
 3. 确认子应用可接收 `portal_token/from/user_id/companyId`。
 4. 子应用后端用 token 校验用户对 `companyId` 的权限，不信任 URL 参数本身。
-5. 验证普通消息、FLOW `returnUrl` 和钉钉 `redirect_url` 三条链路。
+5. 分别验收普通消息 `showUrl`、审批业务页面 `mobileBusinessUrl`，以及钉钉 FLOW 深链/`redirect_url`；内部 `returnUrl` 的透传和返回行为也应回归。
 
 只改 `portal-apps.ts` 不改 `relay.html` 时，基座内部可打开，钉钉静态中转页仍会拦截。
 
@@ -626,7 +608,7 @@ OAMS 审批消息 showUrl
 | 消息 `showUrl`                   | 流程消息发送方       | 定位流程实例和待办，使消息进入基座审批详情         | `flowHandle?commentId=...&id=...`    |
 | `paramTemplate/params`           | 流程模板与流程发起方 | 在基座内展示稳定的审批摘要，并标识可授权编辑的字段 | `{ code: "amount", value: "1000" }`  |
 | `flowInstance.mobileBusinessUrl` | 业务流程发起方       | 打开子应用中的完整移动业务单据                     | `/mbase/example/order/detail?id=...` |
-| `flowInstance.businessUrl`       | 业务流程发起方       | PC 详情地址；移动端仅作历史兼容兜底                | PC 页面或组件地址                    |
+| `flowInstance.businessUrl`       | 业务流程发起方       | PC 详情地址；不作为移动审批业务页面兜底                | PC 页面或组件地址                    |
 
 审批消息已经进入基座，只能证明第一层正确；它不会让流程引擎自动读取任意业务数据库，也不会自动生成子应用详情页。业务摘要和完整业务页应分别完成第二、第三层契约。
 
@@ -698,13 +680,13 @@ params
 | ------------------------------------------ | --------------------------------------------------------- | -------------------------------- |
 | 审批消息无法进入审批详情                   | 消息 `showUrl` 中的 `id/commentId`                        | 消息或流程通知配置               |
 | 摘要字段显示 `-`                           | `paramTemplate.code` 是否能在 `params` 中找到同编码非空值 | 流程模板或发起端传参             |
-| 没有“业务页面”按钮                         | 三种候选业务地址是否都为空                                | 流程发起端或流程服务持久化       |
-| 有按钮但提示“业务地址未配置”               | 地址是否同源、以 `/` 开头并命中已注册 `mpPath`            | 地址格式、子应用注册或流程返回值 |
+| 没有“业务页面”按钮                         | `flowInstance.mobileBusinessUrl` 是否为空                                | 流程发起端或流程服务持久化       |
+| 有“业务页面”按钮但打开失败                 | 地址格式、可信来源及已注册 `mpPath`，展开 `?` 查看具体失败环节 | 地址格式、子应用注册或流程返回值 |
 | 打开后 404                                 | 子应用是否真实实现对应路由                                | 子应用                           |
 | 打开后空白或 403                           | token、公司上下文和流程参与人只读权限                     | 子应用及其业务后端               |
 | 接口已返回完整合法数据但基座仍未展示或跳转 | 保存接口响应和复现步骤                                    | 基座                             |
 
-当前“业务地址未配置”同时覆盖“没有地址”和“地址未通过可信路由匹配”两类情况，排障时不能只看提示文案，必须以接口返回值和路由匹配结果为准。
+配置诊断会区分字段缺失、类型、格式、来源和应用前缀，并说明配置位置。仅凭审批响应字段缺失，基座不能断定是发起请求漏传还是流程服务漏存/漏返回；应按“最终发起请求 → 持久化 → 审批响应”核查。
 
 ### 7.4 处理按钮的真实判断
 
@@ -903,7 +885,7 @@ OAMS
 | 建议优先级 | 现状                                                                           | 影响                                                      | 改进建议                                       |
 | ---------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- | ---------------------------------------------- |
 | P0         | OAMS 列表实体可能返回含终端密钥的 `detailList`                                 | 客户端抓包可能看到钉钉凭据                                | 改列表 DTO 或 JSON 忽略后再上线外部终端        |
-| P0         | 标准 OAMS 实体没有 `returnUrl/mobileBusinessUrl`                               | 普通业务 PC 与移动详情地址可能冲突                        | 扩展后端字段与表结构                           |
+| 按需       | PC 展示读取查询结果 `showUrl`，后端参考发送代码另配 `pcShowUrl`；本地缺少 SDK/后端映射源码 | 双端地址映射需联调确认 | 核对 PC 与 mbase 的实际查询响应及 SDK 映射，不新增普通消息 `returnUrl/mobileBusinessUrl` |
 | P1         | 钉钉发送器直接使用 PC `showUrl`，不自动生成 relay URL                          | `flowHandle?...` 等 PC 组件路径在钉钉中不能正确直达移动端 | 增加终端专用点击地址或服务端 URL 构造          |
 | P1         | `relay.html` 只直达 `FLOW_COMMENTS`，内部路由可查看所有 `FLOW_*`               | 外部与内部点击策略不完全一致                              | 统一策略并做双入口回归                         |
 | P1         | `relay.html` 与 `flow-message.ts` 的安全域临时规则执行顺序不同                 | 同一消息可能从不同入口落到不同页面                        | 迁移标准参数后删除临时规则                     |
@@ -915,7 +897,7 @@ OAMS
 | P1         | 未读讯息在路由成功前先标已读                                                   | 地址配置错误时也可能进入已读                              | 路由校验成功后再标已读，或明确产品规则         |
 | 按需       | 个人通道直接把 `userNo` 当 userid                                              | 允许并启用个人通道的项目中，账号不一致时无法送达          | 确需个人通道时建立服务端账号映射；华新不适用   |
 | P1         | 移动 API 封装了 `/removeBatch`，当前服务端未提供该接口                         | 后续启用删除功能会 404                                    | 删除未使用封装或补齐服务端接口                 |
-| P2         | 消息模块没有自动化测试                                                         | 路由和状态规则依赖人工回归                                | 增加 store、flow-message、portal-redirect 单测 |
+| P2         | 已有 `test:message-diagnostics` 路由/诊断回归；真实业务页面、流程持久化和权限仍需联调 | 前端检查不能证明后端和子应用正确 | 按两种地址配置场景完成端到端验收 |
 | P2         | `public/relay.html` 应用白名单与 `portal-apps.ts` 重复维护                     | 新应用容易漏配                                            | 构建时生成静态白名单或共享配置                 |
 
 ## 11. 使用说明：测试与业务验收
@@ -1060,10 +1042,27 @@ FLOW：
 
 普通业务：
 
-- 检查 `returnUrl/mobileBusinessUrl/showUrl`。
+- 普通业务通知/待办检查发送代码和消息响应中的 `showUrl`。
+- 审批业务页面检查发起流程的 `mobileBusinessUrl` 及审批响应 `flowInstance.mobileBusinessUrl`。
 - 地址是否同源。
 - 路径是否命中 `portal-apps.ts` 的 `mpPath`。
 - 钉钉入口是否也加入 `relay.html` 的 `APP_PATHS`。
+
+配置错误弹层的“原因”右侧有 `?`：桌面悬停可查看，手机点按可固定展开。消息中心、顶部消息提醒、审批详情的业务地址失败共用同一组件；钉钉流程入口保留原生提示和关闭后的返回逻辑，直接展示相同规则生成的说明与示例。
+
+说明按实际入口区分字段缺失/类型不符、地址格式、来源校验、运行域名和应用前缀匹配，并标出实际使用的字段。普通消息标明配置位置为 `OaMessageBuilder.setShowUrl(showUrl)`；审批业务页面标明配置位置为发起流程入参 `mobileBusinessUrl`，实际读取 `flowInstance.mobileBusinessUrl`。内部 FLOW 链接参数 `returnUrl` 的提示单独说明透传来源，不要求普通消息新增字段。
+
+业务地址示例从当前 `PORTAL_APPS` 的 `mpPath` 生成，不根据模板名称、消息分类、`appCode/domainCode` 猜测所属子应用。例如注册前缀为 `/mbase/hb/` 时，格式示例为：
+
+```text
+/mbase/hb/<真实移动页面路由>?<业务参数名>=<业务参数值>
+```
+
+尖括号里的内容必须由子应用替换成真实配置；仅加前缀不能证明原 PC 页面能在移动端打开。来源和前缀匹配也不能证明内部路由存在、业务参数有效或用户有权限。基座不自动修改地址，不主动访问子应用探测页面，不为诊断触发跳转、加载公司或改变消息状态；消息点击原有的已读处理保持不变。
+
+`FLOW_*` 参数错误按当前处理/查看模式给示例：处理模式要求 `id/commentId`，消息列表的 `commentId` 优先取 `relativeId`，其次取 `showUrl` 查询参数；查看模式只要求 `id`。界面和复制诊断中地址的全部参数值均隐藏，避免带出免登凭证；参数名和路径保留用于核查。
+
+回归命令：`pnpm test:message-diagnostics`。
 
 ### 12.5 顶部提醒不弹
 
@@ -1082,7 +1081,7 @@ FLOW：
 - PC `showUrl` 可能只是组件名，例如 `someBusinessDetail?id=1`。
 - 移动端普通业务要求同源、以 `/` 开头且匹配已注册子应用。
 - FLOW 的 `flowHandle/flowViewer` 可以由移动端专门解析，普通业务组件名不可以。
-- 为普通业务补充 `mobileBusinessUrl/returnUrl`，不要增加按标题猜页面的前端硬编码。
+- 普通业务在 `showUrl` 填完整移动地址，并独立配置 PC 地址；审批业务页面在发起流程时填 `mobileBusinessUrl`，不要增加按标题猜页面的前端硬编码。
 
 ## 13. 接口附录
 
@@ -1172,12 +1171,15 @@ GET  /hrms/user/list?strNameOrAccount={keyword}&size=20
 | `hasRead/handled`                 | 阅读和办理状态                   | 已支持                    |
 | `resourceType`                    | 消息业务分类                     | 已支持                    |
 | `relativeId/relativeType`         | 业务完成、删除、转办关联         | 已支持                    |
-| `showUrl`                         | PC 详情；FLOW 参数；移动兼容地址 | 已支持                    |
+| `showUrl`                         | 普通业务的移动地址；FLOW 消息的流程参数入口 | 已支持 |
+| `pcShowUrl`                       | PC 专用地址；不参与移动选址，PC 查询映射需联调核对 | 环保后端 Builder 参考支持 |
 | `terminals`                       | 站内与外部推送端                 | 已支持                    |
 | `detailList`                      | 终端参数                         | 已支持，但列表必须脱敏    |
 | `star/starTime`                   | 置顶                             | 已支持                    |
-| `returnUrl/mobileBusinessUrl`     | 移动业务地址                     | mbase 已识别，OAMS 待扩展 |
+
 | `businessType/domainCode/appCode` | 领域和过渡判断                   | mbase 已识别，OAMS 待扩展 |
+
+本表是 OAMS 消息记录契约。流程发起入参 `mobileBusinessUrl`、审批响应 `flowInstance.mobileBusinessUrl` 与内部 FLOW 链接参数 `returnUrl` 属于另外的契约，见 §6.1–6.2，不能混入普通消息字段说明。
 
 ## 14. 发布检查表与维护边界
 
@@ -1186,7 +1188,8 @@ GET  /hrms/user/list?strNameOrAccount={keyword}&size=20
 - [ ] 模板编码、类型和业务分类已评审。
 - [ ] 正式模板已选 `pc`。
 - [ ] 外部终端参数已通过服务端验证且不会返回客户端。
-- [ ] 普通业务移动地址已落到标准字段。
+- [ ] 普通业务移动地址已配置到 `showUrl`；独立 PC 地址和双端查询映射已验收。
+- [ ] 需要完整业务页面的审批已传入并持久化 `mobileBusinessUrl`，审批响应原样返回。
 - [ ] FLOW 参数包含正确 `id/commentId`。
 - [ ] `relativeId/relativeType` 的发送、完成和删除口径一致。
 - [ ] 子应用同时注册到 `portal-apps.ts` 与 `relay.html`。

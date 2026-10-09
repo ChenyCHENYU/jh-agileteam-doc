@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/29-database-source-governance.md · 本文可判定条目由 wl-sk…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/29-database-source-governance.md · 本文可判定条目由 wl-sk…"
 ---
 
 # 29 · 数据库事实源与结构收敛规范（🔴 阻断）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/29-database-source-governance.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/29-database-source-governance.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > 适用于建表、加字段、代码生成、数据库迁移、结构审计和旧表退役。结构正确性不因 dev/sit 而降级；只有审批流程按环境分级。

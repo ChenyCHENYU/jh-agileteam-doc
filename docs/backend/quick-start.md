@@ -8,7 +8,7 @@ description: "面向新加入后端团队的开发者：从环境准备到跑通
 
 ::: tip 前置知识
 - 基线：**Java 8 + Spring Boot 2 + jh4j-cloud 3.1 + MyBatis-Plus**，交付 profile `jh4j3-openapi3@1.0`
-- 工具包：`@agile-team/wl-skills-bd`（<NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.32.0" />），完整能力见 [Skills 集合](/backend/skills/)
+- 工具包：`@agile-team/wl-skills-bd`（<NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.34.0" />），完整能力见 [Skills 集合](/backend/skills/)
 :::
 
 ---

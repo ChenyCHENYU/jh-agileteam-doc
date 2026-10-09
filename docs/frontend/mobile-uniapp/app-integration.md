@@ -1,7 +1,3 @@
----
-description: "📦 来源：wl-mbase 仓库 docs/APP集成与发布.md。"
----
-
 # App 集成与发布
 
 > 📦 来源：`wl-mbase` 仓库 `docs/APP集成与发布.md`。

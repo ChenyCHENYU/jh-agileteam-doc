@@ -13,7 +13,7 @@
   └──► 需求说明书 ──► page-spec / api.md ──► wl-contract.json ──► 用例矩阵 ──► 质量门
        原型标注 D1-D3    （前后端共享契约）   （机器契约）      （消费双方契约）   （DI 4 指标）
            │                   │              │                  │
-        verify 四域      validate K1~K19   validate B1~B32     audit T1~T25
+        verify 四域      validate K1~K22   validate B1~B32     audit T1~T25
 ```
 
 **契约从左到右单向流动、逐段机器校验**——上游改契约，下游 `diff` 即知受影响用例与页面（test `contract_diff` / kit `contract compare --strict`）。
@@ -32,10 +32,10 @@
 
 | 环节 | 包 | 版本 | 状态 |
 |------|-----|------|------|
-| 设计 | wl-skills-design | v0.11.1 | ✅ 已落地（verify 四域机械校验） |
+| 设计 | wl-skills-design | v0.14.0 | ✅ 已落地（verify 四域机械校验） |
 | 前端 | wl-skills-kit | v2.21.0 | 🟡 全链路践行中（scenario 确定性渲染已上线） |
 | 后端 | wl-skills-bd | v0.24.0 | ✅ 已落地（review 统一质量门） |
-| 测试 | wl-skills-test | v0.25.0 | ✅ 已落地（真实执行引擎 + gate） |
+| 测试 | wl-skills-test | v0.28.0 | ✅ 已落地（真实执行引擎 + gate） |
 | L5 Pipeline | — | — | 🟡 `_pipeline.md` 协议试运行 |
 | L6 Multi-Agent | — | — | ▶ L5 稳定后规划 |
 

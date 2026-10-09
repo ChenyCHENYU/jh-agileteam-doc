@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/11-security-permission.md · 本文可判定条目由 wl-skills-bd…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/11-security-permission.md · 本文可判定条目由 wl-skills-bd…"
 ---
 
 # 11 · 权限与租户隔离（✅ 已落地）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/11-security-permission.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/11-security-permission.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > 权限注解防越权调用，租户隔离防跨租户数据泄露。两者都是安全红线。

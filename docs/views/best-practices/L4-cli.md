@@ -13,7 +13,7 @@ description: "把 AI 体系的高频操作固化为可复现命令：无 AI 依�
 | 没有 L4 | 有 L4 |
 |---------|-------|
 | 新人接手项目，靠文档口述装规范，装漏装错没人知道 | `npx @agile-team/wl-skills-kit init` 一条命令，manifest 可追溯 |
-| AI 生成的代码能不能合入，靠 Reviewer 记忆把关 | `validate` 进 CI，K1~K19 不过就阻断合并 |
+| AI 生成的代码能不能合入，靠 Reviewer 记忆把关 | `validate` 进 CI，K1~K22 不过就阻断合并 |
 | 每次发版同步规范靠人工比对 | `diff` 一条命令看本地与最新 kit 的全部差异 |
 
 **判断标准**：这件事需要 AI 判断吗？不需要判断、只要可复现结果的，就该沉到 CLI——省 Token、可进流水线、结果稳定。

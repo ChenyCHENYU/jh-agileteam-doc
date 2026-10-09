@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/20-redis-cache.md · 本文可判定条目由 wl-skills-bd validat…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/20-redis-cache.md · 本文可判定条目由 wl-skills-bd validat…"
 ---
 
 # 20 · Redis 与缓存规范（✅ 已落地）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/20-redis-cache.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/20-redis-cache.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > Redis 是分布式系统的"共享内存"，但它的便利性掩盖了三件事：**OOM、超卖、雪崩**。本规范把社区血泪教训固化为团队基线。

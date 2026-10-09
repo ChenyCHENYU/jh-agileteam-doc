@@ -1,6 +1,6 @@
 <!--
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/28-production-assurance.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/28-production-assurance.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 document-meta:
   purpose: 规定生产级后端在 SLA、安全、数据治理、并发一致性、微服务韧性方面的声明、证据和交付边界

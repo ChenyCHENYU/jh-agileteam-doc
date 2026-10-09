@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/26-task-driven.md · 本文可判定条目由 wl-skills-bd validat…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/26-task-driven.md · 本文可判定条目由 wl-skills-bd validat…"
 ---
 
 # 26 · 任务驱动与精准触发（✅ 已落地）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/26-task-driven.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/26-task-driven.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > `wl-skills-bd task` 把自然语言需求路由到最小 Skill、Standards、B 规则子集和安全执行步骤。它是只读指挥层，不是第二套代码写入器。

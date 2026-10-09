@@ -154,8 +154,8 @@ wl-skills-design ──► wl-skills-kit ──► wl-skills-ui    wl-skills-bd 
 
 | 术语 | 含义 |
 |------|------|
-| **K1~K19** | wl-skills-**k**it 的确定性审计规则（v2.18.0 前为 R 前缀） |
-| **R001~R043** | wl-skills-ui 扫描器的 UI 风格规则（与 kit 的 K 系编号解耦） |
+| **K1~K22** | wl-skills-**k**it 的确定性审计规则（v2.18.0 前为 R 前缀） |
+| **R001~R044** | wl-skills-ui 扫描器的 UI 风格规则（与 kit 的 K 系编号解耦） |
 | **B1~B32** | wl-skills-**b**d 后端确定性扫描规则 |
 | **T1~T25** | wl-skills-**t**est 测试资产审计规则 |
 | **J1~J8** | bd 的 Java 质量门（ArchUnit/Checkstyle/PMD/SpotBugs/Spotless/P3C/OpenAPI/JaCoCo） |

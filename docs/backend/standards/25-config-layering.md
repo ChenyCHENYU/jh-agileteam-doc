@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-bd v0.24.0 · standards/25-config-layering.md · 本文可判定条目由 wl-skills-bd val…"
+description: "📦 来源：wl-skills-bd v0.34.0 · standards/25-config-layering.md · 本文可判定条目由 wl-skills-bd val…"
 ---
 
 # 25 · 配置分层与多环境管理（✅ 已落地）
 
-> 📦 来源：`wl-skills-bd` v0.24.0 · `standards/25-config-layering.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
+> 📦 来源：`wl-skills-bd` v0.34.0 · `standards/25-config-layering.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。
 
 
 > 一个业务项目从内网→华新→下一个客户，每次迁移最痛的是改配置。本规范把"配置"固化为三层分层模型 + 单一事实源，让任何业务项目套用同一套模式：一处声明、全工程应用、一键体检、一键迁移。

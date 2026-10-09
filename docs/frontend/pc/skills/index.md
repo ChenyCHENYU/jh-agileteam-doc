@@ -4,7 +4,7 @@ description: "前端 Skills 基于 @agile-team/wl-skills-kit（<NpmVersion pkg='
 
 # 前端 Skills 概述
 
-前端 Skills 基于 `@agile-team/wl-skills-kit`（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.25.0" />）— 一条命令，将 **14 条编码规范、13 个 AI Skill、29 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
+前端 Skills 基于 `@agile-team/wl-skills-kit`（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.27.0" />）— 一条命令，将 **14 条编码规范、13 个 AI Skill、34 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
 
 ::: tip 确定性场景生成（v2.20 新增）
 领域场景的"结构 + 展示方式"以 **wl-scenario JSON** 描述，由 kit 编译器**确定性渲染**页面（AI 零自由度）：render 单页 0.4~1ms、模型 token 恒为 0（AI 主流程每页约 2 万 token 输入）；`validate` 内置 W1 字节级防漂移（手改产物提交/CI 即拦截），extract/from-spec 支持存量页面提取与 page-spec 零手写引导，全部 pattern 通过往返等价性机器证明（49+26 用例）。CLI：`wl-skills scenario validate/render/extract/verify/from-spec`。
@@ -38,7 +38,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 | 类别              | 数量  | 说明                                                                         |
 | ----------------- | ----- | ---------------------------------------------------------------------------- |
 | **AI Skills**     | 13 个 | prototype-scan / spec-doc-parse / api-contract / page-codegen / business-doc-extract / menu-sync / dict-sync / permission-sync / convention-audit / template-extract / code-fix / standard-env-config / status-column-audit |
-| **MCP Tools**     | 29 个 | 菜单/字典/权限/项目感知/快照蓝图/模板治理/环境标准化/通知推送，全清单见下文 |
+| **MCP Tools**     | 34 个 | 菜单/字典/权限/项目感知/快照蓝图/模板治理/环境标准化/任务观测/通知推送，全清单见下文 |
 | **编码规范**      | 14 条 | 模块化规范（01-工具链 ~ 14-布局容器），AI 自动门控加载                       |
 | **页面模板**      | 9 种  | LIST / FORM_ROUTE / MASTER_DETAIL / TREE_LIST / DETAIL_TABS 等               |
 | **组件 API 文档** | 11 个 | jh-select / jh-date / jh-drag-row / jh-pagination 等                         |
@@ -151,7 +151,7 @@ npx @agile-team/wl-skills-kit mock-clean --all
 
 ---
 
-## 29 个 MCP Tools（权威清单）
+## 34 个 MCP Tools（权威清单）
 
 | 类别 | Tool | 能力 | 关联 Skill |
 |------|------|------|----------|
@@ -183,6 +183,11 @@ npx @agile-team/wl-skills-kit mock-clean --all
 | 环境标准化 | `wls_standard_env_scan` | 环境配置扫描 | standard-env-config |
 | 环境标准化 | `wls_standard_env_apply` | 环境配置应用（受控） | standard-env-config |
 | 环境标准化 | `wls_standard_env_verify` | 环境配置验证 | standard-env-config |
+| 任务观测 | `wls_task` | 任务判定并登记计划（记录 runId，未执行不冒充已跑） | 跨 Skill 通用 |
+| 任务观测 | `wls_route` | 只读任务路由（匹配/基础规范/歧义/缺口/不适用/缺上下文） | 跨 Skill 通用 |
+| 任务观测 | `wls_explain` | 只读解释候选 Skill、适用规则与缺口建议 | 跨 Skill 通用 |
+| 任务观测 | `wls_status` | 查看实际执行、验证状态、检查范围与过期证据 | 跨 Skill 通用 |
+| 任务观测 | `wls_doctor_host` | 静态宿主入口诊断（不声称宿主已加载） | 全局 |
 | 通知 | `wls_audit_report_push` | 推送审计报告到飞书 webhook（可选） | convention-audit |
 
 > **整体效果**：菜单/权限同步 token 节省约 **87%**；操作时间压缩 **15-20 倍**；人工点击次数 → **0**。
@@ -214,7 +219,7 @@ v2.16.1 起新增统一表单能力，支持大表单中混合必填/非必填�
 ## 伴生工程
 
 - 后端 Skills：[wl-skills-bd](/backend/skills/)（契约驱动代码生成 + 数据库事实源治理）
-- 测试工程：[wl-skills-test](/views/testing/)（13 Skill + 25 条审计规则 + 3 个执行器 + 18 MCP）
+- 测试工程：[wl-skills-test](/views/testing/)（13 Skill + 25 条审计规则 + 3 个执行器 + 20 MCP）
 - 视觉一致性：[wl-skills-ui](/views/styling/wl-skills-ui)
 - 产品设计：[wl-skills-design](/views/ai-workflow/design-skills)
 - 后端使用指南：[后端 Skills 使用指南](/backend/skills/usage-guide)

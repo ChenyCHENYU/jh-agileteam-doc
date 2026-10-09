@@ -1,10 +1,10 @@
 ---
-description: "📦 来源：wl-skills-design v0.11.1 · standards/09-change-impact.md · 可判定条目由 verify（M 机械项）自动执…"
+description: "📦 来源：wl-skills-design v0.14.0 · standards/09-change-impact.md · 可判定条目由 verify（M 机械项）自动执…"
 ---
 
 # 09 — 变更影响分析规范
 
-> 📦 来源：`wl-skills-design` v0.11.1 · `standards/09-change-impact.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
+> 📦 来源：`wl-skills-design` v0.14.0 · `standards/09-change-impact.md` · 可判定条目由 `verify`（[M] 机械项）自动执行。
 
 
 > 目标：把设计变更从“人工记忆同步”升级为“先分析影响，再补丁更新，最后复验闭环”。

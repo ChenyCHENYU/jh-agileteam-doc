@@ -1,10 +1,10 @@
 ---
-description: "版本：v0.11.1 · 9 条设计规范 + 10 个 AI Skill + 16 个 Copilot Prompt，支持 10 种 AI 编辑器，机器语义双轨验证（M/J）+…"
+description: "版本：v0.14.0 · 9 条设计规范 + 10 个 AI Skill + 16 个 Copilot Prompt，支持 10 种 AI 编辑器，机器语义双轨验证（M/J）+…"
 ---
 
 # @agile-team/wl-skills-design — 产品设计 AI 技能包
 
-> 版本：v0.11.1 · 9 条设计规范 + 10 个 AI Skill + 16 个 Copilot Prompt，支持 10 种 AI 编辑器，机器语义双轨验证（[M]/[J]）+ verify CLI 四域机械校验（spec / flowchart / db / api）
+> 版本：v0.14.0 · 9 条设计规范 + 10 个 AI Skill + 16 个 Copilot Prompt，支持 10 种 AI 编辑器，机器语义双轨验证（[M]/[J]）+ verify CLI 四域机械校验（spec / flowchart / db / api）
 
 ---
 
