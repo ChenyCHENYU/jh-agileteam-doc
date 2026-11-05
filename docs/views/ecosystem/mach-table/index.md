@@ -1,14 +1,24 @@
 ---
-description: "面向复杂 B 端业务的高性能 TypeScript 数据表格：框架无关内核、零核心运行时依赖、Vue 3 优先 + React 18+ 官方适配；生态中被第三方复用最多的包（2…"
+description: "面向复杂 B 端业务的高性能 TypeScript 数据表格：框架无关内核、零核心运行时依赖、Vue 3 优先 + React 18+ 官方适配；本板块含概览、快速上手、API 参考与场景示例…"
 ---
 
 # MachTable — 企业数据表格
+
+<AuthorTag :authors="['CHENY']" />
 
 > 面向复杂 B 端业务的高性能 TypeScript 数据表格：框架无关内核、零核心运行时依赖、Vue 3 优先 + React 18+ 官方适配；生态中**被第三方复用最多**的包（28 个外部依赖方），下载量见[生态看板](/views/ecosystem/)。
 
 ::: warning 授权说明
 MachTable 采用 **Source-Available License 1.0**——源码可见但**不是开源软件**：安装、运行、修改、集成、分发或商业使用均须事先取得作者书面授权（团队内部项目已有授权体系）。详见仓库 `LICENSING.md`。
 :::
+
+## 本板块导航
+
+| 页面 | 内容 |
+|------|------|
+| [快速上手](./getting-started) | 安装矩阵、Vue/React/原生接入、配置中心、`useMachTable()` |
+| [API 参考](./api) | GridOptions / ColDef / GridApi（12 领域）/ Events 完整速查表 |
+| [场景示例](./recipes) | 服务端分页、编辑与批量保存、树形分组、主从明细、导入导出等带代码食谱 |
 
 ## 四件套矩阵
 
@@ -19,7 +29,7 @@ MachTable 采用 **Source-Available License 1.0**——源码可见但**不是�
 | `@agile-team/mach-table-react` | React 18+ 官方适配 |
 | `@agile-team/mach-table-xlsx` | 可选 XLSX 导入导出扩展 |
 
-版本统一发布（当前 <NpmVersion pkg="@agile-team/mach-table" fallback="0.29.2" />）；业务**只装一个适配包**，Core 自动带入。
+版本统一发布（当前 <NpmVersion pkg="@agile-team/mach-table" fallback="0.38.0" />）；业务**只装一个适配包**，Core 自动带入。
 
 ---
 
@@ -84,4 +94,4 @@ const columns = defineVueColumns([
 - 质量门禁：复杂度豁免 0、生产函数复杂度 ≤ 15、API 快照、ESM/CJS exports、gzip 预算、发布产物校验；
 - E2E 覆盖 Chromium / Firefox / WebKit，含大数据与生命周期性能场景。
 
-完整文档见仓库：[快速开始](https://github.com/ChenyCHENYU/MachTable/blob/main/docs/guide/getting-started.md) · [企业接入手册](https://github.com/ChenyCHENYU/MachTable/blob/main/docs/guide/enterprise-integration.md) · [API](https://github.com/ChenyCHENYU/MachTable/blob/main/docs/api/grid-options.md)
+更多细节见仓库：[完整指南](https://github.com/ChenyCHENYU/MachTable/tree/main/docs/guide) · [全部场景食谱](https://github.com/ChenyCHENYU/MachTable/tree/main/docs/recipes)。

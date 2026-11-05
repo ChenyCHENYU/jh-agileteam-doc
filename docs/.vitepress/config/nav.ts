@@ -22,7 +22,9 @@ export const nav: DefaultTheme.NavItem[] = [
     text: "工程生态",
     items: [
       { text: "生态全景", link: "/views/ecosystem/" },
-      { text: "MachTable 数据表格", link: "/views/ecosystem/mach-table" },
+      { text: "MachTable 数据表格", link: "/views/ecosystem/mach-table/" },
+      { text: "MachReport 报表引擎", link: "/views/ecosystem/mach-report/" },
+      { text: "wl-skills-gate 质量门", link: "/views/ecosystem/gate" },
       { text: "工程工具链", link: "/views/ecosystem/toolchain" },
       { text: "基础设施库", link: "/views/ecosystem/foundation" },
     ],

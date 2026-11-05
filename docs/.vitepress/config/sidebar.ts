@@ -94,7 +94,34 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "生态全景", link: "/views/ecosystem/" },
-        { text: "MachTable 数据表格", link: "/views/ecosystem/mach-table" },
+        {
+          text: "MachTable 数据表格",
+          collapsed: true,
+          items: [
+            { text: "概览", link: "/views/ecosystem/mach-table/" },
+            { text: "快速上手", link: "/views/ecosystem/mach-table/getting-started" },
+            { text: "API 参考", link: "/views/ecosystem/mach-table/api" },
+            { text: "场景示例", link: "/views/ecosystem/mach-table/recipes" },
+          ],
+        },
+        {
+          text: "MachReport 报表引擎",
+          collapsed: true,
+          items: [
+            { text: "概览", link: "/views/ecosystem/mach-report/" },
+            { text: "快速上手", link: "/views/ecosystem/mach-report/getting-started" },
+            { text: "API 参考", link: "/views/ecosystem/mach-report/api" },
+            { text: "场景示例", link: "/views/ecosystem/mach-report/recipes" },
+          ],
+        },
+        {
+          text: "质量门与工作台",
+          collapsed: true,
+          items: [
+            { text: "wl-skills-gate 质量门", link: "/views/ecosystem/gate" },
+            { text: "WL Harness 工作台", link: "/views/ecosystem/harness" },
+          ],
+        },
         { text: "工程工具链", link: "/views/ecosystem/toolchain" },
         { text: "基础设施库", link: "/views/ecosystem/foundation" },
       ],
@@ -108,7 +135,34 @@ export const sidebar: DefaultTheme.Sidebar = {
       collapsed: false,
       items: [
         { text: "生态全景", link: "/views/ecosystem/" },
-        { text: "MachTable 数据表格", link: "/views/ecosystem/mach-table" },
+        {
+          text: "MachTable 数据表格",
+          collapsed: true,
+          items: [
+            { text: "概览", link: "/views/ecosystem/mach-table/" },
+            { text: "快速上手", link: "/views/ecosystem/mach-table/getting-started" },
+            { text: "API 参考", link: "/views/ecosystem/mach-table/api" },
+            { text: "场景示例", link: "/views/ecosystem/mach-table/recipes" },
+          ],
+        },
+        {
+          text: "MachReport 报表引擎",
+          collapsed: true,
+          items: [
+            { text: "概览", link: "/views/ecosystem/mach-report/" },
+            { text: "快速上手", link: "/views/ecosystem/mach-report/getting-started" },
+            { text: "API 参考", link: "/views/ecosystem/mach-report/api" },
+            { text: "场景示例", link: "/views/ecosystem/mach-report/recipes" },
+          ],
+        },
+        {
+          text: "质量门与工作台",
+          collapsed: true,
+          items: [
+            { text: "wl-skills-gate 质量门", link: "/views/ecosystem/gate" },
+            { text: "WL Harness 工作台", link: "/views/ecosystem/harness" },
+          ],
+        },
         { text: "工程工具链", link: "/views/ecosystem/toolchain" },
         { text: "基础设施库", link: "/views/ecosystem/foundation" },
       ],

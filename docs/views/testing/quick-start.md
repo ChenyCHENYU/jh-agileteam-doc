@@ -11,7 +11,7 @@ description: "30 分钟跑通'安装 → 接入 → 用例生成 → 审计 → 
 ## 一、安装与体检（3 分钟）
 
 ```bash
-npx @agile-team/wl-skills-test init     # 11 规范 + 13 Skill + 19 MCP + 编辑器配置
+npx @agile-team/wl-skills-test init     # 11 规范 + 13 Skill + 23 MCP + 编辑器配置
 npx @agile-team/wl-skills-test doctor   # Node / Playwright / JMeter / 目录结构体检
 ```
 

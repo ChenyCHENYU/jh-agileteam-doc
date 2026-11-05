@@ -11,8 +11,8 @@ description: "被五包与业务项目共同依赖的底层库：平台组件、
 | 库 | 版本 | 生效方式 | 被谁依赖 |
 |----|------|---------|---------|
 | `@jhlc/common-core` | 内部源 | 全局注册 `jh-*` 平台组件 | kit 体系全部 PC 页面 |
-| `@robot-admin/git-standards` | <NpmVersion pkg="@robot-admin/git-standards" fallback="1.0.5" /> | `init` 安装 Husky/Commitlint/ESLint/Prettier/lint-staged | 新项目工程化前置（强制） |
-| `@robot-admin/form-validate` | <NpmVersion pkg="@robot-admin/form-validate" fallback="3.4.2" /> | 表单 rules 校验函数库 | PC 表单（K18 校验其版本与用法） |
+| `@robot-admin/git-standards` | <NpmVersion pkg="@robot-admin/git-standards" fallback="1.0.6" /> | `init` 安装 Husky/Commitlint/ESLint/Prettier/lint-staged | 新项目工程化前置（强制） |
+| `@robot-admin/form-validate` | <NpmVersion pkg="@robot-admin/form-validate" fallback="3.4.4" /> | 表单 rules 校验函数库 | PC 表单（K18 校验其版本与用法） |
 | `@robot-h5/core` | <NpmVersion pkg="@robot-h5/core" fallback="1.2.0" /> | H5 运行时：宿主识别/桥接/15 Hooks/水印 | Robot_H5 模板与移动端子应用 |
 | `@agile-team/naive-ui-components` | <NpmVersion pkg="@agile-team/naive-ui-components" fallback="0.1.4" /> | Vue 3 组件库（Naive UI 基座） | 非 jh4j / Element Plus 基线项目 |
 

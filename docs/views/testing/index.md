@@ -2,9 +2,9 @@
 
 <AuthorTag author="ChangXing" />
 
-::: tip npm 已发布 <NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.28.0" />
+::: tip npm 已发布 <NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.34.1" />
 ```bash
-npx @agile-team/wl-skills-test        # 安装（11 规范 + 13 Skill + 19 MCP）
+npx @agile-team/wl-skills-test        # 安装（11 规范 + 13 Skill + 23 MCP）
 npx @agile-team/wl-skills-test doctor # 环境体检
 npx @agile-team/wl-skills-test setup  # 接入探测引导（v0.21：没有契约也能开始）
 npx @agile-team/wl-skills-test audit  # 审计测试代码（T1-T25）
@@ -40,14 +40,14 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 |------|:----:|------|
 | 测试规范 | 11 | 对齐在线 QC 流程规范（01-流程 ~ 11-数据安全） |
 | AI Skill | 13 | 功能链 9 + 性能链 3 + 接入编排 1（test-onboarding） |
-| MCP 工具 | 20 | wls_test_* 前缀，全部实现并有测试覆盖（v0.22 gen_contract · v0.27 task） |
+| MCP 工具 | 23 | wls_test_* 前缀，全部实现并有测试覆盖（v0.22 gen_contract · v0.27 task · v0.34 SIT 三工具） |
 | 审计规则 | 25 | T1-T25 确定性扫描器（Playwright/JMeter/用例/E2E 工程），表驱动可扩展 |
 | 自动修复 | 6 | F1-F6（v-deep/beforeEach/waitForTimeout/硬编码/afterEach/测试名），修复后强制复验 |
-| 执行器 | 3 | API 接口测试 + Playwright 自动化 + JMeter 性能 |
-| CLI 命令 | 27 | init/update/setup/doctor/validate/gen-contract/validate-contract/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/ci/diff/clean + task/route/explain/status/doctor-host/protocol |
-| 单元测试 | 316 | 全部通过 |
+| 执行器 | 3+1 | API 接口测试 + Playwright 自动化 + JMeter 性能 + sit-verify 交付核验（v0.34） |
+| CLI 命令 | 28 | init/update/setup/doctor/validate/gen-contract/validate-contract/run-gen/audit/fix/run-api/run-playwright/run-jmeter/perf-compare/e2e-check/dict-sync/gate/report/ci/diff/clean/sit + task/route/explain/status/doctor-host/protocol |
+| 单元测试 | 492 | 全部通过 |
 
-### 版本演进亮点（0.12 → 0.28）
+### 版本演进亮点（0.12 → 0.34）
 
 | 版本 | 主题 |
 |------|------|
@@ -68,6 +68,11 @@ design(产品设计) → kit(前端代码) → ui(视觉对齐) → bd(后端代
 | 0.26 | 独立与共存：安装归属保护（manifest 记录本包贡献、冲突保留、`--force` 只动本包）、共享文件按标记区块合并、**真实契约联动**（页面相对路径 `apiContract` + delivery Profile 驱动真实方法/路径/成功码，缺项拒绝而非猜默认）、独立页面测试（无契约页面保留 UI/E2E 用例，接口事实标记未决） |
 | 0.27 | **任务路由与真实执行证据**：task/route/explain/status/doctor-host + MCP `wls_test_task`（第 20 个工具），13 个业务 Skill 可解释路由；同 runId 任务/工具回执保存输入与检查文件哈希，执行与验证分开记录，报告按 runId 聚合并拒绝不匹配证据 |
 | 0.28 | **公开集成协议**：describe/request 统一信封（能力清单/路由语料/判定结果按公开契约暴露）；ESM 静态导入修复，MCP 目录 Node 20 可用；补 context null 与空 targets 回归 |
+| 0.29 | **接入边界收口**：任务路由前校验目标项目自身接入与平台；未接入/移动端零规则零任务写入，不继承父安装 |
+| 0.30-0.31 | **动作模式与协议增强**：区分当前请求、否定动作与历史引用，解释/规划不自动检查；公开协议增加带 Schema 的 result.integration 与只读执行器目录 |
+| 0.32 | **证据诚实门禁**：空审计与零样本质量门不能通过；Playwright 真实非零退出/超时/零用例准确传播 |
+| 0.33 | **安全与证据分离**：锁定 Ajv 修复已公告依赖风险；DI 统计与发布证据分离（caseCount/roundResults 公开，拒绝缺分母默认值）；fix 收集器拒绝根/祖先逃逸；executor-invoke-v1 结构化执行入口 |
+| 0.34 | **SIT 原版式交付闭环**：Excel 模板目录/生成/检查（四种工作一览与问题总览公式保留、旧客户数据净化）；提前七日交付、真实两轮逐用例证据与问题闭环核验；新增 `sit` CLI + 3 个 SIT MCP 工具（第 21~23 个）+ 公开 sit-verify 执行器；MCP 增加非法 JSON-RPC 帧与 XML 非法字符拒绝 |
 
 ---
 
@@ -220,11 +225,11 @@ npx @agile-team/wl-skills-test gen-contract --swagger http://localhost:8080/v3/a
 
 | 能力维度 | design | kit | ui | bd | **test** |
 |---------|:------:|:---:|:--:|:--:|:--------:|
-| 版本 | <NpmVersion pkg="@agile-team/wl-skills-design" fallback="0.14.0" /> | <NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.27.0" /> | <NpmVersion pkg="@agile-team/wl-skills-ui" fallback="1.16.0" /> | <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.34.0" /> | **<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.28.0" />** |
+| 版本 | <NpmVersion pkg="@agile-team/wl-skills-design" fallback="1.0.2" /> | <NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.33.4" /> | <NpmVersion pkg="@agile-team/wl-skills-ui" fallback="1.22.3" /> | <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.42.0" /> | **<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.34.1" />** |
 | 审计规则 | — | K1-K22 | R001-R044 | B1-B32 | **T1-T25** |
 | 自动修复 | — | F1-F6 | 14 条 | B3/B5 | **F1-F6** |
 | 执行能力 | ❌ | ❌ | ❌ | ❌ | **✅ API+PW+JMeter** |
-| MCP 工具 | 0 | 34 | 18 | 18 | **20** |
+| MCP 工具 | 0 | 34 | 18 | 18 | **23** |
 
 ---
 

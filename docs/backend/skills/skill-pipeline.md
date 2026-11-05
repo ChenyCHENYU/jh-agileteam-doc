@@ -2,7 +2,7 @@
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang','ZhangXiang']" />
 
-> `@agile-team/wl-skills-bd`（<NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.34.0" />）— 契约驱动代码生成的完整链路：从需求评审 → 契约设计 → 代码生成 → 数据库迁移 → 单元测试 → 规范审计 → 安全修复 → 变更审查。
+> `@agile-team/wl-skills-bd`（<NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.42.0" />）— 契约驱动代码生成的完整链路：从需求评审 → 契约设计 → 代码生成 → 数据库迁移 → 单元测试 → 规范审计 → 安全修复 → 变更审查。
 
 ---
 
@@ -32,7 +32,7 @@
 
 ---
 
-## 12 个 Skill 衔接关系
+## 13 个 Skill 衔接关系
 
 ### 核心生成链（① → ⑤）
 

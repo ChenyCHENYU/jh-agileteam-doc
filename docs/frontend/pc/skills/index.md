@@ -4,7 +4,7 @@ description: "前端 Skills 基于 @agile-team/wl-skills-kit（<NpmVersion pkg='
 
 # 前端 Skills 概述
 
-前端 Skills 基于 `@agile-team/wl-skills-kit`（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.27.0" />）— 一条命令，将 **14 条编码规范、13 个 AI Skill、34 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
+前端 Skills 基于 `@agile-team/wl-skills-kit`（<NpmVersion pkg="@agile-team/wl-skills-kit" fallback="2.33.4" />）— 一条命令，将 **14 条编码规范、13 个 AI Skill、34 个 MCP Tool**、编辑器配置、组件文档、通用组件、领域样例导入到 Vue 3 前端项目，让 AI（Copilot / Cursor / Windsurf / Claude Code / Cline / Kiro / Kilo Code / Trae / Qoder / 通用 Agents）**真正理解项目规范**，从 Axure 原型 / 详细设计文档 / 口述需求 → 全流程自动化生成可运行的完整页面代码。
 
 ::: tip 确定性场景生成（v2.20 新增）
 领域场景的"结构 + 展示方式"以 **wl-scenario JSON** 描述，由 kit 编译器**确定性渲染**页面（AI 零自由度）：render 单页 0.4~1ms、模型 token 恒为 0（AI 主流程每页约 2 万 token 输入）；`validate` 内置 W1 字节级防漂移（手改产物提交/CI 即拦截），extract/from-spec 支持存量页面提取与 page-spec 零手写引导，全部 pattern 通过往返等价性机器证明（49+26 用例）。CLI：`wl-skills scenario validate/render/extract/verify/from-spec`。
@@ -219,7 +219,7 @@ v2.16.1 起新增统一表单能力，支持大表单中混合必填/非必填�
 ## 伴生工程
 
 - 后端 Skills：[wl-skills-bd](/backend/skills/)（契约驱动代码生成 + 数据库事实源治理）
-- 测试工程：[wl-skills-test](/views/testing/)（13 Skill + 25 条审计规则 + 3 个执行器 + 20 MCP）
+- 测试工程：[wl-skills-test](/views/testing/)（13 Skill + 25 条审计规则 + 3+1 个执行器 + 23 MCP）
 - 视觉一致性：[wl-skills-ui](/views/styling/wl-skills-ui)
 - 产品设计：[wl-skills-design](/views/ai-workflow/design-skills)
 - 后端使用指南：[后端 Skills 使用指南](/backend/skills/usage-guide)

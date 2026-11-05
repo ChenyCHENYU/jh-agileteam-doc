@@ -3,7 +3,7 @@
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />
 
 ::: tip ✅ 已正式发布
-后端 Skills 包（`@agile-team/wl-skills-bd`，当前 <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.34.0" />）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
+后端 Skills 包（`@agile-team/wl-skills-bd`，当前 <NpmVersion pkg="@agile-team/wl-skills-bd" fallback="0.42.0" />）已正式发布，覆盖框架扩展点 Bean 与容器测试闭环、生产安全契约、通用契约与运行时边界闭环、契约驱动代码生成、模块目录与精准上下文、配置分层与多环境、任务驱动、数据安全护栏、行为契约测试、质量门、数据库源头一致性与事实源强门禁、**多模块与字段影响分析**、**集成适配器治理**、**变更审查统一质量门**、MCP 与安全修复闭环全链路。
 :::
 
 ## 概述
@@ -70,7 +70,7 @@ wl-skills-bd codegen apply   wl-contract.json --plan-hash <sha256> --confirm
 所有写操作走 `validate / plan / apply`，apply 要求 **`planHash + --confirm`**；生产/完成度/证据门、受保护业务区、写入失败全量回滚；batch 默认全成全败。
 :::
 
-## 12 个 Skill
+## 13 个 Skill
 
 | # | Skill | 分类 | 触发词（示例） | 状态 |
 |---|-------|------|----------------|------|
@@ -223,7 +223,7 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 | 精准修复（v0.24） | `fix advise` 修复分级：项目 recipe 生成与精确替换走 planHash/确认/事务写链；0 次或多次匹配、写前漂移、受保护环境、复验失败均阻断或回滚 |
 | 性能与准确率（v0.21） | B 规则执行计划 + ScanContext 按需读取、Source Index 两级缓存、MCP 统一 `response.mode/maxItems/maxBytes/cursor` 分页与 token 预算、`discover→context→validate→plan→approval→apply→verify` Pipeline DAG、`eval:quality` 准确率/P95 CI 门禁 |
 
-## AI 精准接入与业务闭环（v0.25 ~ v0.31）
+## AI 精准接入与业务闭环（v0.25 ~ v0.42）
 
 | 能力 | 说明 |
 |------|------|
@@ -239,6 +239,10 @@ wl-skills-bd db preview wl-contract.json         # DDL 预览 + 基线门禁 + �
 | 业务生成闭环（v0.29） | 契约新增 `businessKeys[]` 业务去重与 `batchPolicy` 批量策略：新增/修改归一化、租户+有效数据查重、更新排除自身、selected-only 一致性门禁；Flyway 明确为迁移唯一写入者，部署制品以实际文件 SHA-256 为准 |
 | 写入安全升级（v0.30） | `init/update/clean` 默认预览，写入需同一 `planHash` + `--confirm`；安装/生成目标原子写、漂移检测、失败回滚；`wl-skills-bd mcp` 可直接启动 stdio 服务；扫描目录不可读时明确降级 `partial`，不再空扫描误报通过 |
 | 共享资产保护（v0.31） | manifest 记录本包贡献哈希：共享 Markdown / MCP 配置按服务键合并，保留其他包与用户内容；`--force` 只能更新本包贡献，Delivery Profile 与业务配置不会被强制重置 |
+| 任务判定与公开协议（v0.32~v0.33） | task/route/explain/status/doctor-host 可解释路由（阈值/分差/负向领域/歧义/缺口）；describe/request 统一信封按公开契约暴露能力清单；能力清单只反映真实安装技能 |
+| 静态质量精准化（v0.40） | PMD7 精选扫描（显式 Locale/硬编码密钥/固定 IV）；B32 区分请求反序列化入口与返回模型待核实风险；B30 注解定位忽略字符串与注释；Maven 新增 `wl-quality-audit` / `wl-quality-unit` 独立质量模板 |
+| CLI/任务目录单源（v0.41） | 命令分发、帮助、公开协议目录与安装 capabilities 共用同一份完整目录；目录门禁逐项核验真实 handler/参数/副作用；README/任务规范/技能注册表从同一 catalog 生成（doc-sync 字节级防漂移） |
+| 行为契约与交付政策（v0.42） | 集成契约可选 `behavior`（步骤/前置/未知结果/幂等性/容量/映射来源）；适配器可选执行证据校验（真实 JUnit testcase/场景映射/报告指纹/新鲜度）；review 可消费项目 `delivery-policy` 核对 Maven profile/目标/版本/交付产物；B20/B17 误报收敛（事务委托链与删表判定） |
 
 ## 18 个 MCP 工具
 

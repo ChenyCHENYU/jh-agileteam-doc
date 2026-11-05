@@ -10,9 +10,14 @@ description: "把'环境标准化'和'项目创建'做成一条命令——三�
 
 | 包 | 版本 | 定位 |
 |----|------|------|
-| `@agile-team/vscode-config` | <NpmVersion pkg="@agile-team/vscode-config" fallback="3.14.5" /> | 一键安装团队标准编辑器配置（VS Code / Cursor / Windsurf / Kiro / Qoder） |
+| `@agile-team/vscode-config` | <NpmVersion pkg="@agile-team/vscode-config" fallback="3.15.0" /> | 一键安装团队标准编辑器配置（VS Code / Cursor / Windsurf / Kiro / Qoder） |
 | `@agile-team/vscode-config-extensions` | <NpmVersion pkg="@agile-team/vscode-config-extensions" fallback="1.1.0" /> | 配套离线扩展包（vsix，不含 AI 类扩展）——云桌面 / 内网环境 |
 | `@agile-team/robot-cli` | <NpmVersion pkg="@agile-team/robot-cli" fallback="3.2.0" /> | 多栈通用脚手架（vue / react / node / h5-vant / webview / electron），bun 优先兼容 npm/pnpm/yarn |
+| `git-branch-check-diff-commits` | <NpmVersion pkg="git-branch-check-diff-commits" fallback="1.4.2" /> | 按提交比对两个分支的差异清单 |
+| `git-log-formatter` | <NpmVersion pkg="git-log-formatter" fallback="1.2.0" /> | git log 格式化输出（变更统计/周报素材） |
+| `ts-type-cleaner` | <NpmVersion pkg="ts-type-cleaner" fallback="6.1.0" /> | TypeScript 冗余类型清理 |
+| `vite-console-plugin` | <NpmVersion pkg="vite-console-plugin" fallback="2.1.0" /> | Vite 构建按环境剥离/保留 console |
+| `vite-plugin-preloader` | <NpmVersion pkg="vite-plugin-preloader" fallback="2.3.0" /> | Vite 资源预加载插件 |
 
 ---
 
@@ -50,7 +55,22 @@ npx @agile-team/robot-cli create
 
 ---
 
-## 三者关系
+## 研发提效小工具（独立 npm 包）
+
+五个独立发布的轻量工具，按需 `npx` 使用；源码在工作区 `lib/` 目录维护：
+
+```bash
+npx git-branch-check-diff-commits main feature/x   # 两分支按提交比对差异
+npx git-log-formatter                               # 格式化 git log（周报/变更统计素材）
+npx ts-type-cleaner src                             # 清理 TS 冗余类型
+```
+
+- `vite-console-plugin` / `vite-plugin-preloader`：加入 Vite 配置使用，生产构建剥离 console / 资源预加载；
+- 均为零依赖或轻依赖的 CLI/插件，不影响项目运行时。
+
+---
+
+## 关系图
 
 ```text
 入职第一天      vscode-config ──► 编辑器就绪
@@ -58,4 +78,5 @@ npx @agile-team/robot-cli create
 企业正式项目    jh4j-cloud-cli ──► PC / 移动端 H5 标准工程
                     ↓
         wl-skills-* init（AI 体系注入）
+日常提效        git-log-formatter · ts-type-cleaner · vite-* 插件
 ```

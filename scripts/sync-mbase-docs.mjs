@@ -51,6 +51,8 @@ const anchorMap = [
   ["#断点续传断网排队", "#断点续传-断网排队"],
   ["./message-center#73-审批详情", "./message-center#_7-3-审批详情"],
   ["./message-center#6-移动端地址与消息路由契约", "./message-center#_6-移动端地址与消息路由契约"],
+  ["#审批摘要完整详情与作废闭环v37", "#审批摘要、完整详情与作废闭环-v3-7"],
+  ["./message-center#96-业务接入约定与兼容策略", "./message-center#_9-6-业务接入约定与兼容策略"],
   ["./app-integration#23-底层桥接协议", "./app-integration#_2-3-底层桥接协议"],
   ["./chunk-upload#三服务端协议必须实现", "./chunk-upload#三、服务端协议-必须实现"],
   ["#⑦-权限与异常页面协同避免子应用空白", "#_7-权限与异常页面协同-避免子应用空白"],

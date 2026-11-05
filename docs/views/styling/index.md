@@ -11,7 +11,7 @@
 | [UnoCSS 最佳实践](./unocss-best-practices) | 原子化 CSS 引擎使用规范 | 布局/间距/颜色的原子类怎么写 |
 | [SCSS 最佳实践](./scss-best-practices) | CSS 预处理器规范 | 复杂样式、组件样式、主题变量怎么组织 |
 | [UI 设计系统](./ui-design-system) | 设计系统原则 | 页面视觉结构（卡片/留白/层次）长什么样 |
-| [wl-skills-ui](./wl-skills-ui) | **视觉对齐框架**（v1.16.0） | 存量/新项目怎么被机器管住视觉一致：40 条 R 规则扫描 + fixer + Profile 体系 |
+| [wl-skills-ui](./wl-skills-ui) | **视觉对齐框架**（v1.22.3） | 存量/新项目怎么被机器管住视觉一致：40 条 R 规则扫描 + fixer + Profile 体系 |
 
 ## 定位区分（一句话版）
 

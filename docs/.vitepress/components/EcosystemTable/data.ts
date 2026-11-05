@@ -22,29 +22,41 @@ export interface EcoPkg {
 const L5 = "AI 工程五包";
 const LBASE = "基础设施库";
 const LGRID = "企业数据表格";
+const LREPORT = "报表引擎";
+const LQG = "质量门（Gate）";
 const LTOOL = "工程工具链";
 
 export const ecoPackages: EcoPkg[] = [
   // ---- AI 工程五包 ----
-  { name: "@agile-team/wl-skills-kit", layer: L5, version: "2.27.0", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-ui", layer: L5, version: "1.16.0", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-bd", layer: L5, version: "0.34.0", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-test", layer: L5, version: "0.28.0", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-design", layer: L5, version: "0.14.0", license: "Apache-2.0" },
+  { name: "@agile-team/wl-skills-kit", layer: L5, version: "2.33.4", license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-ui", layer: L5, version: "1.22.3", license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-bd", layer: L5, version: "0.42.0", license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-test", layer: L5, version: "0.34.1", license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-design", layer: L5, version: "1.0.2", license: "Apache-2.0" },
+  // ---- 质量门（Gate） ----
+  { name: "@agile-team/wl-skills-gate", layer: LQG, version: "0.13.19", license: "Source-Available（商用需授权）", featured: true },
   // ---- 基础设施库 ----
   { name: "@jhlc/common-core", layer: LBASE, version: "—", license: "—", internal: true },
-  { name: "@robot-admin/git-standards", layer: LBASE, version: "1.0.5", license: "MIT" },
-  { name: "@robot-admin/form-validate", layer: LBASE, version: "3.4.2", license: "MIT" },
+  { name: "@robot-admin/git-standards", layer: LBASE, version: "1.0.6", license: "MIT" },
+  { name: "@robot-admin/form-validate", layer: LBASE, version: "3.4.4", license: "MIT" },
   { name: "@robot-h5/core", layer: LBASE, version: "1.2.0", license: "UNLICENSED" },
   { name: "@agile-team/naive-ui-components", layer: LBASE, version: "0.1.4", license: "MIT" },
   // ---- 企业数据表格（MachTable 四件套） ----
-  { name: "@agile-team/mach-table", layer: LGRID, version: "0.29.2", license: "Source-Available（商用需授权）", featured: true },
-  { name: "@agile-team/mach-table-vue", layer: LGRID, version: "0.29.2", license: "Source-Available（商用需授权）" },
-  { name: "@agile-team/mach-table-react", layer: LGRID, version: "0.29.2", license: "Source-Available（商用需授权）" },
-  { name: "@agile-team/mach-table-xlsx", layer: LGRID, version: "0.29.2", license: "Source-Available（商用需授权）" },
+  { name: "@agile-team/mach-table", layer: LGRID, version: "0.38.0", license: "Source-Available（商用需授权）", featured: true },
+  { name: "@agile-team/mach-table-vue", layer: LGRID, version: "0.38.0", license: "Source-Available（商用需授权）" },
+  { name: "@agile-team/mach-table-react", layer: LGRID, version: "0.38.0", license: "Source-Available（商用需授权）" },
+  { name: "@agile-team/mach-table-xlsx", layer: LGRID, version: "0.38.0", license: "Source-Available（商用需授权）" },
+  // ---- 报表引擎 ----
+  { name: "@agile-team/mach-report", layer: LREPORT, version: "2.21.1", license: "Source-Available（商用需授权）", featured: true },
   // ---- 工程工具链 ----
   { name: "@agile-team/jh4j-cloud-cli", layer: LTOOL, version: "0.6.3", license: "—" },
   { name: "@agile-team/robot-cli", layer: LTOOL, version: "3.2.0", license: "MIT" },
-  { name: "@agile-team/vscode-config", layer: LTOOL, version: "3.14.5", license: "MIT" },
+  { name: "@agile-team/vscode-config", layer: LTOOL, version: "3.15.0", license: "MIT" },
   { name: "@agile-team/vscode-config-extensions", layer: LTOOL, version: "1.1.0", license: "MIT" },
+  // ---- 独立小工具（研发提效，公共 npm） ----
+  { name: "git-branch-check-diff-commits", layer: LTOOL, version: "1.4.2", license: "MIT" },
+  { name: "git-log-formatter", layer: LTOOL, version: "1.2.0", license: "MIT" },
+  { name: "ts-type-cleaner", layer: LTOOL, version: "6.1.0", license: "MIT" },
+  { name: "vite-console-plugin", layer: LTOOL, version: "2.1.0", license: "MIT" },
+  { name: "vite-plugin-preloader", layer: LTOOL, version: "2.3.0", license: "MIT" },
 ];

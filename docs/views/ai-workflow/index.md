@@ -32,10 +32,10 @@
 
 | 环节 | 包 | 版本 | 状态 |
 |------|-----|------|------|
-| 设计 | wl-skills-design | v0.14.0 | ✅ 已落地（verify 四域机械校验） |
-| 前端 | wl-skills-kit | v2.21.0 | 🟡 全链路践行中（scenario 确定性渲染已上线） |
-| 后端 | wl-skills-bd | v0.24.0 | ✅ 已落地（review 统一质量门） |
-| 测试 | wl-skills-test | v0.28.0 | ✅ 已落地（真实执行引擎 + gate） |
+| 设计 | wl-skills-design | v1.0.2 | ✅ 已落地（verify 四域机械校验） |
+| 前端 | wl-skills-kit | v2.33.4 | 🟡 全链路践行中（scenario 确定性渲染已上线） |
+| 后端 | wl-skills-bd | v0.42.0 | ✅ 已落地（review 统一质量门） |
+| 测试 | wl-skills-test | v0.34.1 | ✅ 已落地（真实执行引擎 + gate） |
 | L5 Pipeline | — | — | 🟡 `_pipeline.md` 协议试运行 |
 | L6 Multi-Agent | — | — | ▶ L5 稳定后规划 |
 

@@ -1,10 +1,10 @@
 ---
-description: "版本：v1.16.0 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。"
+description: "版本：v1.22.3 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。"
 ---
 
 # @agile-team/wl-skills-ui — 企业级 UI 风格对齐框架
 
-> 版本：v1.16.0 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
+> 版本：v1.22.3 · 让 Vue + Element Plus 业务系统获得一致的视觉，可被 AI 精确识别和修复。
 
 ::: tip 能力 Profile 体系（v1.12.0）
 按项目形态选择接入档位，统一声明 adapter、扫描规则、SCSS preset 与 runtime guard：

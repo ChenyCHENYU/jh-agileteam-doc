@@ -2,14 +2,14 @@
 
 <AuthorTag author="ChangXing" />
 
-> `@agile-team/wl-skills-test`（<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.28.0" />）— 从安装到日常使用的完整指南。
+> `@agile-team/wl-skills-test`（<NpmVersion pkg="@agile-team/wl-skills-test" fallback="0.34.1" />）— 从安装到日常使用的完整指南。
 
 ---
 
 ## 安装与初始化
 
 ```bash
-# 安装（11 规范 + 12 Skill + 模板 + 9 编辑器配置）
+# 安装（11 规范 + 13 Skill + 模板 + 9 编辑器配置）
 npx @agile-team/wl-skills-test init
 
 # 预览
@@ -19,7 +19,7 @@ npx @agile-team/wl-skills-test --dry-run
 npx @agile-team/wl-skills-test doctor
 ```
 
-安装后，AI 编辑器自动识别 `.github/skills/` 下 12 个 Skill 和 `.github/standards/` 下 11 条规范。
+安装后，AI 编辑器自动识别 `.github/skills/` 下 13 个 Skill 和 `.github/standards/` 下 11 条规范。
 
 ---
 
@@ -152,7 +152,7 @@ node quality-gate.js \
 
 ---
 
-## MCP 工具（20 个）
+## MCP 工具（23 个）
 
 | 工具 | 用途 |
 |------|------|
@@ -176,6 +176,9 @@ node quality-gate.js \
 | `wls_test_gate` | 一键聚合质量门（审计 + e2e-check + 冒烟 + DI + 性能基线） |
 | `wls_test_gen_contract` | OpenAPI/Swagger → 契约转换（v2/v3、basePath 拼接、响应/查询模型导入，紧凑输出） |
 | `wls_test_contract_diff` | 契约变更影响面：操作/字段级变更 + 受影响用例清单（内容哈希精确到条） |
+| `wls_test_sit_templates` | 读取 SIT Excel 模板目录、版式保留范围与严格输入 Schema；不写文件（v0.34 起） |
+| `wls_test_sit_generate` | 在明确指定的新目录生成 SIT 原版式 Excel、方案和报告；不覆盖既有交付物，不代填执行或客户签收 |
+| `wls_test_sit_verify` | 核验 SIT 交付记录（带 runId 时写本包回执）：提前一周交付、两轮全量执行和问题闭环；hash 回执/事实缺失阻断 |
 
 ---
 
@@ -188,3 +191,5 @@ design(产品) → kit(前端) → ui(样式) → bd(后端) → test(测试)
 ```
 
 test 是五包中**唯一具备实际执行能力**的包（API/Playwright/JMeter 三种执行器）。
+
+跨项目的 Git 钩子、构建门禁、九维 Review 与通知编排由 **[wl-skills-gate 质量门](/views/ecosystem/gate)** 统一接线——Test 的 `gate` 聚合结果（审计+E2E+冒烟+DI+性能）作为其中"测试"维度的证据源。
