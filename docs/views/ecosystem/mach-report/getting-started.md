@@ -23,6 +23,8 @@ pnpm add @agile-team/mach-report
 | `/pdf` · `/xlsx` · `/sql` | PDF 编码 · Excel 导入导出 · 动态 SQL 编译校验 |
 | `/designer` | 可视化模板设计器（画布/绑定向导/规则/验收） |
 | `/codes` | 工业标签 QR/条码 PNG 渲染 |
+| `/analytics` | 交叉表、数据集聚合、动态矩阵与图表组件 |
+| `/worker` | 浏览器 Worker 执行器（大报表后台生成） |
 | `/server` · `/server/node` | 服务端 Runtime、任务队列、持久任务与流式 Excel |
 
 所有代码入口提供 ESM/CJS 与类型声明；仅 Node 入口引用线程/文件系统。
