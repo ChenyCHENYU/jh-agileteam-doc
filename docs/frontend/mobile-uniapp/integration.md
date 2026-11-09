@@ -4,65 +4,52 @@
 
 <AuthorTag :authors="['CHENY']" />
 
-> 版本：v3.8 · 更新：2026-11-05
-> 适用范围：移动端门户（wl-mbase）对接 H5/钉钉、微信 WebView 与 App/PDA 子应用的完整参考手册
+> 版本：v3.9 · 更新：2026-11-09
+>
+> 适用对象：子应用开发、业务后端、平台配置、测试和发布人员。
+>
+> 适用范围：wl-mbase 的 H5/钉钉、微信 WebView 与 App/PDA 子应用。
 
----
+按接入顺序完成基础链路，再选择业务需要的能力。各章包含接入步骤、完整示例、字段与返回、异常处理和验收要求。
 
 ## 目录
 
-0. [阅读路径与接入边界](#零、阅读路径与接入边界)
-1. [整体架构](#一、整体架构)
-2. [免登（SSO）实现原理](#二、免登-sso-实现原理)
-   - [钉钉消息单点跳转](#钉钉消息单点跳转)
-   - [审批流消息分流](#审批流消息分流)
-   - [统一消息提醒接入](#统一消息提醒接入)
-   - [普通消息与审批业务页面的后端配置](#普通消息与审批业务页面的后端配置)
-   - [审批摘要、完整详情与作废闭环（v3.7）](#审批摘要、完整详情与作废闭环-v3-7)
-   - [审批业务页面与移动客户端配置](#审批业务页面与移动客户端配置)
-3. [门户侧已完成内容](#三、门户侧已完成内容)
-4. [H5 子应用侧改造清单](#四、h5-子应用侧改造清单)
-   - [App/PDA 单头部导航](#_6-app-pda-双向返回导航-单头部规则适用于所有宿主)
-   - [权限与异常页面协同](#_7-权限与异常页面协同-避免子应用空白)
-5. [桥接通信协议](#五、桥接通信协议)
-   - [跨端媒体 SDK（拍照/相册）](#推荐-使用跨端媒体-sdk)
-   - [断点续传（断网排队）](#断点续传-断网排队)
-6. [钉钉 JSAPI 鉴权](#六、钉钉-jsapi-鉴权)
-7. [访客模式接入](#七、访客模式接入-免账号密码)
-8. [微信小程序 openid 分发](#八、微信小程序-openid-分发-访客身份识别)
-9. [公司上下文透传](#九、公司上下文透传)
-10. [多环境配置](#十、多环境配置)
-11. [安全注意事项](#十一、安全注意事项)
+1. [接入总览与职责](#overview)
+2. [基础接入与上下文](#basics)
+3. [标题、返回与页面状态](#navigation)
+4. [消息与审批接入](#messages)
+5. [拍照、相册、临时图片与水印](#media)
+6. [断点续传](#resumable)
+7. [宿主通信、设备能力与钉钉鉴权](#bridge)
+8. [访客模式与微信身份](#visitor)
+9. [环境、构建与部署](#environment)
+10. [联调验收与问题定位](#acceptance)
+11. [基座能力、联调分工与安全约束](#implementation)
 
----
+| 接入任务             | 先看       | 完成标准                                        |
+| -------------------- | ---------- | ----------------------------------------------- |
+| 首次接入             | 第 1–3 章  | 真实路由可打开，身份/公司正确，权限和返回正常   |
+| 消息与审批           | 第 4 章    | 消息出现、地址正确、业务和消息状态闭环          |
+| 拍照、相册、水印     | 第 5 章    | 来源、上传、附件关联和异常状态符合业务要求      |
+| 弱网与大文件         | 第 6 章    | 任务可恢复，正式附件只在完成后落库              |
+| 底层桥与设备鉴权     | 第 7 章    | 宿主、能力声明、来源校验和鉴权正确              |
+| 微信访客             | 第 8 章    | 受限身份及应用声明生效，openid 缺失可按约定降级 |
+| 环境部署、验收与排障 | 第 9–11 章 | 产物身份、网关、真实接口与目标宿主验收一致      |
 
-## 零、阅读路径与接入边界
+<a id="overview"></a>
 
-本文是完整参考手册，保留所有分端约定、代码、错误码、验收和排障细节。第一次接入不需要从头读到尾，推荐按任务阅读：
+## 1. 接入总览与职责
 
-| 读者/任务                    | 先读                                                           | 再读                                                |
-| ---------------------------- | -------------------------------------------------------------- | --------------------------------------------------- |
-| 首次接入开发者               | [10 分钟快速接入](./quick-access)                   | 本文第四、五、九节                                  |
-| 只接免登、公司和菜单权限     | 本文第二、四、九节                                             | 权限与异常页面协同                                  |
-| 接业务通知、审批或待办消息   | 第二节“统一消息提醒接入”                                       | 消息中心架构说明第 5～8、9.6～9.7 节                |
-| 接审批完整详情、显示值或作废 | [审批摘要、完整详情与作废闭环](#审批摘要、完整详情与作废闭环-v3-7) | 本节职责表、接入步骤和联合验收清单                  |
-| 接拍照、相册、水印           | 第五节“跨端媒体 SDK”                                           | [图片水印服务端接入](./watermark) |
-| 接断点续传                   | 第五节“断点续传”                                               | 对应后端协议与排障表                                |
-| App/PDA 标题、返回和原生能力 | 第四节 App/PDA 导航、第五节能力表                              | [APP 集成与发布](./app-integration)                |
-| 项目经理、测试和现场排障     | 各能力验收清单、第十一节                                       | 设置 → 网络诊断                                     |
+| 责任方           | 接入职责                                               |
+| ---------------- | ------------------------------------------------------ |
+| 基座维护方       | 应用注册、环境开放、身份与公司透传、宿主能力和统一兜底 |
+| 平台维护方       | 认证客户端、流程与消息模板、钉钉配置及平台状态接口     |
+| 子应用与业务后端 | 页面、菜单与数据权限、业务接口、消息发送与业务回写     |
+| 测试与发布方     | 按目标环境和宿主验证正常、异常及跨系统状态             |
 
-稳定边界如下：
+<a id="一整体架构"></a>
 
-- 门户负责登录、公司上下文、入口、宿主导航、平台能力和统一兜底。
-- 子应用负责自己的菜单、按钮、业务数据权限、路由和页面状态。
-- 当前内部平台约定直接复用 `portal_token`，不要求子应用后端提供 Token 交换接口；本次优化不改变现有 URL 参数或登录链路。
-- 子应用无权限、无菜单或初始化失败时必须主动渲染状态页；基座只能通过协同协议辅助兜底，不能读取跨域子应用 DOM 并猜测空白原因。
-
-本次 v3.7 更新覆盖：审批历史与发起节点展示、显式显示元数据、正式作废接口及异常结果核对、H5/钉钉只读业务详情内嵌、统一滚动视觉，以及消息列表和账号/公司上下文隔离。下面“门户侧已完成内容”仅表示本仓库能力已实现；业务页适配、平台回调、OAMS 与钉钉待办同步须联合验收。
-
----
-
-## 一、整体架构
+### 整体架构
 
 ```
 用户请求
@@ -94,7 +81,7 @@ Nginx 分流
 
 > 智慧营销仅配置 `platforms: ['h5']`，用于钉钉和普通 H5 调试，不会出现在微信小程序或 App 工作台。
 
-### 应用环境可见性配置
+#### 应用环境可见性配置
 
 应用「在哪个环境显示」由 `src/config/portal-apps.ts` 顶部的 `ENV_APP_WHITELIST` 统一管理，集中一处即可调整，无需为不同环境修改代码或维护分支差异：
 
@@ -109,16 +96,22 @@ Nginx 分流
 > `enabled` 字段表示「应用配置已完成」，与环境无关，恒为 `true`。
 > 新应用在 SIT 测试通过后，按实际发布计划在 `ENV_APP_WHITELIST` 的 `uat`、`pre`、`production` 数组追加其 `id`；不要提前放开尚未部署的环境，所有分支代码保持一致。
 
----
+<a id="basics"></a>
 
-## 二、免登（SSO）实现原理
+## 2. 基础接入与上下文
+
+接入顺序为注册部署 → 环境就绪 → 最新 Token → 公司同步 → 用户和权限 → 业务页面。非模板项目启用托管环境时，先完成[环境初始化](#1033-第二步在业务初始化前获取基座环境)，再创建 API 客户端或发起业务请求。
+
+<a id="二免登sso实现原理"></a>
+
+### 免登（SSO）实现原理
 
 本项目有两层“免登”，不要混在一起看：
 
 - **基座自身登录**：用户进入 wl-mbase。钉钉 H5 场景可通过 `requestAuthCode` 换系统 token，详见 [钉钉免登方案](./dingtalk)。
 - **子应用登录**：用户已经进入 wl-mbase 后，点击智慧安全/安防/环保等子应用。基座把 `portal_token` 拼到子应用 URL，子应用据此跳过自己的登录页。
 
-### 流程
+#### 流程
 
 ```
 ① 用户在移动端门户登录（OAuth2）
@@ -140,7 +133,7 @@ Nginx 分流
 > **核心原则：登录只在门户发生一次。**
 > 用户已经在移动端登录，进入子应用时不应再看到任何登录界面。
 
-### Token 使用方式
+#### Token 使用方式
 
 当前接入的都是平台内部子应用，与门户共用认证服务，统一直接把 `portal_token` 当 Bearer Token 使用。该方式已经与平台约定，本项目不要求子应用后端增加 Token 交换接口。
 
@@ -151,6 +144,722 @@ Nginx 分流
 3. 接口返回 401 时按本文协议向基座上报 `logout`，不要自行清空后停留在空白页。
 
 未来如果接入不共用认证服务的第三方系统，应单独评审认证适配方案，不改变当前存量子应用协议。
+
+<a id="四h5-子应用侧改造清单"></a>
+
+### H5 子应用侧改造清单
+
+> **核心思路：登录入口只有一个，就是门户。**
+
+<a id="41-必须改否则免登不生效"></a>
+
+#### 部署与免登前置步骤
+
+<a id="①-移动端入口路径统一部署在-mbase缩写-路径下"></a>
+
+##### 移动端入口路径：统一部署在 `/mbase/{缩写}` 路径下
+
+```ts
+// vite.config.ts
+base: '/mbase/aq'     // 子应用 base path
+
+// vue-router
+createWebHistory('/mbase/aq')
+
+// 构建输出
+build.outDir: 'aq'    // 部署时放到 /mbase/ 目录下
+```
+
+<a id="②-login-入口检测到-portal_token-就直接进首页"></a>
+
+##### Login 入口：检测到 `portal_token` 就直接进首页
+
+```ts
+const urlParams = new URLSearchParams(window.location.search)
+const portalToken = urlParams.get('portal_token')
+const userId = urlParams.get('user_id')
+const companyId = urlParams.get('companyId')
+const companyName = urlParams.get('companyName')
+
+if (portalToken) {
+  // 方式A：直接用 portal_token 设置本系统认证状态
+  store.setToken(portalToken)
+  store.setUserId(userId)
+  store.setCompanyContext({ companyId, companyName })
+  router.replace('/home') // 进首页，登录页不渲染
+  return
+}
+```
+
+<a id="③-路由守卫深链接进入时不强制跳登录页"></a>
+
+##### 路由守卫：深链接进入时不强制跳登录页
+
+```ts
+router.beforeEach((to, from, next) => {
+  const hasPortalToken = new URLSearchParams(window.location.search).has(
+    'portal_token'
+  )
+  if (!store.token && !hasPortalToken) {
+    next('/login')
+  } else {
+    next()
+  }
+})
+```
+
+<a id="④-允许被-iframe-嵌入nginx-配置"></a>
+
+##### 允许被 iframe 嵌入（nginx 配置）
+
+```nginx
+# 删除或注释 X-Frame-Options
+# add_header X-Frame-Options SAMEORIGIN;
+
+# 改用 CSP 限制来源（推荐）
+add_header Content-Security-Policy "frame-ancestors 'self' https://ytiop-sit.walsin.com.cn";
+```
+
+### OAuth 客户端由谁配置
+
+`mobileBusinessUrl` 是否有效与 OAuth 客户端是否创建是两项独立条件。业务系统不需要为每条审批、每个页面或每个子应用单独创建客户端；所有通过 wl-mbase 进入的移动子应用统一复用基座 Token。
+
+移动门户各环境统一约定如下（OAuth 客户端不按环境区分）：
+
+| 配置位置                                               | 配置项              | 约定                                                               | 责任方       |
+| ------------------------------------------------------ | ------------------- | ------------------------------------------------------------------ | ------------ |
+| 平台「客户端管理」                                     | 客户端 ID           | `hb_ydd`                                                           | 平台认证服务 |
+| 平台「客户端管理」                                     | 原始客户端密钥      | 与 `hb_ydd` 客户端创建时录入的原始值一致；当前约定与客户端 ID 同值 | 平台认证服务 |
+| 平台「客户端管理」                                     | 授权模式            | 至少开启“资源拥有者/密码模式”和“刷新 Token”                        | 平台认证服务 |
+| 平台「客户端管理」                                     | 权限集              | `all`，或覆盖移动门户及已接入业务所需接口的最小权限集              | 平台认证服务 |
+| `wl-mbase/scripts/build-environment.mjs`（共享默认值） | `oauthClientId`     | `hb_ydd`，全部环境一致，一处维护                                   | 基座         |
+| `wl-mbase/scripts/build-environment.mjs`（共享默认值） | `oauthClientSecret` | 平台录入的原始值；不能使用管理页面显示的 BCrypt 哈希               | 基座         |
+| 各子应用                                               | OAuth client        | 不配置，复用 `portal_token`                                        | 子应用       |
+
+这套移动客户端的目的，是让移动端 Token 及其公司上下文与 PC 的 `c1` 隔离；它不会改变审批路由，也不会替代 `mobileBusinessUrl`。移动门户所有环境统一使用 `hb_ydd`；各环境认证服务需各自完成该客户端的创建与授权配置。
+
+客户端归属只在“签发 Token”时确定，后续切换公司不重新生成 Token。标准链路是：基座使用当前环境的移动客户端完成登录/刷新 → 每次打开子应用都注入最新 `portal_token` → 子应用用同一个 Token 调用业务接口；若存量平台接口依赖“当前公司”，子应用只需先调用 `POST /hrms/user/changeCompany?companyId=<companyId>`。平台按 Token 所属客户端隔离当前公司，因此移动端 `hb_ydd` 的切换不会修改 PC `c1` 的当前公司，反向也一样。
+
+子应用**禁止重复实现客户端认证**：不要声明 `VITE_OAUTH_CLIENT_ID/VITE_OAUTH_CLIENT_SECRET`，不要把客户端密钥打入 H5 产物，不要自行拼装 `client_code`，也不要再调用 `sso_token_change` 二次换票。否则会产生凭据泄露、双 Token、刷新状态不一致及公司上下文串用。子应用只负责接收最新 `portal_token`、初始化公司上下文和刷新自己的用户/权限/业务数据。
+
+钉钉免登还需额外确认：当前前端调用 `GET /auth/dingtalk/login?code=...`，请求中不传 `client_id`，因此平台后端必须确保该接口签发的 Token 归属移动客户端 `hb_ydd`，不能仍归属 PC 客户端 `c1`。
+
+联调验收至少覆盖：
+
+1. 全部移动端会话退出后重新登录，确认新 Token 由移动客户端签发。
+2. 移动端切换公司后，PC 刷新仍保持原公司；PC 切换公司也不影响移动端。
+3. Token 临近过期时可以使用 `hb_ydd` 完成刷新；若首次登录成功但到期退出，优先检查是否遗漏“刷新 Token”授权模式。
+4. 从审批消息进入基座审批详情，再点击“业务页面”，能够进入正确子应用和业务单据。
+5. 缺少 `flowInstance.mobileBusinessUrl` 时不显示“业务页面”按钮；已返回地址但打开失败时，查看地址诊断说明。这类配置与 OAuth 客户端配置分别验收。
+
+---
+
+<a id="九公司上下文透传"></a>
+
+### 公司上下文透传
+
+> 适用场景：正式登录用户（含钉钉免登、普通 H5 登录）进入工作台后，基座获取该用户可访问的公司列表，用户在工作台选择当前公司，打开子应用时把公司上下文随 URL 一起传入。
+
+<a id="91-门户侧公司来源"></a>
+
+#### 门户侧公司来源
+
+工作台进入后使用登录态获取当前用户与组织信息：
+
+```http
+GET /hrms/user/getCurUser
+GET /hrms/user/getById?id=<getCurUser.data.user.id>
+```
+
+两个接口都需要携带 `Authorization: Bearer <portal_token>`。门户先通过 `getCurUser` 拿到当前用户 ID，再通过 `getById` 读取该用户维护在平台里的 `userOrganizeInfo`。`/hrms/company/getCompanyIdNameMap` 仍作为公司基础字典接口保留，用于公司 ID 名称映射、登录页字典等公共场景；移动工作台公司展示和切换以 `userOrganizeInfo` 为准。
+
+兜底策略：
+
+- 正常路径：`/hrms/user/getById?id=<当前用户ID>` 成功返回 `userOrganizeInfo`，门户使用该列表。
+- 兜底路径：如果 `getById` 因权限或网关问题失败，但 `getCurUser` 已经在 `userStore.userInfo` 中缓存了当前用户的 `userOrganizeInfo`，门户会使用缓存恢复公司上下文，避免工作台出现“公司未获取”。
+- 失败路径：如果两处都没有可用组织信息，门户仍会展示明确错误，例如 `/hrms/user/getById 获取失败：无权限访问`，便于定位后端权限配置。
+
+`/hrms/hrUserCompanyController/listByUserNo` 仍作为 PC 登录前按账号查询公司逻辑保留，移动工作台不再使用它作为公司来源。
+
+后端返回示例：
+
+```json
+{
+  "code": 2000,
+  "message": "查询成功",
+  "data": {
+    "id": "2067939926757871617",
+    "userNo": "cheny",
+    "name": "杨晨誉",
+    "phone": "18993540586",
+    "userOrganizeInfo": [
+      {
+        "companyId": "2061278439935053826",
+        "companyName": "煙台華新",
+        "deptId": "2066414891727589441",
+        "deptName": "煙台智能應用部",
+        "main": true
+      },
+      {
+        "companyId": "2066414891673063426",
+        "companyName": "煙臺冷精",
+        "deptId": "2066414891723395146",
+        "deptName": "技術部門(煙臺冷精)",
+        "main": false
+      }
+    ]
+  }
+}
+```
+
+门户会把 `userOrganizeInfo` 转成 `{ id: companyId, name: companyName, deptId, deptName, main }[]`。公司 ID 可能超过 JS 安全整数范围，前端和子应用都必须按字符串处理，不要转成 `number`。部门信息仅用于门户展示当前公司下的所属部门，子应用权限与数据范围仍以 `token + companyId` 后端校验为准。
+
+默认选择规则：
+
+1. 优先使用当前用户上次选择且仍在公司列表内的公司。
+2. 否则选择 `main === true` 的公司作为默认公司，展示名称以接口返回的 `companyName` 为准，不写死名称。
+3. 如果后端未返回主公司，则选择当前用户 `companyId` 对应公司；仍未命中时选择列表第一项。
+
+当前选择会按用户 ID 维度保存在本地，避免 A 用户选择的公司污染到 B 用户。若 `userOrganizeInfo` 为空，门户会提示“该账号未在平台绑定公司”；若接口异常且没有缓存可兜底，会明确提示是 `/hrms/user/getCurUser` 还是 `/hrms/user/getById` 获取失败，便于定位后端或登录态问题。
+
+<a id="92-子应用-url-参数"></a>
+
+#### 子应用 URL 参数
+
+门户打开子应用时会追加：
+
+```text
+portal_token=<token>
+from=portal
+user_id=<userId>
+companyId=<当前公司ID>
+companyName=<当前公司名称>
+```
+
+完整示例：
+
+```text
+https://ytiop-sit.walsin.com.cn/mbase/aq/
+  ?portal_token=xxx
+  &from=portal
+  &user_id=U001
+  &companyId=2061278439935053827
+  &companyName=%E7%83%9F%E5%8F%B0%E5%8D%8E%E9%91%AB
+```
+
+参数说明：
+
+| 参数          | 说明                                                             |
+| ------------- | ---------------------------------------------------------------- |
+| `companyId`   | 当前选择的公司 ID，业务接口和权限校验应使用该值，按字符串处理    |
+| `companyName` | 当前选择的公司名称，仅用于页面展示；权限、数据范围不能依赖该字段 |
+
+<a id="93-子应用读取方式"></a>
+
+#### 子应用读取方式
+
+子应用入口初始化时读取自身 URL：
+
+```ts
+const params = new URLSearchParams(window.location.search)
+
+const portalToken = params.get('portal_token') || ''
+const companyId = params.get('companyId') || ''
+const companyName = params.get('companyName') || ''
+
+if (portalToken) {
+  localStorage.setItem('portal_token', portalToken)
+}
+if (companyId) {
+  sessionStorage.setItem('portal_company_id', companyId)
+}
+if (companyName) {
+  sessionStorage.setItem('portal_company_name', companyName)
+}
+```
+
+后续调用子应用自己的业务接口时，建议显式携带公司 ID：
+
+```ts
+await request('/api/current-user/permissions', {
+  headers: {
+    Authorization: `Bearer ${portalToken}`,
+  },
+  params: {
+    companyId,
+  },
+})
+```
+
+<a id="94-数据刷新与存量接口兼容"></a>
+
+#### 数据刷新与存量接口兼容
+
+基座负责选择并透传公司上下文，不会替子应用调用业务接口，也不会修改子应用的菜单、权限和页面缓存。子应用必须在用户信息、权限菜单和业务列表加载前完成公司上下文初始化。
+
+后端接口分为两类：
+
+1. **显式上下文接口（推荐）**：每个公司级接口都携带 `companyId`，服务端使用 `portal_token + companyId` 校验权限并过滤数据，不依赖服务端可变的“当前公司”。
+2. **存量当前公司接口**：接口本身没有 `companyId`，依赖平台保存的当前公司。子应用首次进入时应先调用 `POST /hrms/user/changeCompany?companyId=<本次公司>`，成功后再清理并重新获取用户、菜单、按钮权限、字典和业务数据。
+
+无论使用哪一种接口，子应用都复用基座传入的 `portal_token`，公司切换本身不换 Token，也不配置 `client_id/client_secret`。PC 与移动端是否隔离由认证平台根据 Token 所属客户端维护；SIT 中移动门户使用 `hb_ydd`，PC 使用 `c1`。`changeCompany` 必须携带当前 `portal_token`，认证平台据此只更新移动客户端会话下的公司上下文。
+
+公司同步失败必须阻断业务首页，不能继续展示上一公司缓存，也不能静默回退到默认公司。Pinia、KeepAlive、localStorage 和 IndexedDB 中的业务缓存应清除或按 `companyId` 分区。
+
+Robot_H5 模板已经内置上述闭环：默认 `server` 模式兼容平台存量接口，也支持 `explicit` 模式；提供 `withMbaseCompanyContext()` 显式追加公司参数和 `getMbaseCompanyScopedKey()` 隔离业务缓存。具体配置、诊断页和验收步骤见模板 `docs/mbase-integration.md`。
+
+<a id="95-权限边界"></a>
+
+#### 权限边界
+
+`companyId` 是用户在门户选择的业务上下文，不是权限证明。子应用后端必须使用 `portal_token + companyId` 再次校验该用户是否有该公司权限，并据此返回菜单、按钮和数据范围。
+
+`companyName` 只用于展示，例如页面顶部显示当前公司名称。不要用 `companyName` 做权限判断，也不要把它当作后端可信参数。
+
+如果子应用没有收到 `companyId`，建议阻断进入业务首页并提示“缺少公司上下文，请从移动门户重新进入”，避免用户在错误公司或默认数据下继续操作。
+
+---
+
+<a id="44-不需要改"></a>
+
+### 业务职责与接入范围
+
+- 子应用自己的普通业务接口 — 照常工作；涉及公司数据/权限的接口需接收并校验 `companyId`
+- 子应用自己的 UI/样式 — iframe 完全隔离
+- 子应用内部路由 — H5/钉钉照常工作；App/PDA 仅按[导航协议](#navigation)上报标题和是否可返回，业务路由仍由子应用自己管理
+
+<a id="navigation"></a>
+
+## 3. 标题、返回与页面状态
+
+<a id="4.2-可选接入体验更好"></a>
+<a id="42-可选接入体验更好"></a>
+
+### 标题与返回接入
+
+<a id="⑤-h5--钉钉页面标题同步给门户"></a>
+
+#### H5 / 钉钉页面标题同步给门户
+
+> 使用 **Robot_H5 v1.7.1+** 创建的 Vue 3 子应用已内置本节标题同步和
+> [App/PDA 导航协议](#app-pda-双向返回导航-单头部规则适用于所有宿主)。业务只需为每个路由维护 `meta.title`，为 Tab/首页根路由维护
+> `meta.mbaseRoot: true`，不要再次复制适配器。旧项目或其他技术栈按下方协议接入。
+
+```ts
+// 各环境显式配置，例如：https://ytiop-sit.walsin.com.cn
+const MBASE_ORIGIN = new URL(import.meta.env.VITE_MBASE_ORIGIN).origin
+
+router.afterEach(to => {
+  window.parent.postMessage(
+    { title: to.meta.title || document.title },
+    MBASE_ORIGIN
+  )
+})
+```
+
+标题上报必须绑定在路由完成事件（如 `router.afterEach`、uni-app H5 的
+`hashchange/popstate`）上，覆盖“进入新页面”和“返回已缓存页面”两个方向。
+不要只在导航组件 `mounted/onMounted` 时上报：返回旧页面时组件通常不会重新挂载，
+钉钉原生头部会因此保留后一页的标题。基座会在退出子应用后恢复工作台等自身页面
+标题，但跨域条件下无法读取子应用内部路由，子应用仍须按当前路由重新上报。
+
+<a id="⑥-apppda-单头部导航"></a>
+<a id="⑥-apppda-双向返回导航单头部规则适用于所有宿主"></a>
+
+#### App/PDA 双向返回导航（单头部规则适用于所有宿主）
+
+> 本节的“原生返回双向协议”只对 `mbase_host=app` 生效，覆盖普通 App 和 Android PDA；H5、钉钉和微信小程序不启用该返回协议。单头部规则则适用于所有有宿主头部的 mbase 场景：子应用确认被 mbase 托管后隐藏自己的头部，并持续上报标题。不要只使用 `from=portal` 判断 App/PDA，因为 H5/钉钉入口同样携带该参数。
+
+目标效果：
+
+```text
+进入子应用根页：首页原生头部（基座返回 + 当前标题）
+进入子应用详情页：仍只有同一个原生头部，标题随路由更新
+点击原生返回：详情页 → 子应用上一页；子应用根页 → 门户工作台
+独立浏览器打开子应用：保留子应用自己的 C_NavBar
+```
+
+职责固定如下：
+
+| 职责                    | 基座         | 子应用                            |
+| ----------------------- | ------------ | --------------------------------- |
+| 显示 App/PDA 唯一头部   | 是           | 嵌入时隐藏自己的头部              |
+| 决定页面标题            | 展示         | 用 `route.meta.title` 上报        |
+| 判断是否处于业务根页    | 否           | 用 `route.meta.mbaseRoot` 上报    |
+| 响应设备返回键/原生返回 | 下发返回指令 | 执行 `router.back()` 并确认新状态 |
+
+基座自动在 App/PDA 子应用 URL 上追加：
+
+```text
+mbase_host=app&mbase_bridge_version=1
+```
+
+子应用分三步接入。Robot_H5 `v1.7.1+` 已完成以下步骤，业务项目不得再次复制；其他技术栈按协议实现。
+
+**第一步：配置可信门户与 App SDK 按需加载。** 安装 `@robot-h5/core@^1.2.0`，将官方 `uni.webview.1.5.8.js` 放到子应用 `public/vendor/`，并在 Core 配置中声明地址：
+
+```ts
+import { defineH5Config } from '@robot-h5/core'
+
+export default defineH5Config({
+  bridge: {
+    platform: 'auto',
+    mbase: {
+      origin: import.meta.env.VITE_MBASE_ORIGIN,
+      appBridgeTimeoutMs: 6000,
+      appSdkUrl: `${import.meta.env.BASE_URL}vendor/uni.webview.1.5.8.js`,
+    },
+  },
+})
+```
+
+各环境的 `VITE_MBASE_ORIGIN` 必须是精确来源（协议、域名和可选端口），禁止为 `*`。不要在 `index.html` 静态引入 SDK：Core 仅在 `mbase_host=app` 的 App/PDA 首次通信时插入脚本；普通 H5、微信和钉钉不下载、不执行，主 JS 也不包含 SDK 实现。`appSdkUrl` 应跟随 Vite `BASE_URL`，不要硬编码某个环境域名，也不要依赖公共 CDN。
+
+**第二步：新增通用导航适配器。** 以下代码可直接保存为 `src/platform/mbase-navigation.ts`：
+
+```ts
+import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
+import {
+  isMbaseAppWebView,
+  postMbaseMessage,
+  waitForMbaseAppBridge,
+} from '@robot-h5/core/bridge'
+
+const SOURCE = 'mbase-navigation'
+const PROTOCOL = 1
+const COMMAND_EVENT = 'mbase:navigation-command'
+
+// core 同时识别 URL 参数和 window.__MBASE_BRIDGE_HOST__，应在登录逻辑清理 URL 前初始化。
+export const isMbaseAppHost = isMbaseAppWebView()
+
+let sequence = 0
+let latestRoute: RouteLocationNormalizedLoaded | undefined
+let pendingAckRequestId: string | undefined
+let queuedState: Record<string, unknown> | undefined
+let flushing = false
+
+const isRootRoute = (route: RouteLocationNormalizedLoaded) =>
+  route.meta.mbaseRoot === true
+
+const flush = async () => {
+  if (flushing) return
+  flushing = true
+  let sent = false
+  try {
+    await waitForMbaseAppBridge()
+    while (queuedState) {
+      const latest = queuedState
+      queuedState = undefined
+      await postMbaseMessage(latest)
+      sent = true
+    }
+  } catch (error) {
+    console.warn('[mbase-navigation] App/PDA 导航状态上报失败', error)
+  } finally {
+    flushing = false
+    // 仅在发送期间又出现更新时继续；超时/失败不自旋，由就绪事件或下一次路由变化重试。
+    if (sent && queuedState) void flush()
+  }
+}
+
+const send = (state: Record<string, unknown>) => {
+  queuedState = state // SDK 等待期间只保留最新路由状态
+  void flush()
+}
+
+const report = (
+  route: RouteLocationNormalizedLoaded,
+  ackRequestId?: string
+) => {
+  const title = String(route.meta.title || document.title || '应用').trim()
+  send({
+    source: SOURCE,
+    type: 'navigation:state',
+    protocol: PROTOCOL,
+    title,
+    canGoBack: !isRootRoute(route),
+    seq: ++sequence,
+    ...(ackRequestId ? { ackRequestId } : {}),
+  })
+}
+
+const isBackCommand = (
+  value: unknown
+): value is { id: string; type: 'navigation:back' } => {
+  if (!value || typeof value !== 'object') return false
+  const command = value as Record<string, unknown>
+  return (
+    command.source === SOURCE &&
+    command.type === 'navigation:back' &&
+    command.protocol === PROTOCOL &&
+    typeof command.id === 'string' &&
+    /^[A-Za-z0-9:_-]{1,100}$/.test(command.id)
+  )
+}
+
+export const installMbaseNavigation = (router: Router) => {
+  if (!isMbaseAppHost) return
+
+  const retryFlush = () => void flush()
+  document.addEventListener('UniAppJSBridgeReady', retryFlush)
+  document.addEventListener('plusready', retryFlush)
+
+  router.afterEach((to, _from, failure) => {
+    if (failure) return
+    latestRoute = to
+    const ackRequestId = pendingAckRequestId
+    pendingAckRequestId = undefined
+    report(to, ackRequestId)
+  })
+
+  window.addEventListener(COMMAND_EVENT, rawEvent => {
+    const command = (rawEvent as CustomEvent).detail
+    if (!isBackCommand(command) || !latestRoute) return
+
+    if (isRootRoute(latestRoute)) {
+      // 状态极短暂不同步时不误退出，也要确认指令让基座解除锁定。
+      report(latestRoute, command.id)
+      return
+    }
+
+    pendingAckRequestId = command.id
+    router.back()
+  })
+}
+```
+
+**第三步：在路由安装时启用，并隐藏嵌入态子头部。**
+
+```ts
+// router/routes.ts：所有“回到门户”的业务根页必须显式标记。
+{
+  path: '/home',
+  name: 'Home',
+  component: () => import('@/views/home/index.vue'),
+  meta: { title: '首页', mbaseRoot: true },
+}
+
+// main.ts：在 app.mount 前安装一次。
+import { installMbaseNavigation } from '@/platform/mbase-navigation'
+installMbaseNavigation(router)
+```
+
+```vue
+<!-- C_NavBar/index.vue：隐藏整个组件，placeholder 也会一起移除。 -->
+<VanNavBar v-if="!isMbaseAppHost" ... />
+
+<script setup lang="ts">
+  import { isMbaseAppHost } from '@/platform/mbase-navigation'
+</script>
+```
+
+接入约束：
+
+- 每个路由都配置准确的 `meta.title`；不要只把标题写死在页面的 `C_NavBar title` 属性中。
+- 首页、工作台、底部 Tab 根页等无法再退回子页面的路由配置 `meta.mbaseRoot: true`；详情、编辑、扫描等二级页不要配置。
+- 子应用头部右侧如果有保存、筛选等业务按钮，不能随 `C_NavBar` 一起隐藏；应迁移到页面内容区或独立业务工具栏。
+- 不要用 `window.history.length` 判断根页，它会混入登录跳转、重定向和 WebView 自身历史。
+- 不要在子应用里直接调用 `plus.webview` 或关闭容器；返回统一由上述协议处理。
+
+协议字段：
+
+| 方向              | 消息/事件                                      | 必填字段                                                  |
+| ----------------- | ---------------------------------------------- | --------------------------------------------------------- |
+| 子应用 → 基座     | `uni.postMessage` / `navigation:state`         | `source`、`protocol: 1`、`title`、`canGoBack`、递增 `seq` |
+| 基座 → 子应用     | `mbase:navigation-command` / `navigation:back` | `source`、`protocol: 1`、唯一 `id`                        |
+| 子应用 → 基座确认 | 下一条 `navigation:state`                      | `ackRequestId` 等于返回指令 `id`                          |
+
+兼容规则：只有基座收到一条合法 `navigation:state` 后才启用新协议；未接入的存量子应用继续使用原生 WebView 历史返回，原有拍照、上传、扫码、免登均不受影响。
+
+**Robot_H5 v1.7.1+ 默认行为：** `src/platform/mbase/` 已完成宿主固化、SDK 就绪等待、
+路由双向标题同步、换号时旧身份清理、根页返回保护及稳定错误信息；`C_NavBar` 只在确认被 mbase 托管时隐藏。
+因此新项目不得再引入 `window.android/window.webkit/plus.webview` 等旧返回代码，也不要只在
+导航组件 `mounted` 时上报标题。
+
+验收至少覆盖：
+
+1. App/PDA 打开根页只有一个头部，标题正确；浏览器独立打开仍显示子应用头部。
+2. 根页 → 二级页 → 三级页，标题依次变化且始终只有一个返回按钮。
+3. 连续点击原生返回，先逐级返回；到根页再点才回门户工作台。
+4. 快速连点返回不会跳两级；子应用未确认时基座会锁住重复指令并提示重试。
+5. 未接入协议的旧子应用仍可按原方式返回。
+
+<a id="43-必须处理的页面边界"></a>
+
+### 必须处理的页面边界
+
+<a id="⑦-权限与异常页面协同避免子应用空白"></a>
+
+#### 权限与异常页面协同（避免子应用空白）
+
+子应用的菜单、按钮和业务数据权限由各自后端控制。基座可以确认子应用 URL 是否可信、网络是否可达、主文档是否加载成功，但跨域后**不能读取子应用 DOM，也不能把“页面空白”可靠地猜成无权限**。
+
+因此采用两层协同：
+
+1. **子应用是第一责任层**：入口必须渲染 `loading / ready / access-denied / unavailable` 四态页面，任何初始化分支都不能只 `return` 留下空节点。
+2. **基座是统一兜底层**：子应用上报标准页面状态后，H5/钉钉和 App/PDA 显示统一说明、重新校验和返回工作台；微信原生 `web-view` 使用模态提示辅助兜底。
+
+兼容保证：页面状态协议是纯新增、可选上报。没有接入的存量子应用继续按原方式加载，登录、拍照、相册、扫码、上传和导航均不改变。
+
+**必须区分以下结果：**
+
+| 场景                       | 子应用页面状态     | 是否上报基座                |
+| -------------------------- | ------------------ | --------------------------- |
+| 初始化尚未完成             | `loading`          | 否                          |
+| 有权限且路由挂载完成       | `ready`            | 可选，建议上报              |
+| HTTP 403 / 当前公司无菜单  | `access-denied`    | 是                          |
+| 初始化接口异常、配置不可用 | `unavailable`      | 是                          |
+| HTTP 401                   | 原页面保持加载提示 | 上报既有 `action: 'logout'` |
+| 正常接口返回空数组         | 业务空状态         | 否，不能误判为无权限        |
+
+标准消息：
+
+```ts
+interface PortalPageStateMessage {
+  source: 'mbase-subapp'
+  type: 'page:state'
+  protocol: 1
+  status: 'ready' | 'access-denied' | 'unavailable'
+  title?: string // 最长 100 字符
+  message?: string // 最长 300 字符；只给用户可理解的说明
+  code?: string // 最长 64 字符；稳定错误编号，不含敏感数据
+}
+```
+
+推荐在子应用平台层集中封装一次：
+
+```ts
+type PortalPageState = Omit<
+  PortalPageStateMessage,
+  'source' | 'type' | 'protocol'
+>
+
+function resolvePortalOrigin(): string {
+  try {
+    return document.referrer
+      ? new URL(document.referrer).origin
+      : window.location.origin
+  } catch {
+    return window.location.origin
+  }
+}
+
+export function reportPortalPageState(state: PortalPageState): void {
+  const message: PortalPageStateMessage = {
+    source: 'mbase-subapp',
+    type: 'page:state',
+    protocol: 1,
+    ...state,
+  }
+  const params = new URLSearchParams(window.location.search)
+
+  // App/PDA WebView
+  if (params.get('mbase_host') === 'app') {
+    ;(window as any).uni?.postMessage?.({ data: message })
+    return
+  }
+
+  // 钉钉/普通 H5 iframe
+  if (window.parent !== window) {
+    window.parent.postMessage(message, resolvePortalOrigin())
+    return
+  }
+
+  // 微信小程序 WebView。消息可能在返回/销毁等时机才送达，不能替代本地状态页。
+  ;(window as any).wx?.miniProgram?.postMessage?.({ data: message })
+}
+```
+
+入口初始化范式：
+
+```ts
+async function bootstrap() {
+  renderLoadingPage()
+  try {
+    await syncLatestPortalToken() // 当前 URL Token 始终覆盖本地旧值
+    await syncPortalCompany()
+    await loadCurrentUser()
+    const menus = await loadMenusAndPermissions()
+
+    const firstRoute = resolveFirstAccessibleRoute(menus)
+    if (!firstRoute) {
+      renderAccessDeniedPage({
+        message: '当前公司下未配置可访问菜单',
+        onRetry: bootstrap,
+        onBack: backToPortal,
+      })
+      reportPortalPageState({
+        status: 'access-denied',
+        title: '暂无访问权限',
+        message: '当前公司下未配置可访问菜单，请联系业务管理员开通',
+        code: 'NO_MENU',
+      })
+      return
+    }
+
+    await router.replace(firstRoute)
+    renderApplication()
+    reportPortalPageState({
+      status: 'ready',
+      title: String(router.currentRoute.value.meta.title || ''),
+    })
+  } catch (error: any) {
+    const status = Number(error?.status || error?.code)
+    if (status === 401) {
+      reportPortalLogout() // 使用既有 action: 'logout' 协议
+      return
+    }
+    if (status === 403) {
+      renderAccessDeniedPage({ onRetry: bootstrap, onBack: backToPortal })
+      reportPortalPageState({
+        status: 'access-denied',
+        title: '暂无访问权限',
+        message: '当前账号暂无该应用或页面权限',
+        code: 'HTTP_403',
+      })
+      return
+    }
+
+    renderUnavailablePage({ onRetry: bootstrap, onBack: backToPortal })
+    reportPortalPageState({
+      status: 'unavailable',
+      title: '应用暂不可用',
+      message: '应用初始化失败，请稍后重试',
+      code: 'BOOTSTRAP_FAILED',
+    })
+  }
+}
+```
+
+页面和上报约束：
+
+- 必须先渲染子应用本地状态页，再上报基座；不能依赖 postMessage 替自己展示页面。
+- 用户提示不得包含 Token、完整带参 URL、接口响应体、堆栈或个人敏感信息。
+- `code` 使用稳定枚举供排障，例如 `NO_MENU`、`HTTP_403`、`BOOTSTRAP_FAILED`。
+- 不要把权限接口超时误报成“无权限”，应进入 `unavailable` 并提供重试。
+- “重新校验权限”必须重新拉取用户、公司、菜单和按钮权限，不能只刷新当前空白路由。
+- 独立访问子应用时也必须显示自己的状态页；基座兜底只在门户宿主中生效。
+
+分端最终效果：
+
+| 宿主           | 子应用本地页面 | 基座收到上报后的增强                                        |
+| -------------- | -------------- | ----------------------------------------------------------- |
+| 钉钉/普通 H5   | 必须           | 覆盖为统一权限/不可用说明，可重新校验或返回工作台           |
+| App/PDA        | 必须           | 原生容器显示统一说明，不再停留在无内容 WebView              |
+| 微信小程序     | 必须           | 在消息实际送达时显示模态提示；原生 WebView 限制下不承诺即时 |
+| 浏览器独立访问 | 必须           | 无基座增强，由子应用自己完整处理                            |
+
+验收至少覆盖：有权限、无菜单、按钮无权限、HTTP 403、HTTP 401、接口超时、服务 500、公司切换后权限变化、独立访问及三个门户宿主。所有失败场景都应有可理解文案和可执行动作，不允许白屏、无限 loading 或跳转循环。
+
+<a id="messages"></a>
+
+## 4. 消息与审批接入
+
+| 场景              | 关键配置                                                             | 完成后的状态                         |
+| ----------------- | -------------------------------------------------------------------- | ------------------------------------ |
+| 无业务页的纯通知  | 非 `FLOW_*`、`type=1`，`title/content` 完整，`showUrl` 可空          | 基座展示正文并同步已读               |
+| 普通业务通知/待办 | 移动 `showUrl`、PC `pcShowUrl`，待办使用 `type=2`                    | 业务服务回写完成状态                 |
+| FLOW 审批         | 流程实例和审批意见参数；完整业务页由发起流程保存 `mobileBusinessUrl` | 审批、作废与关联消息按服务端状态验收 |
 
 ### 钉钉消息单点跳转
 
@@ -553,556 +1262,9 @@ wl-mbase 移动 OAuth client
 
 简单审批如果只需要流程信息、少量摘要以及通过/驳回等动作，可以全部在基座审批详情完成，不强制配置业务页面。完整分层、字段契约与排障表见 [移动端消息中心使用与架构说明 §7.3](./message-center#_7-3-审批详情)。
 
-#### OAuth 客户端由谁配置
+<a id="media"></a>
 
-`mobileBusinessUrl` 是否有效与 OAuth 客户端是否创建是两项独立条件。业务系统不需要为每条审批、每个页面或每个子应用单独创建客户端；所有通过 wl-mbase 进入的移动子应用统一复用基座 Token。
-
-移动门户各环境统一约定如下（OAuth 客户端不按环境区分）：
-
-| 配置位置                                               | 配置项              | 约定                                                               | 责任方       |
-| ------------------------------------------------------ | ------------------- | ------------------------------------------------------------------ | ------------ |
-| 平台「客户端管理」                                     | 客户端 ID           | `hb_ydd`                                                           | 平台认证服务 |
-| 平台「客户端管理」                                     | 原始客户端密钥      | 与 `hb_ydd` 客户端创建时录入的原始值一致；当前约定与客户端 ID 同值 | 平台认证服务 |
-| 平台「客户端管理」                                     | 授权模式            | 至少开启“资源拥有者/密码模式”和“刷新 Token”                        | 平台认证服务 |
-| 平台「客户端管理」                                     | 权限集              | `all`，或覆盖移动门户及已接入业务所需接口的最小权限集              | 平台认证服务 |
-| `wl-mbase/scripts/build-environment.mjs`（共享默认值） | `oauthClientId`     | `hb_ydd`，全部环境一致，一处维护                                   | 基座         |
-| `wl-mbase/scripts/build-environment.mjs`（共享默认值） | `oauthClientSecret` | 平台录入的原始值；不能使用管理页面显示的 BCrypt 哈希               | 基座         |
-| 各子应用                                               | OAuth client        | 不配置，复用 `portal_token`                                        | 子应用       |
-
-这套移动客户端的目的，是让移动端 Token 及其公司上下文与 PC 的 `c1` 隔离；它不会改变审批路由，也不会替代 `mobileBusinessUrl`。移动门户所有环境统一使用 `hb_ydd`；各环境认证服务需各自完成该客户端的创建与授权配置。
-
-客户端归属只在“签发 Token”时确定，后续切换公司不重新生成 Token。标准链路是：基座使用当前环境的移动客户端完成登录/刷新 → 每次打开子应用都注入最新 `portal_token` → 子应用用同一个 Token 调用业务接口；若存量平台接口依赖“当前公司”，子应用只需先调用 `POST /hrms/user/changeCompany?companyId=<companyId>`。平台按 Token 所属客户端隔离当前公司，因此移动端 `hb_ydd` 的切换不会修改 PC `c1` 的当前公司，反向也一样。
-
-子应用**禁止重复实现客户端认证**：不要声明 `VITE_OAUTH_CLIENT_ID/VITE_OAUTH_CLIENT_SECRET`，不要把客户端密钥打入 H5 产物，不要自行拼装 `client_code`，也不要再调用 `sso_token_change` 二次换票。否则会产生凭据泄露、双 Token、刷新状态不一致及公司上下文串用。子应用只负责接收最新 `portal_token`、初始化公司上下文和刷新自己的用户/权限/业务数据。
-
-钉钉免登还需额外确认：当前前端调用 `GET /auth/dingtalk/login?code=...`，请求中不传 `client_id`，因此平台后端必须确保该接口签发的 Token 归属移动客户端 `hb_ydd`，不能仍归属 PC 客户端 `c1`。
-
-联调验收至少覆盖：
-
-1. 全部移动端会话退出后重新登录，确认新 Token 由移动客户端签发。
-2. 移动端切换公司后，PC 刷新仍保持原公司；PC 切换公司也不影响移动端。
-3. Token 临近过期时可以使用 `hb_ydd` 完成刷新；若首次登录成功但到期退出，优先检查是否遗漏“刷新 Token”授权模式。
-4. 从审批消息进入基座审批详情，再点击“业务页面”，能够进入正确子应用和业务单据。
-5. 缺少 `flowInstance.mobileBusinessUrl` 时不显示“业务页面”按钮；已返回地址但打开失败时，查看地址诊断说明。这类配置与 OAuth 客户端配置分别验收。
-
----
-
-## 三、门户侧已完成内容
-
-以下为基座代码已实现项，不代表已完成真实环境的联合验收。消息接入方应同时阅读第二节“统一消息提醒接入”的最小步骤、兼容范围与验收要点。
-
-- [x] `src/config/portal-apps.ts`：配置子应用列表（url、mpPath、name、enabled、roles、platforms）
-- [x] `ENV_APP_WHITELIST`：环境应用白名单（控制各环境上线范围，集中维护，与 enabled 解耦）
-- [x] `buildAppUrl(app, token, userId, openid, isVisitor, context)`：自动拼接 `portal_token`、`user_id`、`from=portal`、`companyId`、`companyName`
-- [x] `src/pages/index/index.vue`：点击应用图标 → 传参跳转 webview 页
-- [x] `src/pages/webview/index.vue`：iframe / web-view 嵌入 + postMessage 双向通信 + 桥接协议
-- [x] 长会话 Token 续期：子应用上报鉴权失效后，H5/钉钉和 App/PDA 由基座刷新或复用当前 token，重新签发可信子应用 URL 并强制加载；微信小程序返回工作台后再次进入时携带当前 token
-- [x] `src/utils/dingtalk/`：钉钉 JSAPI 按职责拆分为 5 个子模块
-- [x] `src/utils/dingtalk-redirect.ts`：钉钉消息 redirect 捕获、白名单校验、SSO 后消费跳转
-- [x] `public/relay.html`：静态中转页，支持钉钉消息单点跳转和返回体验优化
-- [x] `src/services/message-reminder.ts`：全部消息模板类型的前台轻提醒、历史基线、等计数新消息检查和失败退避；当前仍各查询前 5 条候选
-- [x] `src/utils/notification-preferences.ts`：沿用设备通知配置，接通全局开关、22:00 - 08:00 免打扰与可识别应用的订阅
-- [x] `C_MessageNotice` 与提醒队列：积压汇总、普通消息和待办原路由、App/H5 汇总导航，点击汇总不标读样本、不标记待办完成
-- [x] 提醒异步上下文保护：后台迟到响应、关闭动画、重复点击，以及已读确认或公司加载期间切换账号/公司时，丢弃旧上下文后续更新和跳转
-- [x] 审批详情：按历史版本显示历史页，保留节点退回记录；显示独立发起节点与逐条意见；消费可选显示元数据且提交原编码
-- [x] 平台流程作废：正式实例接口、发起人与已知状态约束、二次确认、终态统一显示；写异常只读核对、读取刷新失败单独提示，不伪造消息已办
-- [x] H5/钉钉业务详情：可信地址显式启用只读内嵌，支持公开环境与页面状态、超时及会话失效兜底；其他端和旧页面保留原入口
-- [x] 消息列表与滚动：返回页面重取当前列表，隔离迟到列表、分页、计数和账号/公司响应；通知弹窗隐藏原生滚动条并保留溢出提示
-- [x] `src/pages/webview/photo-utils.ts`：图片归一化工具（URL/dataURI/base64）
-
-### 后续待做
-
-| 任务                     | 优先级 | 说明                                                                                 |
-| ------------------------ | ------ | ------------------------------------------------------------------------------------ |
-| 子应用列表维护           | 中     | 后端不提供接口，直接维护 `src/config/portal-apps.ts`                                 |
-| 消息实时与增量接口       | 按需   | 平台提供地址、鉴权、事件与补查约定后，由平台和基座双方适配联调                       |
-| 业务状态闭环与旧入口迁移 | 高     | 各业务接入发送、完成、撤销和转办，验证存量待办与历史查询后再切换                     |
-| 审批完整业务详情适配     | 按业务 | 子应用适配只读路由、领域字段/附件和页面状态后显式开启内嵌；平台按需返回显示元数据    |
-| 作废跨系统联合验收       | 高     | 核验正式作废权限、业务回调、同实例 OAMS 待办办结及钉钉同步，不以前端成功提示代替验收 |
-
----
-
-## 四、H5 子应用侧改造清单
-
-> **核心思路：登录入口只有一个，就是门户。**
-
-### 4.1 必须改（否则免登不生效）
-
-#### ① 移动端入口路径：统一部署在 `/mbase/{缩写}` 路径下
-
-```ts
-// vite.config.ts
-base: '/mbase/aq'     // 子应用 base path
-
-// vue-router
-createWebHistory('/mbase/aq')
-
-// 构建输出
-build.outDir: 'aq'    // 部署时放到 /mbase/ 目录下
-```
-
-#### ② Login 入口：检测到 `portal_token` 就直接进首页
-
-```ts
-const urlParams = new URLSearchParams(window.location.search)
-const portalToken = urlParams.get('portal_token')
-const userId = urlParams.get('user_id')
-const companyId = urlParams.get('companyId')
-const companyName = urlParams.get('companyName')
-
-if (portalToken) {
-  // 方式A：直接用 portal_token 设置本系统认证状态
-  store.setToken(portalToken)
-  store.setUserId(userId)
-  store.setCompanyContext({ companyId, companyName })
-  router.replace('/home') // 进首页，登录页不渲染
-  return
-}
-```
-
-#### ③ 路由守卫：深链接进入时不强制跳登录页
-
-```ts
-router.beforeEach((to, from, next) => {
-  const hasPortalToken = new URLSearchParams(window.location.search).has(
-    'portal_token'
-  )
-  if (!store.token && !hasPortalToken) {
-    next('/login')
-  } else {
-    next()
-  }
-})
-```
-
-#### ④ 允许被 iframe 嵌入（nginx 配置）
-
-```nginx
-# 删除或注释 X-Frame-Options
-# add_header X-Frame-Options SAMEORIGIN;
-
-# 改用 CSP 限制来源（推荐）
-add_header Content-Security-Policy "frame-ancestors 'self' https://ytiop-sit.walsin.com.cn";
-```
-
-### 4.2 可选接入（体验更好）
-
-#### ⑤ H5 / 钉钉页面标题同步给门户
-
-> 使用 **Robot_H5 v1.7.1+** 创建的 Vue 3 子应用已内置本节标题同步和第⑥节
-> App/PDA 导航协议。业务只需为每个路由维护 `meta.title`，为 Tab/首页根路由维护
-> `meta.mbaseRoot: true`，不要再次复制适配器。旧项目或其他技术栈按下方协议接入。
-
-```ts
-// 各环境显式配置，例如：https://ytiop-sit.walsin.com.cn
-const MBASE_ORIGIN = new URL(import.meta.env.VITE_MBASE_ORIGIN).origin
-
-router.afterEach(to => {
-  window.parent.postMessage(
-    { title: to.meta.title || document.title },
-    MBASE_ORIGIN
-  )
-})
-```
-
-标题上报必须绑定在路由完成事件（如 `router.afterEach`、uni-app H5 的
-`hashchange/popstate`）上，覆盖“进入新页面”和“返回已缓存页面”两个方向。
-不要只在导航组件 `mounted/onMounted` 时上报：返回旧页面时组件通常不会重新挂载，
-钉钉原生头部会因此保留后一页的标题。基座会在退出子应用后恢复工作台等自身页面
-标题，但跨域条件下无法读取子应用内部路由，子应用仍须按当前路由重新上报。
-
-#### ⑥ App/PDA 双向返回导航（单头部规则适用于所有宿主）
-
-> 本节的“原生返回双向协议”只对 `mbase_host=app` 生效，覆盖普通 App 和 Android PDA；H5、钉钉和微信小程序不启用该返回协议。单头部规则则适用于所有有宿主头部的 mbase 场景：子应用确认被 mbase 托管后隐藏自己的头部，并持续上报标题。不要只使用 `from=portal` 判断 App/PDA，因为 H5/钉钉入口同样携带该参数。
-
-目标效果：
-
-```text
-进入子应用根页：首页原生头部（基座返回 + 当前标题）
-进入子应用详情页：仍只有同一个原生头部，标题随路由更新
-点击原生返回：详情页 → 子应用上一页；子应用根页 → 门户工作台
-独立浏览器打开子应用：保留子应用自己的 C_NavBar
-```
-
-职责固定如下：
-
-| 职责                    | 基座         | 子应用                            |
-| ----------------------- | ------------ | --------------------------------- |
-| 显示 App/PDA 唯一头部   | 是           | 嵌入时隐藏自己的头部              |
-| 决定页面标题            | 展示         | 用 `route.meta.title` 上报        |
-| 判断是否处于业务根页    | 否           | 用 `route.meta.mbaseRoot` 上报    |
-| 响应设备返回键/原生返回 | 下发返回指令 | 执行 `router.back()` 并确认新状态 |
-
-基座自动在 App/PDA 子应用 URL 上追加：
-
-```text
-mbase_host=app&mbase_bridge_version=1
-```
-
-子应用分三步接入。Robot_H5 `v1.7.1+` 已完成以下步骤，业务项目不得再次复制；其他技术栈按协议实现。
-
-**第一步：配置可信门户与 App SDK 按需加载。** 安装 `@robot-h5/core@^1.2.0`，将官方 `uni.webview.1.5.8.js` 放到子应用 `public/vendor/`，并在 Core 配置中声明地址：
-
-```ts
-import { defineH5Config } from '@robot-h5/core'
-
-export default defineH5Config({
-  bridge: {
-    platform: 'auto',
-    mbase: {
-      origin: import.meta.env.VITE_MBASE_ORIGIN,
-      appBridgeTimeoutMs: 6000,
-      appSdkUrl: `${import.meta.env.BASE_URL}vendor/uni.webview.1.5.8.js`,
-    },
-  },
-})
-```
-
-各环境的 `VITE_MBASE_ORIGIN` 必须是精确来源（协议、域名和可选端口），禁止为 `*`。不要在 `index.html` 静态引入 SDK：Core 仅在 `mbase_host=app` 的 App/PDA 首次通信时插入脚本；普通 H5、微信和钉钉不下载、不执行，主 JS 也不包含 SDK 实现。`appSdkUrl` 应跟随 Vite `BASE_URL`，不要硬编码某个环境域名，也不要依赖公共 CDN。
-
-**第二步：新增通用导航适配器。** 以下代码可直接保存为 `src/platform/mbase-navigation.ts`：
-
-```ts
-import type { RouteLocationNormalizedLoaded, Router } from 'vue-router'
-import {
-  isMbaseAppWebView,
-  postMbaseMessage,
-  waitForMbaseAppBridge,
-} from '@robot-h5/core/bridge'
-
-const SOURCE = 'mbase-navigation'
-const PROTOCOL = 1
-const COMMAND_EVENT = 'mbase:navigation-command'
-
-// core 同时识别 URL 参数和 window.__MBASE_BRIDGE_HOST__，应在登录逻辑清理 URL 前初始化。
-export const isMbaseAppHost = isMbaseAppWebView()
-
-let sequence = 0
-let latestRoute: RouteLocationNormalizedLoaded | undefined
-let pendingAckRequestId: string | undefined
-let queuedState: Record<string, unknown> | undefined
-let flushing = false
-
-const isRootRoute = (route: RouteLocationNormalizedLoaded) =>
-  route.meta.mbaseRoot === true
-
-const flush = async () => {
-  if (flushing) return
-  flushing = true
-  let sent = false
-  try {
-    await waitForMbaseAppBridge()
-    while (queuedState) {
-      const latest = queuedState
-      queuedState = undefined
-      await postMbaseMessage(latest)
-      sent = true
-    }
-  } catch (error) {
-    console.warn('[mbase-navigation] App/PDA 导航状态上报失败', error)
-  } finally {
-    flushing = false
-    // 仅在发送期间又出现更新时继续；超时/失败不自旋，由就绪事件或下一次路由变化重试。
-    if (sent && queuedState) void flush()
-  }
-}
-
-const send = (state: Record<string, unknown>) => {
-  queuedState = state // SDK 等待期间只保留最新路由状态
-  void flush()
-}
-
-const report = (
-  route: RouteLocationNormalizedLoaded,
-  ackRequestId?: string
-) => {
-  const title = String(route.meta.title || document.title || '应用').trim()
-  send({
-    source: SOURCE,
-    type: 'navigation:state',
-    protocol: PROTOCOL,
-    title,
-    canGoBack: !isRootRoute(route),
-    seq: ++sequence,
-    ...(ackRequestId ? { ackRequestId } : {}),
-  })
-}
-
-const isBackCommand = (
-  value: unknown
-): value is { id: string; type: 'navigation:back' } => {
-  if (!value || typeof value !== 'object') return false
-  const command = value as Record<string, unknown>
-  return (
-    command.source === SOURCE &&
-    command.type === 'navigation:back' &&
-    command.protocol === PROTOCOL &&
-    typeof command.id === 'string' &&
-    /^[A-Za-z0-9:_-]{1,100}$/.test(command.id)
-  )
-}
-
-export const installMbaseNavigation = (router: Router) => {
-  if (!isMbaseAppHost) return
-
-  const retryFlush = () => void flush()
-  document.addEventListener('UniAppJSBridgeReady', retryFlush)
-  document.addEventListener('plusready', retryFlush)
-
-  router.afterEach((to, _from, failure) => {
-    if (failure) return
-    latestRoute = to
-    const ackRequestId = pendingAckRequestId
-    pendingAckRequestId = undefined
-    report(to, ackRequestId)
-  })
-
-  window.addEventListener(COMMAND_EVENT, rawEvent => {
-    const command = (rawEvent as CustomEvent).detail
-    if (!isBackCommand(command) || !latestRoute) return
-
-    if (isRootRoute(latestRoute)) {
-      // 状态极短暂不同步时不误退出，也要确认指令让基座解除锁定。
-      report(latestRoute, command.id)
-      return
-    }
-
-    pendingAckRequestId = command.id
-    router.back()
-  })
-}
-```
-
-**第三步：在路由安装时启用，并隐藏嵌入态子头部。**
-
-```ts
-// router/routes.ts：所有“回到门户”的业务根页必须显式标记。
-{
-  path: '/home',
-  name: 'Home',
-  component: () => import('@/views/home/index.vue'),
-  meta: { title: '首页', mbaseRoot: true },
-}
-
-// main.ts：在 app.mount 前安装一次。
-import { installMbaseNavigation } from '@/platform/mbase-navigation'
-installMbaseNavigation(router)
-```
-
-```vue
-<!-- C_NavBar/index.vue：隐藏整个组件，placeholder 也会一起移除。 -->
-<VanNavBar v-if="!isMbaseAppHost" ... />
-
-<script setup lang="ts">
-  import { isMbaseAppHost } from '@/platform/mbase-navigation'
-</script>
-```
-
-接入约束：
-
-- 每个路由都配置准确的 `meta.title`；不要只把标题写死在页面的 `C_NavBar title` 属性中。
-- 首页、工作台、底部 Tab 根页等无法再退回子页面的路由配置 `meta.mbaseRoot: true`；详情、编辑、扫描等二级页不要配置。
-- 子应用头部右侧如果有保存、筛选等业务按钮，不能随 `C_NavBar` 一起隐藏；应迁移到页面内容区或独立业务工具栏。
-- 不要用 `window.history.length` 判断根页，它会混入登录跳转、重定向和 WebView 自身历史。
-- 不要在子应用里直接调用 `plus.webview` 或关闭容器；返回统一由上述协议处理。
-
-协议字段：
-
-| 方向              | 消息/事件                                      | 必填字段                                                  |
-| ----------------- | ---------------------------------------------- | --------------------------------------------------------- |
-| 子应用 → 基座     | `uni.postMessage` / `navigation:state`         | `source`、`protocol: 1`、`title`、`canGoBack`、递增 `seq` |
-| 基座 → 子应用     | `mbase:navigation-command` / `navigation:back` | `source`、`protocol: 1`、唯一 `id`                        |
-| 子应用 → 基座确认 | 下一条 `navigation:state`                      | `ackRequestId` 等于返回指令 `id`                          |
-
-兼容规则：只有基座收到一条合法 `navigation:state` 后才启用新协议；未接入的存量子应用继续使用原生 WebView 历史返回，原有拍照、上传、扫码、免登均不受影响。
-
-**Robot_H5 v1.7.1+ 默认行为：** `src/platform/mbase/` 已完成宿主固化、SDK 就绪等待、
-路由双向标题同步、换号时旧身份清理、根页返回保护及稳定错误信息；`C_NavBar` 只在确认被 mbase 托管时隐藏。
-因此新项目不得再引入 `window.android/window.webkit/plus.webview` 等旧返回代码，也不要只在
-导航组件 `mounted` 时上报标题。
-
-验收至少覆盖：
-
-1. App/PDA 打开根页只有一个头部，标题正确；浏览器独立打开仍显示子应用头部。
-2. 根页 → 二级页 → 三级页，标题依次变化且始终只有一个返回按钮。
-3. 连续点击原生返回，先逐级返回；到根页再点才回门户工作台。
-4. 快速连点返回不会跳两级；子应用未确认时基座会锁住重复指令并提示重试。
-5. 未接入协议的旧子应用仍可按原方式返回。
-
-### 4.3 必须处理的页面边界
-
-#### ⑦ 权限与异常页面协同（避免子应用空白）
-
-子应用的菜单、按钮和业务数据权限由各自后端控制。基座可以确认子应用 URL 是否可信、网络是否可达、主文档是否加载成功，但跨域后**不能读取子应用 DOM，也不能把“页面空白”可靠地猜成无权限**。
-
-因此采用两层协同：
-
-1. **子应用是第一责任层**：入口必须渲染 `loading / ready / access-denied / unavailable` 四态页面，任何初始化分支都不能只 `return` 留下空节点。
-2. **基座是统一兜底层**：子应用上报标准页面状态后，H5/钉钉和 App/PDA 显示统一说明、重新校验和返回工作台；微信原生 `web-view` 使用模态提示辅助兜底。
-
-兼容保证：页面状态协议是纯新增、可选上报。没有接入的存量子应用继续按原方式加载，登录、拍照、相册、扫码、上传和导航均不改变。
-
-**必须区分以下结果：**
-
-| 场景                       | 子应用页面状态     | 是否上报基座                |
-| -------------------------- | ------------------ | --------------------------- |
-| 初始化尚未完成             | `loading`          | 否                          |
-| 有权限且路由挂载完成       | `ready`            | 可选，建议上报              |
-| HTTP 403 / 当前公司无菜单  | `access-denied`    | 是                          |
-| 初始化接口异常、配置不可用 | `unavailable`      | 是                          |
-| HTTP 401                   | 原页面保持加载提示 | 上报既有 `action: 'logout'` |
-| 正常接口返回空数组         | 业务空状态         | 否，不能误判为无权限        |
-
-标准消息：
-
-```ts
-interface PortalPageStateMessage {
-  source: 'mbase-subapp'
-  type: 'page:state'
-  protocol: 1
-  status: 'ready' | 'access-denied' | 'unavailable'
-  title?: string // 最长 100 字符
-  message?: string // 最长 300 字符；只给用户可理解的说明
-  code?: string // 最长 64 字符；稳定错误编号，不含敏感数据
-}
-```
-
-推荐在子应用平台层集中封装一次：
-
-```ts
-type PortalPageState = Omit<
-  PortalPageStateMessage,
-  'source' | 'type' | 'protocol'
->
-
-function resolvePortalOrigin(): string {
-  try {
-    return document.referrer
-      ? new URL(document.referrer).origin
-      : window.location.origin
-  } catch {
-    return window.location.origin
-  }
-}
-
-export function reportPortalPageState(state: PortalPageState): void {
-  const message: PortalPageStateMessage = {
-    source: 'mbase-subapp',
-    type: 'page:state',
-    protocol: 1,
-    ...state,
-  }
-  const params = new URLSearchParams(window.location.search)
-
-  // App/PDA WebView
-  if (params.get('mbase_host') === 'app') {
-    ;(window as any).uni?.postMessage?.({ data: message })
-    return
-  }
-
-  // 钉钉/普通 H5 iframe
-  if (window.parent !== window) {
-    window.parent.postMessage(message, resolvePortalOrigin())
-    return
-  }
-
-  // 微信小程序 WebView。消息可能在返回/销毁等时机才送达，不能替代本地状态页。
-  ;(window as any).wx?.miniProgram?.postMessage?.({ data: message })
-}
-```
-
-入口初始化范式：
-
-```ts
-async function bootstrap() {
-  renderLoadingPage()
-  try {
-    await syncLatestPortalToken() // 当前 URL Token 始终覆盖本地旧值
-    await syncPortalCompany()
-    await loadCurrentUser()
-    const menus = await loadMenusAndPermissions()
-
-    const firstRoute = resolveFirstAccessibleRoute(menus)
-    if (!firstRoute) {
-      renderAccessDeniedPage({
-        message: '当前公司下未配置可访问菜单',
-        onRetry: bootstrap,
-        onBack: backToPortal,
-      })
-      reportPortalPageState({
-        status: 'access-denied',
-        title: '暂无访问权限',
-        message: '当前公司下未配置可访问菜单，请联系业务管理员开通',
-        code: 'NO_MENU',
-      })
-      return
-    }
-
-    await router.replace(firstRoute)
-    renderApplication()
-    reportPortalPageState({
-      status: 'ready',
-      title: String(router.currentRoute.value.meta.title || ''),
-    })
-  } catch (error: any) {
-    const status = Number(error?.status || error?.code)
-    if (status === 401) {
-      reportPortalLogout() // 使用既有 action: 'logout' 协议
-      return
-    }
-    if (status === 403) {
-      renderAccessDeniedPage({ onRetry: bootstrap, onBack: backToPortal })
-      reportPortalPageState({
-        status: 'access-denied',
-        title: '暂无访问权限',
-        message: '当前账号暂无该应用或页面权限',
-        code: 'HTTP_403',
-      })
-      return
-    }
-
-    renderUnavailablePage({ onRetry: bootstrap, onBack: backToPortal })
-    reportPortalPageState({
-      status: 'unavailable',
-      title: '应用暂不可用',
-      message: '应用初始化失败，请稍后重试',
-      code: 'BOOTSTRAP_FAILED',
-    })
-  }
-}
-```
-
-页面和上报约束：
-
-- 必须先渲染子应用本地状态页，再上报基座；不能依赖 postMessage 替自己展示页面。
-- 用户提示不得包含 Token、完整带参 URL、接口响应体、堆栈或个人敏感信息。
-- `code` 使用稳定枚举供排障，例如 `NO_MENU`、`HTTP_403`、`BOOTSTRAP_FAILED`。
-- 不要把权限接口超时误报成“无权限”，应进入 `unavailable` 并提供重试。
-- “重新校验权限”必须重新拉取用户、公司、菜单和按钮权限，不能只刷新当前空白路由。
-- 独立访问子应用时也必须显示自己的状态页；基座兜底只在门户宿主中生效。
-
-分端最终效果：
-
-| 宿主           | 子应用本地页面 | 基座收到上报后的增强                                        |
-| -------------- | -------------- | ----------------------------------------------------------- |
-| 钉钉/普通 H5   | 必须           | 覆盖为统一权限/不可用说明，可重新校验或返回工作台           |
-| App/PDA        | 必须           | 原生容器显示统一说明，不再停留在无内容 WebView              |
-| 微信小程序     | 必须           | 在消息实际送达时显示模态提示；原生 WebView 限制下不承诺即时 |
-| 浏览器独立访问 | 必须           | 无基座增强，由子应用自己完整处理                            |
-
-验收至少覆盖：有权限、无菜单、按钮无权限、HTTP 403、HTTP 401、接口超时、服务 500、公司切换后权限变化、独立访问及三个门户宿主。所有失败场景都应有可理解文案和可执行动作，不允许白屏、无限 loading 或跳转循环。
-
-### 4.4 不需要改
-
-- 子应用自己的普通业务接口 — 照常工作；涉及公司数据/权限的接口需接收并校验 `companyId`
-- 子应用自己的 UI/样式 — iframe 完全隔离
-- 子应用内部路由 — H5/钉钉照常工作；App/PDA 仅按上述协议上报标题和是否可返回，业务路由仍由子应用自己管理
-
----
-
-## 五、桥接通信协议
-
-子应用运行在 iframe 内，受安全策略限制无法直调钉钉 JSAPI。由基座统一调用 JSAPI，通过 `postMessage` 桥接回传结果。
+## 5. 拍照、相册、临时图片与水印
 
 ### 推荐：使用跨端媒体 SDK
 
@@ -1115,7 +1277,7 @@ async function bootstrap() {
 #### 接入约定
 
 1. 新接入项目推荐在子应用 `index.html` 中加载基座脚本。生产部署与基座同源时固定使用 `/mbase/sdk/portal-media.js`。
-2. 已经封装 `invokeBridge()` 的存量项目可以直接调用本文能力表，不要求重复加载 SDK；**SDK 和项目自有桥接封装二选一**，不要让一次点击同时走两套调用。
+2. 已经封装 `invokeBridge()` 的存量项目可以直接调用[底层桥能力表](#支持的能力列表)，不要求重复加载 SDK；**SDK 和项目自有桥接封装二选一**，不要让一次点击同时走两套调用。
 3. 使用 SDK 且需要 TypeScript 类型提示时，将基座的 `public/sdk/portal-media.d.ts` 复制到子应用 `src/types/portal-media.d.ts`，并确保该目录被 `tsconfig.json` 包含。
 4. 跨端直传时，`url` 必须传各环境可直接访问的**完整 HTTPS 上传地址**，不要把 `/api/files/upload` 一类相对路径作为跨端契约。
 5. 业务上传接口必须支持 `POST multipart/form-data`，图片字段统一接收 `file`；`formData` 中的字段按普通表单字段接收。
@@ -1517,9 +1679,13 @@ if (watermarkEnabled) {
 | 重复上传     | 只生成一份衍生图，不出现双重水印或重复附件        |
 | 系统历史图   | 服务端鉴权后生成衍生图，原图和历史记录保持不变    |
 
+<a id="resumable"></a>
+
+## 6. 断点续传
+
 ### 断点续传（断网排队）
 
-断点续传是独立的可选链路，适合 PDA 现场大文件、弱网和频繁断网场景。它不会接管上面的媒体 SDK：
+断点续传是独立的可选链路，适合 PDA 现场大文件、弱网和频繁断网场景。它不会接管[媒体 SDK](#media)：
 
 - 小图片、网络稳定：继续使用 `WLPortalMedia.chooseImageAndUpload`。
 - 需要断网排队、恢复后从已确认偏移继续：显式使用续传能力。
@@ -1830,9 +1996,19 @@ pnpm check:platform-isolation
 
 专项协议、安全要求、监控指标和完整真机矩阵继续参见[移动端断点续传能力设计与接入](./chunk-upload)。
 
+<a id="bridge"></a>
+
+## 7. 宿主通信、设备能力与钉钉鉴权
+
+<a id="五桥接通信协议"></a>
+
+### 钉钉能力桥概述
+
+子应用运行在 iframe 内，受安全策略限制无法直调钉钉 JSAPI。由基座统一调用 JSAPI，通过 `postMessage` 桥接回传结果。
+
 ### 底层协议：直接调用钉钉能力桥（仅存量兼容/排查）
 
-新接入推荐优先使用上面的媒体 SDK。已经有统一 `invokeBridge()` 封装、且明确运行在钉钉 iframe 内的存量项目，可以继续使用以下 `postMessage` 协议，不必重复加载 SDK。自行实现时必须同时满足：
+新接入推荐优先使用[媒体 SDK](#media)。已经有统一 `invokeBridge()` 封装、且明确运行在钉钉 iframe 内的存量项目，可以继续使用以下 `postMessage` 协议，不必重复加载 SDK。自行实现时必须同时满足：
 
 - 发送消息时使用配置的基座 `origin`，禁止使用 `*`。
 - 接收消息时同时校验 `event.source === window.parent` 和 `event.origin === MBASE_ORIGIN`。
@@ -1908,7 +2084,7 @@ window.parent.postMessage(
 
 临时图片五个接口只注册在钉钉 H5 能力桥，不进入 App 或微信小程序能力表。`pendingId` 只在创建它的 `appId + origin + iframe` 中有效，不能跨页面、跨子应用或长期持久化使用。
 
-> `resumable*` 不通过钉钉原生能力桥执行。钉钉直接调用这些能力会返回 `use_resumable_sdk`；应使用上面的 `WLPortalResumableUpload`。App 才通过原生桥调用 `resumableChooseAndUpload / List / Resume / Pause / Cancel`。
+> `resumable*` 不通过钉钉原生能力桥执行。钉钉直接调用这些能力会返回 `use_resumable_sdk`；应使用[续传 SDK `WLPortalResumableUpload`](#钉钉-普通-h5)。App 才通过原生桥调用 `resumableChooseAndUpload / List / Resume / Pause / Cancel`。
 
 ### iframe 普通消息
 
@@ -2120,11 +2296,13 @@ window.parent.postMessage(
 
 ---
 
-## 六、钉钉 JSAPI 鉴权
+<a id="六钉钉-jsapi-鉴权"></a>
+
+### 钉钉 JSAPI 鉴权
 
 > 适用场景：用户在钉钉客户端内使用拍照、定位等敏感 JSAPI，前端必须先 `dd.config` 签名鉴权，否则报 `No permission info for action: ...`。
 
-### 整体流程
+#### 整体流程
 
 ```
 前端(mbase)                         后端                         钉钉服务端
@@ -2141,7 +2319,7 @@ window.parent.postMessage(
    │  dd.config(...) → dd.ready → 调拍照/定位                       │
 ```
 
-### 后端签名接口
+#### 后端签名接口
 
 | 项   | 内容                                                       |
 | ---- | ---------------------------------------------------------- |
@@ -2165,7 +2343,7 @@ window.parent.postMessage(
 }
 ```
 
-### 前端鉴权模块
+#### 前端鉴权模块
 
 `src/utils/dingtalk/` 按职责拆分为 5 个子模块：
 
@@ -2190,13 +2368,13 @@ device.geolocation.start
 biz.util.previewImage
 ```
 
-### 调用时机
+#### 调用时机
 
 - 进入钉钉子应用 webview 容器页后，`onMounted` 会预鉴权一次；进入门户首页本身不会触发这次设备能力鉴权。
 - 拍照、相册或定位调用会复用按签名 URL 缓存的鉴权结果；预鉴权尚未完成或缓存失效时，能力调用会再次等待/触发鉴权。
 - 非敏感 API（扫码 `biz.util.scan`）无需鉴权，只做 `loadJSAPI() + dd.ready`
 
-### 运维清单
+#### 运维清单
 
 1. 注入环境变量 `DINGTALK_APP_SECRET`
 2. 服务器能访问外网 `https://oapi.dingtalk.com`
@@ -2205,13 +2383,17 @@ biz.util.previewImage
 5. Android、iOS 分别使用真机验收；建议以钉钉 7.0.10 及以上作为 `uploadFile` 验收基线，版本说明见[钉钉官方 JSAPI Explorer](https://open.dingtalk.com/tools/explorer/jsapi?id=10281)
 6. 上传域名使用有效 HTTPS 证书，且业务后端按 Token 校验用户、公司和附件归属
 
----
+<a id="visitor"></a>
 
-## 七、访客模式接入（免账号密码）
+## 8. 访客模式与微信身份
+
+<a id="七访客模式接入免账号密码"></a>
+
+### 访客模式接入（免账号密码）
 
 > 适用场景：访客预约、进出厂物资登记等业务，需要**外部人员（无系统账号）**在微信端直接使用。
 
-### 整体流程
+#### 整体流程
 
 ```
 ① 用户在 mbase 登录页点击「访客入口」（仅微信小程序端展示）
@@ -2231,21 +2413,21 @@ biz.util.previewImage
 ⑤ 访客只看到访客功能，其它图标隐藏，接口由后端 scope 兜底
 ```
 
-### 两层控制
+#### 两层控制
 
 | 层级           | 手段                         | 作用                                       |
 | -------------- | ---------------------------- | ------------------------------------------ |
 | 安全（硬控制） | 后端访客客户端的 `scope`     | 决定**能不能调接口**，越权直接拒绝         |
 | 体验（软控制） | 前端 `mode=visitor` + `v-if` | 决定**显不显示图标**，避免访客看到无关功能 |
 
-### 门户侧已预置（子应用无需关心）
+#### 门户侧已预置（子应用无需关心）
 
 | 文件                        | 内容                                              |
 | --------------------------- | ------------------------------------------------- |
 | `src/pages/login/index.vue` | 微信端「访客入口」按钮（`#ifdef MP-WEIXIN`）      |
 | `src/utils/visitor-auth.ts` | `client_credentials` 换 token、RSA 加密、独立存储 |
 
-### 子应用改造（安防参考，4 处小改动）
+#### 子应用改造（安防参考，4 处小改动）
 
 1. 新增常量 `VISITOR_MODE_KEY = 'h5_visitor_mode'`
 2. `parsePortalUrlParams()` 增加 `mode` 字段解析
@@ -2260,13 +2442,13 @@ biz.util.previewImage
 <!-- 访客可见 -->
 ```
 
-### 后端配合
+#### 后端配合
 
 1. 平台后台「客户端管理」新增访客专用客户端
 2. scope 仅授予访客接口（如 `store_attach_view`、`store_attach_add`）
 3. 将 `clientId/clientSecret` 提供给前端替换占位值
 
-### 联调 Checklist
+#### 联调 Checklist
 
 - [ ] 已建访客客户端，scope 仅含访客接口
 - [ ] mbase `visitor-auth.ts` 凭证已替换
@@ -2276,13 +2458,17 @@ biz.util.previewImage
 
 ---
 
-## 八、微信小程序 openid 分发（访客身份识别）
+<a id="八微信小程序-openid-分发访客身份识别"></a>
+
+### 微信小程序 openid 分发（访客身份识别）
 
 > 适用场景：微信小程序访客入口进入子应用（当前为智慧安防）时，子应用需要拿到微信 `openid`，用于识别同一访客并留存入场/登记记录。
 >
 > 该能力**仅微信小程序端生效**；钉钉/H5/App 不参与、不注入、不受影响。
 
-### 8.1 为什么必须后端配合
+<a id="81-为什么必须后端配合"></a>
+
+#### 为什么必须后端配合
 
 小程序前端只能通过 `uni.login`（底层 `wx.login`）拿到一次性 `code`，不能直接拿到 `openid`。
 `code → openid` 必须由后端携带小程序 `appid` + `appsecret` 调微信 `jscode2session` 完成。
@@ -2291,7 +2477,9 @@ biz.util.previewImage
 
 > ✅ **已验证（2026-06）**：后端接口 `GET /integrated/external/wx/getOpenId?code=` 已上线，无需鉴权，调微信侧链路正常。前端已完成对齐。
 
-### 8.2 最佳实践流程
+<a id="82-最佳实践流程"></a>
+
+#### 最佳实践流程
 
 ```
 微信小程序 mbase
@@ -2314,7 +2502,9 @@ mbase 缓存 openid（独立 storage，不进入 user store）
 安防子应用从 URL 读取 openid，用于访客登记/入场留存
 ```
 
-### 8.3 门户侧开关（防止污染其它子应用）
+<a id="83-门户侧开关防止污染其它子应用"></a>
+
+#### 门户侧开关（防止污染其它子应用）
 
 openid 注入是**应用级 opt-in**，只有在 `src/config/portal-apps.ts` 中显式声明的应用才会收到。
 
@@ -2329,7 +2519,9 @@ openid 注入是**应用级 opt-in**，只有在 `src/config/portal-apps.ts` 中
 
 未声明 `needWechatOpenid: true` 的应用（如智慧安全、智慧环保）永远不会被追加 `openid` 参数，避免身份信息误传、互相污染或业务混淆。
 
-### 8.4 后端接口说明（已上线）
+<a id="84-后端接口说明已上线"></a>
+
+#### 后端接口说明（已上线）
 
 | 项       | 实际值                                                           |
 | -------- | ---------------------------------------------------------------- |
@@ -2370,7 +2562,9 @@ openid 注入是**应用级 opt-in**，只有在 `src/config/portal-apps.ts` 中
 - `unionid`：微信开放平台统一标识，后端目前未返回（跨公众号识别时再议）。
 - `session_key`：微信会返回，但前端不需要，不能下发到子应用。
 
-### 8.5 接口未就绪时的降级策略
+<a id="85-接口未就绪时的降级策略"></a>
+
+#### 接口未就绪时的降级策略
 
 门户侧已做降级：
 
@@ -2378,7 +2572,9 @@ openid 注入是**应用级 opt-in**，只有在 `src/config/portal-apps.ts` 中
 - 子应用 URL 只是不携带 `openid`，仍保留 `portal_token`、`from=portal` 等免登参数。
 - 错误仅在 mbase 控制台输出 warning，不影响普通登录、访客 token、其它应用展示。
 
-### 8.6 子应用如何获取和使用
+<a id="86-子应用如何获取和使用"></a>
+
+#### 子应用如何获取和使用
 
 安防子应用在入口初始化时读取自身 URL 参数：
 
@@ -2410,7 +2606,9 @@ await api.submitVisitorRegister({
 - 仅在 `mode=visitor` 或访客功能页面使用该 openid，不要写入普通用户资料。
 - 如果 openid 缺失，仍允许用户继续登记，但后端可提示「微信身份未绑定」或降级为手机号/证件号识别。
 
-### 8.7 与钉钉能力桥的边界
+<a id="87-与钉钉能力桥的边界"></a>
+
+#### 与钉钉能力桥的边界
 
 | 场景                | 通信方式                   | 适用能力                | 是否携带 openid      |
 | ------------------- | -------------------------- | ----------------------- | -------------------- |
@@ -2419,165 +2617,17 @@ await api.submitVisitorRegister({
 
 不要把微信 openid 放进钉钉 `mbase-bridge`；不要在非微信端追加 openid；不要让未声明的子应用拿到 openid。
 
----
+<a id="environment"></a>
 
-## 九、公司上下文透传
+## 9. 环境、构建与部署
 
-> 适用场景：正式登录用户（含钉钉免登、普通 H5 登录）进入工作台后，基座获取该用户可访问的公司列表，用户在工作台选择当前公司，打开子应用时把公司上下文随 URL 一起传入。
+<a id="十多环境配置"></a>
 
-### 9.1 门户侧公司来源
+### 多环境配置
 
-工作台进入后使用登录态获取当前用户与组织信息：
+<a id="101-线上环境"></a>
 
-```http
-GET /hrms/user/getCurUser
-GET /hrms/user/getById?id=<getCurUser.data.user.id>
-```
-
-两个接口都需要携带 `Authorization: Bearer <portal_token>`。门户先通过 `getCurUser` 拿到当前用户 ID，再通过 `getById` 读取该用户维护在平台里的 `userOrganizeInfo`。`/hrms/company/getCompanyIdNameMap` 仍作为公司基础字典接口保留，用于公司 ID 名称映射、登录页字典等公共场景；移动工作台公司展示和切换以 `userOrganizeInfo` 为准。
-
-兜底策略：
-
-- 正常路径：`/hrms/user/getById?id=<当前用户ID>` 成功返回 `userOrganizeInfo`，门户使用该列表。
-- 兜底路径：如果 `getById` 因权限或网关问题失败，但 `getCurUser` 已经在 `userStore.userInfo` 中缓存了当前用户的 `userOrganizeInfo`，门户会使用缓存恢复公司上下文，避免工作台出现“公司未获取”。
-- 失败路径：如果两处都没有可用组织信息，门户仍会展示明确错误，例如 `/hrms/user/getById 获取失败：无权限访问`，便于定位后端权限配置。
-
-`/hrms/hrUserCompanyController/listByUserNo` 仍作为 PC 登录前按账号查询公司逻辑保留，移动工作台不再使用它作为公司来源。
-
-后端返回示例：
-
-```json
-{
-  "code": 2000,
-  "message": "查询成功",
-  "data": {
-    "id": "2067939926757871617",
-    "userNo": "cheny",
-    "name": "杨晨誉",
-    "phone": "18993540586",
-    "userOrganizeInfo": [
-      {
-        "companyId": "2061278439935053826",
-        "companyName": "煙台華新",
-        "deptId": "2066414891727589441",
-        "deptName": "煙台智能應用部",
-        "main": true
-      },
-      {
-        "companyId": "2066414891673063426",
-        "companyName": "煙臺冷精",
-        "deptId": "2066414891723395146",
-        "deptName": "技術部門(煙臺冷精)",
-        "main": false
-      }
-    ]
-  }
-}
-```
-
-门户会把 `userOrganizeInfo` 转成 `{ id: companyId, name: companyName, deptId, deptName, main }[]`。公司 ID 可能超过 JS 安全整数范围，前端和子应用都必须按字符串处理，不要转成 `number`。部门信息仅用于门户展示当前公司下的所属部门，子应用权限与数据范围仍以 `token + companyId` 后端校验为准。
-
-默认选择规则：
-
-1. 优先使用当前用户上次选择且仍在公司列表内的公司。
-2. 否则选择 `main === true` 的公司作为默认公司，展示名称以接口返回的 `companyName` 为准，不写死名称。
-3. 如果后端未返回主公司，则选择当前用户 `companyId` 对应公司；仍未命中时选择列表第一项。
-
-当前选择会按用户 ID 维度保存在本地，避免 A 用户选择的公司污染到 B 用户。若 `userOrganizeInfo` 为空，门户会提示“该账号未在平台绑定公司”；若接口异常且没有缓存可兜底，会明确提示是 `/hrms/user/getCurUser` 还是 `/hrms/user/getById` 获取失败，便于定位后端或登录态问题。
-
-### 9.2 子应用 URL 参数
-
-门户打开子应用时会追加：
-
-```text
-portal_token=<token>
-from=portal
-user_id=<userId>
-companyId=<当前公司ID>
-companyName=<当前公司名称>
-```
-
-完整示例：
-
-```text
-https://ytiop-sit.walsin.com.cn/mbase/aq/
-  ?portal_token=xxx
-  &from=portal
-  &user_id=U001
-  &companyId=2061278439935053827
-  &companyName=%E7%83%9F%E5%8F%B0%E5%8D%8E%E9%91%AB
-```
-
-参数说明：
-
-| 参数          | 说明                                                             |
-| ------------- | ---------------------------------------------------------------- |
-| `companyId`   | 当前选择的公司 ID，业务接口和权限校验应使用该值，按字符串处理    |
-| `companyName` | 当前选择的公司名称，仅用于页面展示；权限、数据范围不能依赖该字段 |
-
-### 9.3 子应用读取方式
-
-子应用入口初始化时读取自身 URL：
-
-```ts
-const params = new URLSearchParams(window.location.search)
-
-const portalToken = params.get('portal_token') || ''
-const companyId = params.get('companyId') || ''
-const companyName = params.get('companyName') || ''
-
-if (portalToken) {
-  localStorage.setItem('portal_token', portalToken)
-}
-if (companyId) {
-  sessionStorage.setItem('portal_company_id', companyId)
-}
-if (companyName) {
-  sessionStorage.setItem('portal_company_name', companyName)
-}
-```
-
-后续调用子应用自己的业务接口时，建议显式携带公司 ID：
-
-```ts
-await request('/api/current-user/permissions', {
-  headers: {
-    Authorization: `Bearer ${portalToken}`,
-  },
-  params: {
-    companyId,
-  },
-})
-```
-
-### 9.4 数据刷新与存量接口兼容
-
-基座负责选择并透传公司上下文，不会替子应用调用业务接口，也不会修改子应用的菜单、权限和页面缓存。子应用必须在用户信息、权限菜单和业务列表加载前完成公司上下文初始化。
-
-后端接口分为两类：
-
-1. **显式上下文接口（推荐）**：每个公司级接口都携带 `companyId`，服务端使用 `portal_token + companyId` 校验权限并过滤数据，不依赖服务端可变的“当前公司”。
-2. **存量当前公司接口**：接口本身没有 `companyId`，依赖平台保存的当前公司。子应用首次进入时应先调用 `POST /hrms/user/changeCompany?companyId=<本次公司>`，成功后再清理并重新获取用户、菜单、按钮权限、字典和业务数据。
-
-无论使用哪一种接口，子应用都复用基座传入的 `portal_token`，公司切换本身不换 Token，也不配置 `client_id/client_secret`。PC 与移动端是否隔离由认证平台根据 Token 所属客户端维护；SIT 中移动门户使用 `hb_ydd`，PC 使用 `c1`。`changeCompany` 必须携带当前 `portal_token`，认证平台据此只更新移动客户端会话下的公司上下文。
-
-公司同步失败必须阻断业务首页，不能继续展示上一公司缓存，也不能静默回退到默认公司。Pinia、KeepAlive、localStorage 和 IndexedDB 中的业务缓存应清除或按 `companyId` 分区。
-
-Robot_H5 模板已经内置上述闭环：默认 `server` 模式兼容平台存量接口，也支持 `explicit` 模式；提供 `withMbaseCompanyContext()` 显式追加公司参数和 `getMbaseCompanyScopedKey()` 隔离业务缓存。具体配置、诊断页和验收步骤见模板 `docs/mbase-integration.md`。
-
-### 9.5 权限边界
-
-`companyId` 是用户在门户选择的业务上下文，不是权限证明。子应用后端必须使用 `portal_token + companyId` 再次校验该用户是否有该公司权限，并据此返回菜单、按钮和数据范围。
-
-`companyName` 只用于展示，例如页面顶部显示当前公司名称。不要用 `companyName` 做权限判断，也不要把它当作后端可信参数。
-
-如果子应用没有收到 `companyId`，建议阻断进入业务首页并提示“缺少公司上下文，请从移动门户重新进入”，避免用户在错误公司或默认数据下继续操作。
-
----
-
-## 十、多环境配置
-
-### 10.1 线上环境
+#### 线上环境
 
 | 环境 | 域名                      | API 前缀   |
 | ---- | ------------------------- | ---------- |
@@ -2586,7 +2636,9 @@ Robot_H5 模板已经内置上述闭环：默认 `server` 模式兼容平台存�
 | PRE  | `ytiop-pre.walsin.com.cn` | `/pre-api` |
 | PRD  | `ytiop-prd.walsin.com.cn` | `/prd-api` |
 
-### 10.2 环境切换
+<a id="102-环境切换"></a>
+
+#### 环境切换
 
 基座各环境的公开配置集中维护在 `scripts/build-environment.mjs`：
 
@@ -2597,11 +2649,15 @@ wl-mbase 与 Robot_H5 在 `dev / sit / uat / pre / main` 标准发布分支统�
 
 > `mpPath` 用于所有线上环境，运行时通过构建期注入的 `VITE_DOMAIN` 拼接完整 HTTPS 地址；`url` 字段仅用于开发环境 fallback。不要通过 URL 参数、运行时读取 `env.json` 或构建后文本替换来切换环境。
 
-### 10.3 非模板 H5 统一环境构建与审计
+<a id="103-非模板-h5-统一环境构建与审计"></a>
+
+#### 非模板 H5 统一环境构建与审计
 
 本节只面向**没有使用 Robot_H5**、但需要进入 wl-mbase 的普通 Vite / Vue CLI H5 项目。Robot_H5 已内置同一套分支映射、`build:h5` 和 `env.json`，不要重复复制本节脚本。
 
-#### 10.3.1 最终约定
+<a id="1031-最终约定"></a>
+
+##### 最终约定
 
 | 项目                   | 统一规则                                                              |
 | ---------------------- | --------------------------------------------------------------------- |
@@ -2617,7 +2673,9 @@ wl-mbase 与 Robot_H5 在 `dev / sit / uat / pre / main` 标准发布分支统�
 
 当前 v1 覆盖浏览器 H5、钉钉 iframe、App 和 Android PDA 中的远程 H5。微信小程序 WebView 不具备同等的即时双向消息条件；同时投放微信小程序的非模板项目暂不启用 `managed`，仍保留自身编译期环境配置。Robot_H5 不受此限制，也不需要改造。
 
-#### 10.3.2 第一步：复制无依赖构建适配器
+<a id="1032-第一步复制无依赖构建适配器"></a>
+
+##### 第一步：复制无依赖构建适配器
 
 从 wl-mbase 复制：
 
@@ -2676,7 +2734,9 @@ Vue CLI 项目使用：
 
 CI 不增加环境参数，也不需要额外校验步骤。适配器会拒绝非标准分支，先执行 `build:project`，成功后再生成并校验 `env.json`；项目构建失败时不会伪造环境身份证。
 
-#### 10.3.3 第二步：在业务初始化前获取基座环境
+<a id="1033-第二步在业务初始化前获取基座环境"></a>
+
+##### 第二步：在业务初始化前获取基座环境
 
 在子应用 HTML 引入基座 SDK：
 
@@ -2725,7 +2785,9 @@ iframe 下 SDK 使用 `document.referrer` 得到精确父来源，并同时校�
 | `environment_not_enabled` | 子应用尚未由平台组开启 `environmentMode: 'managed'`             |
 | `invalid_environment`     | 返回契约不完整；记录基座版本与 Commit，停止业务请求并联系平台组 |
 
-#### 10.3.4 第三步：平台组灰度启用
+<a id="1034-第三步平台组灰度启用"></a>
+
+##### 第三步：平台组灰度启用
 
 子应用完成 SIT 改造并部署后，平台组才在对应 `PortalApp` 增加：
 
@@ -2741,7 +2803,9 @@ iframe 下 SDK 使用 `document.referrer` 得到精确父来源，并同时校�
 
 推荐发布顺序：先发布支持环境请求的基座 → 部署已改造子应用 → 平台组设置 `managed` → SIT 真机验收 → 再逐环境放行。回滚子应用时可以保留 `managed`（旧子应用不会主动请求）；不要在新版子应用仍依赖托管环境时先回滚基座协议。
 
-#### 10.3.5 验收与审计
+<a id="1035-验收与审计"></a>
+
+##### 验收与审计
 
 1. 在 `dev / sit / uat / pre / main` 分支分别执行同一命令 `pnpm build:h5`，非标准分支必须失败。
 2. 访问子应用 `/<子应用路径>/env.json`，确认 `application.id`、`environment`、`branch`、`commitSha`、`builtAt`、`publicPath` 正确。
@@ -2751,14 +2815,18 @@ iframe 下 SDK 使用 `document.referrer` 得到精确父来源，并同时校�
 6. 独立打开子应用时应进入明确的独立模式或错误页，不能静默使用某个默认环境。
 7. 运行基座 `pnpm test:managed-h5` 与 `pnpm check:quality`。
 
-### 10.4 开发环境
+<a id="104-开发环境"></a>
+
+#### 开发环境
 
 | 服务       | 地址                          | 说明               |
 | ---------- | ----------------------------- | ------------------ |
 | 移动端网关 | `http://172.28.99.172:9000`   | OAuth2 / JWT Token |
 | 子应用 H5  | 本地 Vite 代理 `/mbase/aq` 等 | iframe 嵌入        |
 
-### 10.5 Nginx 配置示例
+<a id="105-nginx-配置示例"></a>
+
+#### Nginx 配置示例
 
 ```nginx
 server {
@@ -2807,22 +2875,90 @@ server {
 }
 ```
 
----
+<a id="acceptance"></a>
 
-## 十一、安全注意事项
+## 10. 联调验收与问题定位
 
-| 风险点                    | 当前策略 / 建议                                                                        |
-| ------------------------- | -------------------------------------------------------------------------------------- |
-| `portal_token` 明文在 URL | 内网 HTTPS 可接受；外网或更高安全级别建议改为短期一次性 code 换取                      |
-| 消息 `redirect_url` 外跳  | `relay.html` 与 `dingtalk-redirect.ts` 只允许同源 + 已注册 `mpPath`，拦截跨域/未知路径 |
-| iframe 嵌入任意 URL       | 工作台入口通过 `portal-apps.ts` 注册表打开；消息直达也走白名单                         |
-| postMessage 来源校验      | 基座按当前 iframe origin + contentWindow 校验来源；子应用接收消息也应校验来源          |
-| Token 有效期              | relay 检测过期并回基座 SSO；已打开子应用上报 401 后，基座续期并用新 URL 重新注入 token |
-| 子应用登出不同步          | 通过 postMessage `action: logout` / `user-logout` 触发基座同步清理                     |
-| `companyId` 被篡改        | 子应用后端必须用 `portal_token + companyId` 校验公司权限                               |
-| `companyName` 被篡改      | 仅用于展示，不参与权限判断和数据范围过滤                                               |
+### 基础必验项
 
-### 维护约定
+- [ ] 从工作台与真实深链接均能进入正确移动页面。
+- [ ] 最新 Token 覆盖旧值，换号和切公司后用户、菜单、按钮和业务数据正确。
+- [ ] 无菜单、403、初始化失败、401 和正常空列表均有明确、正确的页面状态。
+- [ ] 目标宿主的标题、头部、返回、权限拒绝和取消操作符合相应协议。
+- [ ] 已选能力通过所在章节的成功、异常、恢复和真机验收清单。
+- [ ] 消息的阅读与办理分别验证，完成、作废、撤销或转办后的业务与平台状态一致。
+- [ ] 环境、分支、API、部署路径与产物 `env.json` 信息一致，日志及诊断内容已脱敏。
+
+### 按现象排查
+
+| 现象                                 | 检查顺序                                                | 位置                                                                          |
+| ------------------------------------ | ------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| 重复登录、持续 401、公司串用         | 最新上下文 → 认证配置 → 公司同步 → 缓存与会话恢复       | [基础接入](#basics)、[会话协议](#iframe-普通消息)                             |
+| 白屏、无菜单、权限失败               | 根状态 → 可访问路由 → 初始化接口 → 403 与空列表处理     | [页面边界](#权限与异常页面协同-避免子应用空白)                               |
+| 消息缺失、跳转错误、待办未办结       | 模板终端 → 类型与地址字段 → 流程持久化 → 业务回写       | [消息与审批](#messages)                                                       |
+| 图片重复、无 ID 上传失败、临时项丢失 | 上传链路 → 临时项生命周期 → 错误码 → 正式附件刷新       | [媒体上传](#media)                                                            |
+| 续传停住、持续 409、完成无附件       | 登录/网络 → 服务端偏移 → 幂等 → `completed.result` 落库 | [续传排障](#常见问题与排查)                                                   |
+| 标题或返回异常                       | 宿主识别 → 路由 meta → 状态上报 → 返回请求              | [标题与返回](#navigation)                                                     |
+| JSAPI 无权限、环境请求超时           | 签名 URL → 白名单 → 应用开关 → 来源与初始化顺序         | [设备鉴权](#六钉钉-jsapi-鉴权)、[托管环境](#103-非模板-h5-统一环境构建与审计) |
+| 微信访客缺 openid                    | 应用声明 → code → 后端响应 → 降级与子应用读取           | [微信身份](#visitor)                                                          |
+
+现场问题从「设置 → 网络诊断」采集脱敏报告，并附环境、宿主、客户端版本、应用 ID、时间、接口状态和业务关联 ID。续传问题同时提供任务/会话 ID、偏移和最后错误。
+
+<a id="implementation"></a>
+
+## 11. 基座能力、联调分工与安全约束
+
+<a id="三门户侧已完成内容"></a>
+
+### 门户侧已完成内容
+
+以下为基座代码已实现项，不代表已完成真实环境的联合验收。消息接入方应同时阅读[统一提醒说明](#统一消息提醒接入)的最小步骤、兼容范围与验收要点。
+
+- [x] `src/config/portal-apps.ts`：配置子应用列表（url、mpPath、name、enabled、roles、platforms）
+- [x] `ENV_APP_WHITELIST`：环境应用白名单（控制各环境上线范围，集中维护，与 enabled 解耦）
+- [x] `buildAppUrl(app, token, userId, openid, isVisitor, context)`：自动拼接 `portal_token`、`user_id`、`from=portal`、`companyId`、`companyName`
+- [x] `src/pages/index/index.vue`：点击应用图标 → 传参跳转 webview 页
+- [x] `src/pages/webview/index.vue`：iframe / web-view 嵌入 + postMessage 双向通信 + 桥接协议
+- [x] 长会话 Token 续期：子应用上报鉴权失效后，H5/钉钉和 App/PDA 由基座刷新或复用当前 token，重新签发可信子应用 URL 并强制加载；微信小程序返回工作台后再次进入时携带当前 token
+- [x] `src/utils/dingtalk/`：钉钉 JSAPI 按职责拆分为 5 个子模块
+- [x] `src/utils/dingtalk-redirect.ts`：钉钉消息 redirect 捕获、白名单校验、SSO 后消费跳转
+- [x] `public/relay.html`：静态中转页，支持钉钉消息单点跳转和返回体验优化
+- [x] `src/services/message-reminder.ts`：全部消息模板类型的前台轻提醒、历史基线、等计数新消息检查和失败退避；当前仍各查询前 5 条候选
+- [x] `src/utils/notification-preferences.ts`：沿用设备通知配置，接通全局开关、22:00 - 08:00 免打扰与可识别应用的订阅
+- [x] `C_MessageNotice` 与提醒队列：积压汇总、普通消息和待办原路由、App/H5 汇总导航，点击汇总不标读样本、不标记待办完成
+- [x] 提醒异步上下文保护：后台迟到响应、关闭动画、重复点击，以及已读确认或公司加载期间切换账号/公司时，丢弃旧上下文后续更新和跳转
+- [x] 审批详情：按历史版本显示历史页，保留节点退回记录；显示独立发起节点与逐条意见；消费可选显示元数据且提交原编码
+- [x] 平台流程作废：正式实例接口、发起人与已知状态约束、二次确认、终态统一显示；写异常只读核对、读取刷新失败单独提示，不伪造消息已办
+- [x] H5/钉钉业务详情：可信地址显式启用只读内嵌，支持公开环境与页面状态、超时及会话失效兜底；其他端和旧页面保留原入口
+- [x] 消息列表与滚动：返回页面重取当前列表，隔离迟到列表、分页、计数和账号/公司响应；通知弹窗隐藏原生滚动条并保留溢出提示
+- [x] `src/pages/webview/photo-utils.ts`：图片归一化工具（URL/dataURI/base64）
+
+#### 后续待做
+
+| 任务                     | 优先级 | 说明                                                                                 |
+| ------------------------ | ------ | ------------------------------------------------------------------------------------ |
+| 子应用列表维护           | 中     | 后端不提供接口，直接维护 `src/config/portal-apps.ts`                                 |
+| 消息实时与增量接口       | 按需   | 平台提供地址、鉴权、事件与补查约定后，由平台和基座双方适配联调                       |
+| 业务状态闭环与旧入口迁移 | 高     | 各业务接入发送、完成、撤销和转办，验证存量待办与历史查询后再切换                     |
+| 审批完整业务详情适配     | 按业务 | 子应用适配只读路由、领域字段/附件和页面状态后显式开启内嵌；平台按需返回显示元数据    |
+| 作废跨系统联合验收       | 高     | 核验正式作废权限、业务回调、同实例 OAMS 待办办结及钉钉同步，不以前端成功提示代替验收 |
+
+<a id="十一安全注意事项"></a>
+
+### 安全注意事项
+
+| 风险点                    | 当前策略 / 建议                                                                                                                           |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `portal_token` 明文在 URL | 内网 HTTPS 可接受；外网或更高安全级别建议改为短期一次性 code 换取                                                                         |
+| 消息 `redirect_url` 外跳  | `relay.html` 与 `dingtalk-redirect.ts` 只允许同源 + 已注册 `mpPath`，拦截跨域/未知路径                                                    |
+| iframe 嵌入任意 URL       | 工作台入口通过 `portal-apps.ts` 注册表打开；消息直达也走白名单                                                                            |
+| postMessage 来源校验      | 基座按当前 iframe origin + contentWindow 校验来源；子应用接收消息也应校验来源                                                             |
+| Token 有效期              | relay 检测过期并回基座 SSO；已打开子应用上报 401 后，基座续期并用新 URL 重新注入 token                                                    |
+| 子应用登出不同步          | 普通容器的 `logout` 用于会话校验/续期，`user-logout` 用于主动退出清理；审批只读内嵌页按[专用重载约定](#审批摘要、完整详情与作废闭环-v3-7)处理 |
+| `companyId` 被篡改        | 子应用后端必须用 `portal_token + companyId` 校验公司权限                                                                                  |
+| `companyName` 被篡改      | 仅用于展示，不参与权限判断和数据范围过滤                                                                                                  |
+
+#### 维护约定
 
 - 新增子应用时，先维护 `src/config/portal-apps.ts`，再同步 `public/relay.html` 的 `APP_PATHS`。
 - 应用在各环境是否显示，统一在 `portal-apps.ts` 的 `ENV_APP_WHITELIST` 调整，不要为不同环境改 `enabled`，以保持所有分支代码一致。
