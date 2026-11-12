@@ -1,3 +1,7 @@
+---
+description: "移动端 H5 Skills 使用指南：@robot-h5/core 与 wl-skills-kit 的安装和调用方式。"
+---
+
 # 移动端 H5 Skills 使用指南
 
 <AuthorTag :authors="['XieFei','MaJiaRui']" />

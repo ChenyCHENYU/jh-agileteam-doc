@@ -16,20 +16,14 @@
             <td><code class="eco-name">{{ pkg.name }}</code></td>
             <td class="eco-layer">{{ pkg.layer }}</td>
             <td>
-              <span
-                v-if="pkg.internal"
-                class="eco-version eco-version--internal"
-                title="未发布到公共 npm registry（内部源），版本以内部制品库为准"
-              >内部源</span>
-              <span
-                v-else
-                class="eco-version"
-                :class="{ 'is-live': live[pkg.name]?.version }"
-                :title="live[pkg.name]?.version ? '来自 npm registry 实时数据' : '构建时版本（实时获取失败时的兜底值）'"
-              >v{{ live[pkg.name]?.version || pkg.version }}</span>
+              <VersionChip
+                :version="liveVersions[pkg.name] || pkg.version"
+                :live="!!liveVersions[pkg.name]"
+                :internal="pkg.internal"
+              />
             </td>
             <td class="eco-dl">
-              {{ pkg.internal ? "—" : live[pkg.name]?.downloads != null ? live[pkg.name]!.downloads.toLocaleString("zh-CN") : "—" }}
+              {{ pkg.internal ? "—" : formatDownloads(downloads[pkg.name]) }}
             </td>
             <td class="eco-license">{{ pkg.license }}</td>
           </tr>
@@ -38,7 +32,7 @@
           <tr>
             <td colspan="3" class="eco-total-label">合计月下载（公共 npm）</td>
             <td class="eco-dl eco-total">
-              {{ totalDownloads != null ? totalDownloads.toLocaleString("zh-CN") : "—" }}
+              {{ formatDownloads(totalDownloads) }}
             </td>
             <td></td>
           </tr>
@@ -54,45 +48,37 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { ecoPackages } from "./data";
+import VersionChip from "../VersionChip/index.vue";
+import { useNpmVersions } from "../../composables/useNpmDistTags";
 
-interface LiveInfo {
-  version?: string;
-  downloads?: number;
-}
+// 版本：走共享 dist-tags 缓存（跨页面 30 分钟复用）
+const liveVersions = useNpmVersions(() =>
+  ecoPackages.filter((pkg) => !pkg.internal).map((pkg) => pkg.name)
+);
 
-const live = ref<Record<string, LiveInfo>>({});
+// 月下载：last-month 窗口（仅本组件使用，页面级请求即可）
+const downloads = ref<Record<string, number>>({});
 
 const totalDownloads = computed(() => {
-  const values = Object.values(live.value)
-    .map((v) => v.downloads)
-    .filter((n): n is number => n != null);
+  const values = Object.values(downloads.value);
   return values.length ? values.reduce((a, b) => a + b, 0) : null;
 });
+
+const formatDownloads = (n: number | null | undefined) =>
+  n != null ? n.toLocaleString("zh-CN") : "—";
 
 onMounted(async () => {
   await Promise.allSettled(
     ecoPackages
       .filter((pkg) => !pkg.internal)
-      .map(async (pkg) => {
-        // 版本：dist-tags（独立失败互不影响）
-        void fetch(`https://registry.npmjs.org/${encodeURIComponent(pkg.name)}`, {
-          headers: { Accept: "application/vnd.npm.install-v1+json" },
-        })
-          .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
-          .then((d: { "dist-tags"?: Record<string, string> }) => {
-            const latest = d["dist-tags"]?.latest;
-            if (latest) live.value[pkg.name] = { ...live.value[pkg.name], version: latest };
-          })
-          .catch(() => {});
-
-        // 月下载：last-month 窗口
-        void fetch(`https://api.npmjs.org/downloads/point/last-month/${pkg.name}`)
+      .map((pkg) =>
+        fetch(`https://api.npmjs.org/downloads/point/last-month/${pkg.name}`)
           .then((res) => (res.ok ? res.json() : Promise.reject(new Error(String(res.status)))))
           .then((d: { downloads?: number }) => {
-            if (d.downloads != null) live.value[pkg.name] = { ...live.value[pkg.name], downloads: d.downloads };
+            if (d.downloads != null) downloads.value[pkg.name] = d.downloads;
           })
-          .catch(() => {});
-      })
+          .catch(() => {})
+      )
   );
 });
 </script>
@@ -135,30 +121,6 @@ tfoot td {
   white-space: nowrap;
   color: var(--vp-c-text-2);
   font-size: 0.85rem;
-}
-.eco-version {
-  display: inline-block;
-  padding: 0.1rem 0.5rem;
-  border-radius: 999px;
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
-  font-size: 0.82rem;
-  white-space: nowrap;
-}
-.eco-version.is-live::before {
-  content: "";
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #10b981;
-  margin-right: 5px;
-  vertical-align: 1px;
-}
-.eco-version--internal {
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-2);
-  border: 1px dashed var(--vp-c-divider);
 }
 .eco-dl {
   text-align: right;

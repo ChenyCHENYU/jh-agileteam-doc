@@ -1,3 +1,7 @@
+---
+description: "@robot-admin/form-validate 表单校验库：单包同时支持 Naive UI 与 Element Plus 的企业级验证规则。"
+---
+
 # @robot-admin/form-validate 表单校验库
 
 <AuthorTag :authors="['CHENY']" />

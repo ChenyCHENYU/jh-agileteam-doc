@@ -1,0 +1,356 @@
+@use "./variables" as *;
+
+// ================================================================
+// FEATURES SECTION
+// ================================================================
+
+.features-section {
+  padding: 80px 24px 88px;
+  background: var(--vp-c-bg-soft);
+  position: relative;
+}
+
+.features-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--vp-c-divider);
+}
+
+.features-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+}
+
+// --- Section Header ---
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $accent;
+}
+
+.dark .section-eyebrow {
+  color: $accent-d;
+}
+
+.eyebrow-line {
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  background: $accent;
+  border-radius: 1px;
+}
+
+.dark .eyebrow-line {
+  background: $accent-d;
+}
+
+.section-heading {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--vp-c-text-1);
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+
+.section-sub {
+  font-size: 17px;
+  color: var(--vp-c-text-2);
+  margin: 0;
+  line-height: 1.6;
+}
+
+// --- Feature Grid with Animated Gradient Glow ---
+.feat-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--vp-c-divider);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.6s ease, border-color 0.6s ease;
+  }
+  
+  .feat-grid:hover {
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow:
+      0 0 0 1px rgba(99, 102, 241, 0.15),
+      0 0 40px -8px rgba(99, 102, 241, 0.2),
+      0 0 80px -16px rgba(139, 92, 246, 0.12);
+}
+
+.dark .feat-grid {
+  box-shadow: 0 1px 32px rgba(0, 0, 0, 0.36);
+}
+
+.dark .feat-grid:hover {
+  border-color: rgba(129, 140, 248, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(129, 140, 248, 0.2),
+    0 0 50px -8px rgba(129, 140, 248, 0.28),
+    0 0 100px -16px rgba(168, 85, 247, 0.18);
+}
+// --- Feature Card ---
+.feat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px 26px;
+  background: var(--vp-c-bg);
+  text-decoration: none;
+  transition: background $t-fast;
+  overflow: hidden;
+}
+
+.feat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.045) 0%,
+    rgba(168, 85, 247, 0.025) 100%
+  );
+  opacity: 0;
+  transition: opacity $t-mid;
+  z-index: 0;
+}
+
+.feat-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, $accent 0%, $accent-alt 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform $t-mid;
+  z-index: 1;
+}
+
+.feat-card:hover {
+  background: var(--vp-c-bg-soft);
+}
+
+.feat-card:hover::before {
+  opacity: 1;
+}
+
+.feat-card:hover::after {
+  transform: scaleX(1);
+}
+
+.feat-card:hover .feat-title {
+  color: $accent;
+}
+
+.feat-card:hover .feat-num {
+  opacity: 1;
+  color: $accent;
+}
+
+.feat-card:hover .feat-icon {
+  transform: scale(1.1);
+  filter: saturate(1.25);
+}
+
+.feat-card:hover .link-arrow {
+  transform: translateX(3px);
+}
+
+.dark .feat-card::before {
+  background: linear-gradient(
+    135deg,
+    rgba(129, 140, 248, 0.065) 0%,
+    rgba(192, 132, 252, 0.035) 100%
+  );
+}
+
+.dark .feat-card::after {
+  background: linear-gradient(90deg, $accent-d 0%, $accent-d-alt 100%);
+}
+
+.dark .feat-card:hover .feat-title {
+  color: $accent-d;
+}
+
+.dark .feat-card:hover .feat-num {
+  color: $accent-d;
+}
+
+.feat-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.feat-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--vp-c-text-2);
+  opacity: 0.4;
+  transition: opacity $t-fast, color $t-fast;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.feat-icon {
+  font-size: 26px;
+  line-height: 1;
+  filter: saturate(0.8);
+  transition: transform $t-mid, filter $t-mid;
+}
+
+.feat-title {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--vp-c-text-1);
+  margin: 0 0 10px;
+  position: relative;
+  z-index: 2;
+  transition: color $t-fast;
+}
+
+.feat-desc {
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+  line-height: 1.65;
+  margin: 0;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.feat-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: $accent;
+  position: relative;
+  z-index: 2;
+}
+
+.feat-link .link-arrow {
+  flex-shrink: 0;
+  transition: transform $t-fast;
+}
+
+.dark .feat-link {
+  color: $accent-d;
+}
+
+// ================================================================
+// SCROLL REVEAL — 滚动触发入场动画
+// ================================================================
+
+.reveal-item {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// Stagger delays for grid items
+@for $i from 1 through 6 {
+  .feat-card.reveal-item:nth-child(#{$i}).revealed {
+    transition-delay: #{($i - 1) * 0.08}s;
+  }
+}
+// ================================================================
+// RESPONSIVE
+// ================================================================
+
+@media (max-width: 960px) {
+  .hero-section {
+    min-height: unset;
+    padding: 72px 24px 56px;
+  }
+
+  .hero-title { font-size: 62px; }
+
+  .hero-tagline { font-size: 18px; }
+
+  .stat-item { padding: 15px 24px; }
+
+  .feat-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .section-heading { font-size: 30px; }
+
+  .features-section { padding: 64px 24px 72px; }
+}
+
+@media (max-width: 640px) {
+  .hero-section { padding: 56px 20px 44px; }
+
+  .hero-title { font-size: 46px; }
+
+  .hero-tagline {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta .cta-primary,
+  .hero-cta .cta-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-stats {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hero-stats .stat-item {
+    flex-shrink: 0;
+    padding: 14px 22px;
+  }
+
+  .stat-num { font-size: 22px; }
+
+  .feat-grid { grid-template-columns: 1fr; }
+
+  .feat-card { padding: 24px 20px 22px; }
+
+  .section-heading { font-size: 24px; }
+
+  .features-section { padding: 48px 16px 56px; }
+}

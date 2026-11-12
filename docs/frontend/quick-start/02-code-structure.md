@@ -5,6 +5,7 @@ description: "平台规范第 02 条 · 强制度：🔴 必遵。AI 生成代�
 # 代码结构与顺序规范（02）
 
 > **平台规范第 02 条** · 强制度：🔴 必遵。AI 生成代码必须严格按下列顺序输出。
+> 本条讲**单文件内**的代码组织顺序；**目录层级**结构见 [项目结构](./project-structure)。
 
 ::: info 来源
 `@agile-team/wl-skills-kit` · `standards/02-code-structure.md`

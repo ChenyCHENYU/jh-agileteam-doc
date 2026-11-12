@@ -9,9 +9,10 @@
  *  - 代码块内的安装/回退命令（pin 版本是合法操作）
  *  - install 命令的 @latest
  */
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { walkFiles } from "./lib/walk-files.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const PKG = String.raw`@?agile-?team/?(wl-skills-(?:kit|ui|bd|test|design)|jh4j-cloud-cli)`;
@@ -22,17 +23,8 @@ const HISTORICAL = /起|前为|前是|新增|升级到|更名|改名|回退|已�
 // 版本约束放行：≥/>=/^/~ 开头的是兼容范围声明，非"当前版本"
 const CONSTRAINT = /([≥≤]|>=|<=|\^|~)\s*v?\d+\.\d+/g;
 
-function walkMd(dir, acc = []) {
-  for (const name of readdirSync(dir)) {
-    if (name === "dist" || name === "node_modules" || name.startsWith(".")) continue;
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) walkMd(p, acc);
-    else if (name.endsWith(".md")) acc.push(p);
-  }
-  return acc;
-}
 
-const files = [join(root, "README.md"), ...walkMd(join(root, "docs"))];
+const files = [join(root, "README.md"), ...walkFiles(join(root, "docs"), { test: (n) => n.endsWith(".md") })];
 const offenders = [];
 
 for (const file of files) {

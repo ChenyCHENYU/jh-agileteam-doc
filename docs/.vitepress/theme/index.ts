@@ -92,7 +92,8 @@ export default {
     // Waline 评论系统（懒加载 — 滚动到评论区域时才加载资源）
     const walinePlugin = useWalineComments({
       serverURL:
-        (typeof import.meta !== "undefined" && (import.meta as Record<string, Record<string, string>>).env?.VITE_WALINE_SERVER_URL) ||
+        (typeof import.meta !== "undefined" &&
+          (import.meta as unknown as Record<string, Record<string, string>>).env?.VITE_WALINE_SERVER_URL) ||
         "https://waline-comment-lilac.vercel.app",
       meta: ["nick", "mail"],
       requiredMeta: ["nick", "mail"],

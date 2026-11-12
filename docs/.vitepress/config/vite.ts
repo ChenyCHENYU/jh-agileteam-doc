@@ -76,11 +76,10 @@ export const vite: UserConfig = {
   },
 
   // CSS 配置
+  // 注：vite 8 已移除 legacy Sass API，modern-compiler 成为默认，无需再显式声明 api
   css: {
     preprocessorOptions: {
-      scss: {
-        api: "modern-compiler",
-      },
+      scss: {},
     },
   },
 };

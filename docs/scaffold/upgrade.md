@@ -1,3 +1,7 @@
+---
+description: "jh4j-cloud-cli 版本说明与升级指南：各版本变化与升级注意事项。"
+---
+
 # 版本说明与升级
 
 <AuthorTag :authors="['CHENY']" />

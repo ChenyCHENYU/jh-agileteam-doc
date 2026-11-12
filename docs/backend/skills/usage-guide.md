@@ -1,3 +1,7 @@
+---
+description: "wl-skills-bd 使用指南：从安装配置到日常开发中 Skill 的调用方式与注意事项。"
+---
+
 # 后端 Skills 使用指南
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang']" />

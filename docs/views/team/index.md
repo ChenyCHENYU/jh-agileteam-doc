@@ -1,3 +1,7 @@
+---
+description: "鲁班营：共享技术中心前端组，负责 PC/H5/uniApp 三条线与五包前端侧建设。"
+---
+
 # 鲁班营
 <AuthorTag :authors="['ZhuXiang','CHENY']" />
 

@@ -7,25 +7,17 @@
  * 规则：markdown 链接目标以 "/" 开头按站内绝对路径解析，
  * 以 "./" "../" 开头按相对当前文件解析；忽略外链/锚点/图片/代码块。
  */
-import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { dirname, join, normalize, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { walkFiles } from "./lib/walk-files.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const docsRoot = join(root, "docs");
 
-function walkMd(dir, acc = []) {
-  for (const name of readdirSync(dir)) {
-    if (name === "dist" || name === "node_modules" || name.startsWith(".")) continue;
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) walkMd(p, acc);
-    else if (name.endsWith(".md")) acc.push(p);
-  }
-  return acc;
-}
 
 const MD_LINK = /(?<!!)\[[^\]]*\]\(([^)]+)\)/g;
-const files = walkMd(docsRoot);
+const files = walkFiles(docsRoot, { test: (n) => n.endsWith(".md") });
 const missing = [];
 let total = 0;
 
@@ -48,6 +40,7 @@ for (const file of files) {
       if (/^(https?:|mailto:|#|tel:)/i.test(target)) continue;
       target = target.split("#")[0]; // 去锚点（锚点由 check-anchors 负责）
       if (!target) continue;
+      target = target.replace(/\.md$/i, ""); // 剥离 .md 后缀（站内链接统一走 cleanUrls）
       if (!/^\//.test(target)) target = resolve(dirname(file), target); // 相对路径
       const clean = target.replace(/\/$/, "");
       const candidates =

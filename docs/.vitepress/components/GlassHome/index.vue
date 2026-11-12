@@ -26,7 +26,7 @@
           <span class="title-base">AGILE</span><span class="title-gradient"> TEAM</span>
         </h1>
 
-        <p class="hero-tagline">从需求到上线的 AI 工程化体系 · 5 包全链路 · 14 个 npm 包 · {{ releaseCount ? `累计发版 ${releaseCount}+ 次` : "累计发版 385+ 次" }}</p>
+        <p class="hero-tagline">从需求到上线的 AI 工程化体系 · 5 包全链路 · {{ pkgCount }} 个 npm 包 · {{ releaseCount ? `累计发版 ${releaseCount}+ 次` : "累计发版 390+ 次" }}</p>
 
         <div class="hero-cta">
           <a href="/frontend/quick-start/getting-started" class="cta-primary">
@@ -97,6 +97,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
 import { features, stats } from "./data";
+import { ecoPackages } from "../EcosystemTable/data";
+
+/** npm 包总数：从生态单一数据源派生（EcosystemTable/data.ts），不在此写死 */
+const pkgCount = ecoPackages.length;
 
 /** 累计发版次数：随站点部署自动刷新（scripts/gen-site-data.mjs 生成） */
 const releaseCount = ref<number | null>(null);

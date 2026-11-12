@@ -1,3 +1,7 @@
+---
+description: "打印报表平台运维操作手册：从建目录到前端挂载的九步完整流程。"
+---
+
 # 打印报表平台 — 运维操作手册
 
 <AuthorTag :authors="['ZhuXiang']" />

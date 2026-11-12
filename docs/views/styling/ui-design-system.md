@@ -29,7 +29,7 @@ description: "项目首页（GlassHome）明确标注 'Linear × Apple Premium D
 | [Linear.app](https://linear.app) | Hero 渐变网格 + 深色底 + 极简排版 — 当前首页主要参考 |
 | [Apple Developer](https://developer.apple.com) | 高级排版节奏 + 大留白 + 渐变标题 |
 | [Element Plus Docs](https://element-plus.org) | 文档站内容宽度、侧边栏、组件演示布局 |
-| [tzagileteam.com](https://www.tzagileteam.com) | 团队内部参考站 |
+| [tzat.top](https://tzat.top) | 团队内部参考站 |
 
 ---
 

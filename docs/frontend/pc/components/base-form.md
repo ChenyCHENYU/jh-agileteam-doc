@@ -2,7 +2,7 @@
 description: "来源：@jhlc/common-core 远程组件"
 ---
 
-﻿# BaseForm 表单组件
+# BaseForm 表单组件
 
 > 来源：`@jhlc/common-core` 远程组件
 
@@ -248,9 +248,9 @@ interface BaseFormItemDesc<T = any> {
 
 | 值                              | 说明                    |
 | ------------------------------- | ----------------------- |
-| `currentDay`                    | 当天 (2024-09-22)       |
-| `currentMonth`                  | 当月 (2024-09)          |
-| `currentYear`                   | 当年 (2024)             |
+| `currentDay`                    | 当天（格式示例 2024-09-22） |
+| `currentMonth`                  | 当月（格式示例 2024-09）    |
+| `currentYear`                   | 当年（格式示例 2024）       |
 | `currentDept`                   | 当前部门                |
 | `recentDay3`                    | 最近 3 天               |
 | `recentDay7`                    | 最近 7 天               |

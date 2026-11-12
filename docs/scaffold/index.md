@@ -1,3 +1,7 @@
+---
+description: "工程脚手架 jh4j-cloud-cli 概览与快速开始：一条命令创建符合团队规范的工程。"
+---
+
 # 工程脚手架 — 概览 & 快速开始
 
 <AuthorTag author="CHENY" />

@@ -1,3 +1,7 @@
+---
+description: "断点续传能力（来源 wl-mbase）：切片上传 + 服务端合片，弱网/大文件上传不重来。"
+---
+
 # 断点续传能力（弱网上传）
 
 <AuthorTag :authors="['CHENY']" />

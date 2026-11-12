@@ -1,11 +1,3 @@
-/*
- * @Author: ChenYu ycyplus@gmail.com
- * @Date: 2025-10-14 15:02:42
- * @LastEditors: ChenYu ycyplus@gmail.com
- * @FilePath: \jh-agileteam-doc\docs\.vitepress\config\nav.ts
- * @Description: 头部导航栏配置文件
- * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
- */
 import type { DefaultTheme } from "vitepress";
 
 /**

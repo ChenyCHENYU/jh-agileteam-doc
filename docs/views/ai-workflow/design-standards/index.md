@@ -1,3 +1,7 @@
+---
+description: "设计规范索引（来源 wl-skills-design）：01~09 条规范总览与验证清单。"
+---
+
 # 设计规范（9 条）
 
 <AuthorTag :authors="['CHENY']" />

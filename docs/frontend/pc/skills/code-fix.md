@@ -2,7 +2,7 @@
 description: "读取 reports/规范审查报告.md 中的偏差条目，在用户确认 diff 后执行单条或分组修复。"
 ---
 
-# Skill ⑦：受控自动修复（code-fix）
+# Skill ⑪：受控自动修复（code-fix）
 
 读取 `reports/规范审查报告.md` 中的偏差条目，在用户确认 diff 后执行单条或分组修复。
 

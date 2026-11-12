@@ -1,3 +1,7 @@
+---
+description: "PC 端扩展规范索引：平台规范 12~14 条，微服务架构与 common-core 组件体系的专项要求。"
+---
+
 # PC 端扩展规范
 
 <AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />

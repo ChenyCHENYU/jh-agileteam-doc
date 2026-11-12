@@ -94,6 +94,30 @@ for (const team of TEAM_FILES) {
   }
 }
 
+// 跨文件一致性：同一工号在所有数据文件中必须指向同一头像与姓名
+// （历史上 AuthorTag 与团队墙曾各自漂移——胥庆玉/杨晨誉等 5 人头像不一致）
+{
+  const seen = new Map(); // employeeId -> { name, avatar, file }
+  for (const team of [...TEAM_FILES, "AuthorTag"]) {
+    const src = readFileSync(join(compDir, team, "data.ts"), "utf8");
+    for (const block of src.matchAll(/\{[\s\S]*?\}/g)) {
+      const b = block[0];
+      const id = (b.match(/employeeId:\s*"(\d+)"/) || [])[1];
+      const name = (b.match(/name:\s*"([^"]+)"/) || [])[1];
+      const avatar = (b.match(/avatar:\s*"([^"]+)"/) || [])[1];
+      if (!id || !name || !avatar) continue;
+      const prev = seen.get(id);
+      if (prev && (prev.name !== name || prev.avatar !== avatar)) {
+        problems.push(
+          `数据漂移：工号 ${id} 在 ${prev.file} 与 ${team} 中不一致（${prev.name}/${prev.avatar} vs ${name}/${avatar}）`
+        );
+      } else if (!prev) {
+        seen.set(id, { name, avatar, file: team });
+      }
+    }
+  }
+}
+
 console.log(`团队数据品控：4 队 + AuthorTag`);
 if (problems.length) {
   console.error("发现问题：");

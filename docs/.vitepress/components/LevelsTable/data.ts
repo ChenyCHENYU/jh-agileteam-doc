@@ -16,6 +16,8 @@ export interface Level {
   detail: string;
   status: LevelStatus;
   statusText: string;
+  /** 部门能力对照说明 */
+  dept: string;
   /** 文档页链接 */
   link: string;
 }

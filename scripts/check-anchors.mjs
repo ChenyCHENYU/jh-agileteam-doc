@@ -6,25 +6,17 @@
  * 校验对象：docs 目录全部 md 中指向站内页面的锚点链接（含 /path#锚 与 #锚 两种）。
  * 解析方式：把源 md 的锚点映射到对应 dist html 中的 id 集合，锚点不存在即报错。
  */
-import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { join, dirname, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { walkFiles } from "./lib/walk-files.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const docsDir = join(root, "docs");
 const distDir = join(root, "docs/.vitepress/dist");
 const base = "/"; // 站点 base
 
-const mdFiles = [];
-(function walk(dir) {
-  for (const name of readdirSync(dir)) {
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) {
-      if (name === "node_modules" || name === ".vitepress") continue;
-      walk(p);
-    } else if (name.endsWith(".md")) mdFiles.push(p);
-  }
-})(docsDir);
+const mdFiles = walkFiles(docsDir, { ignore: ["node_modules", ".vitepress"], ignoreHidden: false, test: (n) => n.endsWith(".md") });
 
 /** md 路径 -> dist html 路径（index.md -> 目录/index.html；foo.md -> foo.html） */
 function distHtmlFor(mdPath) {

@@ -1,10 +1,25 @@
-import type { DefaultTheme } from "vitepress";
-
 /**
  * 侧边栏配置
  * @description 根据不同的路由路径，展示对应的侧边栏
  */
-export const sidebar: DefaultTheme.Sidebar = {
+// VitePress 2.0.0-alpha.20 运行时已支持侧边栏 badge，但类型未跟上——本地补齐（递归类型）
+type SidebarBadge = { text: string; type?: "info" | "tip" | "warning" | "danger" };
+interface SidebarItemWithBadge {
+  text?: string;
+  link?: string;
+  items?: SidebarItemWithBadge[];
+  collapsed?: boolean;
+  base?: string;
+  badge?: SidebarBadge;
+}
+type SidebarSection = {
+  text?: string;
+  items: SidebarItemWithBadge[];
+  base?: string;
+  collapsed?: boolean;
+};
+
+export const sidebar: Record<string, SidebarItemWithBadge[] | SidebarSection> = {
   // 平台手册
   "/platform/": [
     {
@@ -265,11 +280,9 @@ export const sidebar: DefaultTheme.Sidebar = {
       text: "参考 & 附录",
       collapsed: true,
       items: [
-        { text: "Git 提交规范", link: "/frontend/quick-start/commit-standards" },
         { text: "评论区使用", link: "/frontend/quick-start/waline-usage" },
         { text: "贡献指南", link: "/frontend/quick-start/contributing" },
         { text: "ESLint & Prettier 规范约定", link: "/frontend/quick-start/eslint-prettier-ts" },
-        { text: "Waline 评论系统", link: "/frontend/quick-start/waline-usage" },
       ],
     },
   ],
@@ -626,6 +639,7 @@ export const sidebar: DefaultTheme.Sidebar = {
 
   // 模板库
   "/templates/": [
+    { text: "« 模板总览", link: "/templates/" },
     {
       text: "生产领域",
       collapsed: false,
@@ -716,7 +730,6 @@ export const sidebar: DefaultTheme.Sidebar = {
     },
   ],
 
-  // 测试
   // 测试
   "/views/testing/": [
     {

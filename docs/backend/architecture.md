@@ -1,3 +1,7 @@
+---
+description: "以 wl-produce 生产域为实例拆解 jh4j-cloud 微服务的模块划分、三类服务注册、代码分层与平台扩展点。"
+---
+
 # 后端架构设计
 
 <AuthorTag :authors="['YangTianGuang','CHENY']" />

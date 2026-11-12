@@ -2,7 +2,7 @@
 description: "来源：@jhlc/common-core 远程组件"
 ---
 
-﻿# BaseQuery 查询组件
+# BaseQuery 查询组件
 
 > 来源：`@jhlc/common-core` 远程组件
 

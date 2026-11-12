@@ -1,3 +1,7 @@
+---
+description: "自动化测试 Skills：E2E 脚本生成、通用执行规则、冒烟筛选与执行的自动化闭环。"
+---
+
 # 自动化测试 Skills
 
 <AuthorTag author="ChangXing" />

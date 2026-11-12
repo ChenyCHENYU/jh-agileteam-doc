@@ -5,22 +5,14 @@
  * 规则：取每页首个 blockquote 或首个纯文本段落（≤90 字）作为摘要，
  * 写入 frontmatter description；纯组件页/无合适文本页跳过。
  */
-import { readFileSync, writeFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { walkFiles } from "./lib/walk-files.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const docsRoot = join(root, "docs");
 
-function walkMd(dir, acc = []) {
-  for (const name of readdirSync(dir)) {
-    if (name === "dist" || name === "node_modules" || name.startsWith(".")) continue;
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) walkMd(p, acc);
-    else if (name.endsWith(".md")) acc.push(p);
-  }
-  return acc;
-}
 
 function extractBodyDescription(body) {
   const lines = body.split("\n");
@@ -59,7 +51,7 @@ function extractBodyDescription(body) {
 
 let added = 0;
 let skipped = 0;
-for (const file of walkMd(docsRoot)) {
+for (const file of walkFiles(docsRoot, { test: (n) => n.endsWith(".md") })) {
   const raw = readFileSync(file, "utf8");
   if (raw.startsWith("---")) {
     const end = raw.indexOf("\n---", 3);
@@ -82,7 +74,8 @@ for (const file of walkMd(docsRoot)) {
   const descLine = `description: "${desc.replace(/"/g, "'")}"\n`;
   if (fm) {
     const next = fm.replace(/^---\n/, `---\n${descLine}`);
-    writeFileSync(file, next + body);
+    // frontmatter 闭合 --- 与正文之间必须留空行，否则 H1 会粘连在定界符上
+    writeFileSync(file, `${next}\n\n${body}`);
   } else {
     writeFileSync(file, `---\n${descLine}---\n\n${body}`);
   }

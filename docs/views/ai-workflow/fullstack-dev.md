@@ -1,3 +1,7 @@
+---
+description: "契约驱动协作：以 wl-api-contract 为中心，前后端并行生成、审计、修复互不阻塞。"
+---
+
 # 契约驱动协作（前端 × 后端）
 
 <AuthorTag :authors="['ZhuXiang','CHENY','YangTianGuang']" />

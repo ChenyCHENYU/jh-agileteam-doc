@@ -1,3 +1,7 @@
+---
+description: "后端概览与技术选型：jh4j-cloud 微服务体系、wl-skills-bd 工程闭环与快速上手入口。"
+---
+
 # 后端 — 概览 & 技术选型
 
 <AuthorTag :authors="['YangTianGuang','DaiAn','ZhangXiang','ZhangJie','PanChaoYue']" />

@@ -15,10 +15,12 @@ declare module 'vue' {
     EcosystemTable: typeof import('./../.vitepress/components/EcosystemTable/index.vue')['default']
     GlassHome: typeof import('./../.vitepress/components/GlassHome/index.vue')['default']
     LevelsTable: typeof import('./../.vitepress/components/LevelsTable/index.vue')['default']
+    MemberCard: typeof import('./../.vitepress/components/TeamWall/MemberCard.vue')['default']
     NpmVersion: typeof import('./../.vitepress/components/NpmVersion/index.vue')['default']
     PackagesTable: typeof import('./../.vitepress/components/PackagesTable/index.vue')['default']
     TeamHero: typeof import('./../.vitepress/components/TeamHero/index.vue')['default']
     TeamWall: typeof import('./../.vitepress/components/TeamWall/index.vue')['default']
     TestTeamHero: typeof import('./../.vitepress/components/TestTeamHero/index.vue')['default']
+    VersionChip: typeof import('./../.vitepress/components/VersionChip/index.vue')['default']
   }
 }

@@ -5,16 +5,9 @@
  * bio 字段为个人座右铭名言
  */
 
-export interface BackendTeamMember {
-  name: string;
-  avatar: string;
-  role: string;
-  employeeId?: string;
-  department?: string;
-  /** 座右铭 */
-  bio?: string;
-  skills?: string[];
-}
+import type { WallMember } from "../types";
+
+export type BackendTeamMember = WallMember;
 
 export const BACKEND_TEAM_MEMBERS: BackendTeamMember[] = [
   {

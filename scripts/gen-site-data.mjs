@@ -4,9 +4,9 @@
  *
  * 产物（docs/public/data/，随站点静态发布）：
  *  - release-count.json  团队 14 个公共 npm 包的累计发版次数（首页标语用）
- *  - changelog.json       最近 60 条提交（更新日志页用）
+ *    （changelog.json 已随更新日志板块移除，见 commit 8e349b0）
  *
- * 全部容错：registry/git 任一失败时保留上一次产物，绝不阻塞构建。
+ * 全部容错：registry 任一失败时保留上一次产物，绝不阻塞构建。
  */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { execSync } from "node:child_process";
@@ -18,6 +18,8 @@ const outDir = join(root, "docs/public/data");
 mkdirSync(outDir, { recursive: true });
 
 // ---------- 1) 累计发版次数（npm registry 汇总） ----------
+// ⚠ 同步点：此清单与 EcosystemTable/data.ts 的包列表需同步维护（新增公共包时两处都改，
+// 详见 scripts/SYNC-CHECKLIST.md）
 const PACKAGES = [
   "mach-table", "mach-table-vue", "mach-table-react", "mach-table-xlsx",
   "wl-skills-kit", "wl-skills-ui", "wl-skills-bd", "jh4j-cloud-cli",

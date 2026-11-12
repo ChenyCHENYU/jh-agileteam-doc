@@ -1,3 +1,7 @@
+---
+description: "前端快速上手导航：工程体系入门总览，面向新人、转全栈与了解 AI 工程实践的同学。"
+---
+
 # 前端快速上手
 
 <AuthorTag :authors="['ZhuXiang','CHENY','ZhongYu','XuQingYu','MaJiaRui']" />
@@ -47,7 +51,7 @@ npx @agile-team/wl-skills-kit
 | [规范约定 ④–⑦](./04-coding-basics) | 编码基础、日志、安全、配置管理 |
 | [规范约定 ⑧–⑨](./08-git) | Git 工作流、TypeScript 规范 |
 | [规范约定 ⑩–⑪](./10-pinia) | Pinia 状态管理、表单校验 |
-| [提交规范](./commit-standards) | Conventional Commits + commitizen 交互提交 |
+| [基本规范（约定俗成）](./development-standards) | 命名、目录、变量等团队约定速查 |
 
 ---
 

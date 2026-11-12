@@ -4,7 +4,8 @@
 
 ## 必跑命令
 
-- 改动任何内容后：`pnpm build`（六步全量校验，通过才算完成）
+- 改动任何内容后：`pnpm build`（typecheck + 数据生成 + 六类前置校验 + SSG + 三类后置校验，全过才算完成）
+- 仅改文档内容时的快速自检：`pnpm check:links && pnpm check:sidebar`
 - 本地起服务预览：`pnpm dev`（端口 8866）
 
 ## 数据单一事实源

@@ -1,3 +1,7 @@
+---
+description: "原型设计规范与流程：原型标注深度标准和输出格式要求。"
+---
+
 # 原型设计
 
 <AuthorTag :authors="['ZhuXiang','CHENY','YangTianGuang']" />

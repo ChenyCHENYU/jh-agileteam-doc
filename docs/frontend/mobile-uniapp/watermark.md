@@ -1,3 +1,7 @@
+---
+description: "图片水印能力与服务端契约（来源 wl-mbase）：watermarkPolicy 与失败兜底策略。"
+---
+
 # 图片水印能力（服务端契约）
 
 <AuthorTag :authors="['CHENY']" />

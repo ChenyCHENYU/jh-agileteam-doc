@@ -1,4 +1,8 @@
-﻿# AI 最佳实践
+---
+description: "AI 最佳实践导航：从氛围编程到自演进的 L0~L7 能力层级与落地路径。"
+---
+
+# AI 最佳实践
 
 <AuthorTag :authors="['ZhuXiang','CHENY']" />
 

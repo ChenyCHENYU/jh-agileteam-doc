@@ -1,3 +1,7 @@
+---
+description: "AI 工作流总览：五包按阶段协同——谁在什么时候做什么、契约怎么流动、当前进展。"
+---
+
 # AI 工作流
 
 <AuthorTag :authors="['ZhuXiang','CHENY','YangTianGuang']" />

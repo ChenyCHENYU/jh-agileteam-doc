@@ -2,7 +2,7 @@
 description: "将前端 reports/SYSMENUINFO.md 中定义的菜单结构，自动同步到指定环境的数据库（通过后端管理 API 创建菜单记录）。"
 ---
 
-# Skill ④：菜单同步（menu-sync）
+# Skill ⑧：菜单同步（menu-sync）
 
 将前端 `reports/SYS_MENU_INFO.md` 中定义的菜单结构，自动同步到指定环境的数据库（通过后端管理 API 创建菜单记录）。
 
@@ -242,4 +242,4 @@ A：功能等价，menu-sync 的优势是批量（一次处理 10+ 菜单）且�
 A：不需要，已在 `.gitignore` 里排除，包含 token 等敏感信息。
 
 **Q：actions（功能按钮权限）也能同步吗？**  
-A：menu-sync 只负责路由菜单，功能按钮权限由 `permission-sync` Skill ⑥ 处理。
+A：menu-sync 只负责路由菜单，功能按钮权限由 `permission-sync` Skill ⑩ 处理。

@@ -1,12 +1,3 @@
-<!--
- * @Author: ChenYu ycyplus@gmail.com
- * @Date: 2025-10-15 16:39:35
- * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2026-02-09 16:05:20
- * @FilePath: \jh-agileteam-doc\docs\.vitepress\components\AuthorTag\index.vue
- * @Description: 作者标签组件
- * Copyright (c) 2025 by CHENY, All Rights Reserved 😎. 
--->
 <template>
   <div class="author-tag">
     <!-- 多作者模式 -->
@@ -47,10 +38,10 @@
                 {{ authorData.info.name }}
               </a>
               <span v-else class="pill-name">{{ authorData.info.name }}</span>
-              <span class="pill-divider">·</span>
-              <span class="pill-id">{{ getDisplayEmployeeId(authorData.info) }}</span>
+              <span class="pill-divider" v-if="getDisplayEmployeeId(authorData.info)">·</span>
+              <span v-if="getDisplayEmployeeId(authorData.info)" class="pill-id">{{ getDisplayEmployeeId(authorData.info) }}</span>
             </div>
-            <span class="pill-dept">{{ getDisplayDepartment(authorData.info) }}</span>
+            <span v-if="getDisplayDepartment(authorData.info)" class="pill-dept">{{ getDisplayDepartment(authorData.info) }}</span>
           </div>
         </div>
       </div>
@@ -102,8 +93,8 @@
               {{ displayDepartment }}
             </span>
           </div>
-          
-          <div class="author-meta">
+
+          <div v-if="displayEmployeeId" class="author-meta">
             <span class="employee-id">工号：{{ displayEmployeeId }}</span>
           </div>
         </div>
@@ -163,9 +154,6 @@ const authorsList = computed(() => {
     get avatarLoaded() {
       return avatarsLoadedState.value[index]?.loaded || false;
     },
-    get avatarLoadError() {
-      return avatarsLoadedState.value[index]?.error || false;
-    },
   }));
 });
 
@@ -220,36 +208,19 @@ const getAuthorInitial = (name: string) => {
 
 const authorInitial = computed(() => getAuthorInitial(authorInfo.value.name));
 
-// 显示的职位：优先使用传入的 role，否则使用预定义的，默认为"资深开发工程师"
-const getDisplayRole = (author: Author) => {
-  return props.role || author.role || "资深开发工程师";
-};
-
-const displayRole = computed(() => getDisplayRole(authorInfo.value));
-
-// 显示的工号：优先使用传入的 employeeId，其次使用预定义的，最后使用默认值
+// 显示的工号：优先使用传入的 employeeId，其次使用花名数据；缺失则不渲染
 const getDisplayEmployeeId = (author: Author) => {
-  return props.employeeId || author.employeeId || "409322";
+  return props.employeeId || author.employeeId || "";
 };
 
 const displayEmployeeId = computed(() => getDisplayEmployeeId(authorInfo.value));
 
-// 显示的部门：优先使用传入的 department，其次使用预定义的，最后使用默认值
+// 显示的部门：优先使用传入的 department，其次使用花名数据；缺失则不渲染
 const getDisplayDepartment = (author: Author) => {
-  return props.department || author.department || "默认部门";
+  return props.department || author.department || "";
 };
 
 const displayDepartment = computed(() => getDisplayDepartment(authorInfo.value));
-
-// 获取去重后的部门列表（多作者）
-const getUniqueDepartments = () => {
-  if (normalizedAuthors.value.length === 0) return '';
-  const depts = [...new Set(normalizedAuthors.value.map(author => {
-    const info = getAuthorInfo(author);
-    return getDisplayDepartment(info);
-  }))];
-  return depts.join(' · ');
-};
 
 const getAuthorLink = (author: Author) => {
   if (author.link) {

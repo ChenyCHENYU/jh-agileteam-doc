@@ -1,3 +1,7 @@
+---
+description: "契约守卫局：共享技术中心后端组，jh4j-cloud 微服务体系与 wl-skills-bd 的建设方。"
+---
+
 # 契约守卫局
 <AuthorTag :authors="['YangTianGuang','DaiAn','ZhangXiang','ZhangJie','PanChaoYue']" />
 

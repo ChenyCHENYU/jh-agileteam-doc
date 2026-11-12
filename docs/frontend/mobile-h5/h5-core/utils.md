@@ -166,7 +166,7 @@ isCreditCode('91310000MA1FL8KQ30');            // → true（统一社会信用�
 import { formatDate, formatMoney } from '@robot-h5/core/utils/format';
 
 // 日期格式化
-formatDate(new Date(), 'YYYY-MM-DD');           // → '2024-03-20'
+formatDate(new Date(), 'YYYY-MM-DD');           // → 当天日期，格式如 '2024-03-20'（示例）
 formatDate(1710921600000, 'YYYY-MM-DD HH:mm');  // → '2024-03-20 14:00'
 formatDate('2024-03-20', 'MM月DD日');            // → '03月20日'
 

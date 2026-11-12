@@ -1,3 +1,7 @@
+---
+description: "功能测试 Skills：从需求文档到发布决策的完整功能测试设计链路。"
+---
+
 # 功能测试 Skills
 
 <AuthorTag author="ChangXing" />

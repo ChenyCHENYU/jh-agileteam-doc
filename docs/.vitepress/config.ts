@@ -1,12 +1,3 @@
-/*
- * @Author: ChenYu ycyplus@gmail.com
- * @Date: 2025-10-15 10:03:04
- * @LastEditors: ChenYu ycyplus@gmail.com
- * @LastEditTime: 2025-10-15 19:48:37
- * @FilePath: \jh-agileteam-doc\docs\.vitepress\config.ts
- * @Description: VitePress 主配置文件
- * Copyright (c) 2025 by CHENY, All Rights Reserved 😎.
- */
 import { defineConfig } from "vitepress";
 import { nav } from "./config/nav";
 import { sidebar } from "./config/sidebar";
@@ -19,7 +10,7 @@ import { vite } from "./config/vite";
  */
 export default defineConfig({
   title: "AGILE TEAM",
-  description: "从需求到上线的 AI 工程化体系 — 5 包全链路 · 14 个 npm 包 · 生态月下载 17 万+",
+  description: "从需求到上线的 AI 工程化体系 — 五包全链路 · 生态 npm 包矩阵 · 持续演进",
   lang: "zh-CN",
 
   // 站点图标
@@ -27,15 +18,16 @@ export default defineConfig({
     ["link", { rel: "icon", href: "/favicon.ico" }],
     ["link", { rel: "apple-touch-icon", sizes: "180x180", href: "/logo.png" }],
     ["meta", { name: "theme-color", content: "#667eea" }],
-    // Open Graph
+    // Open Graph（og:image 必须是绝对 URL，否则社交爬虫不抓图）
     ["meta", { property: "og:type", content: "website" }],
     ["meta", { property: "og:title", content: "AGILE TEAM — AI 工程体系文档站" }],
-    ["meta", { property: "og:description", content: "从需求到上线的 AI 工程化体系 — 5 包全链路 · 14 个 npm 包 · 生态月下载 17 万+" }],
-    ["meta", { property: "og:image", content: "/logo.png" }],
+    ["meta", { property: "og:description", content: "从需求到上线的 AI 工程化体系 — 五包全链路 · 生态 npm 包矩阵 · 持续演进" }],
+    ["meta", { property: "og:image", content: "https://www.jhat.tech/logo.png" }],
     // Twitter Card
     ["meta", { name: "twitter:card", content: "summary" }],
     ["meta", { name: "twitter:title", content: "AGILE TEAM — AI 工程体系" }],
-    ["meta", { name: "twitter:description", content: "从需求到上线的 AI 工程化体系 — 5 包全链路 · 14 个 npm 包" }],
+    ["meta", { name: "twitter:description", content: "从需求到上线的 AI 工程化体系 — 五包全链路 · 生态 npm 包矩阵" }],
+    ["meta", { name: "twitter:image", content: "https://www.jhat.tech/logo.png" }],
   ],
 
   // 主题配置

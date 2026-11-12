@@ -1,0 +1,19 @@
+// ---- SCSS Color Variables ----
+$accent:      #6366f1;
+$accent-alt:  #8b5cf6;
+$accent-pink: #ec4899;
+
+$accent-d:      #818cf8;
+$accent-d-alt:  #a78bfa;
+$accent-d-pink: #f472b6;
+
+// Tints
+$accent-bg:     rgba(99, 102, 241, 0.07);
+$accent-border: rgba(99, 102, 241, 0.22);
+
+$accent-d-bg:     rgba(129, 140, 248, 0.09);
+$accent-d-border: rgba(129, 140, 248, 0.28);
+
+// Transitions
+$t-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+$t-mid:  0.25s cubic-bezier(0.4, 0, 0.2, 1);

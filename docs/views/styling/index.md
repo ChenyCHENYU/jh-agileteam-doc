@@ -1,3 +1,7 @@
+---
+description: "样式方案四件套：UnoCSS/SCSS 写法规范、设计系统原则与 wl-skills-ui 视觉对齐框架。"
+---
+
 # 样式方案
 
 <AuthorTag :authors="['CHENY']" />

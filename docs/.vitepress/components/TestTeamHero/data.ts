@@ -3,22 +3,9 @@
  * bio 字段为个人座右铭名言（测试质量主题）
  */
 
-export interface TestTeamMember {
-  /** 成员名称 */
-  name: string;
-  /** 头像 URL */
-  avatar: string;
-  /** 职位/角色 */
-  role: string;
-  /** 工号 */
-  employeeId?: string;
-  /** 所属部门 */
-  department?: string;
-  /** 座右铭 */
-  bio?: string;
-  /** 技能标签 */
-  skills?: string[];
-}
+import type { WallMember } from "../types";
+
+export type TestTeamMember = WallMember;
 
 export const TEST_TEAM_MEMBERS: TestTeamMember[] = [
     {

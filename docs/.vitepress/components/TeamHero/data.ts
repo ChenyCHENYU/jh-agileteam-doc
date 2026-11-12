@@ -2,27 +2,9 @@
  * 团队成员数据配置
  * bio 字段为个人座右铭名言
  */
+import type { WallMember } from "../types";
 
-export interface TeamMember {
-  /** 成员名称 */
-  name: string;
-  /** 头像 URL */
-  avatar: string;
-  /** 职位/角色 */
-  role: string;
-  /** 工号 */
-  employeeId?: string;
-  /** 所属部门 */
-  department?: string;
-  /** 座右铭 */
-  bio?: string;
-  /** GitHub 用户名 */
-  github?: string;
-  /** 邮箱 */
-  email?: string;
-  /** 技能标签 */
-  skills?: string[];
-}
+export type TeamMember = WallMember;
 
 /**
  * 团队成员列表

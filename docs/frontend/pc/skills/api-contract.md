@@ -2,7 +2,7 @@
 description: "基于《页面清单》为每个页面生成 api.md 文件，放在页面目录下（和 index.vue 同级）。"
 ---
 
-# Skill ②：接口约定（api-contract）
+# Skill ④：接口约定（api-contract）
 
 基于《页面清单》为每个页面生成 `api.md` 文件，放在**页面目录下**（和 index.vue 同级）。
 

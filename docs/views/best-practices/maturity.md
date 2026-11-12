@@ -1,3 +1,7 @@
+---
+description: "能力成熟度对照：技术栈层级 L0~L7 与部门 AI Coding 人员定级两条正交线的映射。"
+---
+
 # 能力成熟度：技术栈层级 × 人员等级对照
 
 <AuthorTag :authors="['CHENY']" />

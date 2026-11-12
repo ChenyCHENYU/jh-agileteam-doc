@@ -10,10 +10,11 @@
  * 策略：本脚本只负责下载缺失的 SVG 到 public/avatars/（幂等）；
  * 源码 URL → 本地路径的重写由 --rewrite 参数一次性执行。
  */
-import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { walkFiles } from "./lib/walk-files.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const outDir = join(root, "docs/public/avatars");
@@ -22,21 +23,15 @@ const doRewrite = process.argv.includes("--rewrite");
 
 // 1) 扫描源码中的所有 dicebear URL
 const urls = new Set();
-function walk(dir, cb) {
-  for (const name of readdirSync(dir)) {
-    // 注意：.vitepress 必须进入（头像数据都在 components/*/data.ts）
-    if (name === "dist" || name === "node_modules" || name === "public") continue;
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) walk(p, cb);
-    else if (/\.(ts|vue|md)$/.test(name)) cb(p);
-  }
-}
-const files = [];
-walk(join(root, "docs"), (p) => {
-  const s = readFileSync(p, "utf8");
-  files.push(p);
-  for (const m of s.matchAll(/https:\/\/api\.dicebear\.com[^\s"'`)]+/g)) urls.add(m[0]);
+const files = walkFiles(join(root, "docs"), {
+  ignore: ["dist", "node_modules", "public"],
+  ignoreHidden: false, // .vitepress 必须进入（头像数据都在 components/*/data.ts）
+  test: (n) => /\.(ts|vue|md)$/.test(n),
 });
+for (const p of files) {
+  const s = readFileSync(p, "utf8");
+  for (const m of s.matchAll(/https:\/\/api\.dicebear\.com[^\s"'`)]+/g)) urls.add(m[0]);
+}
 
 console.log(`dicebear URL：${urls.size} 个`);
 

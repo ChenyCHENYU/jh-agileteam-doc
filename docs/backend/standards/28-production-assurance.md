@@ -1,3 +1,7 @@
+---
+description: "生产保障与交付证据规范（来源 wl-skills-bd）：上线前检查、交付物清单与可判定验收条目。"
+---
+
 <!--
 
 > 📦 来源：`wl-skills-bd` v0.42.0 · `standards/28-production-assurance.md` · 本文可判定条目由 `wl-skills-bd validate`（B 系列）与 `mvn verify -Pwl-quality` 自动执行。

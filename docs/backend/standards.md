@@ -1,3 +1,7 @@
+---
+description: "后端开发规范总览：01~30 条规范的索引页，含分层约定、事务边界与生产保障要求。"
+---
+
 # 后端开发规范
 
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />

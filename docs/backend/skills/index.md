@@ -1,3 +1,7 @@
+---
+description: "后端 Skill 总览：wl-skills-bd 提供的契约驱动代码生成与审计能力索引。"
+---
+
 # 后端 Skill
 
 <AuthorTag :authors="['YangTianGuang','ZhangXiang','DaiAn','ZhangJie','PanChaoYue']" />

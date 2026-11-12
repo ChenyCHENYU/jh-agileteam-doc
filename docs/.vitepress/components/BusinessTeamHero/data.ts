@@ -5,16 +5,11 @@
  * bio 字段为个人座右铭名言
  */
 
-export interface BusinessTeamMember {
-  name: string;
-  avatar: string;
-  /** 职位/角色 */
-  role: string;
-  employeeId?: string;
+import type { WallMember } from "../types";
+
+export interface BusinessTeamMember extends WallMember {
   /** 所属业务领域 */
   domain: string;
-  /** 座右铭 */
-  bio?: string;
 }
 
 export const BUSINESS_TEAM_MEMBERS: BusinessTeamMember[] = [

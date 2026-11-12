@@ -1,3 +1,7 @@
+---
+description: "测试规范索引（来源 wl-skills-test）：01~11 条规范总览，对齐在线 QC 流程。"
+---
+
 # 测试规范（11 条）
 
 <AuthorTag :authors="['CHENY']" />

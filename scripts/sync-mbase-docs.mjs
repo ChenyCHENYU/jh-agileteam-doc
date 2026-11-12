@@ -42,7 +42,6 @@ const anchorMap = [
   ["#断点续传断网排队", "#断点续传-断网排队"],
   ["./message-center#73-审批详情", "./message-center#_7-3-审批详情"],
   ["./message-center#6-移动端地址与消息路由契约", "./message-center#_6-移动端地址与消息路由契约"],
-  ["#审批摘要完整详情与作废闭环v37", "#审批摘要、完整详情与作废闭环-v3-7"],
   ["./message-center#96-业务接入约定与兼容策略", "./message-center#_9-6-业务接入约定与兼容策略"],
   // v3.9 章节重构（编号章节 + 显式 HTML 锚点）后的映射，直接指向真实锚点
   ["./integration#五、桥接通信协议", "./integration#五桥接通信协议"],

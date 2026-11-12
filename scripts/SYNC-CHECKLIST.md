@@ -7,8 +7,9 @@
 
 | 文件 | 改什么 | 自动影响范围 |
 |------|--------|-------------|
-| `docs/.vitepress/components/PackagesTable/data.ts` | 对应包 `version`；若 Skill/MCP 数量变化同步 `siteStats`（skills/mcp/rules 及注释算式） | 指南五包表、首页统计卡、首页卡片文案 |
+| `docs/.vitepress/components/PackagesTable/data.ts` | 对应包 `version`；若 Skill/MCP 数量变化同步 `siteStats`（skills/mcp/rules 及注释算式） | 指南五包表、首页统计卡、首页卡片文案、生态看板五包兜底版本（已从此派生） |
 | `docs/.vitepress/components/LevelsTable/data.ts` | 仅当 L 级状态变化（如 L5 转正） | 指南、最佳实践总览三处 |
+| `scripts/gen-site-data.mjs` 的 `PACKAGES` | 新增公共 npm 包时登记（发版数统计口径） | 首页 release-count.json |
 
 ## 二、硬编码同步点（按包逐个改）
 
@@ -17,9 +18,8 @@
 | `README.md` | 五包能力矩阵（版本/MCP/规则列）+ 对应包小节的版本号与数字 |
 | 对应包板块首页 | tip 的"npm 已发布 vX"、核心能力表、五包对标表（testing/index） |
 | 对应包 usage-guide / quick-start | 头部版本行 |
-| `docs/views/rollout/<pkg>.md` **与** `D:\office-project\wl\<包名宣贯文档>.md` | **两份都要**：核对版本行、版本演进速览表（新增一行）、正文计数（Skill/MCP/测试数/CLI 数）、验收清单 |
+| `docs/views/rollout/<pkg>.md` **与** wl 工作区的 `<包名宣贯文档>.md`（Windows 为 `D:\office-project\wl\`，macOS 为本地 wl 工作区） | **两份都要**：核对版本行、版本演进速览表（新增一行）、正文计数（Skill/MCP/测试数/CLI 数）、验收清单 |
 | 版本演进亮点表 | testing/index 的 0.1x 演进表；kit 在 rollout 演进表 |
-| `docs/views/guide/index.md` | "最近更新"表补一行（日期 + 一句话） |
 | 其他包的五包对标表 | test/bd 变更时互查（README / testing / guide 由组件或矩阵覆盖的不用手改） |
 
 ## 三、能力口径新增时（新 Skill / 新规则 / 新命令）
@@ -39,8 +39,8 @@ pnpm build        # 含 sidebar 校验（导航坏链失败）+ 死链检查 + �
 ## 五、npm 发布相关（test 等包）
 
 - 发布前：确认 `package.json` version 已 bump、CHANGELOG 有对应条目、工作区干净；
-- 发布：`npm.cmd publish --access public`（`prepublishOnly` 自动跑全量测试作发布门）；
-- 发布后：`npm.cmd view <pkg> version` 验证 `dist-tags.latest`；本清单第一节起逐项同步；
+- 发布：`npm publish --access public`（Windows 下用 `npm.cmd`；`prepublishOnly` 自动跑全量测试作发布门）；
+- 发布后：`npm view <pkg> version` 验证 `dist-tags.latest`；本清单第一节起逐项同步；
 - 生态数据看板（ecosystem/index.md）：版本/月下载已实时化（浏览器端直查 npm registry），**无需手动刷新**；仅新增包时在 `EcosystemTable/data.ts` 追加一行。
 - 团队成员头像：新增成员时 data.ts 里先写 dicebear URL 即可，构建链会自动 `localize-avatars`（下载到 `public/avatars/` 并改写为本地路径，幂等）；建议构建后把改写结果一并提交。
 
@@ -52,9 +52,9 @@ node scripts/sync-mbase-docs.mjs
 
 - 以 `wl-mbase/docs` 为单一事实源，全量刷新 4 份站内页（integration / message-center / app-integration / quick-access，含来源横幅与仓库内链映射）；
 - 仓库内链已映射到站内路径（./集成文档.md → ./integration 等）；新增 docs 文件需在脚本 `jobs` 里登记；
-- 同步后跑构建三门禁（锚点校验会抓出章节重编号导致的断锚）。
+- 同步后跑 `pnpm build` 全量门禁（锚点校验会抓出章节重编号导致的断锚）。
 
-## 六、已知的历史漏改（引以为戒）
+## 七、已知的历史漏改（引以为戒）
 
 | 漏改 | 教训 |
 |------|------|

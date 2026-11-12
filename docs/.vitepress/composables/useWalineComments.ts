@@ -1,4 +1,4 @@
-import type { WalineInitOptions } from "@waline/client";
+import type { WalineInitOptions, WalineInstance } from "@waline/client";
 
 export interface WalineCommentsOptions extends Omit<WalineInitOptions, "el"> {
   el?: string | HTMLElement;
@@ -16,7 +16,7 @@ export function useWalineComments(options: WalineCommentsOptions) {
     enhanceApp() {
       if (typeof window === "undefined") return;
 
-      let walineInstance: any = null;
+          let walineInstance: WalineInstance | null = null;
       let target: HTMLElement | null = null;
       let observer: IntersectionObserver | null = null;
       let walineLoaded = false;

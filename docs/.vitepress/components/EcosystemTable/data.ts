@@ -2,7 +2,9 @@
  * 生态 npm 看板单一数据源（团队全部包，跨 scope）
  * version 为构建时兜底值；页面加载后自动从 npm registry 拉取最新。
  * 新增包时在此追加一行（internal 包跳过实时拉取）。
+ * 注意：五包版本从 PackagesTable/data.ts 派生（发版只改那一处）。
  */
+import { packages as FIVE_PKGS } from "../PackagesTable/data";
 
 export interface EcoPkg {
   /** 完整包名（含 scope） */
@@ -26,13 +28,21 @@ const LREPORT = "报表引擎";
 const LQG = "质量门（Gate）";
 const LTOOL = "工程工具链";
 
+/** 五包名 → 兜底版本（单一数据源：PackagesTable） */
+const FIVE_VERSIONS = new Map<string, string>(
+  FIVE_PKGS.map((p) => [`@agile-team/${p.name}`, p.version] as const)
+);
+
+/** 五包兜底版本派生（不在此文件维护第二份版本号） */
+const five = (name: string): string => FIVE_VERSIONS.get(name) ?? "0.0.0";
+
 export const ecoPackages: EcoPkg[] = [
   // ---- AI 工程五包 ----
-  { name: "@agile-team/wl-skills-kit", layer: L5, version: "2.33.4", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-ui", layer: L5, version: "1.22.3", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-bd", layer: L5, version: "0.42.0", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-test", layer: L5, version: "0.34.1", license: "UNLICENSED" },
-  { name: "@agile-team/wl-skills-design", layer: L5, version: "1.0.2", license: "Apache-2.0" },
+  { name: "@agile-team/wl-skills-kit", layer: L5, version: five("@agile-team/wl-skills-kit"), license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-ui", layer: L5, version: five("@agile-team/wl-skills-ui"), license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-bd", layer: L5, version: five("@agile-team/wl-skills-bd"), license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-test", layer: L5, version: five("@agile-team/wl-skills-test"), license: "UNLICENSED" },
+  { name: "@agile-team/wl-skills-design", layer: L5, version: five("@agile-team/wl-skills-design"), license: "Apache-2.0" },
   // ---- 质量门（Gate） ----
   { name: "@agile-team/wl-skills-gate", layer: LQG, version: "0.13.19", license: "Source-Available（商用需授权）", featured: true },
   // ---- 基础设施库 ----

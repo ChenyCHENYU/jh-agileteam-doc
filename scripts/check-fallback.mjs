@@ -7,9 +7,10 @@
  * 提示更新 fallback（兜底值只影响断网/首屏，落太多版本仍值得跟进）。
  * --strict 时落后即退出 1（CI 可选用）。
  */
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { walkFiles } from "./lib/walk-files.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const strict = process.argv.includes("--strict");
@@ -27,15 +28,9 @@ function scanText(txt, rel) {
     collect(m[1], m[2]);
   }
 }
-function walk(dir, cb) {
-  for (const name of readdirSync(dir)) {
-    if (name === "dist" || name === "node_modules" || name.startsWith(".")) continue;
-    const p = join(dir, name);
-    if (statSync(p).isDirectory()) walk(p, cb);
-    else if (/\.(md|ts|vue)$/.test(name)) cb(p);
-  }
+for (const p of walkFiles(join(root, "docs"), { test: (n) => /\.(md|ts|vue)$/.test(n) })) {
+  scanText(readFileSync(p, "utf8"), p);
 }
-walk(join(root, "docs"), (p) => scanText(readFileSync(p, "utf8"), p));
 // 组件数据源的静态 version（EcosystemTable / PackagesTable）
 {
   const eco = readFileSync(join(root, "docs/.vitepress/components/EcosystemTable/data.ts"), "utf8");

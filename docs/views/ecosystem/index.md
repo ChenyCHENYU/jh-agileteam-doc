@@ -1,3 +1,7 @@
+---
+description: "工程生态全景：团队维护的 25 个 npm 包清单、版本与职责划分。"
+---
+
 # 工程生态全景
 
 <AuthorTag :authors="['CHENY']" />

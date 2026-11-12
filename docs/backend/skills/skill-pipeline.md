@@ -1,3 +1,7 @@
+---
+description: "wl-skills-bd 后端 AI Skills 流水线：契约驱动代码生成、审计与修复闭环的编排机制。"
+---
+
 # 后端 AI Skills 流水线
 
 <AuthorTag :authors="['HeGuangMing','YangTianGuang','ZhangXiang']" />

@@ -1,3 +1,7 @@
+---
+description: "wl-skills-test 使用指南：安装配置与三类测试 Skill 的调用方式。"
+---
+
 # 测试 Skills 使用指南
 
 <AuthorTag author="ChangXing" />

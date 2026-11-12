@@ -1,3 +1,7 @@
+---
+description: "测试工程技能包 wl-skills-test 总览：功能/自动化/性能三类 Skill 与 11 条测试规范。"
+---
+
 # 测试工程技能包（wl-skills-test）
 
 <AuthorTag author="ChangXing" />

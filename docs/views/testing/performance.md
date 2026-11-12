@@ -1,3 +1,7 @@
+---
+description: "性能测试 Skills：压测方案设计、JMeter 脚本生成与结果分析的完整闭环。"
+---
+
 # 性能测试 Skills
 
 <AuthorTag author="ChangXing" />
